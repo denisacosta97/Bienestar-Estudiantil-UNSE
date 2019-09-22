@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
         //holi chau
 
-        int b;
+        int b = 0;
     }
 }
