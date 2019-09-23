@@ -9,7 +9,6 @@
         android:layout_height="35dp"
         android:background="@drawable/button_border">
 
-
         <TextView
             android:id="@+id/txtTitulo"
             android:gravity="center"
