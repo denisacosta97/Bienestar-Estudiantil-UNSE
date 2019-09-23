@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mCategorias.add(new Categoria("Polideportivo"));
         mCategorias.add(new Categoria("Residencia"));
         mCategorias.add(new Categoria("Cyber Estudiantil"));
+        mCategorias.add(new Categoria("UPA"));
 
         mAdapter = new CategoriasAdapter(mCategorias, getApplicationContext());
 
