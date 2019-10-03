@@ -1,6 +1,6 @@
 package com.unse.bienestarestudiantil;
 
-
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mToolbar = findViewById(R.id.toolbar);
 
@@ -58,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView2.setLayoutManager(mLayoutManager2);
         mRecyclerView2.setAdapter(mNewsAdapter);
         mRecyclerView2.setNestedScrollingEnabled(false);
+
     }
+
 
     private void setToolbar() {
         setSupportActionBar(mToolbar);

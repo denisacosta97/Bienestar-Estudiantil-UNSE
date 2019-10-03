@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="active">
+        <item>@color/colorAccent</item>
+        <item>@color/colorAccent</item>
+        <item>@color/colorPrimaryDark</item>
+    </string-array>
+
+    <string-array name="inactive">
+        <item>#3F3F3F</item>
+        <item>#3F3F3F</item>
+        <item>#3F3F3F</item>
+    </string-array>
+
+</resources>
