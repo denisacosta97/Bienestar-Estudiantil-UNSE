@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Herramientas;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,9 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -24,6 +27,19 @@ public class Utils {
     public static final String IS_FIRST_TIME_LAUNCH = "is_first";
     public static final String UPDATE = "0";
     public static final int PERMISSION_ALL = 1010;
+
+    public static final int NOTICIA_NORMAL = 3030;
+    public static final int NOTICIA_BUTTON_WEB = 3131;
+    public static final int NOTICIA_BUTTON_TIENDA = 3132;
+    public static final int NOTICIA_BUTTON_APP = 3133;
+
+    public static final int TIPO_COMEDOR = 1;
+    public static final int TIPO_DEPORTE = 2;
+    public static final int TIPO_TRANSPORTE  = 3;
+    public static final int TIPO_BECA = 4;
+    public static final int TIPO_RESIDENCIA = 5;
+    public static final int TIPO_CYBER = 6;
+    public static final int TIPO_UPA = 7;
 
 
     public static void showToast(Context c, String msj) {

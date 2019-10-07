@@ -1,7 +1,9 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Herramientas;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 
 public class PreferenceManager {
 

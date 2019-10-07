@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.RecyclerListener;
+package com.unse.bienestarestudiantil.Herramientas.RecyclerListener;
 
 import android.annotation.TargetApi;
 import android.os.Build;

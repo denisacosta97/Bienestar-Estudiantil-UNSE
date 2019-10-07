@@ -1,11 +1,10 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.widget.DatePicker;
 
 import java.util.Calendar;
 

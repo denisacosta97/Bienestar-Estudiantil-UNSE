@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.unse.bienestarestudiantil.Modelos.Categoria;
+import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
@@ -38,7 +41,10 @@ public class CategoriasAdapter  extends RecyclerView.Adapter<CategoriasAdapter.E
 
     }
 
-
+    @Override
+    public long getItemId(int position) {
+        return arrayList.get(position).getIdCategoria();
+    }
 
     @Override
     public int getItemCount() {

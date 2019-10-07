@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Vistas;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText date;
@@ -17,10 +20,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+       // setContentView(R.layout.activity_register);
 
-        date = findViewById(R.id.txtdate);
-        mRegister = findViewById(R.id.btnregister);
+       // date = findViewById(R.id.txtdate);
+       // mRegister = findViewById(R.id.btnregister);
         date.setOnClickListener(this);
         mRegister.setOnClickListener(this);
 
@@ -29,14 +32,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.txtdate:
-                showDateDialog();
-                break;
-            case R.id.btnregister:
+          /* // case R.id.txtdate:
+               // showDateDialog();
+               // break;
+          //  case R.id.btnregister:
                 //Insert función registro DENIS gg
                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 finish();
-                break;
+                break;*/
         }
     }
 

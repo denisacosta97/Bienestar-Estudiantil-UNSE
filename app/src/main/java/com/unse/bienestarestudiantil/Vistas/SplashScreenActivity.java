@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil;
+package com.unse.bienestarestudiantil.Vistas;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.unse.bienestarestudiantil.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
