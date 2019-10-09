@@ -8,17 +8,16 @@
         android:id="@+id/card_inicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorWhite"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
             <ImageView
                 android:id="@+id/imgAlerta"
@@ -26,7 +25,6 @@
                 android:layout_height="160dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_foreground" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,26 +48,30 @@
                     android:layout_marginTop="5dp"
                     android:text="Lorem ipsum dolor sit amet consectetur adipiscing, elit velit porttitor nunc integer cubilia, per placerat nec leo habitasse."
                     android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnFuncion"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="TEXTO"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="end"
+                    android:text="06/03/2019 - 11:42hs"
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnFuncion"
-                android:layout_gravity="center"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TEXTO"
-                android:textStyle="bold" />
 
 
-            <TextView
-                android:id="@+id/txtFecha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="end"
-                android:text="06/03/2019 - 11:42hs"
-                android:textSize="11dp" />
+
 
         </LinearLayout>
 

@@ -1,39 +1,31 @@
 package com.unse.bienestarestudiantil.Vistas;
 
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Categoria;
-import com.unse.bienestarestudiantil.Modelos.Noticias;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.NoticiasAdapter;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.databinding.ActivityMainBinding;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
-    ArrayList<Categoria> mCategorias;
-    CategoriasAdapter mAdapter;
-    Toolbar mToolbar;
-    NoticiasAdapter mNoticiasAdapter;
-    ArrayList<Noticias> mListNoticias;
-
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
     private ActivityMainBinding mBinding;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,95 +34,95 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        mToolbar = findViewById(R.id.toolbar);
+        //    mToolbar = findViewById(R.id.toolbar);
 
+        //   drawerLayout = findViewById(R.id.drawer_layout);
+        //  navigationView = findViewById(R.id.nav_view);
+
+        comprobarNavigationView();
 
         setToolbar();
 
-        loadDataRecycler();
-
-
-    }
-
-    private void loadDataRecycler() {
-        loadCategorias();
-        mAdapter = new CategoriasAdapter(mCategorias, getApplicationContext());
-
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.HORIZONTAL, false);
-        mBinding.recycler.setLayoutManager(mLayoutManager);
-        mBinding.recycler.setAdapter(mAdapter);
-
-        loadNoticias();
-
-        mNoticiasAdapter = new NoticiasAdapter(mListNoticias, getApplicationContext());
-        mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
-        mBinding.recyclerNews.setLayoutManager(mLayoutManager2);
-
-
-        mBinding.recyclerNews.setAdapter(mNoticiasAdapter);
-        mBinding.recyclerNews.setNestedScrollingEnabled(false);
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mBinding.recycler);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                if (id == -1){
-                    mNoticiasAdapter.filtrarNoticias(-1);
-                }else{
-                    mNoticiasAdapter.filtrarNoticias((int) id);
-                }
-            }
-        });
-    }
-
-    private void loadNoticias() {
-        mListNoticias = new ArrayList<>();
-        Noticias noticias = new Noticias("Fiesta del Estudiante",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "25/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_NORMAL, Utils.TIPO_COMEDOR);
-        mListNoticias.add(noticias);
-        noticias = new Noticias("Fiesta del Estudiante 2",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "26/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_WEB, Utils.TIPO_BECA);
-        noticias.setUrlWeb("www.google.com");
-        mListNoticias.add(noticias);
-        noticias = new Noticias("Fiesta del Estudiante 3",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "27/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_TIENDA, Utils.TIPO_DEPORTE);
-        mListNoticias.add(noticias);
-        mListNoticias.add(new Noticias("Fiesta del Estudiante 4",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "28/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_APP, Utils.TIPO_UPA));
-
-
 
     }
 
 
-    private void loadCategorias() {
-        mCategorias = new ArrayList<>();
-        mCategorias.add(new Categoria(-1, "Todo"));
-        mCategorias.add(new Categoria(1, "Comedor Universitario"));
-        mCategorias.add(new Categoria(2, "Deportes"));
-        mCategorias.add(new Categoria(3, "Transporte"));
-        mCategorias.add(new Categoria(4, "Becas"));
-        mCategorias.add(new Categoria(5, "Residencia"));
-        mCategorias.add(new Categoria(6, "Cyber Estudiantil"));
-        mCategorias.add(new Categoria(7, "UPA"));
-    }
-
-    private void setToolbar() {
-        setSupportActionBar(mToolbar);
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setDisplayHomeAsUpEnabled(false);
-            ab.setTitle("Bienestar Estudiantíl");
-            mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+    private void comprobarNavigationView() {
+        if (mBinding.navView != null) {
+            prepararDrawer(mBinding.navView);
+            // Seleccionar item por defecto
+            seleccionarItem(mBinding.navView.getMenu().getItem(0));
         }
     }
 
+    private void prepararDrawer(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        seleccionarItem(menuItem);
+                        mBinding.drawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
+
+    }
+
+    private void seleccionarItem(MenuItem itemDrawer) {
+        Fragment fragmentoGenerico = null;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        switch (itemDrawer.getItemId()) {
+            case R.id.item_uno:
+                fragmentoGenerico = new InicioFragmento();
+                break;
+        }
+        if (fragmentoGenerico != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.contenedor_principal, fragmentoGenerico)
+                    .commit();
+        }
+
+        // Setear título actual
+        setTitle(itemDrawer.getTitle());
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(mBinding.contenedor.toolbarLay.toolbar);
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            // Poner ícono del drawer toggle
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("Bienestar Estudiantíl");
+            mBinding.contenedor.toolbarLay.toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mBinding.drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START))
+            mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            super.onBackPressed();
+    }
 }

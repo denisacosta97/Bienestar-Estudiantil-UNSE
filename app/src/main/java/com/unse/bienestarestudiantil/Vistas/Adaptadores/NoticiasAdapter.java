@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +33,7 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
 
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticia, parent, false);
 
         return new NoticiasViewHolder(view);
     }
@@ -63,18 +62,20 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
         return mNoticias.get(position).getId();
     }
 
-    public void filtrarNoticias(int tipo){
-        ArrayList<Noticias> x = new ArrayList<>(mNoticiasCopia);
-        if (tipo != -1){
-
-
-            for (Noticias n : x){
-                if (n.getIdCategoria() != tipo){
-                    mNoticias.remove(n);
+    public void filtrarNoticias(int tipo) {
+        if(tipo == -1){
+            mNoticias.clear();
+            mNoticias.addAll(mNoticiasCopia);
+        } else{
+            ArrayList<Noticias> result = new ArrayList<>();
+            for(Noticias item: mNoticiasCopia){
+                if (item.getIdCategoria() == tipo){
+                    result.add(item);
                 }
+
             }
-        }else{
-            mNoticias = x;
+            mNoticias.clear();
+            mNoticias.addAll(result);
         }
         notifyDataSetChanged();
     }
