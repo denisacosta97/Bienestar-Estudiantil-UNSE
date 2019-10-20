@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -33,7 +35,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        //Utils.setFont(getApplicationContext(), this, "futura_normal.ttf");
+        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
 
         mProgress = findViewById(R.id.splash_screen_progress_bar);
         linearFondo = findViewById(R.id.splashbackgr);

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/ic_flecha_atras"/>
+
+        <TextView
+            android:id="@+id/tv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTRO"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Regístrate para poder realizar tus trámites dentro de Bienestar Estudiantíl."
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subí tu foto:"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:layout_marginLeft="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserRegister"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/user"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/txtnombre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Nombre completo"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtapellido"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Apellidos"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="textEmailSubject"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtemail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="/eMail/Legajo/DNI"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtdate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Fecha de nacimiento"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txtpass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Contraseña"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="textPassword"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/txt_repass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Confirmar contraseña"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="15dp"
+                android:inputType="textPassword"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btnregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:text="Registrarme"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

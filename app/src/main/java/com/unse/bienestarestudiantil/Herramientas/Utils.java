@@ -80,7 +80,6 @@ public class Utils {
         return pattern.matcher(tel).matches();
     }
 
-
     //Metodo para saber si un permiso esta autorizado o no
     public static boolean isPermissionGranted(Context ctx, String permision) {
         int permission = ActivityCompat.checkSelfPermission(
@@ -102,7 +101,6 @@ public class Utils {
         FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), font);
         fontChanger.replaceFonts((ViewGroup)view.findViewById(android.R.id.content));
     }
-
 
 }
 

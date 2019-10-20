@@ -5,13 +5,19 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
+
+import java.util.Calendar;
 
 public class LoginWelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button mLogin, mInvitado;
+    TextView txtWelcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +25,33 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_login_welcome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+
         mLogin = findViewById(R.id.inisesion);
         mInvitado = findViewById(R.id.visit);
+        txtWelcome = findViewById(R.id.txtWelcome);
         mLogin.setOnClickListener(this);
         mInvitado.setOnClickListener(this);
 
+        changeTextWelcomeLogin();
+
+    }
+
+    public void changeTextWelcomeLogin(){
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 6 && timeOfDay <= 12){
+            txtWelcome.setText("¡Buen día!");
+        }
+        else
+            if(timeOfDay >=13 && timeOfDay <= 19){
+                txtWelcome.setText("¡Buenas tardes!");
+            }
+        else
+            if(timeOfDay >= 20)
+                txtWelcome.setText("¡Buenas noches!");
     }
 
 

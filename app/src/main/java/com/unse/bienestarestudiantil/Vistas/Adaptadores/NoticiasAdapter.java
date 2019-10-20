@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Noticias;
 import com.unse.bienestarestudiantil.R;
@@ -29,11 +30,12 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
         this.mNoticiasCopia.addAll(mNoticias);
     }
 
-
-
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticia, parent, false);
+
+        FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup) view);
 
         return new NoticiasViewHolder(view);
     }
@@ -92,6 +94,7 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
 
         public NoticiasViewHolder(final View itemView) {
             super(itemView);
+
             txtDescripcion = itemView.findViewById(R.id.txtCuerpo);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             txtFecha = itemView.findViewById(R.id.txtFecha);

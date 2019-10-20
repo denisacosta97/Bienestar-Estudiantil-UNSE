@@ -28,7 +28,6 @@ public class TransitionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transition);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
 
-
     }
 
     public void load(View view) {

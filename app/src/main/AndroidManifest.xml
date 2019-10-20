@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unse.bienestarestudiantil">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,8 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Vistas.Fragmentos.DeportesFragment"></activity>
+        <activity android:name=".Vistas.SportsRegistration" />
+        <activity android:name=".Vistas.InfoAlumno" />
+        <activity android:name=".Vistas.UserProfile" />
+        <activity android:name=".Vistas.ReservarActivity" />
+        <activity android:name=".Vistas.SwipeViewPoliDetails" />
+        <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.LoginWelcomeActivity" />
         <activity android:name=".Vistas.LoginActivity" />
+        <activity android:name=".Vistas.ReservaQS" />
+        <activity android:name=".Vistas.Credencial" />
         <activity
             android:name=".Vistas.MainActivity"
             android:label="@string/app_name" />
@@ -25,8 +32,8 @@
         </activity>
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
-
-
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

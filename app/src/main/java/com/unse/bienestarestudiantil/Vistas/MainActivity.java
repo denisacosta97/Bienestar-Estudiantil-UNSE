@@ -1,6 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas;
 
-
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -15,9 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
 import com.unse.bienestarestudiantil.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,16 +38,16 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        //    mToolbar = findViewById(R.id.toolbar);
+        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
 
+        //    mToolbar = findViewById(R.id.toolbar);
         //   drawerLayout = findViewById(R.id.drawer_layout);
         //  navigationView = findViewById(R.id.nav_view);
 
         comprobarNavigationView();
 
         setToolbar();
-
-
     }
 
 
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepararDrawer(NavigationView navigationView) {
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -66,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
     }
 
     private void seleccionarItem(MenuItem itemDrawer) {
@@ -74,9 +78,20 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (itemDrawer.getItemId()) {
-            case R.id.item_uno:
+            case R.id.inicio:
                 fragmentoGenerico = new InicioFragmento();
                 break;
+            case R.id.item_uno:
+                fragmentoGenerico = new PoliFragment();
+                break;
+            case R.id.item_dos:
+                fragmentoGenerico = new DeportesFragment();
+                break;
+            case R.id.menu_opcion_profile:
+                startActivity(new Intent(MainActivity.this, UserProfile.class));
+                finish();
+                break;
+
         }
         if (fragmentoGenerico != null) {
             fragmentManager
@@ -105,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_drawer, menu);
+        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
         return true;
     }
 

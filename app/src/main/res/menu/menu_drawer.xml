@@ -1,19 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/inicio"
+            android:icon="@drawable/ic_home"
+            android:title="Inicio"/>
+        <item
             android:id="@+id/item_uno"
-            android:icon="@drawable/ic_flecha_derecha"
-            android:title="Agregar una parada" />
-
+            android:icon="@drawable/ic_poli"
+            android:title="Polideportivo"/>
         <item
             android:id="@+id/item_dos"
-            android:icon="@drawable/ic_flecha_derecha"
-            android:title="Agregar un punto de carga" />
+            android:icon="@drawable/ic_deportes"
+            android:title="Deportes"/>
         <item
             android:id="@+id/item_tres"
-            android:icon="@drawable/ic_flecha_derecha"
-            android:title="Información" />
+            android:icon="@drawable/ic_upa"
+            android:title="UPA"/>
+        <item
+            android:id="@+id/item_4"
+            android:icon="@drawable/ic_becas"
+            android:title="Área Becas"/>
+        <item
+            android:id="@+id/item_5"
+            android:icon="@drawable/ic_ciber"
+            android:title="Ciber"/>
+        <item
+            android:id="@+id/item_6"
+            android:icon="@drawable/ic_transporte"
+            android:title="Transporte"/>
+        <item
+            android:id="@+id/item_7"
+            android:icon="@drawable/ic_residencia"
+            android:title="Residencia"/>
+        <item
+            android:id="@+id/item_8"
+            android:icon="@drawable/ic_menu_comedor"
+            android:title="Comedor"/>
     </group>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="Más">
+
+        <menu>
+            <item
+                android:id="@+id/menu_opcion_profile"
+                android:icon="@drawable/user"
+                android:title="Perfil"/>
+            <item
+                android:id="@+id/menu_opcion_1"
+                android:icon="@drawable/ic_menu"
+                android:title="Sobre nosotros"/>
+            <item
+                android:id="@+id/menu_opcion_2"
+                android:icon="@drawable/ic_menu"
+                android:title="Contactos"/>
+            <item
+                android:id="@+id/menu_opcion_3"
+                android:icon="@drawable/ic_menu"
+                android:title="Términos y condiciones"/>
+        </menu>
+    </item>
 
 </menu>

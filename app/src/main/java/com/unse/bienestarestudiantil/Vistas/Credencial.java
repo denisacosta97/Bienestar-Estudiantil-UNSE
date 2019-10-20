@@ -1,0 +1,15 @@
+package com.unse.bienestarestudiantil.Vistas;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.unse.bienestarestudiantil.R;
+
+public class Credencial extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_credencial);
+    }
+}

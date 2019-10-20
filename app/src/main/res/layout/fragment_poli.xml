@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mirá todo lo que tenemos para vos en el complejo deportivo."
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_one"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:background="@drawable/bienesplash"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparente"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blackTransparente"
+                    android:src="@drawable/imgborrar2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:background="@color/blackTransparente">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PILETA"
+                        android:layout_margin="10dp"
+                        android:textColor="#ffffff"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:paddingTop="70dp"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:id="@+id/btnInfoPileta"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:text="Información"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="12sp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_border"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_two"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:background="@drawable/bienesplash"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparente"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blackTransparente"
+                    android:src="@drawable/imgborrar1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="QUINCHOS Y SALÓN"
+                        android:layout_margin="10dp"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnReservaQS"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:text="Reservar"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="12sp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_border"
+                    android:layout_gravity="bottom|end"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_three"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:background="@drawable/bienesplash"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparente"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blackTransparente">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/blackTransparente"
+                        android:src="@drawable/imgborrar2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="165dp"
+                        android:background="@color/blackTransparente"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Información sobre canchas"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="#000"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Lorem ipsum dolor sit amet consectetur adipiscing, elit velit porttitor nunc integer cubilia, per placerat nec leo habitasse."
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

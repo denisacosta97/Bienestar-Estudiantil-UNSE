@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
@@ -37,6 +38,9 @@ public class InicioFragmento extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Crea la vista de Inicio
         view = inflater.inflate(R.layout.fragmento_inicio, container, false);
+
+        FontChangeUtil fontChanger = new FontChangeUtil(getContext().getAssets(), "Montserrat-Regular.ttf");
+        fontChanger.replaceFonts((ViewGroup) view);
 
         loadViews();
 
@@ -102,8 +106,6 @@ public class InicioFragmento extends Fragment {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "28/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
                 1,Utils.NOTICIA_BUTTON_APP, Utils.TIPO_UPA));
-
-
 
     }
 

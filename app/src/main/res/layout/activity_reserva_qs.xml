@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Vistas.ReservaQS"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        style="@style/AppTheme.PopupOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </android.support.v7.widget.Toolbar>
+
+        <com.github.badoualy.datepicker.DatePickerTimeline
+            android:id="@+id/timeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mti_ringLblDateSelectedColor="@color/colorPrimary"
+            app:mti_bgLblDateSelectedColor="@color/colorPrimaryDark"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elige una fecha para ver la disponibilidad de los quinchos o el salón."
+        android:textSize="18sp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center"
+            android:layout_centerInParent="true"
+            android:overScrollMode="never"
+            android:clipToPadding="false">
+
+        </android.support.v4.view.ViewPager>
+
+        <Button
+            android:id="@+id/btnReservar"
+            android:text="Reservar"
+            android:background="@drawable/corners_rounded_green"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="35dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>
