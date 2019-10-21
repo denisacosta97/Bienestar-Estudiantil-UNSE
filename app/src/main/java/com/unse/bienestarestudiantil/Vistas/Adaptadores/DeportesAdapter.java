@@ -10,18 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
-import com.unse.bienestarestudiantil.Modelos.Categoria;
-import com.unse.bienestarestudiantil.Modelos.Deportes;
+import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
 public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.EventosViewHolder> {
 
-    ArrayList<Deportes> deport;
+    ArrayList<Deporte> deport;
     private Context context;
 
-    public DeportesAdapter(ArrayList<Deportes> list, Context ctx) {
+    public DeportesAdapter(ArrayList<Deporte> list, Context ctx) {
         this.deport = list;
         this.context = ctx;
     }
@@ -39,13 +38,11 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
 
     @Override
     public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
-
-        Deportes depo = deport.get(position);
-
+        Deporte depo = deport.get(position);
         holder.mIcon.setImageResource(depo.getIconDeporte());
         holder.mNameDeport.setText(depo.getName());
-
     }
+
 
     @Override
     public long getItemId(int position) {
@@ -67,7 +64,6 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
 
             mIcon = itemView.findViewById(R.id.imgvIconDeporte);
             mNameDeport = itemView.findViewById(R.id.txtNameDeporte);
-
         }
     }
 }

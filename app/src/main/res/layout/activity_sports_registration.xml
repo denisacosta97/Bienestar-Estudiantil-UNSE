@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Regístrate en el deporte que tengamos disponible, elige uno de la lista y completa los siguientes datos."
+            android:text="Registro"
             android:textSize="18sp"
             android:gravity="center"
             android:layout_marginRight="15dp"
@@ -69,17 +69,24 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="15dp"/>
 
-            <Spinner
-                android:id="@+id/spinner"
+            <EditText
+                android:id="@+id/edtDeporte"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Selecciona un deporte..."
+                android:layout_height="50dp"
+                android:hint="Deporte"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/txtnombre"
+                android:id="@+id/edtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Nombre completo"
@@ -93,7 +100,7 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/txtapellido"
+                android:id="@+id/edtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Apellidos"
@@ -341,19 +348,36 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edtxPreg1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="¿Realizó o realiza actividad física?"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:padding="15dp"
-                android:inputType="text"
-                android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Realizó o realiza actividad física? "
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+
+                <CheckBox
+                    android:id="@+id/checkBox5"
+                    android:layout_width="115dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Si" />
+
+                <CheckBox
+                    android:id="@+id/checkBox6"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="No" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/disablePreg"

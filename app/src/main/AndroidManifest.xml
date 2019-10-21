@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Fragmentos.DeportesFragment"></activity>
+        <activity android:name=".Vistas.PerfilDeporteActivity"></activity>
+        <activity android:name=".Vistas.Fragmentos.DeportesFragment" />
         <activity android:name=".Vistas.SportsRegistration" />
         <activity android:name=".Vistas.InfoAlumno" />
         <activity android:name=".Vistas.UserProfile" />

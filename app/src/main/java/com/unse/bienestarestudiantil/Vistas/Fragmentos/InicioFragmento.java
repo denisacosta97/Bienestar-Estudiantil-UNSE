@@ -114,7 +114,7 @@ public class InicioFragmento extends Fragment {
         mCategorias = new ArrayList<>();
         mCategorias.add(new Categoria(-1, "Todo"));
         mCategorias.add(new Categoria(1, "Comedor Universitario"));
-        mCategorias.add(new Categoria(2, "Deportes"));
+        mCategorias.add(new Categoria(2, "Deporte"));
         mCategorias.add(new Categoria(3, "Transporte"));
         mCategorias.add(new Categoria(4, "Becas"));
         mCategorias.add(new Categoria(5, "Residencia"));
