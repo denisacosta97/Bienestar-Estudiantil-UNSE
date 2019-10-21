@@ -13,12 +13,12 @@
         <activity android:name=".Vistas.SportsRegistration" />
         <activity android:name=".Vistas.InfoAlumno" />
         <activity android:name=".Vistas.UserProfile" />
-        <activity android:name=".Vistas.ReservarActivity" />
+        <activity android:name=".Vistas.ConfirmarReservaActivity" />
         <activity android:name=".Vistas.SwipeViewPoliDetails" />
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.LoginWelcomeActivity" />
         <activity android:name=".Vistas.LoginActivity" />
-        <activity android:name=".Vistas.ReservaQS" />
+        <activity android:name=".Vistas.ReservaEspacioActivity" />
         <activity android:name=".Vistas.Credencial" />
         <activity
             android:name=".Vistas.MainActivity"

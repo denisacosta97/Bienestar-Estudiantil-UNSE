@@ -3,8 +3,13 @@ package com.unse.bienestarestudiantil.Vistas;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.renderscript.RenderScript;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,41 +20,85 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Espacio;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.EspaciosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ReservarActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConfirmarReservaActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView txtReserva;
     EditText date, time, txtQS;
     Button cancel, reservar;
+
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    EspaciosAdapter mEspaciosAdapter;
+    ArrayList<Espacio> models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+        Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),
+                "Montserrat-Regular.ttf");
 
-        Intent intent = getIntent();
-        String reserva = intent.getStringExtra("nombre");
         txtReserva = findViewById(R.id.txtInfoReserva);
-        txtReserva.setText("Vas a reservar el "+reserva);
-        txtQS = findViewById(R.id.txtQS);
-        txtQS.setText(reserva);
-
         cancel = findViewById(R.id.btnCancel);
-        cancel.setOnClickListener(this);
         reservar = findViewById(R.id.btnReservaF);
-        reservar.setOnClickListener(this);
         date = findViewById(R.id.txtdateR);
-        date.setOnClickListener(this);
         time = findViewById(R.id.edtxTime);
+        mRecyclerView = findViewById(R.id.recycler);
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        models = new ArrayList<>();
+        models.add(new Espacio(R.drawable.imgborrar2, "Salón", "$4200", "Salón de X por Y dimensiones para tus eventos, cuenta con cosa1, cosa2, cosa3..."));
+        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 1", "$2000", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+        models.add(new Espacio(R.drawable.imgborrar2, "Quincho 2", "$3500", "El quincho 2 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 3", "$3200", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+
+        mEspaciosAdapter = new EspaciosAdapter(models, getApplicationContext());
+
+        SnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(mRecyclerView);
+        mRecyclerView.setAdapter(mEspaciosAdapter);
+        mRecyclerView.setNestedScrollingEnabled(true);
+
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                selectItem(position);
+                mEspaciosAdapter.notifyDataSetChanged();
+            }
+        });
+
+       // txtQS = findViewById(R.id.txtQS);
+        //txtQS.setText(reserva);
+
+
+        cancel.setOnClickListener(this);
+        reservar.setOnClickListener(this);
+
+        date.setOnClickListener(this);
+
         time.setOnClickListener(this);
 
+    }
+
+    private void selectItem(int position) {
+        for (Espacio s: models){
+            s.setSeleccionado(false);
+        }
+        models.get(position).setSeleccionado(true);
     }
 
     private void showDateDialog() {

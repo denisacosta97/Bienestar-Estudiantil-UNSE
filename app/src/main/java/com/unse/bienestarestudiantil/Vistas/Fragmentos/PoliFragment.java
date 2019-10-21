@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.ReservaQS;
+import com.unse.bienestarestudiantil.Vistas.ReservaEspacioActivity;
 
 public class PoliFragment extends Fragment {
 
@@ -28,7 +28,7 @@ public class PoliFragment extends Fragment {
         btnReservas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ReservaQS.class);
+                Intent intent = new Intent(getActivity(), ReservaEspacioActivity.class);
                 startActivity(intent);
             }
         });

@@ -97,9 +97,9 @@ public class Utils {
     }
 
 
-    public static void setFont(Context context, Activity view, String font){
+    public static void setFont(Context context, ViewGroup view, String font){
         FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), font);
-        fontChanger.replaceFonts((ViewGroup)view.findViewById(android.R.id.content));
+        fontChanger.replaceFonts(view);
     }
 
 }

@@ -1,171 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reserva"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="60dp"/>
-
-    <TextView
-        android:id="@+id/txtInfoReserva"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vas a reservar el"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Para confirmar la reserva, debes presentarte a realizar el pago en la Secretaría de Bienestar Estudiantíl."
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp">
-
-        <EditText
-            android:id="@+id/txtnombre"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Nombre completo"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_logreg"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/txtapellido"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Apellidos"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
-            android:inputType="textEmailSubject"
-            android:background="@drawable/edit_text_logreg"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/txtemail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Legajo/DNI"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edit_text_logreg"
-            android:textSize="15sp" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/txtdateR"
-                android:layout_width="165dp"
-                android:layout_height="50dp"
-                android:hint="Fecha"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:padding="15dp"
-                android:inputType="date"
-                android:focusable="false"
-                android:clickable="true"
-                android:longClickable="false"
-                android:maxLines="1"
-                android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edtxTime"
-                android:layout_width="165dp"
-                android:layout_height="50dp"
-                android:hint="Hora"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:focusable="false"
-                android:padding="15dp"
-                android:longClickable="false"
-                android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp"/>
+                <TextView
+                    android:id="@+id/tv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Reserva"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtInfoReserva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Vas a reservar el"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Para confirmar la reserva, debes presentarte a realizar el pago en la Secretaría de Bienestar Estudiantíl."
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtnombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:hint="Nombre completo"
+                    android:inputType="textPersonName"
+                    android:padding="15dp"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/txtapellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:hint="Apellidos"
+                    android:inputType="textEmailSubject"
+                    android:padding="15dp"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/txtemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:hint="Legajo/DNI"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/txtQS"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:focusable="false"
+                    android:hint="Cosa a reservar"
+                    android:inputType="text"
+                    android:longClickable="false"
+                    android:padding="15dp"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtdateR"
+                        android:layout_width="165dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edit_text_logreg"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="Fecha"
+                        android:inputType="date"
+                        android:longClickable="false"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/edtxTime"
+                        android:layout_width="165dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edit_text_logreg"
+                        android:focusable="false"
+                        android:hint="Hora"
+                        android:longClickable="false"
+                        android:padding="15dp"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_border"
+                        android:text="Cancelar"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/btnReservaF"
+                        android:layout_width="150dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_border"
+                        android:text="Reservar"
+                        android:textColor="@android:color/white" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/txtQS"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Cosa a reservar"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
-            android:inputType="text"
-            android:focusable="false"
-            android:longClickable="false"
-            android:background="@drawable/edit_text_logreg"
-            android:textSize="15sp" />
+    </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_border"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp"
-                android:textColor="@android:color/white"
-                android:text="Cancelar"/>
-
-            <Button
-                android:id="@+id/btnReservaF"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_border"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="30dp"
-                android:textColor="@android:color/white"
-                android:text="Reservar"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </LinearLayout>

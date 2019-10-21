@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vistas.ReservaQS"
+    tools:context=".Vistas.ReservaEspacioActivity"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -23,7 +23,7 @@
         </android.support.v7.widget.Toolbar>
 
         <com.github.badoualy.datepicker.DatePickerTimeline
-            android:id="@+id/timeline"
+            android:id="@+id/calendario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:mti_ringLblDateSelectedColor="@color/colorPrimary"
@@ -31,46 +31,75 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <TextView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Elige una fecha para ver la disponibilidad de los quinchos o el salón."
-        android:textSize="18sp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+        >
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:foregroundGravity="center"
-            android:layout_centerInParent="true"
-            android:overScrollMode="never"
-            android:clipToPadding="false">
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
 
-        </android.support.v4.view.ViewPager>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Elige una fecha para ver la disponibilidad de los quinchos o el salón."
+                android:textSize="15sp"
+                />
 
-        <Button
-            android:id="@+id/btnReservar"
-            android:text="Reservar"
-            android:background="@drawable/corners_rounded_green"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/colorWhite"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="35dp"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnReservar"
+                    android:text="Reservar"
+                    android:background="@drawable/corners_rounded_green"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginTop="10dp">-->
+
+<!--&lt;!&ndash;        <android.support.v4.view.ViewPager&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/viewPager"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:foregroundGravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_centerInParent="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:overScrollMode="never"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:clipToPadding="false">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </android.support.v4.view.ViewPager>&ndash;&gt;-->
+
+
+
+<!--    </RelativeLayout>-->
 
 </LinearLayout>

@@ -11,6 +11,12 @@
     <color name="transparente">#00E7E7E7</color>
     <color name="blackTransparente">#5B000000</color>
 
+    <color name="colorGreen">#32AC37</color>
+    <color name="colorOrange">#F57C00</color>
+    <color name="colorRed">#D32F2F</color>
+    <color name="colorSelect">#48000000</color>
+
+
     <!--colors for profile-->
     <color name="profilePrimaryDark">#FF3B30</color>
     <color name="profileAccentColor">#F7F7F7</color>
