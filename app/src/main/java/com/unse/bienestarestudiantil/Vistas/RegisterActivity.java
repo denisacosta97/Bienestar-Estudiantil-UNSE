@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
@@ -25,14 +26,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText date;
     Button mRegister;
+    ImageButton mScanner;
     ImageView btnBack;
     CircleImageView imgUserRegister;
 
+    private ZXingScannerView mScannerView;
     private static final int GET_FROM_GALLERY = 3;
 
     @Override
@@ -47,10 +51,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mRegister = findViewById(R.id.btnregister);
         imgUserRegister = findViewById(R.id.imgUserRegister);
         btnBack = findViewById(R.id.btnBack);
+        mScanner = findViewById(R.id.btnScanner);
         date.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         imgUserRegister.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+        mScanner.setOnClickListener(this);
 
     }
 
@@ -70,6 +76,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnBack:
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
+                break;
+            case R.id.btnScanner:
+                startActivity(new Intent(RegisterActivity.this, BarcodeActivity.class));
                 finish();
                 break;
         }

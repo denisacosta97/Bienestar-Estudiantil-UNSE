@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,7 +16,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
-            android:tint="@color/colorWhite"
             android:src="@drawable/ic_flecha_atras"/>
 
         <TextView
@@ -27,7 +25,6 @@
             android:text="REGISTRO"
             android:textAlignment="center"
             android:textSize="50sp"
-            android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
@@ -36,24 +33,42 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Regístrate para poder realizar tus trámites dentro de Bienestar Estudiantíl."
-            android:textColor="@color/colorWhite"
+            android:text="Regístrate para poder realizar tus trámites dentro de Bienestar Estudiantíl. Tienes la opción de escanear el código QR de tu DNI para autocompletar datos."
             android:textSize="18sp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Escanear DNI"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <ImageButton
+            android:id="@+id/btnScanner"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_barcode_dni"
+            android:background="@color/transparente"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Subí tu foto:"
-                android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 android:layout_marginLeft="15dp"/>
 
