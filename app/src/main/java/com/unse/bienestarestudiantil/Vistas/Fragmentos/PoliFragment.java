@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.ReservaEspacioActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.ReservaEspacioActivity;
 
 public class PoliFragment extends Fragment {
 

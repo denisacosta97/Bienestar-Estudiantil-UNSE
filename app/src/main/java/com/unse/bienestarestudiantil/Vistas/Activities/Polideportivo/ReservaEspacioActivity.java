@@ -1,8 +1,7 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,15 +14,13 @@ import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.ReservaHorario;
-import com.unse.bienestarestudiantil.Modelos.Espacio;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.EspaciosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.HorariosAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-public class ReservaEspacioActivity extends AppCompatActivity {
+public class ReservaEspacioActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Button btnReservar;
@@ -39,12 +36,12 @@ public class ReservaEspacioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserva_qs);
+        setContentView(R.layout.activity_reserva_espacio);
 
         Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),
                 "Montserrat-Regular.ttf");
 
-        setSupportActionBar(mToolbar);
+        setToolbar();
 
         loadViews();
 
@@ -65,6 +62,14 @@ public class ReservaEspacioActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void setToolbar() {
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void loadData() {
@@ -110,4 +115,12 @@ public class ReservaEspacioActivity extends AppCompatActivity {
         mRecyclerViewHorario = findViewById(R.id.recycler);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+    }
 }

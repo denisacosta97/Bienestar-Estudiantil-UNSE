@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.EventosViewHolder> {
 
-    ArrayList<Deporte> deport;
+    private ArrayList<Deporte> deport;
     private Context context;
 
     public DeportesAdapter(ArrayList<Deporte> list, Context ctx) {
@@ -39,6 +39,7 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
     @Override
     public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
         Deporte depo = deport.get(position);
+
         holder.mIcon.setImageResource(depo.getIconDeporte());
         holder.mNameDeport.setText(depo.getName());
     }

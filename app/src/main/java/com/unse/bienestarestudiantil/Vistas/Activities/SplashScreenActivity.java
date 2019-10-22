@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -30,17 +31,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+        setViewsConfig();
 
-        mProgress = findViewById(R.id.splash_screen_progress_bar);
-        linearFondo = findViewById(R.id.splashbackgr);
+        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
 
+        loadViews();
+
+        loadData();
+
+        loadListener();
+
+    }
+
+    private void loadListener() {
+        mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashScreenActivity.this, LoginWelcomeActivity.class));
+                finish();
+            }
+        }, 4500);
+    }
+
+    private void loadData() {
         Glide.with(this).load(R.color.colorPrimary)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
@@ -50,15 +65,19 @@ public class SplashScreenActivity extends AppCompatActivity {
                     }
                 });
 
-        mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, LoginWelcomeActivity.class));
-                finish();
-            }
-        }, 4500);
+    }
 
+    private void loadViews() {
+        mProgress = findViewById(R.id.splash_screen_progress_bar);
+        linearFondo = findViewById(R.id.splashbackgr);
+
+    }
+
+    private void setViewsConfig() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
 

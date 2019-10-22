@@ -9,14 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
-import com.unse.bienestarestudiantil.Vistas.PerfilDeporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 
 import java.util.ArrayList;
 
@@ -32,8 +31,7 @@ public class DeportesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_deportes, container, false);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getContext().getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup) view);
+        Utils.setFont(getContext(), (ViewGroup)view, Utils.MONSERRAT);
 
         loadViews();
 
@@ -74,7 +72,7 @@ public class DeportesFragment extends Fragment {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(), PerfilDeporteActivity.class);
-                i.putExtra("dato", mDeportes.get(position));
+                i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
                 startActivity(i);
             }
         });

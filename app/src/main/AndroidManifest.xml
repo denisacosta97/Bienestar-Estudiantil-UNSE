@@ -9,22 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.PerfilDeporteActivity"></activity>
+        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity"></activity>
         <activity android:name=".Vistas.Fragmentos.DeportesFragment" />
-        <activity android:name=".Vistas.SportsRegistration" />
-        <activity android:name=".Vistas.InfoAlumno" />
-        <activity android:name=".Vistas.UserProfile" />
-        <activity android:name=".Vistas.ConfirmarReservaActivity" />
-        <activity android:name=".Vistas.SwipeViewPoliDetails" />
+        <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
+        <activity android:name=".Vistas.Activities.InfoAlumnoActivity"
+            android:label="Información"/>
+        <activity android:name=".Vistas.Activities.PerfilActivity"
+            android:label="Perfil"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity" />
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
-        <activity android:name=".Vistas.LoginWelcomeActivity" />
-        <activity android:name=".Vistas.LoginActivity" />
-        <activity android:name=".Vistas.ReservaEspacioActivity" />
-        <activity android:name=".Vistas.Credencial" />
+        <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
+        <activity android:name=".Vistas.Activities.LoginActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity" />
+        <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
-            android:name=".Vistas.MainActivity"
+            android:name=".Vistas.Activities.MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".Vistas.WelcomeActivity">
+        <activity android:name=".Vistas.Activities.SlideWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +34,7 @@
         </activity>
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
+        <activity android:name=".Vistas.Activities.SplashScreenActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

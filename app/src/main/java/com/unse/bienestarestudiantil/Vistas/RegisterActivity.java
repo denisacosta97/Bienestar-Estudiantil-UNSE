@@ -17,6 +17,8 @@ import android.widget.ImageView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
 import java.io.FileNotFoundException;

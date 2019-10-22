@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".Vistas.LoginWelcomeActivity"
+    tools:context=".Vistas.Activities.LoginWelcomeActivity"
     android:orientation="vertical">
 
     <TextView

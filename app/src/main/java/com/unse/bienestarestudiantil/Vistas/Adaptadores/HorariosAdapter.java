@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class HorariosAdapter extends RecyclerView.Adapter<HorariosAdapter.HorarioViewHolder> {
 
-    ArrayList<ReservaHorario> mList;
-    Context mContext;
+    private ArrayList<ReservaHorario> mList;
+    private Context mContext;
 
     public HorariosAdapter(ArrayList<ReservaHorario> list, Context context) {
         mList = list;
@@ -41,7 +41,8 @@ public class HorariosAdapter extends RecyclerView.Adapter<HorariosAdapter.Horari
         ReservaHorario horario = mList.get(position);
 
 
-        holder.txtHorario.setText(horario.getHoraInicio()+"-"+horario.getHoraFin());
+        String hora = String.format("%s-%s", horario.getHoraInicio(), horario.getHoraFin());
+        holder.txtHorario.setText(hora);
         switch (horario.getEstado()){
             case 1:
                 holder.txtTitulo.setText("LIBRE");

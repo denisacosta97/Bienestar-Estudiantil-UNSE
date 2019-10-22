@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,33 +24,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
 
-        mInicio = findViewById(R.id.sesionOn);
-        mInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            }
-        });
+        loadViews();
 
-        btnBack = findViewById(R.id.btnBack);
+        loadListener();
+
+    }
+
+    private void loadListener() {
         btnBack.setOnClickListener(this);
+    }
+
+    private void loadViews() {
+        mInicio = findViewById(R.id.sesionOn);
+        btnBack = findViewById(R.id.btnBack);
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.register:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            case R.id.sesionOn:
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
                 break;
+            case R.id.register:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                break;
             case R.id.btnBack:
-                startActivity(new Intent(LoginActivity.this, LoginWelcomeActivity.class));
-                finish();
+                onBackPressed();
                 break;
         }
 

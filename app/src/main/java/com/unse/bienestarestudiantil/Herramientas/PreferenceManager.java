@@ -7,13 +7,11 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 
 public class PreferenceManager {
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor spEditor;
-    Context context;
-
-    private static final String FIRST_LAUNCH = "firstLaunch";
-    int MODE = 0;
-    private static final String PREFERENCE = "Javapapers";
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor spEditor;
+    private Context context;
+    private int MODE = 0;
+    private static final String PREFERENCE = "Bienestar";
 
     public PreferenceManager(Context context) {
         this.context = context;

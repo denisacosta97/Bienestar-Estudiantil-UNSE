@@ -42,13 +42,14 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
 
         //Utils.setFont(context, (ViewGroup) view,"Montserrat-Regular.ttf");
 
+        Espacio espacio = mList.get(position);
 
-        holder.imageView.setImageResource(mList.get(position).getImage());
-        holder.title.setText(mList.get(position).getTitle());
-        holder.prize.setText(mList.get(position).getPrize());
-        holder.desc.setText(mList.get(position).getDesc());
+        holder.imgFoto.setImageResource(espacio.getImage());
+        holder.txtTitulo.setText(espacio.getTitle());
+        holder.txtPrecio.setText(espacio.getPrize());
+        holder.txtDescrip.setText(espacio.getDesc());
 
-        if(mList.get(position).isSeleccionado()){
+        if(espacio.isSeleccionado()){
             holder.mCardView.setAlpha(0.5f);
         }else{
             holder.mCardView.setAlpha(1f);
@@ -64,17 +65,17 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
     public class EspacioViewHolder extends RecyclerView.ViewHolder {
 
 
-        ImageView imageView;
-        TextView title, desc, prize;
+        ImageView imgFoto;
+        TextView txtTitulo, txtDescrip, txtPrecio;
         CardView mCardView;
 
 
         public EspacioViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.image);
-            title = itemView.findViewById(R.id.title);
-            prize = itemView.findViewById(R.id.txtprize);
-            desc = itemView.findViewById(R.id.desc);
+            imgFoto = itemView.findViewById(R.id.image);
+            txtTitulo = itemView.findViewById(R.id.title);
+            txtPrecio = itemView.findViewById(R.id.txtprize);
+            txtDescrip = itemView.findViewById(R.id.desc);
             mCardView = itemView.findViewById(R.id.card);
         }
     }

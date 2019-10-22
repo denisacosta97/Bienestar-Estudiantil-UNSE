@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
@@ -38,12 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
-
-        //    mToolbar = findViewById(R.id.toolbar);
-        //   drawerLayout = findViewById(R.id.drawer_layout);
-        //  navigationView = findViewById(R.id.nav_view);
+        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
 
         comprobarNavigationView();
 
@@ -88,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentoGenerico = new DeportesFragment();
                 break;
             case R.id.menu_opcion_profile:
-                startActivity(new Intent(MainActivity.this, UserProfile.class));
-                finish();
+                startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
 
         }

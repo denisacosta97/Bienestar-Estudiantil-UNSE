@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,6 +37,8 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     EditText date, time, txtQS;
     Button cancel, reservar;
 
+    Toolbar mToolbar;
+
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     EspaciosAdapter mEspaciosAdapter;
@@ -47,15 +50,29 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_reservar);
 
         Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),
-                "Montserrat-Regular.ttf");
+                Utils.MONSERRAT);
 
-        txtReserva = findViewById(R.id.txtInfoReserva);
-        cancel = findViewById(R.id.btnCancel);
-        reservar = findViewById(R.id.btnReservaF);
-        date = findViewById(R.id.txtdateR);
-        time = findViewById(R.id.edtxTime);
-        mRecyclerView = findViewById(R.id.recycler);
+        setToolbar();
 
+        loadViews();
+
+        loadData();
+
+        loadListener();
+
+    }
+
+    private void loadListener() {
+        cancel.setOnClickListener(this);
+        reservar.setOnClickListener(this);
+
+        date.setOnClickListener(this);
+
+        time.setOnClickListener(this);
+
+    }
+
+    private void loadData() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -80,18 +97,23 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
                 mEspaciosAdapter.notifyDataSetChanged();
             }
         });
+    }
 
-       // txtQS = findViewById(R.id.txtQS);
-        //txtQS.setText(reserva);
+    private void loadViews() {
+        txtReserva = findViewById(R.id.txtInfoReserva);
+        cancel = findViewById(R.id.btnCancel);
+        reservar = findViewById(R.id.btnReservaF);
+        date = findViewById(R.id.txtdateR);
+        time = findViewById(R.id.edtxTime);
+        mRecyclerView = findViewById(R.id.recycler);
+    }
 
-
-        cancel.setOnClickListener(this);
-        reservar.setOnClickListener(this);
-
-        date.setOnClickListener(this);
-
-        time.setOnClickListener(this);
-
+    private void setToolbar() {
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void selectItem(int position) {

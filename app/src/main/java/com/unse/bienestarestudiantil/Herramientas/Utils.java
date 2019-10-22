@@ -41,6 +41,9 @@ public class Utils {
     public static final int TIPO_CYBER = 6;
     public static final int TIPO_UPA = 7;
 
+    public static final String MONSERRAT = "Montserrat-Regular.ttf";
+    public static final String DEPORTE_NAME = "dato_deporte";
+
 
     public static void showToast(Context c, String msj) {
         Toast.makeText(c, msj, Toast.LENGTH_SHORT).show();

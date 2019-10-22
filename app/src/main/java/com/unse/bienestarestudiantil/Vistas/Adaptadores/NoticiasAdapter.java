@@ -13,21 +13,21 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Noticias;
+import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
 public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.NoticiasViewHolder>{
 
-    ArrayList<Noticias> mNoticias, mNoticiasCopia;
+    ArrayList<Noticia> mNoticias, mNoticiaCopia;
     Context context;
 
-    public NoticiasAdapter(ArrayList<Noticias> list, Context context){
+    public NoticiasAdapter(ArrayList<Noticia> list, Context context){
         this.mNoticias = list;
         this.context = context;
-        this.mNoticiasCopia = new ArrayList<>();
-        this.mNoticiasCopia.addAll(mNoticias);
+        this.mNoticiaCopia = new ArrayList<>();
+        this.mNoticiaCopia.addAll(mNoticias);
     }
 
     @Override
@@ -47,12 +47,12 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
 
     @Override
     public void onBindViewHolder(final NoticiasViewHolder holder, int position) {
-        Noticias noticias = mNoticias.get(position);
-        holder.txtTitulo.setText(noticias.getTitulo());
-        holder.txtDescripcion.setText(noticias.getCuerpo());
-        holder.txtFecha.setText(noticias.getFechahora());
-        Glide.with(holder.imgFoto.getContext()).load(noticias.getUrlImagen()).into(holder.imgFoto);
-        if (noticias.isButton()){
+        Noticia noticia = mNoticias.get(position);
+        holder.txtTitulo.setText(noticia.getTitulo());
+        holder.txtDescripcion.setText(noticia.getCuerpo());
+        holder.txtFecha.setText(noticia.getFechahora());
+        Glide.with(holder.imgFoto.getContext()).load(noticia.getUrlImagen()).into(holder.imgFoto);
+        if (noticia.isButton()){
             holder.btnFuncion.setVisibility(View.VISIBLE);
         }else{
             holder.btnFuncion.setVisibility(View.INVISIBLE);
@@ -67,10 +67,10 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
     public void filtrarNoticias(int tipo) {
         if(tipo == -1){
             mNoticias.clear();
-            mNoticias.addAll(mNoticiasCopia);
+            mNoticias.addAll(mNoticiaCopia);
         } else{
-            ArrayList<Noticias> result = new ArrayList<>();
-            for(Noticias item: mNoticiasCopia){
+            ArrayList<Noticia> result = new ArrayList<>();
+            for(Noticia item: mNoticiaCopia){
                 if (item.getIdCategoria() == tipo){
                     result.add(item);
                 }

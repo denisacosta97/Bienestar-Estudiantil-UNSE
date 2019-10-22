@@ -2,8 +2,6 @@ package com.unse.bienestarestudiantil.Modelos;
 
 public class ReservaHorario {
 
-    enum ESTADO {LIBRE, RESERVADO, EN_ESPERA}
-
     private int estado;
     private String horaInicio;
     private String horaFin;

@@ -1,12 +1,12 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-public class Noticias {
+public class Noticia {
 
     private String titulo, cuerpo, fechahora, urlImagen, urlWeb;
     private int id, idTipoNoticias, idCategoria;
     private boolean isURL = false, isEncuesta = false, isButton = false;
 
-    public Noticias() {
+    public Noticia() {
         this.titulo = "";
         this.cuerpo = "";
         this.fechahora = "";
@@ -14,7 +14,7 @@ public class Noticias {
         this.idTipoNoticias = 0;
     }
 
-    public Noticias(String titulo, String cuerpo, String fechahora, String urlImagen, int id, int idTipoNoticias, int cat) {
+    public Noticia(String titulo, String cuerpo, String fechahora, String urlImagen, int id, int idTipoNoticias, int cat) {
         this.titulo = titulo;
         this.cuerpo = cuerpo;
         this.fechahora = fechahora;
@@ -52,7 +52,7 @@ public class Noticias {
         return titulo;
     }
 
-    public Noticias setTitulo(String titulo) {
+    public Noticia setTitulo(String titulo) {
         this.titulo = titulo;
         return this;
     }
@@ -61,7 +61,7 @@ public class Noticias {
         return cuerpo;
     }
 
-    public Noticias setCuerpo(String cuerpo) {
+    public Noticia setCuerpo(String cuerpo) {
         this.cuerpo = cuerpo;
         return this;
     }
@@ -70,7 +70,7 @@ public class Noticias {
         return fechahora;
     }
 
-    public Noticias setFechahora(String fechahora) {
+    public Noticia setFechahora(String fechahora) {
         this.fechahora = fechahora;
         return this;
     }

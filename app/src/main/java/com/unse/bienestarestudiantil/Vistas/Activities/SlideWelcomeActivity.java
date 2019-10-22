@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -33,7 +33,7 @@ import com.unse.bienestarestudiantil.R;
 
 import static com.unse.bienestarestudiantil.Herramientas.Utils.PERMISSION_ALL;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class SlideWelcomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -129,7 +129,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, LoginWelcomeActivity.class));
+        startActivity(new Intent(SlideWelcomeActivity.this, LoginWelcomeActivity.class));
         finish();
     }
 
@@ -256,7 +256,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void loadPermiso() {
         String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
         if (!hasPermissions(getApplicationContext(), PERMISSIONS)) {
-            ActivityCompat.requestPermissions(WelcomeActivity.this, PERMISSIONS, PERMISSION_ALL);
+            ActivityCompat.requestPermissions(SlideWelcomeActivity.this, PERMISSIONS, PERMISSION_ALL);
         }
     }
 

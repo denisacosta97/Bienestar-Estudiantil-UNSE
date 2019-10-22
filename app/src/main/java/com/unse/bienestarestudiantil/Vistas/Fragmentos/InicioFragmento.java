@@ -13,7 +13,7 @@ import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
-import com.unse.bienestarestudiantil.Modelos.Noticias;
+import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.NoticiasAdapter;
@@ -28,7 +28,7 @@ public class InicioFragmento extends Fragment {
     CategoriasAdapter mAdapter;
     View view;
     NoticiasAdapter mNoticiasAdapter;
-    ArrayList<Noticias> mListNoticias;
+    ArrayList<Noticia> mListNoticias;
 
     public InicioFragmento() {
         // Metodo necesario
@@ -86,23 +86,23 @@ public class InicioFragmento extends Fragment {
 
     private void loadNoticias() {
         mListNoticias = new ArrayList<>();
-        Noticias noticias = new Noticias("Fiesta del Estudiante",
+        Noticia noticia = new Noticia("Fiesta del Estudiante",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "25/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
                 1, Utils.NOTICIA_NORMAL, Utils.TIPO_COMEDOR);
-        mListNoticias.add(noticias);
-        noticias = new Noticias("Fiesta del Estudiante 2",
+        mListNoticias.add(noticia);
+        noticia = new Noticia("Fiesta del Estudiante 2",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "26/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
                 1,Utils.NOTICIA_BUTTON_WEB, Utils.TIPO_BECA);
-        noticias.setUrlWeb("www.google.com");
-        mListNoticias.add(noticias);
-        noticias = new Noticias("Fiesta del Estudiante 3",
+        noticia.setUrlWeb("www.google.com");
+        mListNoticias.add(noticia);
+        noticia = new Noticia("Fiesta del Estudiante 3",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "27/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
                 1,Utils.NOTICIA_BUTTON_TIENDA, Utils.TIPO_DEPORTE);
-        mListNoticias.add(noticias);
-        mListNoticias.add(new Noticias("Fiesta del Estudiante 4",
+        mListNoticias.add(noticia);
+        mListNoticias.add(new Noticia("Fiesta del Estudiante 4",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "28/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
                 1,Utils.NOTICIA_BUTTON_APP, Utils.TIPO_UPA));
