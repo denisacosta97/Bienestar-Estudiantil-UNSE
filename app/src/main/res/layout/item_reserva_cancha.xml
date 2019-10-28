@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="100dp"
     android:layout_margin="6dp"
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="10dp">
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="TURNO MAÑANA"
             android:textStyle="bold"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:textColor="@color/colorWhite"/>
 
 
@@ -31,7 +31,7 @@
             android:id="@+id/imgIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_reserva_espera" />
+            android:src="@drawable/ic_pelota" />
 
         <TextView
             android:id="@+id/txtTitulo"
@@ -40,17 +40,32 @@
             android:gravity="center"
             android:text="A CONFIRMAR"
             android:textColor="@color/colorWhite"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtDescripcion"
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="21:00-01:00"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp"
-            android:textStyle="bold|italic" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgIconPelota"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_pelota" />
+
+            <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21:00-01:00"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

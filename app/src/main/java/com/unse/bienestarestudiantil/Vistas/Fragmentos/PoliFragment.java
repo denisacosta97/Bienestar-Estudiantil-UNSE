@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.EspaciosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.ReservaEspacioActivity;
 
 public class PoliFragment extends Fragment {
@@ -24,11 +25,11 @@ public class PoliFragment extends Fragment {
         FontChangeUtil fontChanger = new FontChangeUtil(getContext().getAssets(), "Montserrat-Regular.ttf");
         fontChanger.replaceFonts((ViewGroup) view);
 
-        btnReservas = view.findViewById(R.id.btnReservaQS);
+        btnReservas = view.findViewById(R.id.btnReserva);
         btnReservas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ReservaEspacioActivity.class);
+                Intent intent = new Intent(getActivity(), EspaciosActivity.class);
                 startActivity(intent);
             }
         });

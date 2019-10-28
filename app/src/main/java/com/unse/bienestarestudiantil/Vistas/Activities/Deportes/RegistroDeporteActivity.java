@@ -2,6 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -52,11 +53,17 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnBack:
-                finish();
-                break;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

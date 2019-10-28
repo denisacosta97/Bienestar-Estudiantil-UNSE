@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -62,11 +63,19 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
             case android.R.id.home:
                 onBackPressed();
-                break;
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+
             case R.id.btnHistoriac:
                 break;
             case R.id.btnCredenciales:

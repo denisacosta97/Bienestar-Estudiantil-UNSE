@@ -44,21 +44,31 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     EspaciosAdapter mEspaciosAdapter;
     ArrayList<Espacio> models;
 
+    int tipo = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservar);
 
-        Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),
-                Utils.MONSERRAT);
+        if(getIntent().getIntExtra(Utils.DATA_RESERVA,-1) != -1){
+            tipo = getIntent().getIntExtra(Utils.DATA_RESERVA, -1);
+        }
 
-        setToolbar();
+        if(tipo != -1){
 
-        loadViews();
+            Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),
+                    Utils.MONSERRAT);
 
-        loadData();
+            setToolbar();
 
-        loadListener();
+            loadViews();
+
+            loadData();
+
+            loadListener();
+
+        }
 
     }
 
@@ -77,11 +87,12 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         models = new ArrayList<>();
-        models.add(new Espacio(R.drawable.imgborrar2, "Salón", "$4200", "Salón de X por Y dimensiones para tus eventos, cuenta con cosa1, cosa2, cosa3..."));
-        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 1", "$2000", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-        models.add(new Espacio(R.drawable.imgborrar2, "Quincho 2", "$3500", "El quincho 2 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 3", "$3200", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-
+        if(tipo == Utils.TIPO_QUINCHO) {
+            models.add(new Espacio(R.drawable.imgborrar2, "Salón", "$4200", "Salón de X por Y dimensiones para tus eventos, cuenta con cosa1, cosa2, cosa3..."));
+            models.add(new Espacio(R.drawable.imgborrar1, "Quincho 1", "$2000", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+            models.add(new Espacio(R.drawable.imgborrar2, "Quincho 2", "$3500", "El quincho 2 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+            models.add(new Espacio(R.drawable.imgborrar1, "Quincho 3", "$3200", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+        }
         mEspaciosAdapter = new EspaciosAdapter(models, getApplicationContext());
 
         SnapHelper pagerSnapHelper = new PagerSnapHelper();
@@ -100,7 +111,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     }
 
     private void loadViews() {
-        txtReserva = findViewById(R.id.txtInfoReserva);
+      //  txtReserva = findViewById(R.id.txtInfoReserva);
         cancel = findViewById(R.id.btnCancel);
         reservar = findViewById(R.id.btnReservaF);
         date = findViewById(R.id.txtdateR);

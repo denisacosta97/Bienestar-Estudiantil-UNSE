@@ -24,24 +24,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="30dp"
                     android:text="Reserva"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite"
                     android:textSize="50sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtInfoReserva"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="Vas a reservar el"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,76 +46,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_margin="10dp"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/txtnombre"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
                     android:hint="Nombre completo"
                     android:inputType="textPersonName"
-                    android:padding="15dp"
+                    android:padding="5dp"
                     android:textSize="15sp" />
 
                 <EditText
+                    android:layout_margin="5dp"
                     android:id="@+id/txtapellido"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_text_logreg"
                     android:hint="Apellidos"
                     android:inputType="textEmailSubject"
-                    android:padding="15dp"
+                    android:padding="5dp"
                     android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/txtemail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_text_logreg"
                     android:hint="Legajo/DNI"
                     android:inputType="textEmailAddress"
-                    android:padding="15dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/txtQS"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edit_text_logreg"
-                    android:focusable="false"
-                    android:hint="Cosa a reservar"
-                    android:inputType="text"
-                    android:longClickable="false"
-                    android:padding="15dp"
-                    android:textSize="15sp"
-                    android:visibility="gone" />
-
                 <LinearLayout
+                    android:weightSum="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <EditText
+                        android:layout_weight="0.5"
                         android:id="@+id/txtdateR"
                         android:layout_width="165dp"
                         android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
                         android:background="@drawable/edit_text_logreg"
                         android:clickable="true"
                         android:focusable="false"
@@ -135,21 +100,20 @@
                         android:inputType="date"
                         android:longClickable="false"
                         android:maxLines="1"
-                        android:padding="15dp"
+                        android:padding="5dp"
+                        android:layout_margin="5dp"
                         android:textSize="15sp" />
 
                     <EditText
+                        android:layout_weight="0.5"
                         android:id="@+id/edtxTime"
                         android:layout_width="165dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/edit_text_logreg"
+                        android:layout_height="50dp" android:background="@drawable/edit_text_logreg"
                         android:focusable="false"
                         android:hint="Hora"
                         android:longClickable="false"
-                        android:padding="15dp"
+                        android:padding="5dp"
+                        android:layout_margin="5dp"
                         android:textSize="15sp" />
 
 

@@ -5,11 +5,21 @@ public class ReservaHorario {
     private int estado;
     private String horaInicio;
     private String horaFin;
+    private int turno;
 
-    public ReservaHorario(int estado, String horaInicio, String horaFin) {
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public ReservaHorario(int turno, int estado, String horaInicio, String horaFin) {
         this.estado = estado;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
+        this.turno = turno;
     }
 
     public int getEstado() {

@@ -3,20 +3,21 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
+import com.unse.bienestarestudiantil.Modelos.*;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.*;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.ReservaHorario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.HorariosAdapter;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -25,29 +26,41 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
 
     Button btnReservar;
     Toolbar mToolbar;
-    RecyclerView mRecyclerViewHorario;
-    RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<ReservaHorario> mListHorarios;
+    RecyclerView mRecyclerHoraQuincho, mRecyclerHoraSalon;
+    RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
+    ArrayList<ReservaHorario> mListHorarios, mListHorario2;
 
-    HorariosAdapter mHorariosAdapter;
+    HorariosAdapter mHorariosAdapter, mHorariosAdapter2;
 
     DatePickerTimeline calendario;
+
+    int tipo = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserva_espacio);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),
-                "Montserrat-Regular.ttf");
+        if(getIntent().getIntExtra(Utils.DATA_RESERVA,-1) != -1){
+            tipo = getIntent().getIntExtra(Utils.DATA_RESERVA, -1);
+        }
+        if(tipo != -1){
 
-        setToolbar();
+            Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),
+                    "Montserrat-Regular.ttf");
 
-        loadViews();
+            setToolbar();
 
-        loadData();
+            loadViews();
 
-        loadListener();
+            loadData();
+
+            loadListener();
+        }else{
+            Utils.showToast(getApplicationContext(), "Error al abrir la actividad");
+        }
+
+
 
 
 
@@ -67,25 +80,48 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
     private void setToolbar() {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     private void loadData() {
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mListHorarios = new ArrayList<>();
-        mListHorarios.add(new ReservaHorario(1, "10:00","14:00"));
-        mListHorarios.add(new ReservaHorario(1, "14:00","14:00"));
-        mListHorarios.add(new ReservaHorario(2, "10:00","18:00"));
-        mListHorarios.add(new ReservaHorario(3, "14:00","19:00"));
-        mListHorarios.add(new ReservaHorario(2, "10:00","13:00"));
-        mListHorarios.add(new ReservaHorario(1, "14:00","12:00"));
-        mListHorarios.add(new ReservaHorario(2, "10:00","21:00"));
-        mRecyclerViewHorario.setLayoutManager(mLayoutManager);
-        mRecyclerViewHorario.setNestedScrollingEnabled(true);
-        mHorariosAdapter = new HorariosAdapter(mListHorarios, getApplicationContext());
-        mRecyclerViewHorario.setAdapter(mHorariosAdapter);
+        if(tipo == Utils.TIPO_CANCHA){
+            mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+            mListHorarios = new ArrayList<>();
+            mListHorarios.add(new ReservaHorario(1,1, "10:00","11:00"));
+            mListHorarios.add(new ReservaHorario(2,1, "11:00","12:00"));
+            mListHorarios.add(new ReservaHorario(1,2, "12:00","13:00"));
+            mListHorarios.add(new ReservaHorario(1,1, "13:00","14:00"));
+            mListHorarios.add(new ReservaHorario(2,3, "14:00","15:00"));
+            mListHorarios.add(new ReservaHorario(1,1, "15:00","16:00"));
+            mListHorarios.add(new ReservaHorario(2,2, "16:00","17:00"));
+            mRecyclerHoraQuincho.setLayoutManager(mLayoutManager);
+            mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
+            mHorariosAdapter = new HorariosAdapter(mListHorarios, getApplicationContext(), true);
+            mRecyclerHoraQuincho.setAdapter(mHorariosAdapter);
+
+        }else if(tipo == Utils.TIPO_QUINCHO){
+            mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+            mListHorarios = new ArrayList<>();
+            mListHorarios.add(new ReservaHorario(1,1, "10:00","18:00"));
+            mListHorarios.add(new ReservaHorario(2,1, "20:00","02:00"));
+            mRecyclerHoraQuincho.setLayoutManager(mLayoutManager);
+            mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
+            mHorariosAdapter = new HorariosAdapter(mListHorarios, getApplicationContext(), false);
+            mRecyclerHoraQuincho.setAdapter(mHorariosAdapter);
+
+            mListHorario2 = new ArrayList<>();
+            mListHorario2.add(new ReservaHorario(1, 2,"10:00","19:00"));
+            mListHorario2.add(new ReservaHorario(2, 3,"21:00","05:00"));
+            mLayoutManager2 = new GridLayoutManager(getApplicationContext(), 2);
+            mRecyclerHoraSalon.setLayoutManager(mLayoutManager2);
+            mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
+            mHorariosAdapter2 = new HorariosAdapter(mListHorario2, getApplicationContext(), false);
+            mRecyclerHoraSalon.setAdapter(mHorariosAdapter2);
+
+        }
 
 
         calendario.setLastVisibleDate(2029, Calendar.DECEMBER, 31);
@@ -99,11 +135,24 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
 
             }
         });
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerViewHorario);
+        final Intent i = new Intent(getApplicationContext(), ConfirmarReservaActivity.class);
+        if(tipo == Utils.TIPO_QUINCHO)
+            i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_QUINCHO);
+        else
+            i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_CANCHA);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerHoraSalon);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                startActivity(new Intent(getApplicationContext(), ConfirmarReservaActivity.class));
+                startActivity(i);
+            }
+        });
+
+        ItemClickSupport itemClickSupport2 = ItemClickSupport.addTo(mRecyclerHoraQuincho);
+        itemClickSupport2.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                startActivity(i);
             }
         });
     }
@@ -111,16 +160,24 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
     private void loadViews() {
         mToolbar = findViewById(R.id.toolbar);
         calendario = findViewById(R.id.calendario);
-        btnReservar = findViewById(R.id.btnReservar);
-        mRecyclerViewHorario = findViewById(R.id.recycler);
+       // btnReservar = findViewById(R.id.btnReservar);
+        mRecyclerHoraSalon = findViewById(R.id.recycler2);
+        mRecyclerHoraQuincho = findViewById(R.id.recycler);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case android.R.id.home:
-                finish();
-                break;
-        }
+
     }
 }

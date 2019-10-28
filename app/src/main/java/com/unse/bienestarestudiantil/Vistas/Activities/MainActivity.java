@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     private ActivityMainBinding mBinding;
     Toolbar mToolbar;
+    Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +95,12 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.contenedor_principal, fragmentoGenerico)
                     .commit();
         }
+        mFragment = fragmentoGenerico;
 
         // Setear título actual
-        setTitle(itemDrawer.getTitle());
+
+        mBinding.contenedor.toolbarLay.toolbar.setTitle(itemDrawer.getTitle());
+        //setTitle(itemDrawer.getTitle());
     }
 
     private void setToolbar() {
@@ -134,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START))
             mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
-        else
+        else if(!(mFragment instanceof InicioFragmento)){
+            seleccionarItem(mBinding.navView.getMenu().getItem(0));
+        }else
             super.onBackPressed();
     }
 }

@@ -78,7 +78,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
                 startActivity(i);
                 break;
             case R.id.btnBack:
-                finish();
+                onBackPressed();
                 break;
         }
 

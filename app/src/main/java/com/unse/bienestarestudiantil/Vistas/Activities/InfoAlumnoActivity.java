@@ -3,6 +3,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,13 +34,17 @@ public class InfoAlumnoActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case android.R.id.home:
-                onBackPressed();
-                break;
-        }
     }
 }

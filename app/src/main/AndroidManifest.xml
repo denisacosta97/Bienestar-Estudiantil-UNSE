@@ -17,11 +17,13 @@
             android:label="Información"/>
         <activity android:name=".Vistas.Activities.PerfilActivity"
             android:label="Perfil"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity"
+            android:label="Confirmar Reserva"/>
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity"
+            android:label="Realizar Reserva"/>
         <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
             android:name=".Vistas.Activities.MainActivity"
@@ -36,6 +38,7 @@
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.EspaciosActivity" />
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
 
