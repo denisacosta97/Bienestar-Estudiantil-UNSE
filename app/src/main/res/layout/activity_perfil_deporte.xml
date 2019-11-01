@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:background="@color/colorFCEyT"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +17,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
-            android:tint="@color/colorWhite"
             android:src="@drawable/ic_flecha_atras"/>
 
         <ImageView
@@ -26,7 +24,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:translationY="70dp"
+            android:translationY="10dp"
             android:elevation="4sp"
             android:src="@drawable/ic_ciber" />
 
@@ -36,7 +34,10 @@
             android:layout_margin="10dp"
             android:elevation="2sp"
             app:cardCornerRadius="10dp"
-            card_view:cardBackgroundColor="@android:color/white">
+            android:translationY="-60dp"
+            android:outlineAmbientShadowColor="@color/colorGrey2"
+            android:outlineSpotShadowColor="@color/colorGrey2"
+            card_view:backgroundTint="@color/colorWhite">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -58,7 +59,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:layout_marginTop="45dp"
-                        android:textSize="40sp"/>
+                        android:textSize="45sp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -75,9 +76,7 @@
                             android:id="@+id/txtEntrenador"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:text="Entrenador: Matías Umaño"/>
-
 
                     </LinearLayout>
 
@@ -96,7 +95,6 @@
                             android:id="@+id/txtDia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:text="Días: lunes, miércoles y viernes."/>
 
                     </LinearLayout>
@@ -116,7 +114,6 @@
                             android:id="@+id/txtHorarios"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="16sp"
                             android:text="Horarios: 15:00hs, 16:00hs y 17:00hs."/>
 
                     </LinearLayout>
@@ -124,15 +121,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
                         android:text="Lugar de entrenamiento:"
                         android:textStyle="bold"/>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/bienesplash"/>
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/mappoliborrar"/>
 
                     <Button
                         android:id="@+id/btnRegisterDep"
@@ -141,6 +137,7 @@
                         android:layout_marginTop="10dp"
                         android:textColor="@color/whiteTextColor"
                         android:textStyle="bold"
+                        android:textSize="14sp"
                         android:background="@drawable/button_border"
                         android:text="REGISTRARME"/>
 

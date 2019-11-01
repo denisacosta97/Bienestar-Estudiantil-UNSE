@@ -35,7 +35,6 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
         loadData();
 
-
     }
 
     private void loadListener() {

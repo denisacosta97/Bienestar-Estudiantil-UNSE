@@ -42,7 +42,6 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
             finish();
         }
 
-
     }
 
     private void loadData() {

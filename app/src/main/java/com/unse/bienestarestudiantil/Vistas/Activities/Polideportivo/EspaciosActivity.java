@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -13,7 +14,7 @@ import com.unse.bienestarestudiantil.R;
 
 public class EspaciosActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout linearCancha, linearQuincho;
+    Button linearCancha, linearQuincho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,4 +20,12 @@
 
     <string name="title_activity_profile">Profile</string>
 
+    <string name="txtDeportesFrag">La UNSE considera que el deporte es un componente fundamental en la formación de sus estudiantes. El deporte es salud, ocupación del tiempo libre, afán de superación y socialización.\n\n
+        El área de deportes es la encargada de programar y coordinar las diversas actividades con el fin de facilitar a los estudiantes los medios necesarios para la práctica deportiva.\n\n
+        Cada año se programan ligas deportivas en  las disciplinas de básquet, fútbol, rugby, voleibol y ajedrez. También para aprender o seguir desarrollando las competencias deportivas se ofrece la formación y el entrenamiento en voleibol masculino y femenino, rugby masculino y femenino, cestobol, hockey y fútbol femenino.\n\n
+        En algunas disciplinas deportivas se forman los equipos representativos que participan en las ligas provinciales. También, la UNSE participa de los Juegos deportivos nacionales que se realizan cada dos años en distintas universidades del país.\n\n
+        Por inscripciones a cualquiera de los deportes, puedes realizarlo mediante la aplicación donde tendrás toda la información y también puedes comunicarte por teléfono o por mail para más información.\n\n
+
+ </string>
+
 </resources>

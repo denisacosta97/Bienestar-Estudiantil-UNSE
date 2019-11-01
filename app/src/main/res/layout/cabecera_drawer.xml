@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Licenciatura en Sistemas de Información"
-                    android:textSize="12sp"
+                    android:textSize="16sp"
                     android:textColor="@color/colorWhite" />
 
                 <TextView

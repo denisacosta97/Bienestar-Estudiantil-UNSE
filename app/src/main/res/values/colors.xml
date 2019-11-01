@@ -33,4 +33,6 @@
     <color name="color4">#921b0c</color>
     <color name="colorMoney">#216C2A</color>
 
+    <color name="black_alpha_40">#66000000</color>
+
 </resources>

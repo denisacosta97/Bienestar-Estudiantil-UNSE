@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="REGISTRO"
             android:textAlignment="center"
-            android:textSize="50sp"
+            android:textSize="56sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Regístrate para poder realizar tus trámites dentro de Bienestar Estudiantíl. Tienes la opción de escanear el código QR de tu DNI para autocompletar datos."
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"/>
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Escanear DNI"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:gravity="center"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Subí tu foto:"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:layout_marginLeft="15dp"/>
 
             <LinearLayout
@@ -95,7 +95,6 @@
 
             </LinearLayout>
 
-
             <EditText
                 android:id="@+id/txtnombre"
                 android:layout_width="match_parent"
@@ -107,7 +106,7 @@
                 android:padding="15dp"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txtapellido"
@@ -120,7 +119,7 @@
                 android:padding="15dp"
                 android:inputType="textEmailSubject"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txtemail"
@@ -133,7 +132,7 @@
                 android:padding="15dp"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txtdate"
@@ -149,7 +148,7 @@
                 android:clickable="true"
                 android:maxLines="1"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txtpass"
@@ -162,7 +161,7 @@
                 android:padding="15dp"
                 android:inputType="textPassword"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/txt_repass"
@@ -174,7 +173,7 @@
                 android:padding="15dp"
                 android:inputType="textPassword"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnregister"
@@ -186,6 +185,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:layout_centerInParent="true"
+                android:textSize="14sp"
                 android:textColor="@android:color/white"
                 android:text="Registrarme"/>
 

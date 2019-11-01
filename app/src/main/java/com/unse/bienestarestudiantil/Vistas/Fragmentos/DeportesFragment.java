@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -26,6 +27,7 @@ public class DeportesFragment extends Fragment {
     RecyclerView reciclerDeportes;
     ArrayList<Deporte> mDeportes;
     DeportesAdapter mDeportesAdapter;
+    ImageView mImageDeportes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class DeportesFragment extends Fragment {
 
     private void loadViews() {
         reciclerDeportes = view.findViewById(R.id.recyclerDeportes);
+        mImageDeportes = view.findViewById(R.id.imgAreaDeportes);
     }
 
     private void loadDataRecycler() {
@@ -66,6 +69,7 @@ public class DeportesFragment extends Fragment {
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
         reciclerDeportes.setAdapter(mDeportesAdapter);
+        mImageDeportes.requestFocus();
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(reciclerDeportes);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -77,7 +81,5 @@ public class DeportesFragment extends Fragment {
             }
         });
     }
-
-
 
 }

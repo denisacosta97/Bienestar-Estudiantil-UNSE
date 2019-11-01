@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="La Universidad Nacional de Santiago del Estero cuenta con un extenso polideportivo donde se desarrollan un gran numero de actividades."
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
@@ -54,6 +53,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
         </android.support.v7.widget.CardView>
 
 
@@ -63,14 +63,13 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Adicional cuenta con espacios reservables para todo el público."
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_two"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="230dp"
             android:layout_marginTop="15dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -83,9 +82,9 @@
                 android:layout_gravity="center|bottom"
                 android:layout_margin="5dp"
                 android:background="@drawable/button_border"
-                android:text="MAS INFO"
+                android:text="MÁS INFO"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -105,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:text="ALQUILER Y/O RESERVAS"
+                    android:text="RESERVAS"
                     android:textColor="#ffffff"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -113,7 +112,6 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
 
     </LinearLayout>
 

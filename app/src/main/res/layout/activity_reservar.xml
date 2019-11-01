@@ -28,8 +28,9 @@
                     android:text="Reserva"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite"
-                    android:textSize="50sp"
+                    android:textSize="56sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -37,11 +38,9 @@
                     android:layout_marginRight="15dp"
                     android:text="Para confirmar la reserva, debes presentarte a realizar el pago en la Secretaría de Bienestar Estudiantíl."
                     android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
-
+                    android:textSize="14sp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,7 +107,8 @@
                         android:layout_weight="0.5"
                         android:id="@+id/edtxTime"
                         android:layout_width="165dp"
-                        android:layout_height="50dp" android:background="@drawable/edit_text_logreg"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_logreg"
                         android:focusable="false"
                         android:hint="Hora"
                         android:longClickable="false"
@@ -139,6 +139,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_border"
                         android:text="Cancelar"
+                        android:textSize="14sp"
                         android:textColor="@android:color/white" />
 
                     <Button
@@ -148,18 +149,14 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_border"
                         android:text="Reservar"
+                        android:textSize="14sp"
                         android:textColor="@android:color/white" />
-
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
-
-
-
-
 
             </LinearLayout>
 
