@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
+    android:id="@+id/backgroundlogin"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Vistas.Activities.LoginActivity">
+
+<!--    <include layout="@layout/video_background" />-->
 
     <ImageView
         android:id="@+id/btnBack"
@@ -17,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
+        android:paddingTop="50dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:orientation="vertical">
@@ -29,9 +32,8 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/user"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"/>
 
@@ -69,6 +71,9 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="Iniciar sesión"
+                    android:textColor="@color/whiteTextColor"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/colorPrimaryDark"
                     android:background="@drawable/corners_rounded_green"
                     android:layout_margin="5dp"/>
 
@@ -90,4 +95,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

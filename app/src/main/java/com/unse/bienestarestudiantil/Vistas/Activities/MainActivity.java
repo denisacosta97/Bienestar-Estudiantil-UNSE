@@ -15,7 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setToolbar() {
         setSupportActionBar(mBinding.contenedor.toolbarLay.toolbar);
+        mBinding.contenedor.toolbarLay.imgFlecha.setVisibility(View.GONE);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             // Poner ícono del drawer toggle

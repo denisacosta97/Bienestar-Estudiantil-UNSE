@@ -2,13 +2,18 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.RegisterActivity;
@@ -17,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
+    LinearLayout layoutFondo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
+
+        layoutFondo = findViewById(R.id.backgroundlogin);
+
+        Glide.with(this).load(R.drawable.img_unse2)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        layoutFondo.setBackground(resource);
+                    }
+                });
 
         loadViews();
 
