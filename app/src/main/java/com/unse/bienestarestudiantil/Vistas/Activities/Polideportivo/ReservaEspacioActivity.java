@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -18,6 +20,9 @@ import com.unse.bienestarestudiantil.Modelos.*;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.*;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -29,6 +34,8 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
     RecyclerView mRecyclerHoraQuincho, mRecyclerHoraSalon;
     RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
     ArrayList<ReservaHorario> mListHorarios, mListHorario2;
+    ImageView imgFlecha;
+    TextView txtDesc;
 
     HorariosAdapter mHorariosAdapter, mHorariosAdapter2;
 
@@ -81,13 +88,14 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        TextView txtTitulo = findViewById(R.id.txtTitulo);
+        String titulo = Utils.getAppName(getApplicationContext(), getComponentName());
+        txtTitulo.setText(titulo);
     }
 
     private void loadData() {
         if(tipo == Utils.TIPO_CANCHA){
+            txtDesc.setText(String.format(getResources().getString(R.string.txtReserva),"las canchas."));
             mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
             mListHorarios = new ArrayList<>();
             mListHorarios.add(new ReservaHorario(1,1, "10:00","11:00"));
@@ -103,6 +111,7 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
             mRecyclerHoraQuincho.setAdapter(mHorariosAdapter);
 
         }else if(tipo == Utils.TIPO_QUINCHO){
+            txtDesc.setText(String.format(getResources().getString(R.string.txtReserva),"el salon y quinchos."));
             mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
             mListHorarios = new ArrayList<>();
             mListHorarios.add(new ReservaHorario(1,1, "10:00","18:00"));
@@ -129,6 +138,7 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
     }
 
     private void loadListener() {
+        imgFlecha.setOnClickListener(this);
         calendario.setOnDateSelectedListener(new DatePickerTimeline.OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, int index) {
@@ -163,21 +173,18 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
        // btnReservar = findViewById(R.id.btnReservar);
         mRecyclerHoraSalon = findViewById(R.id.recycler2);
         mRecyclerHoraQuincho = findViewById(R.id.recycler);
+        imgFlecha = findViewById(R.id.imgFlecha);
+        txtDesc = findViewById(R.id.txtDescripcion);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
+        }
 
     }
 }

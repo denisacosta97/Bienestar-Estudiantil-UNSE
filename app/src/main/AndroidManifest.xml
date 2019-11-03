@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unse.bienestarestudiantil">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,7 +39,8 @@
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.EspaciosActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.EspaciosActivity"
+            android:label="Espacios Disponibles"/>
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@color/colorGrey"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -13,6 +13,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <include layout="@layout/toolbar_trans" />
 
             <LinearLayout
                 android:layout_width="match_parent"

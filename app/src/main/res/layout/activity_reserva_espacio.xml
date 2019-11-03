@@ -72,10 +72,11 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtDescripcion"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Elige una fecha para ver la disponibilidad de los quinchos o el salón."
+                android:text="@string/txtReserva"
                 android:textSize="15sp"
                 />
 

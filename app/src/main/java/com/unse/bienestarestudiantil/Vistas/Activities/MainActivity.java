@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity {
         mFragment = fragmentoGenerico;
 
         // Setear título actual
-
-        mBinding.contenedor.toolbarLay.toolbar.setTitle(itemDrawer.getTitle());
+        mBinding.contenedor.toolbarLay.txtTitulo.setText(itemDrawer.getTitle());
         //setTitle(itemDrawer.getTitle());
     }
 
@@ -121,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_drawer, menu);
-        FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+      //  FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        //fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
         return true;
     }
 
@@ -133,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mBinding.drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.item_admin:
+                //Aqui iria toda la logica para ingresar al apartado admin de una área determinada
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
         else if(!(mFragment instanceof InicioFragmento)){
             seleccionarItem(mBinding.navView.getMenu().getItem(0));
+            mBinding.navView.setCheckedItem(0);
         }else
             super.onBackPressed();
     }

@@ -1,7 +1,9 @@
 package com.unse.bienestarestudiantil.Herramientas;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -101,6 +103,17 @@ public class Utils {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    public static String getAppName(Context context, ComponentName name){
+        try {
+            ActivityInfo activityInfo = context.getPackageManager().getActivityInfo(
+                    name,PackageManager.GET_META_DATA);
+            return activityInfo.loadLabel(context.getPackageManager()).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

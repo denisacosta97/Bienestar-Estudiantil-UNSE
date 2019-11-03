@@ -27,5 +27,6 @@
         Por inscripciones a cualquiera de los deportes, puedes realizarlo mediante la aplicación donde tendrás toda la información y también puedes comunicarte por teléfono o por mail para más información.\n\n
 
  </string>
+    <string name="txtReserva">Elige una fecha para ver la disponibilidad de %s</string>
 
 </resources>

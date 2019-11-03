@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     TextView txtReserva;
     EditText date, time, txtQS;
     Button cancel, reservar;
+    ImageView imgFlecha;
 
     Toolbar mToolbar;
 
@@ -75,6 +77,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     private void loadListener() {
         cancel.setOnClickListener(this);
         reservar.setOnClickListener(this);
+        imgFlecha.setOnClickListener(this);
 
         date.setOnClickListener(this);
 
@@ -83,6 +86,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     }
 
     private void loadData() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -117,6 +121,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         date = findViewById(R.id.txtdateR);
         time = findViewById(R.id.edtxTime);
         mRecyclerView = findViewById(R.id.recycler);
+        imgFlecha = findViewById(R.id.imgFlecha);
     }
 
     private void setToolbar() {
@@ -172,6 +177,9 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
             case R.id.edtxTime:
                 showTimeDialog();
                 break;
@@ -179,7 +187,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
                 showDateDialog();
                 break;
             case R.id.btnCancel:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btnReservaF:
                 Toast.makeText(this, "FALTA LA FUNCIÓN GG", Toast.LENGTH_SHORT).show();
