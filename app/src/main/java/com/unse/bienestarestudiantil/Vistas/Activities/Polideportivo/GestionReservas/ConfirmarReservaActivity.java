@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;

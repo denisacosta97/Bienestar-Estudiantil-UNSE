@@ -1,13 +1,11 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,11 +15,10 @@ import android.widget.TextView;
 import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.*;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.*;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;

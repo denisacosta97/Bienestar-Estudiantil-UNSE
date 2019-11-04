@@ -17,11 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mBinding;
     Toolbar mToolbar;
     Fragment mFragment;
+    int itemSelecionado = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
+        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         comprobarNavigationView();
 
@@ -77,16 +77,16 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (itemDrawer.getItemId()) {
-            case R.id.inicio:
+            case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
                 break;
-            case R.id.item_uno:
+            case R.id.item_poli:
                 fragmentoGenerico = new PoliFragment();
                 break;
-            case R.id.item_dos:
+            case R.id.item_deporte:
                 fragmentoGenerico = new DeportesFragment();
                 break;
-            case R.id.menu_opcion_profile:
+            case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
 
@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
         mFragment = fragmentoGenerico;
+
+        itemSelecionado = itemDrawer.getItemId();
 
         // Setear título actual
         mBinding.contenedor.toolbarLay.txtTitulo.setText(itemDrawer.getTitle());
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_admin, menu);
-      //  FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
+        //  FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
         //fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
         return true;
     }
@@ -133,8 +135,24 @@ public class MainActivity extends AppCompatActivity {
                 mBinding.drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.item_admin:
-                //Aqui iria toda la logica para ingresar al apartado admin de una área determinada
-                break;
+                if (itemSelecionado != -1) {
+                    switch (itemSelecionado) {
+                        case R.id.item_poli:
+                            if (true) { //Si tiene los permisos necesarios
+                                startActivity(new Intent(getApplicationContext(), GestionPolideportivoActivity.class));
+                            }
+                            break;
+                        case R.id.item_deporte:
+                            break;
+                        default:
+                            Utils.showToast(getApplicationContext(), "No se definió una zona administrativa aún");
+                            break;
+                        //Resto de ls secciones
+                    }
+                } else {
+                    Utils.showToast(getApplicationContext(), "No tiene los permisos necesarios para administrar dicha sección");
+                }
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -143,10 +161,10 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START))
             mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
-        else if(!(mFragment instanceof InicioFragmento)){
+        else if (!(mFragment instanceof InicioFragmento)) {
             seleccionarItem(mBinding.navView.getMenu().getItem(0));
             mBinding.navView.setCheckedItem(0);
-        }else
+        } else
             super.onBackPressed();
     }
 }

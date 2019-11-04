@@ -18,12 +18,12 @@
             android:label="Información"/>
         <activity android:name=".Vistas.Activities.PerfilActivity"
             android:label="Perfil"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity"
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity"
             android:label="Confirmar Reserva"/>
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity"
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva"/>
         <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
@@ -39,8 +39,16 @@
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.EspaciosActivity"
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
             android:label="Espacios Disponibles"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
+            android:label="Gestión de Polideportivo"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
+            android:label="Gestión de Finanzas"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity"
+            android:label="Gestión de Reservas"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
+            android:label="Gestión de Ingresos"/>
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
 

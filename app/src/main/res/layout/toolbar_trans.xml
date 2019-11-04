@@ -25,8 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text=""
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:text="Ejemplo"
             android:textColor="@color/whiteTextColor"
             android:textSize="22sp"
             android:textStyle="bold" />

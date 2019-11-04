@@ -3,39 +3,39 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/inicio"
+            android:id="@+id/item_inicio"
             android:icon="@drawable/ic_home"
             android:title="Inicio"/>
         <item
-            android:id="@+id/item_uno"
+            android:id="@+id/item_poli"
             android:icon="@drawable/ic_poli"
             android:title="Polideportivo"/>
         <item
-            android:id="@+id/item_dos"
+            android:id="@+id/item_deporte"
             android:icon="@drawable/ic_deportes"
             android:title="Deportes"/>
         <item
-            android:id="@+id/item_tres"
+            android:id="@+id/item_upa"
             android:icon="@drawable/ic_upa"
             android:title="UPA"/>
         <item
-            android:id="@+id/item_4"
+            android:id="@+id/item_becas"
             android:icon="@drawable/ic_becas"
             android:title="Área Becas"/>
         <item
-            android:id="@+id/item_5"
+            android:id="@+id/item_ciber"
             android:icon="@drawable/ic_ciber"
             android:title="Ciber"/>
         <item
-            android:id="@+id/item_6"
+            android:id="@+id/item_transporte"
             android:icon="@drawable/ic_transporte"
             android:title="Transporte"/>
         <item
-            android:id="@+id/item_7"
+            android:id="@+id/item_resi"
             android:icon="@drawable/ic_residencia"
             android:title="Residencia"/>
         <item
-            android:id="@+id/item_8"
+            android:id="@+id/item_comedor"
             android:icon="@drawable/ic_menu_comedor"
             android:title="Comedor"/>
     </group>
@@ -46,19 +46,19 @@
 
         <menu>
             <item
-                android:id="@+id/menu_opcion_profile"
+                android:id="@+id/item_perfil"
                 android:icon="@drawable/user"
                 android:title="Perfil"/>
             <item
-                android:id="@+id/menu_opcion_1"
+                android:id="@+id/item_nosotros"
                 android:icon="@drawable/ic_menu"
                 android:title="Sobre nosotros"/>
             <item
-                android:id="@+id/menu_opcion_2"
+                android:id="@+id/item_contactos"
                 android:icon="@drawable/ic_menu"
                 android:title="Contactos"/>
             <item
-                android:id="@+id/menu_opcion_3"
+                android:id="@+id/item_terminos"
                 android:icon="@drawable/ic_menu"
                 android:title="Términos y condiciones"/>
         </menu>
