@@ -2,10 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< Updated upstream
     android:background="@color/colorGrey"
-=======
->>>>>>> Stashed changes
+
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -32,6 +30,7 @@
                     android:layout_marginTop="30dp"
                     android:text="Reserva"
                     android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
                     android:textSize="56sp"
                     android:textStyle="bold" />
 
@@ -41,6 +40,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:text="Para confirmar la reserva, debes presentarte a realizar el pago en la Secretaría de Bienestar Estudiantíl."
+                    android:textColor="@color/colorWhite"
                     android:textSize="14sp" />
 
             </LinearLayout>
