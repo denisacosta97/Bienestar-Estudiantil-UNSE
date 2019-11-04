@@ -8,7 +8,7 @@ public class Deporte implements Parcelable {
     private int mIconDeporte, idDep;
     private String mName, entrenador, dias, horario;
 
-    public Deporte(int idDep,int iconDeporte, String name, String entrenador, String dias, String horario) {
+    public Deporte(int idDep, int iconDeporte, String name, String entrenador, String dias, String horario) {
         this.mIconDeporte = iconDeporte;
         this.idDep = idDep;
         this.mName = name;

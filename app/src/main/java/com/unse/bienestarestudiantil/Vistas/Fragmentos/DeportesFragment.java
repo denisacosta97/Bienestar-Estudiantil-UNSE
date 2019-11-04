@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -27,7 +28,7 @@ public class DeportesFragment extends Fragment {
     RecyclerView reciclerDeportes;
     ArrayList<Deporte> mDeportes;
     DeportesAdapter mDeportesAdapter;
-    ImageView mImageDeportes;
+    RelativeLayout mImageDeportes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

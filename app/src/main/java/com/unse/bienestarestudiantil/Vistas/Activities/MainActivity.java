@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
+            case R.id.profe_profile:
+                startActivity(new Intent(MainActivity.this, PerfilProfesorActivity.class));
+                break;
 
         }
         if (fragmentoGenerico != null) {

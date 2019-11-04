@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".Vistas.Activities.LoginActivity">
 
-<!--    <include layout="@layout/video_background" />-->
+    <include layout="@layout/video_background" />
 
     <ImageView
         android:id="@+id/btnBack"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/edit_text_logreg"
-                android:hint="Legajo/eMail/Dni"
+                android:hint="DNI"
                 android:inputType="textPersonName"
                 android:padding="10dp" />
 

@@ -50,7 +50,15 @@
                 android:icon="@drawable/user"
                 android:title="Perfil"/>
             <item
+<<<<<<< Updated upstream
                 android:id="@+id/item_nosotros"
+=======
+                android:id="@+id/profe_profile"
+                android:icon="@drawable/user"
+                android:title="Perfil profesor"/>
+            <item
+                android:id="@+id/menu_opcion_1"
+>>>>>>> Stashed changes
                 android:icon="@drawable/ic_menu"
                 android:title="Sobre nosotros"/>
             <item

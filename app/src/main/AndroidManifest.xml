@@ -10,10 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.BarcodeActivity"></activity>
-        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity"></activity>
+        <activity android:name=".Vistas.Activities.AsistenciaActivity"></activity>
+        <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
+        <activity android:name=".Vistas.BarcodeActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity" />
         <activity android:name=".Vistas.Fragmentos.DeportesFragment" />
         <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
+<<<<<<< Updated upstream
         <activity android:name=".Vistas.Activities.InfoAlumnoActivity"
             android:label="Información"/>
         <activity android:name=".Vistas.Activities.PerfilActivity"
@@ -25,6 +28,23 @@
         <activity android:name=".Vistas.Activities.LoginActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva"/>
+=======
+        <activity
+            android:name=".Vistas.Activities.InfoAlumnoActivity"
+            android:label="Información" />
+        <activity
+            android:name=".Vistas.Activities.PerfilActivity"
+            android:label="Perfil" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity"
+            android:label="Confirmar Reserva" />
+        <activity android:name=".Vistas.Fragmentos.PoliFragment" />
+        <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
+        <activity android:name=".Vistas.Activities.LoginActivity" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity"
+            android:label="Realizar Reserva" />
+>>>>>>> Stashed changes
         <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
             android:name=".Vistas.Activities.MainActivity"
@@ -50,8 +70,8 @@
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
             android:label="Gestión de Ingresos"/>
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

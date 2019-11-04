@@ -3,6 +3,8 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -22,7 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
-    LinearLayout layoutFondo;
+    RelativeLayout layoutFondo;
+    VideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +37,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
 
-        layoutFondo = findViewById(R.id.backgroundlogin);
+        mVideoView = findViewById (R.id.videoView);
+        Uri uri = Uri.parse("android.resource://".concat(getPackageName()).concat("/raw/").concat(String.valueOf(R.raw.video_bacl)));
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
 
-        Glide.with(this).load(R.drawable.img_unse2)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        layoutFondo.setBackground(resource);
-                    }
-                });
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
 
         loadViews();
 
         loadListener();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // to restart the video after coming from other activity like Sing up
+        mVideoView.start();
     }
 
     private void loadListener() {

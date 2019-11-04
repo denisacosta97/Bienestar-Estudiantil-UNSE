@@ -82,6 +82,7 @@
                 android:focusable="false"
                 android:clickable="true"
                 android:inputType="textPersonName"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
@@ -96,6 +97,7 @@
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:inputType="textPersonName"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
@@ -109,6 +111,7 @@
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
                 android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
@@ -129,6 +132,7 @@
                     android:hint="DNI"
                     android:padding="15dp"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -142,6 +146,7 @@
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp"/>
 
@@ -158,6 +163,7 @@
                     android:clickable="true"
                     android:longClickable="false"
                     android:maxLines="1"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -173,6 +179,7 @@
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
                 android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
@@ -186,6 +193,7 @@
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
                 android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
@@ -206,6 +214,7 @@
                     android:hint="Carrera"
                     android:padding="15dp"
                     android:inputType="text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -218,6 +227,7 @@
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
                     android:inputType="text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp"/>
 
@@ -233,56 +243,55 @@
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
                 android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/edxtCiudad"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
+                android:layout_marginBottom="10dp"
+                android:hint="Ciudad"
+                android:padding="15dp"
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/edxtCiudad"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="20dp"
-                    android:hint="Ciudad"
-                    android:padding="15dp"
-                    android:inputType="text"
-                    android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+            <EditText
+                android:id="@+id/edtxProvincia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Provincia"
+                android:padding="15dp"
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp"/>
 
-                <EditText
-                    android:id="@+id/edtxProvincia"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="20dp"
-                    android:hint="Provincia"
-                    android:layout_marginBottom="10dp"
-                    android:padding="15dp"
-                    android:inputType="text"
-                    android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"/>
-
-                <EditText
-                    android:id="@+id/txtPais"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:hint="Pais"
-                    android:layout_marginBottom="10dp"
-                    android:padding="15dp"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
+            <EditText
+                android:id="@+id/txtPais"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Pais"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -301,6 +310,7 @@
                     android:hint="Año ingreso"
                     android:padding="15dp"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -313,6 +323,7 @@
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp"/>
 
@@ -320,42 +331,52 @@
 
             <EditText
                 android:id="@+id/txtFacebook"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
                 android:hint="Facebook"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:inputType="text"
-                android:maxLines="1"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
+
 
             <EditText
                 android:id="@+id/txtInstagram"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
                 android:hint="Instagram"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:inputType="text"
-                android:maxLines="1"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
 
+
             <EditText
                 android:id="@+id/txtMail"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
                 android:hint="Mail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:inputType="text"
-                android:maxLines="1"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -374,6 +395,7 @@
                     android:hint="Teléfono"
                     android:padding="15dp"
                     android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -382,6 +404,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimaryDark"
                     android:padding="15dp"
                     android:text="¿WhatsApp?" />
 
@@ -407,6 +430,7 @@
                     android:layout_width="115dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimaryDark"
                     android:text="Si" />
 
                 <CheckBox
@@ -414,6 +438,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimaryDark"
                     android:text="No" />
 
             </LinearLayout>
@@ -422,6 +447,7 @@
                 android:id="@+id/disablePreg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:orientation="vertical">
 
                 <EditText
@@ -434,6 +460,7 @@
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
                     android:inputType="text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -457,6 +484,7 @@
                         android:layout_width="115dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimaryDark"
                         android:text="Continua" />
 
                     <CheckBox
@@ -464,6 +492,7 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimaryDark"
                         android:text="Media" />
 
                     <CheckBox
@@ -471,6 +500,7 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimaryDark"
                         android:text="Baja" />
 
                 </LinearLayout>
@@ -485,6 +515,7 @@
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
                     android:inputType="text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
 
@@ -501,6 +532,7 @@
                 android:padding="15dp"
                 android:inputType="text"
                 android:background="@drawable/edit_text_logreg"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="15sp" />
 
             <Button
@@ -518,7 +550,5 @@
                 android:text="Registrarme"/>
 
         </LinearLayout>
-
-    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
