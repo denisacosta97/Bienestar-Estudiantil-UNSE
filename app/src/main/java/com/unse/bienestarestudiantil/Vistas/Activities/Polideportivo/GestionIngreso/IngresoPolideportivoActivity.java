@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionIngreso;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,23 +12,26 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoIngresoPolideportivo;
 
 import java.util.ArrayList;
 
-public class GestionIngresoActivity extends AppCompatActivity implements View.OnClickListener {
+public class IngresoPolideportivoActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    OpcionesAdapter mAdapter;
-    ArrayList<Opciones> mOpciones;
+    UsuariosAdapter mAdapter;
+    ArrayList<Usuario> mUsuarios;
     ImageView imgIcono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_ingreso);
+        setContentView(R.layout.activity_ingreso_polideportivo);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -54,26 +56,24 @@ public class GestionIngresoActivity extends AppCompatActivity implements View.On
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id){
-                    case 2:
-                        startActivity(new Intent(getApplicationContext(), IngresoPolideportivoActivity.class));
-                        break;
-                }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
+                Utils.showToast(getApplicationContext(), "Item: "+mUsuarios.get(position).getNombre());
+                DialogoIngresoPolideportivo dialogoIngresoPolideportivo = new DialogoIngresoPolideportivo();
+                dialogoIngresoPolideportivo.loadDataFromUser(mUsuarios.get(position));
+                dialogoIngresoPolideportivo.show(getSupportFragmentManager(),"dialog_ingreso");
             }
         });
         imgIcono.setOnClickListener(this);
     }
 
     private void loadData() {
-        mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Ingreso a pileta",R.drawable.ic_ingreso_pileta, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Ingreso a polideportivo",R.drawable.ic_ingreso_poli, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Ingresos del dia", R.drawable.ic_ingresos_poli_dia, R.color.colorFCEyT));
+        mUsuarios = new ArrayList<>();
+        mUsuarios.add(new Usuario("40657677","Denis Lionel","Acosta","jee","EST"));
+        mUsuarios.add(new Usuario("399865810","Cristian Santiago", "Ledesma","jeje","EST"));
+        mUsuarios.add(new Usuario("40657678","Nicolas","Maldonado", "jeje","EST"));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
     }
 

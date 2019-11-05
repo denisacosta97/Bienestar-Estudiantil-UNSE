@@ -48,6 +48,8 @@
             android:label="Gestión de Reservas"/>
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
             android:label="Gestión de Ingresos"/>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity"
+            android:label="Registrar Ingreso"/>
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />
