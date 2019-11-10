@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,8 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.NewsReader;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.NoticiasAdapter;
 
@@ -67,9 +70,18 @@ public class InicioFragmento extends Fragment {
         mLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
         recyclerNoticias.setLayoutManager(mLayoutManager2);
 
-
         recyclerNoticias.setAdapter(mNoticiasAdapter);
         recyclerNoticias.setNestedScrollingEnabled(false);
+
+        ItemClickSupport itemClickSupport2 = ItemClickSupport.addTo(recyclerNoticias);
+        itemClickSupport2.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                Intent i = new Intent(getContext(), NewsReader.class);
+                i.putExtra(Utils.NOTICIA, mListNoticias.get(position));
+                startActivity(i);
+            }
+        });
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerCategorias);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -88,24 +100,24 @@ public class InicioFragmento extends Fragment {
         mListNoticias = new ArrayList<>();
         Noticia noticia = new Noticia("Fiesta del Estudiante",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "25/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1, Utils.NOTICIA_NORMAL, Utils.TIPO_COMEDOR);
+                "25/10/19","https://www.unse.edu.ar/images/CEOMI2019/UAPU%20redes.jpg",
+                1, Utils.NOTICIA_NORMAL, Utils.TIPO_COMEDOR, "COMEDOR UNIVERSITARIO");
         mListNoticias.add(noticia);
         noticia = new Noticia("Fiesta del Estudiante 2",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
-                "26/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_WEB, Utils.TIPO_BECA);
+                "26/10/19","https://fce.unse.edu.ar/sites/default/files/styles/large/public/400x250concursodocente.jpg",
+                1,Utils.NOTICIA_BUTTON_WEB, Utils.TIPO_BECA, "ÁREA BECAS");
         noticia.setUrlWeb("www.google.com");
         mListNoticias.add(noticia);
         noticia = new Noticia("Fiesta del Estudiante 3",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "27/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_TIENDA, Utils.TIPO_DEPORTE);
+                1,Utils.NOTICIA_BUTTON_TIENDA, Utils.TIPO_DEPORTE, "ÁREA DEPORTES");
         mListNoticias.add(noticia);
         mListNoticias.add(new Noticia("Fiesta del Estudiante 4",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n incididunt ut labore et dolore magna aliqua.",
                 "28/10/19","https://fcf.unse.edu.ar/wp-content/uploads/2018/11/becas-destacado.jpg",
-                1,Utils.NOTICIA_BUTTON_APP, Utils.TIPO_UPA));
+                1,Utils.NOTICIA_BUTTON_APP, Utils.TIPO_UPA, "UPA"));
 
     }
 

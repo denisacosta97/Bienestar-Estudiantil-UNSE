@@ -55,6 +55,11 @@
                 android:title="Perfil profesor"/>
 
             <item
+                android:id="@+id/menu_opcion_1"
+
+                android:icon="@drawable/ic_menu"
+                android:title="Sobre nosotros"/>
+            <item
                 android:id="@+id/item_contactos"
                 android:icon="@drawable/ic_menu"
                 android:title="Contactos"/>
