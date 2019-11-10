@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         comprobarNavigationView();
 
         setToolbar();
+
+        Utils.createPDF(getApplicationContext());
     }
 
 

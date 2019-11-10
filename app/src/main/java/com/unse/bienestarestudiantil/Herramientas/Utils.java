@@ -1,20 +1,48 @@
 package com.unse.bienestarestudiantil.Herramientas;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.itextpdf.forms.PdfAcroForm;
+import com.itextpdf.forms.fields.PdfButtonFormField;
+import com.itextpdf.forms.fields.PdfFormField;
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.Rectangle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfString;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.action.PdfAction;
+import com.itextpdf.kernel.pdf.annot.PdfAnnotation;
+import com.itextpdf.kernel.pdf.annot.PdfTextAnnotation;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -37,7 +65,7 @@ public class Utils {
 
     public static final int TIPO_COMEDOR = 1;
     public static final int TIPO_DEPORTE = 2;
-    public static final int TIPO_TRANSPORTE  = 3;
+    public static final int TIPO_TRANSPORTE = 3;
     public static final int TIPO_BECA = 4;
     public static final int TIPO_RESIDENCIA = 5;
     public static final int TIPO_CYBER = 6;
@@ -57,8 +85,8 @@ public class Utils {
         Toast.makeText(c, msj, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showLog(String title, String msj){
-        Log.e(title,msj);
+    public static void showLog(String title, String msj) {
+        Log.e(title, msj);
     }
 
 //    public static void showCustomToast(Activity activity, Context context, String text, int icon){
@@ -107,10 +135,10 @@ public class Utils {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
-    public static String getAppName(Context context, ComponentName name){
+    public static String getAppName(Context context, ComponentName name) {
         try {
             ActivityInfo activityInfo = context.getPackageManager().getActivityInfo(
-                    name,PackageManager.GET_META_DATA);
+                    name, PackageManager.GET_META_DATA);
             return activityInfo.loadLabel(context.getPackageManager()).toString();
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -119,9 +147,128 @@ public class Utils {
     }
 
 
-    public static void setFont(Context context, ViewGroup view, String font){
+    public static void setFont(Context context, ViewGroup view, String font) {
         FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), font);
         fontChanger.replaceFonts(view);
+    }
+
+
+    private static void crearArchivoProvisorio(InputStream inputStream, File file) {
+
+        try  {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            int read;
+            byte[] bytes = new byte[1024];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static void createPDF(Context context) {
+        File file = null;
+        Document document = null;
+        AssetManager assetManager = context.getAssets();
+        InputStream in = null;
+        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR/";
+        try {
+            File directorio = new File(directory_path);
+            if (!directorio.exists())
+                directorio.mkdirs();
+            in = assetManager.open("ficha_deportes_label.pdf");
+            file = new File(directory_path, "deportesProvisorio.pdf");
+            crearArchivoProvisorio(in, file);
+
+            File src = new File(directory_path, "deportesProvisorio.pdf");
+            File des = new File(directory_path, "ficha_deportes.pdf");
+            if (!src.exists()) {
+                try {
+                    InputStream is = context.getAssets().open("ficha_deportes_label.pdf");
+                    byte[] buffer = new byte[1024];
+                    is.read(buffer);
+                    is.close();
+                    FileOutputStream fos = new FileOutputStream(src);
+                    fos.write(buffer);
+                    fos.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            PdfDocument pdfDocument = new PdfDocument(new PdfReader(src), new PdfWriter(des));
+            PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDocument, true);
+            form.getField("nombre").setValue("Denis Lionel Acosta");
+            pdfDocument.close();
+            src.delete();
+            //document = new Document(pdfDocument);
+            //document.close();
+            /*document.add(getText("SYSTOCK", 15, true));
+            document.add(getText("Sistema de Gestión de Mercadería, Facturación y Gestión de Clientes", 12, true));
+            document.add(getText("----------------------------------------------------------------------------------------------------------------------", 11, true));
+            document.add(getText("Datos del Pedido", 12, false));
+            document.close();*/
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static Paragraph getText(String text, float size, boolean center) {
+        return center ? new Paragraph(text).setFontSize(size).setTextAlignment(TextAlignment.CENTER)
+                : new Paragraph(text).setFontSize(size);
+    }
+
+    public static String getNameFile(String directory_path, int codPedido, String fecha) {
+        return directory_path + "REPORTE_" + codPedido + "_" +
+                getFechaName(Utils.getFechaDate(fecha)) + ".pdf";
+    }
+
+    private static Cell createCell(String text, boolean center) {
+        return center ? new Cell().setPadding(0.8f)
+                .add(new Paragraph(text)
+                        .setMultipliedLeading(1))
+                : new Cell().setPadding(0.8f)
+                .add(new Paragraph(text)
+                        .setMultipliedLeading(1)).setTextAlignment(TextAlignment.CENTER);
+    }
+
+    private static Cell createCell(String text, PdfFont font) {
+        return new Cell().setPadding(0.8f)
+                .add(new Paragraph(text).setFont(font)
+                        .setMultipliedLeading(1));
+    }
+
+    public static Date getFechaDate(String fecha) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaI = null;
+        try {
+            fechaI = simpleDateFormat.parse(fecha);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return fechaI;
+
+    }
+
+    public static String getFechaName(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String value = cal.get(Calendar.DAY_OF_MONTH) + "-"
+                + (cal.get(Calendar.MONTH) + 1) + "-" +
+                cal.get(Calendar.YEAR)/* + "-" + cal.get(Calendar.HOUR_OF_DAY) + ":" +
+                cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND)*/;
+
+        return value;
+
+
     }
 
 }
