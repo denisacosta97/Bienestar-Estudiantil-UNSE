@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -53,7 +55,10 @@ public class GestionReservasActivity extends AppCompatActivity implements View.O
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
+                if(position == 0) {
+                    Intent i = new Intent(getApplicationContext(), AdministrarReservasActivity.class);
+                    startActivity(i);
+                }
             }
         });
         imgIcono.setOnClickListener(this);

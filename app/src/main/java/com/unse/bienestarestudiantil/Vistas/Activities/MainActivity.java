@@ -1,8 +1,11 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
@@ -94,12 +99,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+
         if (fragmentoGenerico != null) {
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.contenedor_principal, fragmentoGenerico)
                     .commit();
         }
+
         mFragment = fragmentoGenerico;
 
         itemSelecionado = itemDrawer.getItemId();

@@ -51,12 +51,13 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
         holder.txtTitulo.setText(noticia.getTitulo());
         holder.txtDescripcion.setText(noticia.getCuerpo());
         holder.txtFecha.setText(noticia.getFechahora());
+        holder.etiqueta.setText(noticia.getEtiqueta());
         Glide.with(holder.imgFoto.getContext()).load(noticia.getUrlImagen()).into(holder.imgFoto);
-        if (noticia.isButton()){
-            holder.btnFuncion.setVisibility(View.VISIBLE);
-        }else{
-            holder.btnFuncion.setVisibility(View.INVISIBLE);
-        }
+//        if (noticia.isButton()){
+//            holder.btnFuncion.setVisibility(View.VISIBLE);
+//        }else{
+//            holder.btnFuncion.setVisibility(View.INVISIBLE);
+//        }
     }
 
     @Override
@@ -88,7 +89,7 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
     }
 
     public class NoticiasViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTitulo, txtDescripcion, txtFecha;
+        TextView txtTitulo, txtDescripcion, txtFecha, etiqueta;
         ImageView imgFoto;
         Button btnFuncion;
 
@@ -99,27 +100,28 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             txtFecha = itemView.findViewById(R.id.txtFecha);
             imgFoto = itemView.findViewById(R.id.imgAlerta);
-            btnFuncion = itemView.findViewById(R.id.btnFuncion);
-            btnFuncion.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (getItemViewType()){
-                        case Utils.NOTICIA_BUTTON_WEB:
-                            showToast("Abre una pagina web");
-                            break;
-                        case Utils.NOTICIA_BUTTON_APP:
-                            showToast("Abre una app determinada");
-                            break;
-                        case Utils.NOTICIA_BUTTON_TIENDA:
-                            showToast("Abre la tienda");
-                            break;
-                    }
-                }
-
-                private void showToast(String x) {
-                    Toast.makeText(context, x, Toast.LENGTH_SHORT).show();
-                }
-            });
+            etiqueta = itemView.findViewById(R.id.txtEtiqueta);
+////            btnFuncion = itemView.findViewById(R.id.btnFuncion);
+////            btnFuncion.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    switch (getItemViewType()){
+////                        case Utils.NOTICIA_BUTTON_WEB:
+////                            showToast("Abre una pagina web");
+////                            break;
+////                        case Utils.NOTICIA_BUTTON_APP:
+////                            showToast("Abre una app determinada");
+////                            break;
+////                        case Utils.NOTICIA_BUTTON_TIENDA:
+////                            showToast("Abre la tienda");
+////                            break;
+////                    }
+////                }
+//
+//                private void showToast(String x) {
+//                    Toast.makeText(context, x, Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
         }
 

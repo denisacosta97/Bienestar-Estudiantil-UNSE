@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -7,7 +8,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_inicio"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_margin="5dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -33,6 +34,16 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/txtEtiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="POLIDEPORTIVO"
+                    android:textColor="@color/whiteTextColor"
+                    android:background="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
                     android:id="@+id/txtTitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -49,16 +60,6 @@
                     android:text="Lorem ipsum dolor sit amet consectetur adipiscing, elit velit porttitor nunc integer cubilia, per placerat nec leo habitasse."
                     android:textSize="11sp" />
 
-                <Button
-                    android:id="@+id/btnFuncion"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="TEXTO"
-                    android:textStyle="bold" />
-
-
                 <TextView
                     android:id="@+id/txtFecha"
                     android:layout_width="match_parent"
@@ -67,11 +68,8 @@
                     android:gravity="end"
                     android:text="06/03/2019 - 11:42hs"
                     android:textSize="11sp" />
+
             </LinearLayout>
-
-
-
-
 
         </LinearLayout>
 

@@ -9,21 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.BarcodeActivity"></activity>
-        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity"></activity>
+        <activity android:name=".Vistas.Dialogos.DialogoReservas"></activity>
+        <activity android:name=".Vistas.Activities.NewsReader" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity" />
+        <activity android:name=".Vistas.BarcodeActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity" />
         <activity android:name=".Vistas.Fragmentos.DeportesFragment" />
         <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
-        <activity android:name=".Vistas.Activities.InfoAlumnoActivity"
-            android:label="Información"/>
-        <activity android:name=".Vistas.Activities.PerfilActivity"
-            android:label="Perfil"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity"
-            android:label="Confirmar Reserva"/>
+        <activity
+            android:name=".Vistas.Activities.InfoAlumnoActivity"
+            android:label="Información" />
+        <activity
+            android:name=".Vistas.Activities.PerfilActivity"
+            android:label="Perfil" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity"
+            android:label="Confirmar Reserva" />
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
-            android:label="Realizar Reserva"/>
+        <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
+        <activity android:name=".Vistas.Activities.AsistenciaActivity" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
+            android:label="Realizar Reserva" />
         <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
             android:name=".Vistas.Activities.MainActivity"
@@ -38,22 +48,24 @@
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
-            android:label="Espacios Disponibles"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
-            android:label="Gestión de Polideportivo"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
-            android:label="Gestión de Finanzas"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity"
-            android:label="Gestión de Reservas"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
-            android:label="Gestión de Ingresos"/>
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity"
-            android:label="Registrar Ingreso"/>
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
+            android:label="Espacios Disponibles" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
+            android:label="Gestión de Polideportivo" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
+            android:label="Gestión de Finanzas" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity"
+            android:label="Gestión de Reservas" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
+            android:label="Gestión de Ingresos" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -49,6 +49,8 @@ public class Utils {
     public static final String MONSERRAT = "Montserrat-Regular.ttf";
     public static final String MONTSERRAT_BOLD = "Montserrat-Black.ttf";
     public static final String DEPORTE_NAME = "dato_deporte";
+    public static final String NOTICIA = "dato_noticia";
+    public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
     public static final String ALUMNO_NAME = "dato_alumno";
 
