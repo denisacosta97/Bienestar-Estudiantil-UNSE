@@ -1,20 +1,25 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 
-public class NewsReader extends AppCompatActivity {
+public class NoticiaLectorActivity extends AppCompatActivity implements View.OnClickListener {
 
     Noticia mNoticia;
     TextView etiqueta, titulo, cuerpo, fecha, hora;
-    ImageView portada;
+    ImageView imgFlecha, imgFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +35,22 @@ public class NewsReader extends AppCompatActivity {
         if (mNoticia != null) {
             loadViews();
             loadData();
+            loadListener();
+            Utils.changeColorDrawable(imgFlecha,getApplicationContext(),R.color.colorPrimary);
+
 
         } else {
             Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
             finish();
         }
 
+
+
+
+    }
+
+    private void loadListener() {
+        imgFlecha.setOnClickListener(this);
     }
 
     private void loadData() {
@@ -44,6 +59,7 @@ public class NewsReader extends AppCompatActivity {
         cuerpo.setText(mNoticia.getCuerpo());
         fecha.setText(mNoticia.getFechahora());
         hora.setText("Hace: 5 Minutos");
+        Glide.with(imgFoto.getContext()).load(mNoticia.getUrlImagen()).into(imgFoto);
 
     }
 
@@ -54,7 +70,17 @@ public class NewsReader extends AppCompatActivity {
         cuerpo = findViewById(R.id.txtCuerpo);
         fecha = findViewById(R.id.txtFecha);
         hora = findViewById(R.id.txtHoraPublicado);
+        imgFlecha = findViewById(R.id.imgFlecha);
+        imgFoto = findViewById(R.id.imgPortada);
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
+        }
+    }
 }

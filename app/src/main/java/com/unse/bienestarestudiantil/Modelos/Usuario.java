@@ -7,6 +7,7 @@ public class Usuario {
     private String apellido;
     private String foto;
     private String estatus;
+    private String fechaNac;
     //Aqui se agregaria toda la info que tendría un usuario
 
 
@@ -29,6 +30,19 @@ public class Usuario {
     public String getNombre() {
         return nombre;
     }
+
+    public String getNombreCompleto1(){
+        return String.format("%s %s",getNombre(),getApellido());
+    }
+
+    public String getNombreCompleto2(){
+        return String.format("%s %s",getApellido(),getNombre());
+    }
+
+    public String getNombreCompleto3(){
+        return String.format("%s, %s",getApellido(),getNombre());
+    }
+
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

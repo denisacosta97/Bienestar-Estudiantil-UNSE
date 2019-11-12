@@ -8,48 +8,53 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.NoticiasViewHolder>{
+public class NoticiasAdapter extends RecyclerView.Adapter<NoticiasAdapter.NoticiasViewHolder> {
 
     ArrayList<Noticia> mNoticias, mNoticiaCopia;
     Context context;
 
-    public NoticiasAdapter(ArrayList<Noticia> list, Context context){
+    public NoticiasAdapter(ArrayList<Noticia> list, Context context) {
         this.mNoticias = list;
         this.context = context;
         this.mNoticiaCopia = new ArrayList<>();
         this.mNoticiaCopia.addAll(mNoticias);
     }
 
+
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticia, parent, false);
+        View view = null;
+        if (viewType == 1)
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticia_left, parent, false);
+        else
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticias_right, parent, false);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup) view);
+        Utils.setFont(context, (ViewGroup) view, Utils.MONSERRAT);
 
         return new NoticiasViewHolder(view);
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mNoticias.get(position).getIdTipoNoticias();
+        return position % 2;
     }
 
     @Override
     public void onBindViewHolder(final NoticiasViewHolder holder, int position) {
         Noticia noticia = mNoticias.get(position);
         holder.txtTitulo.setText(noticia.getTitulo());
-        holder.txtDescripcion.setText(noticia.getCuerpo());
+        if (noticia.getCuerpo().length() > 100) {
+            holder.txtDescripcion.setText(noticia.getCuerpo().substring(0, 100));
+        } else
+            holder.txtDescripcion.setText(noticia.getCuerpo());
         holder.txtFecha.setText(noticia.getFechahora());
         holder.etiqueta.setText(noticia.getEtiqueta());
         Glide.with(holder.imgFoto.getContext()).load(noticia.getUrlImagen()).into(holder.imgFoto);
@@ -66,13 +71,13 @@ public class NoticiasAdapter extends RecyclerView.Adapter <NoticiasAdapter.Notic
     }
 
     public void filtrarNoticias(int tipo) {
-        if(tipo == -1){
+        if (tipo == -1) {
             mNoticias.clear();
             mNoticias.addAll(mNoticiaCopia);
-        } else{
+        } else {
             ArrayList<Noticia> result = new ArrayList<>();
-            for(Noticia item: mNoticiaCopia){
-                if (item.getIdCategoria() == tipo){
+            for (Noticia item : mNoticiaCopia) {
+                if (item.getIdCategoria() == tipo) {
                     result.add(item);
                 }
 

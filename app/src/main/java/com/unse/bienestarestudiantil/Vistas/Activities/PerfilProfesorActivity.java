@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity;
 
 public class PerfilProfesorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,10 +41,6 @@ public class PerfilProfesorActivity extends AppCompatActivity implements View.On
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
     private void loadListener() {
         mAlumnos.setOnClickListener(this);
@@ -76,13 +73,12 @@ public class PerfilProfesorActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-
             case R.id.btnHistoriac:
                 break;
             case R.id.btnAlumnos:
                 break;
             case R.id.btnAsistencia:
-                startActivity(new Intent(PerfilProfesorActivity.this, AsistenciaActivity.class));
+                startActivity(new Intent(getApplicationContext(), GestionProfesorActivity.class));
                 break;
             case R.id.btnMensajes:
                 break;

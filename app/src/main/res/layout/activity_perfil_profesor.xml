@@ -156,7 +156,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tomar asistencia"
+                            android:text="Mis Deportes"
                             android:gravity="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"

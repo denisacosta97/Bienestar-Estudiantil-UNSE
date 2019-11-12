@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Dialogos.DialogoReservas"></activity>
-        <activity android:name=".Vistas.Activities.NewsReader" />
+        <activity android:name=".Vistas.Dialogos.DialogoReservas" />
+        <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity" />
         <activity android:name=".Vistas.BarcodeActivity" />
@@ -67,6 +67,10 @@
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
             android:label="Gestión de Ingresos" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity"
+            android:label="Gestión de Profesor"/>
+        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity"
+            android:label="Listado de Alumnos"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

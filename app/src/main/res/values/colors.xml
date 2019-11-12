@@ -16,6 +16,7 @@
     <color name="colorOrange">#F57C00</color>
     <color name="colorRed">#D32F2F</color>
     <color name="colorSelect">#48000000</color>
+    <color name="colorGreyDark">#777777</color>
 
 
     <!--colors for profile-->

@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:text="Ejemplo"
+            android:text=""
             android:textColor="@color/whiteTextColor"
             android:textSize="22sp"
             android:textStyle="bold" />

@@ -30,15 +30,20 @@ public class Noticia implements Parcelable {
         this.etiqueta = etiqueta;
     }
 
+
     protected Noticia(Parcel in) {
         titulo = in.readString();
         cuerpo = in.readString();
         fechahora = in.readString();
         urlImagen = in.readString();
+        urlWeb = in.readString();
+        etiqueta = in.readString();
         id = in.readInt();
         idTipoNoticias = in.readInt();
         idCategoria = in.readInt();
-        etiqueta = in.readString();
+        isURL = in.readByte() != 0;
+        isEncuesta = in.readByte() != 0;
+        isButton = in.readByte() != 0;
     }
 
     public static final Creator<Noticia> CREATOR = new Creator<Noticia>() {
@@ -166,20 +171,25 @@ public class Noticia implements Parcelable {
         this.etiqueta = etiqueta;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(titulo);
-        parcel.writeString(cuerpo);
-        parcel.writeString(fechahora);
-        parcel.writeString(urlImagen);
-        parcel.writeInt(id);
-        parcel.writeInt(idTipoNoticias);
-        parcel.writeInt(idCategoria);
-        parcel.writeString(etiqueta);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(titulo);
+        dest.writeString(cuerpo);
+        dest.writeString(fechahora);
+        dest.writeString(urlImagen);
+        dest.writeString(urlWeb);
+        dest.writeString(etiqueta);
+        dest.writeInt(id);
+        dest.writeInt(idTipoNoticias);
+        dest.writeInt(idCategoria);
+        dest.writeByte((byte) (isURL ? 1 : 0));
+        dest.writeByte((byte) (isEncuesta ? 1 : 0));
+        dest.writeByte((byte) (isButton ? 1 : 0));
     }
 }

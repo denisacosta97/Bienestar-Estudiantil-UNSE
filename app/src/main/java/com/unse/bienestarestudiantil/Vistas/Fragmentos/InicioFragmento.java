@@ -16,8 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.NewsReader;
+import com.unse.bienestarestudiantil.Vistas.Activities.NoticiaLectorActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.NoticiasAdapter;
 
@@ -42,8 +41,7 @@ public class InicioFragmento extends Fragment {
         //Crea la vista de Inicio
         view = inflater.inflate(R.layout.fragmento_inicio, container, false);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(getContext().getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup) view);
+        Utils.setFont(getContext(), (ViewGroup) view, Utils.MONSERRAT);
 
         loadViews();
 
@@ -77,7 +75,7 @@ public class InicioFragmento extends Fragment {
         itemClickSupport2.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(), NewsReader.class);
+                Intent i = new Intent(getContext(), NoticiaLectorActivity.class);
                 i.putExtra(Utils.NOTICIA, mListNoticias.get(position));
                 startActivity(i);
             }

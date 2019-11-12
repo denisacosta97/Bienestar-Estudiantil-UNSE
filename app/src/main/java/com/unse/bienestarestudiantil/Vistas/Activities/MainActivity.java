@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
         setToolbar();
 
         Utils.createPDF(getApplicationContext());
+
+        String x = "Denis";
+        String msj = Utils.encryptPassword(Utils.getStringValue(x,29,9,1997));
+        x = "Deniss";
+        String msj2 = Utils.encryptPassword(Utils.getStringValue(x,29,9,1997));
+        if (msj.equals(msj2)){
+            Utils.showToast(getApplicationContext(),"Iguales");
+        }
     }
 
 
