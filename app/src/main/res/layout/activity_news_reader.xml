@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +29,7 @@
                 android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/txtTitulo"
+                android:id="@+id/txtTitulo2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Paro de colectivos a partir de las 12hs"

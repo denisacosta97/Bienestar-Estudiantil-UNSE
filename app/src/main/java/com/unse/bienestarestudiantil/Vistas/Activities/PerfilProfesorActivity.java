@@ -13,6 +13,8 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProfesorDeportes;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoReservas;
 
 public class PerfilProfesorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -78,7 +80,8 @@ public class PerfilProfesorActivity extends AppCompatActivity implements View.On
             case R.id.btnAlumnos:
                 break;
             case R.id.btnAsistencia:
-                startActivity(new Intent(getApplicationContext(), GestionProfesorActivity.class));
+                DialogoProfesorDeportes dialogoProfesorDeportes = new DialogoProfesorDeportes();
+                dialogoProfesorDeportes.show(getSupportFragmentManager(),"dialog_resevas");
                 break;
             case R.id.btnMensajes:
                 break;

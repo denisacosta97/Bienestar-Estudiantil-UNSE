@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,13 +39,29 @@ public class AsistenciaAdapter extends RecyclerView.Adapter<AsistenciaAdapter.Ev
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final EventosViewHolder holder, int position) {
         Asistencia depo = asistencia.get(position);
 
-        holder.mImgFotoAlum.setImageResource(depo.getIdFotoAlum());
+        holder.idAlumno.setText(String.valueOf(depo.getId()+1));
         holder.mNameAlum.setText(depo.getName());
-    }
 
+        holder.btnPresente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btnAusente.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.btnPresente.setBackgroundColor(context.getResources().getColor(R.color.colorGreen));
+            }
+        });
+
+        holder.btnAusente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btnPresente.setBackgroundColor(context.getResources().getColor(R.color.colorGrey));
+                holder.btnAusente.setBackgroundColor(context.getResources().getColor(R.color.colorRed));
+            }
+        });
+
+    }
 
     @Override
     public long getItemId(int position) {
@@ -58,17 +75,17 @@ public class AsistenciaAdapter extends RecyclerView.Adapter<AsistenciaAdapter.Ev
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mImgFotoAlum;
-        TextView mNameAlum;
-        //CheckBox mCheckBox, mNotCheckedBox;
+        TextView mNameAlum, idAlumno;
+        Button btnPresente, btnAusente;
 
         EventosViewHolder(View itemView) {
             super(itemView);
 
-            mImgFotoAlum = itemView.findViewById(R.id.imgFotoAlumno);
+            idAlumno = itemView.findViewById(R.id.idAlumno);
             mNameAlum = itemView.findViewById(R.id.txtNameAlumno);
-//            mCheckBox = itemView.findViewById(R.id.checkBoxPresente);
-//            mNotCheckedBox = itemView.findViewById(R.id.checkBoxAusente);
+            btnPresente = itemView.findViewById(R.id.btnPresente);
+            btnAusente = itemView.findViewById(R.id.btnAusente);
+
         }
     }
 

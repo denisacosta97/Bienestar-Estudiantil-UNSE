@@ -31,10 +31,9 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
     ArrayList<Asistencia> mAsistencias;
     AsistenciaAdapter mAsistenciaAdapter;
     Asistencia mAsistencia;
-    TextView mNombreAlu;
-    ImageView mFotoAlu;
-    CheckBox mCheckBox, mNotCheckedBox;
-    Button btnRegister;
+    TextView mNombreAlu, idAlumno;
+    Button btnFinalizar;
+    ImageView mLinearLayout;
 
     public AsistenciaActivity(){
 
@@ -51,6 +50,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
 
         loadViews();
 
+        loadListener();
 //        if (getIntent().getParcelableExtra(Utils.ALUMNO_NAME) != null) {
 //            mAsistencia = getIntent().getParcelableExtra(Utils.ALUMNO_NAME);
 //        }
@@ -97,27 +97,35 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mRecyclerAsistencia.setNestedScrollingEnabled(true);
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
         mRecyclerAsistencia.setAdapter(mAsistenciaAdapter);
+        mLinearLayout.requestFocus();
+
+
     }
 
     private void loadData() {
-        mFotoAlu.setImageResource(mAsistencia.getIdFotoAlum());
+        idAlumno.setText(mAsistencia.getId());
         mNombreAlu.setText(mAsistencia.getName());
     }
 
     private void loadListener() {
-        btnRegister.setOnClickListener(this);
+        btnFinalizar.setOnClickListener(this);
     }
 
     private void loadViews() {
-        mFotoAlu = findViewById(R.id.imgFotoAlumno);
+        idAlumno = findViewById(R.id.idAlumno);
         mNombreAlu = findViewById(R.id.txtNameAlumno);
-//        mCheckBox = findViewById(R.id.checkBoxPresente);
-//        mNotCheckedBox = findViewById(R.id.checkBoxAusente);
-
+        mLinearLayout = findViewById(R.id.imgFlecha);
+        btnFinalizar = findViewById(R.id.btnFinalizar);
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnFinalizar:
+
+                break;
+
+        }
 
     }
 }

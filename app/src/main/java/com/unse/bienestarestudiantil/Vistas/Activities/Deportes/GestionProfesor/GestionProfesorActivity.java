@@ -15,6 +15,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -33,8 +34,6 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_gestion_profesor);
 
         Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
-
-
 
         loadViews();
 
@@ -62,6 +61,8 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
                     case 1:
                         startActivity(new Intent(getApplicationContext(), ListadoAlumnosActivity.class));
                         break;
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
                 }
                 Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }

@@ -66,7 +66,7 @@ public class NoticiaLectorActivity extends AppCompatActivity implements View.OnC
 
     private void loadViews() {
         etiqueta = findViewById(R.id.txtEtiqueta);
-        titulo = findViewById(R.id.txtTitulo);
+        titulo = findViewById(R.id.txtTitulo2);
         cuerpo = findViewById(R.id.txtCuerpo);
         fecha = findViewById(R.id.txtFecha);
         hora = findViewById(R.id.txtHoraPublicado);

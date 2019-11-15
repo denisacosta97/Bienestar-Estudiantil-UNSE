@@ -19,16 +19,23 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
 
     private ArrayList<Deporte> deport;
     private Context context;
+    private boolean mBoolean;
+    View view;
 
-    public DeportesAdapter(ArrayList<Deporte> list, Context ctx) {
+    public DeportesAdapter(ArrayList<Deporte> list, Context ctx, boolean b) {
         this.deport = list;
         this.context = ctx;
+        this.mBoolean = b;
     }
 
     @NonNull
     @Override
     public EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes, parent, false);
+        if(mBoolean)
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes_profesor, parent, false);
+
+        else
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes, parent, false);
 
         FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), "Montserrat-Regular.ttf");
         fontChanger.replaceFonts((ViewGroup) view);

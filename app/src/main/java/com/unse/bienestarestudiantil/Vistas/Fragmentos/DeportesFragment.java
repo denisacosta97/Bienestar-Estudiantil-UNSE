@@ -65,7 +65,7 @@ public class DeportesFragment extends Fragment {
         mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
         mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
 
-        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext());
+        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
