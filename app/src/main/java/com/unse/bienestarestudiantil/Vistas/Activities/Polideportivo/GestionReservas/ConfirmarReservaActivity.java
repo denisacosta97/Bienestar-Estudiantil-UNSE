@@ -2,8 +2,6 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionRes
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.renderscript.RenderScript;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Espacio;

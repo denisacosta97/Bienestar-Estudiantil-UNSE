@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -10,11 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProfesorDeportes;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoReservas;
 
 public class PerfilProfesorActivity extends AppCompatActivity implements View.OnClickListener {
 

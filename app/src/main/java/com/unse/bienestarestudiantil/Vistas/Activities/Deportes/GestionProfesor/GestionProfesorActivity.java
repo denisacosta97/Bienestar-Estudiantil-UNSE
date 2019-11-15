@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.TorneosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -63,6 +63,10 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(getApplicationContext(), TorneosActivity.class));
+                        break;
                 }
                 Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }

@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 

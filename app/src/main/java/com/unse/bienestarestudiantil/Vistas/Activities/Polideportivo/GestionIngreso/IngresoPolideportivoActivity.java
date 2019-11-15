@@ -11,10 +11,8 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoIngresoPolideportivo;
 

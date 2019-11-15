@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,21 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.AsistenciaAdapter;
 
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class AsistenciaActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -99,7 +93,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mRecyclerAsistencia.setAdapter(mAsistenciaAdapter);
         mLinearLayout.requestFocus();
 
-
     }
 
     private void loadData() {
@@ -122,7 +115,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnFinalizar:
-
                 break;
 
         }

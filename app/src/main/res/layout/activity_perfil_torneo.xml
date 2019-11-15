@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <include
+          layout="@layout/toolbar_trans"/>
+
+        <ImageView
+            android:id="@+id/imgvIcon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:translationY="10dp"
+            android:elevation="4sp"
+            android:src="@drawable/ic_cup" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="2sp"
+            app:cardCornerRadius="10dp"
+            android:translationY="-60dp"
+            android:outlineAmbientShadowColor="@color/colorGrey2"
+            android:outlineSpotShadowColor="@color/colorGrey2"
+            card_view:backgroundTint="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtNameTorneo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Torneo JUR"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginTop="45dp"
+                        android:textSize="45sp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lugar: "
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/txtLugar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Buenos Aires, Tecnópolis"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha de inicio y fin: "
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/txtFechas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="12/11/2019 - 20/11/2019"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Descripción: "
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/txtDesc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="230dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/mappoliborrar"/>
+
+                    <Button
+                        android:id="@+id/btnPostular"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:background="@drawable/button_border"
+                        android:text="POSTULAR LISTA"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

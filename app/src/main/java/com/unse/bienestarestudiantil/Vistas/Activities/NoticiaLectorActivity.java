@@ -1,12 +1,9 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,9 +41,6 @@ public class NoticiaLectorActivity extends AppCompatActivity implements View.OnC
             finish();
         }
 
-
-
-
     }
 
     private void loadListener() {
@@ -60,7 +54,6 @@ public class NoticiaLectorActivity extends AppCompatActivity implements View.OnC
         fecha.setText(mNoticia.getFechahora());
         hora.setText("Hace: 5 Minutos");
         Glide.with(imgFoto.getContext()).load(mNoticia.getUrlImagen()).into(imgFoto);
-
     }
 
 

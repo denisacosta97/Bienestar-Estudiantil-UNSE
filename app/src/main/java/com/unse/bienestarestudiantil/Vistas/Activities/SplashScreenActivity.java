@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 

@@ -1,11 +1,14 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-public class Torneo {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private int id, logo, lugar;
-    private String nameTorneo, desc, fechaInicio, fechaFin;
+public class Torneo implements Parcelable {
 
-    public Torneo(int id, int logo, int lugar, String nameTorneo, String desc, String fechaInicio, String fechaFin) {
+    private int id, logo;
+    private String nameTorneo, desc, fechaInicio, fechaFin, lugar;
+
+    public Torneo(int id, int logo, String lugar, String nameTorneo, String desc, String fechaInicio, String fechaFin) {
         this.id = id;
         this.logo = logo;
         this.lugar = lugar;
@@ -18,12 +21,34 @@ public class Torneo {
     public Torneo() {
         this.id = 0;
         this.logo = 0;
-        this.lugar = 0;
+        this.lugar = "";
         this.nameTorneo = "";
         this.desc = "";
         this.fechaInicio = "";
         this.fechaFin = "";
     }
+
+    protected Torneo(Parcel in) {
+        id = in.readInt();
+        logo = in.readInt();
+        lugar = in.readString();
+        nameTorneo = in.readString();
+        desc = in.readString();
+        fechaInicio = in.readString();
+        fechaFin = in.readString();
+    }
+
+    public static final Creator<Torneo> CREATOR = new Creator<Torneo>() {
+        @Override
+        public Torneo createFromParcel(Parcel in) {
+            return new Torneo(in);
+        }
+
+        @Override
+        public Torneo[] newArray(int size) {
+            return new Torneo[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -41,11 +66,11 @@ public class Torneo {
         this.logo = logo;
     }
 
-    public int getLugar() {
+    public String getLugar() {
         return lugar;
     }
 
-    public void setLugar(int lugar) {
+    public void setLugar(String lugar) {
         this.lugar = lugar;
     }
 
@@ -79,5 +104,21 @@ public class Torneo {
 
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(logo);
+        dest.writeString(lugar);
+        dest.writeString(nameTorneo);
+        dest.writeString(desc);
+        dest.writeString(fechaInicio);
+        dest.writeString(fechaFin);
     }
 }
