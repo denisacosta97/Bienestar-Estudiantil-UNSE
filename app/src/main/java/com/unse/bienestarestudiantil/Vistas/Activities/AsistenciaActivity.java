@@ -24,10 +24,10 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
     RecyclerView mRecyclerAsistencia;
     ArrayList<Asistencia> mAsistencias;
     AsistenciaAdapter mAsistenciaAdapter;
-    Asistencia mAsistencia;
     TextView mNombreAlu, idAlumno;
     Button btnFinalizar;
-    ImageView mLinearLayout;
+    LinearLayout mLinearLayout;
+    ImageView imgFlecha;
 
     public AsistenciaActivity(){
 
@@ -38,33 +38,25 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia);
 
-        mRecyclerAsistencia = findViewById(R.id.recycler);
-
         Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 
         loadListener();
-//        if (getIntent().getParcelableExtra(Utils.ALUMNO_NAME) != null) {
-//            mAsistencia = getIntent().getParcelableExtra(Utils.ALUMNO_NAME);
-//        }
-//
-//        if (mAsistencia != null) {
-//            loadViews();
-//
-//            //loadListener();
-//
-//            loadData();
-//        } else {
-//            Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
-//            finish();
-//        }
 
-        loadDataRecycler();
+        loadData();
+
+        setToolbar();
 
     }
 
-    private void loadDataRecycler() {
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        Utils.changeColorDrawable(imgFlecha, getApplicationContext(), R.color.colorPrimary);
+    }
+
+    private void loadData() {
         mAsistencias = new ArrayList<>();
 
         mAsistencias.add(new Asistencia(0, R.drawable.ic_basquet, "Cristian Santiago Ledesma"));
@@ -90,30 +82,34 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
         mRecyclerAsistencia.setNestedScrollingEnabled(true);
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
+        mRecyclerAsistencia.setHasFixedSize(true);
         mRecyclerAsistencia.setAdapter(mAsistenciaAdapter);
+        mRecyclerAsistencia.setFocusable(false);
         mLinearLayout.requestFocus();
 
     }
 
-    private void loadData() {
-        idAlumno.setText(mAsistencia.getId());
-        mNombreAlu.setText(mAsistencia.getName());
-    }
 
     private void loadListener() {
         btnFinalizar.setOnClickListener(this);
+        imgFlecha.setOnClickListener(this);
     }
 
     private void loadViews() {
+        mRecyclerAsistencia = findViewById(R.id.recycler);
         idAlumno = findViewById(R.id.idAlumno);
         mNombreAlu = findViewById(R.id.txtNameAlumno);
-        mLinearLayout = findViewById(R.id.imgFlecha);
+        mLinearLayout = findViewById(R.id.layout);
         btnFinalizar = findViewById(R.id.btnFinalizar);
+        imgFlecha = findViewById(R.id.imgFlecha);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
             case R.id.btnFinalizar:
                 break;
 

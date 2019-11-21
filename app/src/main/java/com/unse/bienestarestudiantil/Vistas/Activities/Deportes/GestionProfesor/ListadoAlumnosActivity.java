@@ -83,13 +83,13 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     }
 
     private void buscar(String txt) {
-        Pattern pattern = Pattern.compile("[0-9]+(-)[0-9]*");
+        Pattern pattern = Pattern.compile("[0-9]+(\\/|-)[0-9]*");
         Matcher matcher = pattern.matcher(txt);
         if (matcher.find()){
             mAdapter.filtrar(txt, Utils.LIST_LEGAJO);
             return;
         }
-        pattern = Pattern.compile("[0-9]+");
+        pattern = Pattern.compile("([0-9]+){5,8}");
         matcher = pattern.matcher(txt);
         if (matcher.find()){
             if (txt.length() > 4){

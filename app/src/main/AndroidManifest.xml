@@ -36,7 +36,8 @@
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
         <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
-        <activity android:name=".Vistas.Activities.AsistenciaActivity" />
+        <activity android:name=".Vistas.Activities.AsistenciaActivity"
+            android:label="Asistencia"/>
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
