@@ -32,7 +32,8 @@
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
         <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
-        <activity android:name=".Vistas.Activities.AsistenciaActivity" />
+        <activity android:name=".Vistas.Activities.AsistenciaActivity"
+            android:label="Asistencia"/>
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
@@ -69,6 +70,7 @@
             android:label="Gestión de Profesor"/>
         <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity"
             android:label="Listado de Alumnos"/>
+        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.AsistenciaClasesActivity" />
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
