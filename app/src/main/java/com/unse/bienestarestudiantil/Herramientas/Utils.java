@@ -96,6 +96,9 @@ public class Utils {
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
 
+
+    public static final String URL = "http://192.168.1.20/bienestar/usuario/insertar.php";
+
     public static void changeColorDrawable(ImageView view, Context context, int color){
         DrawableCompat.setTint(
                 DrawableCompat.wrap(view.getDrawable()),

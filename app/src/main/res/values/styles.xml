@@ -32,5 +32,21 @@
         <item name="android:textColor">#FF7043</item>
     </style>
 
+    <!--  Card  -->
+
+    <declare-styleable name="creditcard">
+        <attr name="cvv" format="integer" />
+        <attr name="card_holder_name" format="string" />
+        <attr name="card_expiration" format="string" />
+        <attr name="card_number" format="string" />
+        <attr name="card_side" format="enum">
+            <enum name="front" value="1" />
+            <enum name="back" value="0" />
+        </attr>
+        <attr name="change_card_color" format="boolean"/>
+        <attr name="show_card_animation" format="boolean"/>
+        <attr name="show_chip_on_card" format="boolean"/>
+
+    </declare-styleable>
 
 </resources>

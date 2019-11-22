@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.textclassifier.TextLinks;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,14 +22,27 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -46,13 +60,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
     String[] fceyt = {"Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Electrónica",
             "Ingeniería Eléctrica", "Ingeniería en Agrimensura", "Ingeniería Hidráulica",
-        "Ingeniería Industrial", "Ingeniería Vial", "Licenciatura en Hidrología Subterránea",
+            "Ingeniería Industrial", "Ingeniería Vial", "Licenciatura en Hidrología Subterránea",
             "Licenciatura en Matemática", "Licenciatura en Sistemas de Información",
-        "Profesorado en Física", "Profesorado en Informática", "Profesorado en Matemática",
-    "Programador Universitario en Informática", "Tecnicatura Universitaria Vial",
-        "Tecnicatura Universitaria en Construcciones",
-        "Tecnicatura Universitaria en Hidrología Subterránea",
-        "Tecnicatura Universitaria en Organización y Control de la Producción"};
+            "Profesorado en Física", "Profesorado en Informática", "Profesorado en Matemática",
+            "Programador Universitario en Informática", "Tecnicatura Universitaria Vial",
+            "Tecnicatura Universitaria en Construcciones",
+            "Tecnicatura Universitaria en Hidrología Subterránea",
+            "Tecnicatura Universitaria en Organización y Control de la Producción"};
     String[] fcf = {"Ingeniería Forestal", "Ingeniería en Industrias Forestales",
             "Licenciatura en Ecología y Conservación del Ambiente",
             "Tecnicatura Universitaria Fitosanitarista",
@@ -64,8 +78,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
             "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
             "Licenciatura en Educación para la Salud", "Licenciatura en Obtetricia",
-            "Licenciatura en Filosofía","Licenciatura en Trabajo Social",
-            "Licenciatura en Periodismo","Profesorado en Educación para la Salud",
+            "Licenciatura en Filosofía", "Licenciatura en Trabajo Social",
+            "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
 
@@ -79,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
+        fontChanger.replaceFonts((ViewGroup) findViewById(android.R.id.content));
 
         date = findViewById(R.id.txtdate);
         mRegister = findViewById(R.id.btnregister);
@@ -120,10 +134,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long arg3) {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 spinner.setSelection(position);
                 Spinner spinner2 = findViewById(R.id.spinner2);
-                switch (position){
+                switch (position) {
                     case 0:
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
                         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -159,47 +173,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         });
 
-
-//        switch (position){
-//            case 0:
-//                ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, faya);
-//                dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner2.setAdapter(dataAdapter2);
-//                break;
-//            case 1:
-//                ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fceyt);
-//                dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner2.setAdapter(dataAdapter3);
-//                break;
-//            case 2:
-//                ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fcf);
-//                dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner2.setAdapter(dataAdapter4);
-//                break;
-//            case 3:
-//                ArrayAdapter<String> dataAdapter5 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fcm);
-//                dataAdapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner2.setAdapter(dataAdapter5);
-//                break;
-//            case 4:
-//                ArrayAdapter<String> dataAdapter6 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fhcys);
-//                dataAdapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinner2.setAdapter(dataAdapter6);
-//                break;
-//        }
-
     }
 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-          case R.id.txtdate:
+        switch (view.getId()) {
+            case R.id.txtdate:
                 showDateDialog();
                 break;
-          case R.id.btnregister:
+            case R.id.btnregister:
                 //Insert función registro DENIS gg
+
                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                login();
                 finish();
                 break;
             case R.id.imgUserRegister:
@@ -232,12 +219,72 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void login() {
+        final HashMap<String, String> params2 = new HashMap<String, String>();
+        params2.put("id", "39986583");
+        params2.put("nom", "Val");
+        params2.put("ape", "Val");
+        params2.put("fecha", "Val");
+        params2.put("pais", "Val");
+        params2.put("prov", "Val");
+        params2.put("local", "Val");
+        params2.put("dom", "Val");
+        params2.put("sex", "Val");
+        params2.put("key", "123456789");
+        params2.put("car", "Val");
+        params2.put("fac", "Val");
+        params2.put("anio", "Val");
+        params2.put("leg", "Val");
+        params2.put("pass", "Val");
+        params2.put("tipo", "Val");
+        params2.put("mail", "Val");
+
+        JSONObject jsonObject = new JSONObject(params2);
+
+        StringRequest request = new StringRequest(Request.Method.POST, Utils.URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                    Utils.showToast(getApplicationContext(), response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return params2;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8" + getParamsEncoding();
+            }
+        }
+        ;
+        Volley.newRequestQueue(getApplicationContext()).add(request);
+        String x = request.getUrl();
+
+    }
     private void showDateDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero
-                final String selectedDate = day + "/" + (month+1) + "/" + year;
+                final String selectedDate = day + "/" + (month + 1) + "/" + year;
                 date.setText(selectedDate);
             }
         });
@@ -251,7 +298,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         //Detects request codes
-        if(requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
