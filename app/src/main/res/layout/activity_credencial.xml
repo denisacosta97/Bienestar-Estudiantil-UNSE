@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@color/colorGrey">
 
     <android.support.v7.widget.CardView
@@ -24,31 +25,34 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="3"
                 android:orientation="horizontal"
                 android:background="@color/colorPrimaryDark">
 
                 <ImageView
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/logo_unse"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_logo_bienestar_02"
                     android:layout_margin="5dp"/>
 
                 <TextView
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="CARNET \nPOLIDEPORTIVO"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"/>
 
                 <ImageView
-                    android:layout_width="100dp"
+                    android:layout_width="120dp"
                     android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/bienesplash"
+                    android:src="@drawable/logo_unse"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"/>
+
 
             </LinearLayout>
 
@@ -58,80 +62,159 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LIGA DEPORTIVA UNIVERSITARIA"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deporte: "/>
+
+                        <TextView
+                            android:id="@+id/txtDeporte"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Apellido: "/>
+
+                        <TextView
+                            android:id="@+id/txtApellido"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre: "/>
+
+                        <TextView
+                            android:id="@+id/txtNombre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Facultad: "/>
+
+                        <TextView
+                            android:id="@+id/txtFacultad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N° de Legajo: "/>
+
+                        <TextView
+                            android:id="@+id/txtLegajo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre del equipo: "/>
+
+                        <TextView
+                            android:id="@+id/txtNombreEquipo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Año: "/>
+
+                        <TextView
+                            android:id="@+id/txtAño"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/user"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/txtnombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:hint="Nombre completo"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:padding="15dp"
-                        android:inputType="textPersonName"
-                        android:background="@drawable/edit_text_logreg"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/txtdato"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:hint="Nombre completo"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:padding="15dp"
-                        android:inputType="textPersonName"
-                        android:background="@drawable/edit_text_logreg"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/txtdato2"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:hint="Nombre completo"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:padding="15dp"
-                        android:inputType="textPersonName"
-                        android:background="@drawable/edit_text_logreg"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/txtdato3"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:hint="Nombre completo"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:padding="15dp"
-                        android:inputType="textPersonName"
-                        android:background="@drawable/edit_text_logreg"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtFecha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="45dp"
-                android:text="Legajo/DNI"
-                android:textSize="11dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

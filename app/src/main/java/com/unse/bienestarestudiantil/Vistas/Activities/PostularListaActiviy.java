@@ -5,16 +5,12 @@ import android.os.Bundle;
 
 import com.unse.bienestarestudiantil.R;
 
-public class CredencialActivity extends AppCompatActivity {
+public class PostularListaActiviy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credencial);
-
-
+        setContentView(R.layout.activity_postular_lista_activiy);
     }
 
 }
-
-

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.*;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.*;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;

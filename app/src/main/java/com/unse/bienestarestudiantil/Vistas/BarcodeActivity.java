@@ -44,7 +44,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
             resultados.add(matcher.group(0));
         }
 
-        
 
 //        AlertDialog alertDialog = builder.create();
 //        alertDialog.show();

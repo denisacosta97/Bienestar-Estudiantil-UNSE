@@ -96,7 +96,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txtnombre"
+                android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Nombre completo"
@@ -109,7 +109,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/txtapellido"
+                android:id="@+id/txtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Apellidos"
@@ -121,11 +121,49 @@
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="14sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/txtDNI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:hint="D.N.I"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txtSexo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:hint="Sexo"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="15dp"
+                    android:inputType="textShortMessage"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="15sp"/>
+
+
+            </LinearLayout>
+
             <EditText
-                android:id="@+id/txtemail"
+                android:id="@+id/txtMail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="/eMail/Legajo/DNI"
+                android:hint="Email"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
@@ -135,7 +173,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/txtdate"
+                android:id="@+id/txtDate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Fecha de nacimiento"
@@ -151,7 +189,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/txtpass"
+                android:id="@+id/txtPass"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Contraseña"
@@ -164,7 +202,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/txt_repass"
+                android:id="@+id/txtRepass"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Confirmar contraseña"
@@ -174,6 +212,211 @@
                 android:inputType="textPassword"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="14sp" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnProfesor"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:layout_margin="5dp"
+                    android:textSize="10dp"
+                    android:text="Profesor"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:background="@drawable/corners_rounded_button"/>
+
+                <Button
+                    android:id="@+id/btnAlumno"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:layout_margin="5dp"
+                    android:textSize="10dp"
+                    android:text="Alumno"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:background="@drawable/corners_rounded_button"/>
+
+                <Button
+                    android:id="@+id/btnNoDocente"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:layout_margin="5dp"
+                    android:textSize="10dp"
+                    android:text="No docente"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:background="@drawable/corners_rounded_button"/>
+
+                <Button
+                    android:id="@+id/btnEgresado"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:layout_margin="5dp"
+                    android:textSize="10dp"
+                    android:text="Egresado"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:background="@drawable/corners_rounded_button"/>
+
+                <Button
+                    android:id="@+id/btnParticular"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.2"
+                    android:layout_margin="5dp"
+                    android:textSize="10dp"
+                    android:text="Particular"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:background="@drawable/corners_rounded_button"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayProfesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtProfesion1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Profesion"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="textEmailSubject"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txtAnioIngreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Año de ingreso"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="textEmailSubject"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayAlumno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Facultad: "
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:overlapAnchor="false"
+                        android:background="@drawable/border_spinner"
+                        android:spinnerMode="dropdown"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carrera: "
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:overlapAnchor="false"
+                        android:background="@drawable/border_spinner"
+                        android:spinnerMode="dropdown"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/txtAnioIngreso2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Año de ingreso"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayEgresado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtProfesion2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Profesión"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txtAnioEgreso"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Año de egreso"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnregister"

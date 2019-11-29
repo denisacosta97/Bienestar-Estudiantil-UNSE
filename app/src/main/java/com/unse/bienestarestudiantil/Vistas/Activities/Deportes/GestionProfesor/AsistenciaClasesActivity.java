@@ -81,7 +81,7 @@ public class AsistenciaClasesActivity extends AppCompatActivity implements View.
         AsistenciaClasesAdapter.Meses[] dummy = new AsistenciaClasesAdapter.Meses[sections.size()];
         AsistenciaClasesAdapter mSectionedAdapter = new
                 AsistenciaClasesAdapter(getApplicationContext(),
-                mRecyclerView,mAdapter);
+                mRecyclerView);
         mSectionedAdapter.setSections(sections.toArray(dummy));
 
         //Apply this adapter to the RecyclerView

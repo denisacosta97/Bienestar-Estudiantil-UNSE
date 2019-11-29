@@ -86,6 +86,7 @@ public class Utils {
     public static final String MONSERRAT = "Montserrat-Regular.ttf";
     public static final String MONTSERRAT_BOLD = "Montserrat-Black.ttf";
     public static final String DEPORTE_NAME = "dato_deporte";
+    public static final String TORNEO = "dato_torneo";
     public static final String NOTICIA = "dato_noticias";
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
@@ -94,6 +95,9 @@ public class Utils {
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
+
+
+    public static final String URL = "http://192.168.1.29/bienestar/usuario/insertar.php";
 
     public static void changeColorDrawable(ImageView view, Context context, int color){
         DrawableCompat.setTint(
@@ -198,13 +202,13 @@ public class Utils {
         return msj.toString();
     }
 
-    public static String encryptPassword(String password)  {
+    public static String crypt(String text)  {
 
         MessageDigest crypt = null;
         try {
             crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
-            crypt.update(password.getBytes("UTF-8"));
+            crypt.update(text.getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -212,6 +216,17 @@ public class Utils {
         }
 
         return new BigInteger(1, crypt.digest()).toString(16);
+    }
+
+    public static String generateToken(String... data){
+        String sha = "";
+        if(data.length == 3){
+            sha = data[0]+data[1]+data[2];
+            return crypt(sha);
+        }else{
+            return sha;
+        }
+
     }
 
 

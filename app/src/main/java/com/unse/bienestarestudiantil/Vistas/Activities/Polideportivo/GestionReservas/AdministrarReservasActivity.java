@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +14,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Reserva;
 import com.unse.bienestarestudiantil.Modelos.ReservaHorario;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AsistenciaAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.GestionReservasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoReservas;
 
