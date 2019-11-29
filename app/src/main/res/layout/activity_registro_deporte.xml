@@ -96,7 +96,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences|textPersonName"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -110,7 +110,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -178,7 +178,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -192,7 +192,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -213,7 +213,7 @@
                     android:layout_marginRight="20dp"
                     android:hint="Carrera"
                     android:padding="15dp"
-                    android:inputType="text"
+                    android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
@@ -242,7 +242,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -257,7 +257,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="Ciudad"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -272,7 +272,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="Provincia"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp"/>
@@ -287,7 +287,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:maxLines="1"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
@@ -339,7 +339,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -355,7 +355,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="15sp" />
@@ -400,7 +400,7 @@
                     android:textSize="15sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox1"
+                    android:id="@+id/chbxWhats"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
@@ -415,31 +415,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:weightSum="3"
+                android:weightSum="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿Realizó o realiza actividad física? "
+                    android:text="¿Realizó o realiza actividad física?"
+                    android:layout_weight="0.6"
                     android:textStyle="bold"
                     android:textSize="15sp"/>
 
                 <CheckBox
-                    android:id="@+id/checkBox5"
+                    android:id="@+id/chbxSi"
                     android:layout_width="115dp"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:buttonTint="@color/colorPrimaryDark"
-                    android:text="Si" />
+                    android:text="Si"/>
 
                 <CheckBox
-                    android:id="@+id/checkBox6"
+                    android:id="@+id/chbxNo"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:buttonTint="@color/colorPrimaryDark"
-                    android:text="No" />
+                    android:text="No"/>
 
             </LinearLayout>
 
@@ -459,7 +460,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
-                    android:inputType="text"
+                    android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
@@ -480,7 +481,7 @@
                         android:textSize="15sp"/>
 
                     <CheckBox
-                        android:id="@+id/checkBox2"
+                        android:id="@+id/chbxContin"
                         android:layout_width="115dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -488,7 +489,7 @@
                         android:text="Continua" />
 
                     <CheckBox
-                        android:id="@+id/checkBox3"
+                        android:id="@+id/chbxMedia"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -496,7 +497,7 @@
                         android:text="Media" />
 
                     <CheckBox
-                        android:id="@+id/checkBox4"
+                        android:id="@+id/chbxBaja"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
@@ -514,7 +515,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
-                    android:inputType="text"
+                    android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp" />
@@ -530,7 +531,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:inputType="text"
+                android:inputType="textCapSentences|text"
                 android:background="@drawable/edit_text_logreg"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="15sp" />

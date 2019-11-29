@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -172,7 +173,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
 
         });
-
     }
 
 
@@ -184,7 +184,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnregister:
                 //Insert función registro DENIS gg
-
                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 login();
                 finish();
@@ -279,6 +278,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String x = request.getUrl();
 
     }
+
     private void showDateDialog() {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -296,14 +296,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                imgUserRegister.setImageBitmap(bitmap);
+                imgUserRegister.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 120, 120, false));
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
