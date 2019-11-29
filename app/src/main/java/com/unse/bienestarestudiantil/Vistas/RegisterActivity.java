@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Herramientas.Validador;
-import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
@@ -43,7 +42,6 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Tecnicatura Universitaria Fitosanitarista",
             "Tecnicatura Universitaria en Viveros y Plantaciones Forestales",
             "Tecnicatura Universitaria en Aserraderos y Carpintería Industrial"};
+
     String[] fcm = {"Medicina"};
+
     String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
             "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
             "Licenciatura en Educación para la Salud", "Licenciatura en Obtetricia",
@@ -442,14 +442,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         //Detects request codes
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                imgUserRegister.setImageBitmap(bitmap);
+                imgUserRegister.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 120, 120, false));
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

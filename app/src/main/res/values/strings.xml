@@ -29,4 +29,10 @@
  </string>
     <string name="txtReserva">Elige una fecha para ver la disponibilidad de %s</string>
 
+    <string name="txtAfiliados">1. Constancia de descuento del área personal.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
+    <string name="txtdocnodoc">1. Constancia de empleado y/o área que presta servicio.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
+    <string name="txtalumnegre">1. Constancia de alumno regular y en caso de egresados se elevará una nota solicitando su confirmación como tal.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
+    <string name="txtpartic">1. Fotocopia del DNI.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
+
 </resources>
+
