@@ -1,10 +1,13 @@
 package com.unse.bienestarestudiantil.Vistas;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.zxing.Result;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -43,6 +46,10 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         while (matcher.find()){
             resultados.add(matcher.group(0));
         }
+
+        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+        i.putExtra(Utils.BARCODE, resultados);
+        startActivity(i);
 
 //        AlertDialog alertDialog = builder.create();
 //        alertDialog.show();

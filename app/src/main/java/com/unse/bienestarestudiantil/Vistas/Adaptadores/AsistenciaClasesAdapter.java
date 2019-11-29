@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -33,12 +34,12 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
         mContext = context;
         mRecyclerView = recyclerView;
         clases = new ArrayList<>();
-        final GridLayoutManager layoutManager = (GridLayoutManager) (mRecyclerView.getLayoutManager());
+        final GridLayoutManager layoutManager = (GridLayoutManager)(mRecyclerView.getLayoutManager());
         assert layoutManager != null;
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                return (isSectionHeaderPosition(position)) ? layoutManager.getSpanCount() : 1;
+                return (isSectionHeaderPosition(position))? layoutManager.getSpanCount() : 1 ;
             }
         });
     }
@@ -56,7 +57,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         private TextView txtTitulo;
 
-        MesesViewHolder(View view) {
+         MesesViewHolder(View view) {
             super(view);
             txtTitulo = view.findViewById(R.id.txtTitulo);
         }
@@ -72,7 +73,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_asistencia_mes, parent, false);
             return new MesesViewHolder(view);
 
-        } else {
+        }else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_asistencia_clase, parent, false);
             return new ClasesViewHolder(view);
         }
@@ -84,9 +85,9 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (isSectionHeaderPosition(position)) {
             MesesViewHolder holder = (MesesViewHolder) sectionViewHolder;
             holder.txtTitulo.setText(mSections.get(position).getTitle());
-        } else {
+        }else{
             ClasesViewHolder holder = (ClasesViewHolder) sectionViewHolder;
-            holder.txtClase.setText("Clase " + position);
+            holder.txtClase.setText("Clase "+position);
         }
 
     }
@@ -95,7 +96,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
     public int getItemViewType(int position) {
         return isSectionHeaderPosition(position)
                 ? TYPE_MES
-                : TYPE_CLASE;
+                :  TYPE_CLASE;
     }
 
 
@@ -109,7 +110,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
             this.txtTitulo = title;
         }
 
-        public String getTitle() {
+        public String  getTitle() {
             return txtTitulo;
         }
     }
@@ -121,9 +122,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
         Arrays.sort(sections, new Comparator<Meses>() {
             @Override
             public int compare(Meses o, Meses o1) {
-                return (o.firstPosition == o1.firstPosition)
-                        ? 0
-                        : ((o.firstPosition < o1.firstPosition) ? -1 : 1);
+                return Integer.compare(o.firstPosition, o1.firstPosition);
             }
         });
 
@@ -158,13 +157,16 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return isSectionHeaderPosition(position)
+                ? Integer.MAX_VALUE - mSections.indexOfKey(position)
+                : mBaseAdapter.getItemId(sectionedPositionToPosition(position));
     }
 
     @Override
     public int getItemCount() {
         return (mValid ? clases.size() + mSections.size() : 0);
     }
+
 
 
 }

@@ -32,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
@@ -59,7 +58,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
     String jeje;
     CircleImageView imgUserRegister;
-    Spinner spinner, spinner2;
+    EditText nombre, apellido, dni, sexo, fechaNac, mail, celular, domicilio, barrio, localidad, provincia, pais,
+    pass, repass, profProfesor, anioIngProf, legajo, anioIngAlu, profEgre, anioEgre;
+    ArrayList datosUser;
     String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
     String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
             "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
@@ -87,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
+
 
     private ZXingScannerView mScannerView;
     private static final int GET_FROM_GALLERY = 3;
@@ -132,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 spinner.setSelection(position);
+                Spinner spinner2 = findViewById(R.id.spinner2);
                 switch (position) {
                     case 0:
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
@@ -203,12 +206,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.txtDate:
+            case R.id.txtdate:
                 showDateDialog();
                 break;
             case R.id.btnregister:
                 //Insert función registro DENIS gg
-                //startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 login();
                 //finish();
                 break;

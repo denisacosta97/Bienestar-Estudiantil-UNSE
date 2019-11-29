@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/txtNombre"
+                    android:id="@+id/edtNombre"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Nombre completo"
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtApellido"
+                android:id="@+id/edtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Apellidos"
@@ -150,7 +150,7 @@
                     android:layout_weight="0.7">
 
                     <EditText
-                        android:id="@+id/txtDNI"
+                        android:id="@+id/edtDNI"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="D.N.I"
@@ -170,7 +170,7 @@
                     android:layout_weight="0.3">
 
                     <EditText
-                        android:id="@+id/edtxSexo"
+                        android:id="@+id/edtSexo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Sexo"
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/txtemail"
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Email"
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxCelu"
+                    android:id="@+id/edtCelu"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Celular"
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxDomicilio"
+                    android:id="@+id/edtDomicilio"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Domicilio"
@@ -270,7 +270,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxBarrio"
+                    android:id="@+id/edtBarrio"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Barrio"
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxLocalidad"
+                    android:id="@+id/edtLocalidad"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Localidad"
@@ -312,7 +312,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxProvincia"
+                    android:id="@+id/edtProvincia"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Provincia"
@@ -333,7 +333,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edtxPais"
+                    android:id="@+id/edtPais"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Pais"
@@ -354,7 +354,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/txtpass"
+                    android:id="@+id/edtPass"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Contraseña"
@@ -374,7 +374,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/txt_repass"
+                    android:id="@+id/edtRepass"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Confirmar contraseña"
@@ -466,14 +466,13 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilProfesion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtProfesion1"
+                        android:id="@+id/edtProfesion1"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Profesion"
@@ -493,7 +492,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtanioIngreso"
+                        android:id="@+id/edtAnioIngProf"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Año de ingreso"
@@ -561,14 +560,13 @@
 
                 </LinearLayout>
 
-
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilLeg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtaLegajo"
+                        android:id="@+id/edtLegajo"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Legajo"
@@ -586,7 +584,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtaAnioIngr"
+                        android:id="@+id/edtAnioIngrAlu"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Año de ingreso"
@@ -613,7 +611,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtaProfesion2"
+                        android:id="@+id/edtProfesion2"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Profesión"
@@ -631,7 +629,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/txtaAnioEgreso"
+                        android:id="@+id/edtAnioEgreso"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="Año de egreso"
