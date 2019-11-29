@@ -122,7 +122,9 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
         Arrays.sort(sections, new Comparator<Meses>() {
             @Override
             public int compare(Meses o, Meses o1) {
-                return Integer.compare(o.firstPosition, o1.firstPosition);
+                return (o.firstPosition == o1.firstPosition)
+                        ? 0
+                        : ((o.firstPosition < o1.firstPosition) ? -1 : 1);
             }
         });
 
@@ -157,9 +159,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public long getItemId(int position) {
-        return isSectionHeaderPosition(position)
-                ? Integer.MAX_VALUE - mSections.indexOfKey(position)
-                : mBaseAdapter.getItemId(sectionedPositionToPosition(position));
+        return 0;
     }
 
     @Override

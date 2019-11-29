@@ -50,10 +50,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
         i.putExtra(Utils.BARCODE, resultados);
         startActivity(i);
-
-//        AlertDialog alertDialog = builder.create();
-//        alertDialog.show();
-        // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
     }
 }

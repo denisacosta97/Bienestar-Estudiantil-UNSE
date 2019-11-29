@@ -32,6 +32,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Herramientas.Validador;
+import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
@@ -42,6 +44,7 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,9 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
     String jeje;
     CircleImageView imgUserRegister;
-    EditText nombre, apellido, dni, sexo, fechaNac, mail, celular, domicilio, barrio, localidad, provincia, pais,
-    pass, repass, profProfesor, anioIngProf, legajo, anioIngAlu, profEgre, anioEgre;
-    ArrayList datosUser;
+    Spinner spinner, spinner2;
     String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
     String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
             "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
@@ -134,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 spinner.setSelection(position);
-                Spinner spinner2 = findViewById(R.id.spinner2);
                 switch (position) {
                     case 0:
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
@@ -173,19 +173,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void loadViews() {
-        date = findViewById(R.id.txtDate);
-        edtNombre = findViewById(R.id.txtNombre);
-        edtApellido = findViewById(R.id.txtApellido);
-        edtDNI = findViewById(R.id.txtDNI);
-        edtSexo = findViewById(R.id.txtSexo);
+        date = findViewById(R.id.txtdate);
+        edtNombre = findViewById(R.id.edtNombre);
+        edtApellido = findViewById(R.id.edtApellido);
+        edtDNI = findViewById(R.id.edtDNI);
+        edtSexo = findViewById(R.id.edtSexo);
         edtMail = findViewById(R.id.txtMail);
-        edtContra = findViewById(R.id.txtPass);
-        edtContraConf = findViewById(R.id.txtRepass);
-        edtProfesion = findViewById(R.id.txtProfesion1);
-        edtAnioIngreso = findViewById(R.id.txtAnioIngreso);
-        edtAnioIngreso2 = findViewById(R.id.txtAnioIngreso2);
-        edtProfesion2 = findViewById(R.id.txtProfesion2);
-        edtAnioEgreso = findViewById(R.id.txtAnioEgreso);
+        edtContra = findViewById(R.id.edtPass);
+        edtContraConf = findViewById(R.id.edtRepass);
+        edtProfesion = findViewById(R.id.edtProfesion1);
+        edtAnioIngreso = findViewById(R.id.edtAnioIngProf);
+        edtAnioIngreso2 = findViewById(R.id.edtAnioIngrAlu);
+        edtProfesion2 = findViewById(R.id.edtProfesion2);
+        edtAnioEgreso = findViewById(R.id.edtAnioEgreso);
         mRegister = findViewById(R.id.btnregister);
         imgUserRegister = findViewById(R.id.imgUserRegister);
         btnBack = findViewById(R.id.btnBack);
@@ -211,7 +211,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnregister:
                 //Insert función registro DENIS gg
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                //startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 login();
                 //finish();
                 break;
@@ -275,6 +275,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String anioIngreso2 = edtAnioIngreso2.getText().toString();
         String profesion2 = edtProfesion2.getText().toString();
         String anioEgreso = edtAnioEgreso.getText().toString();
+        String domicilio = "", telefono = "", pais = "", provincia = "", localidad = "", legajo ="";
 
         if (validador.noVacio(fecha) && validador.validarNombres(nombre) && validador.validarNombres(apellido) && validador.validarDNI(dni)
         && validador.validarMail(mail) && validador.noVacio(sexo) && validador.noVacio(pass, passConf)){
@@ -283,8 +284,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(TIPO_USER == 1){
                      if(validador.noVacio(faculta, carrera, anioIngreso2)){
                          sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                 domicilio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, facultad, anioIngreso2
-                                 , legajo, Utils.crypt(pass)););
+                                 domicilio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, faculta, anioIngreso2
+                                 , legajo, Utils.crypt(pass), null, null));
 
                      }else{
                          Utils.showToast(getApplicationContext(),"Por favor, complete los campos");
@@ -294,7 +295,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
                                 domicilio, telefono, sexo, Utils.generateToken(dni, nombre, apellido),mail,
                                 2, null,null, anioIngreso, null, Utils.crypt(pass),
-                                profesion, null););
+                                profesion, null));
                     }else{
                         Utils.showToast(getApplicationContext(),"Por favor, complete los campos");
                     }
@@ -303,7 +304,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
                                 telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
                                 null, null, null, null, Utils.crypt(pass),
-                                profesion2, anioEgreso););
+                                profesion2, anioEgreso));
 
                     }else{
                         Utils.showToast(getApplicationContext(),"Por favor, complete los campos");
