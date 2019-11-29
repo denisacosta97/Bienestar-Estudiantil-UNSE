@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.MainActivity;
@@ -52,10 +53,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     EditText date, edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtContra, edtContraConf,
         edtProfesion, edtAnioIngreso, edtProfesion2,edtAnioIngreso2,edtAnioEgreso;
-    Button mRegister, mProfesor, mAlumno, mNoDocente, mEgresado, mParticular;
+    Button mRegister, mProfesor, mAlumno, mNoDocente, mEgresado, mParticular, edt;
     ImageButton mScanner;
     ImageView btnBack;
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
+    String jeje;
     CircleImageView imgUserRegister;
     Spinner spinner, spinner2;
     String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
