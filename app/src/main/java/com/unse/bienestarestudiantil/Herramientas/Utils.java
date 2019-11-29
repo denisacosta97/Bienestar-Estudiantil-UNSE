@@ -86,6 +86,7 @@ public class Utils {
     public static final String MONSERRAT = "Montserrat-Regular.ttf";
     public static final String MONTSERRAT_BOLD = "Montserrat-Black.ttf";
     public static final String DEPORTE_NAME = "dato_deporte";
+    public static final String BARCODE = "dato_barcode";
     public static final String TORNEO = "dato_torneo";
     public static final String NOTICIA = "dato_noticias";
     public static final String RESERVA = "dato_reserva";

@@ -42,6 +42,7 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ImageView btnBack;
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
     CircleImageView imgUserRegister;
+    EditText nombre, apellido, dni, sexo, fechaNac, mail, celular, domicilio, barrio, localidad, provincia, pais,
+    pass, repass, profProfesor, anioIngProf, legajo, anioIngAlu, profEgre, anioEgre;
+    ArrayList datosUser;
     String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
     String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
             "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
@@ -96,7 +100,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
         fontChanger.replaceFonts((ViewGroup) findViewById(android.R.id.content));
 
-        date = findViewById(R.id.txtdate);
+        if (getIntent().getParcelableExtra(Utils.BARCODE) != null){
+            datosUser = getIntent().getParcelableExtra(Utils.BARCODE);
+        }
+
         mRegister = findViewById(R.id.btnregister);
         imgUserRegister = findViewById(R.id.imgUserRegister);
         btnBack = findViewById(R.id.btnBack);
@@ -109,6 +116,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mLLAlumno = findViewById(R.id.linlayAlumno);
         mLLEgresado = findViewById(R.id.linlayEgresado);
         mLLProfesor = findViewById(R.id.linlayProfesor);
+
+        nombre = findViewById(R.id.edtNombre);
+        apellido = findViewById(R.id.edtApellido);
+        dni = findViewById(R.id.edtDNI);
+        sexo = findViewById(R.id.edtSexo);
+        mail = findViewById(R.id.edtEmail);
+        celular = findViewById(R.id.edtCelu);
+        domicilio = findViewById(R.id.edtDomicilio);
+        date = findViewById(R.id.txtdate);
+        barrio = findViewById(R.id.edtBarrio);
+        localidad = findViewById(R.id.edtLocalidad);
+        provincia = findViewById(R.id.edtProvincia);
+        pais = findViewById(R.id.edtPais);
+        pass = findViewById(R.id.edtPass);
+        repass = findViewById(R.id.edtRepass);
+        profProfesor = findViewById(R.id.edtProfesion1);
+        anioIngProf = findViewById(R.id.edtAnioIngProf);
+        legajo = findViewById(R.id.edtLegajo);
+        anioIngAlu = findViewById(R.id.edtAnioIngrAlu);
+        profEgre = findViewById(R.id.edtProfesion2);
+        anioEgre = findViewById(R.id.edtAnioEgreso);
+
+
 
         mLLProfesor.setVisibility(View.GONE);
         mLLEgresado.setVisibility(View.GONE);
