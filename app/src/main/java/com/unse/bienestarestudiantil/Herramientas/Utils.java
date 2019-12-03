@@ -52,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -97,13 +98,30 @@ public class Utils {
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
 
+    public static final int GET_FROM_GALLERY = 1011;
+    public static final int GET_FROM_DNI = 1010;
 
-    public static final String URL = "http://192.168.1.29/bienestar/usuario/insertar.php";
+
+    public static final String URL = "http://192.168.0.11/bienestar/usuario/insertar.php";
+    public static final String URL_IMAGE = "http://192.168.0.11/bienestar/uploadImage.php";
 
     public static void changeColorDrawable(ImageView view, Context context, int color){
         DrawableCompat.setTint(
                 DrawableCompat.wrap(view.getDrawable()),
                 ContextCompat.getColor(context, color));
+    }
+
+    public static String getStringCamel(String string){
+        Pattern pattern = Pattern.compile("[A-Za-z]+");
+        Matcher matcher = pattern.matcher(string);
+        StringBuilder resp = new StringBuilder();
+        while (matcher.find()){
+            if(matcher.group(0).length() > 1)
+                resp.append(matcher.group(0).charAt(0)).append(matcher.group(0).substring(1).toLowerCase()).append(" ");
+            else
+                resp.append(matcher.group(0));
+        }
+        return resp.toString();
     }
 
 

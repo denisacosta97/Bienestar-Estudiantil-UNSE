@@ -12,9 +12,19 @@ public class Validador {
         return isNumber && dni.length() >= 7;
     }
 
-    public boolean validarNombres(String name){
-        String regex = "^[_A-Za-z]$";
-        return noVacio(name) && noCaracterEspecial(name) && name.matches(regex);
+    public boolean validarNombre(String name){
+        String regex = "[ A-Za-z]+";
+        return !noVacio(name) && name.matches(regex);
+    }
+
+    public boolean validarNombres(String... datos)
+    {
+        int i = 0;
+        for (i = 0; i<datos.length; i++){
+            if (!validarNombre(datos[i]))
+                break;
+        }
+        return i<(datos.length);
     }
 
 

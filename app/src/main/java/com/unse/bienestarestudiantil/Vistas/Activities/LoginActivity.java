@@ -34,15 +34,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mVideoView = findViewById (R.id.videoView);
         Uri uri = Uri.parse("android.resource://".concat(getPackageName()).concat("/raw/").concat(String.valueOf(R.raw.video_bacl)));
-        mVideoView.setVideoURI(uri);
-        mVideoView.start();
+        //mVideoView.setVideoURI(uri);
+        //mVideoView.start();
 
-        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        /*mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setLooping(true);
             }
-        });
+        });*/
 
         loadViews();
 

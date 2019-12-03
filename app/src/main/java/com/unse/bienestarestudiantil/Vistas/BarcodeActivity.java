@@ -24,9 +24,16 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         super.onCreate(state);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
+    }
+
+
 
     @Override
     public void onPause() {
@@ -35,21 +42,31 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+    @Override
     public void handleResult(Result rawResult) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Resultado  del scanner: ");
-        builder.setMessage("Resultado "+rawResult.getText()+"\n"+"Formato "+rawResult.getBarcodeFormat());
+       // AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //builder.setTitle("Resultado  del scanner: ");
+        //builder.setMessage("Resultado "+rawResult.getText()+"\n"+"Formato "+rawResult.getBarcodeFormat());
 
         ArrayList<String> resultados = new ArrayList<>();
         Pattern regex = Pattern.compile("@([A-Z0-9\\/ ])*");
         Matcher matcher = regex.matcher(rawResult.getText());
         while (matcher.find()){
-            resultados.add(matcher.group(0));
+            resultados.add(matcher.group(0).substring(1));
         }
 
-        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-        i.putExtra(Utils.BARCODE, resultados);
-        startActivity(i);
         mScannerView.resumeCameraPreview(this);
+
+        Intent result = new Intent();
+        result.putExtra(Utils.BARCODE, resultados);
+        setResult(RESULT_OK, result);
+        finish();
+
     }
 }
