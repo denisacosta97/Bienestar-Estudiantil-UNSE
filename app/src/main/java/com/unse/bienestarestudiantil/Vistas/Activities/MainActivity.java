@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
@@ -101,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.profe_profile:
                 startActivity(new Intent(MainActivity.this, PerfilProfesorActivity.class));
+                break;
+            case R.id.item_config:
+                startActivity(new Intent(this, GestionSistemaActivity.class));
                 break;
 
         }

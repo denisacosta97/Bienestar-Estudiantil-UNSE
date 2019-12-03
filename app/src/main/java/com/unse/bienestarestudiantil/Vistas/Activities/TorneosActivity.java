@@ -1,9 +1,8 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
-<<<<<<< Updated upstream
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TorneosAdapter;
 
@@ -30,20 +30,13 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
     TextView mNombreAlu, idAlumno;
     Button btnFinalizar;
     ImageView imgIcono;
-=======
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.unse.bienestarestudiantil.R;
-
-public class TorneosActivity extends AppCompatActivity {
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torneos);
-<<<<<<< Updated upstream
+
 
         mRecyclerAsistencia = findViewById(R.id.recycler);
 
@@ -61,9 +54,9 @@ public class TorneosActivity extends AppCompatActivity {
     private void loadDataRecycler() {
         mTorneos = new ArrayList<>();
 
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo JUR", "Torneo de las Universidades de Argentina.", "10/11/2019","20/11/2019"));
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Santiago del Estero", "Torneo de la UNSE", "Torneo de las Universidades de Argentina.", "10/11/2019","20/11/2019"));
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo regional", "Torneo de las Universidades de Argentina.", "10/11/2019","20/11/2019"));
+        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo JUR", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
+        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Santiago del Estero", "Torneo de la UNSE", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
+        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo regional", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
 
         mTorneosAdapter = new TorneosAdapter(mTorneos, this);
         mLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
@@ -113,8 +106,4 @@ public class TorneosActivity extends AppCompatActivity {
                 break;
         }
     }
-=======
-    }
-
->>>>>>> Stashed changes
 }

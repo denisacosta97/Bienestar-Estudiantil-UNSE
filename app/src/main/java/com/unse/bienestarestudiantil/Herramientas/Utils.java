@@ -102,8 +102,8 @@ public class Utils {
     public static final int GET_FROM_DNI = 1010;
 
 
-    public static final String URL = "http://192.168.0.11/bienestar/usuario/insertar.php";
-    public static final String URL_IMAGE = "http://192.168.0.11/bienestar/uploadImage.php";
+    public static final String URL = "http://192.168.1.27/bienestar/usuario/insertar.php";
+    public static final String URL_IMAGE = "http://192.168.1.27/bienestar/uploadImage.php";
 
     public static void changeColorDrawable(ImageView view, Context context, int color){
         DrawableCompat.setTint(
@@ -340,10 +340,9 @@ public class Utils {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String value = cal.get(Calendar.DAY_OF_MONTH) + "-"
-                + (cal.get(Calendar.MONTH) + 1) + "-" +
-                cal.get(Calendar.YEAR)/* + "-" + cal.get(Calendar.HOUR_OF_DAY) + ":" +
-                cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND)*/;
+        String value = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
+                + cal.get(Calendar.DAY_OF_MONTH) + " " + cal.get(Calendar.HOUR_OF_DAY) + ":" +
+                cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
 
         return value;
 

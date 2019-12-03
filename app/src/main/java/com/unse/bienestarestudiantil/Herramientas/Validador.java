@@ -63,7 +63,7 @@ public class Validador {
     }
 
     private boolean noCaracterEspecial(String dato) {
-        String regex = "^[A-Za-z.]+$";
+        String regex = "[A-Za-z ]+";
         return dato.matches(regex);
     }
 
