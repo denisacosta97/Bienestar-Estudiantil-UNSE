@@ -47,7 +47,6 @@ dependencies {
     implementation 'com.github.badoualy:datepicker-timeline:1.0.1'
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
 
-
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

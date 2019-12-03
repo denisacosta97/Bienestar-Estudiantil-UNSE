@@ -19,6 +19,7 @@
         <activity android:name=".Vistas.Activities.TorneosActivity"></activity>
         <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
         <activity android:name=".Vistas.Dialogos.DialogoReservas" />
+
         <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
 
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
@@ -65,6 +66,9 @@
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
             android:label="Gestión de Polideportivo" />
+        <activity
+            android:name=".Vistas.Activities.Polideportivo.RequisitosReservasActivity"
+            android:label="Requisitos de Reservas" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
             android:label="Gestión de Finanzas" />
