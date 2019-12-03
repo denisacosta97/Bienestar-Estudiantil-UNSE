@@ -24,10 +24,17 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
     RecyclerView mRecyclerAsistencia;
     ArrayList<Asistencia> mAsistencias;
     AsistenciaAdapter mAsistenciaAdapter;
+<<<<<<< Updated upstream
     TextView mNombreAlu, idAlumno;
     Button btnFinalizar;
     LinearLayout mLinearLayout;
     ImageView imgFlecha;
+=======
+    Asistencia mAsistencia;
+    TextView mNombreAlu, idAlumno;
+    Button btnFinalizar;
+    ImageView mLinearLayout;
+>>>>>>> Stashed changes
 
     public AsistenciaActivity(){
 
@@ -43,12 +50,31 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         loadViews();
 
         loadListener();
+<<<<<<< Updated upstream
 
         loadData();
 
         setToolbar();
 
     }
+=======
+//        if (getIntent().getParcelableExtra(Utils.ALUMNO_NAME) != null) {
+//            mAsistencia = getIntent().getParcelableExtra(Utils.ALUMNO_NAME);
+//        }
+//
+//        if (mAsistencia != null) {
+//            loadViews();
+//
+//            //loadListener();
+//
+//            loadData();
+//        } else {
+//            Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
+//            finish();
+//        }
+
+        loadDataRecycler();
+>>>>>>> Stashed changes
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -84,14 +110,26 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
         mRecyclerAsistencia.setHasFixedSize(true);
         mRecyclerAsistencia.setAdapter(mAsistenciaAdapter);
+<<<<<<< Updated upstream
         mRecyclerAsistencia.setFocusable(false);
         mLinearLayout.requestFocus();
 
+=======
+        mLinearLayout.requestFocus();
+
+
+    }
+
+    private void loadData() {
+        idAlumno.setText(mAsistencia.getId());
+        mNombreAlu.setText(mAsistencia.getName());
+>>>>>>> Stashed changes
     }
 
 
     private void loadListener() {
         btnFinalizar.setOnClickListener(this);
+<<<<<<< Updated upstream
         imgFlecha.setOnClickListener(this);
     }
 
@@ -102,15 +140,29 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLinearLayout = findViewById(R.id.layout);
         btnFinalizar = findViewById(R.id.btnFinalizar);
         imgFlecha = findViewById(R.id.imgFlecha);
+=======
+    }
+
+    private void loadViews() {
+        idAlumno = findViewById(R.id.idAlumno);
+        mNombreAlu = findViewById(R.id.txtNameAlumno);
+        mLinearLayout = findViewById(R.id.imgFlecha);
+        btnFinalizar = findViewById(R.id.btnFinalizar);
+>>>>>>> Stashed changes
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+<<<<<<< Updated upstream
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
             case R.id.btnFinalizar:
+=======
+            case R.id.btnFinalizar:
+
+>>>>>>> Stashed changes
                 break;
 
         }

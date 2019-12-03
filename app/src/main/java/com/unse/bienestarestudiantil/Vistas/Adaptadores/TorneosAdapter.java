@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
-import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;

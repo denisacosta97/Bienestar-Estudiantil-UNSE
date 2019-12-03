@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< Updated upstream
+=======
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+>>>>>>> Stashed changes
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +17,11 @@
 
         <include
             android:id="@+id/toolbarLay"
+<<<<<<< Updated upstream
             layout="@layout/toolbar_trans"/>
+=======
+            layout="@layout/toolbar"/>
+>>>>>>> Stashed changes
 
         <TextView
             android:layout_width="match_parent"

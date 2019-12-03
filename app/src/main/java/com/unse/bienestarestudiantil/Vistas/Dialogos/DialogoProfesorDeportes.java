@@ -23,7 +23,10 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
+<<<<<<< Updated upstream
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity;
+=======
+>>>>>>> Stashed changes
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 
 import java.util.ArrayList;
@@ -93,7 +96,11 @@ public class DialogoProfesorDeportes extends DialogFragment {
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
+<<<<<<< Updated upstream
                 Intent i = new Intent(getContext(), GestionProfesorActivity.class);
+=======
+                Intent i = new Intent(getContext(), AsistenciaActivity.class);
+>>>>>>> Stashed changes
                 i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
                 startActivity(i);
             }

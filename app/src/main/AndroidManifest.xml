@@ -20,6 +20,12 @@
         <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
         <activity android:name=".Vistas.Dialogos.DialogoReservas" />
         <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
+=======
+        <activity android:name=".Vistas.Activities.TorneosActivity"></activity>
+        <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
+        <activity android:name=".Vistas.Dialogos.DialogoReservas" />
+        <activity android:name=".Vistas.Activities.NewsReader" />
+>>>>>>> Stashed changes
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity" />
         <activity android:name=".Vistas.BarcodeActivity" />
