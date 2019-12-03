@@ -11,10 +11,6 @@ import android.view.ViewGroup;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProfesorDeportes;
-<<<<<<< Updated upstream
-=======
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoReservas;
->>>>>>> Stashed changes
 
 public class PerfilProfesorActivity extends AppCompatActivity implements View.OnClickListener {
 

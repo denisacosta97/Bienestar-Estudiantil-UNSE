@@ -102,8 +102,8 @@ public class Utils {
     public static final int GET_FROM_DNI = 1010;
 
 
-    public static final String URL = "http://192.168.0.11/bienestar/usuario/insertar.php";
-    public static final String URL_IMAGE = "http://192.168.0.11/bienestar/uploadImage.php";
+    public static final String URL = "http://192.168.1.27/bienestar/usuario/insertar.php";
+    public static final String URL_IMAGE = "http://192.168.1.27/bienestar/uploadImage.php";
 
     public static void changeColorDrawable(ImageView view, Context context, int color){
         DrawableCompat.setTint(

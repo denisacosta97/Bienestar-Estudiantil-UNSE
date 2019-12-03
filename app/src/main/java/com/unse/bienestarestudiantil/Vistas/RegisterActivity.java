@@ -563,7 +563,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void completarDatos(ArrayList<String> resultados) {
-        if(resultados.size() == 8){
+        if(resultados.size() != 0){
             edtApellido.setText(Utils.getStringCamel(resultados.get(0)));
             edtNombre.setText(Utils.getStringCamel(resultados.get(1)));
             edtSexo.setText(Utils.getStringCamel(resultados.get(2)));

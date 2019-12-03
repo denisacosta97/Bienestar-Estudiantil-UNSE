@@ -62,7 +62,8 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
                         startActivity(new Intent(getApplicationContext(), ListadoAlumnosActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), AsistenciaClasesActivity.class));
+                       // startActivity(new Intent(getApplicationContext(), AsistenciaClasesActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
                         break;
 
                 }
