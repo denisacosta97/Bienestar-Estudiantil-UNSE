@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linlayLogueado"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@drawable/gradient"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,31 +30,29 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/user"/>
 
+                <ImageView
+                    android:id="@+id/logoBienestar"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_logo_bienestar_01"/>
+
                 <TextView
+                    android:id="@+id/txtNombreUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Cristian Ledesma"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorWhite" />
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
+                    android:id="@+id/txtCarrera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Licenciatura en Sistemas de Información"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorWhite" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="FCEyT"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorFCEyT" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

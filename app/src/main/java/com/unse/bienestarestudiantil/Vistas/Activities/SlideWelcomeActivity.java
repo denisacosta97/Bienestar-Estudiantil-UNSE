@@ -57,7 +57,7 @@ public class SlideWelcomeActivity extends AppCompatActivity {
             }
             setContentView(R.layout.activity_welcome);
 
-            //Utils.setFont(getApplicationContext(), this,"Montserrat-Regular.ttf" );
+            //Utils.setFont(getApplicationContext(), this,"montserrat_regular.ttf" );
 
             viewPager = findViewById(R.id.view_pager);
             dotsLayout = findViewById(R.id.layoutBars);

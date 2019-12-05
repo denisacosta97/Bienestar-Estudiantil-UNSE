@@ -60,6 +60,8 @@
         <activity android:name=".Vistas.RegisterActivity" />
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
+        <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
+
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
             android:label="Espacios Disponibles" />

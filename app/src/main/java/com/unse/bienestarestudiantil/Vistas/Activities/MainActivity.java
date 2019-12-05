@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
@@ -27,7 +31,7 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
 import com.unse.bienestarestudiantil.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Fragment mFragment;
     int itemSelecionado = -1;
+    boolean loginOk = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,33 @@ public class MainActivity extends AppCompatActivity {
         Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         comprobarNavigationView();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        View hView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
+        if(loginOk){
+            ImageView imgbien = hView.findViewById(R.id.logoBienestar);
+            ImageView imgvw = hView.findViewById(R.id.imgUserPerfil);
+            TextView nameUser = hView.findViewById(R.id.txtNombreUser);
+            TextView carrera = hView.findViewById(R.id.txtCarrera);
+            imgbien.setVisibility(View.GONE);
+            imgvw.setVisibility(View.VISIBLE);
+            imgvw.setImageResource(R.drawable.user);
+            nameUser.setText("Cristian Ledesma");
+            carrera.setText("Lic. en Sistemas de Información");
+        }
+        else {
+            ImageView img = hView.findViewById(R.id.imgUserPerfil);
+            ImageView imgvw = hView.findViewById(R.id.logoBienestar);
+            TextView nameUser = hView.findViewById(R.id.txtNombreUser);
+            TextView carrera = hView.findViewById(R.id.txtCarrera);
+            img.setVisibility(View.GONE);
+            imgvw.setVisibility(View.VISIBLE);
+            imgvw.setImageResource(R.drawable.ic_logo_bienestar_01);
+            nameUser.setText("BIENESTAR ESTUDIANTIL");
+            carrera.setText("Secretaría de Bienestar Estudiantil");
+        }
 
         setToolbar();
 
@@ -141,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
         getMenuInflater().inflate(R.menu.menu_admin, menu);
-        //  FontChangeUtil fontChanger = new FontChangeUtil(getAssets(), "Montserrat-Regular.ttf");
-        //fontChanger.replaceFonts((ViewGroup)findViewById(android.R.id.content));
         return true;
     }
 
@@ -185,5 +216,10 @@ public class MainActivity extends AppCompatActivity {
             mBinding.navView.setCheckedItem(0);
         } else
             super.onBackPressed();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
     }
 }

@@ -16,6 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.TorneosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -65,7 +66,9 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
                        // startActivity(new Intent(getApplicationContext(), AsistenciaClasesActivity.class));
                         startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
                         break;
-
+                    case 3:
+                        startActivity(new Intent(getApplicationContext(), TorneosActivity.class));
+                        break;
                 }
                 Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }

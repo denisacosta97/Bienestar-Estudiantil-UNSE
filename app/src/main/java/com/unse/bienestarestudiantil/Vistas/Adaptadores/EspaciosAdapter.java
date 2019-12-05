@@ -40,7 +40,7 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
     @Override
     public void onBindViewHolder(@NonNull EspacioViewHolder holder, int position) {
 
-        //Utils.setFont(context, (ViewGroup) view,"Montserrat-Regular.ttf");
+        //Utils.setFont(context, (ViewGroup) view,"montserrat_regular.ttf");
 
         Espacio espacio = mList.get(position);
 
