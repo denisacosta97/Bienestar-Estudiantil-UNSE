@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Activities.GestionArchivosActivity"
-            android:label="Gestión de archivos"></activity>
+        <activity android:name=".Vistas.Fragmentos.BecasFragment"></activity>
+        <activity
+            android:name=".Vistas.Activities.GestionArchivosActivity"
+            android:label="Gestión de archivos" />
         <activity android:name=".Vistas.Activities.TorneosActivity" />
         <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
         <activity android:name=".Vistas.Dialogos.DialogoReservas" />
@@ -86,13 +88,12 @@
         <activity
             android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
             android:label="Estadisticas" />
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

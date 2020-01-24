@@ -26,6 +26,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
@@ -128,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.item_deporte:
                 fragmentoGenerico = new DeportesFragment();
+                break;
+            case R.id.item_becas:
+                fragmentoGenerico = new BecasFragment();
                 break;
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
