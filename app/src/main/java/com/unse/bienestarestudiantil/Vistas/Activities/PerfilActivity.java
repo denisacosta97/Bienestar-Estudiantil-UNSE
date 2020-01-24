@@ -89,6 +89,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnConfig:
                 break;
             case R.id.btnCerrarses:
+                startActivity(new Intent(PerfilActivity.this, GestionArchivosActivity.class));
                 break;
         }
     }

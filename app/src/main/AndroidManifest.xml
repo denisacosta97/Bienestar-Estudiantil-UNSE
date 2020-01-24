@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unse.bienestarestudiantil">
 
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Activities.TorneosActivity"></activity>
+        <activity android:name=".Vistas.Activities.GestionArchivosActivity"
+            android:label="Gestión de archivos"></activity>
+        <activity android:name=".Vistas.Activities.TorneosActivity" />
         <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
         <activity android:name=".Vistas.Dialogos.DialogoReservas" />
-
         <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
-
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity" />
         <activity android:name=".Vistas.BarcodeActivity" />
@@ -41,8 +34,9 @@
         <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
         <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
-        <activity android:name=".Vistas.Activities.AsistenciaActivity"
-            android:label="Asistencia"/>
+        <activity
+            android:name=".Vistas.Activities.AsistenciaActivity"
+            android:label="Asistencia" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
@@ -61,7 +55,6 @@
         <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
-
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
             android:label="Espacios Disponibles" />
@@ -80,16 +73,26 @@
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
             android:label="Gestión de Ingresos" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity"
-            android:label="Gestión de Profesor"/>
-        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity"
-            android:label="Listado de Alumnos"/>
+        <activity
+            android:name=".Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity"
+            android:label="Gestión de Profesor" />
+        <activity
+            android:name=".Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity"
+            android:label="Listado de Alumnos" />
         <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.AsistenciaClasesActivity" />
-        <activity android:name=".Vistas.Activities.Gestion.GestionSistemaActivity"
-            android:label="Gestión de Sistema"/>
-        <activity android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
-            android:label="Estadisticas"/>
-    </application>
+        <activity
+            android:name=".Vistas.Activities.Gestion.GestionSistemaActivity"
+            android:label="Gestión de Sistema" />
+        <activity
+            android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
+            android:label="Estadisticas" />
 
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
