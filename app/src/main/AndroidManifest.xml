@@ -88,7 +88,13 @@
         <activity
             android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
             android:label="Estadisticas" />
+        <activity
+            android:name=".Vistas.Activities.Becas.TurnosActivity"
+            android:label="Turnos" />
+        <activity android:name=".Vistas.Activities.Becas.TipoTurnosActivity" />
+        <activity android:name=".Vistas.Activities.Becas.SelectorFechaActivity" />
     </application>
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
