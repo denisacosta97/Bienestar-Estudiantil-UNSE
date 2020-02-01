@@ -25,7 +25,7 @@ public class PerfilTorneoActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_torneo);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         if (getIntent().getParcelableExtra(Utils.TORNEO) != null) {
             mTorneo = getIntent().getParcelableExtra(Utils.TORNEO);

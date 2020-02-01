@@ -25,7 +25,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_deporte);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null) {
             mDeporte = getIntent().getParcelableExtra(Utils.DEPORTE_NAME);

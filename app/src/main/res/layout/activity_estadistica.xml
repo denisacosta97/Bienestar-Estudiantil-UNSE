@@ -45,7 +45,8 @@
                         android:text="ALUMNOS INSCRIPTOS"
                         android:textColor="@color/colorAccent"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/pieChart"
@@ -86,7 +87,8 @@
                             android:text="SEXO"
                             android:textColor="@color/colorAccent"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <com.github.mikephil.charting.charts.PieChart
                             android:id="@+id/pieChartSexo"
@@ -126,7 +128,8 @@
                             android:text="EDAD"
                             android:textColor="@color/colorAccent"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <com.github.mikephil.charting.charts.PieChart
                             android:id="@+id/pieChartEdad"
@@ -142,8 +145,5 @@
 
 
     </android.support.v4.widget.NestedScrollView>
-
-
-
 
 </LinearLayout>

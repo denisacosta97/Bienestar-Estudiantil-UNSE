@@ -24,7 +24,8 @@
             android:textSize="18sp"
             android:gravity="center"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:text="Subir foto"
                 android:textSize="14sp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/montserrat_black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:text="  - Trata de sacarte una foto del rostro en un fondo blanco, sin anteojos, pelo en la cara o algo que pueda obstruir la foto del rostro completo. Ten en cuenta que esta foto podría usarse para papeles importantes, razón por la que debe ser una foto formal."
                 android:textSize="12sp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edtDeporte"
@@ -84,7 +87,8 @@
                 android:inputType="textPersonName"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edtNombre"
@@ -99,7 +103,8 @@
                 android:inputType="textCapSentences|textPersonName"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edtApellido"
@@ -113,7 +118,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,7 +140,8 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/edtxEdad"
@@ -148,7 +155,8 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/txtDateAlumno"
@@ -165,7 +173,8 @@
                     android:maxLines="1"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -181,7 +190,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edtxBarrio"
@@ -195,7 +205,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,7 +227,8 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/edtxLegajo"
@@ -229,7 +241,8 @@
                     android:inputType="text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -245,7 +258,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edxtCiudad"
@@ -260,7 +274,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/edtxProvincia"
@@ -275,7 +290,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/txtPais"
@@ -291,7 +307,8 @@
                 android:maxLines="1"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -312,7 +329,8 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/edtxCantMat"
@@ -325,7 +343,8 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -342,8 +361,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
-
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/txtInstagram"
@@ -358,8 +377,8 @@
                 android:inputType="textCapSentences|text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
-
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
                 android:id="@+id/txtMail"
@@ -374,7 +393,8 @@
                 android:inputType="text"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -397,7 +417,8 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <CheckBox
                     android:id="@+id/chbxWhats"
@@ -406,7 +427,8 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimaryDark"
                     android:padding="15dp"
-                    android:text="¿WhatsApp?" />
+                    android:text="¿WhatsApp?"
+                    android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>
 
@@ -424,7 +446,8 @@
                     android:text="¿Realizó o realiza actividad física?"
                     android:layout_weight="0.6"
                     android:textStyle="bold"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <CheckBox
                     android:id="@+id/chbxSi"
@@ -432,7 +455,8 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.2"
                     android:buttonTint="@color/colorPrimaryDark"
-                    android:text="Si"/>
+                    android:text="Si"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <CheckBox
                     android:id="@+id/chbxNo"
@@ -440,7 +464,8 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.2"
                     android:buttonTint="@color/colorPrimaryDark"
-                    android:text="No"/>
+                    android:text="No"
+                    android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>
 
@@ -463,7 +488,8 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -478,7 +504,8 @@
                         android:layout_height="wrap_content"
                         android:text="Intensidad:"
                         android:textStyle="bold"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <CheckBox
                         android:id="@+id/chbxContin"
@@ -486,7 +513,8 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorPrimaryDark"
-                        android:text="Continua" />
+                        android:text="Continua"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                     <CheckBox
                         android:id="@+id/chbxMedia"
@@ -494,7 +522,8 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorPrimaryDark"
-                        android:text="Media" />
+                        android:text="Media"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                     <CheckBox
                         android:id="@+id/chbxBaja"
@@ -502,7 +531,8 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorPrimaryDark"
-                        android:text="Baja" />
+                        android:text="Baja"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
 
@@ -518,7 +548,8 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>
 
@@ -534,7 +565,8 @@
                 android:inputType="textCapSentences|text"
                 android:background="@drawable/edit_text_logreg"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
             <Button
                 android:id="@+id/btnregister"
@@ -548,7 +580,8 @@
                 android:layout_centerInParent="true"
                 android:textSize="14sp"
                 android:textColor="@android:color/white"
-                android:text="Registrarme"/>
+                android:text="Registrarme"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 

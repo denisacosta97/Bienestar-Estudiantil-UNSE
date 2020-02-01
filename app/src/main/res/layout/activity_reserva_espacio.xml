@@ -45,7 +45,8 @@
                     android:layout_gravity="center"
                     android:textColor="@color/whiteTextColor"
                     android:textStyle="bold"
-                    android:textSize="22sp"/>
+                    android:textSize="22sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txtReserva"
                 android:textSize="15sp"
-                />
+                android:fontFamily="@font/montserrat_regular"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -102,34 +103,8 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-
     </android.support.v4.widget.NestedScrollView>
-
-
-
-
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="10dp">-->
-
-<!--&lt;!&ndash;        <android.support.v4.view.ViewPager&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/viewPager"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:foregroundGravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_centerInParent="true"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:overScrollMode="never"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:clipToPadding="false">&ndash;&gt;-->
-
-<!--&lt;!&ndash;        </android.support.v4.view.ViewPager>&ndash;&gt;-->
-
-
-
-<!--    </RelativeLayout>-->
 
 </LinearLayout>

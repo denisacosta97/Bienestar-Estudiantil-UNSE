@@ -33,7 +33,7 @@ public class DeportesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_deportes, container, false);
 
-        Utils.setFont(getContext(), (ViewGroup)view, Utils.MONSERRAT);
+        //Utils.setFont(getContext(), (ViewGroup)view, Utils.MONSERRAT);
 
         loadViews();
 

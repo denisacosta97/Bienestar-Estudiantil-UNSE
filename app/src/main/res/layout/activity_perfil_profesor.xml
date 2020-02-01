@@ -52,7 +52,8 @@
                             android:text="Yesica Kofler"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorWhite" />
+                            android:textColor="@color/colorWhite"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -60,7 +61,8 @@
                             android:gravity="center"
                             android:text="Profesora de Cesto"
                             android:textSize="14sp"
-                            android:textColor="@color/colorWhite" />
+                            android:textColor="@color/colorWhite"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </LinearLayout>
 
@@ -122,7 +124,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -160,7 +162,8 @@
                             android:gravity="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -199,7 +202,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -241,7 +244,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -281,7 +284,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -321,7 +324,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -338,7 +341,8 @@
             android:translationY="-70dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Actividades"/>
+            android:text="Actividades"
+            android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -393,7 +397,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -432,7 +436,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -471,7 +475,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 

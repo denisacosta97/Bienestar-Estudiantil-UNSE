@@ -49,8 +49,7 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
         }
         if(tipo != -1){
 
-            Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),
-                    "Montserrat-Regular.ttf");
+            //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),"Montserrat-Regular.ttf");
 
             setToolbar();
 
@@ -62,21 +61,6 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
         }else{
             Utils.showToast(getApplicationContext(), "Error al abrir la actividad");
         }
-
-
-
-
-
-
-       /* calendario.setDateLabelAdapter(new MonthView.DateLabelAdapter() {
-            @Override
-            public CharSequence getLabel(Calendar calendar, int index) {
-                return (calendar.get(Calendar.MONTH) + 1) + "/" + (calendar.get(Calendar.YEAR) % 2000);
-            }
-        });*/
-
-
-
 
     }
 
@@ -127,7 +111,6 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
             mRecyclerHoraSalon.setAdapter(mHorariosAdapter2);
 
         }
-
 
         calendario.setLastVisibleDate(2029, Calendar.DECEMBER, 31);
 

@@ -38,7 +38,8 @@
                     android:layout_gravity="center"
                     android:textColor="@color/whiteTextColor"
                     android:textStyle="bold"
-                    android:textSize="22sp"/>
+                    android:textSize="22sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 

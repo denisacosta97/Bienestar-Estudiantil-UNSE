@@ -32,7 +32,6 @@
                 android:layout_height="60dp"
                 android:src="@drawable/ic_buscar" />
 
-
             <TextView
                 android:gravity="center"
                 android:id="@+id/txtTitulo"
@@ -41,10 +40,10 @@
                 android:text="NO HAY RESULTADOS"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

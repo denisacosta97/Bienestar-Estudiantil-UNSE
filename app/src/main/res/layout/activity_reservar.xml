@@ -30,7 +30,8 @@
                     android:text="Reserva"
                     android:textAlignment="center"
                     android:textSize="56sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -38,7 +39,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:text="Para confirmar la reserva, debes presentarte con los siguientes papeles:"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <Button
                     android:id="@+id/btnRequisitos"
@@ -51,7 +53,8 @@
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:textSize="14sp"
-                    android:backgroundTint="@color/colorMoney"/>
+                    android:backgroundTint="@color/colorMoney"
+                    android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>
 
@@ -70,7 +73,8 @@
                     android:hint="Nombre completo"
                     android:inputType="textPersonName"
                     android:padding="5dp"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:layout_margin="5dp"
@@ -81,7 +85,8 @@
                     android:hint="Apellidos"
                     android:inputType="textEmailSubject"
                     android:padding="5dp"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/txtemail"
@@ -92,7 +97,8 @@
                     android:inputType="textEmailAddress"
                     android:padding="5dp"
                     android:layout_margin="5dp"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <LinearLayout
                     android:weightSum="1"
@@ -114,7 +120,8 @@
                         android:maxLines="1"
                         android:padding="5dp"
                         android:layout_margin="5dp"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                     <EditText
                         android:layout_weight="0.5"
@@ -127,8 +134,8 @@
                         android:longClickable="false"
                         android:padding="5dp"
                         android:layout_margin="5dp"
-                        android:textSize="15sp" />
-
+                        android:textSize="15sp"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
 
@@ -153,7 +160,8 @@
                         android:background="@drawable/button_border"
                         android:text="Cancelar"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <Button
                         android:id="@+id/btnReservaF"
@@ -163,7 +171,8 @@
                         android:background="@drawable/button_border"
                         android:text="Reservar"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/montserrat_black"/>
 
                 </LinearLayout>
 
@@ -176,6 +185,5 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
 
 </LinearLayout>

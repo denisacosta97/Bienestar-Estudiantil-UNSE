@@ -36,7 +36,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 
@@ -88,7 +88,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLinearLayout.requestFocus();
 
         mLinearLayout.requestFocus();
-
 
     }
 

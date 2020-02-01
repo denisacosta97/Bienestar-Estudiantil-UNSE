@@ -37,7 +37,7 @@ public class AdministrarReservasActivity extends AppCompatActivity {
 
         mRecyclerReserva = findViewById(R.id.recycler);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 

@@ -24,15 +24,13 @@ public class EspaciosActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_espacios);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),
-                "Montserrat-Regular.ttf");
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),"Montserrat-Regular.ttf");
 
         loadViews();
 
         loadListener();
 
         loadData();
-
 
     }
 

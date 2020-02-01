@@ -14,6 +14,7 @@
         android:textAllCaps="true"
         android:textSize="16sp"
         android:text="Septiembre"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_black"/>
 
 </LinearLayout>

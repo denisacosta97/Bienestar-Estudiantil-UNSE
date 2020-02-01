@@ -26,7 +26,8 @@
                 android:textColor="@color/whiteTextColor"
                 android:background="@color/colorPrimary"
                 android:textStyle="bold"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_black"/>
 
             <TextView
                 android:id="@+id/txtTitulo2"
@@ -34,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:text="Paro de colectivos a partir de las 12hs"
                 android:textColor="#000"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,27 +48,30 @@
                     android:id="@+id/txtFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="08/11/2019"/>
+                    android:text="08/11/2019"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="|"/>
+                    android:text="|"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <TextView
                     android:id="@+id/txtHoraPublicado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hace: 3 Minutos"/>
+                    android:text="Hace: 3 Minutos"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imgPortada"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/bienesplash"/>
 
@@ -77,7 +82,8 @@
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
                 android:text="El próximo 13 de noviembre se llevarán a cabo elecciones en nuestra Universidad, para Consejeros Directivos y Superiores, además los Estudiantes deberán elegir integrantes al Centro de Estudiantes de cada Facultad.\n\nEn nuestro programa radial Armonía Exacta, Álvaro Martínez en representación del CEFCET (Centro de Estudiantes de la Facultad de Cs. Exactas y Tecnologías), explicó cómo son las elecciones para el Claustro Estudiantil.\n\n
-                En una misma jornada, los estudiantes deben elegir: Delegados de carrera que integrarán el CEFCET; la Comisión Directiva del CEFCET; los Consejeros Directivos y Consejeros Superiores. Usualmente los Delegados y la Comisión, se votan en una sola boleta en la misma mesa, en el 1º piso del pabellón de aulas de nuestra Facultad. Para el caso de Consejeros, se votan con boletas diferentes, en mesas separadas en el 2º piso; hay que tener en cuenta que son Consejos distintos, por tanto candidatos para cada ámbito."/>
+                En una misma jornada, los estudiantes deben elegir: Delegados de carrera que integrarán el CEFCET; la Comisión Directiva del CEFCET; los Consejeros Directivos y Consejeros Superiores. Usualmente los Delegados y la Comisión, se votan en una sola boleta en la misma mesa, en el 1º piso del pabellón de aulas de nuestra Facultad. Para el caso de Consejeros, se votan con boletas diferentes, en mesas separadas en el 2º piso; hay que tener en cuenta que son Consejos distintos, por tanto candidatos para cada ámbito."
+                android:fontFamily="@font/montserrat_regular"/>
 
         </LinearLayout>
 

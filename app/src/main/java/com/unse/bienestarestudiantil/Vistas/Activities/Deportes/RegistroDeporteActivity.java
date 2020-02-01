@@ -31,7 +31,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
             mDeporte = getIntent().getParcelableExtra(Utils.DEPORTE_NAME);
         }
 
-        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 
