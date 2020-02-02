@@ -43,7 +43,6 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
 
         loadData();
 
-
     }
 
     private void setToolbar() {
@@ -72,6 +71,7 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
             }
         });
         imgIcono.setOnClickListener(this);
+
     }
 
     private void loadData() {

@@ -52,7 +52,8 @@
                             android:text="Cristian Ledesma"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorWhite" />
+                            android:textColor="@color/colorWhite"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -60,7 +61,8 @@
                             android:gravity="center"
                             android:text="Licenciatura en Sistemas de Información"
                             android:textSize="14sp"
-                            android:textColor="@color/colorWhite" />
+                            android:textColor="@color/colorWhite"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -69,7 +71,8 @@
                             android:text="FCEyT"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorFCEyT" />
+                            android:textColor="@color/colorFCEyT"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </LinearLayout>
 
@@ -118,7 +121,6 @@
                         android:orientation="vertical">
 
                         <ImageView
-
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_becas"
@@ -132,7 +134,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -172,7 +174,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -211,7 +213,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -253,7 +255,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -293,7 +295,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -332,7 +334,8 @@
                             android:gravity="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -349,7 +352,8 @@
             android:translationY="-70dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Actividades"/>
+            android:text="Actividades"
+            android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -404,7 +408,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -443,7 +447,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -482,7 +486,7 @@
                             android:textColor="@android:color/background_dark"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            />
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 

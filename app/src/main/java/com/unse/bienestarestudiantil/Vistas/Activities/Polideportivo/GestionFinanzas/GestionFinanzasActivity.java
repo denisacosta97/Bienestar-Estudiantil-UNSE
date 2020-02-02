@@ -39,7 +39,6 @@ public class GestionFinanzasActivity extends AppCompatActivity implements View.O
 
         loadData();
 
-
     }
 
     private void setToolbar() {

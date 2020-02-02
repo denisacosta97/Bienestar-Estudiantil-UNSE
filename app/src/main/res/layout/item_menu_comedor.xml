@@ -26,6 +26,7 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:background="@drawable/cabecera_comedor">
+
                 <TextView
                     android:id="@+id/txtTitulo"
                     android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
                     android:text="Menú Comedor Universitario"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,7 +43,8 @@
                     android:text="Semana del 23 al 27 de Septiembre"
                     android:textColor="@color/colorWhite"
                     android:textSize="15sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -69,36 +72,40 @@
                             android:layout_height="wrap_content"
                             android:text="Lunes"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Martes"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Miercoles"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Jueves"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Viernes"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
-
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -107,55 +114,55 @@
                         android:layout_height="match_parent" />
 
                     <LinearLayout
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical">
 
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Arroz amarillo con salsa"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                         <TextView
                             android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Keepe con ensalada"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                         <TextView
                             android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tortilla de papa"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                         <TextView
                             android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Milanesa de pollo con puré"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                         <TextView
                             android:layout_marginTop="2dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pizza libre"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </LinearLayout>
 
-
                 </LinearLayout>
 
-
             </LinearLayout>
-
 
         </LinearLayout>
 

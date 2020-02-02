@@ -23,8 +23,8 @@
             android:text="TURNO MAÑANA"
             android:textStyle="bold"
             android:textSize="13sp"
-            android:textColor="@color/colorWhite"/>
-
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/montserrat_black"/>
 
         <ImageView
             android:layout_marginTop="5dp"
@@ -41,7 +41,8 @@
             android:text="A CONFIRMAR"
             android:textColor="@color/colorWhite"
             android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout
             android:gravity="center"
@@ -62,11 +63,10 @@
                 android:text="21:00-01:00"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/montserrat_regular"/>
+
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

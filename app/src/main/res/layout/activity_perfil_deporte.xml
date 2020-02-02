@@ -59,7 +59,8 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:layout_marginTop="45dp"
-                        android:textSize="45sp"/>
+                        android:textSize="45sp"
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -76,13 +77,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Entrenador/a: "
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtEntrenador"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Entrenador: Matías Umaño"/>
+                                android:text="Matías Umaño"
+                                android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
 
@@ -95,13 +98,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Días: "
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtDia"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Días: lunes, miércoles y viernes."/>
+                                android:text="lunes, miércoles y viernes."
+                                android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
 
@@ -114,13 +119,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Horarios: "
-                                android:textStyle="bold"/>
+                                android:textStyle="bold"
+                                android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtHorarios"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Horarios: 15:00hs, 16:00hs y 17:00hs."/>
+                                android:text="15:00hs, 16:00hs y 17:00hs."
+                                android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
 
@@ -128,8 +135,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Lugar de entrenamiento:"
-                            android:textStyle="bold"/>
-
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -148,7 +155,8 @@
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:background="@drawable/button_border"
-                        android:text="REGISTRARME"/>
+                        android:text="REGISTRARME"
+                        android:fontFamily="@font/montserrat_black"/>
 
                 </LinearLayout>
 

@@ -22,7 +22,7 @@ public class PerfilProfesorActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_profesor);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
 
         setToolbar();
 

@@ -38,7 +38,8 @@
                     android:text="REQUISITOS PARA EL ALQUILER DE INSTALACIONES"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -46,19 +47,22 @@
                     android:text="SUM Y QUINCHOS"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="- Afiliados:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtAfiliados"/>
 
                 <TextView
@@ -66,12 +70,14 @@
                     android:layout_height="wrap_content"
                     android:text="- Docentes y no docentes:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtdocnodoc"/>
 
                 <TextView
@@ -79,12 +85,14 @@
                     android:layout_height="wrap_content"
                     android:text="- Alumnos y Egresados:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtalumnegre"/>
 
                 <TextView
@@ -92,12 +100,14 @@
                     android:layout_height="wrap_content"
                     android:text="- Particulares:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtpartic"/>
 
                 <TextView
@@ -106,20 +116,23 @@
                     android:text="UBICACIONES"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="SADAIC:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dirección: Av. Belgrano Sur 813"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <ImageView
                     android:layout_width="350dp"
@@ -132,13 +145,15 @@
                     android:layout_height="wrap_content"
                     android:text="Calidad de vida:"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dirección: Av. Belgrano Norte 448"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <ImageView
                     android:layout_width="350dp"

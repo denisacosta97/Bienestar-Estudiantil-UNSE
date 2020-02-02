@@ -58,8 +58,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
 
         if(tipo != -1){
 
-            Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),
-                    Utils.MONSERRAT);
+           // Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
 
             setToolbar();
 

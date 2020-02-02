@@ -31,7 +31,7 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_login_welcome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         layoutFondo = findViewById(R.id.backgroundwelcome);
 
@@ -54,7 +54,7 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
     private void loadListener() {
           mLogin.setOnClickListener(this);
         mInvitado.setOnClickListener(this);
-}
+    }
 
     private void loadViews() {
         mLogin = findViewById(R.id.inisesion);

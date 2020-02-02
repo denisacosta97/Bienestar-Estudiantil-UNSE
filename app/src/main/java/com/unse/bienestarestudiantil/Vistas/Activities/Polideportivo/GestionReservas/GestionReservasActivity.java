@@ -40,7 +40,6 @@ public class GestionReservasActivity extends AppCompatActivity implements View.O
 
         loadData();
 
-
     }
 
     private void setToolbar() {

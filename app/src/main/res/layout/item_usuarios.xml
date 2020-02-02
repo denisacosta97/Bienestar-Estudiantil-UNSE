@@ -47,7 +47,8 @@
                     android:text="OLLEA ALLENDE NICOLE MARIEL"
                     android:textColor="@color/colorWhite"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:id="@+id/txtDescripcion"
@@ -57,7 +58,8 @@
                     android:text="40657677"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 
@@ -75,8 +77,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_estudiante" />
-        </LinearLayout>
 
+        </LinearLayout>
 
     </LinearLayout>
 

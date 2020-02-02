@@ -22,7 +22,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
 
         setToolbar();
 

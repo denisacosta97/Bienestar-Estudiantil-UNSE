@@ -32,7 +32,8 @@
                 android:text="ADMINISTRAR RESERVA"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
@@ -76,8 +77,9 @@
                             android:layout_height="wrap_content"
                             android:text="OLLEA ALLENDE NICOLE MARIEL"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:id="@+id/txtDescripcion"
@@ -86,7 +88,8 @@
                             android:text="40657677"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
 
@@ -100,13 +103,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DNI: "/>
+                        android:text="DNI: "
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
                         android:id="@+id/txtDni"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="123456789"/>
+                        android:text="123456789"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
 
@@ -118,13 +123,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre y apellido: "/>
+                        android:text="Nombre y apellido: "
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
                         android:id="@+id/txtNombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Denis"/>
+                        android:text="Denis"
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
 
@@ -140,13 +147,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_border"
-                android:text="ACEPTAR" />
-
+                android:text="ACEPTAR"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

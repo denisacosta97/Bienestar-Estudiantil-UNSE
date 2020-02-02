@@ -23,7 +23,7 @@ public class NoticiaLectorActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_reader);
 
-        Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         if (getIntent().getParcelableExtra(Utils.NOTICIA) != null) {
             mNoticia = getIntent().getParcelableExtra(Utils.NOTICIA);

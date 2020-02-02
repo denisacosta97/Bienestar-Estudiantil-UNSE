@@ -22,7 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="10"/>
+                android:text="10"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
@@ -40,7 +41,8 @@
                 android:layout_gravity="center"
                 android:text="Denis Acosta"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
@@ -57,15 +59,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-
-                android:text="P"/>
+                android:text="P"
+                android:fontFamily="@font/montserrat_black"/>
 
             <Button
                 android:id="@+id/btnAusente"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="A"/>
+                android:text="A"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 

@@ -30,7 +30,8 @@
             android:text=""
             android:textColor="@color/whiteTextColor"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_regular"/>
 
     </LinearLayout>
 

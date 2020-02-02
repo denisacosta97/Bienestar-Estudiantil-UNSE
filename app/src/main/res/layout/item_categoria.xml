@@ -18,7 +18,8 @@
             android:text="Noticias"
             android:textColor="@color/colorWhite"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_black"/>
 
     </LinearLayout>
 

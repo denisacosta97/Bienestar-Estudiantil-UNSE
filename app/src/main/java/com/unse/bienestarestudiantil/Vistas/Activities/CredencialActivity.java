@@ -2,11 +2,9 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
 public class CredencialActivity extends AppCompatActivity {

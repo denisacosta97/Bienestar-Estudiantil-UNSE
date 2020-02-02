@@ -32,7 +32,8 @@
                 android:text="ADMINISTRAR DEPORTE"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
@@ -43,6 +44,5 @@
             android:layout_margin="10dp" />
 
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

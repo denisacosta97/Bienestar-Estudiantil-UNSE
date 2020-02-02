@@ -1,13 +1,11 @@
 package com.unse.bienestarestudiantil.Vistas;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.zxing.Result;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

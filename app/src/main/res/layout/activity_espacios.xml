@@ -29,8 +29,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="Aquí podrás realizar las reservas de la cancha de fútbol 11 por hora como también las reservas del SUM y los quinchos."
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"/>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_two"
@@ -65,7 +66,8 @@
                             android:layout_margin="10dp"
                             android:textStyle="bold"
                             android:textColor="@color/whiteTextColor"
-                            android:textSize="35dp" />
+                            android:textSize="32dp"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -74,7 +76,8 @@
                             android:layout_margin="10dp"
                             android:gravity="center|left"
                             android:textSize="12dp"
-                            android:textColor="@color/whiteTextColor" />
+                            android:textColor="@color/whiteTextColor"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </RelativeLayout>
 
@@ -90,7 +93,8 @@
                         android:drawableRight="@drawable/flecha_derecha"
                         android:drawableTint="@color/whiteTextColor"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"/>
 
                 </android.support.v7.widget.CardView>
 
@@ -126,7 +130,8 @@
                             android:layout_margin="10dp"
                             android:textStyle="bold"
                             android:textColor="@color/whiteTextColor"
-                            android:textSize="32dp" />
+                            android:textSize="30dp"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -134,8 +139,9 @@
                             android:text="Aquí podrás reservar\ntanto el SUM como\nalguno de los quinchos."
                             android:layout_margin="10dp"
                             android:gravity="center|left"
-                            android:textSize="12dp"
-                            android:textColor="@color/whiteTextColor" />
+                            android:textSize="11dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </RelativeLayout>
 
@@ -151,7 +157,8 @@
                         android:drawableRight="@drawable/flecha_derecha"
                         android:drawableTint="@color/whiteTextColor"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"/>
 
                 </android.support.v7.widget.CardView>
 

@@ -17,18 +17,19 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/txtDeportesFrag"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:text="@string/txtDeportesFrag"-->
+<!--            android:textSize="14sp" />-->
 
         <View
             android:layout_width="60dp"
             android:layout_height="12dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:background="@drawable/corners_rounded_green"/>
 
@@ -40,8 +41,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="Mirá todos los deportes que tenemos disponibles: "
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_black"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerDeportes"
@@ -64,7 +66,8 @@
             android:layout_gravity="center"
             android:text="Información"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +75,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:text="Horarios de atención: 08:00hs a 13:30hs y de 17:00hs a 20:30hs."
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,7 +84,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:text="Teléfono: 4509525"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,7 +93,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:text="e-Mail: bienestar@unse.edu.ar"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_regular"/>
 
         <View
             android:layout_width="match_parent"

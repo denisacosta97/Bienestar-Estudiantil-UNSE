@@ -48,7 +48,6 @@
             android:background="@color/colorPrimary"
             android:visibility="invisible" />
 
-
     </RelativeLayout>
 
 </layout>

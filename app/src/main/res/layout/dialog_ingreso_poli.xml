@@ -29,8 +29,9 @@
                 android:layout_marginTop="5dp"
                 android:text="CONFIRMACIÓN DE INGRESO"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
 
