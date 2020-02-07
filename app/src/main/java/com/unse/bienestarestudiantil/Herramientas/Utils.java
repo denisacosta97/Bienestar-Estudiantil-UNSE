@@ -13,31 +13,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.itextpdf.forms.PdfAcroForm;
-import com.itextpdf.forms.fields.PdfButtonFormField;
-import com.itextpdf.forms.fields.PdfFormField;
-import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.kernel.pdf.PdfString;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.action.PdfAction;
-import com.itextpdf.kernel.pdf.annot.PdfAnnotation;
-import com.itextpdf.kernel.pdf.annot.PdfTextAnnotation;
-import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-import com.unse.bienestarestudiantil.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,7 +39,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,18 +93,18 @@ public class Utils {
     public static final String URL = "http://192.168.1.27/bienestar/usuario/insertar.php";
     public static final String URL_IMAGE = "http://192.168.1.27/bienestar/uploadImage.php";
 
-    public static void changeColorDrawable(ImageView view, Context context, int color){
+    public static void changeColorDrawable(ImageView view, Context context, int color) {
         DrawableCompat.setTint(
                 DrawableCompat.wrap(view.getDrawable()),
                 ContextCompat.getColor(context, color));
     }
 
-    public static String getStringCamel(String string){
+    public static String getStringCamel(String string) {
         Pattern pattern = Pattern.compile("[A-Za-z]+");
         Matcher matcher = pattern.matcher(string);
         StringBuilder resp = new StringBuilder();
-        while (matcher.find()){
-            if(matcher.group(0).length() > 1)
+        while (matcher.find()) {
+            if (matcher.group(0).length() > 1)
                 resp.append(matcher.group(0).charAt(0)).append(matcher.group(0).substring(1).toLowerCase()).append(" ");
             else
                 resp.append(matcher.group(0));
@@ -200,7 +187,7 @@ public class Utils {
 
     private static void crearArchivoProvisorio(InputStream inputStream, File file) {
 
-        try  {
+        try {
             FileOutputStream outputStream = new FileOutputStream(file);
             int read;
             byte[] bytes = new byte[1024];
@@ -208,21 +195,21 @@ public class Utils {
             while ((read = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, read);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public static String getStringValue(Object... arg){
-        StringBuilder  msj = new StringBuilder();
-        for (Object o:arg){
+    public static String getStringValue(Object... arg) {
+        StringBuilder msj = new StringBuilder();
+        for (Object o : arg) {
             msj.append(o.toString());
         }
         return msj.toString();
     }
 
-    public static String crypt(String text)  {
+    public static String crypt(String text) {
 
         MessageDigest crypt = null;
         try {
@@ -238,12 +225,12 @@ public class Utils {
         return new BigInteger(1, crypt.digest()).toString(16);
     }
 
-    public static String generateToken(String... data){
+    public static String generateToken(String... data) {
         String sha = "";
-        if(data.length == 3){
-            sha = data[0]+data[1]+data[2];
+        if (data.length == 3) {
+            sha = data[0] + data[1] + data[2];
             return crypt(sha);
-        }else{
+        } else {
             return sha;
         }
 
@@ -281,7 +268,57 @@ public class Utils {
             }
             PdfDocument pdfDocument = new PdfDocument(new PdfReader(src), new PdfWriter(des));
             PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDocument, true);
-            form.getField("nombre").setValue("Denis Lionel Acosta");
+            form.getField("DNI").setValue("4000000");
+            pdfDocument.close();
+            src.delete();
+            //document = new Document(pdfDocument);
+            //document.close();
+            /*document.add(getText("SYSTOCK", 15, true));
+            document.add(getText("Sistema de Gestión de Mercadería, Facturación y Gestión de Clientes", 12, true));
+            document.add(getText("----------------------------------------------------------------------------------------------------------------------", 11, true));
+            document.add(getText("Datos del Pedido", 12, false));
+            document.close();*/
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void createPDF(Context context, String name) {
+        File file = null;
+        Document document = null;
+        AssetManager assetManager = context.getAssets();
+        InputStream in = null;
+        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR/";
+        try {
+            File directorio = new File(directory_path);
+            if (!directorio.exists())
+                directorio.mkdirs();
+            in = assetManager.open(name);
+            file = new File(directory_path, "prov_" + name);
+            crearArchivoProvisorio(in, file);
+
+            File src = new File(directory_path, "prov_" + name);
+            String names = name.substring(0, name.length() - 4);
+            names = names +"_"+getHoraWithSeconds(new Date(System.currentTimeMillis()))+".pdf";
+            File des = new File(directory_path, names);
+            if (!src.exists()) {
+                try {
+                    InputStream is = context.getAssets().open(name);
+                    byte[] buffer = new byte[1024];
+                    is.read(buffer);
+                    is.close();
+                    FileOutputStream fos = new FileOutputStream(src);
+                    fos.write(buffer);
+                    fos.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            PdfDocument pdfDocument = new PdfDocument(new PdfReader(src), new PdfWriter(des));
+            PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDocument, true);
+            form.getField("DNI").setValue("4000000");
             pdfDocument.close();
             src.delete();
             //document = new Document(pdfDocument);
@@ -343,12 +380,31 @@ public class Utils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String value = "";
-        if (cal.get(Calendar.MINUTE) <= 9){
+        if (cal.get(Calendar.MINUTE) <= 9) {
             value = cal.get(Calendar.HOUR_OF_DAY) + ":0" +
                     cal.get(Calendar.MINUTE);
-        }else{
+        } else {
             value = cal.get(Calendar.HOUR_OF_DAY) + ":" +
                     cal.get(Calendar.MINUTE);
+        }
+
+
+        return value;
+
+
+    }
+
+    public static String getHoraWithSeconds(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String value = "";
+        if (cal.get(Calendar.MINUTE) <= 9) {
+            value = cal.get(Calendar.HOUR_OF_DAY) + ":0" +
+                    cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+        } else {
+            value = cal.get(Calendar.HOUR_OF_DAY) + ":" +
+                    cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
         }
 
 
@@ -395,7 +451,7 @@ public class Utils {
 
     public static boolean isDateHabilited(Calendar calendar) {
 
-        if (getDayWeek(calendar.getTime()).equals("Sábado") || getDayWeek(calendar.getTime()).equals("Domingo")){
+        if (getDayWeek(calendar.getTime()).equals("Sábado") || getDayWeek(calendar.getTime()).equals("Domingo")) {
             return true;
         }
         return false;

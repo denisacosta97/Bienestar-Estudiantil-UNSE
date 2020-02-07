@@ -12,12 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
 public class ResumenTurnoActivity extends AppCompatActivity implements View.OnClickListener {
@@ -136,6 +136,7 @@ public class ResumenTurnoActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void run() {
                         finish();
+                        Utils.createPDF(getApplicationContext(), "COMPROBANTETURNO.pdf");
                     }
                 }, 1200);
 
