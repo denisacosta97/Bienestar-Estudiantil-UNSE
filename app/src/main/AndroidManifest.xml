@@ -56,7 +56,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vistas.RegisterActivity" />
-        <activity android:name=".Vistas.TransitionActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
@@ -95,6 +94,8 @@
             android:label="Turnos" />
         <activity android:name=".Vistas.Activities.Becas.TipoTurnosActivity" />
         <activity android:name=".Vistas.Activities.Becas.SelectorFechaActivity" />
+        <activity android:name=".Vistas.Activities.Becas.SelectorReceptoresActivity" />
+        <activity android:name=".Vistas.Activities.Becas.ResumenTurnoActivity" />
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

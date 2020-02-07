@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
     ImageView imgFlecha;
     TextView txtDesc;
 
-    HorariosAdapter mHorariosAdapter, mHorariosAdapter2;
+    HorariosCanchaAdapter mHorariosCanchaAdapter, mHorariosCanchaAdapter2;
 
     DatePickerTimeline calendario;
 
@@ -87,8 +86,8 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
             mListHorarios.add(new ReservaHorario(2,2, "16:00","17:00"));
             mRecyclerHoraQuincho.setLayoutManager(mLayoutManager);
             mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
-            mHorariosAdapter = new HorariosAdapter(mListHorarios, getApplicationContext(), true);
-            mRecyclerHoraQuincho.setAdapter(mHorariosAdapter);
+            mHorariosCanchaAdapter = new HorariosCanchaAdapter(mListHorarios, getApplicationContext(), true);
+            mRecyclerHoraQuincho.setAdapter(mHorariosCanchaAdapter);
 
         }else if(tipo == Utils.TIPO_QUINCHO){
             txtDesc.setText(String.format(getResources().getString(R.string.txtReserva),"el salon y quinchos."));
@@ -98,8 +97,8 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
             mListHorarios.add(new ReservaHorario(2,1, "20:00","02:00"));
             mRecyclerHoraQuincho.setLayoutManager(mLayoutManager);
             mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
-            mHorariosAdapter = new HorariosAdapter(mListHorarios, getApplicationContext(), false);
-            mRecyclerHoraQuincho.setAdapter(mHorariosAdapter);
+            mHorariosCanchaAdapter = new HorariosCanchaAdapter(mListHorarios, getApplicationContext(), false);
+            mRecyclerHoraQuincho.setAdapter(mHorariosCanchaAdapter);
 
             mListHorario2 = new ArrayList<>();
             mListHorario2.add(new ReservaHorario(1, 2,"10:00","19:00"));
@@ -107,8 +106,8 @@ public class ReservaEspacioActivity extends AppCompatActivity implements View.On
             mLayoutManager2 = new GridLayoutManager(getApplicationContext(), 2);
             mRecyclerHoraSalon.setLayoutManager(mLayoutManager2);
             mRecyclerHoraQuincho.setNestedScrollingEnabled(true);
-            mHorariosAdapter2 = new HorariosAdapter(mListHorario2, getApplicationContext(), false);
-            mRecyclerHoraSalon.setAdapter(mHorariosAdapter2);
+            mHorariosCanchaAdapter2 = new HorariosCanchaAdapter(mListHorario2, getApplicationContext(), false);
+            mRecyclerHoraSalon.setAdapter(mHorariosCanchaAdapter2);
 
         }
 

@@ -17,13 +17,13 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class HorariosAdapter extends RecyclerView.Adapter<HorariosAdapter.HorarioViewHolder> {
+public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAdapter.HorarioViewHolder> {
 
     private ArrayList<ReservaHorario> mList;
     private Context mContext;
     private boolean isCancha = false;
 
-    public HorariosAdapter(ArrayList<ReservaHorario> list, Context context, boolean c) {
+    public HorariosCanchaAdapter(ArrayList<ReservaHorario> list, Context context, boolean c) {
         mList = list;
         mContext = context;
         isCancha = c;

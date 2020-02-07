@@ -1,24 +1,36 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Becas;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CalendarView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Horario;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.HorariosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesSimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class SelectorFechaActivity extends AppCompatActivity {
+public class SelectorFechaActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
-    OpcionesSimpleAdapter adapter;
+    HorariosAdapter adapter;
     RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Opciones> mList;
+    ArrayList<Horario> mList;
+    CalendarView mCalendarView;
+    CardView mCardView;
 
 
     @Override
@@ -35,17 +47,24 @@ public class SelectorFechaActivity extends AppCompatActivity {
 
     private void loadData() {
         mList = new ArrayList<>();
-        mList.add(new Opciones(1, "BECA APUNTES 2020", 0, 0));
-        mList.add(new Opciones(2, "BECA COMEDOR 2020", 0, 0));
-        mList.add(new Opciones(3, "BECA DEPORTES 2020", 0, 0));
-        mList.add(new Opciones(4, "BECA AYUDA ECONOMICA 2020", 0, 0));
-        mList.add(new Opciones(5, "BECA MERITO AL ESTADIO 2020", 0, 0));
-        mList.add(new Opciones(6, "BECA EXCELENCIA 2020", 0, 0));
-        mList.add(new Opciones(7, "BECA RESIDENCIA 2020", 0, 0));
+        Date fecha = new Date(System.currentTimeMillis());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(fecha);
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+        for(int i = 0; i<32;i++){
+            Horario horario = new Horario(i,0,"","");
+            String horaInicio = Utils.getHora(calendar.getTime());
+            horario.setHoraInicio(horaInicio);
+            calendar.add(Calendar.MINUTE, 15);
+            fecha = calendar.getTime();
+            String horaFin = Utils.getHora(fecha);
+            horario.setHoraFin(horaFin);
+            mList.add(horario);
+        }
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-
-        adapter = new OpcionesSimpleAdapter(mList, getApplicationContext());
+        adapter = new HorariosAdapter(mList, getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(adapter);
@@ -59,11 +78,33 @@ public class SelectorFechaActivity extends AppCompatActivity {
 
             }
         });
+        mCardView.setOnClickListener(this);
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar calendar = new GregorianCalendar(year, month, dayOfMonth);
+                if (!Utils.isDateHabilited(calendar)){
+
+                }else{
+                    Utils.showToast(getApplicationContext(), "Día no habilitado para turnos");
+                }
+            }
+        });
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
+        mCalendarView = findViewById(R.id.calendario);
+        mCardView = findViewById(R.id.cardContinuar);
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cardContinuar:
+                startActivity(new Intent(getApplicationContext(), SelectorReceptoresActivity.class));
+                break;
+        }
+    }
 }

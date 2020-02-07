@@ -337,6 +337,27 @@ public class Utils {
 
     }
 
+
+    public static String getHora(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String value = "";
+        if (cal.get(Calendar.MINUTE) <= 9){
+            value = cal.get(Calendar.HOUR_OF_DAY) + ":0" +
+                    cal.get(Calendar.MINUTE);
+        }else{
+            value = cal.get(Calendar.HOUR_OF_DAY) + ":" +
+                    cal.get(Calendar.MINUTE);
+        }
+
+
+        return value;
+
+
+    }
+
+
     public static String getFechaName(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -350,5 +371,36 @@ public class Utils {
 
     }
 
+    public static String getDayWeek(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.MONDAY:
+                return "Lunes";
+            case Calendar.TUESDAY:
+                return "Martes";
+            case Calendar.WEDNESDAY:
+                return "Miércoles";
+            case Calendar.THURSDAY:
+                return "Jueves";
+            case Calendar.FRIDAY:
+                return "Viernes";
+            case Calendar.SATURDAY:
+                return "Sábado";
+            case Calendar.SUNDAY:
+                return "Domingo";
+        }
+        return "";
+    }
+
+    public static boolean isDateHabilited(Calendar calendar) {
+
+        if (getDayWeek(calendar.getTime()).equals("Sábado") || getDayWeek(calendar.getTime()).equals("Domingo")){
+            return true;
+        }
+        return false;
+
+
+    }
 }
 

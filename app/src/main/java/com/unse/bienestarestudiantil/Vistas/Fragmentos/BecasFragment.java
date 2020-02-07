@@ -38,6 +38,9 @@ public class BecasFragment extends Fragment implements View.OnClickListener {
             case R.id.card_infoBecas:
                 startActivity(new Intent(getContext(), InfoBecasActivity.class));
                 break;
+            case R.id.cardTurnos:
+                startActivity(new Intent(getContext(), TurnosActivity.class));
+                break;
         }
     }
     private void loadListener() {
@@ -48,12 +51,4 @@ public class BecasFragment extends Fragment implements View.OnClickListener {
         cardTurnos = view.findViewById(R.id.cardTurnos);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cardTurnos:
-                startActivity(new Intent(getContext(), TurnosActivity.class));
-                break;
-        }
-    }
 }

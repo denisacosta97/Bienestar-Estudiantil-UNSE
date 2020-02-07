@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Adaptadores;
+package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,12 +15,12 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class OpcionesSimpleAdapter extends RecyclerView.Adapter<OpcionesSimpleAdapter.HorarioViewHolder> {
+public class HorariosAdapter extends RecyclerView.Adapter<HorariosAdapter.OpcionesViewHolder> {
 
-    private ArrayList<Opciones> arrayList;
+    private ArrayList<Horario> arrayList;
     private Context context;
 
-    public OpcionesSimpleAdapter(ArrayList<Opciones> list, Context ctx) {
+    public HorariosAdapter(ArrayList<Horario> list, Context ctx) {
         context = ctx;
         arrayList = list;
     }
@@ -33,20 +33,20 @@ public class OpcionesSimpleAdapter extends RecyclerView.Adapter<OpcionesSimpleAd
 
     @NonNull
     @Override
-    public OpcionesSimpleAdapter.HorarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HorariosAdapter.OpcionesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_opciones_simple, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_opciones_horario, parent, false);
 
 
-        return new OpcionesSimpleAdapter.HorarioViewHolder(view);
+        return new HorariosAdapter.OpcionesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OpcionesSimpleAdapter.HorarioViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HorariosAdapter.OpcionesViewHolder holder, int position) {
 
-        Opciones s = arrayList.get(position);
-
-        holder.txtTitulo.setText(s.getTitulo());
+        Horario s = arrayList.get(position);
+        String hora = String.format("%s\n-\n%s", s.getHoraInicio(), s.getHoraFin());
+        holder.txtTitulo.setText(hora);
         holder.txtTitulo.setTextColor(context.getResources().getColor(R.color.colorAccent));
     }
 
@@ -55,12 +55,12 @@ public class OpcionesSimpleAdapter extends RecyclerView.Adapter<OpcionesSimpleAd
         return arrayList.size();
     }
 
-    static class HorarioViewHolder extends RecyclerView.ViewHolder {
+    static class OpcionesViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTitulo;
         CardView mCardView;
 
-        HorarioViewHolder(View itemView) {
+        OpcionesViewHolder(View itemView) {
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             mCardView = itemView.findViewById(R.id.card);

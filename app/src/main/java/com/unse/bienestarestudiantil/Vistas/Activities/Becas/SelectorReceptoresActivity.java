@@ -14,7 +14,7 @@ import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesSimpleAdapter;
 
 import java.util.ArrayList;
 
-public class TipoTurnosActivity extends AppCompatActivity {
+public class SelectorReceptoresActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     OpcionesSimpleAdapter adapter;
@@ -25,7 +25,7 @@ public class TipoTurnosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tipos_turnos);
+        setContentView(R.layout.activity_selector_receptores);
 
         loadViews();
 
@@ -36,13 +36,13 @@ public class TipoTurnosActivity extends AppCompatActivity {
 
     private void loadData() {
         mList = new ArrayList<>();
-        mList.add(new Opciones(1, "BECA APUNTES 2020", 0, 0));
-        mList.add(new Opciones(2, "BECA COMEDOR 2020", 0, 0));
-        mList.add(new Opciones(3, "BECA DEPORTES 2020", 0, 0));
-        mList.add(new Opciones(4, "BECA AYUDA ECONOMICA 2020", 0, 0));
-        mList.add(new Opciones(5, "BECA AL MERITO ESTUDIANTIL 2020", 0, 0));
-        mList.add(new Opciones(6, "BECA EXCELENCIA 2020", 0, 0));
-        mList.add(new Opciones(7, "BECA RESIDENCIA 2020", 0, 0));
+        mList.add(new Opciones(1, "RECEPTOR 1", 0, 0));
+        mList.add(new Opciones(2, "RECEPTOR 2", 0, 0));
+        mList.add(new Opciones(3, "RECEPTOR 3", 0, 0));
+        mList.add(new Opciones(4, "RECEPTOR 4", 0, 0));
+        mList.add(new Opciones(5, "RECEPTOR 5", 0, 0));
+        mList.add(new Opciones(6, "RECEPTOR 6", 0, 0));
+
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -57,7 +57,7 @@ public class TipoTurnosActivity extends AppCompatActivity {
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                startActivity(new Intent(getApplicationContext(), SelectorFechaActivity.class));
+                startActivity(new Intent(getApplicationContext(), ResumenTurnoActivity.class));
             }
         });
     }

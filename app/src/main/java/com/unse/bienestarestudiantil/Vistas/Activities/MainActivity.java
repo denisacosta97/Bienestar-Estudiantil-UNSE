@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setToolbar();
 
-        Utils.createPDF(getApplicationContext());
+        /*Utils.createPDF(getApplicationContext());
 
         String x = "Denis";
         String msj = Utils.crypt(Utils.getStringValue(x,29,9,1997));
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String msj2 = Utils.crypt(Utils.getStringValue(x,29,9,1997));
         if (msj.equals(msj2)){
             Utils.showToast(getApplicationContext(),"Iguales");
-        }
+        }*/
     }
 
 

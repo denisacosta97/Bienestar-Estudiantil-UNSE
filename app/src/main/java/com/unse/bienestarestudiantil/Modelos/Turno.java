@@ -4,8 +4,6 @@ public class Turno {
 
     public enum ESTADO {PENDIENTE, CONFIRMADO, AUSENTE}
 
-    ;
-
     int id;
     String titulo, descripcion;
     String estado, fechaInicio, fechaFin, fecha;
