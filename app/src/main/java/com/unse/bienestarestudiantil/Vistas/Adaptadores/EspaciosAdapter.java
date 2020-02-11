@@ -64,11 +64,9 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
 
     public class EspacioViewHolder extends RecyclerView.ViewHolder {
 
-
         ImageView imgFoto;
         TextView txtTitulo, txtDescrip, txtPrecio;
         CardView mCardView;
-
 
         public EspacioViewHolder(View itemView) {
             super(itemView);

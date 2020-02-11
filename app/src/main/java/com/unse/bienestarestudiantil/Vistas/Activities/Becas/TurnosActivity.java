@@ -26,7 +26,6 @@ public class TurnosActivity extends AppCompatActivity implements View.OnClickLis
     FloatingActionButton fabMas;
     ImageView imgIcono;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +43,15 @@ public class TurnosActivity extends AppCompatActivity implements View.OnClickLis
     private void loadData() {
         mList = new ArrayList<>();
         mList.add(new Turno("BECAS COMEDOR 2019", "Presentación de papeles para becas comedor 2019", Turno.ESTADO.CONFIRMADO.name(),
-                "09:05:00", "09:10:00", "24/02/2019"));
+                "09:05:00", "09:10:00", "24/02/2019", "39986583", "Cristian", "Ledesma"));
         mList.add(new Turno("BECAS UNSE 2020", "Presentación de papeles para becas comedor 2019", Turno.ESTADO.AUSENTE.name(),
-                "09:05:00", "09:10:00", "24/02/2019"));
+                "09:05:00", "09:10:00", "24/02/2019", "39986583", "Cristian", "Ledesma"));
         mList.add(new Turno("BECAS COMEDOR 2020", "Presentación de papeles para becas comedor 2019", Turno.ESTADO.CONFIRMADO.name(),
-                "09:05:00", "09:10:00", "2/10/2020"));
+                "09:05:00", "09:10:00", "2/10/2020", "39986583", "Cristian", "Ledesma"));
         mList.add(new Turno("DEPORTES 2020", "Presentación de papeles para becas comedor 2019", Turno.ESTADO.AUSENTE.name(),
-                "09:05:00", "09:10:00", "24/04/2020"));
+                "09:05:00", "09:10:00", "24/04/2020", "39986583", "Cristian", "Ledesma"));
         mList.add(new Turno("AYUDA ECONOMICA 2020", "Presentación de papeles para becas comedor 2019", Turno.ESTADO.PENDIENTE.name(),
-                "09:05:00", "09:10:00", "24/03/2020"));
+                "09:05:00", "09:10:00", "24/03/2020", "39986583", "Cristian", "Ledesma"));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 

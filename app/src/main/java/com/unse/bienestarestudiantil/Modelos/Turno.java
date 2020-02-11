@@ -5,16 +5,19 @@ public class Turno {
     public enum ESTADO {PENDIENTE, CONFIRMADO, AUSENTE}
 
     int id;
-    String titulo, descripcion;
+    String titulo, descripcion, nombre, apellido, dni;
     String estado, fechaInicio, fechaFin, fecha;
 
-    public Turno(String titulo, String descripcion, String estado, String fechaInicio, String fechaFin, String fecha) {
+    public Turno(String titulo, String descripcion, String estado, String fechaInicio, String fechaFin, String fecha, String dni, String nombre, String apellido) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.fecha = fecha;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public String getFecha() {
@@ -71,5 +74,29 @@ public class Turno {
 
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 }

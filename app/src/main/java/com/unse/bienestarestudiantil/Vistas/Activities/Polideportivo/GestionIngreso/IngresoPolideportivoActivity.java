@@ -40,7 +40,6 @@ public class IngresoPolideportivoActivity extends AppCompatActivity implements V
 
         loadData();
 
-
     }
 
     private void setToolbar() {

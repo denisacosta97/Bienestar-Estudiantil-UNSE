@@ -15,7 +15,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class TorneosAdapter extends RecyclerView.Adapter<TorneosAdapter.EventosViewHolder>{
+public class TorneosAdapter extends RecyclerView.Adapter<TorneosAdapter.EventosViewHolder> {
 
     private ArrayList<Torneo> mTorneos;
     private Context context;

@@ -22,9 +22,12 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
@@ -131,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item_becas:
                 fragmentoGenerico = new BecasFragment();
                 break;
+            case R.id.item_comedor:
+                fragmentoGenerico = new ComedorFragment();
+                break;
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
@@ -195,6 +201,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                             break;
                         case R.id.item_deporte:
+                            break;
+                        case R.id.item_becas:
+                            if (true) { //Si tiene los permisos necesarios
+                                startActivity(new Intent(getApplicationContext(), MainGestionBecasActivity.class));
+                            }
                             break;
                         default:
                             Utils.showToast(getApplicationContext(), "No se definió una zona administrativa aún");

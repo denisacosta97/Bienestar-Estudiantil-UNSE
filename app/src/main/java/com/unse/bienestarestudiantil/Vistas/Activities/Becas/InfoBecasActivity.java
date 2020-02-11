@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Becas;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,6 +14,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.InfoBecas;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.PerfilBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.InfoBecasAdapter;
 
 import java.util.ArrayList;
