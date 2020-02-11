@@ -136,7 +136,7 @@ public class ResumenTurnoActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void run() {
                         finish();
-                        Utils.createPDF(getApplicationContext(), "COMPROBANTETURNO.pdf");
+                        Utils.createPDF(getApplicationContext(), "COMPROBANTE_TURNO.pdf");
                     }
                 }, 1200);
 
@@ -160,7 +160,7 @@ public class ResumenTurnoActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    public void showProgressDialog() {
+    public void showProgressDialog() { 
         mProgressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
         mProgressBar.setVisibility(View.VISIBLE);
     }
