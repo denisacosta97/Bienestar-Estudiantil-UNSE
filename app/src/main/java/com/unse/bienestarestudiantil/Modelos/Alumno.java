@@ -2,21 +2,44 @@ package com.unse.bienestarestudiantil.Modelos;
 
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 
+import java.util.Date;
+
 public class Alumno extends Usuario{
 
-    private String carrera;
-    private String facultad;
-    private String fecha;
-    private String legajo;
-    private boolean regularidad;
+    public static final String TAG = Usuario.class.getSimpleName();
+    public static final String TABLE = "usuario";
+    // Labels Table Columns names
+    public static final String KEY_ID_ALU = "idAlumno";
+    public static final String KEY_CARR = "carrera";
+    public static final String KEY_FAC = "facultad";
+    public static final String KEY_ANIO = "anio";
+    public static final String KEY_LEG = "legajo";
+    public static final String KEY_REG = "idRegularidad";
+    public static final String KEY_CHK_DATA = "checkData";
 
-    public Alumno(String id, String nombre, String apellido, String foto, String estatus, String carrera, String facultad, String fecha, String legajo, boolean regularidad) {
-        super(id, nombre, apellido, foto, estatus);
+    private String carrera, facultad, legajo, anio, checkData;
+    private int idAlumno, idRegularidad;
+
+    public Alumno(int idUsuario, int tipoUsuario, String id, String nombre, String apellido, String pais, String provincia, String localidad, String domicilio, String barrio, String telefono, String sexo, String mail, String checkData, String foto, String estatus, Date fechaNac, String carrera, String facultad, String legajo, String anio, int idAlumno, String checkData1, int idRegularidad) {
+        super(idUsuario, tipoUsuario, id, nombre, apellido, pais, provincia, localidad, domicilio, barrio, telefono, sexo, mail, checkData, foto, estatus, fechaNac);
         this.carrera = carrera;
         this.facultad = facultad;
-        this.fecha = fecha;
         this.legajo = legajo;
-        this.regularidad = regularidad;
+        this.anio = anio;
+        this.idAlumno = idAlumno;
+        this.checkData = checkData1;
+        this.idRegularidad = idRegularidad;
+    }
+
+    public Alumno() {
+        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        this.carrera = "";
+        this.facultad = "";
+        this.legajo = "";
+        this.anio = "";
+        this.idAlumno = -1;
+        this.checkData = "";
+        this.idRegularidad = -1;
     }
 
     public String getCarrera() {
@@ -35,14 +58,6 @@ public class Alumno extends Usuario{
         this.facultad = facultad;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
     public String getLegajo() {
         return legajo;
     }
@@ -51,11 +66,37 @@ public class Alumno extends Usuario{
         this.legajo = legajo;
     }
 
-    public boolean isRegularidad() {
-        return regularidad;
+    public String getAnio() {
+        return anio;
     }
 
-    public void setRegularidad(boolean regularidad) {
-        this.regularidad = regularidad;
+    public void setAnio(String anio) {
+        this.anio = anio;
+    }
+
+    @Override
+    public String getCheckData() {
+        return checkData;
+    }
+
+    @Override
+    public void setCheckData(String checkData) {
+        this.checkData = checkData;
+    }
+
+    public int getIdAlumno() {
+        return idAlumno;
+    }
+
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
+    }
+
+    public int getIdRegularidad() {
+        return idRegularidad;
+    }
+
+    public void setIdRegularidad(int idRegularidad) {
+        this.idRegularidad = idRegularidad;
     }
 }
