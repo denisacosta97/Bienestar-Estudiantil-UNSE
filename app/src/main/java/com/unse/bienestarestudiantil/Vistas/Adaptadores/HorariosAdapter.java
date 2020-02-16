@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Modelos.Horario;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;

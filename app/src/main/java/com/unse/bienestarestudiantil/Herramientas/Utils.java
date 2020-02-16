@@ -71,6 +71,8 @@ public class Utils {
     public static final int TIPO_CANCHA = 1010;
     public static final int TIPO_QUINCHO = 1011;
 
+    public static final String TYPE_RANGE = "type_range";
+
     public static final String MONSERRAT = "Montserrat-Regular.ttf";
     public static final String MONTSERRAT_BOLD = "Montserrat-Black.ttf";
     public static final String DEPORTE_NAME = "dato_deporte";
@@ -90,8 +92,9 @@ public class Utils {
     public static final int GET_FROM_DNI = 1010;
 
 
-    public static final String URL = "http://192.168.1.27/bienestar/usuario/insertar.php";
-    public static final String URL_IMAGE = "http://192.168.1.27/bienestar/uploadImage.php";
+    public static final String URL = "http://192.168.0.12/bienestar/usuario/insertar.php";
+    public static final String URL_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
+    public static final String URL_IMAGE = "http://192.168.0.12/bienestar/uploadImage.php";
 
     public static void changeColorDrawable(ImageView view, Context context, int color) {
         DrawableCompat.setTint(

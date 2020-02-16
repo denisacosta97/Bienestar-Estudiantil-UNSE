@@ -5,10 +5,20 @@ public class Categoria {
 
     private int idCategoria;
     private String nombre;
+    boolean estado = false;
 
     public Categoria(int id, String nombre) {
         this.nombre = nombre;
         this.idCategoria = id;
+        this.estado = false;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public String getNombre() {

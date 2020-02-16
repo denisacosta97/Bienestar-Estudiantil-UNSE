@@ -7,24 +7,52 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 
 public class PreferenceManager {
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor spEditor;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private Context context;
     private int MODE = 0;
     private static final String PREFERENCE = "Bienestar";
 
     public PreferenceManager(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(PREFERENCE, MODE);
-        spEditor = sharedPreferences.edit();
+        pref = context.getSharedPreferences(PREFERENCE, MODE);
+        editor = pref.edit();
     }
 
     public void setFirstTimeLaunch(boolean isFirstTime) {
-        spEditor.putBoolean(Utils.IS_FIRST_TIME_LAUNCH, isFirstTime);
-        spEditor.commit();
+        editor.putBoolean(Utils.IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
     }
 
     public boolean FirstLaunch() {
-        return sharedPreferences.getBoolean(Utils.IS_FIRST_TIME_LAUNCH, true);
+        return pref.getBoolean(Utils.IS_FIRST_TIME_LAUNCH, true);
     }
+
+    public String getValueString(String tag) {
+        return pref.getString(tag, "");
+    }
+
+    public int getValueInt(String tag) {
+        return pref.getInt(tag, 0);
+    }
+
+    public void setValue(String tag, String value) {
+        editor.putString(tag, value);
+        editor.commit();
+    }
+
+    public void setValue(String tag, int value) {
+        editor.putInt(tag, value);
+        editor.commit();
+    }
+
+    public boolean getValue(String tag) {
+        return pref.getBoolean(tag, true);
+    }
+
+    public void setValue(String tag, boolean value) {
+        editor.putBoolean(tag, value);
+        editor.commit();
+    }
+
 }

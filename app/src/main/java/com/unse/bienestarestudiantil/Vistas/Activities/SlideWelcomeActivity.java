@@ -30,6 +30,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginWelcomeActivity;
 
 import static com.unse.bienestarestudiantil.Herramientas.Utils.PERMISSION_ALL;
 

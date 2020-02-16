@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.itextpdf.kernel.geom.Line;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
@@ -40,6 +42,11 @@ public class CategoriasAdapter  extends RecyclerView.Adapter<CategoriasAdapter.E
 
         Categoria s = arrayList.get(position);
 
+        if (s.isEstado()){
+            holder.mLayout.setBackground(context.getResources().getDrawable(R.drawable.button_border_select));
+        }else{
+            holder.mLayout.setBackground(context.getResources().getDrawable(R.drawable.button_border));
+        }
         holder.txtTitulo.setText(s.getNombre());
 
     }
@@ -57,10 +64,12 @@ public class CategoriasAdapter  extends RecyclerView.Adapter<CategoriasAdapter.E
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTitulo;
+        LinearLayout mLayout;
 
         EventosViewHolder(View itemView) {
             super(itemView);
 
+            mLayout = itemView.findViewById(R.id.back);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
 
 

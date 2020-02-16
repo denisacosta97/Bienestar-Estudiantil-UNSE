@@ -13,10 +13,8 @@ import android.widget.CalendarView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Horario;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.HorariosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesSimpleAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.HorariosAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;

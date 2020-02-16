@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +30,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
+import com.unse.bienestarestudiantil.Vistas.BarcodeActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
 import org.json.JSONException;
@@ -58,12 +65,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText date, edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtContra, edtContraConf,
             edtProfesionProf, edtAnioIngresoProf, edtProfesionEgre, edtAnioIngresoAlu, edtAnioEgresoEgre,
             edtDomicilio, edtProvincia, edtTelefono, edtPais, edtLocalidad, edtLegajoAlu, edtBarrio;
-    Button mRegister, mProfesor, mAlumno, mNoDocente, mEgresado, mParticular;
+    Button mRegister;//, mProfesor, mAlumno, mNoDocente, mEgresado, mParticular;
     ImageButton mScanner;
     ImageView btnBack;
     Bitmap mBitmap = null;
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
     CircleImageView imgUserRegister;
+    RecyclerView recyclerTipoUsuario;
+    CategoriasAdapter adapterCategorias;
+    RecyclerView.LayoutManager mManager;
+    ArrayList<Categoria> mList;
+    DialogoProcesamiento dialog;
     Spinner spinner, spinner2;
     String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
     String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
@@ -95,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     private ZXingScannerView mScannerView;
-    private int TIPO_USER = -1;
+    private int TIPO_USER = 1;
     boolean doubleBackToExitPressedOnce = false;
     boolean isTODNI = false;
 
@@ -104,8 +116,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 
@@ -125,6 +135,65 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(dataAdapter2);
+
+        mList = new ArrayList<>();
+        mList.add(new Categoria(1,"Alumno"));
+        mList.add(new Categoria(2,"Profesor"));
+        mList.add(new Categoria(3,"NoDocente"));
+        mList.add(new Categoria(4,"Egresado"));
+        mList.add(new Categoria(5,"Particular"));
+        mList.get(0).setEstado(true);
+        mLLAlumno.setVisibility(View.VISIBLE);
+
+        mManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerTipoUsuario.setHasFixedSize(true);
+        recyclerTipoUsuario.setLayoutManager(mManager);
+        adapterCategorias = new CategoriasAdapter(mList, getApplicationContext());
+        recyclerTipoUsuario.setAdapter(adapterCategorias);
+
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerTipoUsuario);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                switch ((int)id) {
+                    case 2:
+                        mLLProfesor.setVisibility(View.VISIBLE);
+                        mLLEgresado.setVisibility(View.GONE);
+                        mLLAlumno.setVisibility(View.GONE);
+                        break;
+                    case 1:
+                        mLLAlumno.setVisibility(View.VISIBLE);
+                        mLLProfesor.setVisibility(View.GONE);
+                        mLLEgresado.setVisibility(View.GONE);
+                        break;
+                    case 4:
+                        mLLEgresado.setVisibility(View.VISIBLE);
+                        mLLProfesor.setVisibility(View.GONE);
+                        mLLAlumno.setVisibility(View.GONE);
+                        break;
+                    case 5:
+                        mLLEgresado.setVisibility(View.GONE);
+                        mLLProfesor.setVisibility(View.GONE);
+                        mLLAlumno.setVisibility(View.GONE);
+                    case 3:
+                        mLLEgresado.setVisibility(View.GONE);
+                        mLLProfesor.setVisibility(View.GONE);
+                        mLLAlumno.setVisibility(View.GONE);
+                        break;
+                }
+                TIPO_USER = (int) id;
+                resetEstado();
+                mList.get(position).setEstado(true);
+                adapterCategorias.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    private void resetEstado() {
+        for (Categoria c: mList){
+            c.setEstado(false);
+        }
     }
 
     private void loadListener() {
@@ -133,11 +202,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         imgUserRegister.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         mScanner.setOnClickListener(this);
-        mProfesor.setOnClickListener(this);
-        mAlumno.setOnClickListener(this);
-        mNoDocente.setOnClickListener(this);
-        mEgresado.setOnClickListener(this);
-        mParticular.setOnClickListener(this);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -145,26 +209,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 spinner.setSelection(position);
                 switch (position) {
                     case 0:
+                        //FAyA
                         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
                         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner2.setAdapter(dataAdapter2);
                         break;
                     case 1:
+                        //FCEyT
                         ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fceyt);
                         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner2.setAdapter(dataAdapter3);
                         break;
                     case 2:
+                        //FCF
                         ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fcf);
                         dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner2.setAdapter(dataAdapter4);
                         break;
                     case 3:
+                        //FCM
                         ArrayAdapter<String> dataAdapter5 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fcm);
                         dataAdapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner2.setAdapter(dataAdapter5);
                         break;
                     case 4:
+                        //FHyCS
                         ArrayAdapter<String> dataAdapter6 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fhcys);
                         dataAdapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner2.setAdapter(dataAdapter6);
@@ -198,11 +267,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         imgUserRegister = findViewById(R.id.imgUserRegister);
         btnBack = findViewById(R.id.btnBack);
         mScanner = findViewById(R.id.btnScanner);
-        mProfesor = findViewById(R.id.btnProfesor);
-        mAlumno = findViewById(R.id.btnAlumno);
-        mNoDocente = findViewById(R.id.btnNoDocente);
-        mEgresado = findViewById(R.id.btnEgresado);
-        mParticular = findViewById(R.id.btnParticular);
         mLLAlumno = findViewById(R.id.linlayAlumno);
         mLLEgresado = findViewById(R.id.linlayEgresado);
         mLLProfesor = findViewById(R.id.linlayProfesor);
@@ -215,6 +279,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edtLegajoAlu = findViewById(R.id.edtLegajo);
         edtPais = findViewById(R.id.edtPais);
         edtBarrio = findViewById(R.id.edtBarrio);
+        recyclerTipoUsuario = findViewById(R.id.recycler);
     }
 
 
@@ -237,35 +302,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnScanner:
                 startActivityForResult(new Intent(this,
                         BarcodeActivity.class), GET_FROM_DNI);
-                break;
-            case R.id.btnProfesor:
-                mLLProfesor.setVisibility(View.VISIBLE);
-                mLLEgresado.setVisibility(View.GONE);
-                mLLAlumno.setVisibility(View.GONE);
-                TIPO_USER = 2;
-                break;
-            case R.id.btnAlumno:
-                mLLAlumno.setVisibility(View.VISIBLE);
-                mLLProfesor.setVisibility(View.GONE);
-                mLLEgresado.setVisibility(View.GONE);
-                TIPO_USER = 1;
-                break;
-            case R.id.btnEgresado:
-                mLLEgresado.setVisibility(View.VISIBLE);
-                mLLProfesor.setVisibility(View.GONE);
-                mLLAlumno.setVisibility(View.GONE);
-                TIPO_USER = 4;
-                break;
-            case R.id.btnParticular:
-                mLLEgresado.setVisibility(View.GONE);
-                mLLProfesor.setVisibility(View.GONE);
-                mLLAlumno.setVisibility(View.GONE);
-                TIPO_USER = 5;
-            case R.id.btnNoDocente:
-                mLLEgresado.setVisibility(View.GONE);
-                mLLProfesor.setVisibility(View.GONE);
-                mLLAlumno.setVisibility(View.GONE);
-                TIPO_USER = 3;
                 break;
 
         }
@@ -341,6 +377,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 null, null, null, null, Utils.crypt(pass), null, null));
                     }
 
+
+
                 } else {
                     Utils.showToast(getApplicationContext(), "Las contraseñas no son identicas");
                 }
@@ -405,7 +443,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             super.onBackPressed();
             return;
         }
-
         this.doubleBackToExitPressedOnce = true;
         Utils.showToast(getApplicationContext(), "Presiona de nuevo para salir");
 
@@ -419,6 +456,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void sendServer(String data) {
+
 
         String URL = Utils.URL + data;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -440,7 +478,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                response.length();
+                int re =  response.length();
 
             }
         }, new Response.ErrorListener() {
@@ -458,6 +496,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 return parm;
             }
         };
+
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
     }
@@ -480,13 +522,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void procesarRespuesta(String response) {
         try {
+            dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(),"Registor exitoso!");
+                    Utils.showToast(getApplicationContext(),"Registro exitoso!");
                     finish();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    Utils.showToast(getApplicationContext(), "Inicia sesión para confirmar");
                     break;
                 case 2:
                     //Error 1

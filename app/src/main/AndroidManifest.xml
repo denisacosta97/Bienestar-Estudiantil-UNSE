@@ -35,8 +35,8 @@
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity"
             android:label="Confirmar Reserva" />
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
-        <activity android:name=".Vistas.Activities.LoginWelcomeActivity" />
-        <activity android:name=".Vistas.Activities.LoginActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
         <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
         <activity
             android:name=".Vistas.Activities.AsistenciaActivity"
@@ -46,7 +46,7 @@
             android:label="Realizar Reserva" />
         <activity android:name=".Vistas.Activities.CredencialActivity" />
         <activity
-            android:name=".Vistas.Activities.MainActivity"
+            android:name=".Vistas.Activities.Inicio.MainActivity"
             android:label="@string/app_name" />
         <activity android:name=".Vistas.Activities.SlideWelcomeActivity">
             <intent-filter>
@@ -55,7 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vistas.RegisterActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.RegisterActivity" />
         <activity android:name=".Vistas.Activities.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity

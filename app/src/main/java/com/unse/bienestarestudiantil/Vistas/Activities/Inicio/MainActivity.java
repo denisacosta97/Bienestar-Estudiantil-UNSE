@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -20,10 +20,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.PerfilActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.PerfilProfesorActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
@@ -33,8 +37,9 @@ import com.unse.bienestarestudiantil.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
-    NavigationView navigationView;
     private ActivityMainBinding mBinding;
+    NavigationView navigationView;
+    PreferenceManager manager;
     Toolbar mToolbar;
     Fragment mFragment;
     int itemSelecionado = -1;
@@ -47,12 +52,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
-
         comprobarNavigationView();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
+        manager = new PreferenceManager(getApplicationContext());
+
+        navigationView = findViewById(R.id.nav_view);
         navigationView.removeHeaderView(navigationView.getHeaderView(0));
         View hView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
         if(loginOk){
@@ -80,15 +84,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setToolbar();
 
-        /*Utils.createPDF(getApplicationContext());
+    }
 
-        String x = "Denis";
-        String msj = Utils.crypt(Utils.getStringValue(x,29,9,1997));
-        x = "Deniss";
-        String msj2 = Utils.crypt(Utils.getStringValue(x,29,9,1997));
-        if (msj.equals(msj2)){
-            Utils.showToast(getApplicationContext(),"Iguales");
-        }*/
+    private void updateMenu() {
+        Menu menu = mBinding.navView.getMenu();
+
+
+        int range = manager.getValueInt(Utils.TYPE_RANGE);
+        if (range == 0){
+            MenuItem men = menu.findItem(R.id.item_perfil);
+            men.setVisible(false);
+            men = menu.findItem(R.id.profe_profile);
+            men.setVisible(false);
+            men = menu.findItem(R.id.item_config);
+            men.setVisible(false);
+        }
     }
 
 
@@ -118,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragmentoGenerico = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+
         switch (itemDrawer.getItemId()) {
             case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
@@ -140,7 +151,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item_config:
                 startActivity(new Intent(this, GestionSistemaActivity.class));
                 break;
+        }
 
+
+
+        if(!(fragmentoGenerico instanceof InicioFragmento)){
+            int range = manager.getValueInt(Utils.TYPE_RANGE);
+            if (range == 0){
+                fragmentoGenerico = new AccesoDenegadoFragment();
+            }
         }
 
         if (fragmentoGenerico != null) {
@@ -156,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Setear título actual
         mBinding.contenedor.toolbarLay.txtTitulo.setText(itemDrawer.getTitle());
-        //setTitle(itemDrawer.getTitle());
     }
 
     private void setToolbar() {
@@ -175,8 +193,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
         getMenuInflater().inflate(R.menu.menu_admin, menu);
+        int range = manager.getValueInt(Utils.TYPE_RANGE);
+        if (range == 0){
+            MenuItem menuItem = menu.findItem(R.id.item_admin);
+            menuItem.setVisible(false);
+        }
+        updateMenu();
         return true;
     }
 
@@ -189,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.item_admin:
                 if (itemSelecionado != -1) {
                     switch (itemSelecionado) {
+
                         case R.id.item_poli:
                             if (true) { //Si tiene los permisos necesarios
                                 startActivity(new Intent(getApplicationContext(), GestionPolideportivoActivity.class));
