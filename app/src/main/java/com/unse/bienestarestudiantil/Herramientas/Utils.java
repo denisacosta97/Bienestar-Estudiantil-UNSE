@@ -26,6 +26,8 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
+import com.unse.bienestarestudiantil.Databases.BDGestor;
+import com.unse.bienestarestudiantil.Databases.DBManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,6 +61,12 @@ public class Utils {
     public static final int NOTICIA_BUTTON_WEB = 3131;
     public static final int NOTICIA_BUTTON_TIENDA = 3132;
     public static final int NOTICIA_BUTTON_APP = 3133;
+
+    public static final int USERTYPE_EGR = 2904;
+    public static final int USERTYPE_EST = 2903;
+    public static final int USERTYPE_DOC = 2902;
+    public static final int USERTYPE_PRO = 2901;
+    public static final int USERTYPE_PAR = 2900;
 
     public static final int TIPO_COMEDOR = 1;
     public static final int TIPO_DEPORTE = 2;
@@ -427,7 +435,6 @@ public class Utils {
 
         return value;
 
-
     }
 
     public static String getDayWeek(Date date) {
@@ -458,8 +465,12 @@ public class Utils {
             return true;
         }
         return false;
-
-
     }
+
+    public static void initBD(Context c) {
+        BDGestor gestor = new BDGestor(c);
+        DBManager.initializeInstance(gestor);
+    }
+
 }
 
