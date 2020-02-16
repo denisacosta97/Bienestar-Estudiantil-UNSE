@@ -7,7 +7,7 @@ import java.util.Date;
 public class Alumno extends Usuario{
 
     public static final String TAG = Usuario.class.getSimpleName();
-    public static final String TABLE = "usuario";
+    public static final String TABLE = "alumno";
     // Labels Table Columns names
     public static final String KEY_ID_ALU = "idAlumno";
     public static final String KEY_CARR = "carrera";
