@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Egresado extends Usuario {
 
-    public static final String TAG = Usuario.class.getSimpleName();
+    public static final String TAG = Egresado.class.getSimpleName();
     public static final String TABLE = "egresado";
     // Labels Table Columns names
     public static final String KEY_ID_EGR = "idEgresado";
@@ -16,16 +16,17 @@ public class Egresado extends Usuario {
     private int idEgresado;
     private Date fechaEgreso;
 
-    public Egresado(int idUsuario, int tipoUsuario, String id, String nombre, String apellido, String pais, String provincia, String localidad, String domicilio, String barrio, String telefono, String sexo, String mail, String checkData, String foto, String estatus, Date fechaNac, String profesion, String checkData1, int idEgresado, Date fechaEgreso) {
-        super(idUsuario, tipoUsuario, id, nombre, apellido, pais, provincia, localidad, domicilio, barrio, telefono, sexo, mail, checkData, foto, estatus, fechaNac);
-        this.profesion = profesion;
+    public Egresado(Usuario usuario, String profesion, String checkData1, int idEgresado, Date fechaEgreso) {
+        super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
+                usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());this.profesion = profesion;
         this.checkData = checkData1;
         this.idEgresado = idEgresado;
         this.fechaEgreso = fechaEgreso;
     }
 
     public Egresado() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "","", "", "", "", "", "", "", "", new Date());
         this.profesion = "";
         this.checkData = "";
         this.idEgresado = -1;
@@ -40,12 +41,10 @@ public class Egresado extends Usuario {
         this.profesion = profesion;
     }
 
-    @Override
     public String getCheckData() {
         return checkData;
     }
 
-    @Override
     public void setCheckData(String checkData) {
         this.checkData = checkData;
     }

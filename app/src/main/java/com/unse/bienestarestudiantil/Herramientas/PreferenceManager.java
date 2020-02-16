@@ -47,7 +47,7 @@ public class PreferenceManager {
     }
 
     public boolean getValue(String tag) {
-        return pref.getBoolean(tag, true);
+        return pref.getBoolean(tag, false);
     }
 
     public void setValue(String tag, boolean value) {

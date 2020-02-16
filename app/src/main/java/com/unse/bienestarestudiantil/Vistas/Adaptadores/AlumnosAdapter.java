@@ -51,8 +51,8 @@ public class AlumnosAdapter extends RecyclerView.Adapter<AlumnosAdapter.AlumnoVi
 
         if (mList.size() != 0) {
             Alumno alumno = mList.get(i);
-            holder.txtNombre.setText(alumno.getNombreCompleto2());
-            holder.txtDni.setText(alumno.getId());
+            holder.txtNombre.setText(alumno.getNombre());
+            holder.txtDni.setText(String.format("%s",alumno.getIdUsuario()));
             holder.txtLegajo.setText(alumno.getLegajo());
         }
 
@@ -67,7 +67,7 @@ public class AlumnosAdapter extends RecyclerView.Adapter<AlumnosAdapter.AlumnoVi
                 break;
             case Utils.LIST_DNI:
                 for (Alumno item : mListCopia) {
-                    if (item.getId().contains(txt)) {
+                    if (String.valueOf(item.getIdUsuario()).contains(txt)) {
                         result.add(item);
                     }
 
@@ -89,7 +89,8 @@ public class AlumnosAdapter extends RecyclerView.Adapter<AlumnosAdapter.AlumnoVi
                 break;
             case Utils.LIST_NOMBRE:
                 for (Alumno item : mListCopia) {
-                    if (item.getNombreCompleto1().toLowerCase().contains(txt.toLowerCase())) {
+                    String nombre = String.format("%s %s", item.getNombre(), item.getApellido());
+                    if (nombre.toLowerCase().contains(txt.toLowerCase())) {
                         result.add(item);
                     }
 

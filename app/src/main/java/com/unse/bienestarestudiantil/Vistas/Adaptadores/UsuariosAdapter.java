@@ -31,7 +31,7 @@ public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.Usuar
 
     @Override
     public long getItemId(int position) {
-        return Integer.parseInt(arrayList.get(position).getId());
+        return arrayList.get(position).getIdUsuario();
     }
 
     @NonNull
@@ -50,7 +50,7 @@ public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.Usuar
         Usuario user = arrayList.get(position);
 
         holder.txtTitulo.setText(String.format("%s\n%s", user.getApellido(), user.getNombre()));
-        holder.txtDescripcion.setText(user.getId());
+        holder.txtDescripcion.setText(String.format("%s", user.getIdUsuario()));
 
         Glide.with(holder.imgIconoFoto.getContext())
                 .load(R.drawable.ic_foto_usuario)

@@ -42,7 +42,7 @@ public class ProfesorRepo {
         ContentValues values = new ContentValues();
         values.put(Profesor.KEY_ID_PRO, carrito.getIdProfesor());
         values.put(Profesor.KEY_PRFN, carrito.getProfesion());
-        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaName(carrito.getFechaIngreso()));
+        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaNameWithinHour(carrito.getFechaIngreso()));
         values.put(Profesor.KEY_CHK_DATA, carrito.getCheckData());
         float x = db.insert(Profesor.TABLE, null, values);
         DBManager.getInstance().closeDatabase();
@@ -91,7 +91,7 @@ public class ProfesorRepo {
         ContentValues values = new ContentValues();
         values.put(Profesor.KEY_ID_PRO, carrito.getIdProfesor());
         values.put(Profesor.KEY_PRFN, carrito.getProfesion());
-        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaName(carrito.getFechaIngreso()));
+        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaNameWithinHour(carrito.getFechaIngreso()));
         values.put(Profesor.KEY_CHK_DATA, carrito.getCheckData());
         String id = String.valueOf(carrito.getIdProfesor());
         String selection = Profesor.KEY_ID_PRO + " = " + id;

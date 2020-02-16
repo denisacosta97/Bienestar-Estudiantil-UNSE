@@ -19,6 +19,10 @@ public class BDGestor extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL(UsuariosRepo.createTable());
+        sqLiteDatabase.execSQL(EgresadosRepo.createTable());
+        sqLiteDatabase.execSQL(ProfesorRepo.createTable());
+        sqLiteDatabase.execSQL(AlumnosRepo.createTable());
+        sqLiteDatabase.execSQL(RolRepo.createTable());
 
     }
 

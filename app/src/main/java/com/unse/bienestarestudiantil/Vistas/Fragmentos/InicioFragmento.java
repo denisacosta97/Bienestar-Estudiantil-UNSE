@@ -84,13 +84,22 @@ public class InicioFragmento extends Fragment {
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                resetear();
+                mCategorias.get(position).setEstado(true);
                 if (id == -1){
                     mNoticiasAdapter.filtrarNoticias(-1);
                 }else{
                     mNoticiasAdapter.filtrarNoticias((int) id);
                 }
+                mAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void resetear() {
+        for (Categoria c :mCategorias){
+            c.setEstado(false);
+        }
     }
 
     private void loadNoticias() {
@@ -129,5 +138,6 @@ public class InicioFragmento extends Fragment {
         mCategorias.add(new Categoria(5, "Residencia"));
         mCategorias.add(new Categoria(6, "Cyber Estudiantil"));
         mCategorias.add(new Categoria(7, "UPA"));
+        mCategorias.get(0).setEstado(true);
     }
 }

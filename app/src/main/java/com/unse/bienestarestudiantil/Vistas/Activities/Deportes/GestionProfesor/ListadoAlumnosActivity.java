@@ -57,7 +57,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Item: " + mList.get(position).getNombreCompleto2());
+                Utils.showToast(getApplicationContext(), "Item: " + mList.get(position).getNombre());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -129,7 +129,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     private void loadData() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mList = new ArrayList<>();
-        mList.add(new Alumno("31567984","Florencia","Rios","jee","EST","LSI","FCEyT","29/09/2018","23/15", true));
+       /* mList.add(new Alumno("31567984","Florencia","Rios","jee","EST","LSI","FCEyT","29/09/2018","23/15", true));
         mList.add(new Alumno("31567984","Martin","Atias","jee","EST","LSI","FCEyT","29/09/2018","113/12", true));
         mList.add(new Alumno("23453067","Bruno", "Herlan","jeje","EST","Obstetricia","FAyA","29/09/2018","5/16", true));
         mList.add(new Alumno("29876345","Pablo","Rojas", "jeje","EST","Contador Público","FCSyH","29/09/2018","220/16", true));
@@ -139,7 +139,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
         mList.add(new Alumno("40657677","Denis Lionel","Acosta","jee","EST","LSI","FCEyT","29/09/2018","183/16", true));
         mList.add(new Alumno("399865810","Cristian Santiago", "Ledesma","jeje","EST","Obstetricia","FAyA","29/09/2018","100/16", true));
         mList.add(new Alumno("40657678","Nicolas","Maldonado", "jeje","EST","Contador Público","FCSyH","29/09/2018","240/16", true));
-
+*/
         mAdapter = new AlumnosAdapter(mList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);

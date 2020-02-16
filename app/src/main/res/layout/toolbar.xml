@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <android.support.design.widget.AppBarLayout
+<android.support.design.widget.AppBarLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         style="@style/AppTheme.PopupOverlay"
@@ -45,5 +44,4 @@
 
         </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
-</layout>
+</android.support.design.widget.AppBarLayout>

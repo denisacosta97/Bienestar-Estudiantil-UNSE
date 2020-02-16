@@ -54,7 +54,8 @@ public class Utils {
     public static final String AUTO_INCREMENT = "primary key autoincrement";
     //Constantes de preferencias
     public static final String IS_FIRST_TIME_LAUNCH = "is_first";
-    public static final String UPDATE = "0";
+    public static final String IS_LOGIN = "login_yes";
+    public static final String MY_ID = "my_id_user";
     public static final int PERMISSION_ALL = 1010;
 
     public static final int NOTICIA_NORMAL = 3030;
@@ -372,13 +373,19 @@ public class Utils {
     }
 
     public static Date getFechaDate(String fecha) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaI = null;
         try {
             fechaI = simpleDateFormat.parse(fecha);
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                fechaI = simpleDateFormat.parse(fecha);
+
+            } catch (ParseException e2) {
+                e2.printStackTrace();
+            }
         }
 
         return fechaI;
@@ -432,6 +439,17 @@ public class Utils {
         String value = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
                 + cal.get(Calendar.DAY_OF_MONTH) + " " + cal.get(Calendar.HOUR_OF_DAY) + ":" +
                 cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+
+        return value;
+
+    }
+
+    public static String getFechaNameWithinHour(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String value = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
+                + cal.get(Calendar.DAY_OF_MONTH);
 
         return value;
 

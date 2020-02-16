@@ -22,20 +22,18 @@ public class Usuario {
     public static final String KEY_TYPE_USER = "tipoUsuario";
     public static final String KEY_CHK_DATA = "checkData";
 
-    int idUsuario, tipoUsuario;
-    private String id, nombre, apellido, pais, provincia, localidad, domicilio,
+    private int idUsuario, tipoUsuario;
+    private String nombre, apellido, pais, provincia, localidad, domicilio,
             barrio, telefono, sexo, mail, checkData;
     private String foto;
-    private String estatus;
     private Date fechaNac;
 
-    public Usuario(int idUsuario, int tipoUsuario, String id, String nombre, String apellido,
+    public Usuario(int idUsuario, int tipoUsuario, String nombre, String apellido,
                    String pais, String provincia, String localidad, String domicilio, String barrio,
                    String telefono, String sexo, String mail, String checkData, String foto,
-                   String estatus, Date fechaNac) {
+                   Date fechaNac) {
         this.idUsuario = idUsuario;
         this.tipoUsuario = tipoUsuario;
-        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.pais = pais;
@@ -48,14 +46,12 @@ public class Usuario {
         this.mail = mail;
         this.checkData = checkData;
         this.foto = foto;
-        this.estatus = estatus;
         this.fechaNac = fechaNac;
     }
 
     public Usuario() {
         this.idUsuario = -1;
         this.tipoUsuario = -1;
-        this.id = "";
         this.nombre = "";
         this.apellido = "";
         this.pais = "";
@@ -68,7 +64,6 @@ public class Usuario {
         this.mail = "";
         this.checkData = "";
         this.foto = "";
-        this.estatus = "";
         this.fechaNac = new Date();
     }
 
@@ -86,14 +81,6 @@ public class Usuario {
 
     public void setTipoUsuario(int tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -190,14 +177,6 @@ public class Usuario {
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public String getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(String estatus) {
-        this.estatus = estatus;
     }
 
     public Date getFechaNac() {

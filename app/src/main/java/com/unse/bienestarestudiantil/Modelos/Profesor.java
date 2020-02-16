@@ -16,8 +16,10 @@ public class Profesor extends Usuario {
     private int idProfesor;
     private Date fechaIngreso;
 
-    public Profesor(int idUsuario, int tipoUsuario, String id, String nombre, String apellido, String pais, String provincia, String localidad, String domicilio, String barrio, String telefono, String sexo, String mail, String checkData, String foto, String estatus, Date fechaNac, String profesion, String checkData1, int idProfesor, Date fechaIngreso) {
-        super(idUsuario, tipoUsuario, id, nombre, apellido, pais, provincia, localidad, domicilio, barrio, telefono, sexo, mail, checkData, foto, estatus, fechaNac);
+    public Profesor(Usuario usuario, String profesion, String checkData1, int idProfesor, Date fechaIngreso) {
+        super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
+                usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());
         this.profesion = profesion;
         this.checkData = checkData1;
         this.idProfesor = idProfesor;
@@ -25,7 +27,7 @@ public class Profesor extends Usuario {
     }
 
     public Profesor() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date());
         this.profesion = "";
         this.checkData = "";
         this.idProfesor = -1;
@@ -40,12 +42,10 @@ public class Profesor extends Usuario {
         this.profesion = profesion;
     }
 
-    @Override
     public String getCheckData() {
         return checkData;
     }
 
-    @Override
     public void setCheckData(String checkData) {
         this.checkData = checkData;
     }

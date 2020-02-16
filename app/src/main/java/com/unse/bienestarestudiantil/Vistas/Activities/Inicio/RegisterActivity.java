@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
             "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
-            "Licenciatura en Educación para la Salud", "Licenciatura en Obtetricia",
+            "Licenciatura en Educación para la Salud", "Licenciatura en Obstetricia",
             "Licenciatura en Filosofía", "Licenciatura en Trabajo Social",
             "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
@@ -407,7 +407,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
                     "&tipo=%s&mail=%s&tel=%s&barr=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, sexo, key, carrera, facultad,
-                    anioIng, legajo, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
+                    anioIng, legajo, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
                     "1", mail, telefono, barrio);
 
         } else if (tipo == 2) {
@@ -416,7 +416,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
                     "&prof=%s&fechain=%s&barr=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
-                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())), tipo, mail, telefono,
+                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())), tipo, mail, telefono,
                     profesion, anioIng, barrio);
 
         } else if (tipo == 4) {
@@ -424,13 +424,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
                     "&prof=%s&fechaeg=%s&barr=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
-                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
+                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
                     tipo, mail, telefono, profesion, anioEgreso, barrio);
         } else {
             String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
                     "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad,
-                    domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
+                    domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
                     tipo, mail, telefono, barrio);
         }
         return resp;
@@ -472,6 +472,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                dialog.dismiss();
 
             }
         });

@@ -42,7 +42,7 @@ public class EgresadosRepo {
         ContentValues values = new ContentValues();
         values.put(Egresado.KEY_ID_EGR, carrito.getIdEgresado());
         values.put(Egresado.KEY_PROFE, carrito.getProfesion());
-        values.put(Egresado.KEY_FECHA_EGR, Utils.getFechaName(carrito.getFechaEgreso()));
+        values.put(Egresado.KEY_FECHA_EGR, Utils.getFechaNameWithinHour(carrito.getFechaEgreso()));
         values.put(Egresado.KEY_CHK_DATA, carrito.getCheckData());
         float x = db.insert(Egresado.TABLE, null, values);
         DBManager.getInstance().closeDatabase();
@@ -91,7 +91,7 @@ public class EgresadosRepo {
         ContentValues values = new ContentValues();
         values.put(Egresado.KEY_ID_EGR, carrito.getIdEgresado());
         values.put(Egresado.KEY_PROFE, carrito.getProfesion());
-        values.put(Egresado.KEY_FECHA_EGR, Utils.getFechaName(carrito.getFechaEgreso()));
+        values.put(Egresado.KEY_FECHA_EGR, Utils.getFechaNameWithinHour(carrito.getFechaEgreso()));
         values.put(Egresado.KEY_CHK_DATA, carrito.getCheckData());
         String id = String.valueOf(carrito.getIdEgresado());
         String selection = Egresado.KEY_ID_EGR + " = " + id;

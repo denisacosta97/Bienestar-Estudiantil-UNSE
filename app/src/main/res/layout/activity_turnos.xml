@@ -33,6 +33,6 @@
         android:src="@drawable/ic_mas"
         android:layout_gravity="bottom|end"
         app:layout_anchorGravity="bottom|right|end"
-        android:layout_height="wrap_content"></android.support.design.widget.FloatingActionButton>
+        android:layout_height="wrap_content" />
 
 </android.support.design.widget.CoordinatorLayout>

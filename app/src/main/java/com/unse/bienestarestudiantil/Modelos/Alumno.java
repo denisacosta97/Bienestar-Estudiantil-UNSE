@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Alumno extends Usuario{
 
-    public static final String TAG = Usuario.class.getSimpleName();
+    public static final String TAG = Alumno.class.getSimpleName();
     public static final String TABLE = "alumno";
     // Labels Table Columns names
     public static final String KEY_ID_ALU = "idAlumno";
@@ -20,8 +20,10 @@ public class Alumno extends Usuario{
     private String carrera, facultad, legajo, anio, checkData;
     private int idAlumno, idRegularidad;
 
-    public Alumno(int idUsuario, int tipoUsuario, String id, String nombre, String apellido, String pais, String provincia, String localidad, String domicilio, String barrio, String telefono, String sexo, String mail, String checkData, String foto, String estatus, Date fechaNac, String carrera, String facultad, String legajo, String anio, int idAlumno, String checkData1, int idRegularidad) {
-        super(idUsuario, tipoUsuario, id, nombre, apellido, pais, provincia, localidad, domicilio, barrio, telefono, sexo, mail, checkData, foto, estatus, fechaNac);
+    public Alumno(Usuario usuario, String carrera, String facultad, String legajo, String anio, int idAlumno, String checkData1, int idRegularidad) {
+        super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
+                usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());
         this.carrera = carrera;
         this.facultad = facultad;
         this.legajo = legajo;
@@ -32,7 +34,7 @@ public class Alumno extends Usuario{
     }
 
     public Alumno() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date());
         this.carrera = "";
         this.facultad = "";
         this.legajo = "";
@@ -74,12 +76,10 @@ public class Alumno extends Usuario{
         this.anio = anio;
     }
 
-    @Override
     public String getCheckData() {
         return checkData;
     }
 
-    @Override
     public void setCheckData(String checkData) {
         this.checkData = checkData;
     }

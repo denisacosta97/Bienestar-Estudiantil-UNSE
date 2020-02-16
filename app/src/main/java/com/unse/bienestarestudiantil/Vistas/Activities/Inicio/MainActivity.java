@@ -2,9 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,13 +15,19 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityRecord;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
+import com.unse.bienestarestudiantil.Databases.BDGestor;
+import com.unse.bienestarestudiantil.Databases.DBManager;
+import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.PerfilActivity;
@@ -35,12 +39,10 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
-import com.unse.bienestarestudiantil.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    private ActivityMainBinding mBinding;
     NavigationView navigationView;
     PreferenceManager manager;
     Toolbar mToolbar;
@@ -53,63 +55,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        loadViews();
 
         comprobarNavigationView();
 
-        manager = new PreferenceManager(getApplicationContext());
-
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.removeHeaderView(navigationView.getHeaderView(0));
-        View hView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
-        if(loginOk){
-            ImageView imgbien = hView.findViewById(R.id.logoBienestar);
-            ImageView imgvw = hView.findViewById(R.id.imgUserPerfil);
-            TextView nameUser = hView.findViewById(R.id.txtNombreUser);
-            TextView carrera = hView.findViewById(R.id.txtCarrera);
-            imgbien.setVisibility(View.GONE);
-            imgvw.setVisibility(View.VISIBLE);
-            imgvw.setImageResource(R.drawable.user);
-            nameUser.setText("Cristian Ledesma");
-            carrera.setText("Lic. en Sistemas de Información");
-        }
-        else {
-            ImageView img = hView.findViewById(R.id.imgUserPerfil);
-            ImageView imgvw = hView.findViewById(R.id.logoBienestar);
-            TextView nameUser = hView.findViewById(R.id.txtNombreUser);
-            TextView carrera = hView.findViewById(R.id.txtCarrera);
-            img.setVisibility(View.GONE);
-            imgvw.setVisibility(View.VISIBLE);
-            imgvw.setImageResource(R.drawable.ic_logo_bienestar_01);
-            nameUser.setText("BIENESTAR ESTUDIANTIL");
-            carrera.setText("Secretaría de Bienestar Estudiantil");
-        }
-
         setToolbar();
 
+        createBD();
+
+        loadData();
+
+        checkUser();
+
     }
 
-    private void updateMenu() {
-        Menu menu = mBinding.navView.getMenu();
+    private void createBD() {
+        BDGestor gestor = new BDGestor(getApplicationContext());
+        DBManager.initializeInstance(gestor);
 
-
-        int range = manager.getValueInt(Utils.TYPE_RANGE);
-        if (range == 0){
-            MenuItem men = menu.findItem(R.id.item_perfil);
-            men.setVisible(false);
-            men = menu.findItem(R.id.profe_profile);
-            men.setVisible(false);
-            men = menu.findItem(R.id.item_config);
-            men.setVisible(false);
-        }
     }
 
+    private void loadData() {
+        manager = new PreferenceManager(getApplicationContext());
+    }
+
+    private void loadViews() {
+        navigationView = findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        mToolbar = findViewById(R.id.toolbar);
+    }
 
     private void comprobarNavigationView() {
-        if (mBinding.navView != null) {
-            prepararDrawer(mBinding.navView);
+        if (navigationView != null) {
+            prepararDrawer(navigationView);
             // Seleccionar item por defecto
-            seleccionarItem(mBinding.navView.getMenu().getItem(0));
+            seleccionarItem(navigationView.getMenu().getItem(0));
         }
     }
 
@@ -121,11 +102,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         seleccionarItem(menuItem);
-                        mBinding.drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         return true;
                     }
                 });
     }
+
+    private void checkUser() {
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        View hView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        boolean isLogin = preferenceManager.getValue(Utils.IS_LOGIN);
+
+        ImageView img = hView.findViewById(R.id.imgUserPerfil);
+        ImageView imgBienestar = hView.findViewById(R.id.logoBienestar);
+        TextView nameUser = hView.findViewById(R.id.txtNombreUser);
+        TextView carrera = hView.findViewById(R.id.txtCarrera);
+        if (isLogin) {
+            int dni = preferenceManager.getValueInt(Utils.MY_ID);
+            Usuario usuario = new UsuariosRepo(getApplicationContext()).get(dni);
+            Alumno alumno = new AlumnosRepo(getApplicationContext()).get(dni);
+            imgBienestar.setVisibility(View.GONE);
+            img.setVisibility(View.VISIBLE);
+            img.setImageResource(R.drawable.user);
+            nameUser.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
+            carrera.setText(alumno.getCarrera());
+        } else {
+            img.setVisibility(View.GONE);
+            imgBienestar.setVisibility(View.VISIBLE);
+            imgBienestar.setImageResource(R.drawable.ic_logo_bienestar_01);
+            nameUser.setText("BIENESTAR ESTUDIANTIL");
+            carrera.setText("Secretaría de Bienestar Estudiantil");
+        }
+
+    }
+
+    /*
+    REVISAAAAARRRRR
+     */
+    private void updateMenu() {
+        Menu menu = navigationView.getMenu();
+        int range = manager.getValueInt(Utils.TYPE_RANGE);
+        if (range == 0) {
+            MenuItem men = menu.findItem(R.id.item_perfil);
+            men.setVisible(false);
+            men = menu.findItem(R.id.profe_profile);
+            men.setVisible(false);
+            men = menu.findItem(R.id.item_config);
+            men.setVisible(false);
+        }
+    }
+
 
     private void seleccionarItem(MenuItem itemDrawer) {
         Fragment fragmentoGenerico = null;
@@ -160,10 +187,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
-        if(!(fragmentoGenerico instanceof InicioFragmento)){
+        if (!(fragmentoGenerico instanceof InicioFragmento)) {
             int range = manager.getValueInt(Utils.TYPE_RANGE);
-            if (range == 0){
+            if (range == 0) {
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }
@@ -180,19 +206,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         itemSelecionado = itemDrawer.getItemId();
 
         // Setear título actual
-        mBinding.contenedor.toolbarLay.txtTitulo.setText(itemDrawer.getTitle());
+        ((TextView) findViewById(R.id.txtTitulo)).setText(itemDrawer.getTitle());
     }
 
     private void setToolbar() {
-        setSupportActionBar(mBinding.contenedor.toolbarLay.toolbar);
-        mBinding.contenedor.toolbarLay.imgFlecha.setVisibility(View.GONE);
+        setSupportActionBar(mToolbar);
+        findViewById(R.id.imgFlecha).setVisibility(View.GONE);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             // Poner ícono del drawer toggle
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setTitle("Bienestar Estudiantíl");
-            mBinding.contenedor.toolbarLay.toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+            mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         }
 
     }
@@ -201,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_admin, menu);
         int range = manager.getValueInt(Utils.TYPE_RANGE);
-        if (range == 0){
+        if (range == 0) {
             MenuItem menuItem = menu.findItem(R.id.item_admin);
             menuItem.setVisible(false);
         }
@@ -213,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                mBinding.drawerLayout.openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.item_admin:
                 if (itemSelecionado != -1) {
@@ -246,17 +272,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START))
-            mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(Gravity.LEFT);
         else if (!(mFragment instanceof InicioFragmento)) {
-            seleccionarItem(mBinding.navView.getMenu().getItem(0));
-            mBinding.navView.setCheckedItem(0);
+            seleccionarItem(navigationView.getMenu().getItem(0));
+            navigationView.setCheckedItem(0);
         } else
             super.onBackPressed();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
-    }
 }

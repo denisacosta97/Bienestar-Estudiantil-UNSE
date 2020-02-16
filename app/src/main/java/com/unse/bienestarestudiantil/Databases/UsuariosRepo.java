@@ -54,7 +54,7 @@ public class UsuariosRepo {
         values.put(Usuario.KEY_ID_USER, carrito.getIdUsuario());
         values.put(Usuario.KEY_NOMB, carrito.getNombre());
         values.put(Usuario.KEY_APE, carrito.getApellido());
-        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaName(carrito.getFechaNac()));
+        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaNameWithinHour(carrito.getFechaNac()));
         values.put(Usuario.KEY_PAIS, carrito.getPais());
         values.put(Usuario.KEY_PROV, carrito.getProvincia());
         values.put(Usuario.KEY_LOC, carrito.getLocalidad());
@@ -123,7 +123,7 @@ public class UsuariosRepo {
         values.put(Usuario.KEY_ID_USER, carrito.getIdUsuario());
         values.put(Usuario.KEY_NOMB, carrito.getNombre());
         values.put(Usuario.KEY_APE, carrito.getApellido());
-        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaName(carrito.getFechaNac()));
+        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaNameWithinHour(carrito.getFechaNac()));
         values.put(Usuario.KEY_PAIS, carrito.getPais());
         values.put(Usuario.KEY_PROV, carrito.getProvincia());
         values.put(Usuario.KEY_LOC, carrito.getLocalidad());

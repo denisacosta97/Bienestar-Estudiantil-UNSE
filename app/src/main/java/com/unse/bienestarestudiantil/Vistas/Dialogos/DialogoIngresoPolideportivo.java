@@ -58,7 +58,7 @@ public class DialogoIngresoPolideportivo extends DialogFragment {
         contadorMeno = contadorMay = 0;
         if(usuario != null){
             txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
-            txtDNI.setText(usuario.getId());
+            txtDNI.setText(String.format("%s", usuario.getIdUsuario()));
             updateCounter(contadorMay, contadorMeno);
         }
     }

@@ -44,7 +44,7 @@ public class RolRepo {
         values.put(Rol.KEY_ID, carrito.getId());
         values.put(Rol.KEY_ID_USER, carrito.getIdUsuario());
         values.put(Rol.KEY_TIPO_ROL, carrito.getTipoRol());
-        values.put(Rol.KEY_FECHA, Utils.getFechaName(carrito.getFecha()));
+        values.put(Rol.KEY_FECHA, Utils.getFechaNameWithinHour(carrito.getFecha()));
         values.put(Rol.KEY_CHK_DATA, carrito.getCheckData());
         float x = db.insert(Rol.TABLE, null, values);
         DBManager.getInstance().closeDatabase();
@@ -95,7 +95,7 @@ public class RolRepo {
         values.put(Rol.KEY_ID, carrito.getId());
         values.put(Rol.KEY_ID_USER, carrito.getIdUsuario());
         values.put(Rol.KEY_TIPO_ROL, carrito.getTipoRol());
-        values.put(Rol.KEY_FECHA, Utils.getFechaName(carrito.getFecha()));
+        values.put(Rol.KEY_FECHA, Utils.getFechaNameWithinHour(carrito.getFecha()));
         values.put(Rol.KEY_CHK_DATA, carrito.getCheckData());
         String id = String.valueOf(carrito.getId());
         String selection = Rol.KEY_ID + " = " + id;

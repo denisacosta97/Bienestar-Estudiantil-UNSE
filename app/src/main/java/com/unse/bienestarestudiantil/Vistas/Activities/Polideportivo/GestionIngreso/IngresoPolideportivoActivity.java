@@ -64,10 +64,10 @@ public class IngresoPolideportivoActivity extends AppCompatActivity implements V
 
     private void loadData() {
         mUsuarios = new ArrayList<>();
-        mUsuarios.add(new Usuario("40657677","Denis Lionel","Acosta","jee","EST"));
+       /* mUsuarios.add(new Usuario("40657677","Denis Lionel","Acosta","jee","EST"));
         mUsuarios.add(new Usuario("399865810","Cristian Santiago", "Ledesma","jeje","EST"));
         mUsuarios.add(new Usuario("40657678","Nicolas","Maldonado", "jeje","EST"));
-
+*/
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext());

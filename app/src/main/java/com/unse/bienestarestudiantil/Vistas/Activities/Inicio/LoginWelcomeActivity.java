@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.unse.bienestarestudiantil.Databases.BDGestor;
+import com.unse.bienestarestudiantil.Databases.DBManager;
+import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.Calendar;
@@ -26,25 +30,40 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_welcome);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        boolean isLogin = preferenceManager.getValue(Utils.IS_LOGIN);
+        if(isLogin){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }else {
+            setContentView(R.layout.activity_login_welcome);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        layoutFondo = findViewById(R.id.backgroundwelcome);
+            layoutFondo = findViewById(R.id.backgroundwelcome);
 
-        Glide.with(this).load(R.drawable.img_unse2)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        layoutFondo.setBackground(resource);
-                    }
-                });
+            Glide.with(this).load(R.drawable.img_unse2)
+                    .into(new SimpleTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                            layoutFondo.setBackground(resource);
+                        }
+                    });
 
-        loadViews();
+            loadViews();
 
-        loadListener();
+            createBD();
 
-        changeTextWelcome();
+            loadListener();
+
+            changeTextWelcome();
+        }
+
+    }
+
+    private void createBD() {
+        BDGestor gestor = new BDGestor(getApplicationContext());
+        DBManager.initializeInstance(gestor);
 
     }
 
