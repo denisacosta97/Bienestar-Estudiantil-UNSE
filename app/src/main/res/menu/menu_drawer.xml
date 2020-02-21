@@ -65,7 +65,7 @@
                 android:title="Sobre nosotros"/>
             <item
                 android:id="@+id/item_contactos"
-                android:icon="@drawable/ic_menu"
+                android:icon="@drawable/ic_config"
                 android:title="Contactos"/>
             <item
                 android:id="@+id/item_terminos"

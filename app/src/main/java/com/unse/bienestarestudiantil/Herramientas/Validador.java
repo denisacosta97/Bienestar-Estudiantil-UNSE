@@ -62,6 +62,10 @@ public class Validador {
         return i<(datos.length);
     }
 
+    public boolean lengthMore(String string){
+        return string.length() > 4;
+    }
+
     private boolean noCaracterEspecial(String dato) {
         String regex = "[A-Za-z ]+";
         return dato.matches(regex);

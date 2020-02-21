@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+        navigationView.setCheckedItem(R.id.item_inicio);
     }
 
     private void checkUser() {
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             men = menu.findItem(R.id.profe_profile);
             men.setVisible(false);
             men = menu.findItem(R.id.item_config);
-            men.setVisible(false);
+           // men.setVisible(false);
         }
     }
 
@@ -188,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (!(fragmentoGenerico instanceof InicioFragmento)) {
-            int range = manager.getValueInt(Utils.TYPE_RANGE);
-            if (range == 0) {
+            boolean isLogin = manager.getValue(Utils.IS_LOGIN);
+            if (!isLogin) {
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }
@@ -276,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(Gravity.LEFT);
         else if (!(mFragment instanceof InicioFragmento)) {
             seleccionarItem(navigationView.getMenu().getItem(0));
-            navigationView.setCheckedItem(0);
+            navigationView.setCheckedItem(R.id.item_inicio);
         } else
             super.onBackPressed();
     }

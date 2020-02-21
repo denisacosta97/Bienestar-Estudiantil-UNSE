@@ -12,9 +12,14 @@
     <color name="blackTransparente">#5B000000</color>
     <color name="blackTransparente2">#22000000</color>
 
+    <!--Colores varios-->
     <color name="colorGreen">#32AC37</color>
-    <color name="colorOrange">#F57C00</color>
+    <color name="colorOrange">#E64A19</color>
     <color name="colorRed">#D32F2F</color>
+    <color name="colorPink">#C2185B</color>
+    <color name="colorYellow">#FFA000</color>
+    <color name="colorGreeLight">#AFB42B</color>
+    <color name="colorLightBlue">#0097A7</color>
     <color name="colorSelect">#48000000</color>
     <color name="colorGreyDark">#777777</color>
 

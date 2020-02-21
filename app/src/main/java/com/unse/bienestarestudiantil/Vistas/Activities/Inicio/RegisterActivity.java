@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,7 +54,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static com.unse.bienestarestudiantil.Herramientas.Utils.GET_FROM_DNI;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.GET_FROM_GALLERY;
@@ -105,8 +103,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
 
-
-    private ZXingScannerView mScannerView;
     private int TIPO_USER = 1;
     boolean doubleBackToExitPressedOnce = false;
     boolean isTODNI = false;
@@ -137,11 +133,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinner2.setAdapter(dataAdapter2);
 
         mList = new ArrayList<>();
-        mList.add(new Categoria(1,"Alumno"));
-        mList.add(new Categoria(2,"Profesor"));
-        mList.add(new Categoria(3,"NoDocente"));
-        mList.add(new Categoria(4,"Egresado"));
-        mList.add(new Categoria(5,"Particular"));
+        mList.add(new Categoria(1, "Alumno"));
+        mList.add(new Categoria(2, "Profesor"));
+        mList.add(new Categoria(3, "NoDocente"));
+        mList.add(new Categoria(4, "Egresado"));
+        mList.add(new Categoria(5, "Particular"));
         mList.get(0).setEstado(true);
         mLLAlumno.setVisibility(View.VISIBLE);
 
@@ -155,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int)id) {
+                switch ((int) id) {
                     case 2:
                         mLLProfesor.setVisibility(View.VISIBLE);
                         mLLEgresado.setVisibility(View.GONE);
@@ -191,7 +187,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void resetEstado() {
-        for (Categoria c: mList){
+        for (Categoria c : mList) {
             c.setEstado(false);
         }
     }
@@ -336,52 +332,63 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Comprobacion que no sean vacios
         if (!validador.noVacio(fecha, nombre, apellido, dni, sexo, mail, pass, passConf
                 , domicilio, telefono, pais, provincia, localidad, barrio)) {
+
             //Comprobacion del tipo d edatos
             if (validador.validarNombre(nombre) && validador.validarNombre(apellido) && validador.validarDNI(dni)
-                    && validador.validarMail(mail) && sexo.length() == 1 && validador.validarNumero(telefono) && !validador.validarNombres(pais, provincia, localidad)) {
-                //Comprobacion de contraseña
-                if (pass.equals(passConf)) {
+                    && validador.validarMail(mail) && sexo.length() == 1 && validador.validarNumero(telefono) &&
+                    !validador.validarNombres(pais, provincia, localidad)) {
 
-                    if (TIPO_USER == 1) {
-                        if (!validador.noVacio(faculta, carrera, anioIngreso2)) {
-                            sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                    domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, faculta, anioIngreso2
-                                    , legajo, Utils.crypt(pass), null, null));
+                //Comprobacion de tamaños
+                if (validador.lengthMore(domicilio) && validador.lengthMore(pais) && validador.lengthMore(provincia) && validador.lengthMore(localidad)
+                        && validador.lengthMore(barrio)) {
 
-                        } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                        }
-                    } else if (TIPO_USER == 2) {
-                        if (!validador.noVacio(profesion, anioIngreso)) {
-                            sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                    domicilio, barrio,telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail,
-                                    2, null, null, anioIngreso, null, Utils.crypt(pass),
-                                    profesion, null));
-                        } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                        }
-                    } else if (TIPO_USER == 4) {
-                        if (!validador.noVacio(profesion2, anioEgreso)) {
-                            sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
-                                    telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
-                                    null, null, null, null, Utils.crypt(pass),
-                                    profesion2, anioEgreso));
+                    //Comprobacion de contraseña
+                    if (pass.equals(passConf)) {
 
+                        if (TIPO_USER == 1) {
+                            if (!validador.noVacio(faculta, carrera, anioIngreso2)) {
+                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                        domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, faculta, anioIngreso2
+                                        , legajo, Utils.crypt(pass), null, null));
+
+                            } else {
+                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                            }
+                        } else if (TIPO_USER == 2) {
+                            if (!validador.noVacio(profesion, anioIngreso)) {
+                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                        domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail,
+                                        2, null, null, anioIngreso, null, Utils.crypt(pass),
+                                        profesion, null));
+                            } else {
+                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                            }
+                        } else if (TIPO_USER == 4) {
+                            if (!validador.noVacio(profesion2, anioEgreso)) {
+                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
+                                        telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
+                                        null, null, null, null, Utils.crypt(pass),
+                                        profesion2, anioEgreso));
+
+                            } else {
+                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                            }
                         } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                            //NoDocente y Particular
+                            sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
+                                    barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, TIPO_USER,
+                                    null, null, null, null, Utils.crypt(pass), null, null));
                         }
+
+
                     } else {
-                        //NoDocente y Particular
-                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
-                                barrio,telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, TIPO_USER,
-                                null, null, null, null, Utils.crypt(pass), null, null));
+                        Utils.showToast(getApplicationContext(), "Las contraseñas no son identicas");
                     }
 
-
-
                 } else {
-                    Utils.showToast(getApplicationContext(), "Las contraseñas no son identicas");
+                    Utils.showToast(getApplicationContext(), "Hay campos con información inválida");
                 }
+
 
             } else {
                 Utils.showToast(getApplicationContext(), "Hay campos invalidos, corrijalos");
@@ -450,7 +457,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
@@ -479,25 +486,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                int re =  response.length();
+                int re = response.length();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
+                error.printStackTrace();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parm = new HashMap<>();
                 parm.put("id", edtDNI.getText().toString());
-                String info = convertImage(mBitmap != null ? mBitmap : ((BitmapDrawable)imgUserRegister.getDrawable()).getBitmap());
+                String info = convertImage(mBitmap != null ? mBitmap : ((BitmapDrawable) imgUserRegister.getDrawable()).getBitmap());
                 parm.put("img", info);
                 return parm;
             }
         };
-
+        //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), "dialog_process");
@@ -529,14 +536,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             switch (estado) {
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(),"Registro exitoso!");
+                    Utils.showToast(getApplicationContext(), "Registro exitoso!");
                     finish();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     Utils.showToast(getApplicationContext(), "Inicia sesión para confirmar");
                     break;
                 case 2:
                     //Error 1
-                    Utils.showToast(getApplicationContext(),"Error interno al intentar registrarte");
+                    Utils.showToast(getApplicationContext(), "Error interno al intentar registrarte");
                     break;
                 case 3:
                     //Ya existe
@@ -544,7 +551,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(),"No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
                     break;
             }
 
@@ -571,18 +578,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
+        switch (requestCode) {
             case GET_FROM_DNI:
-                if(resultCode == Activity.RESULT_OK)
-                {
+                if (resultCode == Activity.RESULT_OK) {
                     ArrayList<String> resultados = data.getStringArrayListExtra(Utils.BARCODE);
                     completarDatos(resultados);
-                }else{
+                } else {
                     Utils.showToast(getApplicationContext(), "Error al obtener datos desde el scanner");
                 }
                 break;
             case GET_FROM_GALLERY:
-                if(resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     Uri selectedImage = data.getData();
                     //Bitmap bitmap = null;
                     try {
@@ -593,23 +599,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     Utils.showToast(getApplicationContext(), "Debe elegir una foto desde su galería");
                 }
                 break;
         }
     }
 
-    private String convertImage(Bitmap bitmap){
+    private String convertImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] img = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(img, Base64.DEFAULT);
 
     }
 
     private void completarDatos(ArrayList<String> resultados) {
-        if(resultados.size() != 0){
+        if (resultados.size() != 0) {
             edtApellido.setText(Utils.getStringCamel(resultados.get(0)));
             edtNombre.setText(Utils.getStringCamel(resultados.get(1)));
             edtSexo.setText(Utils.getStringCamel(resultados.get(2)));
@@ -618,8 +624,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             String result = "";
             Pattern numero = Pattern.compile("[0-9]+");
             Matcher matcher = numero.matcher(fecha);
-            while (matcher.find()){
-                result = "-"+matcher.group(0)+result;
+            while (matcher.find()) {
+                result = "-" + matcher.group(0) + result;
             }
             result = result.substring(1);
             date.setText(result);

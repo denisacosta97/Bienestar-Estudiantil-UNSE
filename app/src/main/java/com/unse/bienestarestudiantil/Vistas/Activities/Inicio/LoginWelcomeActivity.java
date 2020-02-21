@@ -37,6 +37,7 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }else {
+
             setContentView(R.layout.activity_login_welcome);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
