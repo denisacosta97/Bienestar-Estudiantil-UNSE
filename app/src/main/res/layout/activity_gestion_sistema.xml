@@ -9,6 +9,7 @@
         layout="@layout/toolbar_trans">
     </include>
 
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
