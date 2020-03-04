@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registro"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:gravity="center"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/user"/>
+                        android:src="@drawable/ic_usuario"/>
 
                 </RelativeLayout>
 
@@ -67,9 +67,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  - Trata de sacarte una foto del rostro en un fondo blanco, sin anteojos, pelo en la cara o algo que pueda obstruir la foto del rostro completo. Ten en cuenta que esta foto podría usarse para papeles importantes, razón por la que debe ser una foto formal."
+                android:text="Sube una foto del rostro en un fondo blanco, sin anteojos, pelo en la cara o algo que pueda obstruir la foto del rostro completo. Ten en cuenta que esta foto podría usarse para trámites importantes, razón por la que debe ser una foto formal."
                 android:textSize="12sp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             <EditText
@@ -79,7 +80,6 @@
                 android:hint="Deporte"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:focusable="false"
@@ -121,27 +121,28 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
+            <EditText
+                android:id="@+id/edxtDni"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:hint="DNI"
+                android:padding="15dp"
+                android:inputType="number"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:weightSum="3"
+                android:weightSum="2"
                 android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/edxtDni"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="20dp"
-                    android:hint="DNI"
-                    android:padding="15dp"
-                    android:inputType="number"
-                    android:textCursorDrawable="@drawable/color_cursor"
-                    android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
                     android:id="@+id/edtxEdad"
@@ -340,6 +341,9 @@
                     android:hint="Cantidad materias aprobadas"
                     android:layout_marginBottom="10dp"
                     android:padding="15dp"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
@@ -426,7 +430,6 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:buttonTint="@color/colorPrimaryDark"
-                    android:padding="15dp"
                     android:text="¿WhatsApp?"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -437,6 +440,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:gravity="center"
                 android:weightSum="1"
                 android:orientation="horizontal">
 
@@ -446,7 +450,7 @@
                     android:text="¿Realizó o realiza actividad física?"
                     android:layout_weight="0.6"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <CheckBox
@@ -483,13 +487,23 @@
                     android:hint="¿Cuáles?"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:padding="15dp"
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp"
                     android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Intensidad:"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -498,14 +512,6 @@
                     android:layout_marginRight="20dp"
                     android:weightSum="3"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Intensidad:"
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/montserrat_black"/>
 
                     <CheckBox
                         android:id="@+id/chbxContin"
@@ -549,7 +555,7 @@
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
                     android:textSize="15sp"
-                    android:fontFamily="@font/montserrat_black"/>
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
 

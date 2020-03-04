@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Fragmentos.ComedorFragment"></activity>
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity"></activity>
+        <activity android:name=".Vistas.Activities.ReLoginActivity" />
+        <activity android:name=".Vistas.Activities.RecuperarPassActivity" />
+        <activity android:name=".Vistas.Activities.PassMissedActivity" />
+        <activity android:name=".Vistas.Fragmentos.ComedorFragment" />
         <activity android:name=".Vistas.Activities.Comedor.MainGestionComedor" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosDiaActivity" />
@@ -102,12 +106,13 @@
         <activity android:name=".Vistas.Activities.Becas.SelectorFechaActivity" />
         <activity android:name=".Vistas.Activities.Becas.SelectorReceptoresActivity" />
         <activity android:name=".Vistas.Activities.Becas.ResumenTurnoActivity" />
+        <activity android:name=".Vistas.Activities.LoginActivity" />
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

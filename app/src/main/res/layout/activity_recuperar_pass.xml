@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<RelativeLayout
+    android:id="@+id/backgroundlogin"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_alpha_40">
+    android:orientation="vertical"
+    tools:context=".Vistas.Activities.LoginActivity">
 
     <LinearLayout
-        android:id="@+id/backgroundlogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black_alpha_40"
         android:orientation="vertical">
 
         <ImageView
@@ -21,41 +24,63 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="50dp"
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_candado"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recupera tu contraseña"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="24sp"
+                android:gravity="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="10dp"
                 android:padding="10dp">
 
-                <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="180dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_logo_bienestar_01"
-                    android:layout_marginBottom="20dp"/>
-
                 <EditText
-                    android:id="@+id/edtUser"
+                    android:id="@+id/edtxDni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
-                    android:hint="DNI"
-                    android:inputType="textPersonName"
+                    android:hint="Ingresa tu DNI"
+                    android:inputType="number"
                     android:padding="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
 
                 <EditText
-                    android:id="@+id/edtPass"
+                    android:id="@+id/edtxNewPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
-                    android:hint="Contraseña"
+                    android:hint="Ingresa tu nueva contraseña"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <EditText
+                    android:id="@+id/edtxRepeatPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:hint="Repite la nueva contraseña"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
@@ -68,44 +93,17 @@
                     android:layout_marginTop="20dp">
 
                     <Button
-                        android:id="@+id/sesionOn"
+                        android:id="@+id/btnRecuperar"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:text="Iniciar sesión"
+                        android:text="Recuperar"
                         android:textColor="@color/whiteTextColor"
                         android:textStyle="bold"
                         android:backgroundTint="@color/colorPrimaryDark"
                         android:background="@drawable/corners_rounded_green"
                         android:layout_margin="5dp"
                         android:fontFamily="@font/montserrat_black"/>
-
-                    <TextView
-                        android:id="@+id/register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textSize="17sp"
-                        android:text="Registrarme"
-                        android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="10dp"
-                        android:onClick="onClick"
-                        android:clickable="true"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                    <TextView
-                        android:id="@+id/txtPassMissed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textSize="17sp"
-                        android:text="¿Olvidaste tu contraseña?"
-                        android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="10dp"
-                        android:onClick="onClick"
-                        android:clickable="true"
-                        android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
 
@@ -115,4 +113,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

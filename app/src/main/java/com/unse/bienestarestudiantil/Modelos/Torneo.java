@@ -3,39 +3,54 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 public class Torneo implements Parcelable {
 
-    private int id, logo;
-    private String nameTorneo, desc, fechaInicio, fechaFin, lugar;
+    public static final String TAG = Usuario.class.getSimpleName();
+    public static final String TABLE = "torneo";
+    // Labels Table Columns names
+    public static final String KEY_ID_TOR = "idPregunta";
+    public static final String KEY_NOM = "nombre";
+    public static final String KEY_LUG = "lugar";
+    public static final String KEY_FECHA_INI = "fechaInicio";
+    public static final String KEY_FECHA_FIN = "fechaFin";
+    public static final String KEY_DESC = "descripcion";
+    public static final String KEY_UBI = "ubicacion";
 
-    public Torneo(int id, int logo, String lugar, String nameTorneo, String desc, String fechaInicio, String fechaFin) {
+    private int id, logo;
+    private String nameTorneo, desc, lugar, ubicacion;
+    private Date fechaInicio, fechaFin;
+
+    public Torneo(int id, int logo, String nameTorneo, String desc, String lugar, String ubicacion, Date fechaInicio, Date fechaFin) {
         this.id = id;
         this.logo = logo;
-        this.lugar = lugar;
         this.nameTorneo = nameTorneo;
         this.desc = desc;
+        this.lugar = lugar;
+        this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
 
     public Torneo() {
-        this.id = 0;
+        this.id = -1;
         this.logo = 0;
-        this.lugar = "";
         this.nameTorneo = "";
         this.desc = "";
-        this.fechaInicio = "";
-        this.fechaFin = "";
+        this.lugar = "";
+        this.ubicacion = "";
+        this.fechaInicio = new Date();
+        this.fechaFin = new Date();
     }
 
-    protected Torneo(Parcel in) {
+    protected Torneo(Parcel in) { //REVISAR, FALTAN LAS FECHAS
         id = in.readInt();
         logo = in.readInt();
-        lugar = in.readString();
         nameTorneo = in.readString();
         desc = in.readString();
-        fechaInicio = in.readString();
-        fechaFin = in.readString();
+        lugar = in.readString();
+        ubicacion = in.readString();
     }
 
     public static final Creator<Torneo> CREATOR = new Creator<Torneo>() {
@@ -49,6 +64,21 @@ public class Torneo implements Parcelable {
             return new Torneo[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(logo);
+        dest.writeString(nameTorneo);
+        dest.writeString(desc);
+        dest.writeString(lugar);
+        dest.writeString(ubicacion);
+    }
 
     public int getId() {
         return id;
@@ -64,14 +94,6 @@ public class Torneo implements Parcelable {
 
     public void setLogo(int logo) {
         this.logo = logo;
-    }
-
-    public String getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
     }
 
     public String getNameTorneo() {
@@ -90,35 +112,35 @@ public class Torneo implements Parcelable {
         this.desc = desc;
     }
 
-    public String getFechaInicio() {
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(logo);
-        dest.writeString(lugar);
-        dest.writeString(nameTorneo);
-        dest.writeString(desc);
-        dest.writeString(fechaInicio);
-        dest.writeString(fechaFin);
     }
 }

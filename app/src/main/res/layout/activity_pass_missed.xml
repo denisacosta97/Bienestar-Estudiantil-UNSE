@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/backgroundlogin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Vistas.Activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_alpha_40"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_flecha_atras"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_candado"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recupera tu contraseña"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="24sp"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/edtxMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:hint="Ingresa el mail asociado"
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp">
+
+                    <Button
+                        android:id="@+id/btnEnviar"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="Enviar"
+                        android:textColor="@color/whiteTextColor"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:background="@drawable/corners_rounded_green"
+                        android:layout_margin="5dp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

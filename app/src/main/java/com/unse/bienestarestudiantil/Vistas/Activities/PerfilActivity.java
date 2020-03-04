@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -21,8 +22,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
 

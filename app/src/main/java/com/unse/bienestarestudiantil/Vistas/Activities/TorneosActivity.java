@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,11 +37,9 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_torneos);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mRecyclerAsistencia = findViewById(R.id.recycler);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
 
         loadViews();
 
@@ -54,9 +53,9 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
     private void loadDataRecycler() {
         mTorneos = new ArrayList<>();
 
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo JUR", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Santiago del Estero", "Torneo de la UNSE", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
-        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo regional", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
+//        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo JUR", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
+//        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Santiago del Estero", "Torneo de la UNSE", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
+//        mTorneos.add(new Torneo(0, R.drawable.ic_cup, "Buenos Aires", "Torneo regional", "Torneo de las Universidades de Argentina.", "10/11/2019", "20/11/2019"));
 
         mTorneosAdapter = new TorneosAdapter(mTorneos, this);
         mLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);

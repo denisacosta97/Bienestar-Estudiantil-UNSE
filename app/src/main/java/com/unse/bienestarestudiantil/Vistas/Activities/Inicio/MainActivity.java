@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!(fragmentoGenerico instanceof InicioFragmento)) {
             boolean isLogin = manager.getValue(Utils.IS_LOGIN);
-            if (!isLogin) {
+            if (isLogin) { //Aquí le saqué el !
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem menuItem = menu.findItem(R.id.item_admin);
             menuItem.setVisible(false);
         }
-        updateMenu();
+        //updateMenu();
         return true;
     }
 

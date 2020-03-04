@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ public class CredencialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credencial);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mDeporte = findViewById(R.id.txtDeporte);
         mApellido = findViewById(R.id.txtApellido);

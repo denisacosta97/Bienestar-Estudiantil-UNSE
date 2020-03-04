@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,8 +23,7 @@ public class NoticiaLectorActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_reader);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getIntent().getParcelableExtra(Utils.NOTICIA) != null) {
             mNoticia = getIntent().getParcelableExtra(Utils.NOTICIA);

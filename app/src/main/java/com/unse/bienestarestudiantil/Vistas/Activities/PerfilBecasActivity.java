@@ -21,8 +21,6 @@ public class PerfilBecasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_becas);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
-
         if (getIntent().getParcelableExtra(Utils.BECA_NAME) != null) {
             mInfoBecas = getIntent().getParcelableExtra(Utils.BECA_NAME);
         }

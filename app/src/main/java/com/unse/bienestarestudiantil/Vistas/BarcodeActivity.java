@@ -31,8 +31,6 @@ public class BarcodeActivity extends AppCompatActivity implements ZXingScannerVi
         mScannerView.startCamera();          // Start camera on resume
     }
 
-
-
     @Override
     public void onPause() {
         super.onPause();

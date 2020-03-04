@@ -2,6 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Becas;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
@@ -33,6 +34,7 @@ public class ResumenTurnoActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumen_turno);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 

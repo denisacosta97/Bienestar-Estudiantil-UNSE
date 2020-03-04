@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Gestion;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,8 +33,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_sistema);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 
@@ -81,10 +81,10 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
         mOpciones.add(new Opciones(200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
         mOpciones.add(new Opciones(300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
         mOpciones.add(new Opciones(400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreeLight));
-        mOpciones.add(new Opciones(600, "Gestión Transporte", R.drawable.ic_config, R.color.colorPink));
-        mOpciones.add(new Opciones(700, "Gestión Residencia", R.drawable.ic_config,R.color.colorYellow));
-        mOpciones.add(new Opciones(800, "Gestión Comedor", R.drawable.ic_config, R.color.colorLightBlue));
+        mOpciones.add(new Opciones(500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
+        mOpciones.add(new Opciones(700, "Gestión Residencia", R.drawable.ic_config,R.color.color3));
+        mOpciones.add(new Opciones(800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);

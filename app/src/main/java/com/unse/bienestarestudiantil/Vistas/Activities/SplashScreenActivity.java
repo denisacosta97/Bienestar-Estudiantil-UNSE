@@ -32,8 +32,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         setViewsConfig();
 
-        //Utils.setFont(getApplicationContext(), (ViewGroup)findViewById(android.R.id.content), Utils.MONSERRAT);
-
         loadViews();
 
         loadData();

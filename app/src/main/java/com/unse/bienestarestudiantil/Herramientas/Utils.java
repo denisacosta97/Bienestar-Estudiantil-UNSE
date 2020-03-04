@@ -50,6 +50,7 @@ public class Utils {
     public static final String STRING_TYPE = "text";
     public static final String INT_TYPE = "integer";
     public static final String FLOAT_TYPE = "float";
+    public static final String BIGINT_TYPE = "long";
     public static final String NULL_TYPE = "not null";
     public static final String AUTO_INCREMENT = "primary key autoincrement";
     //Constantes de preferencias

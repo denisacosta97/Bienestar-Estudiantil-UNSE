@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_deporte);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null){
             mDeporte = getIntent().getParcelableExtra(Utils.DEPORTE_NAME);

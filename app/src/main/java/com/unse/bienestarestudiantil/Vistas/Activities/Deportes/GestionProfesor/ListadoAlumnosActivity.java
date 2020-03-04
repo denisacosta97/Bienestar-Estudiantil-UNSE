@@ -129,17 +129,8 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     private void loadData() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mList = new ArrayList<>();
-       /* mList.add(new Alumno("31567984","Florencia","Rios","jee","EST","LSI","FCEyT","29/09/2018","23/15", true));
-        mList.add(new Alumno("31567984","Martin","Atias","jee","EST","LSI","FCEyT","29/09/2018","113/12", true));
-        mList.add(new Alumno("23453067","Bruno", "Herlan","jeje","EST","Obstetricia","FAyA","29/09/2018","5/16", true));
-        mList.add(new Alumno("29876345","Pablo","Rojas", "jeje","EST","Contador Público","FCSyH","29/09/2018","220/16", true));
-        mList.add(new Alumno("34097464","Brenda","Alfaro","jee","EST","LSI","FCEyT","29/09/2018","153/17", true));
-        mList.add(new Alumno("42098314","Nicole Mariel", "Ollea Allende","jeje","EST","Obstetricia","FAyA","29/09/2018","100/12", true));
-        mList.add(new Alumno("45623678","María Angelica","Carbajal", "jeje","EST","Contador Público","FCSyH","29/09/2018","40/17", true));
-        mList.add(new Alumno("40657677","Denis Lionel","Acosta","jee","EST","LSI","FCEyT","29/09/2018","183/16", true));
-        mList.add(new Alumno("399865810","Cristian Santiago", "Ledesma","jeje","EST","Obstetricia","FAyA","29/09/2018","100/16", true));
-        mList.add(new Alumno("40657678","Nicolas","Maldonado", "jeje","EST","Contador Público","FCSyH","29/09/2018","240/16", true));
-*/
+       // mList.add(new Alumno("ELEESEI","ESATAS","207/15","2015","as2d","","FCEyT","29/09/2018","23/15", true));
+
         mAdapter = new AlumnosAdapter(mList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);

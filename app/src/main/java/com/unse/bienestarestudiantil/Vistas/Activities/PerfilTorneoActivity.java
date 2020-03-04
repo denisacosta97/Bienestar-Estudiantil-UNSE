@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +25,7 @@ public class PerfilTorneoActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_torneo);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getIntent().getParcelableExtra(Utils.TORNEO) != null) {
             mTorneo = getIntent().getParcelableExtra(Utils.TORNEO);

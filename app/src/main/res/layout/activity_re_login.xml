@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/backgroundlogin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Vistas.Activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_alpha_40"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_chek"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¡Contraseña reestablecida!"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="22sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Por favor, vuelve a iniciar sesión."
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnIni"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:text="Iniciar sesión"
+            android:textColor="@color/whiteTextColor"
+            android:textStyle="bold"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@drawable/corners_rounded_green"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/montserrat_black"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

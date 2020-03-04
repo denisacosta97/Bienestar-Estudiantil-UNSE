@@ -43,6 +43,7 @@ public class DialogoProfesorDeportes extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialogo_profesor_deportes, container, false);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         //Esto es lo nuevoooooooo, evita los bordes cuadrados
         if (getDialog().getWindow() != null)
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

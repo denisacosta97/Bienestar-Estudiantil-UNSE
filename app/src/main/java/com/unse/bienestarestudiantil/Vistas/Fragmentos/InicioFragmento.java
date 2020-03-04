@@ -40,8 +40,6 @@ public class InicioFragmento extends Fragment {
         //Crea la vista de Inicio
         view = inflater.inflate(R.layout.fragmento_inicio, container, false);
 
-        //Utils.setFont(getContext(), (ViewGroup) view, Utils.MONSERRAT);
-
         loadViews();
 
         loadDataRecycler();

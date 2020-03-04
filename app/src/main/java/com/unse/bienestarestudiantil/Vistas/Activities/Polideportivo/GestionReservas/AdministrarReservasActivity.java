@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ public class AdministrarReservasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrar_reservas);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mRecyclerReserva = findViewById(R.id.recycler);
 

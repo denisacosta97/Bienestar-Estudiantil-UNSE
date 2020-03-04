@@ -3,6 +3,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -57,8 +58,7 @@ public class SlideWelcomeActivity extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             }
             setContentView(R.layout.activity_welcome);
-
-            //Utils.setFont(getApplicationContext(), this,"montserrat_regular.ttf" );
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
             viewPager = findViewById(R.id.view_pager);
             dotsLayout = findViewById(R.id.layoutBars);
