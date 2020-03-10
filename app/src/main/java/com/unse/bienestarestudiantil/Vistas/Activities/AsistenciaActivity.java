@@ -51,7 +51,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Asistencia");
         Utils.changeColorDrawable(imgFlecha, getApplicationContext(), R.color.colorPrimary);
     }
 

@@ -17,7 +17,7 @@ public class AlumnosRepo {
     public AlumnosRepo(Context context) {
 
         Utils.initBD(context);
-        mAlumno = new Alumno();
+        mAlumno = new Alumno("", "", "", "2015", "as2d", "", "FCEyT", "29/09/2018", "23/15", true);
     }
 
     public Alumno getAlumnos() {
@@ -64,7 +64,7 @@ public class AlumnosRepo {
 
 
     public Alumno get(int id) {
-        mAlumno = new Alumno();
+        mAlumno = new Alumno("", "", "", "2015", "as2d", "", "FCEyT", "29/09/2018", "23/15", true);
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
         Cursor cursor = db.rawQuery("select * from " + Alumno.TABLE + " where " + Alumno.KEY_ID_ALU + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {
@@ -128,7 +128,7 @@ public class AlumnosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mAlumno = new Alumno();
+                mAlumno = new Alumno("", "", "", "2015", "as2d", "", "FCEyT", "29/09/2018", "23/15", true);
                 mAlumno.setIdAlumno(cursor.getInt(0));
                 mAlumno.setCarrera(cursor.getString(1));
                 mAlumno.setFacultad(cursor.getString(2));
@@ -154,7 +154,7 @@ public class AlumnosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mAlumno = new Alumno();
+                mAlumno = new Alumno("", "", "", "2015", "as2d", "", "FCEyT", "29/09/2018", "23/15", true);
                 mAlumno.setIdAlumno(cursor.getInt(0));
                 mAlumno.setCarrera(cursor.getString(1));
                 mAlumno.setFacultad(cursor.getString(2));

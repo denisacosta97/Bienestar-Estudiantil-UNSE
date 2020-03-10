@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,9 +21,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    >
-
+                    android:background="@color/colorAccent">
 
                     <TextView
                         android:layout_marginTop="30dp"
@@ -35,7 +32,8 @@
                         android:gravity="center"
                         android:padding="10dp"
                         android:textStyle="bold"
-                        android:text="Solicitud de turno" />
+                        android:text="Solicitud de turno"
+                        android:fontFamily="@font/montserrat_black"/>
 
                     <LinearLayout
                         android:layout_marginTop="10dp"
@@ -52,8 +50,8 @@
                             android:textSize="18sp"
                             android:layout_marginLeft="10dp"
                             android:padding="5dp"
-                            android:textStyle="bold"
-                            android:text="Tipo de turno" />
+                            android:text="Tipo de turno"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
                             android:id="@+id/txtTipoBeca"
@@ -64,7 +62,7 @@
                             android:textSize="18sp"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_regular"
                             android:text="BECA COMEDOR 2020" />
 
                     </LinearLayout>
@@ -84,7 +82,7 @@
                             android:textSize="18sp"
                             android:layout_marginLeft="10dp"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"
                             android:text="Fecha" />
 
                         <TextView
@@ -96,7 +94,7 @@
                             android:textSize="18sp"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_regular"
                             android:text="16/09/20" />
 
                     </LinearLayout>
@@ -116,7 +114,7 @@
                             android:textSize="18sp"
                             android:layout_marginLeft="10dp"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"
                             android:text="Hora" />
 
                         <TextView
@@ -128,7 +126,7 @@
                             android:textSize="18sp"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_regular"
                             android:text="08:00 - 08:15" />
 
                     </LinearLayout>
@@ -148,7 +146,7 @@
                             android:textSize="18sp"
                             android:layout_marginLeft="10dp"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"
                             android:text="Receptor" />
 
                         <TextView
@@ -160,7 +158,7 @@
                             android:textSize="18sp"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_regular"
                             android:text="Receptor 1" />
 
                     </LinearLayout>
@@ -178,7 +176,7 @@
                     android:text="¿Es correcta ésta información?"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"
                     android:textAlignment="center" />
 
                 <FrameLayout
@@ -207,13 +205,9 @@
                         android:layout_gravity="center"
                         android:text="CONFIRMAR"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold" />
-
+                        android:fontFamily="@font/montserrat_black"/>
 
                 </FrameLayout>
-
-
-
 
             </LinearLayout>
 
@@ -237,12 +231,9 @@
             android:gravity="center"
             android:visibility="invisible"
             android:textColor="@color/colorWhite"
+            android:fontFamily="@font/montserrat_black"
             android:textAlignment="center" />
 
-
     </RelativeLayout>
-
-
-
 
 </LinearLayout>

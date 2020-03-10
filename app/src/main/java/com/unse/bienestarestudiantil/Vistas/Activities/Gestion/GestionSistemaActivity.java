@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +14,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.AsistenciaClasesActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -63,6 +61,9 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                         break;
                     case 2:
                         //startActivity(new Intent(getApplicationContext(), AsistenciaClasesActivity.class));
+                        break;
+                    case 100:
+                        startActivity(new Intent(getApplicationContext(), MainGestionDeportesActivity.class));
                         break;
 
                 }

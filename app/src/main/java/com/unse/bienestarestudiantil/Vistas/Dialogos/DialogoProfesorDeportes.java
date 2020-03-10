@@ -15,15 +15,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.FuncionesProfesor.FuncionesProfesorActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 
 import java.util.ArrayList;
@@ -94,7 +92,7 @@ public class DialogoProfesorDeportes extends DialogFragment {
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(), GestionProfesorActivity.class);
+                Intent i = new Intent(getContext(), FuncionesProfesorActivity.class);
                 i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
                 startActivity(i);
             }

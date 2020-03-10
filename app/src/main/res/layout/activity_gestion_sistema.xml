@@ -5,10 +5,7 @@
     android:background="@color/colorGrey"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar_trans">
-    </include>
-
+    <include layout="@layout/toolbar_trans"></include>
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +19,8 @@
             android:text="Aquí puedes visualizar las gestiones que tienes habilitadas"
             android:textColor="@color/colorGreyDark"
             android:textStyle="bold"
-            android:textSize="17sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="10dp"

@@ -1,7 +1,5 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-import com.unse.bienestarestudiantil.Modelos.Usuario;
-
 import java.util.Date;
 
 public class Alumno extends Usuario{
@@ -33,7 +31,7 @@ public class Alumno extends Usuario{
         this.idRegularidad = idRegularidad;
     }
 
-    public Alumno() {
+    public Alumno(String s, String s1, String s2, String s3, String as2d, String s4, String fcEyT, String s5, String s6, boolean b) {
         super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date());
         this.carrera = "";
         this.facultad = "";

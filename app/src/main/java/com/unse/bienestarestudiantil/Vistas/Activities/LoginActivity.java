@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
-    LinearLayout layoutFondo;
+    RelativeLayout layoutFondo;
     VideoView mVideoView;
-    TextView txtPassMissed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +69,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loadListener() {
         btnBack.setOnClickListener(this);
-        txtPassMissed.setOnClickListener(this);
     }
 
     private void loadViews() {
         mInicio = findViewById(R.id.sesionOn);
         btnBack = findViewById(R.id.btnBack);
-        txtPassMissed = findViewById(R.id.txtPassMissed);
 
     }
 
@@ -93,11 +88,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
-            case R.id.btnBack:
-                onBackPressed();
-                break;
             case R.id.txtPassMissed:
                 startActivity(new Intent(LoginActivity.this, PassMissedActivity.class));
+                break;
+            case R.id.btnBack:
+                onBackPressed();
                 break;
         }
     }

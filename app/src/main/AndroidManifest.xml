@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity"></activity>
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionProfeActivity"></activity>
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionTorneoActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BecadoActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionBecadosActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BMDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InscriptosActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ABMInscriptosActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity" />
         <activity android:name=".Vistas.Activities.ReLoginActivity" />
         <activity android:name=".Vistas.Activities.RecuperarPassActivity" />
         <activity android:name=".Vistas.Activities.PassMissedActivity" />
@@ -87,12 +95,12 @@
             android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
             android:label="Gestión de Ingresos" />
         <activity
-            android:name=".Vistas.Activities.Deportes.GestionProfesor.GestionProfesorActivity"
+            android:name=".Vistas.Activities.Deportes.FuncionesProfesor.FuncionesProfesorActivity"
             android:label="Gestión de Profesor" />
         <activity
-            android:name=".Vistas.Activities.Deportes.GestionProfesor.ListadoAlumnosActivity"
+            android:name=".Vistas.Activities.Deportes.FuncionesProfesor.ListadoAlumnosActivity"
             android:label="Listado de Alumnos" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionProfesor.AsistenciaClasesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.FuncionesProfesor.AsistenciaClasesActivity" />
         <activity
             android:name=".Vistas.Activities.Gestion.GestionSistemaActivity"
             android:label="Gestión de Sistema" />
@@ -108,11 +116,11 @@
         <activity android:name=".Vistas.Activities.Becas.ResumenTurnoActivity" />
         <activity android:name=".Vistas.Activities.LoginActivity" />
     </application>
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>
