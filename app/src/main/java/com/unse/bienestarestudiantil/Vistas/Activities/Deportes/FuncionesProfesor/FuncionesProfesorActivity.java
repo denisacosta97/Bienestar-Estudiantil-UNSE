@@ -1,13 +1,12 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.FuncionesProfesor;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class GestionProfesorActivity extends AppCompatActivity implements View.OnClickListener {
+public class FuncionesProfesorActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -33,8 +32,7 @@ public class GestionProfesorActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_profesor);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 

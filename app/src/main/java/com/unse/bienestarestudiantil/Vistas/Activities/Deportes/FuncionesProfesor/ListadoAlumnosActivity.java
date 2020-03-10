@@ -1,5 +1,6 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionProfesor;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.FuncionesProfesor;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,8 +38,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_alumnos);
-
-       // Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content), Utils.MONSERRAT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 
@@ -129,7 +128,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     private void loadData() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mList = new ArrayList<>();
-       // mList.add(new Alumno("ELEESEI","ESATAS","207/15","2015","as2d","","FCEyT","29/09/2018","23/15", true));
+        mList.add(new Alumno("","","","2015","as2d","","FCEyT","29/09/2018","23/15", true));
 
         mAdapter = new AlumnosAdapter(mList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);

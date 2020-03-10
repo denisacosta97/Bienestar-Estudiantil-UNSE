@@ -2,12 +2,14 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
@@ -15,6 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
 import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
 import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
@@ -27,6 +32,7 @@ import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.PassMissedActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -38,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
+    LinearLayout layoutFondo;
     DialogoProcesamiento dialog;
     EditText edtUser, edtPass;
     VideoView mVideoView;
@@ -45,15 +52,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-            setContentView(R.layout.activity_login);
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        layoutFondo = findViewById(R.id.backgroundlogin);
 
-            loadViews();
+        Glide.with(this).load(R.drawable.img_unse2)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        layoutFondo.setBackground(resource);
+                    }
+                });
 
-            loadListener();
+        loadViews();
 
-            loadData();
+        loadListener();
+
+        loadData();
 
 
 
@@ -101,6 +117,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                break;
+            case R.id.txtPassMissed:
+                startActivity(new Intent(LoginActivity.this, PassMissedActivity.class));
                 break;
             case R.id.btnBack:
                 onBackPressed();

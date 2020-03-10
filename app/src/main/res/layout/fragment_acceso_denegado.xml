@@ -24,7 +24,8 @@
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_black"/>
 
         <Button
             android:layout_marginTop="20dp"
@@ -34,7 +35,8 @@
             android:background="@drawable/button_border"
             android:text="REGISTRARSE"
             android:textColor="@color/colorWhite"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:fontFamily="@font/montserrat_black"/>
 
     </LinearLayout>
 

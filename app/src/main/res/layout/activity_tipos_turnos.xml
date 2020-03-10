@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:padding="10dp"
-        android:textStyle="bold"
-        android:text="¿Qué tipo de turno desea realizar?" />
+        android:text="¿Qué tipo de turno desea realizar?"
+        android:fontFamily="@font/montserrat_black"/>
 
     <LinearLayout
         android:layout_margin="30dp"
@@ -24,8 +24,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

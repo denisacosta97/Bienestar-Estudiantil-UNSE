@@ -14,11 +14,12 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class MainGestionDeportesActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionDeportesActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -29,7 +30,7 @@ public class MainGestionDeportesActivity extends AppCompatActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_gestion_deportes);
+        setContentView(R.layout.activity_gestion_deportes);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -39,11 +40,10 @@ public class MainGestionDeportesActivity extends AppCompatActivity implements Vi
         loadListener();
 
         loadData();
-
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión deportes");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de deportes");
 
     }
 
@@ -55,19 +55,10 @@ public class MainGestionDeportesActivity extends AppCompatActivity implements Vi
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), ABMInscriptosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), GestionBecadosActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(), GestionDeportesActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(getApplicationContext(), GestionProfeActivity.class));
-                        break;
-                    case 5:
-                        startActivity(new Intent(getApplicationContext(), GestionTorneoActivity.class));
+                        startActivity(new Intent(getApplicationContext(), BMDeportesActivity.class));
                         break;
 
                 }
@@ -80,11 +71,8 @@ public class MainGestionDeportesActivity extends AppCompatActivity implements Vi
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1, "Alumnos inscriptos",R.drawable.ic_usuarios, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(2, "Gestión de becados",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Gestión de deportes",R.drawable.ic_deportes, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(4, "Gestión de profesores",R.drawable.ic_entrenador, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(5, "Gestión de torneos",R.drawable.ic_cup, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(1,"Asistencia",R.drawable.ic_listado, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(2,"Modificar información",R.drawable.ic_editar, R.color.colorFCEyT ));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
