@@ -24,12 +24,13 @@ public class UsuariosRepo {
         return mUsuario;
     }
 
-    public void setUsuarios(Usuario carrito) {
-        this.mUsuario = carrito;
+    public void setUsuarios(Usuario usuario) {
+        this.mUsuario = usuario;
     }
 
     static String createTable() {
-        return String.format("create table %s(%s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s)",
+        return String.format("create table %s(%s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s, %s %s %s," +
+                        "%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s, %s %s %s,%s %s %s,%s %s %s)",
                 Usuario.TABLE,
                 Usuario.KEY_ID_USER, Utils.INT_TYPE, Utils.AUTO_INCREMENT,
                 Usuario.KEY_NOMB, Utils.STRING_TYPE, Utils.NULL_TYPE,
@@ -44,36 +45,61 @@ public class UsuariosRepo {
                 Usuario.KEY_SEX, Utils.STRING_TYPE, Utils.NULL_TYPE,
                 Usuario.KEY_MAIL, Utils.STRING_TYPE, Utils.NULL_TYPE,
                 Usuario.KEY_TYPE_USER, Utils.INT_TYPE, Utils.NULL_TYPE,
+                Usuario.KEY_FECHA_REGISTRO, Utils.STRING_TYPE, Utils.NULL_TYPE,
                 Usuario.KEY_CHK_DATA, Utils.STRING_TYPE, Utils.NULL_TYPE);
     }
 
-
-    public int insert(Usuario carrito) {
-        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+    public ContentValues loadValues(Usuario usuario) {
         ContentValues values = new ContentValues();
-        values.put(Usuario.KEY_ID_USER, carrito.getIdUsuario());
-        values.put(Usuario.KEY_NOMB, carrito.getNombre());
-        values.put(Usuario.KEY_APE, carrito.getApellido());
-        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaNameWithinHour(carrito.getFechaNac()));
-        values.put(Usuario.KEY_PAIS, carrito.getPais());
-        values.put(Usuario.KEY_PROV, carrito.getProvincia());
-        values.put(Usuario.KEY_LOC, carrito.getLocalidad());
-        values.put(Usuario.KEY_DOM, carrito.getDomicilio());
-        values.put(Usuario.KEY_BAR, carrito.getBarrio());
-        values.put(Usuario.KEY_TEL, carrito.getTelefono());
-        values.put(Usuario.KEY_SEX, carrito.getSexo());
-        values.put(Usuario.KEY_MAIL, carrito.getMail());
-        values.put(Usuario.KEY_TYPE_USER, carrito.getTipoUsuario());
-        values.put(Usuario.KEY_CHK_DATA, carrito.getCheckData());
-        float x = db.insert(Usuario.TABLE, null, values);
-        DBManager.getInstance().closeDatabase();
-        return (int)x;
+        values.put(Usuario.KEY_ID_USER, usuario.getIdUsuario());
+        values.put(Usuario.KEY_NOMB, usuario.getNombre());
+        values.put(Usuario.KEY_APE, usuario.getApellido());
+        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaNameWithinHour(usuario.getFechaNac()));
+        values.put(Usuario.KEY_PAIS, usuario.getPais());
+        values.put(Usuario.KEY_PROV, usuario.getProvincia());
+        values.put(Usuario.KEY_LOC, usuario.getLocalidad());
+        values.put(Usuario.KEY_DOM, usuario.getDomicilio());
+        values.put(Usuario.KEY_BAR, usuario.getBarrio());
+        values.put(Usuario.KEY_TEL, usuario.getTelefono());
+        values.put(Usuario.KEY_SEX, usuario.getSexo());
+        values.put(Usuario.KEY_MAIL, usuario.getMail());
+        values.put(Usuario.KEY_FECHA_REGISTRO, Utils.getFechaName(usuario.getFechaRegistro()));
+        values.put(Usuario.KEY_TYPE_USER, usuario.getTipoUsuario());
+        values.put(Usuario.KEY_CHK_DATA, usuario.getCheckData());
+        return values;
+    }
+
+    public Usuario loadData(Cursor cursor) {
+        mUsuario = new Usuario();
+        mUsuario.setIdUsuario(cursor.getInt(0));
+        mUsuario.setNombre(cursor.getString(1));
+        mUsuario.setApellido(cursor.getString(2));
+        mUsuario.setFechaNac(Utils.getFechaDate(cursor.getString(3)));
+        mUsuario.setPais(cursor.getString(4));
+        mUsuario.setProvincia(cursor.getString(5));
+        mUsuario.setLocalidad(cursor.getString(6));
+        mUsuario.setDomicilio(cursor.getString(7));
+        mUsuario.setBarrio(cursor.getString(8));
+        mUsuario.setTelefono(cursor.getString(9));
+        mUsuario.setSexo(cursor.getString(10));
+        mUsuario.setMail(cursor.getString(11));
+        mUsuario.setTipoUsuario(cursor.getInt(12));
+        mUsuario.setCheckData(cursor.getString(13));
+        return mUsuario;
     }
 
 
-    public void delete(Usuario carrito) {
+    public int insert(Usuario usuario) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        db.delete(Usuario.TABLE, Usuario.KEY_ID_USER + " = ?", new String[]{String.valueOf(carrito.getIdUsuario())});
+        float x = db.insert(Usuario.TABLE, null, loadValues(usuario));
+        DBManager.getInstance().closeDatabase();
+        return (int) x;
+    }
+
+
+    public void delete(Usuario usuario) {
+        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+        db.delete(Usuario.TABLE, Usuario.KEY_ID_USER + " = ?", new String[]{String.valueOf(usuario.getIdUsuario())});
         DBManager.getInstance().closeDatabase();
     }
 
@@ -84,20 +110,7 @@ public class UsuariosRepo {
         Cursor cursor = db.rawQuery("select * from " + Usuario.TABLE + " where " + Usuario.KEY_ID_USER + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            mUsuario.setIdUsuario(cursor.getInt(0));
-            mUsuario.setNombre(cursor.getString(1));
-            mUsuario.setApellido(cursor.getString(2));
-            mUsuario.setFechaNac(Utils.getFechaDate(cursor.getString(3)));
-            mUsuario.setPais(cursor.getString(4));
-            mUsuario.setProvincia(cursor.getString(5));
-            mUsuario.setLocalidad(cursor.getString(6));
-            mUsuario.setDomicilio(cursor.getString(7));
-            mUsuario.setBarrio(cursor.getString(8));
-            mUsuario.setTelefono(cursor.getString(9));
-            mUsuario.setSexo(cursor.getString(10));
-            mUsuario.setMail(cursor.getString(11));
-            mUsuario.setTipoUsuario(cursor.getInt(12));
-            mUsuario.setCheckData(cursor.getString(13));
+            mUsuario = loadData(cursor);
             cursor.close();
         }
         DBManager.getInstance().closeDatabase();
@@ -117,26 +130,11 @@ public class UsuariosRepo {
 
     }
 
-    public void update(Usuario carrito) {
+    public void update(Usuario usuario) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Usuario.KEY_ID_USER, carrito.getIdUsuario());
-        values.put(Usuario.KEY_NOMB, carrito.getNombre());
-        values.put(Usuario.KEY_APE, carrito.getApellido());
-        values.put(Usuario.KEY_FECHA_NAC, Utils.getFechaNameWithinHour(carrito.getFechaNac()));
-        values.put(Usuario.KEY_PAIS, carrito.getPais());
-        values.put(Usuario.KEY_PROV, carrito.getProvincia());
-        values.put(Usuario.KEY_LOC, carrito.getLocalidad());
-        values.put(Usuario.KEY_DOM, carrito.getDomicilio());
-        values.put(Usuario.KEY_BAR, carrito.getBarrio());
-        values.put(Usuario.KEY_TEL, carrito.getTelefono());
-        values.put(Usuario.KEY_SEX, carrito.getSexo());
-        values.put(Usuario.KEY_MAIL, carrito.getMail());
-        values.put(Usuario.KEY_TYPE_USER, carrito.getTipoUsuario());
-        values.put(Usuario.KEY_CHK_DATA, carrito.getCheckData());
-        String id = String.valueOf(carrito.getIdUsuario());
+        String id = String.valueOf(usuario.getIdUsuario());
         String selection = Usuario.KEY_ID_USER + " = " + id;
-        db.update(Usuario.TABLE, values, selection, null);
+        db.update(Usuario.TABLE, loadValues(usuario), selection, null);
         DBManager.getInstance().closeDatabase();
     }
 
@@ -157,22 +155,7 @@ public class UsuariosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mUsuario = new Usuario();
-                mUsuario.setIdUsuario(cursor.getInt(0));
-                mUsuario.setNombre(cursor.getString(1));
-                mUsuario.setApellido(cursor.getString(2));
-                mUsuario.setFechaNac(Utils.getFechaDate(cursor.getString(3)));
-                mUsuario.setPais(cursor.getString(4));
-                mUsuario.setProvincia(cursor.getString(5));
-                mUsuario.setLocalidad(cursor.getString(6));
-                mUsuario.setDomicilio(cursor.getString(7));
-                mUsuario.setBarrio(cursor.getString(8));
-                mUsuario.setTelefono(cursor.getString(9));
-                mUsuario.setSexo(cursor.getString(10));
-                mUsuario.setMail(cursor.getString(11));
-                mUsuario.setTipoUsuario(cursor.getInt(12));
-                mUsuario.setCheckData(cursor.getString(13));
-                list.add(mUsuario);
+                list.add(loadData(cursor));
             } while (cursor.moveToNext());
         }
         DBManager.getInstance().closeDatabase();
@@ -190,22 +173,7 @@ public class UsuariosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mUsuario = new Usuario();
-                mUsuario.setIdUsuario(cursor.getInt(0));
-                mUsuario.setNombre(cursor.getString(1));
-                mUsuario.setApellido(cursor.getString(2));
-                mUsuario.setFechaNac(Utils.getFechaDate(cursor.getString(3)));
-                mUsuario.setPais(cursor.getString(4));
-                mUsuario.setProvincia(cursor.getString(5));
-                mUsuario.setLocalidad(cursor.getString(6));
-                mUsuario.setDomicilio(cursor.getString(7));
-                mUsuario.setBarrio(cursor.getString(8));
-                mUsuario.setTelefono(cursor.getString(9));
-                mUsuario.setSexo(cursor.getString(10));
-                mUsuario.setMail(cursor.getString(11));
-                mUsuario.setTipoUsuario(cursor.getInt(12));
-                mUsuario.setCheckData(cursor.getString(13));
-                list.add(mUsuario);
+                list.add(loadData(cursor));
             } while (cursor.moveToNext());
         }
         DBManager.getInstance().closeDatabase();
@@ -215,9 +183,9 @@ public class UsuariosRepo {
 
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        db.delete(Usuario.TABLE,null,null);
+        db.delete(Usuario.TABLE, null, null);
         DBManager.getInstance().closeDatabase();
     }
 

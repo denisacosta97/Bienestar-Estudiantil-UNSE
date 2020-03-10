@@ -19,7 +19,8 @@ public class Profesor extends Usuario {
     public Profesor(Usuario usuario, String profesion, String checkData1, int idProfesor, Date fechaIngreso) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
-                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(),
+                usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
         this.profesion = profesion;
         this.checkData = checkData1;
         this.idProfesor = idProfesor;
@@ -27,7 +28,8 @@ public class Profesor extends Usuario {
     }
 
     public Profesor() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "",
+                "", "", "", "", "", "", "", "", new Date(), new Date());
         this.profesion = "";
         this.checkData = "";
         this.idProfesor = -1;

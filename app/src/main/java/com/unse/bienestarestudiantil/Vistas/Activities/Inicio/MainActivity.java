@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityRecord;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.PerfilActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.PerfilProfesorActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Fragment mFragment;
     int itemSelecionado = -1;
-    boolean loginOk = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!(fragmentoGenerico instanceof InicioFragmento)) {
             boolean isLogin = manager.getValue(Utils.IS_LOGIN);
-            if (isLogin) { //Aquí le saqué el !
+            if (!isLogin) { //Aquí le saqué el !
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }

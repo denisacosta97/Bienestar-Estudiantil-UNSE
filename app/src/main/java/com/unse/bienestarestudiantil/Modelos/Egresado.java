@@ -19,14 +19,15 @@ public class Egresado extends Usuario {
     public Egresado(Usuario usuario, String profesion, String checkData1, int idEgresado, Date fechaEgreso) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
-                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());this.profesion = profesion;
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
+        this.profesion = profesion;
         this.checkData = checkData1;
         this.idEgresado = idEgresado;
         this.fechaEgreso = fechaEgreso;
     }
 
     public Egresado() {
-        super(-1, -1, "", "", "", "","", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "","", "", "", "", "", "", "", "", new Date(), new Date());
         this.profesion = "";
         this.checkData = "";
         this.idEgresado = -1;

@@ -50,8 +50,7 @@ public class DeportesFragment extends Fragment {
     private void loadDataRecycler() {
         mDeportes = new ArrayList<>();
 
-        mDeportes.add(new Deporte(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
-        mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
+       mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
         mDeportes.add(new Deporte(2, R.drawable.ic_becas, "Cestobol", "Yesica Kofler", "lunes, miércoles, viernes","19:00hs"));
         mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
         mDeportes.add(new Deporte(4, R.drawable.ic_futbol_fem, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
@@ -63,6 +62,7 @@ public class DeportesFragment extends Fragment {
         mDeportes.add(new Deporte(10, R.drawable.ic_tenis_mesa, "Tenis de Mesa", "Rodrigo Costa Mayuli", "martes, jueves y sábado","19:30hs"));
         mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
         mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
+        mDeportes.add(new Deporte(13, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
 
         mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);

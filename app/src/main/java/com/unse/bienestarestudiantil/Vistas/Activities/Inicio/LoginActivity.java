@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
-    RelativeLayout layoutFondo;
     DialogoProcesamiento dialog;
     EditText edtUser, edtPass;
     VideoView mVideoView;
@@ -154,12 +153,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Utils.showToast(getApplicationContext(), "¡Sesión iniciada!");
                     JSONObject datos = jsonObject.getJSONObject("datos");
                     JSONObject tipo = jsonObject.getJSONObject("tipo");
+                    String token = jsonObject.getJSONObject("token").getString("token");
                     //Insertar BD
-                    guardarDatos(datos, tipo);
+                    guardarDatos(datos, tipo, token);
                     PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
                     preferenceManager.setValue(Utils.IS_LOGIN, true);
                     int dni = Integer.parseInt(datos.getString("idUsuario"));
                     preferenceManager.setValue(Utils.MY_ID, dni);
+                    preferenceManager.setValue(Utils.TOKEN, token);
                     //Main
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finishAffinity();
@@ -181,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void guardarDatos(JSONObject datos, JSONObject tipo) {
+    private void guardarDatos(JSONObject datos, JSONObject tipo, String token) {
         try {
             String idUsuario = datos.getString("idUsuario");
             String tipoUsuario = datos.getString("tipoUsuario");
@@ -196,10 +197,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String sexo = datos.getString("sexo");
             String mail = datos.getString("mail");
             String checkData = datos.getString("checkData");
+            Date fechaReg = Utils.getFechaDateWithHour(datos.getString("fechaRegistro"));
             String foto = "www.jje.com/"+idUsuario;
             Date fechaNac = Utils.getFechaDate(datos.getString("fechaNac"));
+
             Usuario usuario = new Usuario(Integer.parseInt(idUsuario),Integer.parseInt(tipoUsuario),nombre,apellido,pais,
-                    provincia,localidad,domicilio,barrio,telefono,sexo,mail,checkData,foto,fechaNac);
+                    provincia,localidad,domicilio,barrio,telefono,sexo,mail,checkData,foto,fechaNac, fechaReg);
             UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
             usuariosRepo.insert(usuario);
             switch (Integer.parseInt(tipoUsuario)){

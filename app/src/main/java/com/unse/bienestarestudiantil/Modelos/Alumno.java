@@ -23,7 +23,7 @@ public class Alumno extends Usuario{
     public Alumno(Usuario usuario, String carrera, String facultad, String legajo, String anio, int idAlumno, String checkData1, int idRegularidad) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
-                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac());
+                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
         this.carrera = carrera;
         this.facultad = facultad;
         this.legajo = legajo;
@@ -34,7 +34,7 @@ public class Alumno extends Usuario{
     }
 
     public Alumno() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date());
+        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date(), new Date());
         this.carrera = "";
         this.facultad = "";
         this.legajo = "";

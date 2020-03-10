@@ -17,26 +17,32 @@
         <item
             android:id="@+id/item_upa"
             android:icon="@drawable/ic_upa"
+            android:visible="false"
             android:title="UPA"/>
         <item
             android:id="@+id/item_becas"
             android:icon="@drawable/ic_becas"
+            android:visible="false"
             android:title="Área Becas"/>
         <item
             android:id="@+id/item_ciber"
             android:icon="@drawable/ic_ciber"
+            android:visible="false"
             android:title="Ciber"/>
         <item
             android:id="@+id/item_transporte"
             android:icon="@drawable/ic_transporte"
+            android:visible="false"
             android:title="Transporte"/>
         <item
             android:id="@+id/item_resi"
             android:icon="@drawable/ic_residencia"
+            android:visible="false"
             android:title="Residencia"/>
         <item
             android:id="@+id/item_comedor"
             android:icon="@drawable/ic_menu_comedor"
+            android:visible="false"
             android:title="Comedor"/>
     </group>
 
@@ -60,7 +66,6 @@
 
             <item
                 android:id="@+id/menu_opcion_1"
-
                 android:icon="@drawable/ic_menu"
                 android:title="Sobre nosotros"/>
             <item

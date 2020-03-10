@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.service.autofill.FieldClassification;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -39,6 +40,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -57,18 +60,18 @@ public class Utils {
     public static final String IS_FIRST_TIME_LAUNCH = "is_first";
     public static final String IS_LOGIN = "login_yes";
     public static final String MY_ID = "my_id_user";
+    public static final String TOKEN = "my_token";
+    //Constantes para activities
+    public static final String DEPORTE_NAME = "dato_deporte";
+    public static final String DEPORTE_ID = "id_deporte";
+
+
     public static final int PERMISSION_ALL = 1010;
 
     public static final int NOTICIA_NORMAL = 3030;
     public static final int NOTICIA_BUTTON_WEB = 3131;
     public static final int NOTICIA_BUTTON_TIENDA = 3132;
     public static final int NOTICIA_BUTTON_APP = 3133;
-
-    public static final int USERTYPE_EGR = 2904;
-    public static final int USERTYPE_EST = 2903;
-    public static final int USERTYPE_DOC = 2902;
-    public static final int USERTYPE_PRO = 2901;
-    public static final int USERTYPE_PAR = 2900;
 
     public static final int TIPO_COMEDOR = 1;
     public static final int TIPO_DEPORTE = 2;
@@ -85,7 +88,7 @@ public class Utils {
 
     public static final String MONSERRAT = "Montserrat-Regular.ttf";
     public static final String MONTSERRAT_BOLD = "Montserrat-Black.ttf";
-    public static final String DEPORTE_NAME = "dato_deporte";
+
     public static final String BECA_NAME = "dato_deporte";
     public static final String BARCODE = "dato_barcode";
     public static final String TORNEO = "dato_torneo";
@@ -105,6 +108,12 @@ public class Utils {
     public static final String URL = "http://192.168.0.12/bienestar/usuario/insertar.php";
     public static final String URL_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
     public static final String URL_IMAGE = "http://192.168.0.12/bienestar/uploadImage.php";
+
+    public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
+
+    public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
+
 
     public static void changeColorDrawable(ImageView view, Context context, int color) {
         DrawableCompat.setTint(
@@ -393,6 +402,26 @@ public class Utils {
 
     }
 
+    public static Date getFechaDateWithHour(String fecha) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date fechaI = null;
+        try {
+            fechaI = simpleDateFormat.parse(fecha);
+
+        } catch (ParseException e) {
+            simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+            try {
+                fechaI = simpleDateFormat.parse(fecha);
+
+            } catch (ParseException e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return fechaI;
+
+    }
+
 
     public static String getHora(Date date) {
 
@@ -437,9 +466,41 @@ public class Utils {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String value = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
-                + cal.get(Calendar.DAY_OF_MONTH) + " " + cal.get(Calendar.HOUR_OF_DAY) + ":" +
-                cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+        String mesS, diaS, minutosS, segS, horasS;
+        int mes = cal.get(Calendar.MONTH) + 1;
+        if (mes < 10){
+            mesS = "0"+mes;
+        }else
+            mesS = String.valueOf(mes);
+
+        int dia = cal.get(Calendar.DAY_OF_MONTH);
+        if (dia < 10){
+            diaS = "0"+dia;
+        }else
+            diaS = String.valueOf(dia);
+
+        int minutos = cal.get(Calendar.MINUTE);
+        if (minutos < 10){
+            minutosS = "0"+minutos;
+        }else
+            minutosS = String.valueOf(minutos);
+
+        int seg = cal.get(Calendar.SECOND);
+        if (seg < 10){
+            segS = "0"+seg;
+        }else
+            segS = String.valueOf(seg);
+
+        int horas = cal.get(Calendar.HOUR_OF_DAY);
+        if (horas < 10)
+            horasS = "0"+horas;
+        else
+            horasS = String.valueOf(horas);
+
+
+        String value = cal.get(Calendar.YEAR) + "-" + mesS + "-"
+                + diaS + " " + horasS + ":" +
+                minutosS + ":" + segS;
 
         return value;
 
@@ -491,5 +552,12 @@ public class Utils {
         DBManager.initializeInstance(gestor);
     }
 
+    public static int getEdad(Date fechaNac) {
+        Date hoy = new Date(System.currentTimeMillis());
+        long tiempo = hoy.getTime() - fechaNac.getTime();
+        double years = tiempo / 3.15576e+10;
+        int age = (int) Math.floor(years);
+        return  age;
+    }
 }
 

@@ -50,6 +50,10 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
         Opciones s = arrayList.get(position);
 
         holder.txtTitulo.setText(s.getTitulo());
+        if (s.getColorText() != 0)
+            holder.txtTitulo.setTextColor(context.getResources().getColor(s.getColorText()));
+        if (s.getSizeText() != 0)
+            holder.txtTitulo.setTextSize(Float.parseFloat(String.valueOf(s.getSizeText())));
         Glide.with(holder.imgIcono.getContext())
                 .load(s.getIcon())
                 .into(holder.imgIcono);

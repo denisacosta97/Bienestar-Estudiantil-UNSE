@@ -22,6 +22,7 @@
     <color name="colorLightBlue">#0097A7</color>
     <color name="colorSelect">#48000000</color>
     <color name="colorGreyDark">#777777</color>
+    <color name="colorTextDefault">#808080</color>
 
 
     <!--colors for profile-->

@@ -414,33 +414,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (tipo == 1) {
             String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
                     "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
-                    "&tipo=%s&mail=%s&tel=%s&barr=%s";
+                    "&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, sexo, key, carrera, facultad,
                     anioIng, legajo, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
-                    "1", mail, telefono, barrio);
+                    "1", mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
 
         } else if (tipo == 2) {
 
             String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
                     "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-                    "&prof=%s&fechain=%s&barr=%s";
+                    "&prof=%s&fechain=%s&barr=%s&fechaR=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
                     localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())), tipo, mail, telefono,
-                    profesion, anioIng, barrio);
+                    profesion, anioIng, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
 
         } else if (tipo == 4) {
             String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
                     "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-                    "&prof=%s&fechaeg=%s&barr=%s";
+                    "&prof=%s&fechaeg=%s&barr=%s&fechaR=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
-                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
-                    tipo, mail, telefono, profesion, anioEgreso, barrio);
+                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
+                    tipo, mail, telefono, profesion, anioEgreso, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
         } else {
             String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-                    "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s";
+                    "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
             resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad,
                     domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
-                    tipo, mail, telefono, barrio);
+                    tipo, mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
         }
         return resp;
     }
@@ -540,7 +540,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //Exito
                     Utils.showToast(getApplicationContext(), "Registro exitoso!");
                     finish();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     Utils.showToast(getApplicationContext(), "Inicia sesión para confirmar");
                     break;
                 case 2:

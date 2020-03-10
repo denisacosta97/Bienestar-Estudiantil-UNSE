@@ -20,18 +20,19 @@ public class Usuario {
     public static final String KEY_SEX = "sexo";
     public static final String KEY_MAIL = "mail";
     public static final String KEY_TYPE_USER = "tipoUsuario";
+    public static final String KEY_FECHA_REGISTRO = "fechaRegistro";
     public static final String KEY_CHK_DATA = "checkData";
 
     private int idUsuario, tipoUsuario;
     private String nombre, apellido, pais, provincia, localidad, domicilio,
             barrio, telefono, sexo, mail, checkData;
     private String foto;
-    private Date fechaNac;
+    private Date fechaNac, fechaRegistro;
 
     public Usuario(int idUsuario, int tipoUsuario, String nombre, String apellido,
                    String pais, String provincia, String localidad, String domicilio, String barrio,
                    String telefono, String sexo, String mail, String checkData, String foto,
-                   Date fechaNac) {
+                   Date fechaNac, Date fechaRegistro) {
         this.idUsuario = idUsuario;
         this.tipoUsuario = tipoUsuario;
         this.nombre = nombre;
@@ -47,6 +48,7 @@ public class Usuario {
         this.checkData = checkData;
         this.foto = foto;
         this.fechaNac = fechaNac;
+        this.fechaRegistro = fechaRegistro;
     }
 
     public Usuario() {
@@ -65,6 +67,14 @@ public class Usuario {
         this.checkData = "";
         this.foto = "";
         this.fechaNac = new Date();
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public int getIdUsuario() {
