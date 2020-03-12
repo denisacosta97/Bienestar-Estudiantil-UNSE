@@ -30,7 +30,6 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.PerfilProfesorActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
             case R.id.profe_profile:
-                startActivity(new Intent(MainActivity.this, PerfilProfesorActivity.class));
+                //startActivity(new Intent(MainActivity.this, PerfilProfesorActivity.class));
                 break;
             case R.id.item_config:
                 startActivity(new Intent(this, GestionSistemaActivity.class));

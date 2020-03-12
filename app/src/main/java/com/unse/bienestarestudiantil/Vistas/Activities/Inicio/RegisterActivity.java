@@ -58,6 +58,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.unse.bienestarestudiantil.Herramientas.Utils.GET_FROM_DNI;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.GET_FROM_GALLERY;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.facultad;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.faya;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.fceyt;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.fcf;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.fcm;
+import static com.unse.bienestarestudiantil.Herramientas.Utils.fhcys;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,33 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Categoria> mList;
     DialogoProcesamiento dialog;
     Spinner spinner, spinner2;
-    String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
-    String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
-            "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
-    String[] fceyt = {"Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Electrónica",
-            "Ingeniería Eléctrica", "Ingeniería en Agrimensura", "Ingeniería Hidráulica",
-            "Ingeniería Industrial", "Ingeniería Vial", "Licenciatura en Hidrología Subterránea",
-            "Licenciatura en Matemática", "Licenciatura en Sistemas de Información",
-            "Profesorado en Física", "Profesorado en Informática", "Profesorado en Matemática",
-            "Programador Universitario en Informática", "Tecnicatura Universitaria Vial",
-            "Tecnicatura Universitaria en Construcciones",
-            "Tecnicatura Universitaria en Hidrología Subterránea",
-            "Tecnicatura Universitaria en Organización y Control de la Producción"};
-    String[] fcf = {"Ingeniería Forestal", "Ingeniería en Industrias Forestales",
-            "Licenciatura en Ecología y Conservación del Ambiente",
-            "Tecnicatura Universitaria Fitosanitarista",
-            "Tecnicatura Universitaria en Viveros y Plantaciones Forestales",
-            "Tecnicatura Universitaria en Aserraderos y Carpintería Industrial"};
 
-    String[] fcm = {"Medicina"};
-
-    String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
-            "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
-            "Licenciatura en Educación para la Salud", "Licenciatura en Obstetricia",
-            "Licenciatura en Filosofía", "Licenciatura en Trabajo Social",
-            "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
-            "Tecnicatura Sup. Adm. y Gestión Universitaria",
-            "Tecnicatura en Educación Intercultural Bilingue"};
 
     private int TIPO_USER = 1;
     boolean doubleBackToExitPressedOnce = false;
@@ -347,40 +327,52 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //Comprobacion de contraseña
                     if (pass.equals(passConf)) {
 
-                        if (TIPO_USER == 1) {
-                            if (!validador.noVacio(faculta, carrera, anioIngreso2)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                        domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, faculta, anioIngreso2
-                                        , legajo, Utils.crypt(pass), null, null));
+                        if (validador.validarContraseña(pass)) {
+                            if (TIPO_USER == 1) {
+                                if (!validador.noVacio(faculta, carrera, anioIngreso2, legajo)) {
+                                    if (validador.isLegajo(legajo))
+                                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                                domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 1, carrera, faculta, anioIngreso2
+                                                , legajo, Utils.crypt(pass), null, null));
+                                    else
+                                        Utils.showToast(getApplicationContext(), "Número de legajo inválido");
 
-                            } else {
-                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                            }
-                        } else if (TIPO_USER == 2) {
-                            if (!validador.noVacio(profesion, anioIngreso)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                        domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail,
-                                        2, null, null, anioIngreso, null, Utils.crypt(pass),
-                                        profesion, null));
-                            } else {
-                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                            }
-                        } else if (TIPO_USER == 4) {
-                            if (!validador.noVacio(profesion2, anioEgreso)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
-                                        telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
-                                        null, null, null, null, Utils.crypt(pass),
-                                        profesion2, anioEgreso));
+                                } else {
+                                    Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                                }
+                            } else if (TIPO_USER == 2) {
+                                if (!validador.noVacio(profesion, anioIngreso)) {
+                                    if (validador.validarNumero(anioIngreso))
+                                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                                domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail,
+                                                2, null, null, anioIngreso, null, Utils.crypt(pass),
+                                                profesion, null));
+                                    else
+                                        Utils.showToast(getApplicationContext(), "El año de ingreso no es válido");
+                                } else {
+                                    Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                                }
+                            } else if (TIPO_USER == 4) {
+                                if (!validador.noVacio(profesion2, anioEgreso)) {
+                                    if (validador.validarNumero(anioEgreso))
+                                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
+                                                telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
+                                                null, null, null, null, Utils.crypt(pass),
+                                                profesion2, anioEgreso));
+                                    else
+                                        Utils.showToast(getApplicationContext(), "El año de ingreso no es válido");
 
+                                } else {
+                                    Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                                }
                             } else {
-                                Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
+                                //NoDocente y Particular
+                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
+                                        barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, TIPO_USER,
+                                        null, null, null, null, Utils.crypt(pass), null, null));
                             }
-                        } else {
-                            //NoDocente y Particular
-                            sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
-                                    barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, TIPO_USER,
-                                    null, null, null, null, Utils.crypt(pass), null, null));
-                        }
+                        } else
+                            Utils.showToast(getApplicationContext(), "La contraseña debe ser mínimo de 4 caracteres");
 
 
                     } else {
@@ -412,33 +404,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         contrasenia, String profesion, String anioEgreso) {
         String resp = "";
         if (tipo == 1) {
-            String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-                    "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
-                    "&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
-            resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, sexo, key, carrera, facultad,
+            resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, sexo, key, carrera, facultad,
                     anioIng, legajo, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
                     "1", mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
 
         } else if (tipo == 2) {
-
-            String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-                    "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-                    "&prof=%s&fechain=%s&barr=%s&fechaR=%s";
-            resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
+            resp = String.format(Utils.dataProfesor, dni, nombre, apellido, fecha, pais, provincia,
                     localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())), tipo, mail, telefono,
                     profesion, anioIng, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
 
         } else if (tipo == 4) {
-            String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-                    "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-                    "&prof=%s&fechaeg=%s&barr=%s&fechaR=%s";
-            resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia,
+            resp = String.format(Utils.dataEgresado, dni, nombre, apellido, fecha, pais, provincia,
                     localidad, domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
                     tipo, mail, telefono, profesion, anioEgreso, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
         } else {
-            String data = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-                    "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
-            resp = String.format(data, dni, nombre, apellido, fecha, pais, provincia, localidad,
+            resp = String.format(Utils.dataPartiNoDoc, dni, nombre, apellido, fecha, pais, provincia, localidad,
                     domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
                     tipo, mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
         }
@@ -467,7 +447,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void sendServer(String data) {
 
 
-        String URL = Utils.URL + data;
+        String URL = Utils.URL_USUARIO_INSERTAR + data;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -485,7 +465,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_IMAGE, new Response.Listener<String>() {
+        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_USUARIO_IMAGE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 int re = response.length();

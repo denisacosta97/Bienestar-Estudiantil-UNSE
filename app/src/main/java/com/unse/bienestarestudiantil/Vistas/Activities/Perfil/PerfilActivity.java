@@ -2,23 +2,27 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
+import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
+import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
+import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.Profesor;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.CredencialActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.GestionArchivosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.InfoAlumnoActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
@@ -28,8 +32,8 @@ import java.util.ArrayList;
 
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView mHistoriaC, mCredenciales, mInfo, mMensajes, mConfig, mCerrarS;
     ImageView btnBack;
+    TextView txtNombre, txtDescripcion, txtFacultad;
 
     ArrayList<Opciones> mList;
     OpcionesAdapter mAdapter;
@@ -50,19 +54,22 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void loadData() {
+
+        loadInfo();
+
         mList = new ArrayList<>();
-        mList.add(new Opciones(1, "Mis Datos", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault,12));
-        mList.add(new Opciones(3, "Credenciales", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault,12));
-        mList.add(new Opciones(4, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorWhite, R.color.colorTextDefault,12));
-        mList.add(new Opciones(5, "¿Mensajes?", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault,12));
+        mList.add(new Opciones(1, "Mis Datos", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(3, "Credenciales", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(4, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(5, "¿Mensajes?", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(6, "Cerrar Sesión", R.drawable.ic_apagar, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(2, "Configuraciones", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault,12));
+        mList.add(new Opciones(2, "Configuraciones", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
 
 
-        mList.add(new Opciones(1, "Inscripciones", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault,12));
+        mList.add(new Opciones(1, "Inscripciones", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault, 12));
         mAdapter = new OpcionesAdapter(mList, getApplicationContext());
 
-        mLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        mLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
 
         mRecyclerViewFunciones.setLayoutManager(mLayoutManager);
         mRecyclerViewFunciones.setHasFixedSize(true);
@@ -70,29 +77,65 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void loadInfo() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        int id = manager.getValueInt(Utils.MY_ID);
+        Usuario usuario = new UsuariosRepo(getApplicationContext()).get(id);
+        txtNombre.setText("NOMBRE");
+        txtDescripcion.setText("CARRERA");
+        txtFacultad.setText("RANGO");
+        if (usuario != null) {
+            txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
+            if (usuario.getTipoUsuario() != 5) {
+                if (usuario.getTipoUsuario() == 1) {
+                    Alumno alumno = new AlumnosRepo(getApplicationContext()).get(id);
+                    if (alumno != null) {
+                        txtDescripcion.setText(alumno.getCarrera());
+                        txtFacultad.setText(alumno.getFacultad());
+                    }
+                } else if (usuario.getTipoUsuario() == 4) {
+                    Egresado egresado = new EgresadosRepo(getApplicationContext()).get(id);
+                    if (egresado != null) {
+                        txtDescripcion.setText(egresado.getProfesion());
+                        txtFacultad.setText(View.GONE);
+                    }
+                } else if (usuario.getTipoUsuario() == 2) {
+                    Profesor profesor = new ProfesorRepo(getApplicationContext()).get(id);
+                    if (profesor != null) {
+                        txtDescripcion.setText(profesor.getProfesion());
+                        txtFacultad.setText("PROFESOR");
+                    }
+                } else if (usuario.getTipoUsuario() == 3) {
+                    txtDescripcion.setVisibility(View.GONE);
+                    txtFacultad.setText("NODOCENTE");
+                }
+            } else {
+                txtDescripcion.setVisibility(View.GONE);
+                txtFacultad.setText("PARTICULAR");
+            }
+        }
+
+    }
+
 
     private void loadListener() {
-        mHistoriaC.setOnClickListener(this);
-        mCredenciales.setOnClickListener(this);
-        mInfo.setOnClickListener(this);
-        mMensajes.setOnClickListener(this);
-        mConfig.setOnClickListener(this);
-        mCerrarS.setOnClickListener(this);
-
         btnBack.setOnClickListener(this);
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerViewFunciones);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Tocaste: "+mList.get(position).getTitulo());
+                Utils.showToast(getApplicationContext(), "Tocaste: " + mList.get(position).getTitulo());
                 procesarClick(parent, view, position, (int) id);
             }
         });
     }
 
     private void procesarClick(RecyclerView parent, View view, int position, int id) {
-        switch (id){
+        switch (id) {
+            case 1:
+                startActivity(new Intent(getApplicationContext(), InfoUsuarioActivity.class));
+                break;
             case 6:
                 logout();
                 break;
@@ -127,39 +170,21 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void loadViews() {
-        mHistoriaC = findViewById(R.id.btnHistoriac);
-        mCredenciales = findViewById(R.id.btnCredenciales);
-        mInfo = findViewById(R.id.btnInfo);
-        mMensajes = findViewById(R.id.btnMensajes);
-        mConfig = findViewById(R.id.btnConfig);
-        mCerrarS = findViewById(R.id.btnCerrarses);
-
         btnBack = findViewById(R.id.btnBack);
         mRecyclerViewFunciones = findViewById(R.id.recycler);
+
+        txtNombre = findViewById(R.id.txtNombre);
+        txtDescripcion = findViewById(R.id.txtDescripcion);
+        txtFacultad = findViewById(R.id.txtFacultad);
 
 
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnBack:
                 onBackPressed();
-                break;
-            case R.id.btnHistoriac:
-                break;
-            case R.id.btnCredenciales:
-                startActivity(new Intent(PerfilActivity.this, CredencialActivity.class));
-                break;
-            case R.id.btnInfo:
-                startActivity(new Intent(PerfilActivity.this, InfoAlumnoActivity.class));
-                break;
-            case R.id.btnMensajes:
-                break;
-            case R.id.btnConfig:
-                break;
-            case R.id.btnCerrarses:
-                startActivity(new Intent(PerfilActivity.this, GestionArchivosActivity.class));
                 break;
         }
     }

@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:paddingTop="3dp">
 
             <ImageView
                 android:layout_width="120dp"
@@ -33,6 +33,16 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/ic_candado" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +59,7 @@
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Ingresa tu DNI"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:padding="10dp" />
 
                 <EditText
@@ -60,7 +70,7 @@
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Ingresa el mail asociado"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:padding="10dp" />
 
                 <LinearLayout
@@ -82,6 +92,27 @@
                         android:textColor="@color/whiteTextColor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:visibility="visible"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:padding="10dp"
+                        android:id="@+id/txtTengoClave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:text="Ya tengo mi nueva contraseña"
+                        android:textColor="@color/whiteTextColor"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/transparente"/>
+
 
                 </LinearLayout>
 

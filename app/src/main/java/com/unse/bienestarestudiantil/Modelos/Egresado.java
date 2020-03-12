@@ -14,9 +14,9 @@ public class Egresado extends Usuario {
 
     private String profesion, checkData;
     private int idEgresado;
-    private Date fechaEgreso;
+    private String fechaEgreso;
 
-    public Egresado(Usuario usuario, String profesion, String checkData1, int idEgresado, Date fechaEgreso) {
+    public Egresado(Usuario usuario, String profesion, String checkData1, int idEgresado, String fechaEgreso) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
                 usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
@@ -31,7 +31,7 @@ public class Egresado extends Usuario {
         this.profesion = "";
         this.checkData = "";
         this.idEgresado = -1;
-        this.fechaEgreso = new Date();
+        this.fechaEgreso = "";
     }
 
     public String getProfesion() {
@@ -58,11 +58,11 @@ public class Egresado extends Usuario {
         this.idEgresado = idEgresado;
     }
 
-    public Date getFechaEgreso() {
+    public String getFechaEgreso() {
         return fechaEgreso;
     }
 
-    public void setFechaEgreso(Date fechaEgreso) {
+    public void setFechaEgreso(String fechaEgreso) {
         this.fechaEgreso = fechaEgreso;
     }
 }

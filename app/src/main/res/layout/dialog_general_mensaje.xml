@@ -20,14 +20,12 @@
             android:padding="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtTitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¡Advertencia!"
-                android:textColor="@color/colorWhite"
-                android:textSize="19sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imgIcon"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_access_denegado" />
 
         </LinearLayout>
 
@@ -46,13 +44,12 @@
                 android:textSize="16sp"
                 android:text="¿Seguro que desea cerrar sesión?"
                 android:textStyle="bold"
-                android:gravity="center" />
+                android:textAlignment="center" />
 
             <LinearLayout
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_margin="10dp"
-                android:weightSum="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -65,24 +62,9 @@
                     android:background="@drawable/button_border"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_weight="0.45" />
+                    android:textSize="16sp" />
 
-                <View
-                    android:layout_weight="0.05"
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent" />
 
-                <Button
-                    android:id="@+id/btnNO"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NO"
-                    android:background="@drawable/button_border"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_weight="0.45" />
 
             </LinearLayout>
 

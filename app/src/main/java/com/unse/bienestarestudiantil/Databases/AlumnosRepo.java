@@ -24,8 +24,8 @@ public class AlumnosRepo {
         return mAlumno;
     }
 
-    public void setAlumnos(Alumno carrito) {
-        this.mAlumno = carrito;
+    public void setAlumnos(Alumno alumno) {
+        this.mAlumno = alumno;
     }
 
     static String createTable() {
@@ -39,26 +39,42 @@ public class AlumnosRepo {
                 Alumno.KEY_REG, Utils.INT_TYPE, Utils.NULL_TYPE,
                 Alumno.KEY_CHK_DATA, Utils.STRING_TYPE, Utils.NULL_TYPE);
     }
-
-    public int insert(Alumno carrito) {
-        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+    
+    public ContentValues loadValues(Alumno alumno){
         ContentValues values = new ContentValues();
-        values.put(Alumno.KEY_ID_ALU, carrito.getIdAlumno());
-        values.put(Alumno.KEY_CARR, carrito.getCarrera());
-        values.put(Alumno.KEY_FAC, carrito.getFacultad());
-        values.put(Alumno.KEY_ANIO, carrito.getAnio());
-        values.put(Alumno.KEY_LEG, carrito.getLegajo());
-        values.put(Alumno.KEY_REG, carrito.getIdRegularidad());
-        values.put(Alumno.KEY_CHK_DATA, carrito.getCheckData());
-        float x = db.insert(Alumno.TABLE, null, values);
+        values.put(Alumno.KEY_ID_ALU, alumno.getIdAlumno());
+        values.put(Alumno.KEY_CARR, alumno.getCarrera());
+        values.put(Alumno.KEY_FAC, alumno.getFacultad());
+        values.put(Alumno.KEY_ANIO, alumno.getAnio());
+        values.put(Alumno.KEY_LEG, alumno.getLegajo());
+        values.put(Alumno.KEY_REG, alumno.getIdRegularidad());
+        values.put(Alumno.KEY_CHK_DATA, alumno.getCheckData());
+        return values;
+    }
+
+    public Alumno loadCursor(Cursor cursor){
+        Alumno alumno = new Alumno();
+        alumno.setIdAlumno(cursor.getInt(0));
+        alumno.setCarrera(cursor.getString(1));
+        alumno.setFacultad(cursor.getString(2));
+        alumno.setAnio(cursor.getString(3));
+        alumno.setLegajo(cursor.getString(4));
+        alumno.setIdRegularidad(cursor.getInt(5));
+        alumno.setCheckData(cursor.getString(6));
+        return alumno;
+    }
+
+    public int insert(Alumno alumno) {
+        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+        float x = db.insert(Alumno.TABLE, null, loadValues(alumno));
         DBManager.getInstance().closeDatabase();
         return (int)x;
     }
 
 
-    public void delete(Alumno carrito) {
+    public void delete(Alumno alumno) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        db.delete(Alumno.TABLE, Alumno.KEY_ID_ALU + " = ?", new String[]{String.valueOf(carrito.getIdAlumno())});
+        db.delete(Alumno.TABLE, Alumno.KEY_ID_ALU + " = ?", new String[]{String.valueOf(alumno.getIdAlumno())});
         DBManager.getInstance().closeDatabase();
     }
 
@@ -69,13 +85,7 @@ public class AlumnosRepo {
         Cursor cursor = db.rawQuery("select * from " + Alumno.TABLE + " where " + Alumno.KEY_ID_ALU + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            mAlumno.setIdAlumno(cursor.getInt(0));
-            mAlumno.setCarrera(cursor.getString(1));
-            mAlumno.setFacultad(cursor.getString(2));
-            mAlumno.setAnio(cursor.getString(3));
-            mAlumno.setLegajo(cursor.getString(4));
-            mAlumno.setIdRegularidad(cursor.getInt(5));
-            mAlumno.setCheckData(cursor.getString(6));
+            mAlumno = loadCursor(cursor);
             cursor.close();
         }
         DBManager.getInstance().closeDatabase();
@@ -95,19 +105,11 @@ public class AlumnosRepo {
 
     }
 
-    public void update(Alumno carrito) {
+    public void update(Alumno alumno) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Alumno.KEY_ID_ALU, carrito.getIdAlumno());
-        values.put(Alumno.KEY_CARR, carrito.getCarrera());
-        values.put(Alumno.KEY_FAC, carrito.getFacultad());
-        values.put(Alumno.KEY_ANIO, carrito.getAnio());
-        values.put(Alumno.KEY_LEG, carrito.getLegajo());
-        values.put(Alumno.KEY_REG, carrito.getIdRegularidad());
-        values.put(Alumno.KEY_CHK_DATA, carrito.getCheckData());
-        String id = String.valueOf(carrito.getIdAlumno());
+        String id = String.valueOf(alumno.getIdAlumno());
         String selection = Alumno.KEY_ID_ALU + " = " + id;
-        db.update(Alumno.TABLE, values, selection, null);
+        db.update(Alumno.TABLE, loadValues(alumno), selection, null);
         DBManager.getInstance().closeDatabase();
     }
 
@@ -117,6 +119,7 @@ public class AlumnosRepo {
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         DBManager.getInstance().closeDatabase();
+        cursor.close();
         return count;
     }
 
@@ -128,14 +131,7 @@ public class AlumnosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mAlumno = new Alumno();
-                mAlumno.setIdAlumno(cursor.getInt(0));
-                mAlumno.setCarrera(cursor.getString(1));
-                mAlumno.setFacultad(cursor.getString(2));
-                mAlumno.setAnio(cursor.getString(3));
-                mAlumno.setLegajo(cursor.getString(4));
-                mAlumno.setIdRegularidad(cursor.getInt(5));
-                mAlumno.setCheckData(cursor.getString(6));
+                mAlumno = loadCursor(cursor);
                 list.add(mAlumno);
             } while (cursor.moveToNext());
         }
@@ -154,14 +150,7 @@ public class AlumnosRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mAlumno = new Alumno();
-                mAlumno.setIdAlumno(cursor.getInt(0));
-                mAlumno.setCarrera(cursor.getString(1));
-                mAlumno.setFacultad(cursor.getString(2));
-                mAlumno.setAnio(cursor.getString(3));
-                mAlumno.setLegajo(cursor.getString(4));
-                mAlumno.setIdRegularidad(cursor.getInt(5));
-                mAlumno.setCheckData(cursor.getString(6));
+                mAlumno = loadCursor(cursor);
                 list.add(mAlumno);
             } while (cursor.moveToNext());
         }

@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity"></activity>
-        <activity android:name=".Vistas.Activities.Perfil.ReLoginActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CambiarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Perfil.RecuperarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionProfeActivity"></activity>
@@ -48,7 +47,7 @@
         <activity android:name=".Vistas.Fragmentos.DeportesFragment" />
         <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
         <activity
-            android:name=".Vistas.Activities.InfoAlumnoActivity"
+            android:name=".Vistas.Activities.Perfil.InfoUsuarioActivity"
             android:label="Información" />
         <activity
             android:name=".Vistas.Activities.Perfil.PerfilActivity"
@@ -59,7 +58,6 @@
         <activity android:name=".Vistas.Fragmentos.PoliFragment" />
         <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
-        <activity android:name=".Vistas.Activities.PerfilProfesorActivity" />
         <activity
             android:name=".Vistas.Activities.AsistenciaActivity"
             android:label="Asistencia" />
@@ -70,7 +68,7 @@
         <activity
             android:name=".Vistas.Activities.Inicio.MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".Vistas.Activities.SlideWelcomeActivity">
+        <activity android:name=".Vistas.Activities.Inicio.SlideWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -78,7 +76,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vistas.Activities.Inicio.RegisterActivity" />
-        <activity android:name=".Vistas.Activities.SplashScreenActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"

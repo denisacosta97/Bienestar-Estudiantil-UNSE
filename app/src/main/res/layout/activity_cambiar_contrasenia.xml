@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    android:id="@+id/backgroundlogin"
+<android.support.v4.widget.NestedScrollView android:id="@+id/backgroundlogin"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/black_alpha_40"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="50dp"
+            android:paddingTop="30dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:orientation="vertical">
@@ -52,15 +52,42 @@
                 android:padding="10dp">
 
                 <EditText
-                    android:id="@+id/edtActual"
+                    android:id="@+id/edtDNI"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
-                    android:hint="Ingresa tu contraseña actual"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:fontFamily="@font/montserrat_regular"
+                    android:hint="Ingresa tu DNI"
+                    android:inputType="number"
+                    android:padding="10dp" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleDrawable="@drawable/ic_pass_toggle"
+                    app:passwordToggleTint="@color/colorTextDefault">
+
+                    <EditText
+                        android:id="@+id/edtActual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edit_text_logreg"
+                        android:hint="Ingresa tu contraseña actual"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:fontFamily="@font/montserrat_regular"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleDrawable="@drawable/ic_pass_toggle"
+                    app:passwordToggleTint="@color/colorTextDefault">
 
                 <EditText
                     android:id="@+id/edtNewPass"
@@ -72,6 +99,14 @@
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleDrawable="@drawable/ic_pass_toggle"
+                    app:passwordToggleTint="@color/colorTextDefault">
 
                 <EditText
                     android:id="@+id/edtRepeatPass"
@@ -83,6 +118,8 @@
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
+
+                </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -111,7 +148,7 @@
                         android:id="@+id/txtPassMissed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textSize="18sp"
                         android:text="¿Olvidaste tu contraseña?"
                         android:textColor="@color/whiteTextColor"

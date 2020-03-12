@@ -9,6 +9,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 
 import java.util.ArrayList;
+import java.util.prefs.PreferencesFactory;
 
 public class ProfesorRepo {
 
@@ -24,8 +25,8 @@ public class ProfesorRepo {
         return mProfesor;
     }
 
-    public void setProfesors(Profesor carrito) {
-        this.mProfesor = carrito;
+    public void setProfesors(Profesor profesor) {
+        this.mProfesor = profesor;
     }
 
     static String createTable() {
@@ -36,23 +37,37 @@ public class ProfesorRepo {
                 Profesor.KEY_FECHA_ING, Utils.STRING_TYPE, Utils.NULL_TYPE,
                 Profesor.KEY_CHK_DATA, Utils.STRING_TYPE, Utils.NULL_TYPE);
     }
-
-    public int insert(Profesor carrito) {
-        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+    
+    public ContentValues loadValues(Profesor profesor){
         ContentValues values = new ContentValues();
-        values.put(Profesor.KEY_ID_PRO, carrito.getIdProfesor());
-        values.put(Profesor.KEY_PRFN, carrito.getProfesion());
-        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaNameWithinHour(carrito.getFechaIngreso()));
-        values.put(Profesor.KEY_CHK_DATA, carrito.getCheckData());
-        float x = db.insert(Profesor.TABLE, null, values);
+        values.put(Profesor.KEY_ID_PRO, profesor.getIdProfesor());
+        values.put(Profesor.KEY_PRFN, profesor.getProfesion());
+        values.put(Profesor.KEY_FECHA_ING, profesor.getFechaIngreso());
+        values.put(Profesor.KEY_CHK_DATA, profesor.getCheckData());
+        return values;
+    }
+
+    public Profesor loadCursor(Cursor cursor){
+        Profesor profesor = new Profesor();
+        profesor.setIdProfesor(cursor.getInt(0));
+        profesor.setProfesion(cursor.getString(1));
+        profesor.setFechaIngreso(cursor.getString(2));
+        profesor.setCheckData(cursor.getString(3));
+        return profesor;
+    }
+
+    public int insert(Profesor profesor) {
+        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+
+        float x = db.insert(Profesor.TABLE, null, loadValues(profesor));
         DBManager.getInstance().closeDatabase();
         return (int)x;
     }
 
 
-    public void delete(Profesor carrito) {
+    public void delete(Profesor profesor) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        db.delete(Profesor.TABLE, Profesor.KEY_ID_PRO + " = ?", new String[]{String.valueOf(carrito.getIdProfesor())});
+        db.delete(Profesor.TABLE, Profesor.KEY_ID_PRO + " = ?", new String[]{String.valueOf(profesor.getIdProfesor())});
         DBManager.getInstance().closeDatabase();
     }
 
@@ -63,10 +78,7 @@ public class ProfesorRepo {
         Cursor cursor = db.rawQuery("select * from " + Profesor.TABLE + " where " + Profesor.KEY_ID_PRO + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            mProfesor.setIdProfesor(cursor.getInt(0));
-            mProfesor.setProfesion(cursor.getString(1));
-            mProfesor.setFechaIngreso(Utils.getFechaDate(cursor.getString(2)));
-            mProfesor.setCheckData(cursor.getString(3));
+            mProfesor = loadCursor(cursor);
             cursor.close();
         }
         DBManager.getInstance().closeDatabase();
@@ -86,16 +98,11 @@ public class ProfesorRepo {
 
     }
 
-    public void update(Profesor carrito) {
+    public void update(Profesor profesor) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        ContentValues values = new ContentValues();
-        values.put(Profesor.KEY_ID_PRO, carrito.getIdProfesor());
-        values.put(Profesor.KEY_PRFN, carrito.getProfesion());
-        values.put(Profesor.KEY_FECHA_ING, Utils.getFechaNameWithinHour(carrito.getFechaIngreso()));
-        values.put(Profesor.KEY_CHK_DATA, carrito.getCheckData());
-        String id = String.valueOf(carrito.getIdProfesor());
+        String id = String.valueOf(profesor.getIdProfesor());
         String selection = Profesor.KEY_ID_PRO + " = " + id;
-        db.update(Profesor.TABLE, values, selection, null);
+        db.update(Profesor.TABLE, loadValues(profesor), selection, null);
         DBManager.getInstance().closeDatabase();
     }
 
@@ -116,11 +123,7 @@ public class ProfesorRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mProfesor = new Profesor();
-                mProfesor.setIdProfesor(cursor.getInt(0));
-                mProfesor.setProfesion(cursor.getString(1));
-                mProfesor.setFechaIngreso(Utils.getFechaDate(cursor.getString(2)));
-                mProfesor.setCheckData(cursor.getString(3));
+                mProfesor = loadCursor(cursor);
                 list.add(mProfesor);
             } while (cursor.moveToNext());
         }
@@ -139,11 +142,7 @@ public class ProfesorRepo {
 
         if (cursor.moveToFirst()) {
             do {
-                mProfesor = new Profesor();
-                mProfesor.setIdProfesor(cursor.getInt(0));
-                mProfesor.setProfesion(cursor.getString(1));
-                mProfesor.setFechaIngreso(Utils.getFechaDate(cursor.getString(2)));
-                mProfesor.setCheckData(cursor.getString(3));
+                mProfesor = loadCursor(cursor);
                 list.add(mProfesor);
             } while (cursor.moveToNext());
         }

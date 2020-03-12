@@ -14,9 +14,9 @@ public class Profesor extends Usuario {
 
     private String profesion, checkData;
     private int idProfesor;
-    private Date fechaIngreso;
+    private String fechaIngreso;
 
-    public Profesor(Usuario usuario, String profesion, String checkData1, int idProfesor, Date fechaIngreso) {
+    public Profesor(Usuario usuario, String profesion, String checkData1, int idProfesor, String fechaIngreso) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
                 usuario.getSexo(), usuario.getMail(), usuario.getCheckData(),
@@ -33,7 +33,7 @@ public class Profesor extends Usuario {
         this.profesion = "";
         this.checkData = "";
         this.idProfesor = -1;
-        this.fechaIngreso = new Date();
+        this.fechaIngreso = "";
     }
 
     public String getProfesion() {
@@ -60,11 +60,11 @@ public class Profesor extends Usuario {
         this.idProfesor = idProfesor;
     }
 
-    public Date getFechaIngreso() {
+    public String getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 }

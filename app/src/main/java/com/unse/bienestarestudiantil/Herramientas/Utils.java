@@ -105,14 +105,60 @@ public class Utils {
     public static final int GET_FROM_DNI = 1010;
 
 
-    public static final String URL = "http://192.168.0.12/bienestar/usuario/insertar.php";
-    public static final String URL_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
-    public static final String URL_IMAGE = "http://192.168.0.12/bienestar/uploadImage.php";
+    public static final String URL_USUARIO_INSERTAR = "http://192.168.0.12/bienestar/usuario/insertar.php";
+    public static final String URL_USUARIO_ACTUALIZAR = "http://192.168.0.12/bienestar/usuario/actualizar.php";
+    public static final String URL_USUARIO_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
+    public static final String URL_USUARIO_IMAGE = "http://192.168.0.12/bienestar/uploadImage.php";
 
     public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
 
     public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
+    public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";
+
+
+    public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
+    public static String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",
+            "Licenciatura en Química", "Profesorado en Química", "Tecnicatura en Apicultura"};
+    public static String[] fceyt = {"Ingeniería Civil", "Ingeniería Electromecánica", "Ingeniería Electrónica",
+            "Ingeniería Eléctrica", "Ingeniería en Agrimensura", "Ingeniería Hidráulica",
+            "Ingeniería Industrial", "Ingeniería Vial", "Licenciatura en Hidrología Subterránea",
+            "Licenciatura en Matemática", "Licenciatura en Sistemas de Información",
+            "Profesorado en Física", "Profesorado en Informática", "Profesorado en Matemática",
+            "Programador Universitario en Informática", "Tecnicatura Universitaria Vial",
+            "Tecnicatura Universitaria en Construcciones",
+            "Tecnicatura Universitaria en Hidrología Subterránea",
+            "Tecnicatura Universitaria en Organización y Control de la Producción"};
+    public static String[] fcf = {"Ingeniería Forestal", "Ingeniería en Industrias Forestales",
+            "Licenciatura en Ecología y Conservación del Ambiente",
+            "Tecnicatura Universitaria Fitosanitarista",
+            "Tecnicatura Universitaria en Viveros y Plantaciones Forestales",
+            "Tecnicatura Universitaria en Aserraderos y Carpintería Industrial"};
+
+    public static String[] fcm = {"Medicina"};
+
+    public static String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
+            "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
+            "Licenciatura en Educación para la Salud", "Licenciatura en Obstetricia",
+            "Licenciatura en Filosofía", "Licenciatura en Trabajo Social",
+            "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
+            "Tecnicatura Sup. Adm. y Gestión Universitaria",
+            "Tecnicatura en Educación Intercultural Bilingue"};
+
+   public static String dataAlumno = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
+            "&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
+
+    public static String dataProfesor = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
+            "&prof=%s&fechain=%s&barr=%s&fechaR=%s";
+
+    public static String dataEgresado = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
+            "&prof=%s&fechaeg=%s&barr=%s&fechaR=%s";
+
+    public static String dataPartiNoDoc = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
 
 
     public static void changeColorDrawable(ImageView view, Context context, int color) {
@@ -510,8 +556,21 @@ public class Utils {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String value = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
-                + cal.get(Calendar.DAY_OF_MONTH);
+
+        String mesS, diaS;
+        int mes = cal.get(Calendar.MONTH) + 1;
+        if (mes < 10){
+            mesS = "0"+mes;
+        }else
+            mesS = String.valueOf(mes);
+
+        int dia = cal.get(Calendar.DAY_OF_MONTH);
+        if (dia < 10){
+            diaS = "0"+dia;
+        }else
+            diaS = String.valueOf(dia);
+        String value = cal.get(Calendar.YEAR) + "-" + mesS + "-"
+                + diaS;
 
         return value;
 

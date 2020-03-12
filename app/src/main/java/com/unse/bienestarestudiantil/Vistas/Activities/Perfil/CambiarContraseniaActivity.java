@@ -2,29 +2,26 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,14 +32,14 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
 
     Button btnCambiar;
     TextView txtRecuperar;
-    EditText edtActual, edtxNewPass, edtxRepass;
+    EditText edtActual, edtxNewPass, edtxRepass, edtDNI;
 
     DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recuperar_pass);
+        setContentView(R.layout.activity_cambiar_contrasenia);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
@@ -61,26 +58,36 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
         edtxNewPass = findViewById(R.id.edtNewPass);
         edtxRepass = findViewById(R.id.edtRepeatPass);
         txtRecuperar = findViewById(R.id.txtPassMissed);
+        edtDNI = findViewById(R.id.edtDNI);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnCambiar:
+                String dni = edtDNI.getText().toString().trim();
                 String actual = edtActual.getText().toString();
                 String newPass = edtxNewPass.getText().toString();
                 String rePass = edtxRepass.getText().toString();
 
                 Validador validador = new Validador();
-                if (!validador.noVacio(actual, newPass, rePass)){
-                    if (newPass.equals(rePass)){
-                        procesarContraseña(actual, newPass);
+                if (!validador.noVacio(actual, newPass, rePass)) {
+                    if (newPass.equals(rePass)) {
+                        if (validador.validarContraseña(rePass)) {
+                            if (validador.validarDNI(dni)) {
+                                procesarContraseña(dni, actual, newPass);
+                            } else {
+                                Utils.showToast(getApplicationContext(), "DNI inválido");
+                            }
+                        } else
+                            Utils.showToast(getApplicationContext(), "La contraseña debe ser mínimo de 4 caracteres");
 
-                    }else{
+
+                    } else {
                         Utils.showToast(getApplicationContext(), "Las nuevas contraseñas no coinciden");
                     }
 
-                }else{
+                } else {
                     Utils.showToast(getApplicationContext(), "¡Hay campos en blanco!");
                 }
                 break;
@@ -93,9 +100,10 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
 
     }
 
-    private void procesarContraseña(String c1, String c2) {
-        String key = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
-        int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
+    private void procesarContraseña(String dni, String c1, String c2) {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = Integer.parseInt(dni);
         String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
         c1 = Utils.crypt(c1);
         c2 = Utils.crypt(c2);
@@ -133,8 +141,29 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
             switch (estado) {
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(),"Contraseña actualizada");
-                    finish();
+                    Utils.showToast(getApplicationContext(), "Contraseña actualizada");
+                    final DialogoMensaje dialogoMensaje = new DialogoMensaje();
+                    dialogoMensaje.loadData(R.drawable.ic_chek, "Contraseña reestablecida, por favor vuelve a iniciar sesón", new YesNoDialogListener() {
+                        @Override
+                        public void yes() {
+                            dialogoMensaje.dismiss();
+                            finishAffinity();
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            PreferenceManager manager = new PreferenceManager(getApplicationContext());
+                            manager.setValue(Utils.IS_LOGIN, false);
+
+                        }
+
+                        @Override
+                        public void no() {
+
+                        }
+                    }, getApplicationContext());
+                    dialogoMensaje.loadColorButton(R.color.colorGreen);
+                    dialogoMensaje.loadColorTitulo(R.color.colorGreen);
+                    dialogoMensaje.loadTextButton("ACEPTAR");
+                    dialogoMensaje.setCancelable(false);
+                    dialogoMensaje.show(getSupportFragmentManager(), "dialog_gral");
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), "La contraseña actual ingresada es inválida");

@@ -48,8 +48,13 @@ public class Validador {
         return numero.matches(regex);
     }
 
-    public boolean noVacio(String string){
+    private boolean noVacio(String string){
         return string.equals("");
+    }
+
+    public boolean isLegajo(String leg){
+        String regex = "[0-9]{1,5}(-|/)[0-9]{1,4}";
+        return leg.matches(regex);
     }
 
     public boolean noVacio(String... datos)

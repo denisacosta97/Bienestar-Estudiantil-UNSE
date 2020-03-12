@@ -84,7 +84,8 @@ public class UsuariosRepo {
         mUsuario.setSexo(cursor.getString(10));
         mUsuario.setMail(cursor.getString(11));
         mUsuario.setTipoUsuario(cursor.getInt(12));
-        mUsuario.setCheckData(cursor.getString(13));
+        mUsuario.setCheckData(cursor.getString(14));
+        mUsuario.setFechaRegistro(Utils.getFechaDateWithHour(cursor.getString(13)));
         return mUsuario;
     }
 

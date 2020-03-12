@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginWelcomeActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
