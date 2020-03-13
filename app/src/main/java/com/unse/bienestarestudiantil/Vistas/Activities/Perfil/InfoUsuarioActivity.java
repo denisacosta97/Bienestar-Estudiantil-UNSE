@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -86,12 +88,19 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
         loadViews();
 
+        setToolbar();
+
         loadData();
 
         loadListener();
 
         editMode(0);
 
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("");
+        DrawableCompat.setTint(btnBack.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.colorWhite));
     }
 
     private void loadListener() {
@@ -201,7 +210,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         edtAnioIngresoAlu = findViewById(R.id.edtAnioIngrAlu);
         edtProfesionEgre = findViewById(R.id.edtProfesionEgre);
         edtAnioEgresoEgre = findViewById(R.id.edtAnioEgresoEgre);
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.imgFlecha);
         spinnerCarrera = findViewById(R.id.spinner2);
         spinnerFacultad = findViewById(R.id.spinner1);
         edtProvincia = findViewById(R.id.edtProvincia);
@@ -358,19 +367,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack:
+            case R.id.imgFlecha:
                 onBackPressed();
                 break;
             case R.id.edtFecha:

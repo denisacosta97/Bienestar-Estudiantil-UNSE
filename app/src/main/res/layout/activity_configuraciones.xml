@@ -9,12 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_flecha_atras" />
+        <include layout="@layout/toolbar_trans" />
 
         <LinearLayout
             android:orientation="vertical"

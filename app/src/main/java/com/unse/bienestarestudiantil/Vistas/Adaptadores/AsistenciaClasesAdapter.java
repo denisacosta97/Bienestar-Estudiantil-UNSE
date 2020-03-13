@@ -31,7 +31,7 @@ public class AsistenciaClasesAdapter extends RecyclerView.Adapter<RecyclerView.V
     public AsistenciaClasesAdapter(Context context,
                                    RecyclerView recyclerView) {
 
-        mContext = context;
+        mContext = context ;
         mRecyclerView = recyclerView;
         clases = new ArrayList<>();
         final GridLayoutManager layoutManager = (GridLayoutManager)(mRecyclerView.getLayoutManager());

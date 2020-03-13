@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,6 +32,7 @@ import java.util.Date;
 public class CambiarContraseniaActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnCambiar;
+    ImageView btnBack;
     TextView txtRecuperar;
     EditText edtActual, edtxNewPass, edtxRepass, edtDNI;
 
@@ -42,17 +44,25 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_cambiar_contrasenia);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        setToolbar();
+
         loadViews();
 
         loadListener();
     }
 
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("");
+    }
+
     private void loadListener() {
         btnCambiar.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
         txtRecuperar.setOnClickListener(this);
     }
 
     private void loadViews() {
+        btnBack = findViewById(R.id.imgFlecha);
         btnCambiar = findViewById(R.id.btnCambiar);
         edtActual = findViewById(R.id.edtActual);
         edtxNewPass = findViewById(R.id.edtNewPass);
@@ -94,6 +104,9 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
             case R.id.txtPassMissed:
                 Intent intent = new Intent(getApplicationContext(), RecuperarContraseniaActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.imgFlecha:
+                onBackPressed();
                 break;
 
         }

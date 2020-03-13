@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.R;
 
@@ -22,11 +23,17 @@ public class ConfiguracionesActivities extends AppCompatActivity implements View
         setContentView(R.layout.activity_configuraciones);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        setToolbar();
+
         loadViews();
 
         loadData();
 
         loadListener();
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("");
     }
 
     private void loadData() {
@@ -53,7 +60,7 @@ public class ConfiguracionesActivities extends AppCompatActivity implements View
 
     private void loadViews() {
         latContrasenia = findViewById(R.id.latContrasenia);
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.imgFlecha);
 
 
     }
@@ -61,7 +68,7 @@ public class ConfiguracionesActivities extends AppCompatActivity implements View
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnBack:
+            case R.id.imgFlecha:
                 onBackPressed();
                 break;
             case R.id.latContrasenia:

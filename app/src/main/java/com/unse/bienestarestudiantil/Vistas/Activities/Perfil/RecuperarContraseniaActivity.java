@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ import java.util.Date;
 public class RecuperarContraseniaActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnEnviar;
+    ImageView imgBack;
     EditText edtxMail, edtDNI;
     TextView txtTengoClave;
 
@@ -39,12 +41,19 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_recuperar_contrasenia);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        setToolbar();
+
         loadViews();
 
         loadListener();
     }
 
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("");
+    }
+
     private void loadListener() {
+        imgBack.setOnClickListener(this);
         btnEnviar.setOnClickListener(this);
         txtTengoClave.setOnClickListener(this);
     }
@@ -54,11 +63,15 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
         edtxMail = findViewById(R.id.edtMail);
         edtDNI = findViewById(R.id.edtDNI);
         txtTengoClave = findViewById(R.id.txtTengoClave);
+        imgBack = findViewById(R.id.imgFlecha);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
             case R.id.txtTengoClave:
                 startActivity(new Intent(getApplicationContext(), CambiarContraseniaActivity.class));
                 break;

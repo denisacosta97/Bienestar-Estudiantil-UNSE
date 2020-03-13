@@ -58,6 +58,11 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
                 .load(s.getIcon())
                 .into(holder.imgIcono);
         holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
+
+        if (s.getDisponibility() == 0){
+            holder.mCardView.setEnabled(false);
+        }else
+            holder.mCardView.setEnabled(true);
     }
 
     @Override

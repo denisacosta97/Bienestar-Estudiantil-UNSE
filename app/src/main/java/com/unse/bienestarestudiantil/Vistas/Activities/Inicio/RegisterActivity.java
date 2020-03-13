@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText date, edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtContra, edtContraConf,
             edtProfesionProf, edtAnioIngresoProf, edtProfesionEgre, edtAnioIngresoAlu, edtAnioEgresoEgre,
             edtDomicilio, edtProvincia, edtTelefono, edtPais, edtLocalidad, edtLegajoAlu, edtBarrio;
-    Button mRegister;//, mProfesor, mAlumno, mNoDocente, mEgresado, mParticular;
+    Button mRegister;
     ImageButton mScanner;
     ImageView btnBack;
     Bitmap mBitmap = null;
@@ -323,6 +323,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //Comprobacion de tamaños
                 if (validador.lengthMore(domicilio) && validador.lengthMore(pais) && validador.lengthMore(provincia) && validador.lengthMore(localidad)
                         && validador.lengthMore(barrio)) {
+
 
                     //Comprobacion de contraseña
                     if (pass.equals(passConf)) {

@@ -3,6 +3,8 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,9 +50,16 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
 
         loadViews();
 
+        setToolbar();
+
         loadData();
 
         loadListener();
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("");
+        DrawableCompat.setTint(btnBack.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.colorWhite));
     }
 
     private void loadData() {
@@ -58,12 +67,12 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         loadInfo();
 
         mList = new ArrayList<>();
-        mList.add(new Opciones(1, "Mis Datos", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(3, "Credenciales", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(4, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(5, "¿Mensajes?", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(6, "Cerrar Sesión", R.drawable.ic_apagar, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(2, "Configuraciones", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(1,1, "Mis Datos", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(1,3, "Credenciales", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(1,4, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(0,5, "¿Mensajes?", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(1,6, "Cerrar Sesión", R.drawable.ic_apagar, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(1,2, "Configuraciones", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault, 12));
 
 
         mList.add(new Opciones(1, "Inscripciones", R.drawable.ic_deportes, R.color.colorWhite, R.color.colorTextDefault, 12));
@@ -170,7 +179,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void loadViews() {
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.imgFlecha);
         mRecyclerViewFunciones = findViewById(R.id.recycler);
 
         txtNombre = findViewById(R.id.txtNombre);
@@ -183,7 +192,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnBack:
+            case R.id.imgFlecha:
                 onBackPressed();
                 break;
         }

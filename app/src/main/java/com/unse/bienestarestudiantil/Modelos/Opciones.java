@@ -5,7 +5,7 @@ public class Opciones {
     private String titulo;
     private int icon;
     private int color, colorText = 0, sizeText =0;
-    private int id;
+    private int id, disponibility;
 
     public Opciones(int id,String titulo, int icon, int color) {
         this.titulo = titulo;
@@ -29,6 +29,24 @@ public class Opciones {
         this.id = id;
         this.colorText = colorText;
         this.sizeText = sizeText;
+    }
+
+    public Opciones(int disponibility, int id,String titulo, int icon, int color, int colorText, int sizeText) {
+        this.titulo = titulo;
+        this.disponibility = disponibility;
+        this.icon = icon;
+        this.color = color;
+        this.id = id;
+        this.colorText = colorText;
+        this.sizeText = sizeText;
+    }
+
+    public int getDisponibility() {
+        return disponibility;
+    }
+
+    public void setDisponibility(int disponibility) {
+        this.disponibility = disponibility;
     }
 
     public int getSizeText() {
