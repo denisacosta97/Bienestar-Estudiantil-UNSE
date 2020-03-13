@@ -1,11 +1,10 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +18,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -29,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class PerfilDeporteActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditDeportesActivity extends AppCompatActivity implements View.OnClickListener {
 
     Deporte mDeporte;
     TextView mHorario, mDia, mEntrenador, mNombreDep;
@@ -40,7 +39,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_deporte);
+        setContentView(R.layout.activity_edit_deportes);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null) {
@@ -57,7 +56,6 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
             Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
             finish();
         }
-
     }
 
     private void loadData() {
@@ -154,7 +152,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
-                   break;
+                    break;
                 case 5:
                     Utils.showToast(getApplicationContext(), "Ya se encuentra inscripto en la actividad");
                     break;
@@ -169,4 +167,5 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
             Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
         }
     }
+
 }

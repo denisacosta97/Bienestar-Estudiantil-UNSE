@@ -3,6 +3,7 @@ package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ public class PoliFragment extends Fragment {
 
     View view;
     Button btnReservas;
+    CardView cardOne;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

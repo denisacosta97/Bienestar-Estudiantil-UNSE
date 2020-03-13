@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!(fragmentoGenerico instanceof InicioFragmento)) {
             boolean isLogin = manager.getValue(Utils.IS_LOGIN);
-            if (!isLogin) { //Aquí le saqué el !
+            if (isLogin) { //Aquí le saqué el !
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }

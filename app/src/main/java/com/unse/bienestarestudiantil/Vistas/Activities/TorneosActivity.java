@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -62,6 +65,22 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
         mRecyclerAsistencia.setNestedScrollingEnabled(true);
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
         mRecyclerAsistencia.setAdapter(mTorneosAdapter);
+
+        if(mTorneos.size() == 0){ //Código para usar los custom toast.
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.toast_layout));
+
+            ImageView image = layout.findViewById(R.id.image);
+            image.setImageResource(R.drawable.ic_chek);
+            TextView text2 = layout.findViewById(R.id.text);
+            text2.setText("No hay torneos disponibles.");
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM, 0, 30);
+            toast.setDuration(Toast.LENGTH_LONG + 4);
+            toast.setView(layout);
+            toast.show();
+        }
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerAsistencia);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

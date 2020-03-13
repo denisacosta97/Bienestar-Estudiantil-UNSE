@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -34,7 +34,8 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
     Button btnCambiar;
     ImageView btnBack;
     TextView txtRecuperar;
-    EditText edtActual, edtxNewPass, edtxRepass, edtDNI;
+    EditText edtActual, edtxNewPass, edtxRepass;
+    LinearLayout layoutFondo;
 
     DialogoProcesamiento dialog;
 
@@ -45,6 +46,17 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
+
+        layoutFondo = findViewById(R.id.backgroundlogin);
+
+        Glide.with(this).load(R.drawable.img_unse2)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        layoutFondo.setBackground(resource);
+                    }
+                });
+
 
         loadViews();
 

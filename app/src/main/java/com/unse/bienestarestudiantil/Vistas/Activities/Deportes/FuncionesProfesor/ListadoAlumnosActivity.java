@@ -128,7 +128,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
     private void loadData() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mList = new ArrayList<>();
-        mList.add(new Alumno());
+        //mList.add(new Alumno("","","","2015","as2d","","FCEyT","29/09/2018","23/15", true));
 
         mAdapter = new AlumnosAdapter(mList, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);

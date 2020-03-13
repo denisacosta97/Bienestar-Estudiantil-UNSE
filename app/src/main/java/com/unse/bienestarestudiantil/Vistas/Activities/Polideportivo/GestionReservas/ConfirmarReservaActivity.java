@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -54,23 +53,13 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_reservar);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if(getIntent().getIntExtra(Utils.DATA_RESERVA,-1) != -1){
-            tipo = getIntent().getIntExtra(Utils.DATA_RESERVA, -1);
-        }
+        setToolbar();
 
-        if(tipo != -1){
+        loadViews();
 
-           // Utils.setFont(getApplicationContext(),(ViewGroup)findViewById(android.R.id.content),Utils.MONSERRAT);
+        loadData();
 
-            setToolbar();
-
-            loadViews();
-
-            loadData();
-
-            loadListener();
-
-        }
+        loadListener();
 
     }
 
@@ -87,17 +76,16 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     }
 
     private void loadData() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Confirmar reserva");
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         models = new ArrayList<>();
-        if(tipo == Utils.TIPO_QUINCHO) {
-            models.add(new Espacio(R.drawable.imgborrar2, "Salón", "$4200", "Salón de X por Y dimensiones para tus eventos, cuenta con cosa1, cosa2, cosa3..."));
-            models.add(new Espacio(R.drawable.imgborrar1, "Quincho 1", "$2000", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-            models.add(new Espacio(R.drawable.imgborrar2, "Quincho 2", "$3500", "El quincho 2 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-            models.add(new Espacio(R.drawable.imgborrar1, "Quincho 3", "$3200", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
-        }
+        models.add(new Espacio(R.drawable.imgborrar2, "Salón", "$4200", "Salón de X por Y dimensiones para tus eventos, cuenta con cosa1, cosa2, cosa3..."));
+        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 1", "$2000", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+        models.add(new Espacio(R.drawable.imgborrar2, "Quincho 2", "$3500", "El quincho 2 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+        models.add(new Espacio(R.drawable.imgborrar1, "Quincho 3", "$3200", "El quincho 1 tiene la mejor ubicación, cerca de la pileta y baños, cuenta con asador y cosa1, cosa2..."));
+
         mEspaciosAdapter = new EspaciosAdapter(models, getApplicationContext());
 
         SnapHelper pagerSnapHelper = new PagerSnapHelper();
@@ -116,7 +104,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
     }
 
     private void loadViews() {
-      //  txtReserva = findViewById(R.id.txtInfoReserva);
+        //txtReserva = findViewById(R.id.txtInfoReserva);
         cancel = findViewById(R.id.btnCancel);
         reservar = findViewById(R.id.btnReservaF);
         date = findViewById(R.id.txtdateR);
@@ -181,12 +169,6 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         switch (view.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
-                break;
-            case R.id.edtxTime:
-                showTimeDialog();
-                break;
-            case R.id.txtdateR:
-                showDateDialog();
                 break;
             case R.id.btnCancel:
                 onBackPressed();

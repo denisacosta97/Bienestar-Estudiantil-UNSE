@@ -10,14 +10,26 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GestionDeportesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -55,7 +67,7 @@ public class GestionDeportesActivity extends AppCompatActivity implements View.O
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), AsistenciaActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ListAsistenciaDeportesActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), BMDeportesActivity.class));

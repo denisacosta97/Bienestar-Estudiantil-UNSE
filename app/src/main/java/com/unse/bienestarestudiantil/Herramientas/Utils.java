@@ -96,6 +96,7 @@ public class Utils {
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
     public static final String ALUMNO_NAME = "dato_alumno";
+    public static final String NUM_INST = "num_inst";
     public static final int LIST_RESET = 0;
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
@@ -112,6 +113,7 @@ public class Utils {
 
     public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_LISTA = "http://192.168.0.12/bienestar/deportes/getAllDeportes.php";
 
     public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
     public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";

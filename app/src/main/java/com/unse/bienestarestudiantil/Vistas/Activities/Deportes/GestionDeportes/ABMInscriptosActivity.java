@@ -57,19 +57,19 @@ public class ABMInscriptosActivity extends AppCompatActivity implements View.OnC
 
     private void loadDataRecycler() {
         mDeportes = new ArrayList<>();
-        mDeportes.add(new Deporte(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
-        mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
-        mDeportes.add(new Deporte(2, R.drawable.ic_becas, "Cestobol", "Yesica Kofler", "lunes, miércoles, viernes","19:00hs"));
-        mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
-        mDeportes.add(new Deporte(4, R.drawable.ic_futbol_fem, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
-        mDeportes.add(new Deporte(5, R.drawable.ic_futbol_masc, "Fútbol Sala Masculino", "Luís Delveliz", "lunes. miércoles y viernes","19:00hs"));
-        mDeportes.add(new Deporte(6, R.drawable.ic_futbol_masc, "Fútbol Sala Femenino", "Luján Cortés", "lunes, miércoles y viernes","19:00hs"));
-        mDeportes.add(new Deporte(7, R.drawable.ic_hockey, "Hockey", "Omar Zorribas", "lunes, martes, jueves y viernes","17:00hs, 16:00hs, 10:00hs, 12:00hs y 17:00hs"));
-        mDeportes.add(new Deporte(8, R.drawable.ic_natacion, "Natación", "Matías Umaño", "lunes, miércoles, viernes","15:00hs, 16:00hs y 17:00hs"));
-        mDeportes.add(new Deporte(9, R.drawable.ic_rugby, "Rugby", "César Muratore", "martes, jueves y sábado","21:30hs y 16:00hs"));
-        mDeportes.add(new Deporte(10, R.drawable.ic_tenis_mesa, "Tenis de Mesa", "Rodrigo Costa Mayuli", "martes, jueves y sábado","19:30hs"));
-        mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
-        mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
+//        mDeportes.add(new Deporte(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
+//        mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
+//        mDeportes.add(new Deporte(2, R.drawable.ic_becas, "Cestobol", "Yesica Kofler", "lunes, miércoles, viernes","19:00hs"));
+//        mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
+//        mDeportes.add(new Deporte(4, R.drawable.ic_futbol_fem, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
+//        mDeportes.add(new Deporte(5, R.drawable.ic_futbol_masc, "Fútbol Sala Masculino", "Luís Delveliz", "lunes. miércoles y viernes","19:00hs"));
+//        mDeportes.add(new Deporte(6, R.drawable.ic_futbol_masc, "Fútbol Sala Femenino", "Luján Cortés", "lunes, miércoles y viernes","19:00hs"));
+//        mDeportes.add(new Deporte(7, R.drawable.ic_hockey, "Hockey", "Omar Zorribas", "lunes, martes, jueves y viernes","17:00hs, 16:00hs, 10:00hs, 12:00hs y 17:00hs"));
+//        mDeportes.add(new Deporte(8, R.drawable.ic_natacion, "Natación", "Matías Umaño", "lunes, miércoles, viernes","15:00hs, 16:00hs y 17:00hs"));
+//        mDeportes.add(new Deporte(9, R.drawable.ic_rugby, "Rugby", "César Muratore", "martes, jueves y sábado","21:30hs y 16:00hs"));
+//        mDeportes.add(new Deporte(10, R.drawable.ic_tenis_mesa, "Tenis de Mesa", "Rodrigo Costa Mayuli", "martes, jueves y sábado","19:30hs"));
+//        mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
+//        mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
 
         mDeportesAdapter = new DeportesAdapter(mDeportes, getApplicationContext(), false);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);

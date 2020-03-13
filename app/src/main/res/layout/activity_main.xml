@@ -17,7 +17,8 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/cabecera_drawer"
-            app:menu="@menu/menu_drawer" />
+            app:menu="@menu/menu_drawer"
+            app:itemTextAppearance="@style/MontserratTextViewStyle"/>
         
 </android.support.v4.widget.DrawerLayout>
 

@@ -38,16 +38,24 @@
                     android:text="REQUISITOS PARA EL ALQUILER DE INSTALACIONES"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:gravity="center"
                     android:fontFamily="@font/montserrat_black"/>
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:background="@drawable/corners_rounded_green" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="SUM Y QUINCHOS"
+                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
@@ -110,10 +118,19 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtpartic"/>
 
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:background="@drawable/corners_rounded_green" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="UBICACIONES"
+                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:textSize="18sp"
