@@ -65,6 +65,8 @@ public class Utils {
     public static final String DEPORTE_NAME = "dato_deporte";
     public static final String DEPORTE_ID = "id_deporte";
 
+    public static final String DEPORTE_NAME_PROF = "dato_deporte_prof";
+
 
     public static final int PERMISSION_ALL = 1010;
 

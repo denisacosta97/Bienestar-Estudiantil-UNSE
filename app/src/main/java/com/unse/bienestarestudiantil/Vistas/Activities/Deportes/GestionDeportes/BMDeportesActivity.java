@@ -21,6 +21,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -54,9 +55,9 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
 
         loadListener();
 
-        loadDataRecycler();
-
         getAll();
+
+        loadDataRecycler();
     }
 
     private void setToolbar() {
@@ -72,19 +73,6 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
     private void loadDataRecycler() {
         mDeportes = new ArrayList<>();
         mProfesors = new ArrayList<>();
-//        mDeportes.add(new Deporte(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
-//        mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
-//        mDeportes.add(new Deporte(2, R.drawable.ic_becas, "Cestobol", "Yesica Kofler", "lunes, miércoles, viernes","19:00hs"));
-//        mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
-//        mDeportes.add(new Deporte(4, R.drawable.ic_futbol_fem, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
-//        mDeportes.add(new Deporte(5, R.drawable.ic_futbol_masc, "Fútbol Sala Masculino", "Luís Delveliz", "lunes. miércoles y viernes","19:00hs"));
-//        mDeportes.add(new Deporte(6, R.drawable.ic_futbol_masc, "Fútbol Sala Femenino", "Luján Cortés", "lunes, miércoles y viernes","19:00hs"));
-//        mDeportes.add(new Deporte(7, R.drawable.ic_hockey, "Hockey", "Omar Zorribas", "lunes, martes, jueves y viernes","17:00hs, 16:00hs, 10:00hs, 12:00hs y 17:00hs"));
-//        mDeportes.add(new Deporte(8, R.drawable.ic_natacion, "Natación", "Matías Umaño", "lunes, miércoles, viernes","15:00hs, 16:00hs y 17:00hs"));
-//        mDeportes.add(new Deporte(9, R.drawable.ic_rugby, "Rugby", "César Muratore", "martes, jueves y sábado","21:30hs y 16:00hs"));
-//        mDeportes.add(new Deporte(10, R.drawable.ic_tenis_mesa, "Tenis de Mesa", "Rodrigo Costa Mayuli", "martes, jueves y sábado","19:30hs"));
-//        mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
-//        mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
 
         mDeportesAdapter = new DeportesAdapter(mDeportes, getApplicationContext(), false);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
@@ -98,6 +86,7 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), EditDeportesActivity.class);
                 i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
+                i.putExtra(Utils.DEPORTE_NAME_PROF, mProfesors.get(position));
                 startActivity(i);
             }
         });
@@ -177,14 +166,23 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
             deporte.setDias(j.getString("diaEntreno"));
             deporte.setHorario(j.getString("horario"));
             deporte.setLugar(j.getString("lugar"));
+            deporte.setIconDeporte(j.getInt("idDeporte"));
             mDeportes.add(deporte);
 
             Profesor profesor = new Profesor();
             profesor.setIdProfesor(j.getInt("idEntrenador"));
-            profesor.setFechaIngreso(Utils.getFechaDate(j.getString("fechaIngreso")));
+            profesor.setFechaIngreso(j.getString("fechaIngreso"));
+            profesor.setNombre(j.getString("nombreP"));
+            profesor.setApellido(j.getString("apellido"));
+            profesor = new Profesor(new Usuario(profesor.getIdProfesor(),
+                    -1, profesor.getNombre(), profesor.getApellido()),
+                    "","",0,"");
+            
+
             mProfesors.add(profesor);
 
         }
+        mDeportesAdapter.notifyDataSetChanged();
     }
 
 

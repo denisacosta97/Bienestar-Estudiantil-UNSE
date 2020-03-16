@@ -68,17 +68,12 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             edtDomicilio, edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio;
     TextView txtFechaNac;
     Spinner spinnerFacultad, spinnerCarrera;
-
     DialogoProcesamiento dialog;
-
     Usuario mUsuario = null;
     Object tipo = null;
     EditText[] campos;
-
     boolean isEdit = false;
-
     int fac = 0, carr = 0, mode = 0, TIPO_USER = -1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,8 +193,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void loadViews() {
-
-
         edtNombre = findViewById(R.id.edtNombre);
         edtApellido = findViewById(R.id.edtApellido);
         edtDNI = findViewById(R.id.edtDNI);
@@ -226,7 +219,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         campos = new EditText[]{edtNombre, edtApellido, edtSexo, edtMail, edtProfesionProf,
                 edtAnioIngresoProf, edtAnioIngresoAlu, edtProfesionEgre, edtAnioEgresoEgre, edtProvincia,
                 edtPais, edtTelefono, edtLocalidad, edtDomicilio, edtLegajoAlu, edtBarrio};
-
 
         latGeneral = findViewById(R.id.layRango);
         latProfesor = findViewById(R.id.layProfesor);
@@ -378,7 +370,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             case R.id.fab:
                 activateEditMode();
                 break;
-
 
         }
     }

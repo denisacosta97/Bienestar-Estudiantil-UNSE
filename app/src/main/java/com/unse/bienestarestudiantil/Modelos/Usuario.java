@@ -51,6 +51,13 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public Usuario(int idUsuario, int tipoUsuario, String nombre, String apellido) {
+        this.idUsuario = idUsuario;
+        this.tipoUsuario = tipoUsuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
     public Usuario() {
         this.idUsuario = -1;
         this.tipoUsuario = -1;

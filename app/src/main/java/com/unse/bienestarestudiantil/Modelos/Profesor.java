@@ -40,6 +40,9 @@ public class Profesor extends Usuario implements Parcelable {
     }
 
     protected Profesor(Parcel in) {
+        setIdUsuario(in.readInt());
+        setNombre(in.readString());
+        setApellido(in.readString());
         profesion = in.readString();
         checkData = in.readString();
         idProfesor = in.readInt();
@@ -96,6 +99,9 @@ public class Profesor extends Usuario implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(getIdUsuario());
+        dest.writeString(getNombre());
+        dest.writeString(getApellido());
         dest.writeString(profesion);
         dest.writeString(checkData);
         dest.writeInt(idProfesor);

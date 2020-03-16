@@ -2,6 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
@@ -46,7 +50,7 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
 
         setToolbar();
 
-        layoutFondo = findViewById(R.id.backgroundwelcome);
+       /* layoutFondo = findViewById(R.id.backgroundwelcome);
 
         Glide.with(this).load(R.drawable.img_unse2)
                 .into(new SimpleTarget<Drawable>() {
@@ -54,7 +58,7 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
                         layoutFondo.setBackground(resource);
                     }
-                });
+                });*/
 
         loadViews();
 

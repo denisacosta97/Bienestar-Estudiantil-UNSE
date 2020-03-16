@@ -6,10 +6,11 @@ import android.os.Parcelable;
 public class Deporte implements Parcelable {
 
     private int mIconDeporte, idDep;
-    private String mName, desc, lugar, dias, horario;
+    private String mName, desc, lugar, dias, horario, lat, lon;
     private Profesor mProfesor;
 
-    public Deporte(int iconDeporte, int idDep, String name, String desc, String lugar, String dias, String horario, Profesor profesor) {
+    public Deporte(int iconDeporte, int idDep, String name, String desc, String lugar, String dias,
+                   String horario, String lat, String lon, Profesor profesor) {
         mIconDeporte = iconDeporte;
         this.idDep = idDep;
         mName = name;
@@ -17,6 +18,8 @@ public class Deporte implements Parcelable {
         this.lugar = lugar;
         this.dias = dias;
         this.horario = horario;
+        this.lat = lat;
+        this.lon = lon;
         mProfesor = profesor;
     }
 
@@ -28,6 +31,8 @@ public class Deporte implements Parcelable {
         this.lugar = "";
         this.dias = "";
         this.horario = "";
+        this.lat = "";
+        this.lon = "";
         mProfesor = new Profesor();
     }
 
@@ -39,6 +44,9 @@ public class Deporte implements Parcelable {
         lugar = in.readString();
         dias = in.readString();
         horario = in.readString();
+        lat = in.readString();
+        lon = in.readString();
+        mProfesor = in.readParcelable(Profesor.class.getClassLoader());
     }
 
     public static final Creator<Deporte> CREATOR = new Creator<Deporte>() {
@@ -109,6 +117,22 @@ public class Deporte implements Parcelable {
         this.horario = horario;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String latlong) {
+        this.lat = latlong;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
     public Profesor getProfesor() {
         return mProfesor;
     }
@@ -131,5 +155,8 @@ public class Deporte implements Parcelable {
         dest.writeString(lugar);
         dest.writeString(dias);
         dest.writeString(horario);
+        dest.writeString(lat);
+        dest.writeString(lon);
+        dest.writeParcelable(mProfesor, flags);
     }
 }

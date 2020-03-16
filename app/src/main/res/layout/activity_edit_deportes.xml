@@ -80,11 +80,18 @@
                                 android:textStyle="bold"
                                 android:fontFamily="@font/montserrat_black"/>
 
-                            <TextView
-                                android:id="@+id/txtEntrenador"
-                                android:layout_width="wrap_content"
+                            <EditText
+                                android:enabled="false"
+                                android:id="@+id/edtxEntrenador"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Matías Umaño"
+                                android:textSize="14sp"
+                                android:text="Matías"
+                                android:inputType="number"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextDefault"
+                                android:padding="10dp"
+                                android:background="@color/transparente"
                                 android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
@@ -101,11 +108,18 @@
                                 android:textStyle="bold"
                                 android:fontFamily="@font/montserrat_black"/>
 
-                            <TextView
-                                android:id="@+id/txtDia"
+                            <EditText
+                                android:enabled="false"
+                                android:id="@+id/edtxDia"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="14sp"
                                 android:text="lunes, miércoles y viernes."
+                                android:inputType="number"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextDefault"
+                                android:padding="10dp"
+                                android:background="@color/transparente"
                                 android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
@@ -122,21 +136,49 @@
                                 android:textStyle="bold"
                                 android:fontFamily="@font/montserrat_black"/>
 
-                            <TextView
-                                android:id="@+id/txtHorarios"
+                            <EditText
+                                android:enabled="false"
+                                android:id="@+id/edtxHorarios"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="15:00hs, 16:00hs y 17:00hs."
+                                android:textSize="14sp"
+                                android:text="lunes, miércoles y viernes."
+                                android:inputType="number"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextDefault"
+                                android:padding="10dp"
+                                android:background="@color/transparente"
                                 android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Lugar de entrenamiento:"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/montserrat_black"/>
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lugar de entrenamiento:"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <EditText
+                                android:enabled="false"
+                                android:id="@+id/edtxLugar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="lunes, miércoles y viernes."
+                                android:inputType="number"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorTextDefault"
+                                android:padding="10dp"
+                                android:background="@color/transparente"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -147,7 +189,7 @@
                         android:src="@drawable/mappoliborrar"/>
 
                     <Button
-                        android:id="@+id/btnRegisterDep"
+                        android:id="@+id/btnModificar"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -156,6 +198,18 @@
                         android:textSize="14sp"
                         android:background="@drawable/button_border"
                         android:text="MODIFICAR"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <Button
+                        android:id="@+id/btnGuardar"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:background="@drawable/button_border"
+                        android:text="GUARDAR"
                         android:fontFamily="@font/montserrat_black"/>
 
                 </LinearLayout>

@@ -3,6 +3,7 @@
     android:id="@+id/backgroundlogin"
     android:layout_width="match_parent"
     android:layout_gravity="center"
+    android:background="@color/black_alpha_40"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -10,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/black_alpha_40">
+        >
 
         <include layout="@layout/toolbar_trans" />
 
