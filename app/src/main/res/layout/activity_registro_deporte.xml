@@ -400,11 +400,10 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:weightSum="2"
@@ -436,6 +435,330 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edxtPeso"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:hint="Peso (kg)"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <EditText
+                    android:id="@+id/edtxAltura"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="Altura (cm)"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnImc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerInParent="true"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:text="Calcular I.M.C"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edxtIMC"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:hint="I.M.C"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <EditText
+                    android:id="@+id/edtxEstadoAlu"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="Estado"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/tabla_cuerpo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp">
+
+                    <TableRow
+                        android:id="@+id/tableRow1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Índice de Masa Corporal"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Rango"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="15 o menos"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Delgadez muy severa"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="15 - 15,9"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Delgadez severa"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="16 - 18,4"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Delgadez"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="18,5 - 24,9"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Peso saludable"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="25 - 29,9"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Sobrepeso"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="30 - 34,9"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Obesidad severa"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="40 o más"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cell_shape"
+                            android:padding="5dp"
+                            android:text="Obesidad mórbida"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"></TextView>
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -473,7 +796,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+        <LinearLayout
                 android:id="@+id/disablePreg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -559,7 +882,7 @@
 
             </LinearLayout>
 
-            <EditText
+        <EditText
                 android:id="@+id/edtxPreg4"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -574,7 +897,7 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
-            <Button
+        <Button
                 android:id="@+id/btnregister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

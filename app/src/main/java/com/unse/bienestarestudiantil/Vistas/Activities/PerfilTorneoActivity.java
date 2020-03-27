@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +40,7 @@ public class PerfilTorneoActivity extends AppCompatActivity implements View.OnCl
             loadListener();
 
             loadData();
+
         } else {
             Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
             finish();

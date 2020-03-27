@@ -26,6 +26,12 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/borrarbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Borrar esto c:"/>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

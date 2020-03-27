@@ -116,6 +116,8 @@ public class Utils {
     public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
     public static final String URL_DEPORTE_LISTA = "http://192.168.0.12/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_TORNEOS_LISTA = "http://192.168.0.12/bienestar/deportes/getAllTorneos.php";
+    public static final String URL_ISCRIP_LISTA = "http://192.168.0.12/bienestar/deportes/getAllInscriptos.php";
 
     public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
     public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";

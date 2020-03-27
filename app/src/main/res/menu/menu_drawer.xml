@@ -65,7 +65,7 @@
                 android:title="Perfil profesor"/>
 
             <item
-                android:id="@+id/menu_opcion_1"
+                android:id="@+id/item_about"
                 android:icon="@drawable/ic_b_bienestar"
                 android:title="Sobre nosotros"/>
             <item

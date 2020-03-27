@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
@@ -27,6 +29,7 @@ public class ListAsistenciaDeportesActivity extends AppCompatActivity implements
     ArrayList<Deporte> mDeportes;
     DeportesAdapter mDeportesAdapter;
     ImageView imgIcono;
+    Button borrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class ListAsistenciaDeportesActivity extends AppCompatActivity implements
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
+        borrar.setOnClickListener(this);
 
     }
 
@@ -90,6 +94,7 @@ public class ListAsistenciaDeportesActivity extends AppCompatActivity implements
     private void loadViews() {
         reciclerDeportes = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
+        borrar = findViewById(R.id.borrarbtn);
     }
 
     @Override
@@ -97,6 +102,9 @@ public class ListAsistenciaDeportesActivity extends AppCompatActivity implements
         switch (v.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
+                break;
+            case R.id.borrarbtn:
+                startActivity(new Intent(ListAsistenciaDeportesActivity.this, AsistenciaActivity.class));
                 break;
         }
     }

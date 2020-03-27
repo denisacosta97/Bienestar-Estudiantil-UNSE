@@ -8,9 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Vistas.Activities.AboutActivity"></activity>
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ListAsistenciaDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.ReLoginActivity" />
@@ -120,11 +122,11 @@
         <activity android:name=".Vistas.Activities.Polideportivo.CalendarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.SelectInstActivity" />
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

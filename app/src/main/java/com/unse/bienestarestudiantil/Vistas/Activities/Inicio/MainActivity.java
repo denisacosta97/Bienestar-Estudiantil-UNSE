@@ -27,7 +27,9 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.AboutActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
@@ -177,17 +179,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
                 break;
             case R.id.profe_profile:
-                //startActivity(new Intent(MainActivity.this, PerfilProfesorActivity.class));
+                startActivity(new Intent(MainActivity.this, RegistroDeporteActivity.class));
                 break;
             case R.id.item_config:
                 startActivity(new Intent(this, GestionSistemaActivity.class));
+                break;
+            case R.id.item_about:
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
         }
 
 
         if (!(fragmentoGenerico instanceof InicioFragmento)) {
             boolean isLogin = manager.getValue(Utils.IS_LOGIN);
-            if (isLogin) { //Aquí le saqué el !
+            if (!isLogin) {
                 fragmentoGenerico = new AccesoDenegadoFragment();
             }
         }

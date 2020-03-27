@@ -19,16 +19,19 @@ public class Torneo implements Parcelable {
     public static final String KEY_UBI = "ubicacion";
 
     private int id, logo;
-    private String nameTorneo, desc, lugar, ubicacion;
+    private String nameTorneo, desc, lugar, ubicacion, lat, lon;
     private Date fechaInicio, fechaFin;
 
-    public Torneo(int id, int logo, String nameTorneo, String desc, String lugar, String ubicacion, Date fechaInicio, Date fechaFin) {
+    public Torneo(int id, int logo, String nameTorneo, String desc, String lugar, String ubicacion,
+                  String lat, String lon, Date fechaInicio, Date fechaFin) {
         this.id = id;
         this.logo = logo;
         this.nameTorneo = nameTorneo;
         this.desc = desc;
         this.lugar = lugar;
         this.ubicacion = ubicacion;
+        this.lat = lat;
+        this.lon = lon;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
@@ -40,17 +43,21 @@ public class Torneo implements Parcelable {
         this.desc = "";
         this.lugar = "";
         this.ubicacion = "";
+        this.lat = "";
+        this.lon = "";
         this.fechaInicio = new Date();
         this.fechaFin = new Date();
     }
 
-    protected Torneo(Parcel in) { //REVISAR, FALTAN LAS FECHAS
+    protected Torneo(Parcel in) {
         id = in.readInt();
         logo = in.readInt();
         nameTorneo = in.readString();
         desc = in.readString();
         lugar = in.readString();
         ubicacion = in.readString();
+        lat = in.readString();
+        lon = in.readString();
     }
 
     public static final Creator<Torneo> CREATOR = new Creator<Torneo>() {
@@ -64,21 +71,6 @@ public class Torneo implements Parcelable {
             return new Torneo[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(logo);
-        dest.writeString(nameTorneo);
-        dest.writeString(desc);
-        dest.writeString(lugar);
-        dest.writeString(ubicacion);
-    }
 
     public int getId() {
         return id;
@@ -128,6 +120,22 @@ public class Torneo implements Parcelable {
         this.ubicacion = ubicacion;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -142,5 +150,22 @@ public class Torneo implements Parcelable {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(logo);
+        dest.writeString(nameTorneo);
+        dest.writeString(desc);
+        dest.writeString(lugar);
+        dest.writeString(ubicacion);
+        dest.writeString(lat);
+        dest.writeString(lon);
     }
 }
