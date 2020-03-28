@@ -186,6 +186,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //Usuario invalido
                     Utils.showToast(getApplicationContext(), "Usuario o contraseña inválidos");
                     break;
+                case 4:
+                    //Usuario invalido
+                    Utils.showToast(getApplicationContext(), "Usuario deshabilitado, contacta al Administrador");
+                    break;
                 case 3:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");

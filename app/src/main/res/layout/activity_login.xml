@@ -100,12 +100,14 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="18sp"
+                        android:padding="10dp"
                         android:text="Registrarme"
                         android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="5dp"
                         android:onClick="onClick"
                         android:clickable="true"
                         android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
@@ -116,7 +118,8 @@
                         android:textSize="16sp"
                         android:text="¿Olvidaste tu contraseña?"
                         android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="10dp"
                         android:onClick="onClick"
                         android:clickable="true"
                         android:focusable="true"

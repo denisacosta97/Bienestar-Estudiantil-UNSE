@@ -28,6 +28,13 @@ public class NoticiasAdapter extends RecyclerView.Adapter<NoticiasAdapter.Notici
         this.mNoticiaCopia.addAll(mNoticias);
     }
 
+    public ArrayList<Noticia> getNoticiaCopia() {
+        return mNoticiaCopia;
+    }
+
+    public void setNoticiaCopia(ArrayList<Noticia> noticiaCopia) {
+        mNoticiaCopia.addAll(noticiaCopia);
+    }
 
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

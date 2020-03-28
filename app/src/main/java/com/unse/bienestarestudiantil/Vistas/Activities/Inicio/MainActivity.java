@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadData() {
         manager = new PreferenceManager(getApplicationContext());
+
+        //Aqui guardar imagen descargadaaaaaa jejejej
     }
 
     private void loadViews() {
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             men = menu.findItem(R.id.profe_profile);
             men.setVisible(false);
             men = menu.findItem(R.id.item_config);
-           // men.setVisible(false);
+            // men.setVisible(false);
         }
     }
 
@@ -204,7 +206,8 @@ public class MainActivity extends AppCompatActivity {
         itemSelecionado = itemDrawer.getItemId();
 
         // Setear título actual
-        ((TextView) findViewById(R.id.txtTitulo)).setText(itemDrawer.getTitle());
+        if (itemDrawer.getItemId() != R.id.item_perfil)
+            ((TextView) findViewById(R.id.txtTitulo)).setText(itemDrawer.getTitle());
     }
 
     private void setToolbar() {

@@ -43,4 +43,16 @@
 
     <color name="black_alpha_40">#66000000</color>
 
+    <color name="green_continue">#1fc055</color>
+    <color name="chip_color">#d4edfa</color>
+    <color name="chip_inner_color">#e0e4e4</color>
+    <color name="chip_yellow_color">#fbe191</color>
+    <color name="chip_yellow_inner_color">#eed280</color>
+
+    <color name="default_color">#363434</color>
+    <color name="default_color_gradient">#434141</color>
+    <color name="text_shadow">#999999</color>
+    <color name="semi_white">#D1D1D1</color>
+    <color name="colorOrange2">#DF291B</color>
+
 </resources>

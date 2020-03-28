@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -76,9 +77,9 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Gestión de Finanzas",R.drawable.ic_finanzas, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Gestión de Reservas",R.drawable.ic_reservas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Gestión de Ingreso", R.drawable.ic_ingreso, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Gestión de Finanzas",R.drawable.ic_finanzas, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Gestión de Reservas",R.drawable.ic_reservas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Ingreso", R.drawable.ic_ingreso, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

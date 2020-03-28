@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layoutError"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIconError"
+            android:padding="10dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/ic_error" />
+
+        <TextView
+            android:id="@+id/txtError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ERROR AL OBTENER CREDENCIALES, POR FAVOR INTENTA NUEVAMENTE"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/btnError"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:padding="15dp"
+            android:background="@drawable/button_border"
+            android:text="REINTENTAR">
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutVacio"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIconVacio"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_vacio" />
+
+        <TextView
+            android:id="@+id/txtVacio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO POSEE NINGUNA CREDENCIAL DEPORTIVA, PRIMERO DEBE REGISTRARSE A UN DEPORTE"
+            android:textColor="@color/colorTextDefault"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+</LinearLayout>

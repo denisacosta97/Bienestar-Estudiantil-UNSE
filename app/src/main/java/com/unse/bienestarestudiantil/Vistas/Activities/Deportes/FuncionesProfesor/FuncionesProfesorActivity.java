@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -76,9 +77,9 @@ public class FuncionesProfesorActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Listado de Alumnos",R.drawable.ic_usuarios, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Asistencias",R.drawable.ic_listado, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Gestión de Torneos", R.drawable.ic_torneo, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Listado de Alumnos",R.drawable.ic_usuarios, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Asistencias",R.drawable.ic_listado, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Torneos", R.drawable.ic_torneo, R.color.colorFCEyT));
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);

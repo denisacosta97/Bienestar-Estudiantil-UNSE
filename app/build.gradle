@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.unse.bienestarestudiantil"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -46,6 +46,14 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.github.badoualy:datepicker-timeline:1.0.1'
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation 'com.isseiaoki:simplecropview:1.1.8'
+
+   // implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    implementation 'com.github.kenglxn.QRGen:android:2.6.0'
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     testImplementation 'junit:junit:4.12'

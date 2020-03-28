@@ -2,18 +2,22 @@ package com.unse.bienestarestudiantil.Herramientas;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.service.autofill.FieldClassification;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Base64;
 import android.util.Log;
-import android.util.Patterns;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,7 +33,9 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 import com.unse.bienestarestudiantil.Databases.BDGestor;
 import com.unse.bienestarestudiantil.Databases.DBManager;
+import com.unse.bienestarestudiantil.Modelos.Archivo;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,8 +46,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -64,6 +68,12 @@ public class Utils {
     //Constantes para activities
     public static final String DEPORTE_NAME = "dato_deporte";
     public static final String DEPORTE_ID = "id_deporte";
+    public static final String TIPO_CREDENCIAL = "tipo_cred";
+    public static final String TIPO_CREDENCIAL_DATO = "tipo_cred_dato";
+    public static final String URI_IMAGE = "uri_image";
+    //Constantes para activities
+    public static final int PICK_IMAGE = 9090;
+    public static final int EDIT_IMAGE = 9091;
 
 
     public static final int PERMISSION_ALL = 1010;
@@ -108,13 +118,25 @@ public class Utils {
     public static final String URL_USUARIO_INSERTAR = "http://192.168.0.12/bienestar/usuario/insertar.php";
     public static final String URL_USUARIO_ACTUALIZAR = "http://192.168.0.12/bienestar/usuario/actualizar.php";
     public static final String URL_USUARIO_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
-    public static final String URL_USUARIO_IMAGE = "http://192.168.0.12/bienestar/uploadImage.php";
+    public static final String URL_USUARIO_IMAGE = "http://192.168.0.12/bienestar/general/uploadImage.php";
+    public static final String URL_USUARIO_IMAGE_LOAD = "http://192.168.0.12/bienestar/usuariosImg/";
+
+    public static final String URL_SOCIO_CREDENCIAL = "http://192.168.0.12/bienestar/socio/getCredencial.php";
 
     public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/getCredencial.php";
+
+    public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/torneo/getCredencial.php";
+
+    public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.12/bienestar/beca/getCredencial.php";
 
     public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
     public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";
+
+    public static final String URL_CATEGORIAS = "http://192.168.0.12/bienestar/general/getArchivos.php";
+    public static final String URL_ARCHIVOS = "http://192.168.0.12/bienestar/archivos/";
+    public static final long SECONS_TIMER = 5000;
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
@@ -145,7 +167,7 @@ public class Utils {
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
 
-   public static String dataAlumno = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+    public static String dataAlumno = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
             "&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
 
@@ -189,6 +211,19 @@ public class Utils {
         Log.e(title, msj);
     }
 
+    public static Bitmap resize(Bitmap bitmapToScale, float newWidth, float newHeight) {
+        if (bitmapToScale == null)
+            return null;
+        int width = bitmapToScale.getWidth();
+        int height = bitmapToScale.getHeight();
+
+        Matrix matrix = new Matrix();
+
+        matrix.postScale(newWidth / width, newHeight / height);
+
+        return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
+    }
+
 //    public static void showCustomToast(Activity activity, Context context, String text, int icon){
 //        LayoutInflater inflater = activity.getLayoutInflater();
 //        View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) activity.findViewById(R.id.toast_layout));
@@ -208,16 +243,6 @@ public class Utils {
 //        toast.show();
 //    }
 
-
-    public static boolean validarEmail(String email) {
-        Pattern pattern = Patterns.EMAIL_ADDRESS;
-        return pattern.matcher(email).matches();
-    }
-
-    public static boolean validarTelefono(String tel) {
-        Pattern pattern = Patterns.PHONE;
-        return pattern.matcher(tel).matches();
-    }
 
     //Metodo para saber si un permiso esta autorizado o no
     public static boolean isPermissionGranted(Context ctx, String permision) {
@@ -269,14 +294,6 @@ public class Utils {
 
     }
 
-    public static String getStringValue(Object... arg) {
-        StringBuilder msj = new StringBuilder();
-        for (Object o : arg) {
-            msj.append(o.toString());
-        }
-        return msj.toString();
-    }
-
     public static String crypt(String text) {
 
         MessageDigest crypt = null;
@@ -302,6 +319,23 @@ public class Utils {
             return sha;
         }
 
+    }
+
+    public static String getDirectoryPath() {
+        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR_ESTUDIANTIL/";
+        File directorio = new File(directory_path);
+        if (!directorio.exists())
+            directorio.mkdirs();
+        return directory_path;
+    }
+
+    public static Object[] exist(Archivo archivo) {
+        File file = new File(getDirectoryPath() + archivo.getNombreArchivo());
+        Object[] a = new Object[2];
+        a[0] = file.exists();
+        a[1] = file.exists() ? file.lastModified() : 0;
+
+        return a;
     }
 
 
@@ -369,7 +403,7 @@ public class Utils {
 
             File src = new File(directory_path, "prov_" + name);
             String names = name.substring(0, name.length() - 4);
-            names = names +"_"+getHoraWithSeconds(new Date(System.currentTimeMillis()))+".pdf";
+            names = names + "_" + getHoraWithSeconds(new Date(System.currentTimeMillis())) + ".pdf";
             File des = new File(directory_path, names);
             if (!src.exists()) {
                 try {
@@ -408,25 +442,6 @@ public class Utils {
                 : new Paragraph(text).setFontSize(size);
     }
 
-    public static String getNameFile(String directory_path, int codPedido, String fecha) {
-        return directory_path + "REPORTE_" + codPedido + "_" +
-                getFechaName(Utils.getFechaDate(fecha)) + ".pdf";
-    }
-
-    private static Cell createCell(String text, boolean center) {
-        return center ? new Cell().setPadding(0.8f)
-                .add(new Paragraph(text)
-                        .setMultipliedLeading(1))
-                : new Cell().setPadding(0.8f)
-                .add(new Paragraph(text)
-                        .setMultipliedLeading(1)).setTextAlignment(TextAlignment.CENTER);
-    }
-
-    private static Cell createCell(String text, PdfFont font) {
-        return new Cell().setPadding(0.8f)
-                .add(new Paragraph(text).setFont(font)
-                        .setMultipliedLeading(1));
-    }
 
     public static Date getFechaDate(String fecha) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -508,38 +523,40 @@ public class Utils {
     }
 
 
+
+
     public static String getFechaName(Date date) {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String mesS, diaS, minutosS, segS, horasS;
         int mes = cal.get(Calendar.MONTH) + 1;
-        if (mes < 10){
-            mesS = "0"+mes;
-        }else
+        if (mes < 10) {
+            mesS = "0" + mes;
+        } else
             mesS = String.valueOf(mes);
 
         int dia = cal.get(Calendar.DAY_OF_MONTH);
-        if (dia < 10){
-            diaS = "0"+dia;
-        }else
+        if (dia < 10) {
+            diaS = "0" + dia;
+        } else
             diaS = String.valueOf(dia);
 
         int minutos = cal.get(Calendar.MINUTE);
-        if (minutos < 10){
-            minutosS = "0"+minutos;
-        }else
+        if (minutos < 10) {
+            minutosS = "0" + minutos;
+        } else
             minutosS = String.valueOf(minutos);
 
         int seg = cal.get(Calendar.SECOND);
-        if (seg < 10){
-            segS = "0"+seg;
-        }else
+        if (seg < 10) {
+            segS = "0" + seg;
+        } else
             segS = String.valueOf(seg);
 
         int horas = cal.get(Calendar.HOUR_OF_DAY);
         if (horas < 10)
-            horasS = "0"+horas;
+            horasS = "0" + horas;
         else
             horasS = String.valueOf(horas);
 
@@ -552,6 +569,29 @@ public class Utils {
 
     }
 
+    public static String getBirthday(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        String mesS, diaS;
+        int mes = cal.get(Calendar.MONTH) + 1;
+        if (mes < 10) {
+            mesS = "0" + mes;
+        } else
+            mesS = String.valueOf(mes);
+
+        int dia = cal.get(Calendar.DAY_OF_MONTH);
+        if (dia < 10) {
+            diaS = "0" + dia;
+        } else
+            diaS = String.valueOf(dia);
+        String value = diaS + "/" + mesS + "/" + cal.get(Calendar.YEAR);
+
+        return value;
+
+    }
+
     public static String getFechaNameWithinHour(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -559,15 +599,15 @@ public class Utils {
 
         String mesS, diaS;
         int mes = cal.get(Calendar.MONTH) + 1;
-        if (mes < 10){
-            mesS = "0"+mes;
-        }else
+        if (mes < 10) {
+            mesS = "0" + mes;
+        } else
             mesS = String.valueOf(mes);
 
         int dia = cal.get(Calendar.DAY_OF_MONTH);
-        if (dia < 10){
-            diaS = "0"+dia;
-        }else
+        if (dia < 10) {
+            diaS = "0" + dia;
+        } else
             diaS = String.valueOf(dia);
         String value = cal.get(Calendar.YEAR) + "-" + mesS + "-"
                 + diaS;
@@ -616,7 +656,55 @@ public class Utils {
         long tiempo = hoy.getTime() - fechaNac.getTime();
         double years = tiempo / 3.15576e+10;
         int age = (int) Math.floor(years);
-        return  age;
+        return age;
+    }
+
+    private static int getFinalWidth() {
+
+        return (int) 35;
+    }
+
+
+    public static void scaleView(View v) {
+    }
+
+    public static void resizeBitmapAndFile(String name) {
+        File file = new File(name);
+        Bitmap in = BitmapFactory.decodeFile(file.getPath());
+        Bitmap out = Utils.resize(in, 600, 600);
+        FileOutputStream fOut;
+        try {
+            fOut = new FileOutputStream(file);
+            out.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
+            fOut.flush();
+            fOut.close();
+            in.recycle();
+            out.recycle();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String convertImage(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] img = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(img, Base64.DEFAULT);
+
+    }
+
+    public static void saveBitmap(Context applicationContext, String s, Bitmap bitmap) {
+        StorageManager storageManager = new StorageManager(applicationContext);
+        storageManager.setFileName(s);
+        storageManager.setFolderName("BIENESTAR");
+        storageManager.saveToInternalStorage(bitmap);
+    }
+
+    public static Bitmap getBitmap(Context applicationContext, String s) {
+        StorageManager storageManager = new StorageManager(applicationContext);
+        storageManager.setFileName(s);
+        storageManager.setFolderName("BIENESTAR");
+        return storageManager.loadImageFromStorage(storageManager.getUriFile());
     }
 }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -84,16 +84,25 @@
                 android:gravity="center">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgUserRegister"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        app:civ_border_color="#FFFFFF"
+                        app:civ_border_width="2dp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/user"/>
+                        android:src="@drawable/ic_user"/>
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fabPic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/imgUserRegister"
+                        android:layout_marginLeft="-35dp"
+                        android:src="@drawable/ic_camera" />
 
                 </RelativeLayout>
 
@@ -367,6 +376,9 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilContra"
                 android:layout_width="match_parent"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/ic_pass_toggle"
+                app:passwordToggleTint="@color/colorTextDefault"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -385,8 +397,12 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/tilRecontra"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/ic_pass_toggle"
+                app:passwordToggleTint="@color/colorTextDefault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

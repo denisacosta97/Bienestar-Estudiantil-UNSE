@@ -16,20 +16,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.R;
 
 public class DialogYesNoGeneral extends DialogFragment implements View.OnClickListener {
 
     Button btnSi, btnNo;
+    ImageView mImageView;
     TextView txtTitulo, txtDescripcion;
     LinearLayout latTitulo;
     Context mContext;
 
     String titulo, descripcion, botonSi, botonNo;
-    int colorSi = 0, colorNo = 0, colorFondo = 0;
+    int colorSi = 0, colorNo = 0, colorFondo = 0, icon = 0;
 
     YesNoDialogListener mListener;
 
@@ -40,6 +43,10 @@ public class DialogYesNoGeneral extends DialogFragment implements View.OnClickLi
         this.descripcion = descripcion;
         this.mListener = listener;
         this.mContext = context;
+    }
+
+    public void loadIcon(int id){
+        this.icon = id;
     }
 
     public void loadColorButton(int c1, int c2){
@@ -75,6 +82,7 @@ public class DialogYesNoGeneral extends DialogFragment implements View.OnClickLi
     }
 
     private void loadViews() {
+        mImageView = view.findViewById(R.id.imgIcon);
         btnNo = view.findViewById(R.id.btnNO);
         btnSi = view.findViewById(R.id.btnSI);
         txtTitulo = view.findViewById(R.id.txtTitulo);
@@ -84,8 +92,15 @@ public class DialogYesNoGeneral extends DialogFragment implements View.OnClickLi
 
     private void loadData() {
         if (titulo != null){
+            txtTitulo.setVisibility(View.VISIBLE);
             txtTitulo.setText(titulo);
-        }
+        }else
+            txtTitulo.setVisibility(View.GONE);
+        if (icon != 0){
+            mImageView.setVisibility(View.VISIBLE);
+            Glide.with(mImageView.getContext()).load(icon).into(mImageView);
+        }else
+            mImageView.setVisibility(View.GONE);
         if (descripcion != null)
             txtDescripcion.setText(descripcion);
         if (colorFondo != 0)

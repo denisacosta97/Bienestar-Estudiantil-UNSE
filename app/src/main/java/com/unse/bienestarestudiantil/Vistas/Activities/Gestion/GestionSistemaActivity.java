@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -75,17 +76,17 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Gestión de Estadisticas",R.drawable.ic_estadistica, R.color.colorGreyDark ));
-        mOpciones.add(new Opciones(2, "Gestión de Roles",R.drawable.ic_usuarios, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Gestión de Estadisticas",R.drawable.ic_estadistica, R.color.colorGreyDark ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Gestión de Roles",R.drawable.ic_usuarios, R.color.colorGreyDark));
 
-        mOpciones.add(new Opciones(100, "Gestión Deportes",R.drawable.ic_config, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
-        mOpciones.add(new Opciones(300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
-        mOpciones.add(new Opciones(400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
-        mOpciones.add(new Opciones(700, "Gestión Residencia", R.drawable.ic_config,R.color.color3));
-        mOpciones.add(new Opciones(800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,100, "Gestión Deportes",R.drawable.ic_config, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,700, "Gestión Residencia", R.drawable.ic_config,R.color.color3));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);

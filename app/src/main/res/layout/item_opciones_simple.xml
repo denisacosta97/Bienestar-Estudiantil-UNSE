@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="GESTION DE CLIENTES (PERIODO 2020)"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorTextDefault"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_black"/>
 

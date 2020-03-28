@@ -14,18 +14,29 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
+import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
 public class GestionArchivosAdapter extends RecyclerView.Adapter<GestionArchivosAdapter.EventosViewHolder>{
 
-    private ArrayList<Archivo> mArchivos;
+    private ArrayList<Archivo> mArchivos, mArchivosCopia;
     private Context context;
 
     public GestionArchivosAdapter(ArrayList<Archivo> list, Context ctx) {
         this.mArchivos = list;
         this.context = ctx;
+        this.mArchivosCopia = new ArrayList<>();
+        this.mArchivosCopia.addAll(mArchivos);
+    }
+
+    public ArrayList<Archivo> getArchivosCopia() {
+        return mArchivosCopia;
+    }
+
+    public void setArchivosCopia(ArrayList<Archivo> archivosCopia) {
+        mArchivosCopia.addAll(archivosCopia);
     }
 
     @NonNull
@@ -41,9 +52,27 @@ public class GestionArchivosAdapter extends RecyclerView.Adapter<GestionArchivos
         Archivo archivo = mArchivos.get(position);
 
         holder.mNumArchivo.setText(String.valueOf(archivo.getId()));
-        holder.mNombreArchivo.setText(archivo.getNombreArchivo());
-        holder.mFecha.setText(archivo.getFecha());
+        holder.mNombreArchivo.setText(archivo.getNombre());
+        //holder.mFecha.setText(archivo.getFecha());
 
+    }
+
+    public void filtrar(int tipo) {
+        if (tipo == -1) {
+            mArchivos.clear();
+            mArchivos.addAll(mArchivosCopia);
+        } else {
+            ArrayList<Archivo> result = new ArrayList<>();
+            for (Archivo item : mArchivosCopia) {
+                if (item.getIdArea() == tipo) {
+                    result.add(item);
+                }
+
+            }
+            mArchivos.clear();
+            mArchivos.addAll(result);
+        }
+        notifyDataSetChanged();
     }
 
     @Override

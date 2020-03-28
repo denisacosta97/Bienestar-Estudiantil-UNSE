@@ -1,16 +1,26 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
+import android.animation.ObjectAnimator;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -20,16 +30,25 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
 import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
 import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
 import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
 import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.StorageManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -44,12 +63,16 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.view.View.VISIBLE;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.facultad;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.faya;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.fceyt;
@@ -62,7 +85,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     ImageView btnBack;
     CircleImageView imgUser;
     LinearLayout latGeneral, latAlumno, latProfesor, latEgresado;
-    FloatingActionButton fabEditar;
+    FloatingActionButton fabEditar, fabPic;
     EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail,
             edtProfesionProf, edtAnioIngresoProf, edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu,
             edtDomicilio, edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio;
@@ -74,8 +97,13 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     Usuario mUsuario = null;
     Object tipo = null;
     EditText[] campos;
+    FragmentManager manager = null;
 
-    boolean isEdit = false;
+    Bitmap mBitmapFile;
+    Uri uriFile;
+    String nameFile;
+
+    boolean isEdit = false, isReady = false;
 
     int fac = 0, carr = 0, mode = 0, TIPO_USER = -1;
 
@@ -106,8 +134,8 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     private void loadListener() {
         txtFechaNac.setOnClickListener(this);
         fabEditar.setOnClickListener(this);
+        fabPic.setOnClickListener(this);
         btnBack.setOnClickListener(this);
-        //spinnerCarrera.setSelection(carr);
         spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -222,6 +250,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         edtBarrio = findViewById(R.id.edtBarrio);
         txtFechaNac = findViewById(R.id.edtFecha);
         fabEditar = findViewById(R.id.fab);
+        fabPic = findViewById(R.id.fabPic);
 
         campos = new EditText[]{edtNombre, edtApellido, edtSexo, edtMail, edtProfesionProf,
                 edtAnioIngresoProf, edtAnioIngresoAlu, edtProfesionEgre, edtAnioEgresoEgre, edtProvincia,
@@ -237,6 +266,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void loadData() {
+        manager = getSupportFragmentManager();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, facultad);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFacultad.setAdapter(dataAdapter);
@@ -267,7 +297,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             edtMail.setText(usuario.getMail());
             edtTelefono.setText(usuario.getTelefono());
 
-            Glide.with(imgUser.getContext()).load(R.drawable.bienesplash).into(imgUser);
+            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, id);
+            Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions().error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE).placeholder(R.drawable.ic_user)).into(imgUser);
+
 
             TIPO_USER = usuario.getTipoUsuario();
 
@@ -324,11 +356,11 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                     break;
                 case 3:
                     index2 = fcm.indexOf(alumno.getCarrera());
-                   // spinnerCarrera.setSelection(Math.max(index2, 0));
+                    // spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
                 case 4:
                     index2 = fhcys.indexOf(alumno.getCarrera());
-                   // spinnerCarrera.setSelection(Math.max(index2, 0));
+                    // spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
 
             }
@@ -338,16 +370,16 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     private void loadLayout(int tipoUsuario) {
         switch (tipoUsuario) {
             case 1:
-                latGeneral.setVisibility(View.VISIBLE);
-                latAlumno.setVisibility(View.VISIBLE);
+                latGeneral.setVisibility(VISIBLE);
+                latAlumno.setVisibility(VISIBLE);
                 latEgresado.setVisibility(View.GONE);
                 latProfesor.setVisibility(View.GONE);
                 break;
             case 2:
-                latGeneral.setVisibility(View.VISIBLE);
+                latGeneral.setVisibility(VISIBLE);
                 latAlumno.setVisibility(View.GONE);
                 latEgresado.setVisibility(View.GONE);
-                latProfesor.setVisibility(View.VISIBLE);
+                latProfesor.setVisibility(VISIBLE);
                 break;
             case 3:
             case 5:
@@ -357,9 +389,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 latProfesor.setVisibility(View.GONE);
                 break;
             case 4:
-                latGeneral.setVisibility(View.VISIBLE);
+                latGeneral.setVisibility(VISIBLE);
                 latAlumno.setVisibility(View.GONE);
-                latEgresado.setVisibility(View.VISIBLE);
+                latEgresado.setVisibility(VISIBLE);
                 latProfesor.setVisibility(View.GONE);
                 break;
         }
@@ -369,6 +401,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.fabPic:
+                openGallery();
+                break;
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
@@ -376,11 +411,149 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 showDateDialog();
                 break;
             case R.id.fab:
+                ObjectAnimator.ofFloat(fabEditar, "rotation", 0f, 360f).setDuration(600).start();
                 activateEditMode();
                 break;
-
-
         }
+    }
+
+    private void openGallery() {
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Seleccionar imagen");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+
+        startActivityForResult(chooserIntent, Utils.PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case Utils.PICK_IMAGE:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = null;
+                    if (data.getData() != null) {
+                        uri = data.getData();
+                    }
+                    Intent intent = new Intent(getApplicationContext(), CropImageActivity.class);
+                    intent.putExtra(Utils.URI_IMAGE, uri);
+                    startActivityForResult(intent, Utils.EDIT_IMAGE);
+                } else if (resultCode == RESULT_CANCELED) {
+                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
+                }
+                break;
+            case Utils.EDIT_IMAGE:
+                if (resultCode == RESULT_OK) {
+                    Uri bitmap = null;
+                    String name = "";
+                    if (data.getParcelableExtra(Utils.URI_IMAGE) != null) {
+                        bitmap = data.getParcelableExtra(Utils.URI_IMAGE);
+                    }
+                    if (data.getStringExtra("name") != null) {
+                        name = data.getStringExtra("name");
+                    }
+                    if (bitmap != null) {
+                        loadPic(bitmap, name);
+                    }
+                } else if (resultCode == 2) {
+                    Utils.showToast(getApplicationContext(), "No se puedo recortar la imagen, intente nuevamente");
+                } else if (resultCode == RESULT_CANCELED) {
+                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
+                }
+                break;
+        }
+
+    }
+
+    private void loadPic(final Uri uri, final String name) {
+        // Get the file instance
+        Utils.resizeBitmapAndFile(name);
+        File file = new File(name);
+        Bitmap in = BitmapFactory.decodeFile(file.getPath());
+        mBitmapFile = in;
+        uriFile = uri;
+        nameFile = name;
+        isReady = true;
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (isReady) {
+            updatePicture(mBitmapFile, nameFile);
+            isReady = false;
+        }
+    }
+
+
+    private void updatePicture(final Bitmap mBitmap, final String name) {
+        final int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
+        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_USUARIO_IMAGE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaImagen(response, mBitmap, name);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Utils.showToast(getApplicationContext(), "Error de comunicación con el servidor");
+                dialog.dismiss();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parm = new HashMap<>();
+                parm.put("id", String.valueOf(id));
+                String info = Utils.convertImage(mBitmap);
+                parm.put("img", info);
+                return parm;
+            }
+        };
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(manager, "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
+    }
+
+    private void procesarRespuestaImagen(String response, Bitmap bitmap, String name) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case 1:
+                    //Exito
+                    Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
+                    Utils.saveBitmap(getApplicationContext(), "pic.jpg", bitmap);
+                    Utils.showToast(getApplicationContext(), "Foto actualizado!");
+                    File file = new File(nameFile);
+                    if (file.exists())
+                        file.delete();
+                    break;
+                case 2:
+                    //No autorizado
+                    Utils.showToast(getApplicationContext(), "No se pudo actualizar su foto de perfil");
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isEdit) {
+            Utils.showToast(getApplicationContext(), "Primero debe guardar los cambios");
+        } else
+            super.onBackPressed();
     }
 
     private void activateEditMode() {
@@ -397,6 +570,21 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void editMode(int mode) {
+        if (mode != 0) {
+            fabEditar.setImageResource(R.drawable.ic_save);
+            txtFechaNac.setOnClickListener(this);
+            spinnerFacultad.setEnabled(true);
+            spinnerCarrera.setEnabled(true);
+            Utils.scaleView(fabPic);
+            fabPic.setVisibility(VISIBLE);
+        } else {
+            fabEditar.setImageResource(R.drawable.ic_edit_);
+            txtFechaNac.setOnClickListener(null);
+            spinnerFacultad.setEnabled(false);
+            spinnerCarrera.setEnabled(false);
+            fabPic.setVisibility(View.INVISIBLE);
+        }
+
         for (EditText e : campos) {
             if (mode == 0) {
                 e.setEnabled(false);
@@ -408,17 +596,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 e.addTextChangedListener(this);
             }
         }
-        if (mode != 0) {
-            fabEditar.setImageResource(R.drawable.ic_save);
-            txtFechaNac.setOnClickListener(this);
-            spinnerFacultad.setEnabled(true);
-            spinnerCarrera.setEnabled(true);
-        } else {
-            fabEditar.setImageResource(R.drawable.ic_edit_);
-            txtFechaNac.setOnClickListener(null);
-            spinnerFacultad.setEnabled(false);
-            spinnerCarrera.setEnabled(false);
-        }
+
 
 
     }

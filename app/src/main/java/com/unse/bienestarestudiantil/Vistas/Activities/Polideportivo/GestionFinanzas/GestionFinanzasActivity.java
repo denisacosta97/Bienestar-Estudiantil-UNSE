@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -60,9 +61,9 @@ public class GestionFinanzasActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Ver ingresos del dia",R.drawable.ic_ingresos_dia, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Reporte mensual",R.drawable.ic_calendar, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Otros", R.drawable.ic_otros, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Ver ingresos del dia",R.drawable.ic_ingresos_dia, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Reporte mensual",R.drawable.ic_calendar, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Otros", R.drawable.ic_otros, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

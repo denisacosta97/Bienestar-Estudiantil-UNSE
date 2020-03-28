@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -64,9 +65,9 @@ public class GestionReservasActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Buscar reserva",R.drawable.ic_buscar, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Ver reservas del dia",R.drawable.ic_reservas_dia, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Confirmar reserva", R.drawable.ic_confirmar_reserva, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Buscar reserva",R.drawable.ic_buscar, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Ver reservas del dia",R.drawable.ic_reservas_dia, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Confirmar reserva", R.drawable.ic_confirmar_reserva, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -13,5 +13,25 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="headerTextSize">28sp</dimen>
 
+    <dimen name="padding_normal">12dp</dimen>
+    <dimen name="padding_xlarge">18dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_small">2dp</dimen>
+    <dimen name="text_size_normal_small">13sp</dimen>
+    <dimen name="text_size_normal">19sp</dimen>
+    <dimen name="text_size_normal_plus">20sp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_xlarge">20dp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="width_cred">400dp</dimen>
+    <dimen name="height_card">250dp</dimen>
+    <dimen name="chip_width_normal">54dp</dimen>
+    <dimen name="chip_height_normal">36dp</dimen>
+    <dimen name="inner_chip_width_normal">28dp</dimen>
+    <dimen name="inner_chip_height_normal">16dp</dimen>
+    <dimen name="logo_width_normal">48dp</dimen>
+    <dimen name="center_image_width">75dp</dimen>
+
 
 </resources>

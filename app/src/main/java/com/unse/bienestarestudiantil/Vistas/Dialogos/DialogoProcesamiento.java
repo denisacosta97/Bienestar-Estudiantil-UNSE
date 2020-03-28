@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.R;
@@ -17,6 +18,7 @@ import com.unse.bienestarestudiantil.R;
 public class DialogoProcesamiento  extends DialogFragment {
 
     View view;
+    ProgressBar mProgressBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,9 +32,23 @@ public class DialogoProcesamiento  extends DialogFragment {
 
         //loadData();
 
+        loadViews();
+
         //loadListener();
 
         return view;
+    }
+
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
+    }
+
+    public void setProgressBar(ProgressBar progressBar) {
+        mProgressBar = progressBar;
+    }
+
+    private void loadViews() {
+        mProgressBar = view.findViewById(R.id.progress);
     }
 
     private void loadData() {

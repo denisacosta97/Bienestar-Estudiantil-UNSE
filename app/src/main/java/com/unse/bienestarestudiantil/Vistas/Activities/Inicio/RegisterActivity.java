@@ -5,15 +5,14 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,12 +29,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.CropImageActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.BarcodeActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -44,13 +45,13 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Button mRegister;
     ImageButton mScanner;
     ImageView btnBack;
-    Bitmap mBitmap = null;
+    FloatingActionButton fabPic;
     LinearLayout mLLProfesor, mLLAlumno, mLLEgresado;
     CircleImageView imgUserRegister;
     RecyclerView recyclerTipoUsuario;
@@ -84,9 +85,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Spinner spinner, spinner2;
 
 
-    private int TIPO_USER = 1;
+    private int TIPO_USER = 1, dniNumber = 0, isFoto = 0, isData = 0;
     boolean doubleBackToExitPressedOnce = false;
     boolean isTODNI = false;
+
+    Bitmap mBitmapFile;
+    Uri uriFile;
+    String nameFile;
+
+    boolean isReady = false;
+
+    Timer timer;
+    TimerTask timerTask;
 
 
     @Override
@@ -179,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mRegister.setOnClickListener(this);
         imgUserRegister.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+        fabPic.setOnClickListener(this);
         mScanner.setOnClickListener(this);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -258,6 +269,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         edtPais = findViewById(R.id.edtPais);
         edtBarrio = findViewById(R.id.edtBarrio);
         recyclerTipoUsuario = findViewById(R.id.recycler);
+        fabPic = findViewById(R.id.fabPic);
     }
 
 
@@ -271,8 +283,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 login();
                 break;
             case R.id.imgUserRegister:
-                startActivityForResult(new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            case R.id.fabPic:
+                openGallery();
+                // startActivityForResult(new Intent(Intent.ACTION_PICK,
+                //       android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 break;
             case R.id.btnBack:
                 onBackPressed();
@@ -285,6 +299,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void openGallery() {
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Seleccionar imagen");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+
+        startActivityForResult(chooserIntent, GET_FROM_GALLERY);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (isReady) {
+            updatePicture(mBitmapFile, nameFile);
+            isReady = false;
+        }
+    }
+
+    private void updatePicture(final Bitmap mBitmap, final String name) {
+        Glide.with(imgUserRegister.getContext()).load(mBitmap).into(imgUserRegister);
+    }
+
+
     private void login() {
         Validador validador = new Validador();
 
@@ -292,6 +333,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String nombre = edtNombre.getText().toString().trim();
         String apellido = edtApellido.getText().toString().trim();
         String dni = edtDNI.getText().toString().trim();
+        dniNumber = Integer.parseInt(dni);
         String sexo = edtSexo.getText().toString().trim();
         String mail = edtMail.getText().toString().trim();
         String pass = edtContra.getText().toString().trim();
@@ -448,7 +490,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void sendServer(String data) {
 
 
-        String URL = Utils.URL_USUARIO_INSERTAR + data;
+        String URL = Utils.URL_USUARIO_INSERTAR + data + "&val=1";
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -462,36 +504,103 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
-                dialog.dismiss();
+                isData = 2;
 
             }
         });
-        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_USUARIO_IMAGE, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                int re = response.length();
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parm = new HashMap<>();
-                parm.put("id", edtDNI.getText().toString());
-                String info = convertImage(mBitmap != null ? mBitmap : ((BitmapDrawable) imgUserRegister.getDrawable()).getBitmap());
-                parm.put("img", info);
-                return parm;
-            }
-        };
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), "dialog_process");
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        loadTimer();
+    }
+
+    private void loadTimer() {
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isFoto == 1 && isData == 1) {
+                            timer.cancel();
+                            dialog.dismiss();
+                            if (!isFinishing()) {
+                                Utils.showToast(getApplicationContext(), "Registro exitoso!");
+                                Utils.showToast(getApplicationContext(), "Inicia sesión para confirmar");
+
+                                finish();
+                            }
+                        } else if (isFoto == 2 || isData == 2) {
+                            timer.cancel();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(timerTask, 0, Utils.SECONS_TIMER);
+    }
+
+    private void procesarRespuestaImagen(String response, Bitmap bitmap, String name) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case 1:
+                    Utils.saveBitmap(getApplicationContext(), "pic.jpg", bitmap);
+                    File file = new File(nameFile);
+                    if (file.exists())
+                        file.delete();
+                    isFoto = 1;
+                    break;
+                case 2:
+                    //No autorizado
+                    isFoto = 2;
+                    Utils.showToast(getApplicationContext(), "No se pudo actualizar su foto de perfil");
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            isFoto = 2;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null)
+            timer.cancel();
+    }
+
+    private void sendPic() {
+        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_USUARIO_IMAGE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaImagen(response, mBitmapFile, "");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Utils.showToast(getApplicationContext(), "Error de comunicación con el servidor");
+                isFoto = 2;
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parm = new HashMap<>();
+                parm.put("id", String.valueOf(dniNumber));
+                String info = Utils.convertImage(mBitmapFile);
+                parm.put("img", info);
+                return parm;
+            }
+        };
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
     }
 
@@ -513,33 +622,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void procesarRespuesta(String response) {
         try {
-            dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(), "Registro exitoso!");
-                    finish();
+                    isData = 1;
+                    sendPic();
                     //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    Utils.showToast(getApplicationContext(), "Inicia sesión para confirmar");
+
                     break;
                 case 2:
                     //Error 1
                     Utils.showToast(getApplicationContext(), "Error interno al intentar registrarte");
+                    isData = 2;
                     break;
                 case 3:
                     //Ya existe
+                    isData = 2;
                     Utils.showToast(getApplicationContext(), "Ya existe un usuario con el DNI ingresado, por favor verifica");
                     break;
                 case 100:
                     //No autorizado
+                    isData = 2;
                     Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
+            isData = 2;
             Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
         }
     }
@@ -571,31 +683,52 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             case GET_FROM_GALLERY:
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri selectedImage = data.getData();
-                    //Bitmap bitmap = null;
-                    try {
-                        mBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                        imgUserRegister.setImageBitmap(Bitmap.createScaledBitmap(mBitmap, 500, 500, false));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                if (resultCode == RESULT_OK) {
+                    Uri uri = null;
+                    if (data.getData() != null) {
+                        uri = data.getData();
                     }
-                } else {
-                    Utils.showToast(getApplicationContext(), "Debe elegir una foto desde su galería");
+                    Intent intent = new Intent(getApplicationContext(), CropImageActivity.class);
+                    intent.putExtra(Utils.URI_IMAGE, uri);
+                    startActivityForResult(intent, Utils.EDIT_IMAGE);
+                } else if (resultCode == RESULT_CANCELED) {
+                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
+                }
+                break;
+            case Utils.EDIT_IMAGE:
+                if (resultCode == RESULT_OK) {
+                    Uri bitmap = null;
+                    String name = "";
+                    if (data.getParcelableExtra(Utils.URI_IMAGE) != null) {
+                        bitmap = data.getParcelableExtra(Utils.URI_IMAGE);
+                    }
+                    if (data.getStringExtra("name") != null) {
+                        name = data.getStringExtra("name");
+                    }
+                    if (bitmap != null) {
+                        loadPic(bitmap, name);
+                    }
+                } else if (resultCode == 2) {
+                    Utils.showToast(getApplicationContext(), "No se puedo recortar la imagen, intente nuevamente");
+                } else if (resultCode == RESULT_CANCELED) {
+                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
                 }
                 break;
         }
     }
 
-    private String convertImage(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] img = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(img, Base64.DEFAULT);
+    private void loadPic(final Uri uri, final String name) {
+        // Get the file instance
+        Utils.resizeBitmapAndFile(name);
+        File file = new File(name);
+        Bitmap in = BitmapFactory.decodeFile(file.getPath());
+        mBitmapFile = in;
+        uriFile = uri;
+        nameFile = name;
+        isReady = true;
 
     }
+
 
     private void completarDatos(ArrayList<String> resultados) {
         if (resultados.size() != 0) {

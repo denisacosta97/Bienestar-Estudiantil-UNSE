@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -80,11 +81,11 @@ public class MainGestionDeportesActivity extends AppCompatActivity implements Vi
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1, "Alumnos inscriptos",R.drawable.ic_usuarios, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(2, "Gestión de becados",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Gestión de deportes",R.drawable.ic_deportes, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(4, "Gestión de profesores",R.drawable.ic_entrenador, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(5, "Gestión de torneos",R.drawable.ic_cup, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1, "Alumnos inscriptos",R.drawable.ic_usuarios, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Gestión de becados",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de deportes",R.drawable.ic_deportes, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión de profesores",R.drawable.ic_entrenador, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Gestión de torneos",R.drawable.ic_cup, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

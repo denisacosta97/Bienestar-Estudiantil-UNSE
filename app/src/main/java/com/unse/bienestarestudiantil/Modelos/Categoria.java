@@ -13,6 +13,12 @@ public class Categoria {
         this.estado = false;
     }
 
+    public Categoria(int id, String nombre, boolean estado) {
+        this.nombre = nombre;
+        this.idCategoria = id;
+        this.estado = estado;
+    }
+
     public boolean isEstado() {
         return estado;
     }

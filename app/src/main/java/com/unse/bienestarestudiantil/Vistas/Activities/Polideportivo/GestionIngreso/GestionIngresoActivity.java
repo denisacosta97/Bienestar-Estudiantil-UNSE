@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -66,9 +67,9 @@ public class GestionIngresoActivity extends AppCompatActivity implements View.On
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(1,"Ingreso a pileta",R.drawable.ic_ingreso_pileta, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(2, "Ingreso a polideportivo",R.drawable.ic_ingreso_poli, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(3, "Ingresos del dia", R.drawable.ic_ingresos_poli_dia, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Ingreso a pileta",R.drawable.ic_ingreso_pileta, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Ingreso a polideportivo",R.drawable.ic_ingreso_poli, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Ingresos del dia", R.drawable.ic_ingresos_poli_dia, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

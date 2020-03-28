@@ -14,19 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:src="@drawable/ic_edit_"
-                app:backgroundTint="@color/colorGrey2"
-                app:borderWidth="0dp"
-                app:layout_anchor="@id/latDatos"
-                android:layout_margin="26dp"
-                android:layout_gravity="end" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,11 +33,29 @@
                         android:layout_margin="10dp"
                         android:gravity="center">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/imgUserPerfil"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/user"/>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/imgUserPerfil"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/ic_user"
+                                app:civ_border_color="#FFFFFF"
+                                app:civ_border_width="2dp" />
+
+                            <android.support.design.widget.FloatingActionButton
+                                android:id="@+id/fabPic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/imgUserPerfil"
+                                android:layout_marginLeft="-35dp"
+                                android:src="@drawable/ic_camera" />
+
+                        </RelativeLayout>
 
                         <View
                             android:layout_width="match_parent"
@@ -66,1003 +71,1017 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_margin="10dp"
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <android.support.v7.widget.CardView
-                            android:layout_width="match_parent"
+                        <android.support.design.widget.FloatingActionButton
+                            android:layout_margin="15dp"
+                            android:id="@+id/fab"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cardElevation="5dp"
-                            app:cardCornerRadius="20dp">
+                            android:src="@drawable/ic_edit_"
+                            app:backgroundTint="@color/colorPrimaryDark"
+                            android:layout_gravity="end" />
 
-                            <LinearLayout
-                                android:visibility="visible"
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
+                                app:cardElevation="5dp"
+                                app:cardCornerRadius="20dp">
                                 <LinearLayout
+                                    android:visibility="visible"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:background="@color/colorGrey"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold"
-                                        android:text="INFORMACIÓN"
-                                        android:fontFamily="@font/montserrat_black"/>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:orientation="vertical"
-                                    android:layout_margin="5dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-
+                                    android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:padding="10dp"
+                                        android:background="@color/colorGrey"
+                                        android:orientation="horizontal">
 
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
+                                        <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="DNI:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:enabled="false"
-                                                android:id="@+id/edtDNI"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:textSize="14sp"
-                                                android:text="00.000.000"
-                                                android:inputType="number"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
                                             android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Nombre:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtNombre"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:textSize="14sp"
-                                                android:text="Nombre"
-                                                android:inputType="text"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Apellido:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtApellido"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:textSize="14sp"
-                                                android:text="Apellido"
-                                                android:inputType="text"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Sexo:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtSexo"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:inputType="text"
-                                                android:textSize="14sp"
-                                                android:text="No Especificado"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Fecha de Nacimiento:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <TextView
-                                                android:id="@+id/edtFecha"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:textSize="14sp"
-                                                android:text="0000-00-00"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Domicilio:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:inputType="text"
-                                                android:id="@+id/edtDomicilio"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:textSize="14sp"
-                                                android:text="ABCDE 0000"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Barrio:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtBarrio"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-
-                                                android:textSize="14sp"
-                                                android:text="ABCDE"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Localidad:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtLocalidad"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-
-                                                android:textSize="14sp"
-                                                android:text="ABCDE"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Provincia:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtProvincia"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-
-                                                android:textSize="14sp"
-                                                android:text="ABCDE"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="País:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtPais"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-
-                                                android:textSize="14sp"
-                                                android:text="ABCDE"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Email:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtMail"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:inputType="textEmailAddress"
-                                                android:textSize="14sp"
-                                                android:text="ABCDE@ABC.ABC"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_gravity="center"
-                                            android:gravity="center"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="Celular:"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <EditText
-                                                android:id="@+id/edtCelu"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:inputType="number"
-                                                android:textSize="14sp"
-                                                android:text="123456789"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorTextDefault"
-                                                android:padding="10dp"
-                                                android:background="@color/transparente" />
-                                        </LinearLayout>
-
-                                        <View
-                                            android:layout_marginStart="10dp"
-                                            android:layout_marginEnd="10dp"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="1dp"
-                                            android:background="@color/colorGrey"/>
+                                            android:textSize="16sp"
+                                            android:textStyle="bold"
+                                            android:text="INFORMACIÓN"
+                                            android:fontFamily="@font/montserrat_black"/>
 
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:orientation="vertical"
-                                        android:id="@+id/layRango"
+                                        android:layout_margin="5dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
 
-                                        <!--                                Capa Alumnos-->
+
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="DNI:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:enabled="false"
+                                                    android:id="@+id/edtDNI"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="14sp"
+                                                    android:text="00.000.000"
+                                                    android:inputType="number"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Nombre:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtNombre"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="14sp"
+                                                    android:text="Nombre"
+                                                    android:inputType="text"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Apellido:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtApellido"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="14sp"
+                                                    android:text="Apellido"
+                                                    android:inputType="text"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Sexo:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtSexo"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:inputType="text"
+                                                    android:textSize="14sp"
+                                                    android:text="No Especificado"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Fecha de Nacimiento:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <TextView
+                                                    android:id="@+id/edtFecha"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="14sp"
+                                                    android:text="0000-00-00"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Domicilio:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:inputType="text"
+                                                    android:id="@+id/edtDomicilio"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE 0000"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Barrio:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtBarrio"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Localidad:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtLocalidad"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Provincia:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtProvincia"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="País:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtPais"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Email:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtMail"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:inputType="textEmailAddress"
+                                                    android:textSize="14sp"
+                                                    android:text="ABCDE@ABC.ABC"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_gravity="center"
+                                                android:gravity="center"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="10dp"
+                                                    android:layout_marginRight="10dp"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:text="Celular:"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <EditText
+                                                    android:id="@+id/edtCelu"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:inputType="number"
+                                                    android:textSize="14sp"
+                                                    android:text="123456789"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorTextDefault"
+                                                    android:padding="10dp"
+                                                    android:background="@color/transparente" />
+                                            </LinearLayout>
+
+                                            <View
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="1dp"
+                                                android:background="@color/colorGrey"/>
+
+                                        </LinearLayout>
+
                                         <LinearLayout
                                             android:orientation="vertical"
-                                            android:id="@+id/layAlumno"
+                                            android:id="@+id/layRango"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content">
 
+                                            <!--                                Capa Alumnos-->
                                             <LinearLayout
+                                                android:orientation="vertical"
+                                                android:id="@+id/layAlumno"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
+                                                android:layout_height="wrap_content">
 
                                                 <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
+                                                    android:orientation="vertical">
 
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Facultad:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <Spinner
-                                                        android:id="@+id/spinner1"
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp" />
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Facultad:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <Spinner
+                                                            android:id="@+id/spinner1"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
                                                 </LinearLayout>
 
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
+                                                <LinearLayout
                                                     android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Carrera:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <Spinner
+                                                            android:id="@+id/spinner2"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"/>
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Legajo:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtLegajo"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+
+                                                            android:textSize="14sp"
+                                                            android:text="123/123"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Año de Ingreso:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtAnioIngrAlu"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:inputType="number"
+                                                            android:text="1234567"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
+                                                </LinearLayout>
+
+
+
 
                                             </LinearLayout>
 
+                                            <!--                                Capa Profesor-->
                                             <LinearLayout
+                                                android:orientation="vertical"
+                                                android:id="@+id/layProfesor"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
+                                                android:layout_height="wrap_content">
 
                                                 <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
+                                                    android:orientation="vertical">
 
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Carrera:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <Spinner
-                                                        android:id="@+id/spinner2"
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"/>
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Profesión:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtProfesion1"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:text="ABCDE"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
                                                 </LinearLayout>
 
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
+                                                <LinearLayout
                                                     android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Año de Ingreso:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtAnioIngProf"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:inputType="number"
+                                                            android:text="123456789"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
+                                                </LinearLayout>
+
+
+
 
                                             </LinearLayout>
 
+                                            <!--                                Capa Egresado-->
                                             <LinearLayout
+                                                android:orientation="vertical"
+                                                android:id="@+id/layEgresado"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
+                                                android:layout_height="wrap_content">
 
                                                 <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
+                                                    android:orientation="vertical">
 
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Legajo:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtLegajo"
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
+                                                        android:orientation="horizontal">
 
-                                                        android:textSize="14sp"
-                                                        android:text="123/123"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:text="Profesión:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtProfesionEgre"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:text="ABCDE"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
                                                 </LinearLayout>
-
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
-
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
 
                                                 <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
+                                                    android:orientation="vertical">
 
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Año de Ingreso:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtAnioIngrAlu"
+                                                    <LinearLayout
+                                                        android:layout_gravity="center"
+                                                        android:gravity="center"
                                                         android:layout_width="match_parent"
                                                         android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:inputType="number"
-                                                        android:text="1234567"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
+                                                        android:orientation="horizontal">
+
+                                                        <TextView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginRight="10dp"
+                                                            android:textColor="@color/colorGrey2"
+                                                            android:textStyle="bold"
+                                                            android:inputType="number"
+                                                            android:text="Año de Egreso:"
+                                                            android:textSize="14sp"
+                                                            android:fontFamily="@font/montserrat_black"/>
+
+                                                        <EditText
+                                                            android:id="@+id/edtAnioEgresoEgre"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:textSize="14sp"
+                                                            android:text="123456789"
+                                                            android:textStyle="bold"
+                                                            android:textColor="@color/colorTextDefault"
+                                                            android:padding="10dp"
+                                                            android:background="@color/transparente" />
+                                                    </LinearLayout>
+
+                                                    <View
+                                                        android:layout_marginStart="10dp"
+                                                        android:layout_marginEnd="10dp"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="1dp"
+                                                        android:background="@color/colorGrey"/>
+
                                                 </LinearLayout>
 
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
+
+
 
                                             </LinearLayout>
-
 
 
 
                                         </LinearLayout>
-
-                                        <!--                                Capa Profesor-->
-                                        <LinearLayout
-                                            android:orientation="vertical"
-                                            android:id="@+id/layProfesor"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
-
-                                                <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Profesión:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtProfesion1"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:text="ABCDE"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
-                                                </LinearLayout>
-
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
-
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
-
-                                                <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Año de Ingreso:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtAnioIngProf"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:inputType="number"
-                                                        android:text="123456789"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
-                                                </LinearLayout>
-
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
-
-                                            </LinearLayout>
-
-
-
-
-                                        </LinearLayout>
-
-                                        <!--                                Capa Egresado-->
-                                        <LinearLayout
-                                            android:orientation="vertical"
-                                            android:id="@+id/layEgresado"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
-
-                                                <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:text="Profesión:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtProfesionEgre"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:text="ABCDE"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
-                                                </LinearLayout>
-
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
-
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical">
-
-                                                <LinearLayout
-                                                    android:layout_gravity="center"
-                                                    android:gravity="center"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="horizontal">
-
-                                                    <TextView
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginLeft="10dp"
-                                                        android:layout_marginRight="10dp"
-                                                        android:textColor="@color/colorGrey2"
-                                                        android:textStyle="bold"
-                                                        android:inputType="number"
-                                                        android:text="Año de Egreso:"
-                                                        android:textSize="14sp"
-                                                        android:fontFamily="@font/montserrat_black"/>
-
-                                                    <EditText
-                                                        android:id="@+id/edtAnioEgresoEgre"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:textSize="14sp"
-                                                        android:text="123456789"
-                                                        android:textStyle="bold"
-                                                        android:textColor="@color/colorTextDefault"
-                                                        android:padding="10dp"
-                                                        android:background="@color/transparente" />
-                                                </LinearLayout>
-
-                                                <View
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_marginEnd="10dp"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="1dp"
-                                                    android:background="@color/colorGrey"/>
-
-                                            </LinearLayout>
-
-
-
-
-                                        </LinearLayout>
-
-
 
                                     </LinearLayout>
+
+
 
                                 </LinearLayout>
 
 
+                            </android.support.v7.widget.CardView>
 
-                            </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp"
+                                android:background="@color/transparente" />
 
-                        </android.support.v7.widget.CardView>
+                        </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="10dp"
-                            android:background="@color/transparente" />
-
-                    </LinearLayout>
-
+                    </FrameLayout>
 
 
                 </LinearLayout>
