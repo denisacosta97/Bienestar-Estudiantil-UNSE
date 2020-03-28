@@ -6,13 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Interfaces.CustomItemClickListener;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.AsistenciaAdapter;
@@ -30,7 +30,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
     LinearLayout mLinearLayout;
     ImageView imgFlecha;
     Asistencia mAsistencia;
-
+    CustomItemClickListener listner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         loadViews();
 
         loadListener();
-
 
         loadData();
 
@@ -94,7 +93,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
 
     private void loadListener() {
         btnFinalizar.setOnClickListener(this);
-
         imgFlecha.setOnClickListener(this);
     }
 
@@ -105,21 +103,18 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLinearLayout = findViewById(R.id.layout);
         btnFinalizar = findViewById(R.id.btnFinalizar);
         imgFlecha = findViewById(R.id.imgFlecha);
+
     }
-
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
             case R.id.btnFinalizar:
 
                 break;
-
         }
 
     }

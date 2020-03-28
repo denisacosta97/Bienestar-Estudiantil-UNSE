@@ -232,11 +232,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String facultad = tipo.getString("facultad");
                     String anio = tipo.getString("anio");
                     String legajo = tipo.getString("legajo");
+                    String peso = datos.getString(" ");
+                    String altura = datos.getString(" ");
+                    String imc = datos.getString(" ");
+                    String estadoAlu = datos.getString(" ");
                     int idRegularidad = Integer.parseInt(
                             tipo.getString("idRegularidad"));
                     String checkDataAlu = tipo.getString("checkData");
-                    Alumno alumno = new Alumno(usuario, carrera, facultad, legajo, anio, Integer.parseInt(idUsuario),
-                            checkDataAlu, idRegularidad);
+                    Alumno alumno = new Alumno(usuario, carrera, facultad, legajo, anio, peso,
+                            altura, imc, estadoAlu, Integer.parseInt(idUsuario), checkDataAlu, idRegularidad);
                     AlumnosRepo alumnosRepo = new AlumnosRepo(getApplicationContext());
                     alumnosRepo.insert(alumno);
                     break;

@@ -1,6 +1,9 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-public class Reserva {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Reserva implements Parcelable {
 
     private int mIcon, idReserva;
     private String mTitulo;
@@ -19,6 +22,24 @@ public class Reserva {
         mTitulo = "";
         mRangoHora = null;
     }
+
+    protected Reserva(Parcel in) {
+        mIcon = in.readInt();
+        idReserva = in.readInt();
+        mTitulo = in.readString();
+    }
+
+    public static final Creator<Reserva> CREATOR = new Creator<Reserva>() {
+        @Override
+        public Reserva createFromParcel(Parcel in) {
+            return new Reserva(in);
+        }
+
+        @Override
+        public Reserva[] newArray(int size) {
+            return new Reserva[size];
+        }
+    };
 
     public int getIcon() {
         return mIcon;
@@ -50,5 +71,17 @@ public class Reserva {
 
     public void setRangoHora(ReservaHorario rangoHora) {
         mRangoHora = rangoHora;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mIcon);
+        dest.writeInt(idReserva);
+        dest.writeString(mTitulo);
     }
 }

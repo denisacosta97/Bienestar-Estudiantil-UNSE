@@ -57,24 +57,24 @@
                 android:title="Gestión del Sistema"/>
             <item
                 android:id="@+id/item_perfil"
-                android:icon="@drawable/user"
+                android:icon="@drawable/ic_usuario"
                 android:title="Perfil"/>
             <item
                 android:id="@+id/profe_profile"
-                android:icon="@drawable/user"
+                android:icon="@drawable/ic_usuario"
                 android:title="Perfil profesor"/>
 
             <item
-                android:id="@+id/menu_opcion_1"
-                android:icon="@drawable/ic_menu"
+                android:id="@+id/item_about"
+                android:icon="@drawable/ic_b_bienestar"
                 android:title="Sobre nosotros"/>
             <item
                 android:id="@+id/item_contactos"
-                android:icon="@drawable/ic_config"
+                android:icon="@drawable/ic_informacion"
                 android:title="Contactos"/>
             <item
                 android:id="@+id/item_terminos"
-                android:icon="@drawable/ic_menu"
+                android:icon="@drawable/ic_terms"
                 android:title="Términos y condiciones"/>
         </menu>
     </item>

@@ -7,20 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Interfaces.CustomItemClickListener;
 import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class AsistenciaAdapter extends RecyclerView.Adapter<AsistenciaAdapter.EventosViewHolder>{
+public class AsistenciaAdapter extends RecyclerView.Adapter<AsistenciaAdapter.EventosViewHolder> implements CustomItemClickListener{
 
     private ArrayList<Asistencia> asistencia;
     private Context context;
+    private CustomItemClickListener itemClick;
 
     public AsistenciaAdapter(ArrayList<Asistencia> list, Context ctx) {
         this.asistencia = list;
@@ -71,6 +71,11 @@ public class AsistenciaAdapter extends RecyclerView.Adapter<AsistenciaAdapter.Ev
     @Override
     public int getItemCount() {
         return asistencia.size();
+    }
+
+    @Override
+    public void onClickAsistencia(Asistencia asistencia) {
+
     }
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {

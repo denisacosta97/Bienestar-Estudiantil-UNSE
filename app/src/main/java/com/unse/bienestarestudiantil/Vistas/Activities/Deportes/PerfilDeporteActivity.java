@@ -61,7 +61,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
     }
 
     private void loadData() {
-        mEntrenador.setText(mDeporte.getEntrenador());
+        mEntrenador.setText("");
         mHorario.setText(mDeporte.getHorario());
         mDia.setText(mDeporte.getDias());
         mNombreDep.setText(mDeporte.getName());

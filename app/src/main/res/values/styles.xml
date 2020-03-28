@@ -49,4 +49,8 @@
 
     </declare-styleable>
 
+    <style name="MontserratTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
 </resources>

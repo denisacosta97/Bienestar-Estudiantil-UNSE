@@ -6,33 +6,47 @@ import android.os.Parcelable;
 public class Deporte implements Parcelable {
 
     private int mIconDeporte, idDep;
-    private String mName, entrenador, dias, horario;
+    private String mName, desc, lugar, dias, horario, lat, lon;
+    private Profesor mProfesor;
 
-    public Deporte(int idDep, int iconDeporte, String name, String entrenador, String dias, String horario) {
-        this.mIconDeporte = iconDeporte;
+    public Deporte(int iconDeporte, int idDep, String name, String desc, String lugar, String dias,
+                   String horario, String lat, String lon, Profesor profesor) {
+        mIconDeporte = iconDeporte;
         this.idDep = idDep;
-        this.mName = name;
-        this.entrenador = entrenador;
+        mName = name;
+        this.desc = desc;
+        this.lugar = lugar;
         this.dias = dias;
         this.horario = horario;
+        this.lat = lat;
+        this.lon = lon;
+        mProfesor = profesor;
     }
 
     public Deporte() {
-        this.mIconDeporte = 0;
-        this.idDep = 0;
-        this.mName = "";
-        this.entrenador = "";
+        mIconDeporte = -1;
+        this.idDep = -1;
+        mName = "";
+        this.desc = "";
+        this.lugar = "";
         this.dias = "";
         this.horario = "";
+        this.lat = "";
+        this.lon = "";
+        mProfesor = new Profesor();
     }
 
     protected Deporte(Parcel in) {
         mIconDeporte = in.readInt();
         idDep = in.readInt();
         mName = in.readString();
-        entrenador = in.readString();
+        desc = in.readString();
+        lugar = in.readString();
         dias = in.readString();
         horario = in.readString();
+        lat = in.readString();
+        lon = in.readString();
+        mProfesor = in.readParcelable(Profesor.class.getClassLoader());
     }
 
     public static final Creator<Deporte> CREATOR = new Creator<Deporte>() {
@@ -71,12 +85,20 @@ public class Deporte implements Parcelable {
         mName = name;
     }
 
-    public String getEntrenador() {
-        return entrenador;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setEntrenador(String entrenador) {
-        this.entrenador = entrenador;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     public String getDias() {
@@ -95,18 +117,46 @@ public class Deporte implements Parcelable {
         this.horario = horario;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String latlong) {
+        this.lat = latlong;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+
+    public Profesor getProfesor() {
+        return mProfesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        mProfesor = profesor;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(mIconDeporte);
-        parcel.writeInt(idDep);
-        parcel.writeString(mName);
-        parcel.writeString(entrenador);
-        parcel.writeString(dias);
-        parcel.writeString(horario);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mIconDeporte);
+        dest.writeInt(idDep);
+        dest.writeString(mName);
+        dest.writeString(desc);
+        dest.writeString(lugar);
+        dest.writeString(dias);
+        dest.writeString(horario);
+        dest.writeString(lat);
+        dest.writeString(lon);
+        dest.writeParcelable(mProfesor, flags);
     }
 }

@@ -1,8 +1,11 @@
 package com.unse.bienestarestudiantil.Modelos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Profesor extends Usuario {
+public class Profesor extends Usuario implements Parcelable {
 
     public static final String TAG = Usuario.class.getSimpleName();
     public static final String TABLE = "profesor";
@@ -36,6 +39,27 @@ public class Profesor extends Usuario {
         this.fechaIngreso = "";
     }
 
+    protected Profesor(Parcel in) {
+        setIdUsuario(in.readInt());
+        setNombre(in.readString());
+        setApellido(in.readString());
+        profesion = in.readString();
+        checkData = in.readString();
+        idProfesor = in.readInt();
+    }
+
+    public static final Creator<Profesor> CREATOR = new Creator<Profesor>() {
+        @Override
+        public Profesor createFromParcel(Parcel in) {
+            return new Profesor(in);
+        }
+
+        @Override
+        public Profesor[] newArray(int size) {
+            return new Profesor[size];
+        }
+    };
+
     public String getProfesion() {
         return profesion;
     }
@@ -66,5 +90,20 @@ public class Profesor extends Usuario {
 
     public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(getIdUsuario());
+        dest.writeString(getNombre());
+        dest.writeString(getApellido());
+        dest.writeString(profesion);
+        dest.writeString(checkData);
+        dest.writeInt(idProfesor);
     }
 }

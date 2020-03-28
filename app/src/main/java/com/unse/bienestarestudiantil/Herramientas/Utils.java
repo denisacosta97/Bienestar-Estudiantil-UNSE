@@ -75,6 +75,8 @@ public class Utils {
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
 
+    public static final String DEPORTE_NAME_PROF = "dato_deporte_prof";
+
 
     public static final int PERMISSION_ALL = 1010;
 
@@ -106,6 +108,7 @@ public class Utils {
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
     public static final String ALUMNO_NAME = "dato_alumno";
+    public static final String NUM_INST = "num_inst";
     public static final int LIST_RESET = 0;
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
@@ -130,6 +133,9 @@ public class Utils {
     public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/torneo/getCredencial.php";
 
     public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.12/bienestar/beca/getCredencial.php";
+    public static final String URL_DEPORTE_LISTA = "http://192.168.0.12/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_TORNEOS_LISTA = "http://192.168.0.12/bienestar/deportes/getAllTorneos.php";
+    public static final String URL_ISCRIP_LISTA = "http://192.168.0.12/bienestar/deportes/getAllInscriptos.php";
 
     public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
     public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";

@@ -17,8 +17,12 @@ public class Validador {
         return !noVacio(name) && name.matches(regex);
     }
 
-    public boolean validarNombres(String... datos)
-    {
+    public boolean validarHora(String name){
+        String regex = "[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}";
+        return !noVacio(name) && name.matches(regex);
+    }
+
+    public boolean validarNombres(String... datos) {
         int i = 0;
         for (i = 0; i<datos.length; i++){
             if (!validarNombre(datos[i]))

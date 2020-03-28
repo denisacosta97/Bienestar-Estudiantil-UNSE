@@ -392,7 +392,7 @@
                     android:padding="15dp"
                     android:inputType="textPassword"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -556,7 +556,7 @@
                         android:inputType="text"
                         android:background="@drawable/edit_text_logreg"
                         android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_black"/>
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -575,7 +575,7 @@
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
                         android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_black"/>
+                        android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
 

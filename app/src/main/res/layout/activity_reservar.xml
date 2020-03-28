@@ -29,7 +29,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Reserva"
                     android:textAlignment="center"
-                    android:textSize="56sp"
+                    android:textSize="46sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -64,6 +64,15 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre completo"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
                 <EditText
                     android:id="@+id/txtnombre"
                     android:layout_width="match_parent"
@@ -76,111 +85,168 @@
                     android:textSize="15sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-                <EditText
-                    android:layout_margin="5dp"
-                    android:id="@+id/txtapellido"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edit_text_logreg"
-                    android:hint="Apellidos"
-                    android:inputType="textEmailSubject"
-                    android:padding="5dp"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:layout_height="wrap_content"
+                    android:text="DNI"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <EditText
                     android:id="@+id/txtemail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/edit_text_logreg"
-                    android:hint="Legajo/DNI"
-                    android:inputType="textEmailAddress"
+                    android:hint="DNI"
+                    android:inputType="text"
                     android:padding="5dp"
                     android:layout_margin="5dp"
                     android:textSize="15sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-                <LinearLayout
-                    android:weightSum="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_weight="0.5"
-                        android:id="@+id/txtdateR"
-                        android:layout_width="165dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edit_text_logreg"
-                        android:clickable="true"
-                        android:focusable="false"
-                        android:hint="Fecha"
-                        android:inputType="date"
-                        android:longClickable="false"
-                        android:maxLines="1"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/montserrat_regular"/>
-
-                    <EditText
-                        android:layout_weight="0.5"
-                        android:id="@+id/edtxTime"
-                        android:layout_width="165dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edit_text_logreg"
-                        android:focusable="false"
-                        android:hint="Hora"
-                        android:longClickable="false"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/montserrat_regular"/>
-
-                </LinearLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:visibility="visible" />
-
-                <LinearLayout
-                    android:layout_marginTop="10dp"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:text="Fecha"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
 
-                    <Button
-                        android:id="@+id/btnCancel"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_border"
-                        android:text="Cancelar"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                    <Button
-                        android:id="@+id/btnReservaF"
-                        android:layout_width="150dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_border"
-                        android:text="Reservar"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                </LinearLayout>
-
-                <View
+                <EditText
+                    android:id="@+id/txtdateR"
                     android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Fecha"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instalación"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtxInst"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:focusable="false"
+                    android:hint="Instalación"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Turno"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtxTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:focusable="false"
+                    android:hint="Turno"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Imagen ilustrativa"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Total a pagar"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <TextView
+                android:id="@+id/txtTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/colorMoney"
+                android:gravity="center"
+                android:text="$ 0"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="Cancelar"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <Button
+                    android:id="@+id/btnReservaF"
+                    android:layout_width="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="Reservar"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
         </LinearLayout>
 

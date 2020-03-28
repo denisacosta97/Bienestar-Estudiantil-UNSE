@@ -86,9 +86,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     CircleImageView imgUser;
     LinearLayout latGeneral, latAlumno, latProfesor, latEgresado;
     FloatingActionButton fabEditar, fabPic;
-    EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail,
-            edtProfesionProf, edtAnioIngresoProf, edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu,
-            edtDomicilio, edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio;
+    EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtProfesionProf, edtAnioIngresoProf,
+            edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu, edtDomicilio,
+            edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio, mPeso, mAltura, mIMC, mEstado;
     TextView txtFechaNac;
     Spinner spinnerFacultad, spinnerCarrera;
 
@@ -625,6 +625,11 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         String legajo = edtLegajoAlu.getText().toString().trim();
         String barrio = edtBarrio.getText().toString().trim();
 
+        String peso = mPeso.getText().toString().trim();
+        String altura = mAltura.getText().toString().trim();
+        String imc = mIMC.getText().toString().trim();
+        String estadoAlu = mEstado.getText().toString().trim();
+
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
@@ -655,7 +660,8 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                                 sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
                                         domicilio, barrio, telefono, sexo, token, mail, 1, carrera, faculta, anioIngreso2
                                         , legajo, "SN", null, null));
-                                tipo = new Alumno(usuario, carrera, faculta, legajo, anioIngreso2, id, "", 0);
+                                tipo = new Alumno(usuario, carrera, faculta, legajo, anioIngreso2,
+                                        peso, altura, imc, estadoAlu, id, "", 0);
                             } else
                                 Utils.showToast(getApplicationContext(), "Número de legajo inválido");
 

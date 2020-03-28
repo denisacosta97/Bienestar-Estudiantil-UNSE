@@ -5,13 +5,14 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.CalendarReservasActivity;
 
 public class EspaciosActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,8 +24,6 @@ public class EspaciosActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_espacios);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        //Utils.setFont(getApplicationContext(), (ViewGroup) findViewById(android.R.id.content),"Montserrat-Regular.ttf");
 
         loadViews();
 
@@ -55,12 +54,13 @@ public class EspaciosActivity extends AppCompatActivity implements View.OnClickL
         Intent i = new Intent(getApplicationContext(), ReservaEspacioActivity.class);;
         switch (v.getId()){
             case R.id.layCancha:
-                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_CANCHA);
-                startActivity(i);
+//                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_CANCHA);
+//                startActivity(i);
                 break;
             case R.id.laySalon:
-                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_QUINCHO);
-                startActivity(i);
+//                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_QUINCHO);
+//                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), CalendarReservasActivity.class));
                 break;
             case R.id.imgFlecha:
                 onBackPressed();

@@ -14,11 +14,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Deporte;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.AlumnosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -28,18 +42,24 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    AlumnosAdapter mAdapter;
-    ArrayList<Alumno> mList;
+    UsuariosAdapter mAdapter;
+    ArrayList<Deporte> mDeporte;
+    ArrayList<Usuario> mUsuarios;
     ImageView imgIcono, imgBuscador;
     TextInputLayout tilBuscador;
     EditText edtBuscar;
     FloatingActionButton fab;
+    DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscriptos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null) {
+            mDeporte = getIntent().getParcelableExtra(Utils.DEPORTE_NAME);
+        }
 
         setToolbar();
 
@@ -48,6 +68,8 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
         loadListener();
 
         loadDataRecycler();
+
+        getAll();
 
     }
 
@@ -61,7 +83,7 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Item: " + mList.get(position).getNombre());
+                Utils.showToast(getApplicationContext(), "Item: " + mUsuarios.get(position).getNombre());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -119,10 +141,9 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
 
     private void loadDataRecycler() {
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mList = new ArrayList<>();
-        //mList.add(new Alumno("ELEESEI","ESATAS","207/15","2015","as2d","","FCEyT","29/09/2018","23/15", true));
+        mUsuarios = new ArrayList<>();
 
-        mAdapter = new AlumnosAdapter(mList, getApplicationContext());
+        mAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -139,6 +160,77 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
         edtBuscar = findViewById(R.id.edtBuscar);
     }
 
+    private void getAll() {
+        String key = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
+        String URL = String.format("%s?key=%s", Utils.URL_ISCRIP_LISTA, key);
+
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuesta(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                dialog.dismiss();
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuesta(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case 1:
+                    //Exito
+                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+                    load(jsonArray);
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), "La contraseña actual ingresada es inválida");
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    break;
+                case 100:
+                    //No autorizado
+                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+        }
+    }
+
+    private void load(JSONArray jsonArray) throws JSONException {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject j = jsonArray.getJSONObject(i);
+
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(j.getInt("idUsuario"));
+            usuario.setNombre(j.getString("nombre"));
+            usuario.setApellido(j.getString("apellido"));
+            usuario.setFechaNac(Utils.getFechaDate(j.getString("fechaNac")));
+            usuario.setNombre(j.getString("nombre"));
+
+            mUsuarios.add(usuario);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -150,6 +242,5 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
     }
-
 
 }

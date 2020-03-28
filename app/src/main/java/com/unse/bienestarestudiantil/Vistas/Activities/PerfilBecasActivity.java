@@ -32,7 +32,7 @@ public class PerfilBecasActivity extends AppCompatActivity {
 
             loadData();
         } else {
-            Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
+            Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelva a intentar");
             finish();
         }
 

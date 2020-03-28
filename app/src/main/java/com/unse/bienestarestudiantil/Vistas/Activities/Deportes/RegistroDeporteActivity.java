@@ -33,17 +33,21 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 public class RegistroDeporteActivity extends AppCompatActivity implements View.OnClickListener {
 
     Deporte mDeporte;
     EditText edtNombreDep, nombre, apellido, dni, edad, fechaNac, domicilio, barrio, carrera, legajo,
-    facultad, ciudad, provincia, pais, anioIng, cantMatAprob, face, insta, mail, tel, actvFis, lugarActiv, objet;
+    facultad, ciudad, provincia, pais, anioIng, cantMatAprob, face, insta, mail, tel, actvFis,
+            lugarActiv, objet, mPeso, mAltura, mIMC, mEstado;
     CheckBox checkwhatsApp, checksi, checkno, checkcont, checkmedia, checkbaja;
     LinearLayout actividad;
     ImageView btnBack;
-    Button btnRegistrar;
+    Button btnRegistrar, btnImc;
     boolean isWsp = false, isActividad = false;
     int intensidad = 1;
+    String imc, estado, peso, altura;
     DialogoProcesamiento dialog;
 
     @Override
@@ -73,6 +77,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         checkcont.setOnClickListener(this);
         checkmedia.setOnClickListener(this);
         btnRegistrar.setOnClickListener(this);
+        btnImc.setOnClickListener(this);
 
     }
 
@@ -84,7 +89,6 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
         Usuario usuario = usuariosRepo.get(new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID));
         edtNombreDep.setText(mDeporte.getName());
-
         nombre.setText(usuario.getNombre());
         apellido.setText(usuario.getApellido());
         dni.setText(String.valueOf(usuario.getIdUsuario()));
@@ -104,6 +108,10 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
             carrera.setText(alumno.getCarrera());
             legajo.setText(alumno.getLegajo());
             anioIng.setText(alumno.getAnio());
+            mPeso.setText(alumno.getPeso());
+            mAltura.setText(alumno.getAltura());
+            mIMC.setText("");
+            mEstado.setText("");
         }else{
             Utils.showToast(getApplicationContext(), "No eres alumno, se rellena con campos por defecto");
             carrera.setText("N/A");
@@ -141,6 +149,12 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         lugarActiv = findViewById(R.id.edtxPreg3);
         objet = findViewById(R.id.edtxPreg4);
         btnBack = findViewById(R.id.btnBack);
+
+        mPeso = findViewById(R.id.edxtPeso);
+        mAltura = findViewById(R.id.edtxAltura);
+        mIMC = findViewById(R.id.edxtIMC);
+        mEstado = findViewById(R.id.edtxEstadoAlu);
+        btnImc = findViewById(R.id.btnImc);
 
         checkwhatsApp = findViewById(R.id.chbxWhats);
         checksi = findViewById(R.id.chbxSi);
@@ -204,6 +218,14 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                     checkwhatsApp.setChecked(isWsp);
                 }
                 break;
+            case R.id.btnImc:
+                peso = mPeso.getText().toString().trim();
+                altura = mAltura.getText().toString().trim();
+                String imc = obtainIMC(peso, altura);
+                mIMC.setText(String.format("%s", imc));
+                String estadoAlu = obtainEstado(imc);
+                mEstado.setText(String.format("%s", estadoAlu));
+                break;
         }
     }
 
@@ -228,6 +250,10 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         String inst = insta.getText().toString().trim();
         String email = mail.getText().toString().trim();
         String telef = tel.getText().toString().trim();
+        peso = mPeso.getText().toString().trim();
+        altura = mAltura.getText().toString().trim();
+        String imc = mIMC.getText().toString().trim();
+        String estadoAlu = mEstado.getText().toString().trim();
         String cuales = actvFis.getText().toString().trim();
         String lug = lugarActiv.getText().toString().trim();
         String objetivo = objet.getText().toString().trim();
@@ -235,8 +261,8 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         //is wsp, is actividad, is intensidad
         Validador validador = new Validador();
 
-        if (!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac,
-                anioIn, objetivo, facebook, inst, fecha)){
+        if (!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac, peso, altura,
+                imc, estadoAlu, anioIn, objetivo, facebook, inst, fecha)){
             if (validador.validarDNI(doc) && validador.validarNumero(eda) && validador.validarNumero(cantMa)
                 && validador.validarNumero(telef)){
                 if (validador.validarMail(email)){
@@ -272,6 +298,65 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
     }
 
+    private static String getTwoDecimals(double value){
+        DecimalFormat df = new DecimalFormat("0.0");
+        return df.format(value);
+    }
+
+    private String obtainEstado(String imc) {
+        double auxImc = Double.parseDouble(imc);
+//        String aux = getTwoDecimals(iMC);
+//        double auxImc = Double.parseDouble(aux);
+        String estado = " ";
+        if(auxImc <= 15){
+            estado = "Delgadez muy severa";
+        }
+        else
+            if(auxImc > 15 && auxImc <= 15.9){
+                estado = "Delgadez severa";
+            }
+            else
+                if(auxImc >= 16 && auxImc <= 18.4){
+                    estado = "Delgadez";
+                }
+                else
+                    if(auxImc >= 18.5 && auxImc <= 24.9) {
+                        estado = "Peso saludable";
+                    }
+                    else
+                        if(auxImc >= 25 && auxImc <= 29.9) {
+                            estado = "Sobrepeso";
+                        }
+                        else
+                            if(auxImc >= 30 && auxImc <= 34.9) {
+                                estado = "Obesidad moderada";
+                            }
+                            else
+                                if(auxImc >= 35 && auxImc <= 39.9) {
+                                    estado = "Obesidad severa";
+                                }
+                                else
+                                    if(auxImc >= 40) {
+                                        estado = "Obesidad mórbida";
+                                    }
+
+        return estado;
+    }
+
+    private String obtainIMC(String peso, String altura) {
+        String imc = " ", aux = " ";
+        double auximc = 0;
+        if(!peso.equals(" ") && !altura.equals(" ")){
+            double pso = Double.parseDouble(peso);
+            double alt = Double.parseDouble(altura);
+            auximc = pso/(alt*alt);
+            imc = Double.toString(auximc);
+            double iMC = Double.parseDouble(imc);
+            aux = getTwoDecimals(iMC);
+        }
+        return aux;
+    }
+
     private void sendServer(String datos) {
         String URL = Utils.URL_DEPORTE_INSCRIPCION+datos;
 
@@ -280,7 +365,6 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
             public void onResponse(String response) {
 
                 procesarRespuesta(response);
-
 
             }
         }, new Response.ErrorListener() {

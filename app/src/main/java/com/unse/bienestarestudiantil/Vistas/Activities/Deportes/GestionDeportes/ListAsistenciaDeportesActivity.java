@@ -1,55 +1,65 @@
-package com.unse.bienestarestudiantil.Vistas.Fragmentos;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.content.pm.ActivityInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Modelos.Asistencia;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.AsistenciaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 
 import java.util.ArrayList;
 
-public class DeportesFragment extends Fragment {
+public class ListAsistenciaDeportesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    View view;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView reciclerDeportes;
     ArrayList<Deporte> mDeportes;
     DeportesAdapter mDeportesAdapter;
-    RelativeLayout mImageDeportes;
+    ImageView imgIcono;
+    Button borrar;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_deportes, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_asistencia_deportes);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //Utils.setFont(getContext(), (ViewGroup)view, Utils.MONSERRAT);
+        setToolbar();
 
         loadViews();
 
-        loadDataRecycler();
+        loadListener();
 
-        return view;
+        loadDataRecycler();
     }
 
-    private void loadViews() {
-        reciclerDeportes = view.findViewById(R.id.recyclerDeportes);
-        mImageDeportes = view.findViewById(R.id.imgAreaDeportes);
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Alumnos inscriptos");
+
+    }
+
+    private void loadListener() {
+        imgIcono.setOnClickListener(this);
+        borrar.setOnClickListener(this);
+
     }
 
     private void loadDataRecycler() {
         mDeportes = new ArrayList<>();
-
+//        mDeportes.add(new Deporte(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
 //        mDeportes.add(new Deporte(1, R.drawable.ic_basquet, "Básquet", "José Emilio López", "martes y jueves", "21:30hs"));
 //        mDeportes.add(new Deporte(2, R.drawable.ic_becas, "Cestobol", "Yesica Kofler", "lunes, miércoles, viernes","19:00hs"));
 //        mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
@@ -62,24 +72,41 @@ public class DeportesFragment extends Fragment {
 //        mDeportes.add(new Deporte(10, R.drawable.ic_tenis_mesa, "Tenis de Mesa", "Rodrigo Costa Mayuli", "martes, jueves y sábado","19:30hs"));
 //        mDeportes.add(new Deporte(11, R.drawable.ic_voley_masc, "Voleibol Masculino", "Diego Moreno", "lunes, miércoles y viernes","21:30hs"));
 //        mDeportes.add(new Deporte(12, R.drawable.ic_voley_fem, "Voleibol Femenino", "Maryne Sanchez", "lunes, miércoles y viernes","21:30hs"));
-//        mDeportes.add(new Deporte(13, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
 
-        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
-        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
+        mDeportesAdapter = new DeportesAdapter(mDeportes, getApplicationContext(), false);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
         reciclerDeportes.setAdapter(mDeportesAdapter);
-        mImageDeportes.requestFocus();
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(reciclerDeportes);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(), PerfilDeporteActivity.class);
+                Intent i = new Intent(getApplicationContext(), AsistenciaActivity.class);
                 i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
                 startActivity(i);
             }
         });
+
+    }
+
+    private void loadViews() {
+        reciclerDeportes = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
+        borrar = findViewById(R.id.borrarbtn);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
+            case R.id.borrarbtn:
+                startActivity(new Intent(ListAsistenciaDeportesActivity.this, AsistenciaActivity.class));
+                break;
+        }
     }
 
 }
