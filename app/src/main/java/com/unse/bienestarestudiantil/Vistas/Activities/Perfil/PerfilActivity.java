@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.signature.ObjectKey;
 import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
 import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
 import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
@@ -33,7 +32,7 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import java.util.ArrayList;
 
@@ -79,7 +78,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 3, "Credenciales", R.drawable.ic_credencial, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 4, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(LinearLayout.VERTICAL, false, 5, "¿Mensajes?", R.drawable.ic_msg, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mList.add(new Opciones(LinearLayout.VERTICAL, true, 1, "Inscripciones", R.drawable.ic_inscipcion, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mList.add(new Opciones(LinearLayout.VERTICAL, true, 7, "Inscripciones", R.drawable.ic_inscipcion, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 2, "Configuraciones", R.drawable.ic_settings, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 6, "Cerrar Sesión", R.drawable.ic_cerrar_e, R.color.colorWhite, R.color.colorTextDefault, 12));
 
@@ -183,7 +182,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     private void procesarClick2(RecyclerView parent, View view, int position, int id) {
         switch (id){
             case 1:
-                startActivity(new Intent(getApplicationContext(), CredencialActivity.class));
+                //startActivity(new Intent(getApplicationContext(), CredencialActivity.class));
                 break;
         }
     }
@@ -196,11 +195,14 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
             case 6:
                 logout();
                 break;
+            case 7:
+                startActivity(new Intent(getApplicationContext(), InscripcionesActivity.class));
+                break;
             case 2:
                 startActivity(new Intent(getApplicationContext(), ConfiguracionesActivities.class));
                 break;
             case 3:
-                startActivity(new Intent(getApplicationContext(), CredencialesActivity.class));
+                startActivity(new Intent(getApplicationContext(), TiposCredencialesActivity.class));
                 break;
             case 4:
                 startActivity(new Intent(getApplicationContext(), GestionArchivosActivity.class));

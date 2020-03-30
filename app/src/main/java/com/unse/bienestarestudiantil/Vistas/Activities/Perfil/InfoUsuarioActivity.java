@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,7 +89,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     FloatingActionButton fabEditar, fabPic;
     EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtProfesionProf, edtAnioIngresoProf,
             edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu, edtDomicilio,
-            edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio, mPeso, mAltura, mIMC, mEstado;
+            edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio;
     TextView txtFechaNac;
     Spinner spinnerFacultad, spinnerCarrera;
 
@@ -530,7 +531,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 case 1:
                     //Exito
                     Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
-                    Utils.saveBitmap(getApplicationContext(), "pic.jpg", bitmap);
+                    Utils.saveBitmap(getApplicationContext(), Utils.FOLDER, "pic.jpg", bitmap, false);
                     Utils.showToast(getApplicationContext(), "Foto actualizado!");
                     File file = new File(nameFile);
                     if (file.exists())
@@ -575,7 +576,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             txtFechaNac.setOnClickListener(this);
             spinnerFacultad.setEnabled(true);
             spinnerCarrera.setEnabled(true);
-            Utils.scaleView(fabPic);
             fabPic.setVisibility(VISIBLE);
         } else {
             fabEditar.setImageResource(R.drawable.ic_edit_);
@@ -625,11 +625,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         String legajo = edtLegajoAlu.getText().toString().trim();
         String barrio = edtBarrio.getText().toString().trim();
 
-        String peso = mPeso.getText().toString().trim();
-        String altura = mAltura.getText().toString().trim();
-        String imc = mIMC.getText().toString().trim();
-        String estadoAlu = mEstado.getText().toString().trim();
-
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
@@ -660,8 +655,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                                 sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
                                         domicilio, barrio, telefono, sexo, token, mail, 1, carrera, faculta, anioIngreso2
                                         , legajo, "SN", null, null));
-                                tipo = new Alumno(usuario, carrera, faculta, legajo, anioIngreso2,
-                                        peso, altura, imc, estadoAlu, id, "", 0);
+                                tipo = new Alumno(usuario, carrera, faculta, legajo, anioIngreso2, id, "", 0);
                             } else
                                 Utils.showToast(getApplicationContext(), "Número de legajo inválido");
 

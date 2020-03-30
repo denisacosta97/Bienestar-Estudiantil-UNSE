@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="CARNET\nPOLIDEPORTIVO"
+                    android:text="CARNET\nCOMEDOR"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
@@ -72,10 +72,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:gravity="center"
+                        android:id="@+id/txtTitulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="LIGA DEPORTIVA UNIVERSITARIA"
+                        android:text="AUTORIZACION: 1"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:fontFamily="@font/montserrat_black"/>
@@ -90,12 +90,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Deporte: "
+                            android:text="DNI: "
                             android:textSize="12sp"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
-                            android:id="@+id/txtDeporte"
+                            android:id="@+id/txtDni"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
@@ -182,7 +182,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="N° de Legajo: "
+                            android:text="Legajo: "
                             android:textSize="12sp"
                             android:fontFamily="@font/montserrat_black"/>
 
@@ -205,12 +205,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre del equipo: "
+                            android:text="Fecha Validez: "
                             android:textSize="12sp"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
-                            android:id="@+id/txtNombreEquipo"
+                            android:id="@+id/txtFecha"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
@@ -259,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:orientation="horizontal"
-               android:layout_weight="0.1"
+                android:layout_weight="0.1"
                 android:background="@drawable/background_rounded_botton">
 
             </LinearLayout>

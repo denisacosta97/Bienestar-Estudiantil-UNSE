@@ -6,16 +6,22 @@ import android.os.Parcelable;
 public class CredencialDeporte extends Credencial implements Parcelable {
 
     private int idTemporada, idDeporte, anio;
-    private String nombre, descripcion;
+    private String nombre, descripcion, nombreU, apellido, legajo, facultad;
 
-    public CredencialDeporte(int id, String titulo, int validez, int idTemporada, int idDeporte, int anio, String nombre, String descripcion) {
+
+    public CredencialDeporte(int id, String titulo, int validez, int idTemporada, int idDeporte,
+                             int anio, String nombre, String descripcion, String nombreU,
+                             String apellido, String legajo, String facultad) {
         super(id, titulo, validez);
-        this.validez = validez;
         this.idTemporada = idTemporada;
         this.idDeporte = idDeporte;
         this.anio = anio;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.nombreU = nombreU;
+        this.apellido = apellido;
+        this.legajo = legajo;
+        this.facultad = facultad;
     }
 
     public CredencialDeporte(Parcel in) {
@@ -25,6 +31,10 @@ public class CredencialDeporte extends Credencial implements Parcelable {
         anio = in.readInt();
         nombre = in.readString();
         descripcion = in.readString();
+        nombreU = in.readString();
+        apellido = in.readString();
+        legajo = in.readString();
+        facultad = in.readString();
     }
 
     public static final Creator<CredencialDeporte> CREATOR = new Creator<CredencialDeporte>() {
@@ -38,6 +48,38 @@ public class CredencialDeporte extends Credencial implements Parcelable {
             return new CredencialDeporte[size];
         }
     };
+
+    public String getLegajo() {
+        return legajo;
+    }
+
+    public void setLegajo(String legajo) {
+        this.legajo = legajo;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
+
+    public String getNombreU() {
+        return nombreU;
+    }
+
+    public void setNombreU(String nombreU) {
+        this.nombreU = nombreU;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     public int getIdTemporada() {
         return idTemporada;
@@ -94,5 +136,9 @@ public class CredencialDeporte extends Credencial implements Parcelable {
         dest.writeInt(anio);
         dest.writeString(nombre);
         dest.writeString(descripcion);
+        dest.writeString(nombreU);
+        dest.writeString(apellido);
+        dest.writeString(legajo);
+        dest.writeString(facultad);
     }
 }

@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
@@ -25,7 +26,7 @@ import com.unse.bienestarestudiantil.Modelos.CredencialSocio;
 import com.unse.bienestarestudiantil.Modelos.CredencialTorneo;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CredencialesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.OnClickListenerAdapter;
+import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -122,6 +123,16 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
 
     private void loadListener() {
         btnBack.setOnClickListener(this);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecycler);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                if (mList.get(position).getValidez() != 0)
+                    procesarClick(position);
+                else
+                    Utils.showToast(getApplicationContext(), "La credencial no se encuentra vigente");
+            }
+        });
     }
 
     private void loadViews() {
@@ -135,15 +146,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
     private void loadData() {
         mList = new ArrayList<>();
 
-        mAdapter = new CredencialesAdapter(mList, getApplicationContext(), new OnClickListenerAdapter() {
-            @Override
-            public void onClick(int id) {
-                if (mList.get(id).getValidez() != 0)
-                    procesarClick(id);
-                else
-                    Utils.showToast(getApplicationContext(), "La credencial no se encuentra vigente");
-            }
-        });
+        mAdapter = new CredencialesAdapter(mList, getApplicationContext());
 
         mManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -155,16 +158,30 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
     private void procesarClick(int id) {
         Intent intent = null;
         switch (tipo) {
+            case 1:
+                CredencialBeca beca = (CredencialBeca) mList.get(id);
+                intent = new Intent(getApplicationContext(), TarjetaCredencialActivity.class);
+                intent.putExtra(Utils.TIPO_CREDENCIAL_DATO, beca);
+                intent.putExtra(Utils.TIPO_CREDENCIAL, tipo);
+                startActivity(intent);
+                break;
             case 2:
                 CredencialDeporte deporte = (CredencialDeporte) mList.get(id);
-                intent = new Intent(getApplicationContext(), VisualizarCredencialActivity.class);
+                intent = new Intent(getApplicationContext(), TarjetaCredencialActivity.class);
                 intent.putExtra(Utils.TIPO_CREDENCIAL_DATO, deporte);
+                intent.putExtra(Utils.TIPO_CREDENCIAL, tipo);
+                startActivity(intent);
+                break;
+            case 3:
+                CredencialTorneo torneo = (CredencialTorneo) mList.get(id);
+                intent = new Intent(getApplicationContext(), TarjetaCredencialActivity.class);
+                intent.putExtra(Utils.TIPO_CREDENCIAL_DATO, torneo);
                 intent.putExtra(Utils.TIPO_CREDENCIAL, tipo);
                 startActivity(intent);
                 break;
             case 4:
                 CredencialSocio socio = (CredencialSocio) mList.get(id);
-                intent = new Intent(getApplicationContext(), VisualizarCredencialActivity.class);
+                intent = new Intent(getApplicationContext(), TarjetaCredencialActivity.class);
                 intent.putExtra(Utils.TIPO_CREDENCIAL_DATO, socio);
                 intent.putExtra(Utils.TIPO_CREDENCIAL, tipo);
                 startActivity(intent);
@@ -231,7 +248,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
                             loadInfoBeca(jsonObject.getJSONArray("mensaje"), jsonObject);
                             break;
                         case 2:
-                            loadInfoDeporte(jsonObject.getJSONArray("mensaje"));
+                            loadInfoDeporte(jsonObject.getJSONArray("mensaje"), jsonObject);
                             break;
                         case 3:
                             loadInfoTorneo(jsonObject.getJSONArray("mensaje"));
@@ -317,6 +334,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
                 JSONObject jsonObject = mensaje.getJSONObject(i);
 
                 int id = Integer.parseInt(jsonObject.getString("idInscripcion"));
+                int idUsuario = Integer.parseInt(jsonObject.getString("idUsuario"));
                 int validez = Integer.parseInt(jsonObject.getString("validez"));
                 int anio = Integer.parseInt(jsonObject.getString("anio"));
                 int tipoUsuario = Integer.parseInt(jsonObject.getString("tipoUsuario"));
@@ -336,7 +354,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
 
                 String titulo = String.format("%s - %s", nombreTorneo, nombreDeporte);
 
-                CredencialTorneo socio = new CredencialTorneo(id, titulo, validez, idTorneo, idDeporte,
+                CredencialTorneo socio = new CredencialTorneo(id, idUsuario,titulo, validez, idTorneo, idDeporte,
                         anio, tipoUsuario, nombreTorneo, lugar, fechaInicio, fechaFin, nombreDeporte, descripcion, nombreUsuario,
                         apellido, fechaNac, sexo);
 
@@ -411,13 +429,13 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
         }
     }
 
-    private void loadInfoDeporte(JSONArray mensaje) {
+    private void loadInfoDeporte(JSONArray mensaje, JSONObject obj) {
         for (int i = 0; i < mensaje.length(); i++) {
             try {
                 JSONObject object = mensaje.getJSONObject(i);
 
-                String nombre, descripcion, titulo;
-                int validez, anio, idTemporada, idDeporte, idCredencial;
+                String nombre, descripcion, titulo, legajo = null, facultad = null;
+                int validez, anio, idTemporada, idDeporte, idCredencial, tipoUsuario;
 
                 nombre = object.getString("nombre");
                 descripcion = object.getString("descripcion");
@@ -426,10 +444,19 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
                 idTemporada = Integer.parseInt(object.getString("idTemporada"));
                 idDeporte = Integer.parseInt(object.getString("idDeporte"));
                 idCredencial = Integer.parseInt(object.getString("idCredencial"));
+                String nombreU = object.getString("nombre");
+                String apellido = object.getString("apellido");
                 titulo = String.format("%s %s", nombre, anio);
+                tipoUsuario = Integer.parseInt(object.getString("tipoUsuario"));
+
+                if (tipoUsuario == 1) {
+                    JSONObject o = obj.getJSONObject("dato");
+                    legajo = o.getString("legajo");
+                    facultad = o.getString("facultad");
+                }
 
                 CredencialDeporte credencialDeporte = new CredencialDeporte(idCredencial, titulo,
-                        validez, idTemporada, idDeporte, anio, nombre, descripcion);
+                        validez, idTemporada, idDeporte, anio, nombre, descripcion, nombreU, apellido, legajo, facultad);
 
                 mList.add(credencialDeporte);
 

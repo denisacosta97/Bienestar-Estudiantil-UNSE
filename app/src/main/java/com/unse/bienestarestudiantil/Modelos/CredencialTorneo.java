@@ -5,16 +5,18 @@ import android.os.Parcelable;
 
 public class CredencialTorneo extends Credencial implements Parcelable {
 
-    private int idTorneo, idDeporte, anio, tipoUsuario;
-    private String nombreTorneo, lugar, fechaInicio, fechaFin, nombreDeporte, descripcion, nombreUsuario, apellido, fechaNac, sexo;
+    private int idTorneo, idDeporte, anio, tipoUsuario, idUsuario;
+    private String nombreTorneo, lugar, fechaInicio, fechaFin, nombreDeporte, descripcion,
+            nombreUsuario, apellido, fechaNac, sexo;
 
-    public CredencialTorneo(int id, String titulo, int validez, int idTorneo, int idDeporte,
+    public CredencialTorneo(int id, int idUsuario,String titulo, int validez, int idTorneo, int idDeporte,
                             int anio, int tipoUsuario, String nombreTorneo, String lugar,
                             String fechaInicio, String fechaFin, String nombreDeporte,
                             String descripcion, String nombreUsuario, String apellido,
                             String fechaNac, String sexo) {
         super(id, titulo, validez);
         this.idTorneo = idTorneo;
+        this.idUsuario = idUsuario;
         this.idDeporte = idDeporte;
         this.anio = anio;
         this.tipoUsuario = tipoUsuario;
@@ -46,6 +48,7 @@ public class CredencialTorneo extends Credencial implements Parcelable {
         apellido = in.readString();
         fechaNac = in.readString();
         sexo = in.readString();
+        idUsuario = in.readInt();
     }
 
     public static final Creator<CredencialTorneo> CREATOR = new Creator<CredencialTorneo>() {
@@ -59,6 +62,14 @@ public class CredencialTorneo extends Credencial implements Parcelable {
             return new CredencialTorneo[size];
         }
     };
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public int getIdTorneo() {
         return idTorneo;
@@ -196,5 +207,6 @@ public class CredencialTorneo extends Credencial implements Parcelable {
         dest.writeString(apellido);
         dest.writeString(fechaNac);
         dest.writeString(sexo);
+        dest.writeInt(idUsuario);
     }
 }

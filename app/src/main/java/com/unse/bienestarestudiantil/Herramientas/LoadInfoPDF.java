@@ -14,13 +14,12 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -123,7 +122,7 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
                 formFields.get("pais").setValue(usuario.getPais());
             if (formFields.containsKey("foto")) {
 
-                Bitmap bitmap = Utils.getBitmap(mContext, "pic.jpg");
+                Bitmap bitmap = Utils.getBitmap(mContext, Utils.FOLDER,"pic.jpg", false);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                /* Image signatura;

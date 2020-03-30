@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Dialogos;
+package com.unse.bienestarestudiantil.Interfaces;
 
 public interface YesNoDialogListener {
 

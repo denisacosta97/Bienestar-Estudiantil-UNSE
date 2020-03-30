@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Adaptadores;
+package com.unse.bienestarestudiantil.Interfaces;
 
 public interface OnClickListenerAdapter {
 

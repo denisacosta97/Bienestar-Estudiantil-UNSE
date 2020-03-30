@@ -1,138 +1,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/front_card_container"
-    android:background="@drawable/card_color_round_rect_default"
     android:layout_width="@dimen/width_cred"
     android:layout_height="@dimen/height_card"
-    android:orientation="vertical"
-    >
+    android:background="@drawable/card_color_round_rect_default"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="250dp"
-        android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/front_card_cvv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="jejeje"
-            android:maxWidth="60dp"
-            android:minWidth="60dp"
-            android:paddingBottom="@dimen/padding_small"
-            android:paddingTop="@dimen/padding_small"
-            android:shadowColor="@color/text_shadow"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/semi_white"
-            android:visibility="gone"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/front_card_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="50dp"
-        android:hint="XXXX XXXX XXXX XXXX"
-        android:shadowColor="@color/text_shadow"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/semi_white"
-        android:textSize="@dimen/text_size_normal"
-
-
-        />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:orientation="horizontal">
+        <ImageView
+            android:layout_marginTop="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_card"
+            android:src="@drawable/curve" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/card_name_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HOLDER CARD"
-                android:textColor="@android:color/darker_gray"
-                android:textColorHint="@color/semi_white"
-                android:textSize="9sp"
-
-                />
-
-            <TextView
-                android:id="@+id/front_card_holder_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="NOMBRE EJEMPLO"
-                android:maxWidth="150dp"
-                android:minWidth="150dp"
-                android:paddingBottom="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_small"
-                android:shadowColor="@color/text_shadow"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/semi_white" />
-
+            android:id="@+id/containerCard"
+            android:orientation="vertical"
+            android:layout_width="@dimen/width_cred"
+            android:layout_height="@dimen/height_card">
 
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/card_expiry_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23/20"
-                android:textColor="@android:color/darker_gray"
-                android:textColorHint="@color/semi_white"
-                android:textSize="9sp"
 
-                />
+    </FrameLayout>
 
-            <TextView
-                android:id="@+id/front_card_expiry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="05/56"
-                android:maxWidth="150dp"
-                android:minWidth="150dp"
-                android:paddingBottom="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_small"
-                android:shadowColor="@color/text_shadow"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/semi_white" />
 
-        </LinearLayout>
-    </LinearLayout>
+
+
 
 
 </RelativeLayout>

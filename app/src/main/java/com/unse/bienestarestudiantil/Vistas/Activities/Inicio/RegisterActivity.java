@@ -551,7 +551,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case 1:
-                    Utils.saveBitmap(getApplicationContext(), "pic.jpg", bitmap);
+                    Utils.saveBitmap(getApplicationContext(), Utils.FOLDER,"pic.jpg", bitmap, false);
                     File file = new File(nameFile);
                     if (file.exists())
                         file.delete();

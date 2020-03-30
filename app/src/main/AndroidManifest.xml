@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.unse.bienestarestudiantil.provider"
@@ -19,14 +19,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
         <activity android:name=".Vistas.Activities.AboutActivity"></activity>
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ListAsistenciaDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity" />
-        <activity android:name=".Vistas.Activities.Perfil.ReLoginActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CambiarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Perfil.RecuperarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionProfeActivity" />
@@ -37,10 +34,6 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BMDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InscriptosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ABMInscriptosActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity" />
-        <activity android:name=".Vistas.Activities.ReLoginActivity" />
-        <activity android:name=".Vistas.Activities.RecuperarPassActivity" />
-        <activity android:name=".Vistas.Activities.PassMissedActivity" />
         <activity android:name=".Vistas.Fragmentos.ComedorFragment" />
         <activity android:name=".Vistas.Activities.Comedor.MainGestionComedor" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosHistoricosActivity" />
@@ -81,7 +74,7 @@
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
-        <activity android:name=".Vistas.Activities.Perfil.CredencialesActivity" />
+        <activity android:name=".Vistas.Activities.Perfil.TiposCredencialesActivity" />
         <activity
             android:name=".Vistas.Activities.Inicio.MainActivity"
             android:label="@string/app_name" />
@@ -135,11 +128,11 @@
         <activity android:name=".Vistas.Activities.Becas.ResumenTurnoActivity" />
         <activity android:name=".Vistas.Activities.Perfil.ConfiguracionesActivities" />
         <activity android:name=".Vistas.Activities.Perfil.ListaCredencialesActivity" />
-        <activity android:name=".Vistas.Activities.Perfil.VisualizarCredencialActivity" />
+        <activity android:name=".Vistas.Activities.Perfil.TarjetaCredencialActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CropImageActivity" />
-        <activity android:name=".Vistas.Activities.Perfil.CredencialActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.CalendarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.SelectInstActivity" />
+        <activity android:name=".Vistas.Activities.Perfil.InscripcionesActivity" />
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

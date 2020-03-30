@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.R;
 
 public class DialogYesNoGeneral extends DialogFragment implements View.OnClickListener {
@@ -37,6 +38,23 @@ public class DialogYesNoGeneral extends DialogFragment implements View.OnClickLi
     YesNoDialogListener mListener;
 
     View view;
+
+    class Builder{
+
+        Context mContext;
+        DialogYesNoGeneral mDialogYesNoGeneral;
+        public Builder(Context context){
+            this.mDialogYesNoGeneral.mContext =  context;
+        }
+
+        public Builder setTitulo(String title){
+            this.mDialogYesNoGeneral.titulo = titulo;
+            return this;
+        }
+
+
+
+    }
 
     public void loadData(String titulo, String descripcion, YesNoDialogListener listener, Context context){
         this.titulo = titulo;

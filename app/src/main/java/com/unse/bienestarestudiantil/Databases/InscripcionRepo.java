@@ -41,7 +41,7 @@ public class InscripcionRepo {
     public int insert(Inscripcion carrito) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(Inscripcion.KEY_ID_INS, carrito.getidInscripcion());
+        values.put(Inscripcion.KEY_ID_INS, carrito.getIdInscripcion());
         values.put(Inscripcion.KEY_FB, carrito.getFb());
         values.put(Inscripcion.KEY_IG, carrito.getIg());
         values.put(Inscripcion.KEY_WPP, carrito.getWpp());
@@ -54,7 +54,7 @@ public class InscripcionRepo {
 
     public void delete(Inscripcion carrito) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
-        db.delete(Inscripcion.TABLE, Inscripcion.KEY_ID_INS + " = ?", new String[]{String.valueOf(carrito.getidInscripcion())});
+        db.delete(Inscripcion.TABLE, Inscripcion.KEY_ID_INS + " = ?", new String[]{String.valueOf(carrito.getIdInscripcion())});
         DBManager.getInstance().closeDatabase();
     }
 
@@ -65,7 +65,7 @@ public class InscripcionRepo {
         Cursor cursor = db.rawQuery("select * from " + Inscripcion.TABLE + " where " + Inscripcion.KEY_ID_INS + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
-            mInscripcion.setidInscripcion(cursor.getInt(0));
+            mInscripcion.setIdInscripcion(cursor.getInt(0));
             mInscripcion.setFb(cursor.getString(1));
             mInscripcion.setIg(cursor.getString(2));
             mInscripcion.setWpp(cursor.getLong(3));
@@ -92,12 +92,12 @@ public class InscripcionRepo {
     public void update(Inscripcion carrito) {
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
-        values.put(Inscripcion.KEY_ID_INS, carrito.getidInscripcion());
+        values.put(Inscripcion.KEY_ID_INS, carrito.getIdInscripcion());
         values.put(Inscripcion.KEY_FB, carrito.getFb());
         values.put(Inscripcion.KEY_IG, carrito.getIg());
         values.put(Inscripcion.KEY_WPP, carrito.getWpp());
         values.put(Inscripcion.KEY_OBJ, carrito.getObjetivo());
-        String id = String.valueOf(carrito.getidInscripcion());
+        String id = String.valueOf(carrito.getIdInscripcion());
         String selection = Inscripcion.KEY_ID_INS + " = " + id;
         db.update(Inscripcion.TABLE, values, selection, null);
         DBManager.getInstance().closeDatabase();
@@ -121,7 +121,7 @@ public class InscripcionRepo {
         if (cursor.moveToFirst()) {
             do {
                 mInscripcion = new Inscripcion();
-                mInscripcion.setidInscripcion(cursor.getInt(0));
+                mInscripcion.setIdInscripcion(cursor.getInt(0));
                 mInscripcion.setFb(cursor.getString(1));
                 mInscripcion.setIg(cursor.getString(2));
                 mInscripcion.setWpp(cursor.getLong(3));
@@ -145,7 +145,7 @@ public class InscripcionRepo {
         if (cursor.moveToFirst()) {
             do {
                 mInscripcion = new Inscripcion();
-                mInscripcion.setidInscripcion(cursor.getInt(0));
+                mInscripcion.setIdInscripcion(cursor.getInt(0));
                 mInscripcion.setFb(cursor.getString(1));
                 mInscripcion.setIg(cursor.getString(2));
                 mInscripcion.setWpp(cursor.getLong(3));

@@ -2,13 +2,16 @@ package com.unse.bienestarestudiantil.Herramientas;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -23,12 +26,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.itextpdf.forms.PdfAcroForm;
-import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 import com.unse.bienestarestudiantil.Databases.BDGestor;
@@ -44,6 +45,8 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -117,32 +120,37 @@ public class Utils {
     public static final int GET_FROM_GALLERY = 1011;
     public static final int GET_FROM_DNI = 1010;
 
-
+    //USUARIO
     public static final String URL_USUARIO_INSERTAR = "http://192.168.0.12/bienestar/usuario/insertar.php";
     public static final String URL_USUARIO_ACTUALIZAR = "http://192.168.0.12/bienestar/usuario/actualizar.php";
     public static final String URL_USUARIO_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
     public static final String URL_USUARIO_IMAGE = "http://192.168.0.12/bienestar/general/uploadImage.php";
     public static final String URL_USUARIO_IMAGE_LOAD = "http://192.168.0.12/bienestar/usuariosImg/";
-
+    public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
+    public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";
+    //SOCIO
     public static final String URL_SOCIO_CREDENCIAL = "http://192.168.0.12/bienestar/socio/getCredencial.php";
-
+    //DEPORTES
     public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
     public static final String URL_DEPORTE_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/getCredencial.php";
-
-    public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/torneo/getCredencial.php";
-
-    public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.12/bienestar/beca/getCredencial.php";
     public static final String URL_DEPORTE_LISTA = "http://192.168.0.12/bienestar/deportes/getAllDeportes.php";
-    public static final String URL_TORNEOS_LISTA = "http://192.168.0.12/bienestar/deportes/getAllTorneos.php";
     public static final String URL_ISCRIP_LISTA = "http://192.168.0.12/bienestar/deportes/getAllInscriptos.php";
-
-    public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
-    public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";
-
+    public static final String URL_INSCRIPCIONES_GENERALES = "http://192.168.0.12/bienestar/beca/getInscripciones.php";
+    //TORNEOS
+    public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/torneo/getCredencial.php";
+    public static final String URL_TORNEOS_LISTA = "http://192.168.0.12/bienestar/deportes/getAllTorneos.php";
+    //BECAS
+    public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.12/bienestar/beca/getCredencial.php";
+    //GENERALES
     public static final String URL_CATEGORIAS = "http://192.168.0.12/bienestar/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "http://192.168.0.12/bienestar/archivos/";
+
     public static final long SECONS_TIMER = 5000;
+
+    //CARPETAS
+    public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
+    public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
@@ -257,6 +265,51 @@ public class Utils {
                 permision);
         return permission == PackageManager.PERMISSION_GRANTED;
 
+    }
+
+    public static String getTwoDecimals(double value) {
+        DecimalFormat df = new DecimalFormat("0.0");
+        return df.format(value);
+    }
+
+    public static String obtainEstado(String imc) {
+        double auxImc = Double.parseDouble(imc);
+//        String aux = getTwoDecimals(iMC);
+//        double auxImc = Double.parseDouble(aux);
+        String estado = " ";
+        if (auxImc <= 15) {
+            estado = "Delgadez muy severa";
+        } else if (auxImc > 15 && auxImc <= 15.9) {
+            estado = "Delgadez severa";
+        } else if (auxImc >= 16 && auxImc <= 18.4) {
+            estado = "Delgadez";
+        } else if (auxImc >= 18.5 && auxImc <= 24.9) {
+            estado = "Peso saludable";
+        } else if (auxImc >= 25 && auxImc <= 29.9) {
+            estado = "Sobrepeso";
+        } else if (auxImc >= 30 && auxImc <= 34.9) {
+            estado = "Obesidad moderada";
+        } else if (auxImc >= 35 && auxImc <= 39.9) {
+            estado = "Obesidad severa";
+        } else if (auxImc >= 40) {
+            estado = "Obesidad mórbida";
+        }
+
+        return estado;
+    }
+
+    public static String obtainIMC(String peso, String altura) {
+        String imc = " ", aux = " ";
+        double auximc = 0;
+        if (!peso.equals(" ") && !altura.equals(" ")) {
+            double pso = Double.parseDouble(peso);
+            double alt = Double.parseDouble(altura);
+            auximc = pso / (alt * alt);
+            imc = Double.toString(auximc);
+            double iMC = Double.parseDouble(imc);
+            aux = getTwoDecimals(iMC);
+        }
+        return aux;
     }
 
 
@@ -529,8 +582,6 @@ public class Utils {
     }
 
 
-
-
     public static String getFechaName(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -665,13 +716,13 @@ public class Utils {
         return age;
     }
 
-    private static int getFinalWidth() {
-
-        return (int) 35;
-    }
-
-
-    public static void scaleView(View v) {
+    public static  void changeColor(Drawable drawable, Context mContext, int colorNo){
+        if (drawable instanceof ShapeDrawable)
+            ((ShapeDrawable)drawable).getPaint().setColor(ContextCompat.getColor(mContext, colorNo));
+        else if (drawable instanceof GradientDrawable)
+            ((GradientDrawable) drawable).setColor(ContextCompat.getColor(mContext, colorNo));
+        else if (drawable instanceof ColorDrawable)
+            ((ColorDrawable) drawable).setColor(ContextCompat.getColor(mContext, colorNo));
     }
 
     public static void resizeBitmapAndFile(String name) {
@@ -691,6 +742,21 @@ public class Utils {
         }
     }
 
+    public static String limpiarAcentos(String cadena) {
+        String limpio =null;
+        if (cadena !=null) {
+            String valor = cadena;
+            valor = valor.toUpperCase();
+            // Normalizar texto para eliminar acentos, dieresis, cedillas y tildes
+            limpio = Normalizer.normalize(valor, Normalizer.Form.NFD);
+            // Quitar caracteres no ASCII excepto la enie, interrogacion que abre, exclamacion que abre, grados, U con dieresis.
+            limpio = limpio.replaceAll("[^\\p{ASCII}(N\u0303)(n\u0303)(\u00A1)(\u00BF)(\u00B0)(U\u0308)(u\u0308)]", "");
+            // Regresar a la forma compuesta, para poder comparar la enie con la tabla de valores
+            limpio = Normalizer.normalize(limpio, Normalizer.Form.NFC);
+        }
+        return limpio;
+    }
+
     public static String convertImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -699,18 +765,40 @@ public class Utils {
 
     }
 
-    public static void saveBitmap(Context applicationContext, String s, Bitmap bitmap) {
+    public static void saveBitmap(Context applicationContext, String folder, String file, Bitmap bitmap, boolean ext) {
         StorageManager storageManager = new StorageManager(applicationContext);
-        storageManager.setFileName(s);
-        storageManager.setFolderName("BIENESTAR");
-        storageManager.saveToInternalStorage(bitmap);
+        storageManager.setFileName(file);
+        storageManager.setFolderName(folder);
+        if (!ext)
+            storageManager.saveToInternalStorage(bitmap);
+        else
+            storageManager.saveToExternalStorage(bitmap, ext);
     }
 
-    public static Bitmap getBitmap(Context applicationContext, String s) {
+    public static Bitmap getBitmap(Context applicationContext, String folder, String file, boolean ext) {
         StorageManager storageManager = new StorageManager(applicationContext);
-        storageManager.setFileName(s);
-        storageManager.setFolderName("BIENESTAR");
-        return storageManager.loadImageFromStorage(storageManager.getUriFile());
+        storageManager.setFileName(file);
+        storageManager.setFolderName(folder);
+        if (!ext)
+        return storageManager.loadImageFromStorage(storageManager.getUriFile(ext));
+        else
+            return storageManager.loadImageFromStorageExternal(storageManager.getUriFile(ext));
+    }
+
+    public static String getTipoUser(int i){
+        switch (i){
+            case 1:
+                return "Alumno";
+            case 2:
+                return "Profesor";
+            case 3:
+                return "Nodocente";
+            case 4:
+                return "Egresado";
+            case 5:
+                return "Particular";
+        }
+        return "";
     }
 }
 

@@ -37,7 +37,7 @@ import com.unse.bienestarestudiantil.Vistas.Adaptadores.GestionArchivosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;

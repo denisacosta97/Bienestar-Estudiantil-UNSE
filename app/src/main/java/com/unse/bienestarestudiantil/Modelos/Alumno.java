@@ -17,11 +17,11 @@ public class Alumno extends Usuario{
     public static final String KEY_REG = "idRegularidad";
     public static final String KEY_CHK_DATA = "checkData";
 
-    private String carrera, facultad, legajo, anio, checkData, peso, altura, imc, estadoAlu;
+    private String carrera, facultad, legajo, anio, checkData;
     private int idAlumno, idRegularidad;
 
     public Alumno(Usuario usuario, String carrera, String facultad, String legajo, String anio,
-                  String peso, String altura, String imc, String estadoAlu, int idAlumno, String checkData1, int idRegularidad) {
+                  int idAlumno, String checkData1, int idRegularidad) {
         super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
                 usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
                 usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
@@ -29,10 +29,6 @@ public class Alumno extends Usuario{
         this.facultad = facultad;
         this.legajo = legajo;
         this.anio = anio;
-        this.anio = peso;
-        this.anio = altura;
-        this.anio = imc;
-        this.anio = estadoAlu;
         this.idAlumno = idAlumno;
         this.checkData = checkData1;
         this.idRegularidad = idRegularidad;
@@ -44,10 +40,6 @@ public class Alumno extends Usuario{
         this.facultad = "";
         this.legajo = "";
         this.anio = "";
-        this.peso = "";
-        this.altura = "";
-        this.imc = "";
-        this.estadoAlu = "";
         this.idAlumno = -1;
         this.checkData = "";
         this.idRegularidad = -1;
@@ -109,35 +101,5 @@ public class Alumno extends Usuario{
         this.idRegularidad = idRegularidad;
     }
 
-    public String getPeso() {
-        return peso;
-    }
 
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
-
-    public String getAltura() {
-        return altura;
-    }
-
-    public void setAltura(String altura) {
-        this.altura = altura;
-    }
-
-    public String getImc() {
-        return imc;
-    }
-
-    public void setImc(String imc) {
-        this.imc = imc;
-    }
-
-    public String getEstadoAlu() {
-        return estadoAlu;
-    }
-
-    public void setEstadoAlu(String estadoAlu) {
-        this.estadoAlu = estadoAlu;
-    }
 }

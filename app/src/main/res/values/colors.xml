@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#8F0015</color>
     <color name="colorAccent">#8F0015</color>
 
+    <color name="colorRedT">#858F0015</color>
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#E7E7E7</color>
     <color name="colorGrey2">#BEBEBE</color>

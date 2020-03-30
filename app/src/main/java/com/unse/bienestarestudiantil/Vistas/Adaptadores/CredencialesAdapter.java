@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
 import com.unse.bienestarestudiantil.R;
 
@@ -18,12 +19,10 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
 
     private ArrayList<Credencial> mArchivos;
     private Context context;
-    private OnClickListenerAdapter mListener;
 
-    public CredencialesAdapter(ArrayList<Credencial> list, Context ctx, OnClickListenerAdapter listenerAdapter) {
+    public CredencialesAdapter(ArrayList<Credencial> list, Context ctx) {
         this.mArchivos = list;
         this.context = ctx;
-        this.mListener = listenerAdapter;
     }
 
     @NonNull
@@ -31,7 +30,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
     public CredencialesAdapter.CredencialViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_credenciales, parent, false);
 
-        return new CredencialesAdapter.CredencialViewHolder(view, mListener);
+        return new CredencialesAdapter.CredencialViewHolder(view);
     }
 
     @Override
@@ -44,6 +43,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
             holder.mLayout.setEnabled(false);
             holder.txtTitulo.setEnabled(false);
             holder.mPdf.setEnabled(false);
+            holder.mNumArchivo.setEnabled(false);
         } else {
             holder.mLayout.setEnabled(true);
         }
@@ -65,23 +65,15 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
         TextView txtTitulo, mNumArchivo;
         LinearLayout mPdf;
         LinearLayout mLayout;
-        OnClickListenerAdapter mListenerAdapter;
 
-        CredencialViewHolder(View itemView, OnClickListenerAdapter listenerAdapter) {
+        CredencialViewHolder(View itemView) {
             super(itemView);
 
             mNumArchivo = itemView.findViewById(R.id.txtNroArchivo);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             mPdf = itemView.findViewById(R.id.imgIcon);
             mLayout = itemView.findViewById(R.id.layout);
-            mListenerAdapter = listenerAdapter;
 
-            mPdf.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListenerAdapter.onClick(getAdapterPosition());
-                }
-            });
 
         }
     }

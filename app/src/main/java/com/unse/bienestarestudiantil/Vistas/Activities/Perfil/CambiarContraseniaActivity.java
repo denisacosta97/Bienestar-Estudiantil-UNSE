@@ -2,7 +2,6 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,16 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
@@ -28,7 +23,7 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;

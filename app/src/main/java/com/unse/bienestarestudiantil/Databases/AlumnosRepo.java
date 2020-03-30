@@ -29,7 +29,7 @@ public class AlumnosRepo {
     }
 
     static String createTable() {
-        return String.format("create table %s(%s %s %s,%s %s %s,%s %s %s, %s %s %s, %s %s %s,%s %s %s,%s %s %s)",
+        return String.format("create table %s(%s %s %s, %s %s %s, %s %s %s,%s %s %s,%s %s %s,%s %s %s,%s %s %s)",
                 Alumno.TABLE,
                 Alumno.KEY_ID_ALU, Utils.INT_TYPE, Utils.AUTO_INCREMENT,
                 Alumno.KEY_CARR, Utils.STRING_TYPE, Utils.NULL_TYPE,
@@ -80,7 +80,7 @@ public class AlumnosRepo {
 
 
     public Alumno get(int id) {
-        mAlumno = new Alumno();
+        mAlumno = null;
         SQLiteDatabase db = DBManager.getInstance().openDatabase();
         Cursor cursor = db.rawQuery("select * from " + Alumno.TABLE + " where " + Alumno.KEY_ID_ALU + " = " + id, null);
         if (cursor != null && cursor.getCount() > 0) {

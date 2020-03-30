@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,22 +38,21 @@ public class StorageManager {
         this.fileName = fileName;
     }
 
-    public String getUriFile() {
-        return new ContextWrapper(context).getDir(getFolderName(), Context.MODE_PRIVATE).getAbsolutePath();
+    public String getUriFile(boolean ext) {
+        if (!ext)
+            return new ContextWrapper(context).getDir(getFolderName(), Context.MODE_PRIVATE).getAbsolutePath();
+        else return Environment.getExternalStorageDirectory().toString();
     }
+
 
     public void saveToInternalStorage(Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(context);
-        // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir(getFolderName(), Context.MODE_PRIVATE);
-        // Create imageDir
         File mypath = new File(directory, getFileName());
-
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,11 +65,6 @@ public class StorageManager {
         }
     }
 
-    public void delete(){
-        File file = new File(getUriFile());
-        file.delete();
-    }
-
     public Bitmap loadImageFromStorage(String path) {
         Bitmap b = null;
         try {
@@ -78,8 +73,51 @@ public class StorageManager {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return b;
+
+    }
+
+    public void saveToExternalStorage(Bitmap bitmapImage, boolean ext) {
+        String path = getUriFile(ext) + "/" + getFolderName();
+        File folder = new File(path);
+        File mypath = new File(path + getFileName());
+
+        if (!folder.exists())
+            folder.mkdirs();
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Bitmap loadImageFromStorageExternal(String path) {
+        Bitmap b = null;
+        try {
+            File f = new File(path + getFileName());
+            b = BitmapFactory.decodeStream(new FileInputStream(f));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         return b;
 
     }
+
+    public void delete(boolean ext) {
+        File file = new File(getUriFile(ext));
+        file.delete();
+    }
+
+
 }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class CredencialesActivity extends AppCompatActivity implements View.OnClickListener {
+public class TiposCredencialesActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -44,24 +43,6 @@ public class CredencialesActivity extends AppCompatActivity implements View.OnCl
         loadData();
 
         loadListener();
-
-      /*  mDeporte = findViewById(R.id.txtDeporte);
-        mApellido = findViewById(R.id.txtApellido);
-        mNombre = findViewById(R.id.txtNombre);
-        mFacultad = findViewById(R.id.txtFacultad);
-        mLegajo = findViewById(R.id.txtLegajo);
-        mNombreEquipo = findViewById(R.id.txtNombreEquipo);
-        mAnio = findViewById(R.id.txtAnio);
-        mFoto = findViewById(R.id.imgUser);
-
-        mDeporte.setText("Fútbol Sala Masculino");
-        mApellido.setText("Ledesma");
-        mNombre.setText("Cristian Santiago");
-        mFacultad.setText("FCEyT");
-        mLegajo.setText("207/15");
-        mNombreEquipo.setText("Santiago Lawn Tennis Club");
-        mAnio.setText("2019");
-        mFoto.setImageResource(R.drawable.imgdeportes);*/
 
     }
 

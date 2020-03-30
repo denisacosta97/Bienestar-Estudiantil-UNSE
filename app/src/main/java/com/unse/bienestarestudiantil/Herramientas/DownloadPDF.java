@@ -2,14 +2,12 @@ package com.unse.bienestarestudiantil.Herramientas;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.PowerManager;
 import android.support.v4.app.FragmentManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
