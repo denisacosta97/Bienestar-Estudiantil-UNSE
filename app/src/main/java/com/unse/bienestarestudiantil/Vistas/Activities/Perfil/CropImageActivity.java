@@ -73,7 +73,8 @@ public class CropImageActivity extends AppCompatActivity implements View.OnClick
 
             loadListener();
         } else {
-            Utils.showToast(getApplicationContext(), "Error al procesar imagen");
+            Utils.showToast(getApplicationContext(), getString(R.string.imagenNoLoad));
+            finish();
         }
 
 
@@ -161,7 +162,7 @@ public class CropImageActivity extends AppCompatActivity implements View.OnClick
                     public void accept(@io.reactivex.annotations.NonNull Uri uri) throws Exception {
                         Intent intent = new Intent();
                         intent.putExtra(Utils.URI_IMAGE, uri);
-                        intent.putExtra("name", nameDir);
+                        intent.putExtra(Utils.NAME_GENERAL, nameDir);
                         setResult(RESULT_OK, intent);
                         finish();
                     }
@@ -223,12 +224,13 @@ public class CropImageActivity extends AppCompatActivity implements View.OnClick
         return createNewUri(getApplicationContext(), Bitmap.CompressFormat.JPEG);
     }
 
-    public static String getDirPath() {
+    public static String getDirPath(Context context) {
         String dirPath = "";
         File imageDir = null;
+        //File dir = context.getCacheDir();
         File extStorageDir = Environment.getExternalStorageDirectory();
         if (extStorageDir.canWrite()) {
-            imageDir = new File(extStorageDir.getPath() + "/BIENESTAR ESTUDIANTIL");
+            imageDir = new File(extStorageDir.getPath() + "/BIENESTAR_ESTUDIANTIL");
         }
         if (imageDir != null) {
             if (!imageDir.exists()) {
@@ -246,7 +248,7 @@ public class CropImageActivity extends AppCompatActivity implements View.OnClick
         Date today = new Date(currentTimeMillis);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String title = dateFormat.format(today);
-        String dirPath = getDirPath();
+        String dirPath = getDirPath(context);
         String fileName = "pic" + title + "." + getMimeType(format);
         String path = dirPath + "/" + fileName;
         File file = new File(path);

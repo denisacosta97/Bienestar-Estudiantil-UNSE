@@ -16,8 +16,9 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AlumnosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -27,8 +28,8 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    AlumnosAdapter mAdapter;
-    ArrayList<Alumno> mList;
+    UsuariosAdapter mAdapter;
+    ArrayList<Usuario> mList;
     ImageView imgIcono, imgBuscador;
     TextInputLayout tilBuscador;
     EditText edtBuscar;
@@ -130,7 +131,7 @@ public class ListadoAlumnosActivity extends AppCompatActivity implements View.On
         mList = new ArrayList<>();
         //mList.add(new Alumno("","","","2015","as2d","","FCEyT","29/09/2018","23/15", true));
 
-        mAdapter = new AlumnosAdapter(mList, getApplicationContext());
+        mAdapter = new UsuariosAdapter(mList, getApplicationContext(), Utils.TIPO_ESTUDIANTE);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
 

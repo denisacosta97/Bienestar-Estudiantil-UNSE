@@ -15,13 +15,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -31,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BMDeportesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -174,10 +172,6 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
             profesor.setFechaIngreso(j.getString("fechaIngreso"));
             profesor.setNombre(j.getString("nombreP"));
             profesor.setApellido(j.getString("apellido"));
-            profesor = new Profesor(new Usuario(profesor.getIdProfesor(),
-                    -1, profesor.getNombre(), profesor.getApellido()),
-                    "","",0,"");
-            
 
             mProfesors.add(profesor);
 

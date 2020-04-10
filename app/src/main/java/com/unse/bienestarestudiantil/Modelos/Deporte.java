@@ -5,12 +5,12 @@ import android.os.Parcelable;
 
 public class Deporte implements Parcelable {
 
-    private int mIconDeporte, idDep;
+    private int mIconDeporte, idDep, validez;
     private String mName, desc, lugar, dias, horario, lat, lon;
     private Profesor mProfesor;
 
     public Deporte(int iconDeporte, int idDep, String name, String desc, String lugar, String dias,
-                   String horario, String lat, String lon, Profesor profesor) {
+                   String horario, String lat, String lon, int validez, Profesor profesor) {
         mIconDeporte = iconDeporte;
         this.idDep = idDep;
         mName = name;
@@ -20,6 +20,7 @@ public class Deporte implements Parcelable {
         this.horario = horario;
         this.lat = lat;
         this.lon = lon;
+        this.validez = validez;
         mProfesor = profesor;
     }
 
@@ -36,6 +37,14 @@ public class Deporte implements Parcelable {
         mProfesor = new Profesor();
     }
 
+    public int getValidez() {
+        return validez;
+    }
+
+    public void setValidez(int validez) {
+        this.validez = validez;
+    }
+
     protected Deporte(Parcel in) {
         mIconDeporte = in.readInt();
         idDep = in.readInt();
@@ -46,6 +55,7 @@ public class Deporte implements Parcelable {
         horario = in.readString();
         lat = in.readString();
         lon = in.readString();
+        validez = in.readInt();
         mProfesor = in.readParcelable(Profesor.class.getClassLoader());
     }
 
@@ -157,6 +167,7 @@ public class Deporte implements Parcelable {
         dest.writeString(horario);
         dest.writeString(lat);
         dest.writeString(lon);
+        dest.writeInt(validez);
         dest.writeParcelable(mProfesor, flags);
     }
 }

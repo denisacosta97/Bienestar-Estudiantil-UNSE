@@ -2,7 +2,6 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,15 +15,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
-import com.unse.bienestarestudiantil.Modelos.Profesor;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 

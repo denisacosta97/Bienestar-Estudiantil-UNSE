@@ -16,17 +16,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Alumno;
-import com.unse.bienestarestudiantil.Modelos.Deporte;
-import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AlumnosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TorneosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -35,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class GestionTorneoActivity extends AppCompatActivity implements View.OnClickListener {
 

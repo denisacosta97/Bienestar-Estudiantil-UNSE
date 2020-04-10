@@ -53,16 +53,12 @@
         <menu>
             <item
                 android:id="@+id/item_config"
-                android:icon="@drawable/ic_config"
+                android:icon="@drawable/ic_settings"
                 android:title="Gestión del Sistema"/>
             <item
                 android:id="@+id/item_perfil"
-                android:icon="@drawable/ic_usuario"
+                android:icon="@drawable/ic_user"
                 android:title="Perfil"/>
-            <item
-                android:id="@+id/profe_profile"
-                android:icon="@drawable/ic_usuario"
-                android:title="Perfil profesor"/>
 
             <item
                 android:id="@+id/item_about"

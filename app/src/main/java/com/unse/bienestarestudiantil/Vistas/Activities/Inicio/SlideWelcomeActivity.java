@@ -29,7 +29,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.R;
 
 import static com.unse.bienestarestudiantil.Herramientas.Utils.PERMISSION_ALL;

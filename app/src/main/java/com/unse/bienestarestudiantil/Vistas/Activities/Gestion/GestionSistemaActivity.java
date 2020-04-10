@@ -16,6 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     OpcionesAdapter mAdapter;
-    ArrayList<Opciones> mOpciones;
+    ArrayList<Opciones> mOpciones, mOpcionesFinal;
+    ArrayList<String> ids;
     ImageView imgIcono;
 
     @Override
@@ -56,7 +58,10 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id){
+                switch ((int) id) {
+                    case 1000:
+                        startActivity(new Intent(getApplicationContext(), GestionUsuariosActivity.class));
+                        break;
                     case 1:
                         startActivity(new Intent(getApplicationContext(), EstadisticasActivity.class));
                         break;
@@ -68,7 +73,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                         break;
 
                 }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
+                Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -76,22 +81,38 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Gestión de Estadisticas",R.drawable.ic_estadistica, R.color.colorGreyDark ));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Gestión de Roles",R.drawable.ic_usuarios, R.color.colorGreyDark));
+        mOpcionesFinal = new ArrayList<>();
+        ids = new ArrayList<>();
 
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,100, "Gestión Deportes",R.drawable.ic_config, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,700, "Gestión Residencia", R.drawable.ic_config,R.color.color3));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 2, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
 
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.color3));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
+
+        mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpcionesFinal, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+
+//        filtrarOpciones();
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void filtrarOpciones() {
+        for (Opciones e : mOpciones) {
+            if (ids.contains(String.valueOf(e.getId())))
+                mOpcionesFinal.add(e);
+        }
     }
 
     private void loadViews() {
@@ -101,7 +122,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
                 break;

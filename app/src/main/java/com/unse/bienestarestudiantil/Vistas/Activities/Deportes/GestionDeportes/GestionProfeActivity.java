@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AlumnosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,8 @@ public class GestionProfeActivity extends AppCompatActivity implements View.OnCl
 
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView mRecyclerAlumnos;
-    ArrayList<Alumno> mAlumno;
-    AlumnosAdapter mAlumnosAdapter;
+    ArrayList<Usuario> mAlumno;
+    UsuariosAdapter mUsuariosAdapter;
     ImageView imgIcono;
 
     @Override
@@ -57,11 +58,11 @@ public class GestionProfeActivity extends AppCompatActivity implements View.OnCl
         mAlumno = new ArrayList<>();
         //mAlumno.add(new Alumno(0, R.drawable.ic_ajedrez, "Ajedréz", "Rubén Corvalán", "martes, miércoles y viernes", "21:00hs"));
 
-        mAlumnosAdapter = new AlumnosAdapter(mAlumno, getApplicationContext());
+        mUsuariosAdapter = new UsuariosAdapter(mAlumno, getApplicationContext(), Utils.TIPO_ESTUDIANTE);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
         mRecyclerAlumnos.setNestedScrollingEnabled(true);
         mRecyclerAlumnos.setLayoutManager(mLayoutManager);
-        mRecyclerAlumnos.setAdapter(mAlumnosAdapter);
+        mRecyclerAlumnos.setAdapter(mUsuariosAdapter);
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerAlumnos);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

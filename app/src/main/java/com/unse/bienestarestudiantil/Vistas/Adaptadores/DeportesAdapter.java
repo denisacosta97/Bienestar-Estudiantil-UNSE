@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 
@@ -38,7 +40,6 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
     public EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(mBoolean)
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes_profesor, parent, false);
-
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes, parent, false);
 
@@ -51,10 +52,7 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
     @Override
     public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
         Deporte depo = deport.get(position);
-        holder.mIcon.setImageResource(iconDeporte[depo.getIdDep()]);
-        deport.get(position).setIconDeporte(iconDeporte[depo.getIdDep()]);
-
-
+        Glide.with(holder.mIcon.getContext()).load(Utils.getIconDeporte(depo.getIdDep())).into(holder.mIcon);
         holder.mNameDeport.setText(depo.getName());
     }
 

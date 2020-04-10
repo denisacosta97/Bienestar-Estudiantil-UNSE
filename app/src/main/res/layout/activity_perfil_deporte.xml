@@ -69,6 +69,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -81,15 +82,17 @@
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
+                                android:layout_marginLeft="5dp"
                                 android:id="@+id/txtEntrenador"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Matías Umaño"
+                                android:text="Matías Umañowefunegioegnweoigneiowgnieong"
                                 android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -102,6 +105,7 @@
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
+                                android:layout_marginLeft="5dp"
                                 android:id="@+id/txtDia"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -111,6 +115,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:gravity="center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -123,6 +128,7 @@
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
+                                android:layout_marginLeft="5dp"
                                 android:id="@+id/txtHorarios"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -131,12 +137,28 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lugar de entrenamiento:"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/montserrat_black"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Lugar de entrenamiento:"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                android:id="@+id/txtLugar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Club Dorrego"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

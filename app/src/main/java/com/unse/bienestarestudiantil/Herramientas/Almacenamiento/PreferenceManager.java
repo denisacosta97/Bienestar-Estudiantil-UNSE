@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Herramientas;
+package com.unse.bienestarestudiantil.Herramientas.Almacenamiento;
 
 import android.content.Context;
 import android.content.SharedPreferences;

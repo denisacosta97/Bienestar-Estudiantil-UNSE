@@ -15,7 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -93,7 +93,7 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
                 String newPass = edtxNewPass.getText().toString();
                 String rePass = edtxRepass.getText().toString();
 
-                Validador validador = new Validador();
+                Validador validador = new Validador(getApplicationContext());
                 if (!validador.noVacio(actual, newPass, rePass)) {
                     if (newPass.equals(rePass)) {
                         if (validador.validarContraseña(rePass)) {
@@ -165,6 +165,9 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
                     Utils.showToast(getApplicationContext(), "Contraseña actualizada");
@@ -177,7 +180,6 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             PreferenceManager manager = new PreferenceManager(getApplicationContext());
                             manager.setValue(Utils.IS_LOGIN, false);
-
                         }
 
                         @Override
@@ -192,14 +194,10 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
                     dialogoMensaje.show(getSupportFragmentManager(), "dialog_gral");
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "La contraseña actual ingresada es inválida");
+                    Utils.showToast(getApplicationContext(), getString(R.string.contraseniaActualInvalida));
                     break;
-                case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
-                    break;
-                case 100:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
             }
 

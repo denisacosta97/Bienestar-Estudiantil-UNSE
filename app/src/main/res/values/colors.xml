@@ -8,6 +8,7 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrey">#E7E7E7</color>
+    <color name="colorGreyT">#C3717171</color>
     <color name="colorGrey2">#BEBEBE</color>
     <color name="colorFCEyT">#024979</color>
     <color name="transparente">#00E7E7E7</color>

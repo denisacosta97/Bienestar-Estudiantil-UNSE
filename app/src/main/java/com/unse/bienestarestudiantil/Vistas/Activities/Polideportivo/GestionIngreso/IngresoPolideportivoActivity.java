@@ -13,7 +13,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapters;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoIngresoPolideportivo;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class IngresoPolideportivoActivity extends AppCompatActivity implements V
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    UsuariosAdapter mAdapter;
+    UsuariosAdapters mAdapter;
     ArrayList<Usuario> mUsuarios;
     ImageView imgIcono;
 
@@ -67,7 +67,7 @@ public class IngresoPolideportivoActivity extends AppCompatActivity implements V
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext());
+        mAdapter = new UsuariosAdapters(mUsuarios, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
     }
 

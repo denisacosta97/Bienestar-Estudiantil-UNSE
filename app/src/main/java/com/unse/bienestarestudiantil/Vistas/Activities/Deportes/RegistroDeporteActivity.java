@@ -1,26 +1,22 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -32,8 +28,6 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.DecimalFormat;
 
 public class RegistroDeporteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,7 +41,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
     Button btnRegistrar;
     boolean isWsp = false, isActividad = false;
     int intensidad = 1;
-    String imc, estado, peso, altura;
+    String peso, altura;
     DialogoProcesamiento dialog;
 
     @Override
@@ -84,15 +78,16 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         checkno.setChecked(true);
         actividad.setVisibility(View.GONE);
 
-        UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
+        UsuarioViewModel usuarioViewModel = new UsuarioViewModel(getApplicationContext());
+        int idLocal = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
 
-        Usuario usuario = usuariosRepo.get(new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID));
+        Usuario usuario = usuarioViewModel.getById(idLocal);
         edtNombreDep.setText(mDeporte.getName());
         nombre.setText(usuario.getNombre());
         apellido.setText(usuario.getApellido());
         dni.setText(String.valueOf(usuario.getIdUsuario()));
-        edad.setText(String.valueOf(Utils.getEdad(usuario.getFechaNac())));
-        fechaNac.setText(Utils.getFechaNameWithinHour(usuario.getFechaNac()));
+        edad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()))));
+        fechaNac.setText(Utils.getFechaNameWithinHour(Utils.getFechaDate(usuario.getFechaNac())));
         domicilio.setText(usuario.getDomicilio());
         barrio.setText(usuario.getBarrio());
         ciudad.setText(usuario.getLocalidad());
@@ -102,7 +97,8 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         tel.setText(String.valueOf(usuario.getTelefono()));
 
         if (usuario.getTipoUsuario() == 1){
-            Alumno alumno = new AlumnosRepo(getApplicationContext()).get(usuario.getIdUsuario());
+            AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
+            Alumno alumno = alumnoViewModel.getById(usuario.getIdUsuario());
             facultad.setText(alumno.getFacultad());
             carrera.setText(alumno.getCarrera());
             legajo.setText(alumno.getLegajo());
@@ -241,7 +237,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         String objetivo = objet.getText().toString().trim();
         int idTemporada = getIntent().getIntExtra(Utils.DEPORTE_ID, -1);
         //is wsp, is actividad, is intensidad
-        Validador validador = new Validador();
+        Validador validador = new Validador(getApplicationContext());
 
         if (!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac, peso, altura, anioIn, objetivo, facebook, inst, fecha)){
             if (validador.validarDNI(doc) && validador.validarNumero(eda) && validador.validarNumero(cantMa)
@@ -252,7 +248,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
                     if (isActividad){
                         if (!validador.noVacio(cuales, lug)){
-                            datos = String.format("?idT=%s&idU=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
+                            datos = String.format("?idT=%s&id=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
                                     isWsp ? 1 : 2, objetivo, cuales, intensidad, lug, peso, altura, new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
 
                             sendServer(datos);
@@ -261,7 +257,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                         }
 
                     }else{
-                        datos = String.format("?idT=%s&idU=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
+                        datos = String.format("?idT=%s&id=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
                                 isWsp ? 1 : 2, objetivo, "N/A", -1, "N/A", peso, altura, new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
 
                         sendServer(datos);
@@ -312,21 +308,27 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
                    finish();
-                   Utils.showToast(getApplicationContext(),"Inscripción exitosa!");
+                   Utils.showToast(getApplicationContext(),getString(R.string.inscripcionExitosa));
                     break;
                 case 2:
                     //Error
-                    Utils.showToast(getApplicationContext(), "Error al inscribirse, intente nuevamente");
+                    Utils.showToast(getApplicationContext(), getString(R.string.inscripcionErronea));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 

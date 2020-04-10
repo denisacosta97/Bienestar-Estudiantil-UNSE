@@ -133,15 +133,16 @@
         <activity android:name=".Vistas.Activities.Polideportivo.CalendarReservasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.SelectInstActivity" />
         <activity android:name=".Vistas.Activities.Perfil.InscripcionesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.ModificarInscripcionDeporteActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity" />
+        <activity android:name=".Vistas.Activities.Perfil.UploadPictureActivity" />
     </application>
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

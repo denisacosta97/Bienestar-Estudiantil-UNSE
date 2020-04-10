@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,12 +13,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.bumptech.glide.Glide;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -61,10 +60,11 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
     }
 
     private void loadData() {
-        mEntrenador.setText("");
+        mEntrenador.setText(String.format("%s %s", mDeporte.getProfesor().getNombre(), mDeporte.getProfesor().getApellido()));
         mHorario.setText(mDeporte.getHorario());
         mDia.setText(mDeporte.getDias());
         mNombreDep.setText(mDeporte.getName());
+        Glide.with(mIcon.getContext()).load(Utils.getIconDeporte(mDeporte.getIdDep())).into(mIcon);
         mIcon.setImageResource(mDeporte.getIconDeporte());
     }
 
@@ -105,7 +105,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
 
         int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
 
-        String URL = String.format("%s?id=%s&anio=%s&idUs=%s&key=%s",
+        String URL = String.format("%s?idD=%s&anio=%s&id=%s&key=%s",
                 Utils.URL_DEPORTE_TEMPORADA, mDeporte.getIdDep(), anio, id,
                 new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
 
@@ -121,7 +121,7 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -139,6 +139,9 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
                     Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
@@ -147,26 +150,30 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
                     i.putExtra(Utils.DEPORTE_ID, id);
                     startActivity(i);
                     break;
-                case 4://No existe
-                case 2:
-                    //Sin Convocatoria
-                    Utils.showToast(getApplicationContext(), "El deporte seleccionado no tiene convocatoria vigente");
+
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.deportesSinConvocatoria));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                    break;
-                case 5:
-                    Utils.showToast(getApplicationContext(), "Ya se encuentra inscripto en la actividad");
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.deporteCerroConvocatoria));
+                    break;
+                case 6:
+                    Utils.showToast(getApplicationContext(), getString(R.string.deporteYaInscripto));
                     break;
                 case 100:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 }

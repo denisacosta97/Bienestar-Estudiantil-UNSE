@@ -13,24 +13,31 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.UsuariosViewHolder> {
+public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.AlumnoViewHolder> {
 
     private ArrayList<Usuario> mList;
     private ArrayList<Usuario> mListCopia;
-    private Context context;
+    private Context mContext;
+    private int tipo;
 
-    public UsuariosAdapter(ArrayList<Usuario> list, Context ctx) {
-        context = ctx;
-        mList = list;
+    public UsuariosAdapter(ArrayList<Usuario> list, Context context, int type) {
+        this.mContext = context;
+        this.mList = list;
+        this.mListCopia = new ArrayList<>();
+        this.mListCopia.addAll(mList);
+        this.tipo = type;
 
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return mList.size() == 0 ? 0 : 1;
+    }
 
     @Override
     public long getItemId(int position) {
@@ -39,29 +46,57 @@ public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.Usuar
 
     @NonNull
     @Override
-    public UsuariosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AlumnoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view = null;
+        if (viewType == 0)
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_listado_vacio, viewGroup, false);
+        else
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_usuario, viewGroup, false);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usuarios, parent, false);
-
-
-        return new UsuariosViewHolder(view);
+        return new AlumnoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsuariosViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AlumnoViewHolder holder, int i) {
+        if (mList.size() != 0) {
 
-        Usuario user = mList.get(position);
+            Usuario alumno = mList.get(i);
+            holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
+            holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
+            holder.txtTipo.setText(Utils.getTipoUser(alumno.getTipoUsuario()));
+            switch (tipo) {
+                case Utils.TIPO_USUARIO:
+                    holder.txtRol.setVisibility(View.GONE);
+                    break;
+            }
+            int icon = 0;
+            switch (alumno.getTipoUsuario()) {
+                case 1:
+                    icon = R.drawable.ic_tipo_usuario;
+                    break;
+                case 2:
+                    icon = R.drawable.ic_tipo_prof;
+                    break;
+                case 3:
+                    icon = R.drawable.ic_tipo_nodoc;
+                    break;
+                case 4:
+                    icon = R.drawable.ic_tipo_egresado;
+                    break;
+                case 5:
+                    icon = R.drawable.ic_tipo_particular;
+                    break;
+            }
+            Glide.with(holder.imgIconRol.getContext()).load(icon).into(holder.imgIconRol);
 
-        holder.txtTitulo.setText(String.format("%s\n%s", user.getApellido(), user.getNombre()));
-        holder.txtDescripcion.setText(String.format("%s", user.getIdUsuario()));
+        }
 
-        Glide.with(holder.imgIconoFoto.getContext())
-                .load(R.drawable.ic_foto_usuario)
-                .into(holder.imgIconoFoto);
+    }
 
-        Glide.with(holder.imgIconoRol.getContext())
-                .load(R.drawable.ic_estudiante)
-                .into(holder.imgIconoRol);
+    public void setList(ArrayList<Usuario> list) {
+        this.mList = list;
+        this.mListCopia = new ArrayList<>();
+        this.mListCopia.addAll(mList);
     }
 
     public void filtrar(String txt, int tipo) {
@@ -76,17 +111,32 @@ public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.Usuar
                     if (String.valueOf(item.getIdUsuario()).contains(txt)) {
                         result.add(item);
                     }
+
                 }
                 mList.clear();
                 mList.addAll(result);
                 break;
+            case Utils.LIST_LEGAJO:
+                if (tipo == Utils.TIPO_ESTUDIANTE) {
+                    if (txt.contains("-"))
+                        txt = txt.replace("-", "/");
+                    for (Usuario item : mListCopia) {
+                        if (((Alumno) item).getLegajo().toLowerCase().contains(txt.toLowerCase())) {
+                            result.add(item);
+                        }
 
+                    }
+                }
+                mList.clear();
+                mList.addAll(result);
+                break;
             case Utils.LIST_NOMBRE:
                 for (Usuario item : mListCopia) {
                     String nombre = String.format("%s %s", item.getNombre(), item.getApellido());
                     if (nombre.toLowerCase().contains(txt.toLowerCase())) {
                         result.add(item);
                     }
+
                 }
                 mList.clear();
                 mList.addAll(result);
@@ -97,25 +147,27 @@ public class UsuariosAdapter  extends RecyclerView.Adapter<UsuariosAdapter.Usuar
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList.size() == 0 ? 1 : mList.size();
     }
 
-    static class UsuariosViewHolder extends RecyclerView.ViewHolder {
+    static class AlumnoViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTitulo, txtDescripcion;
-        ImageView imgIconoFoto, imgIconoRol;
+        TextView txtNombre, txtRol, txtDni, txtTipo;
         CardView mCardView;
+        ImageView imgIconRol;
 
-        UsuariosViewHolder(View itemView) {
-            super(itemView);
+        AlumnoViewHolder(View view) {
+            super(view);
 
-            imgIconoRol = itemView.findViewById(R.id.imgIconRol);
-            imgIconoFoto = itemView.findViewById(R.id.imgIcon);
-            txtDescripcion = itemView.findViewById(R.id.txtDescripcion);
-            txtTitulo = itemView.findViewById(R.id.txtTitulo);
-            mCardView = itemView.findViewById(R.id.card);
+            mCardView = view.findViewById(R.id.card);
+            txtNombre = view.findViewById(R.id.txtTitulo);
+            txtDni = view.findViewById(R.id.txtDescripcion);
+            txtRol = view.findViewById(R.id.txtRol);
+            txtTipo = view.findViewById(R.id.txtRolName);
+            imgIconRol = view.findViewById(R.id.imgIconRol);
+
 
         }
-    }
 
+    }
 }

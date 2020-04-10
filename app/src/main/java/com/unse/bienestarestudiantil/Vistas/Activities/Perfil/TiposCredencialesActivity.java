@@ -86,10 +86,10 @@ public class TiposCredencialesActivity extends AppCompatActivity implements View
     private void loadData() {
         mList = new ArrayList<>();
 
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 1, "CREDENCIALES BECAS", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault));
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 2, "CREDENCIALES DEPORTES", R.drawable.ic_zapatilla, R.color.colorWhite, R.color.colorTextDefault));
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 3, "CREDENCIALES TORNEOS", R.drawable.ic_trofeo, R.color.colorWhite, R.color.colorTextDefault));
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 4, "CREDENCIAL SOCIO", R.drawable.ic_socio, R.color.colorWhite, R.color.colorTextDefault));
+        mList.add(new Opciones(true,LinearLayout.HORIZONTAL, 1, "CREDENCIALES BECAS", R.drawable.ic_becas, R.color.colorWhite, R.color.colorTextDefault));
+        mList.add(new Opciones(true,LinearLayout.HORIZONTAL, 2, "CREDENCIALES DEPORTES", R.drawable.ic_zapatilla, R.color.colorWhite, R.color.colorTextDefault));
+        mList.add(new Opciones(true,LinearLayout.HORIZONTAL, 3, "CREDENCIALES TORNEOS", R.drawable.ic_trofeo, R.color.colorWhite, R.color.colorTextDefault));
+        mList.add(new Opciones(true,LinearLayout.HORIZONTAL, 4, "CREDENCIAL SOCIO", R.drawable.ic_socio, R.color.colorWhite, R.color.colorTextDefault));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mAdapter = new OpcionesAdapter(mList, getApplicationContext());

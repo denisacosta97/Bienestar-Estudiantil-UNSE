@@ -1,48 +1,123 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-import com.unse.bienestarestudiantil.Modelos.Usuario;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.util.Date;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Alumno extends Usuario{
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-    public static final String TAG = Alumno.class.getSimpleName();
-    public static final String TABLE = "alumno";
-    // Labels Table Columns names
+@Entity(tableName = "alumno")
+public class Alumno extends Usuario implements Parcelable {
+
+    @Ignore
+    public static final String TABLE_ALUMNO = "alumno";
+    @Ignore
     public static final String KEY_ID_ALU = "idAlumno";
-    public static final String KEY_CARR = "carrera";
-    public static final String KEY_FAC = "facultad";
-    public static final String KEY_ANIO = "anio";
-    public static final String KEY_LEG = "legajo";
-    public static final String KEY_REG = "idRegularidad";
-    public static final String KEY_CHK_DATA = "checkData";
 
-    private String carrera, facultad, legajo, anio, checkData;
-    private int idAlumno, idRegularidad;
+    @NonNull
+    private int idAlumno;
+    @NonNull
+    private String carrera;
+    @NonNull
+    private String facultad;
+    @NonNull
+    private String anio;
+    @NonNull
+    private String legajo;
+    @NonNull
+    private int idRegularidad;
 
-    public Alumno(Usuario usuario, String carrera, String facultad, String legajo, String anio,
-                  int idAlumno, String checkData1, int idRegularidad) {
-        super(usuario.getIdUsuario(), usuario.getTipoUsuario(), usuario.getNombre(), usuario.getApellido(), usuario.getPais(),
-                usuario.getProvincia(), usuario.getLocalidad(), usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(),
-                usuario.getSexo(), usuario.getMail(), usuario.getCheckData(), usuario.getFoto(), usuario.getFechaNac(), usuario.getFechaRegistro());
+    public Alumno(int idUsuario, @NonNull String nombre, @NonNull String apellido,
+                  @NonNull String fechaNac, @NonNull String pais, @NonNull String provincia,
+                  @NonNull String localidad, @NonNull String domicilio, @NonNull String barrio,
+                  @NonNull String telefono, @NonNull String sexo, @NonNull String mail,
+                  int tipoUsuario, @NonNull String fechaRegistro, @NonNull String fechaModificacion,
+                  int validez, int idAlumno, @NonNull String carrera, @NonNull String facultad,
+                  @NonNull String anio, @NonNull String legajo, int idRegularidad) {
+        super(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
+                barrio, telefono, sexo, mail, tipoUsuario, fechaRegistro,
+                fechaModificacion, validez);
+        this.idAlumno = idAlumno;
         this.carrera = carrera;
         this.facultad = facultad;
-        this.legajo = legajo;
         this.anio = anio;
-        this.idAlumno = idAlumno;
-        this.checkData = checkData1;
+        this.legajo = legajo;
         this.idRegularidad = idRegularidad;
     }
 
+    @Ignore
     public Alumno() {
-        super(-1, -1, "", "", "", "", "", "", "", "", "", "", "", "", new Date(), new Date());
-        this.carrera = "";
-        this.facultad = "";
-        this.legajo = "";
-        this.anio = "";
-        this.idAlumno = -1;
-        this.checkData = "";
-        this.idRegularidad = -1;
+
+    }
+
+    @Ignore
+    protected Alumno(Parcel in) {
+        setIdUsuario(in.readInt());
+        setTipoUsuario(in.readInt());
+        setValidez(in.readInt());
+        setNombre(in.readString());
+        setApellido(in.readString());
+        setPais(in.readString());
+        setProvincia(in.readString());
+        setLocalidad(in.readString());
+        setDomicilio(in.readString());
+        setBarrio(in.readString());
+        setTelefono(in.readString());
+        setSexo(in.readString());
+        setMail(in.readString());
+        setFechaNac(in.readString());
+        setFechaRegistro(in.readString());
+        setFechaModificacion(in.readString());
+
+        carrera = in.readString();
+        facultad = in.readString();
+        legajo = in.readString();
+        anio = in.readString();
+        idAlumno = in.readInt();
+        idRegularidad = in.readInt();
+    }
+
+    public static final Creator<Alumno> CREATOR = new Creator<Alumno>() {
+        @Override
+        public Alumno createFromParcel(Parcel in) {
+            return new Alumno(in);
+        }
+
+        @Override
+        public Alumno[] newArray(int size) {
+            return new Alumno[size];
+        }
+    };
+
+    public static Alumno mapper(JSONObject o, Usuario usuario) {
+        Alumno alumno = new Alumno();
+        try {
+            if (o.get("datos") != null) {
+                JSONObject object = o.getJSONObject("datos");
+                String carrera = object.getString("carrera");
+                String facultad = object.getString("facultad");
+                String anio = object.getString("anio");
+                String legajo = object.getString("legajo");
+                int idRegularidad = Integer.parseInt(
+                        object.getString("idRegularidad"));
+
+                alumno = new Alumno(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
+                        usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),
+                        usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(), usuario.getSexo(),
+                        usuario.getMail(), usuario.getTipoUsuario(), usuario.getFechaRegistro(), usuario.getFechaModificacion(),
+                        usuario.getValidez(), usuario.getIdUsuario(), carrera, facultad, anio, legajo, idRegularidad
+                );
+            }
+            return alumno;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return alumno;
     }
 
     public String getCarrera() {
@@ -77,14 +152,6 @@ public class Alumno extends Usuario{
         this.anio = anio;
     }
 
-    public String getCheckData() {
-        return checkData;
-    }
-
-    public void setCheckData(String checkData) {
-        this.checkData = checkData;
-    }
-
     public int getIdAlumno() {
         return idAlumno;
     }
@@ -102,4 +169,35 @@ public class Alumno extends Usuario{
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(getIdUsuario());
+        dest.writeInt(getTipoUsuario());
+        dest.writeInt(getValidez());
+        dest.writeString(getNombre());
+        dest.writeString(getApellido());
+        dest.writeString(getPais());
+        dest.writeString(getProvincia());
+        dest.writeString(getLocalidad());
+        dest.writeString(getDomicilio());
+        dest.writeString(getBarrio());
+        dest.writeString(getTelefono());
+        dest.writeString(getSexo());
+        dest.writeString(getMail());
+        dest.writeString(getFechaNac());
+        dest.writeString(getFechaRegistro());
+        dest.writeString(getFechaModificacion());
+
+        dest.writeString(carrera);
+        dest.writeString(facultad);
+        dest.writeString(legajo);
+        dest.writeString(anio);
+        dest.writeInt(idAlumno);
+        dest.writeInt(idRegularidad);
+    }
 }

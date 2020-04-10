@@ -2,7 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,21 +22,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
-import com.unse.bienestarestudiantil.Databases.BDGestor;
-import com.unse.bienestarestudiantil.Databases.DBManager;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AboutActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
@@ -45,9 +50,13 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     PreferenceManager manager;
+    UsuarioViewModel mUsuarioViewModel;
     Toolbar mToolbar;
+    View headerView;
     Fragment mFragment;
-    int itemSelecionado = -1;
+    int itemSelecionado = -1, idUser = 0;
+    ImageView imgPerfil, imgBienestar;
+    TextView txtNombre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,36 +70,32 @@ public class MainActivity extends AppCompatActivity {
 
         setToolbar();
 
-        createBD();
-
         loadData();
 
         checkUser();
 
     }
 
-    private void createBD() {
-        BDGestor gestor = new BDGestor(getApplicationContext());
-        DBManager.initializeInstance(gestor);
-
-    }
 
     private void loadData() {
         manager = new PreferenceManager(getApplicationContext());
-
-        //Aqui guardar imagen descargadaaaaaa jejejej
+        mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
     }
 
     private void loadViews() {
         navigationView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
         mToolbar = findViewById(R.id.toolbar);
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        headerView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
+        imgPerfil = headerView.findViewById(R.id.imgUserPerfil);
+        imgBienestar = headerView.findViewById(R.id.logoBienestar);
+        txtNombre = headerView.findViewById(R.id.txtNombreUser);
     }
 
     private void comprobarNavigationView() {
         if (navigationView != null) {
             prepararDrawer(navigationView);
-            // Seleccionar item por defecto
             seleccionarItem(navigationView.getMenu().getItem(0));
         }
     }
@@ -110,45 +115,67 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setCheckedItem(R.id.item_inicio);
     }
 
-    private void checkUser() {
-        navigationView.removeHeaderView(navigationView.getHeaderView(0));
-        View hView = navigationView.inflateHeaderView(R.layout.cabecera_drawer);
-        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
-        boolean isLogin = preferenceManager.getValue(Utils.IS_LOGIN);
-
-        ImageView img = hView.findViewById(R.id.imgUserPerfil);
-        ImageView imgBienestar = hView.findViewById(R.id.logoBienestar);
-        TextView nameUser = hView.findViewById(R.id.txtNombreUser);
-        TextView carrera = hView.findViewById(R.id.txtCarrera);
-        if (isLogin) {
-            int dni = preferenceManager.getValueInt(Utils.MY_ID);
-            Usuario usuario = new UsuariosRepo(getApplicationContext()).get(dni);
-            Alumno alumno = new AlumnosRepo(getApplicationContext()).get(dni);
-            imgBienestar.setVisibility(View.GONE);
-            img.setVisibility(View.VISIBLE);
-            img.setImageResource(R.drawable.user);
-            nameUser.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
-            carrera.setText(alumno.getCarrera());
+    private void loadProfilePicture() {
+        Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER, String.format(Utils.PROFILE_PIC, idUser),
+                false);
+        if (bitmap != null) {
+            Glide.with(imgPerfil.getContext()).load(bitmap).into(imgPerfil);
         } else {
-            img.setVisibility(View.GONE);
+            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, idUser);
+            Glide.with(imgPerfil.getContext()).load(URL)
+                    .apply(new RequestOptions().error(R.drawable.ic_user)
+                            .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.ic_user))
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER,
+                                    String.format(Utils.PROFILE_PIC,
+                                            idUser),
+                                    ((BitmapDrawable) resource).getBitmap(), false);
+                            return false;
+                        }
+                    }).into(imgPerfil);
+
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadProfilePicture();
+    }
+
+    private void checkUser() {
+        boolean isLogin = manager.getValue(Utils.IS_LOGIN);
+        if (isLogin) {
+            idUser = manager.getValueInt(Utils.MY_ID);
+            Usuario usuario = mUsuarioViewModel.getById(idUser);
+            imgBienestar.setVisibility(View.GONE);
+            imgPerfil.setVisibility(View.VISIBLE);
+            loadProfilePicture();
+            txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
+        } else {
+            imgPerfil.setVisibility(View.GONE);
             imgBienestar.setVisibility(View.VISIBLE);
             imgBienestar.setImageResource(R.drawable.ic_logo_bienestar_01);
-            nameUser.setText("BIENESTAR ESTUDIANTIL");
-            carrera.setText("Secretaría de Bienestar Estudiantil");
+            txtNombre.setText(getText(R.string.app_name_shor).toString().toUpperCase());
         }
 
     }
 
     /*
-    REVISAAAAARRRRR
+    REVISAAAR
      */
     private void updateMenu() {
         Menu menu = navigationView.getMenu();
         int range = manager.getValueInt(Utils.TYPE_RANGE);
         if (range == 0) {
             MenuItem men = menu.findItem(R.id.item_perfil);
-            men.setVisible(false);
-            men = menu.findItem(R.id.profe_profile);
             men.setVisible(false);
             men = menu.findItem(R.id.item_config);
             // men.setVisible(false);
@@ -160,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragmentoGenerico = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-
         switch (itemDrawer.getItemId()) {
             case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
@@ -170,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_deporte:
                 fragmentoGenerico = new DeportesFragment();
+                ((DeportesFragment) fragmentoGenerico).setContext(getApplicationContext());
+                ((DeportesFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
                 break;
             case R.id.item_becas:
                 fragmentoGenerico = new BecasFragment();
@@ -179,9 +207,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
-                break;
-            case R.id.profe_profile:
-                startActivity(new Intent(MainActivity.this, RegistroDeporteActivity.class));
                 break;
             case R.id.item_config:
                 startActivity(new Intent(this, GestionSistemaActivity.class));
@@ -210,9 +235,13 @@ public class MainActivity extends AppCompatActivity {
 
         itemSelecionado = itemDrawer.getItemId();
 
-        // Setear título actual
-        if (itemDrawer.getItemId() != R.id.item_perfil)
+        if (itemDrawer.getItemId() != R.id.item_perfil ||
+                itemDrawer.getItemId() != R.id.item_config
+                || itemDrawer.getItemId() != R.id.item_about
+                || itemDrawer.getItemId() != R.id.item_terminos
+                || itemDrawer.getItemId() != R.id.item_contactos) {
             ((TextView) findViewById(R.id.txtTitulo)).setText(itemDrawer.getTitle());
+        }
     }
 
     private void setToolbar() {
@@ -220,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.imgFlecha).setVisibility(View.GONE);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            // Poner ícono del drawer toggle
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setTitle("Bienestar Estudiantíl");
@@ -230,47 +258,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_admin, menu);
-        int range = manager.getValueInt(Utils.TYPE_RANGE);
-        if (range == 0) {
-            MenuItem menuItem = menu.findItem(R.id.item_admin);
-            menuItem.setVisible(false);
-        }
-        //updateMenu();
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            case R.id.item_admin:
-                if (itemSelecionado != -1) {
-                    switch (itemSelecionado) {
-
-                        case R.id.item_poli:
-                            if (true) { //Si tiene los permisos necesarios
-                                startActivity(new Intent(getApplicationContext(), GestionPolideportivoActivity.class));
-                            }
-                            break;
-                        case R.id.item_deporte:
-                            break;
-                        case R.id.item_becas:
-                            if (true) { //Si tiene los permisos necesarios
-                                startActivity(new Intent(getApplicationContext(), MainGestionBecasActivity.class));
-                            }
-                            break;
-                        default:
-                            Utils.showToast(getApplicationContext(), "No se definió una zona administrativa aún");
-                            break;
-                        //Resto de ls secciones
-                    }
-                } else {
-                    Utils.showToast(getApplicationContext(), "No tiene los permisos necesarios para administrar dicha sección");
-                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

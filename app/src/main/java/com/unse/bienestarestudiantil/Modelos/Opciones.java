@@ -15,6 +15,14 @@ public class Opciones {
         this.id = id;
         this.orientation = orientation;
     }
+    public Opciones(boolean dis, int orientation, int id,String titulo, int icon, int color) {
+        this.titulo = titulo;
+        this.icon = icon;
+        this.color = color;
+        this.id = id;
+        this.orientation = orientation;
+        this.disponibility = dis;
+    }
 
     public Opciones(int orientation,int id,String titulo, int icon, int color, int colorText) {
         this.titulo = titulo;
@@ -23,6 +31,16 @@ public class Opciones {
         this.id = id;
         this.colorText = colorText;
         this.orientation = orientation;
+    }
+
+    public Opciones(boolean dis,int orientation,int id,String titulo, int icon, int color, int colorText) {
+        this.titulo = titulo;
+        this.icon = icon;
+        this.color = color;
+        this.id = id;
+        this.colorText = colorText;
+        this.orientation = orientation;
+        this.disponibility = dis;
     }
 
     public Opciones(int orientation,int id,String titulo, int icon, int color, int colorText, int sizeText) {

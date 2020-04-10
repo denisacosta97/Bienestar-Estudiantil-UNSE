@@ -19,11 +19,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
-import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
-import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
+import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
@@ -37,8 +37,6 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button mInicio;
@@ -47,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     DialogoProcesamiento dialog;
     EditText edtUser, edtPass;
     VideoView mVideoView;
+    UsuarioViewModel mUsuarioViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loadData() {
+        mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
         // Uri uri = Uri.parse("android.resource://".concat(getPackageName()).concat("/raw/").concat(String.valueOf(R.raw.video_bacl)));
         //mVideoView.setVideoURI(uri);
         //mVideoView.start();
@@ -169,15 +169,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //Exito
                     Utils.showToast(getApplicationContext(), "¡Sesión iniciada!");
                     JSONObject datos = jsonObject.getJSONObject("datos");
-                    JSONObject tipo = jsonObject.getJSONObject("tipo");
+                    // JSONObject tipo = jsonObject.getJSONObject("tipo");
                     String token = jsonObject.getJSONObject("token").getString("token");
                     //Insertar BD
-                    guardarDatos(datos, tipo, token);
+                    Usuario user = guardarDatos(jsonObject);
+
                     PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
                     preferenceManager.setValue(Utils.IS_LOGIN, true);
-                    int dni = Integer.parseInt(datos.getString("idUsuario"));
+                    int dni = user.getIdUsuario();
                     preferenceManager.setValue(Utils.MY_ID, dni);
                     preferenceManager.setValue(Utils.TOKEN, token);
+                    preferenceManager.setValue(Utils.IS_VISIT, false);
                     //Main
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finishAffinity();
@@ -186,9 +188,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //Usuario invalido
                     Utils.showToast(getApplicationContext(), "Usuario o contraseña inválidos");
                     break;
-                case 4:
+                case 5:
                     //Usuario invalido
                     Utils.showToast(getApplicationContext(), "Usuario deshabilitado, contacta al Administrador");
+                    break;
+                case 4:
+                    //Usuario invalido
+                    Utils.showToast(getApplicationContext(), "Campos inválidos");
                     break;
                 case 3:
                     //No autorizado
@@ -203,68 +209,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void guardarDatos(JSONObject datos, JSONObject tipo, String token) {
+    private Usuario guardarDatos(JSONObject datos) {
+        Usuario usuario = null;
         try {
-            String idUsuario = datos.getString("idUsuario");
-            String tipoUsuario = datos.getString("tipoUsuario");
-            String nombre = datos.getString("nombre");
-            String apellido = datos.getString("apellido");
-            String pais = datos.getString("pais");
-            String provincia = datos.getString("provincia");
-            String localidad = datos.getString("localidad");
-            String domicilio = datos.getString("domicilio");
-            String barrio = datos.getString("barrio");
-            String telefono = datos.getString("telefono");
-            String sexo = datos.getString("sexo");
-            String mail = datos.getString("mail");
-            String checkData = datos.getString("checkData");
-            Date fechaReg = Utils.getFechaDateWithHour(datos.getString("fechaRegistro"));
-            String foto = "www.jje.com/" + idUsuario;
-            Date fechaNac = Utils.getFechaDate(datos.getString("fechaNac"));
-
-            Usuario usuario = new Usuario(Integer.parseInt(idUsuario), Integer.parseInt(tipoUsuario), nombre, apellido, pais,
-                    provincia, localidad, domicilio, barrio, telefono, sexo, mail, checkData, foto, fechaNac, fechaReg);
-            UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
-            usuariosRepo.insert(usuario);
-            switch (Integer.parseInt(tipoUsuario)) {
+            usuario = Usuario.mapper(datos, Usuario.COMPLETE);
+            mUsuarioViewModel.insert(usuario);
+            switch (usuario.getTipoUsuario()) {
                 case 1:
-                    String carrera = tipo.getString("carrera");
-                    String facultad = tipo.getString("facultad");
-                    String anio = tipo.getString("anio");
-                    String legajo = tipo.getString("legajo");
-                    int idRegularidad = Integer.parseInt(
-                            tipo.getString("idRegularidad"));
-                    String checkDataAlu = tipo.getString("checkData");
-                    Alumno alumno = new Alumno(usuario, carrera, facultad, legajo, anio, Integer.parseInt(idUsuario), checkDataAlu, idRegularidad);
-                    AlumnosRepo alumnosRepo = new AlumnosRepo(getApplicationContext());
-                    alumnosRepo.insert(alumno);
+                    Alumno alumno = Alumno.mapper(datos, usuario);
+                    AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
+                    alumnoViewModel.insert(alumno);
                     break;
                 case 2:
-                    String profesion = tipo.getString("profesion");
-                    String fechaIngreso = tipo.getString("fechaIngreso");
-                    String checkDataProf = tipo.getString("checkData");
-                    Profesor profesor = new Profesor(usuario, profesion, checkDataProf, Integer.parseInt(idUsuario), fechaIngreso);
-                    ProfesorRepo profesorRepo = new ProfesorRepo(getApplicationContext());
-                    profesorRepo.insert(profesor);
+                    Profesor profesor = Profesor.mapper(datos, usuario);
+                    ProfesorViewModel profesorViewModel = new ProfesorViewModel(getApplicationContext());
+                    profesorViewModel.insert(profesor);
                     break;
                 case 4:
-                    String profesionEgre = tipo.getString("profesion");
-                    String fechaEgreso = tipo.getString("fechaEgreso");
-                    String checkDataEg = tipo.getString("checkData");
-                    Egresado egresado = new Egresado(usuario, profesionEgre, checkDataEg, Integer.parseInt(idUsuario), fechaEgreso);
-                    EgresadosRepo egresadosRepo = new EgresadosRepo(getApplicationContext());
-                    egresadosRepo.insert(egresado);
+                    Egresado egresado = Egresado.mapper(datos, usuario);
+                    EgresadoViewModel egresadoViewModel = new EgresadoViewModel(getApplicationContext());
+                    egresadoViewModel.insert(egresado);
                     break;
                 case 3:
                 case 5:
                     //Nadin jeje
                     break;
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            Utils.showToast(getApplicationContext(), "Error de formato");
         }
+        return usuario;
     }
 
 }

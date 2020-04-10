@@ -4,11 +4,10 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_margin="4dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -23,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.9"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -31,7 +30,7 @@
                 android:id="@+id/imgIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_foto_usuario" />
+                android:src="@drawable/ic_user" />
 
             <LinearLayout
                 android:layout_marginLeft="10dp"
@@ -44,8 +43,8 @@
                     android:id="@+id/txtTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OLLEA ALLENDE NICOLE MARIEL"
-                    android:textColor="@color/colorWhite"
+                    android:text="NOMBRE SEGUNDO NOMBRE APELLIDO"
+                    android:textColor="@color/colorTextDefault"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
@@ -55,21 +54,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="40657677"
-                    android:textColor="@color/colorWhite"
+                    android:text="D.N.I"
+                    android:textColor="@color/colorTextDefault"
                     android:textSize="14sp"
-                    android:textStyle="bold|italic"
+                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_regular"/>
 
                 <TextView
-                    android:id="@+id/txtLegajo"
+                    android:id="@+id/txtRol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="183/16"
-                    android:textColor="@color/colorWhite"
+                    android:text="ADICIONAL"
+                    android:textColor="@color/colorTextDefault"
                     android:textSize="14sp"
-                    android:textStyle="bold|italic"
+                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>
@@ -77,18 +76,27 @@
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_weight="0.1"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_margin="5dp"
                 android:id="@+id/imgIconRol"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_estudiante" />
+                android:src="@drawable/ic_search" />
+
+            <TextView
+                android:id="@+id/txtRolName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Particular"
+                android:textStyle="bold"
+                android:gravity="center" />
         </LinearLayout>
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Herramientas;
+package com.unse.bienestarestudiantil.Herramientas.Credencial;
 
 import android.content.Context;
 import android.view.GestureDetector;

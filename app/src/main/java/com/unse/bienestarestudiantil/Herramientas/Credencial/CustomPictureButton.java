@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Herramientas;
+package com.unse.bienestarestudiantil.Herramientas.Credencial;
 
 import com.itextpdf.forms.PdfAcroForm;
 import com.itextpdf.forms.fields.PdfButtonFormField;
@@ -28,7 +28,7 @@ import com.itextpdf.layout.renderer.DrawContext;
 import com.itextpdf.layout.renderer.IRenderer;
 import com.itextpdf.layout.tagging.IAccessibleElement;
 
-class CustomButton extends AbstractElement<CustomButton> implements ILeafElement, IAccessibleElement {
+public class CustomPictureButton extends AbstractElement<CustomPictureButton> implements ILeafElement, IAccessibleElement {
 
     protected PdfName role = PdfName.Figure;
     protected PdfButtonFormField button;
@@ -39,7 +39,7 @@ class CustomButton extends AbstractElement<CustomButton> implements ILeafElement
     protected Color buttonBackgroundColor ;
     protected DefaultAccessibilityProperties tagProperties;
 
-    public CustomButton(PdfButtonFormField button) {
+    public CustomPictureButton(PdfButtonFormField button) {
         this.button = button;
     }
 
@@ -101,7 +101,7 @@ class CustomButton extends AbstractElement<CustomButton> implements ILeafElement
 
     static class CustomButtonRenderer extends AbstractRenderer {
 
-        public CustomButtonRenderer(CustomButton button) {
+        public CustomButtonRenderer(CustomPictureButton button) {
             super(button);
         }
 
@@ -110,9 +110,9 @@ class CustomButton extends AbstractElement<CustomButton> implements ILeafElement
             LayoutArea area = layoutContext.getArea().clone();
             Rectangle layoutBox = area.getBBox();
             applyMargins(layoutBox, false);
-            CustomButton modelButton = (CustomButton) modelElement;
+            CustomPictureButton modelButton = (CustomPictureButton) modelElement;
             occupiedArea = new LayoutArea(area.getPageNumber(), new Rectangle(modelButton.button.getWidgets().get(0).getRectangle().toRectangle()));
-            PdfButtonFormField button = ((CustomButton) getModelElement()).getButton();
+            PdfButtonFormField button = ((CustomPictureButton) getModelElement()).getButton();
             button.getWidgets().get(0).setRectangle(new PdfArray(occupiedArea.getBBox()));
 
             return new LayoutResult(LayoutResult.FULL, occupiedArea, null, null);
@@ -120,7 +120,7 @@ class CustomButton extends AbstractElement<CustomButton> implements ILeafElement
 
         @Override
         public void draw(DrawContext drawContext) {
-            CustomButton modelButton = (CustomButton) modelElement;
+            CustomPictureButton modelButton = (CustomPictureButton) modelElement;
             Rectangle rect = modelButton.button.getWidgets().get(0).getRectangle().toRectangle();
             occupiedArea.setBBox(rect);
 

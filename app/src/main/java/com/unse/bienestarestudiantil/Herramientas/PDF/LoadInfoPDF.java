@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Herramientas;
+package com.unse.bienestarestudiantil.Herramientas.PDF;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,7 +15,11 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Credencial.CustomPictureButton;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -106,7 +110,8 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
     private void completeValues(PdfAcroForm form, Map<String, PdfFormField> formFields) {
         int id = new PreferenceManager(mContext).getValueInt(Utils.MY_ID);
         //Info user
-        Usuario usuario = new UsuariosRepo(mContext).get(id);
+        UsuarioViewModel usuarioViewModel = new UsuarioViewModel(mContext);
+        Usuario usuario = usuarioViewModel.getById(id);
         if (usuario != null) {
             if (formFields.containsKey("dni"))
                 formFields.get("dni").setValue(String.valueOf(usuario.getIdUsuario()));
@@ -117,12 +122,13 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
             if (formFields.containsKey("apellido"))
                 formFields.get("apellido").setValue(usuario.getApellido());
             if (formFields.containsKey("fechaNac"))
-                formFields.get("fechaNac").setValue(Utils.getBirthday(usuario.getFechaNac()));
+                formFields.get("fechaNac").setValue(usuario.getFechaNac());
             if (formFields.containsKey("pais"))
                 formFields.get("pais").setValue(usuario.getPais());
             if (formFields.containsKey("foto")) {
 
-                Bitmap bitmap = Utils.getBitmap(mContext, Utils.FOLDER,"pic.jpg", false);
+                Bitmap bitmap = FileStorageManager.getBitmap(mContext, Utils.FOLDER,
+                        String.format(Utils.PROFILE_PIC, id), false);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                /* Image signatura;
@@ -136,7 +142,7 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
 
                 //PdfFormField ad = form.copyField("foto");
 
-                CustomButton ad = new CustomButton((PdfButtonFormField) formFields.get("foto"));
+                CustomPictureButton ad = new CustomPictureButton((PdfButtonFormField) formFields.get("foto"));
                 ad.setImage(ImageDataFactory.create(stream.toByteArray()));
                 formFields.remove("foto");
                 document.add(new Paragraph().add(ad));

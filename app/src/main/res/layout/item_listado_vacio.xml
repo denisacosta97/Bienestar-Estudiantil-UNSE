@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/colorGreyDark"
+    app:cardBackgroundColor="@color/colorGrey2"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -30,7 +30,7 @@
                 android:id="@+id/imgIcon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_buscar" />
+                android:src="@drawable/ic_search" />
 
             <TextView
                 android:gravity="center"

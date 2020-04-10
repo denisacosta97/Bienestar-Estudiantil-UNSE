@@ -18,8 +18,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.unse.bienestarestudiantil.Herramientas.Credencial.CredencialView;
-import com.unse.bienestarestudiantil.Herramientas.OnSwipeTouchListener;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
+import com.unse.bienestarestudiantil.Herramientas.Credencial.OnSwipeTouchListener;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
 import com.unse.bienestarestudiantil.Modelos.CredencialBeca;
@@ -73,7 +74,7 @@ public class TarjetaCredencialActivity extends AppCompatActivity {
     private void createImage() {
         Bitmap bitmap = getBitmapFromView(mLayout);
         bitmap = Utils.resize(bitmap, 600, 375);
-        Utils.saveBitmap(getApplicationContext(), Utils.FOLDER_CREDENCIALES, getFileName(), bitmap, true);
+        FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER_CREDENCIALES, getFileName(), bitmap, true);
     }
 
     private String getFileName() {

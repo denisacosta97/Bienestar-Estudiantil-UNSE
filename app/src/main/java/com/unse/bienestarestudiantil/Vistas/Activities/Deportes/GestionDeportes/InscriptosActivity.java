@@ -18,16 +18,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AlumnosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapters;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -42,7 +40,7 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    UsuariosAdapter mAdapter;
+    UsuariosAdapters mAdapter;
     ArrayList<Deporte> mDeporte;
     ArrayList<Usuario> mUsuarios;
     ImageView imgIcono, imgBuscador;
@@ -143,7 +141,7 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mUsuarios = new ArrayList<>();
 
-        mAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext());
+        mAdapter = new UsuariosAdapters(mUsuarios, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -223,7 +221,7 @@ public class InscriptosActivity extends AppCompatActivity implements View.OnClic
             usuario.setIdUsuario(j.getInt("idUsuario"));
             usuario.setNombre(j.getString("nombre"));
             usuario.setApellido(j.getString("apellido"));
-            usuario.setFechaNac(Utils.getFechaDate(j.getString("fechaNac")));
+            usuario.setFechaNac(j.getString("fechaNac"));
             usuario.setNombre(j.getString("nombre"));
 
             mUsuarios.add(usuario);

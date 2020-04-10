@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -20,7 +19,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,9 +30,13 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
-import com.unse.bienestarestudiantil.Databases.BDGestor;
-import com.unse.bienestarestudiantil.Databases.DBManager;
+import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
+import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
+import com.unse.bienestarestudiantil.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,6 +53,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,17 +72,38 @@ public class Utils {
     public static final String IS_LOGIN = "login_yes";
     public static final String MY_ID = "my_id_user";
     public static final String TOKEN = "my_token";
+    public static final String IS_VISIT = "visit";
     //Constantes para activities
+    public static final String USER_INFO = "user_info";
     public static final String DEPORTE_NAME = "dato_deporte";
     public static final String DEPORTE_ID = "id_deporte";
     public static final String TIPO_CREDENCIAL = "tipo_cred";
     public static final String TIPO_CREDENCIAL_DATO = "tipo_cred_dato";
+    public static final String CREDENCIAL = "credencial";
     public static final String URI_IMAGE = "uri_image";
+    public static final String DEPORTE_NAME_PROF = "dato_deporte_prof";
+    public static final String IS_ADMIN_MODE = "is_admin_mode";
+    public static final String NAME_GENERAL = "name_general";
     //Constantes para activities
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
-
-    public static final String DEPORTE_NAME_PROF = "dato_deporte_prof";
+    //Constantes para tipos de usuario
+    public static final int TIPO_USUARIO = 1;
+    public static final int TIPO_ESTUDIANTE = 2;
+    //Constantes para busqueda
+    public static final String PATRON_LEGAJO = "[0-9]{1,5}(-|/)[0-9]{2,4}";
+    public static final String PATRON_DNI = "([0-9]){5,8}";
+    public static final String PATRON_NOMBRES = "[a-zA-Z_ ]+";
+    //Constante para tipo de usuario
+    public static final int TIPO_ALUMNO = 1;
+    public static final int TIPO_PROFESOR = 2;
+    public static final int TIPO_NODOCENTE = 3;
+    public static final int TIPO_EGRESADO = 4;
+    public static final int TIPO_PARTICULAR = 5;
+    //Constante para Volley
+    public static final int MY_DEFAULT_TIMEOUT = 15000;
+    //Constante de nombres de archivos
+    public static final String PROFILE_PIC = "%s.jpg";
 
 
     public static final int PERMISSION_ALL = 1010;
@@ -121,36 +146,42 @@ public class Utils {
     public static final int GET_FROM_DNI = 1010;
 
     //USUARIO
-    public static final String URL_USUARIO_INSERTAR = "http://192.168.0.12/bienestar/usuario/insertar.php";
-    public static final String URL_USUARIO_ACTUALIZAR = "http://192.168.0.12/bienestar/usuario/actualizar.php";
-    public static final String URL_USUARIO_LOGIN = "http://192.168.0.12/bienestar/usuario/login.php";
-    public static final String URL_USUARIO_IMAGE = "http://192.168.0.12/bienestar/general/uploadImage.php";
-    public static final String URL_USUARIO_IMAGE_LOAD = "http://192.168.0.12/bienestar/usuariosImg/";
-    public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/cambiarContrasenia.php";
-    public static final String URL_REC_CONTRASENIA = "http://192.168.0.12/bienestar/usuario/recuperarContrasenia.php";
+    public static final String URL_USUARIO_INSERTAR = "http://192.168.0.11/bienestar/usuario/insertar.php";
+    public static final String URL_USUARIO_ACTUALIZAR = "http://192.168.0.11/bienestar/usuario/actualizar.php";
+    public static final String URL_USUARIO_LOGIN = "http://192.168.0.11/bienestar/usuario/login.php";
+    public static final String URL_USUARIO_IMAGE = "http://192.168.0.11/bienestar/general/uploadImage.php";
+    public static final String URL_USUARIO_IMAGE_LOAD = "http://192.168.0.11/bienestar/usuariosImg/";
+    public static final String URL_CAMBIO_CONTRASENIA = "http://192.168.0.11/bienestar/usuario/cambiarContrasenia.php";
+    public static final String URL_REC_CONTRASENIA = "http://192.168.0.11/bienestar/usuario/recuperarContrasenia.php";
+    public static final String URL_USUARIOS_LISTA = "http://192.168.0.11/bienestar/usuario/getUsuarios.php";
+    public static final String URL_USUARIO_BY_ID = "http://192.168.0.11/bienestar/usuario/getUser.php";
+    public static final String URL_USUARIO_ELIMINAR = "http://192.168.0.11/bienestar/usuario/eliminar.php";
     //SOCIO
-    public static final String URL_SOCIO_CREDENCIAL = "http://192.168.0.12/bienestar/socio/getCredencial.php";
+    public static final String URL_SOCIO_CREDENCIAL = "http://192.168.0.11/bienestar/socio/getCredencial.php";
     //DEPORTES
-    public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.12/bienestar/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.12/bienestar/deportes/registrar.php";
-    public static final String URL_DEPORTE_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://192.168.0.12/bienestar/deportes/getAllDeportes.php";
-    public static final String URL_ISCRIP_LISTA = "http://192.168.0.12/bienestar/deportes/getAllInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "http://192.168.0.12/bienestar/beca/getInscripciones.php";
+    public static final String URL_DEPORTE_TEMPORADA = "http://192.168.0.11/bienestar/deportes/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "http://192.168.0.11/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_CREDENCIAL = "http://192.168.0.11/bienestar/deportes/getCredencial.php";
+    public static final String URL_DEPORTE_LISTA = "http://192.168.0.11/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_ISCRIP_LISTA = "http://192.168.0.11/bienestar/deportes/getAllInscriptos.php";
+    public static final String URL_INSCRIPCIONES_GENERALES = "http://192.168.0.11/bienestar/beca/getInscripciones.php";
+    public static final String URL_INSCRIPCIONES_PARTICULAR_DEPORTE = "http://192.168.0.11/bienestar/deportes/getInscripcion.php";
+    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://192.168.0.11/bienestar/deportes/actualizarInscripcion.php";
     //TORNEOS
-    public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.12/bienestar/deportes/torneo/getCredencial.php";
-    public static final String URL_TORNEOS_LISTA = "http://192.168.0.12/bienestar/deportes/getAllTorneos.php";
+    public static final String URL_TORNEO_CREDENCIAL = "http://192.168.0.11/bienestar/deportes/torneo/getCredencial.php";
+    public static final String URL_TORNEOS_LISTA = "http://192.168.0.11/bienestar/deportes/getAllTorneos.php";
     //BECAS
-    public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.12/bienestar/beca/getCredencial.php";
+    public static final String URL_BECAS_CREDENCIAL = "http://192.168.0.11/bienestar/beca/getCredencial.php";
     //GENERALES
-    public static final String URL_CATEGORIAS = "http://192.168.0.12/bienestar/general/getArchivos.php";
-    public static final String URL_ARCHIVOS = "http://192.168.0.12/bienestar/archivos/";
+    public static final String URL_CATEGORIAS = "http://192.168.0.11/bienestar/general/getArchivos.php";
+    public static final String URL_ARCHIVOS = "http://192.168.0.11/bienestar/archivos/";
 
-    public static final long SECONS_TIMER = 5000;
+    public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
     public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
     public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
+
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
@@ -181,20 +212,20 @@ public class Utils {
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
 
-    public static String dataAlumno = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-            "&dom=%s&sex=%s&key=%s&car=%s&fac=%s&anio=%s&leg=%s&pass=%s&fecha=%s" +
-            "&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
+    public static String dataAlumno = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&car=%s&fac=%s&anio=%s&leg=%s" +
+            "&tipo=%s&mail=%s&tel=%s&barr=%s&fecham=%s";
 
-    public static String dataProfesor = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-            "&prof=%s&fechain=%s&barr=%s&fechaR=%s";
+    public static String dataProfesor = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&tipo=%s&mail=%s&tel=%s" +
+            "&prof=%s&fechain=%s&barr=%s&fecham=%s";
 
-    public static String dataEgresado = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s" +
-            "&prof=%s&fechaeg=%s&barr=%s&fechaR=%s";
+    public static String dataEgresado = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&tipo=%s&mail=%s&tel=%s" +
+            "&prof=%s&fechaeg=%s&barr=%s&fecham=%s";
 
-    public static String dataPartiNoDoc = "?id=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
-            "&dom=%s&sex=%s&key=%s&pass=%s&fecha=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fechaR=%s";
+    public static String dataPartiNoDoc = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
+            "&dom=%s&sex=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fecham=%s";
 
 
     public static void changeColorDrawable(ImageView view, Context context, int color) {
@@ -505,38 +536,40 @@ public class Utils {
     public static Date getFechaDate(String fecha) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaI = null;
-        try {
-            fechaI = simpleDateFormat.parse(fecha);
-
-        } catch (ParseException e) {
-            simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        if (fecha != null)
             try {
                 fechaI = simpleDateFormat.parse(fecha);
 
-            } catch (ParseException e2) {
-                e2.printStackTrace();
+            } catch (ParseException e) {
+                simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    fechaI = simpleDateFormat.parse(fecha);
+
+                } catch (ParseException e2) {
+                    e2.printStackTrace();
+                }
             }
-        }
 
         return fechaI;
 
     }
 
     public static Date getFechaDateWithHour(String fecha) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date fechaI = null;
-        try {
-            fechaI = simpleDateFormat.parse(fecha);
-
-        } catch (ParseException e) {
-            simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        if (fecha != null)
             try {
                 fechaI = simpleDateFormat.parse(fecha);
 
-            } catch (ParseException e2) {
-                e2.printStackTrace();
+            } catch (ParseException e) {
+                simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                try {
+                    fechaI = simpleDateFormat.parse(fecha);
+
+                } catch (ParseException e2) {
+                    e2.printStackTrace();
+                }
             }
-        }
 
         return fechaI;
 
@@ -695,17 +728,21 @@ public class Utils {
         return "";
     }
 
+    public static String getMonth(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String mes = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        char in = mes.charAt(0);
+
+        return in + mes.substring(1);
+    }
+
     public static boolean isDateHabilited(Calendar calendar) {
 
         if (getDayWeek(calendar.getTime()).equals("Sábado") || getDayWeek(calendar.getTime()).equals("Domingo")) {
             return true;
         }
         return false;
-    }
-
-    public static void initBD(Context c) {
-        BDGestor gestor = new BDGestor(c);
-        DBManager.initializeInstance(gestor);
     }
 
     public static int getEdad(Date fechaNac) {
@@ -716,35 +753,20 @@ public class Utils {
         return age;
     }
 
-    public static  void changeColor(Drawable drawable, Context mContext, int colorNo){
+    public static void changeColor(Drawable drawable, Context mContext, int colorNo) {
         if (drawable instanceof ShapeDrawable)
-            ((ShapeDrawable)drawable).getPaint().setColor(ContextCompat.getColor(mContext, colorNo));
+            ((ShapeDrawable) drawable).getPaint().setColor(ContextCompat.getColor(mContext, colorNo));
         else if (drawable instanceof GradientDrawable)
             ((GradientDrawable) drawable).setColor(ContextCompat.getColor(mContext, colorNo));
         else if (drawable instanceof ColorDrawable)
             ((ColorDrawable) drawable).setColor(ContextCompat.getColor(mContext, colorNo));
     }
 
-    public static void resizeBitmapAndFile(String name) {
-        File file = new File(name);
-        Bitmap in = BitmapFactory.decodeFile(file.getPath());
-        Bitmap out = Utils.resize(in, 600, 600);
-        FileOutputStream fOut;
-        try {
-            fOut = new FileOutputStream(file);
-            out.compress(Bitmap.CompressFormat.JPEG, 90, fOut);
-            fOut.flush();
-            fOut.close();
-            in.recycle();
-            out.recycle();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static String limpiarAcentos(String cadena) {
-        String limpio =null;
-        if (cadena !=null) {
+        String limpio = null;
+        if (cadena != null) {
             String valor = cadena;
             valor = valor.toUpperCase();
             // Normalizar texto para eliminar acentos, dieresis, cedillas y tildes
@@ -765,28 +787,14 @@ public class Utils {
 
     }
 
-    public static void saveBitmap(Context applicationContext, String folder, String file, Bitmap bitmap, boolean ext) {
-        StorageManager storageManager = new StorageManager(applicationContext);
-        storageManager.setFileName(file);
-        storageManager.setFolderName(folder);
-        if (!ext)
-            storageManager.saveToInternalStorage(bitmap);
-        else
-            storageManager.saveToExternalStorage(bitmap, ext);
+    public static byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
 
-    public static Bitmap getBitmap(Context applicationContext, String folder, String file, boolean ext) {
-        StorageManager storageManager = new StorageManager(applicationContext);
-        storageManager.setFileName(file);
-        storageManager.setFolderName(folder);
-        if (!ext)
-        return storageManager.loadImageFromStorage(storageManager.getUriFile(ext));
-        else
-            return storageManager.loadImageFromStorageExternal(storageManager.getUriFile(ext));
-    }
-
-    public static String getTipoUser(int i){
-        switch (i){
+    public static String getTipoUser(int i) {
+        switch (i) {
             case 1:
                 return "Alumno";
             case 2:
@@ -799,6 +807,98 @@ public class Utils {
                 return "Particular";
         }
         return "";
+    }
+
+    public static int getIconDeporte(int idDeporte) {
+        int icon = 0;
+        switch (idDeporte) {
+            case 1:
+                icon = R.drawable.ic_ajedrez;
+                break;
+            case 2:
+                icon = R.drawable.ic_basquet;
+                break;
+            case 3:
+                icon = R.drawable.ic_becas;
+                break;
+            case 4:
+            case 6:
+            case 7:
+                icon = R.drawable.ic_futbol_masc;
+                break;
+            case 5:
+                icon = R.drawable.ic_futbol_fem;
+                break;
+
+            case 8:
+                icon = R.drawable.ic_hockey;
+                break;
+            case 9:
+                icon = R.drawable.ic_natacion;
+                break;
+            case 10:
+                icon = R.drawable.ic_rugby;
+                break;
+            case 11:
+                icon = R.drawable.ic_tenis_mesa;
+                break;
+            case 12:
+                icon = R.drawable.ic_voley_masc;
+                break;
+            case 13:
+                icon = R.drawable.ic_voley_fem;
+                break;
+            case 14:
+                break;
+            default:
+                icon = R.drawable.ic_zapatilla;
+                break;
+        }
+        return icon;
+
+    }
+
+    public static String getFechaFormat(String fechaRegistro) {
+        Calendar calendar = new GregorianCalendar();
+        Date date = getFechaDateWithHour(fechaRegistro);
+        if (date != null) {
+            calendar.setTime(date);
+            String dia = getDayWeek(date);
+            String mes = getMonth(date);
+            String anio = String.valueOf(calendar.get(Calendar.YEAR));
+            String minutosS, segS, horasS;
+            int minutos = calendar.get(Calendar.MINUTE);
+            if (minutos < 10) {
+                minutosS = "0" + minutos;
+            } else
+                minutosS = String.valueOf(minutos);
+
+            int seg = calendar.get(Calendar.SECOND);
+            if (seg < 10) {
+                segS = "0" + seg;
+            } else
+                segS = String.valueOf(seg);
+
+            int horas = calendar.get(Calendar.HOUR_OF_DAY);
+            if (horas < 10)
+                horasS = "0" + horas;
+            else {
+                horasS = String.valueOf(horas);
+            }
+            String hora = String.format("%s:%s:%s", horasS, minutosS, segS);
+            String fecha = String.format("%s, %s de %s de %s - %s", dia, calendar.get(Calendar.DAY_OF_MONTH), mes, anio, hora);
+            return fecha;
+        }
+        return "NO FECHA";
+
+    }
+
+    public static void resetData(Context context) {
+        new UsuarioViewModel(context).deleteAll();
+        new EgresadoViewModel(context).deleteAll();
+        new ProfesorViewModel(context).deleteAll();
+        new AlumnoViewModel(context).deleteAll();
+        FileStorageManager.deleteAll(0);
     }
 }
 

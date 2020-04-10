@@ -16,16 +16,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
-import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -36,8 +32,6 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import static com.unse.bienestarestudiantil.Herramientas.Utils.facultad;
 
 public class EditDeportesActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
@@ -148,7 +142,7 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void save() {
-        Validador validador = new Validador();
+        Validador validador = new Validador(getApplicationContext());
 
         String horario = mHorario.getText().toString().trim();
         String dia = mDia.getText().toString().trim();

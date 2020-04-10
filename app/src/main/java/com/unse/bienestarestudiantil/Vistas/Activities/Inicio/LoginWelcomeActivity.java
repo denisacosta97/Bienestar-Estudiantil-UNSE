@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.unse.bienestarestudiantil.Databases.BDGestor;
-import com.unse.bienestarestudiantil.Databases.DBManager;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
@@ -53,18 +51,10 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
 
             loadViews();
 
-            createBD();
-
             loadListener();
 
             changeTextWelcome();
         }
-
-    }
-
-    private void createBD() {
-        BDGestor gestor = new BDGestor(getApplicationContext());
-        DBManager.initializeInstance(gestor);
 
     }
 
@@ -96,6 +86,8 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.visit:
+                PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+                preferenceManager.setValue(Utils.IS_VISIT, true);
                 startActivity(new Intent(LoginWelcomeActivity.this, MainActivity.class));
                 break;
             case R.id.inisesion:

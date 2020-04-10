@@ -16,7 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -162,7 +162,7 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
     }
 
     private void save() {
-        Validador validador = new Validador();
+        Validador validador = new Validador(getApplicationContext());
 
         String name = mNombreTorneo.getText().toString().trim();
         String fechaIni = mFechaInicio.getText().toString().trim();

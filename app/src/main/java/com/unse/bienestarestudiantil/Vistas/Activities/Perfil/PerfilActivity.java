@@ -2,7 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +18,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
-import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
-import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.bumptech.glide.request.target.Target;
+import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
+import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
@@ -32,7 +42,7 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
-import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
 
 import java.util.ArrayList;
 
@@ -48,6 +58,9 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     OpcionesAdapter mAdapter, mAdapterActividades;
     RecyclerView mRecyclerViewFunciones, mRecyclerActividades;
     RecyclerView.LayoutManager mLayoutManager, mLayoutActividades;
+
+    UsuarioViewModel mUsuarioViewModel;
+    Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,8 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
 
     private void loadData() {
 
+        mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
+
         loadInfo();
 
         mList = new ArrayList<>();
@@ -91,9 +106,9 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         mRecyclerViewFunciones.setAdapter(mAdapter);
 
         mListActividades = new ArrayList<>();
-        mListActividades.add(new Opciones(LinearLayout.VERTICAL, true, 1, "Reservas", R.drawable.ic_reservas, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mListActividades.add(new Opciones(LinearLayout.VERTICAL, true, 2, "Historia Clínica", R.drawable.ic_historia_clinica, R.color.colorWhite, R.color.colorTextDefault, 12));
-        mListActividades.add(new Opciones(LinearLayout.VERTICAL, true, 3, "Historial de Turnos", R.drawable.ic_turnos, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mListActividades.add(new Opciones(LinearLayout.VERTICAL, false, 1, "Reservas", R.drawable.ic_reservas, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mListActividades.add(new Opciones(LinearLayout.VERTICAL, false, 2, "Historia Clínica", R.drawable.ic_historia_clinica, R.color.colorWhite, R.color.colorTextDefault, 12));
+        mListActividades.add(new Opciones(LinearLayout.VERTICAL, false, 3, "Historial de Turnos", R.drawable.ic_turnos, R.color.colorWhite, R.color.colorTextDefault, 12));
 
 
         mAdapterActividades = new OpcionesAdapter(mListActividades, getApplicationContext());
@@ -106,39 +121,44 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
         loadInfo();
     }
 
+
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
-        int id = manager.getValueInt(Utils.MY_ID);
-        Usuario usuario = new UsuariosRepo(getApplicationContext()).get(id);
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        usuario = mUsuarioViewModel.getById(idLocal);
         if (txtNombre != null) {
             txtNombre.setText("NOMBRE");
             txtDescripcion.setText("CARRERA");
             txtFacultad.setText("RANGO");
-            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, id);
-            Glide.with(imgPerfil.getContext()).load(URL).apply(new RequestOptions().error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE).placeholder(R.drawable.ic_user)).into(imgPerfil);
-
+            loadProfilePicture();
             if (usuario != null) {
                 txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
                 if (usuario.getTipoUsuario() != 5) {
                     if (usuario.getTipoUsuario() == 1) {
-                        Alumno alumno = new AlumnosRepo(getApplicationContext()).get(id);
+                        Alumno alumno = null;
+                        AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
+                        alumno = alumnoViewModel.getById(idLocal);
                         if (alumno != null) {
                             txtDescripcion.setText(alumno.getCarrera());
                             txtFacultad.setText(alumno.getFacultad());
                         }
                     } else if (usuario.getTipoUsuario() == 4) {
-                        Egresado egresado = new EgresadosRepo(getApplicationContext()).get(id);
+                        Egresado egresado = null;
+                        EgresadoViewModel egresadoViewModel = new EgresadoViewModel(getApplicationContext());
+                        egresado = egresadoViewModel.getById(idLocal);
                         if (egresado != null) {
                             txtDescripcion.setText(egresado.getProfesion());
                             txtFacultad.setText(View.GONE);
                         }
                     } else if (usuario.getTipoUsuario() == 2) {
-                        Profesor profesor = new ProfesorRepo(getApplicationContext()).get(id);
+                        Profesor profesor = null;
+                        ProfesorViewModel profesorViewModel = new ProfesorViewModel(getApplicationContext());
+                        profesor = profesorViewModel.getById(idLocal);
                         if (profesor != null) {
                             txtDescripcion.setText(profesor.getProfesion());
                             txtFacultad.setText("PROFESOR");
@@ -154,6 +174,34 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
 
+    }
+
+    private void loadProfilePicture() {
+        Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER, String.format(Utils.PROFILE_PIC, usuario.getIdUsuario()), false);
+        if (bitmap != null) {
+            Glide.with(imgPerfil.getContext()).load(bitmap).into(imgPerfil);
+        } else {
+            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, usuario.getIdUsuario());
+            Glide.with(imgPerfil.getContext()).load(URL)
+                    .apply(new RequestOptions().error(R.drawable.ic_user)
+                            .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.ic_user))
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER,
+                                    String.format(Utils.PROFILE_PIC,
+                                            usuario.getIdUsuario()),
+                                    ((BitmapDrawable)resource).getBitmap(), false);
+                            return false;
+                        }
+                    }).into(imgPerfil);
+
+        }
     }
 
 
@@ -180,7 +228,23 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void procesarClick2(RecyclerView parent, View view, int position, int id) {
-        switch (id){
+        final DialogoMensaje dialogoMensaje = new DialogoMensaje();
+        dialogoMensaje.loadData(R.drawable.ic_repair, "¡Ésta sección se encuentra en desarrollo!",
+                new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        dialogoMensaje.dismiss();
+                    }
+
+                    @Override
+                    public void no() {
+
+                    }
+                }, getApplicationContext());
+        dialogoMensaje.setCancelable(false);
+        dialogoMensaje.loadTextButton("ACEPTAR");
+        dialogoMensaje.show(getSupportFragmentManager(), "dialog_proces");
+        switch (id) {
             case 1:
                 //startActivity(new Intent(getApplicationContext(), CredencialActivity.class));
                 break;
@@ -216,10 +280,12 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         YesNoDialogListener listener = new YesNoDialogListener() {
             @Override
             public void yes() {
-                dialog.dismiss();
-                finishAffinity();
+
+                Utils.resetData(getApplicationContext());
                 PreferenceManager manager = new PreferenceManager(getApplicationContext());
                 manager.setValue(Utils.IS_LOGIN, false);
+                dialog.dismiss();
+                finishAffinity();
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }

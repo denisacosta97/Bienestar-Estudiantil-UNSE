@@ -77,11 +77,13 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
         if (!s.getDisponibility()) {
             holder.mCardView.setEnabled(false);
             holder.imgIcono.setEnabled(false);
-            holder.txtTitulo.setEnabled(false);
+            holder.imgIcono.setAlpha(0.4f);
+            holder.txtTitulo.setAlpha(0.4f);
         } else {
             holder.mCardView.setEnabled(true);
             holder.imgIcono.setEnabled(true);
             holder.txtTitulo.setEnabled(true);
+
         }
     }
 

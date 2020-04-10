@@ -15,7 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -26,7 +26,6 @@ import com.unse.bienestarestudiantil.Modelos.CredencialSocio;
 import com.unse.bienestarestudiantil.Modelos.CredencialTorneo;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CredencialesAdapter;
-import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -222,7 +221,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 updateView(2);
                 dialog.dismiss();
 
@@ -241,6 +240,9 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
                     switch (tipo) {
@@ -260,24 +262,24 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
                     updateView(1);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "No posee credenciales");
+                    Utils.showToast(getApplicationContext(), getString(R.string.noCredenciales));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
                 case 4:
-                    Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
             updateView(2);
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

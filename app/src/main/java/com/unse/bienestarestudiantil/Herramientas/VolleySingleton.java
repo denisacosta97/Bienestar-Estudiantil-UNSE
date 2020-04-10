@@ -2,6 +2,7 @@ package com.unse.bienestarestudiantil.Herramientas;
 
 import android.content.Context;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -51,6 +52,9 @@ public final class VolleySingleton {
      * @param <T> Resultado final de tipo T
      */
     public <T> void addToRequestQueue(Request<T> req) {
+        req.setRetryPolicy(new DefaultRetryPolicy(Utils.MY_DEFAULT_TIMEOUT,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(req);
     }
 

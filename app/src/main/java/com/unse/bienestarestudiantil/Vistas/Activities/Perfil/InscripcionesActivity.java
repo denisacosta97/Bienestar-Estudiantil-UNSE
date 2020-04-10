@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -24,6 +25,7 @@ import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.ModificarInscripcionDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -80,10 +82,30 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-
+                procesarClick(position);
             }
         });
 
+    }
+
+    private void procesarClick(int position) {
+        Intent intent = null;
+        ItemBase itemBase = mListOficial.get(position);
+        ItemDato itemDato = (ItemDato) itemBase;
+        switch (itemDato.getInscripcion().getTipo()) {
+            case Inscripcion.TIPO_BECA:
+                intent = new Intent(getApplicationContext(), null);
+                int id = itemDato.getInscripcion().getIdConvocatoria();
+                intent.putExtra(Utils.CREDENCIAL, id);
+                //startActivity(intent);
+                break;
+            case Inscripcion.TIPO_DEPORTE:
+                int id2 = itemDato.getInscripcion().getIdInscripcion();
+                intent = new Intent(getApplicationContext(), ModificarInscripcionDeporteActivity.class);
+                intent.putExtra(Utils.CREDENCIAL, id2);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void loadData() {
@@ -176,7 +198,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-            if (jsonObject.get("becas") != null && jsonObject.get("becas") instanceof  JSONArray) {
+            if (jsonObject.get("becas") != null && jsonObject.get("becas") instanceof JSONArray) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("becas");
 
@@ -202,7 +224,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
                 }
 
-            }else{
+            } else {
 
                 JSONObject o = jsonObject.getJSONObject("becas");
 
@@ -225,7 +247,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
             }
 
-            if (jsonObject.get("deportes") != null && jsonObject.get("deportes") instanceof  JSONArray) {
+            if (jsonObject.get("deportes") != null && jsonObject.get("deportes") instanceof JSONArray) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("deportes");
 
@@ -251,7 +273,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
                 }
 
-            }else{
+            } else {
                 JSONObject o = jsonObject.getJSONObject("deportes");
 
                 int id = Integer.parseInt(o.getString("idInscripcion"));

@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -19,11 +18,10 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -43,21 +41,24 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.signature.ObjectKey;
-import com.unse.bienestarestudiantil.Databases.AlumnosRepo;
-import com.unse.bienestarestudiantil.Databases.EgresadosRepo;
-import com.unse.bienestarestudiantil.Databases.ProfesorRepo;
-import com.unse.bienestarestudiantil.Databases.UsuariosRepo;
-import com.unse.bienestarestudiantil.Herramientas.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.StorageManager;
+import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
+import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
+import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.UploadManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
+import com.unse.bienestarestudiantil.Herramientas.VolleyMultipartRequest;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
@@ -67,12 +68,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.provider.MediaStore.Images.Media;
 import static android.view.View.VISIBLE;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.facultad;
 import static com.unse.bienestarestudiantil.Herramientas.Utils.faya;
@@ -85,28 +85,31 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
     ImageView btnBack;
     CircleImageView imgUser;
-    LinearLayout latGeneral, latAlumno, latProfesor, latEgresado;
+    LinearLayout latGeneral, latAlumno, latProfesor, latEgresado, latAdmin, latUser;
     FloatingActionButton fabEditar, fabPic;
     EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtProfesionProf, edtAnioIngresoProf,
             edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu, edtDomicilio,
-            edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio;
-    TextView txtFechaNac;
+            edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio, edtRegistro, edtModificacion,
+            edtFechaNac;
+    Button btnAltaBaja;
     Spinner spinnerFacultad, spinnerCarrera;
+    EditText[] campos;
+    ArrayAdapter<String> carreraAdapter;
+    ArrayAdapter<String> facultadAdapter;
+
 
     DialogoProcesamiento dialog;
+    UsuarioViewModel mUsuarioViewModel;
 
     Usuario mUsuario = null;
-    Object tipo = null;
-    EditText[] campos;
+    Object tipoUsuario = null;
     FragmentManager manager = null;
+    Bitmap mBitmapFileSelect;
+    Uri uriFileSelect;
+    String nameFileSelect;
 
-    Bitmap mBitmapFile;
-    Uri uriFile;
-    String nameFile;
-
-    boolean isEdit = false, isReady = false;
-
-    int fac = 0, carr = 0, mode = 0, TIPO_USER = -1;
+    boolean isEditMode = false, isReadyForLoad = false, isAdminMode = false;
+    int facultadUser = 0, carreraUser = 0, mode = 0, tipoUsuer = -1, idUser = 0, validez = -1;
 
 
     @Override
@@ -114,6 +117,8 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_usuario);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        isAdmin();
 
         loadViews();
 
@@ -127,108 +132,102 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    private void isAdmin() {
+        if (getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false)) {
+            isAdminMode = getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false);
+        }
+        if (isAdminMode) {
+            if (getIntent().getParcelableExtra(Utils.USER_INFO) != null) {
+                mUsuario = getIntent().getParcelableExtra(Utils.USER_INFO);
+            }
+        }
+    }
+
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText("");
         DrawableCompat.setTint(btnBack.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.colorWhite));
     }
 
     private void loadListener() {
-        txtFechaNac.setOnClickListener(this);
+        edtFechaNac.setOnClickListener(this);
         fabEditar.setOnClickListener(this);
         fabPic.setOnClickListener(this);
         btnBack.setOnClickListener(this);
-        spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btnAltaBaja.setOnClickListener(this);
+        if (tipoUsuer == Utils.TIPO_ALUMNO) {
+            spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                spinnerFacultad.setSelection(position);
-                switch (position) {
-                    case 0:
-                        //FAyA
-                        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
-                        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerCarrera.setAdapter(dataAdapter2);
-                        break;
-                    case 1:
-                        //FCEyT
-                        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fceyt);
-                        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerCarrera.setAdapter(dataAdapter3);
-                        break;
-                    case 2:
-                        //FCF
-                        ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fcf);
-                        dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerCarrera.setAdapter(dataAdapter4);
-                        break;
-                    case 3:
-                        //FCM
-                        ArrayAdapter<String> dataAdapter5 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fcm);
-                        dataAdapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerCarrera.setAdapter(dataAdapter5);
-                        break;
-                    case 4:
-                        //FHyCS
-                        ArrayAdapter<String> dataAdapter6 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, fhcys);
-                        dataAdapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerCarrera.setAdapter(dataAdapter6);
-                        break;
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    spinnerFacultad.setSelection(position);
+                    switch (position) {
+                        case 0:
+                            //FAyA
+                            carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, faya);
+                            carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerCarrera.setAdapter(carreraAdapter);
+                            break;
+                        case 1:
+                            //FCEyT
+                            carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, fceyt);
+                            carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerCarrera.setAdapter(carreraAdapter);
+                            break;
+                        case 2:
+                            //FCF
+                            carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, fcf);
+                            carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerCarrera.setAdapter(carreraAdapter);
+                            break;
+                        case 3:
+                            //FCM
+                            carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, fcm);
+                            carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerCarrera.setAdapter(carreraAdapter);
+                            break;
+                        case 4:
+                            //FHyCS
+                            carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item, fhcys);
+                            carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerCarrera.setAdapter(carreraAdapter);
+                            break;
+                    }
+                    //Es para determinar que se cambio de carrera
+                    if (facultadUser != position && mode == 1)
+                        isEditMode = true;
                 }
-                if (fac != position && mode == 1)
-                    isEdit = true;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
 
-            }
+                }
 
-        });
-        spinnerCarrera.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (mode == 0)
-                    spinnerCarrera.setSelection(carr);
-                if (carr != position && mode == 1)
-                    isEdit = true;
-            }
+            });
+            spinnerCarrera.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (mode == 0)
+                        spinnerCarrera.setSelection(carreraUser);
+                    if (carreraUser != position && mode == 1)
+                        isEditMode = true;
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        spinnerFacultad.setSelection(fac);
-
-    }
-
-    private void showDateDialog() {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                // +1 because January is zero
-                String mes, dia;
-                if (month < 10) {
-                    mes = "0" + month;
-                } else
-                    mes = String.valueOf(month);
-                if (day < 10)
-                    dia = "0" + day;
-                else
-                    dia = String.valueOf(day);
-                final String selectedDate = year + "-" + mes + "-" + dia;
-                if (!txtFechaNac.getText().toString().equals(selectedDate))
-                    isEdit = true;
-                txtFechaNac.setText(selectedDate);
-            }
-        });
-        newFragment.show(getFragmentManager(), "datePicker");
+                }
+            });
+            spinnerFacultad.setSelection(facultadUser);
+        }
 
     }
 
     private void loadViews() {
-
-
         edtNombre = findViewById(R.id.edtNombre);
         edtApellido = findViewById(R.id.edtApellido);
         edtDNI = findViewById(R.id.edtDNI);
@@ -249,88 +248,174 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         edtLegajoAlu = findViewById(R.id.edtLegajo);
         edtPais = findViewById(R.id.edtPais);
         edtBarrio = findViewById(R.id.edtBarrio);
-        txtFechaNac = findViewById(R.id.edtFecha);
+        edtFechaNac = findViewById(R.id.edtFecha);
         fabEditar = findViewById(R.id.fab);
         fabPic = findViewById(R.id.fabPic);
-
-        campos = new EditText[]{edtNombre, edtApellido, edtSexo, edtMail, edtProfesionProf,
-                edtAnioIngresoProf, edtAnioIngresoAlu, edtProfesionEgre, edtAnioEgresoEgre, edtProvincia,
-                edtPais, edtTelefono, edtLocalidad, edtDomicilio, edtLegajoAlu, edtBarrio};
-
-
         latGeneral = findViewById(R.id.layRango);
         latProfesor = findViewById(R.id.layProfesor);
         latEgresado = findViewById(R.id.layEgresado);
         latAlumno = findViewById(R.id.layAlumno);
-
         imgUser = findViewById(R.id.imgUserPerfil);
+        latAdmin = findViewById(R.id.latAdmin);
+        latUser = findViewById(R.id.latDatos);
+        btnAltaBaja = findViewById(R.id.btnAltaBaja);
+        edtRegistro = findViewById(R.id.edtFechaRegistro);
+        edtModificacion = findViewById(R.id.edtFechaMod);
     }
 
     private void loadData() {
+        mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
+        if (!isAdminMode) {
+            latAdmin.setVisibility(View.GONE);
+            latUser.setVisibility(VISIBLE);
+        } else {
+            latAdmin.setVisibility(VISIBLE);
+            latUser.setVisibility(VISIBLE);
+            edtRegistro.setEnabled(false);
+        }
+        campos = new EditText[]{edtNombre, edtApellido, edtSexo, edtMail, edtProfesionProf,
+                edtAnioIngresoProf, edtAnioIngresoAlu, edtProfesionEgre, edtAnioEgresoEgre, edtProvincia,
+                edtPais, edtTelefono, edtLocalidad, edtDomicilio, edtLegajoAlu, edtBarrio};
         manager = getSupportFragmentManager();
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, facultad);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFacultad.setAdapter(dataAdapter);
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, faya);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCarrera.setAdapter(dataAdapter2);
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                facultadAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_spinner_item, facultad);
+                facultadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerFacultad.setAdapter(facultadAdapter);
+                carreraAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_spinner_item, faya);
+                carreraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCarrera.setAdapter(carreraAdapter);
+            }
+        }).start();
         loadInfo();
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
-        int id = manager.getValueInt(Utils.MY_ID);
-        Usuario usuario = new UsuariosRepo(getApplicationContext()).get(id);
-        if (usuario != null) {
-            loadLayout(usuario.getTipoUsuario());
-            edtDNI.setText(String.valueOf(id));
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        if (!isAdminMode) {
+            //En caso de ser perfil actual, obtengo los datos desde la BD local
+            mUsuario = mUsuarioViewModel.getById(idLocal);
+            // mUsuario = new UsuariosRepo(getApplicationContext()).get(idLocal);
             edtDNI.setEnabled(false);
-            edtNombre.setText(usuario.getNombre());
-            edtApellido.setText(usuario.getApellido());
-            edtSexo.setText(usuario.getSexo());
-            txtFechaNac.setText(Utils.getFechaNameWithinHour(usuario.getFechaNac()));
-            edtDomicilio.setText(usuario.getDomicilio());
-            edtBarrio.setText(usuario.getBarrio());
-            edtLocalidad.setText(usuario.getLocalidad());
-            edtProvincia.setText(usuario.getProvincia());
-            edtPais.setText(usuario.getPais());
-            edtMail.setText(usuario.getMail());
-            edtTelefono.setText(usuario.getTelefono());
-
-            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, id);
-            Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions().error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE).placeholder(R.drawable.ic_user)).into(imgUser);
-
-
-            TIPO_USER = usuario.getTipoUsuario();
-
-            if (usuario.getTipoUsuario() != 5) {
-                if (usuario.getTipoUsuario() == 1) {
-                    Alumno alumno = new AlumnosRepo(getApplicationContext()).get(id);
-                    if (alumno != null) {
-                        edtLegajoAlu.setText(alumno.getLegajo());
-                        edtAnioIngresoAlu.setText(alumno.getAnio());
-                        loadCarrera(alumno);
-
+        }
+        if (mUsuario != null) {
+            //Cargo la vista en base al tipo de mUsuario
+            loadLayout(mUsuario.getTipoUsuario());
+            edtDNI.setText(String.valueOf(mUsuario.getIdUsuario()));
+            edtNombre.setText(mUsuario.getNombre());
+            edtApellido.setText(mUsuario.getApellido());
+            edtSexo.setText(mUsuario.getSexo());
+            edtFechaNac.setText(mUsuario.getFechaNac());
+            edtDomicilio.setText(mUsuario.getDomicilio());
+            edtBarrio.setText(mUsuario.getBarrio());
+            edtLocalidad.setText(mUsuario.getLocalidad());
+            edtProvincia.setText(mUsuario.getProvincia());
+            edtPais.setText(mUsuario.getPais());
+            edtMail.setText(mUsuario.getMail());
+            edtTelefono.setText(mUsuario.getTelefono());
+            edtRegistro.setText(Utils.getFechaFormat(mUsuario.getFechaRegistro()));
+            edtModificacion.setText(Utils.getFechaFormat(mUsuario.getFechaModificacion()));
+            //Cargo foto de perfil
+            loadProfilePicture();
+            //Cargo datos necesarios para operaciones
+            tipoUsuer = mUsuario.getTipoUsuario();
+            validez = mUsuario.getValidez();
+            idUser = mUsuario.getIdUsuario();
+            if (isAdminMode)
+                changeButton();
+            //Cargo datos en base al tipo de mUsuario
+            if (mUsuario.getTipoUsuario() != 5 || mUsuario.getTipoUsuario() != 3) {
+                //Alumnos
+                if (mUsuario.getTipoUsuario() == 1) {
+                    Alumno alumno = null;
+                    //Si es modo Admin saco los datos del objeto
+                    if (isAdminMode) {
+                        edtLegajoAlu.setText(((Alumno) mUsuario).getLegajo());
+                        edtAnioIngresoAlu.setText(((Alumno) mUsuario).getAnio());
+                        loadCarrera(mUsuario);
+                    } else {
+                        AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
+                        alumno = alumnoViewModel.getById(idLocal);
+                        if (alumno != null) {
+                            edtLegajoAlu.setText(alumno.getLegajo());
+                            edtAnioIngresoAlu.setText(alumno.getAnio());
+                            loadCarrera(alumno);
+                        }
                     }
-                } else if (usuario.getTipoUsuario() == 4) {
-                    Egresado egresado = new EgresadosRepo(getApplicationContext()).get(id);
-                    if (egresado != null) {
-                        edtProfesionEgre.setText(egresado.getProfesion());
-                        edtAnioEgresoEgre.setText(egresado.getFechaEgreso());
+                    //Egresado
+                } else if (mUsuario.getTipoUsuario() == 4) {
+                    Egresado egresado = null;
+                    if (isAdminMode) {
+                        edtProfesionEgre.setText(((Egresado) mUsuario).getProfesion());
+                        edtAnioEgresoEgre.setText(((Egresado) mUsuario).getFechaEgreso());
+                    } else {
+                        EgresadoViewModel egresadoViewModel = new EgresadoViewModel(getApplicationContext());
+                        egresado = egresadoViewModel.getById(idLocal);
+                        if (egresado != null) {
+                            edtProfesionEgre.setText(egresado.getProfesion());
+                            edtAnioEgresoEgre.setText(egresado.getFechaEgreso());
+                        }
                     }
-                } else if (usuario.getTipoUsuario() == 2) {
-                    Profesor profesor = new ProfesorRepo(getApplicationContext()).get(id);
-                    if (profesor != null) {
-                        edtProfesionProf.setText(profesor.getProfesion());
-                        edtAnioIngresoProf.setText(profesor.getFechaIngreso());
+                    //Profesor
+                } else if (mUsuario.getTipoUsuario() == 2) {
+                    Profesor profesor = null;
+                    if (isAdminMode) {
+                        edtProfesionProf.setText(((Profesor) mUsuario).getProfesion());
+                        edtAnioIngresoProf.setText(((Profesor) mUsuario).getFechaIngreso());
+                    } else {
+                        ProfesorViewModel profesorViewModel = new ProfesorViewModel(getApplicationContext());
+                        profesor = profesorViewModel.getById(idLocal);
+                        if (profesor != null) {
+                            edtProfesionProf.setText(profesor.getProfesion());
+                            edtAnioIngresoProf.setText(profesor.getFechaIngreso());
+                        }
                     }
+
                 }
             }
         }
     }
 
-    private void loadCarrera(Alumno alumno) {
+    private void loadProfilePicture() {
+        if (isAdminMode) {
+            String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, mUsuario.getIdUsuario());
+            Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions()
+                    .error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.drawable.ic_user)).into(imgUser);
+        } else {
+            Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER,
+                    String.format(Utils.PROFILE_PIC, mUsuario.getIdUsuario()), false);
+            if (bitmap != null) {
+                Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
+            } else {
+                String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, mUsuario.getIdUsuario());
+                Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions()
+                        .error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.DATA)
+                        .placeholder(R.drawable.ic_user)).listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER,
+                                String.format(Utils.PROFILE_PIC,
+                                        mUsuario.getIdUsuario()),
+                                ((BitmapDrawable) resource).getBitmap(), false);
+                        return false;
+                    }
+                }).into(imgUser);
+            }
+        }
+    }
+
+    private void loadCarrera(Usuario mUsuario) {
+        Alumno alumno = (Alumno) mUsuario;
         List<String> facultad = Arrays.asList(Utils.facultad);
         List<String> faya = Arrays.asList(Utils.faya);
         List<String> fceyt = Arrays.asList(Utils.fceyt);
@@ -338,34 +423,29 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         List<String> fcm = Arrays.asList(Utils.fcm);
         List<String> fhcys = Arrays.asList(Utils.fhcys);
         int index = facultad.indexOf(alumno.getFacultad());
-        fac = index;
+        facultadUser = index;
         int index2 = -1;
         spinnerFacultad.setSelection(Math.max(index, 0));
         if (index != -1)
             switch (index) {
                 case 0:
                     index2 = faya.indexOf(alumno.getCarrera());
-                    //spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
                 case 1:
                     index2 = fceyt.indexOf(alumno.getCarrera());
-                    //spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
                 case 2:
                     index2 = fcf.indexOf(alumno.getCarrera());
-                    //spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
                 case 3:
                     index2 = fcm.indexOf(alumno.getCarrera());
-                    // spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
                 case 4:
                     index2 = fhcys.indexOf(alumno.getCarrera());
-                    // spinnerCarrera.setSelection(Math.max(index2, 0));
                     break;
 
             }
-        carr = index2;
+        carreraUser = index2;
     }
 
     private void loadLayout(int tipoUsuario) {
@@ -384,7 +464,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 break;
             case 3:
             case 5:
-                latGeneral.setVisibility(View.GONE);
+                latGeneral.setVisibility(VISIBLE);
                 latAlumno.setVisibility(View.GONE);
                 latEgresado.setVisibility(View.GONE);
                 latProfesor.setVisibility(View.GONE);
@@ -402,6 +482,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnAltaBaja:
+                altaBajaUser();
+                break;
             case R.id.fabPic:
                 openGallery();
                 break;
@@ -409,25 +492,117 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 onBackPressed();
                 break;
             case R.id.edtFecha:
-                showDateDialog();
+                elegirFechaNacimiento();
                 break;
             case R.id.fab:
-                ObjectAnimator.ofFloat(fabEditar, "rotation", 0f, 360f).setDuration(600).start();
-                activateEditMode();
+                openModeEditor();
                 break;
+        }
+    }
+
+    private void openModeEditor() {
+        ObjectAnimator.ofFloat(fabEditar, "rotation", 0f, 360f).setDuration(600).start();
+        activateEditMode();
+    }
+
+    private void altaBajaUser() {
+        final DialogYesNoGeneral dialogYesNoGeneral = new DialogYesNoGeneral();
+        dialogYesNoGeneral.loadData(getString(R.string.advertencia),
+                String.format(getString(R.string.usuarioEliminar), validez == 0 ? "alta" : "baja",
+                        mUsuario.getNombre(),
+                        mUsuario.getApellido()), new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        if (validez == 0)
+                            validez = 1;
+                        else
+                            validez = 0;
+                        baja(validez);
+                        dialogYesNoGeneral.dismiss();
+                    }
+
+                    @Override
+                    public void no() {
+                        dialogYesNoGeneral.dismiss();
+                    }
+                }, getApplicationContext());
+        dialogYesNoGeneral.loadIcon(R.drawable.ic_advertencia);
+        dialogYesNoGeneral.loadTextButton("SI", "NO");
+        dialogYesNoGeneral.show(getSupportFragmentManager(), "dialog_ad");
+    }
+
+    private void baja(int val) {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?key=%s&id=%s&idU=%s&val=%s", Utils.URL_USUARIO_ELIMINAR, key,
+                idLocal, mUsuario.getIdUsuario(), val);
+        StringRequest requestImage = new StringRequest(Request.Method.DELETE, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaEliminar(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                dialog.dismiss();
+            }
+        });
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
+    }
+
+    private void procesarRespuestaEliminar(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
+                case 1:
+                    //Exito
+                    String texto = null;
+                    if (validez == 0)
+                        texto = getString(R.string.usuarioDeshabilitado);
+                    else
+                        texto = getString(R.string.usuarioHabilitado);
+                    Utils.showToast(getApplicationContext(), texto);
+                    changeButton();
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioNoExiste));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 100:
+                    //No autorizado
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
     private void openGallery() {
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
-
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
-
         Intent chooserIntent = Intent.createChooser(getIntent, "Seleccionar imagen");
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-
         startActivityForResult(chooserIntent, Utils.PICK_IMAGE);
     }
 
@@ -439,31 +614,35 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                     Uri uri = null;
                     if (data.getData() != null) {
                         uri = data.getData();
+                        Intent intent = new Intent(getApplicationContext(), CropImageActivity.class);
+                        intent.putExtra(Utils.URI_IMAGE, uri);
+                        startActivityForResult(intent, Utils.EDIT_IMAGE);
+                    } else {
+                        Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorLoad));
                     }
-                    Intent intent = new Intent(getApplicationContext(), CropImageActivity.class);
-                    intent.putExtra(Utils.URI_IMAGE, uri);
-                    startActivityForResult(intent, Utils.EDIT_IMAGE);
                 } else if (resultCode == RESULT_CANCELED) {
-                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
+                    Utils.showToast(getApplicationContext(), getString(R.string.noSelectImagen));
                 }
                 break;
             case Utils.EDIT_IMAGE:
                 if (resultCode == RESULT_OK) {
-                    Uri bitmap = null;
-                    String name = "";
+                    Uri uri = null;
+                    String name = null;
                     if (data.getParcelableExtra(Utils.URI_IMAGE) != null) {
-                        bitmap = data.getParcelableExtra(Utils.URI_IMAGE);
+                        uri = data.getParcelableExtra(Utils.URI_IMAGE);
                     }
-                    if (data.getStringExtra("name") != null) {
-                        name = data.getStringExtra("name");
+                    if (data.getStringExtra(Utils.NAME_GENERAL) != null) {
+                        name = data.getStringExtra(Utils.NAME_GENERAL);
                     }
-                    if (bitmap != null) {
-                        loadPic(bitmap, name);
+                    if (uri != null && name != null) {
+                        loadPic(uri, name);
+                    } else {
+                        Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorCrop));
                     }
                 } else if (resultCode == 2) {
-                    Utils.showToast(getApplicationContext(), "No se puedo recortar la imagen, intente nuevamente");
+                    Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorCrop));
                 } else if (resultCode == RESULT_CANCELED) {
-                    Utils.showToast(getApplicationContext(), "No se guardaron cambios");
+                    Utils.showToast(getApplicationContext(), getString(R.string.cambioNoGuardado));
                 }
                 break;
         }
@@ -471,58 +650,72 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void loadPic(final Uri uri, final String name) {
-        // Get the file instance
-        Utils.resizeBitmapAndFile(name);
-        File file = new File(name);
-        Bitmap in = BitmapFactory.decodeFile(file.getPath());
-        mBitmapFile = in;
-        uriFile = uri;
-        nameFile = name;
-        isReady = true;
+        FileStorageManager.resizeBitmapAndFile(name);
+        mBitmapFileSelect = BitmapFactory.decodeFile(new File(name).getPath());
+        uriFileSelect = uri;
+        nameFileSelect = name;
+        isReadyForLoad = true;
 
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if (isReady) {
-            updatePicture(mBitmapFile, nameFile);
-            isReady = false;
+        if (isReadyForLoad) {
+            uploadImage(mBitmapFileSelect);
+            isReadyForLoad = false;
         }
     }
 
-
-    private void updatePicture(final Bitmap mBitmap, final String name) {
-        final int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
-        StringRequest requestImage = new StringRequest(Request.Method.POST, Utils.URL_USUARIO_IMAGE, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                procesarRespuestaImagen(response, mBitmap, name);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Utils.showToast(getApplicationContext(), "Error de comunicación con el servidor");
-                dialog.dismiss();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parm = new HashMap<>();
-                parm.put("id", String.valueOf(id));
-                String info = Utils.convertImage(mBitmap);
-                parm.put("img", info);
-                return parm;
-            }
-        };
-        dialog = new DialogoProcesamiento();
-        dialog.setCancelable(false);
-        dialog.show(manager, "dialog_process");
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
+    private String getCarrera(int selectedItemPosition) {
+        switch (selectedItemPosition) {
+            case 0:
+                return faya[spinnerCarrera.getSelectedItemPosition()];
+            case 1:
+                return fceyt[spinnerCarrera.getSelectedItemPosition()];
+            case 2:
+                return fcf[spinnerCarrera.getSelectedItemPosition()];
+            case 3:
+                return fcm[spinnerCarrera.getSelectedItemPosition()];
+            case 4:
+                return fhcys[spinnerCarrera.getSelectedItemPosition()];
+        }
+        return "";
     }
 
-    private void procesarRespuestaImagen(String response, Bitmap bitmap, String name) {
+    private void uploadImage(final Bitmap bitmap) {
+        VolleyMultipartRequest.DataPart dataPart = new VolleyMultipartRequest.DataPart(
+                String.format(Utils.PROFILE_PIC, idUser),
+                Utils.getFileDataFromDrawable(bitmap)
+        );
+        VolleyMultipartRequest volleyMultipartRequest = new UploadManager.Builder(getApplicationContext())
+                .setMetodo(Request.Method.POST)
+                .setURL(Utils.URL_USUARIO_IMAGE)
+                .setOkListener(new Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        procesarRespuestaImagen(new String(response.data), bitmap);
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        dialog.dismiss();
+                        Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorLoad));
+                        FileStorageManager.deleteFileFromUri(getApplicationContext(), uriFileSelect);
+                    }
+                })
+                .setDato(dataPart)
+                .setTipoDato(UploadManager.IMAGE)
+                .setParams(null)
+                .build();
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(volleyMultipartRequest);
+    }
+
+    private void procesarRespuestaImagen(String response, Bitmap bitmap) {
         try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
@@ -531,37 +724,39 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 case 1:
                     //Exito
                     Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
-                    Utils.saveBitmap(getApplicationContext(), Utils.FOLDER, "pic.jpg", bitmap, false);
-                    Utils.showToast(getApplicationContext(), "Foto actualizado!");
-                    File file = new File(nameFile);
-                    if (file.exists())
-                        file.delete();
+                    if (!isAdminMode)
+                        FileStorageManager.saveBitmap(getApplicationContext(),
+                                Utils.FOLDER,
+                                String.format(Utils.PROFILE_PIC, idUser), bitmap,
+                                false);
+                    Utils.showToast(getApplicationContext(), getString(R.string.fotoPerfilExito));
                     break;
                 case 2:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), "No se pudo actualizar su foto de perfil");
+                    Utils.showToast(getApplicationContext(), getString(R.string.fotoPerfilError));
                     break;
             }
+            FileStorageManager.deleteFileFromUri(getApplicationContext(), uriFileSelect);
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            FileStorageManager.deleteFileFromUri(getApplicationContext(), uriFileSelect);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
+
     @Override
     public void onBackPressed() {
-        if (isEdit) {
-            Utils.showToast(getApplicationContext(), "Primero debe guardar los cambios");
+        if (isEditMode) {
+            Utils.showToast(getApplicationContext(), getString(R.string.cambioPrimeroGuardar));
         } else
             super.onBackPressed();
     }
 
     private void activateEditMode() {
-        if (isEdit) {
+        if (isEditMode) {
             save();
             return;
-
         }
         if (mode == 0)
             mode = 1;
@@ -573,13 +768,15 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     private void editMode(int mode) {
         if (mode != 0) {
             fabEditar.setImageResource(R.drawable.ic_save);
-            txtFechaNac.setOnClickListener(this);
+            edtFechaNac.setOnClickListener(this);
             spinnerFacultad.setEnabled(true);
             spinnerCarrera.setEnabled(true);
-            fabPic.setVisibility(VISIBLE);
+            if (!isAdminMode) {
+                fabPic.setVisibility(VISIBLE);
+            }
         } else {
             fabEditar.setImageResource(R.drawable.ic_edit_);
-            txtFechaNac.setOnClickListener(null);
+            edtFechaNac.setOnClickListener(null);
             spinnerFacultad.setEnabled(false);
             spinnerCarrera.setEnabled(false);
             fabPic.setVisibility(View.INVISIBLE);
@@ -598,13 +795,12 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         }
 
 
-
     }
 
     private void save() {
-        Validador validador = new Validador();
+        Validador validador = new Validador(getApplicationContext());
 
-        String fecha = txtFechaNac.getText().toString().trim();
+        String fecha = edtFechaNac.getText().toString().trim();
         String nombre = edtNombre.getText().toString().trim();
         String apellido = edtApellido.getText().toString().trim();
         String dni = edtDNI.getText().toString().trim();
@@ -624,128 +820,103 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         String localidad = edtLocalidad.getText().toString().trim();
         String legajo = edtLegajoAlu.getText().toString().trim();
         String barrio = edtBarrio.getText().toString().trim();
+        //Creo un modelo para posterior almacenarlo local
+        mUsuario = new Usuario(Integer.parseInt(dni), nombre, apellido, fecha, pais, provincia, localidad,
+                domicilio, barrio, telefono, sexo, mail, tipoUsuer, mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
+                mUsuario.getValidez());
+        idUser = Integer.parseInt(dni);
 
-        String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
-
-        UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
-        int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
-        Usuario usuario = usuariosRepo.get(id);
-        int tipoUsuario = usuario.getTipoUsuario();
-
-        usuario = new Usuario(id, tipoUsuario, nombre, apellido, pais,
-                provincia, localidad, domicilio, barrio, telefono, sexo, mail, "", usuario.getFoto(), Utils.getFechaDate(fecha), usuario.getFechaRegistro());
-        mUsuario = usuario;
-
-        //Comprobacion que no sean vacios
-        if (!validador.noVacio(fecha, nombre, apellido, dni, sexo, mail
-                , domicilio, telefono, pais, provincia, localidad, barrio)) {
-
-            //Comprobacion del tipo d edatos
-            if (validador.validarNombre(nombre) && validador.validarNombre(apellido) && validador.validarDNI(dni)
-                    && validador.validarMail(mail) && sexo.length() == 1 && validador.validarNumero(telefono) &&
-                    !validador.validarNombres(pais, provincia, localidad)) {
-
-                //Comprobacion de tamaños
-                if (validador.lengthMore(domicilio) && validador.lengthMore(pais) && validador.lengthMore(provincia) && validador.lengthMore(localidad)
-                        && validador.lengthMore(barrio)) {
-
-                    if (TIPO_USER == 1) {
-                        if (!validador.noVacio(faculta, carrera, anioIngreso2, legajo)) {
-                            if (validador.isLegajo(legajo)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                        domicilio, barrio, telefono, sexo, token, mail, 1, carrera, faculta, anioIngreso2
-                                        , legajo, "SN", null, null));
-                                tipo = new Alumno(usuario, carrera, faculta, legajo, anioIngreso2, id, "", 0);
-                            } else
-                                Utils.showToast(getApplicationContext(), "Número de legajo inválido");
-
-                        } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                        }
-                    } else if (TIPO_USER == 2) {
-                        if (!validador.noVacio(profesion, anioIngreso)) {
-                            if (validador.validarNumero(anioIngreso)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                        domicilio, barrio, telefono, sexo, token, mail,
-                                        2, null, null, anioIngreso, null, "SN",
-                                        profesion, null));
-                                tipo = new Profesor(usuario, profesion, "", id, anioIngreso);
-                            } else
-                                Utils.showToast(getApplicationContext(), "El año de ingreso no es válido");
-                        } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                        }
-                    } else if (TIPO_USER == 4) {
-                        if (!validador.noVacio(profesion2, anioEgreso)) {
-                            if (validador.validarNumero(anioEgreso)) {
-                                sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
-                                        telefono, sexo, token, mail, 4,
-                                        null, null, null, null, "SN",
-                                        profesion2, anioEgreso));
-                                tipo = new Egresado(usuario, profesion2, "", id, anioEgreso);
-                            } else
-                                Utils.showToast(getApplicationContext(), "El año de ingreso no es válido");
-
-                        } else {
-                            Utils.showToast(getApplicationContext(), "Por favor, complete los campos");
-                        }
-                    } else {
-                        //NoDocente y Particular
-                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
-                                barrio, telefono, sexo, token, mail, TIPO_USER,
-                                null, null, null, null, "SN", null, null));
+        if (validador.validarDNI(edtDNI) && validador.validarTelefono(edtTelefono) && validador.validarMail(edtMail)
+                && validador.validarFecha(edtFechaNac) && validador.validarDomicilio(edtDomicilio)
+                && !validador.validarNombresEdt(edtNombre, edtApellido, edtPais,
+                edtProvincia, edtLocalidad, edtBarrio, edtSexo)) {
+            switch (mUsuario.getTipoUsuario()) {
+                case Utils.TIPO_ALUMNO:
+                    if (!validador.noVacio(faculta) && !validador.noVacio(carrera) &&
+                            validador.validarAnio(edtAnioIngresoAlu) && validador.validarLegajo(edtLegajoAlu)) {
+                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                domicilio, barrio, telefono, sexo, mail, Utils.TIPO_ALUMNO, carrera, faculta, anioIngreso2
+                                , legajo, null, null));
+                        tipoUsuario = new Alumno(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
+                                mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
+                                mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
+                                mUsuario.getMail(), mUsuario.getTipoUsuario(), mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
+                                mUsuario.getValidez(), Integer.parseInt(dni), carrera, faculta,
+                                anioIngreso2, legajo, 0);
                     }
-
-
-                } else {
-                    Utils.showToast(getApplicationContext(), "Hay campos con información inválida");
-                }
-
-
-            } else {
-                Utils.showToast(getApplicationContext(), "Hay campos invalidos, corrijalos");
+                    break;
+                case Utils.TIPO_PROFESOR:
+                    if (!validador.validarNombresEdt(edtProfesionProf)
+                            && validador.validarAnio(edtAnioIngresoProf)) {
+                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
+                                domicilio, barrio, telefono, sexo, mail,
+                                Utils.TIPO_PROFESOR, null, null, anioIngreso, null,
+                                profesion, null));
+                        tipoUsuario = new Profesor(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
+                                mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
+                                mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
+                                mUsuario.getMail(), mUsuario.getTipoUsuario(), mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
+                                mUsuario.getValidez(), Integer.parseInt(dni), profesion, anioIngreso);
+                    }
+                    break;
+                case Utils.TIPO_EGRESADO:
+                    if (!validador.validarNombresEdt(edtProfesionEgre) && validador.validarAnio(edtAnioEgresoEgre)) {
+                        sendServer(processString(dni, nombre, apellido, fecha, pais, provincia,
+                                localidad, domicilio, barrio,
+                                telefono, sexo, mail, Utils.TIPO_EGRESADO,
+                                null, null, null, null,
+                                profesion2, anioEgreso));
+                        tipoUsuario = new Egresado(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
+                                mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
+                                mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
+                                mUsuario.getMail(), mUsuario.getTipoUsuario(), mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
+                                mUsuario.getValidez(), Integer.parseInt(dni), profesion2, anioEgreso);
+                    }
+                    break;
+                case Utils.TIPO_NODOCENTE:
+                case Utils.TIPO_PARTICULAR:
+                    sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
+                            barrio, telefono, sexo, mail, tipoUsuer,
+                            null, null, null, null, null, null));
+                    break;
             }
 
-        } else {
-            Utils.showToast(getApplicationContext(), "Por favor, complete todos los campos");
-
-        }
-
-
+        } else Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
     }
 
     public String processString(String dni, String nombre, String apellido, String
             fecha, String pais, String provincia, String localidad, String domicilio,
-                                String barrio, String telefono, String sexo, String key, String mail,
-                                int tipo, String carrera, String facultad, String anioIng, String legajo, String
-                                        contrasenia, String profesion, String anioEgreso) {
+                                String barrio, String telefono, String sexo, String mail,
+                                int tipo, String carrera, String facultad, String anioIng,
+                                String legajo, String profesion, String anioEgreso) {
         String resp = "";
-        if (tipo == 1) {
-            resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, sexo, key, carrera, facultad,
-                    anioIng, legajo, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
-                    "1", mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
+        String fechaModificacion = Utils.getFechaName(new Date(System.currentTimeMillis()));
+        if (tipo == Utils.TIPO_ALUMNO) {
+            resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia,
+                    localidad, domicilio, sexo, carrera, facultad,
+                    anioIng, legajo, tipo, mail, telefono, barrio, fechaModificacion);
 
-        } else if (tipo == 2) {
+        } else if (tipo == Utils.TIPO_PROFESOR) {
             resp = String.format(Utils.dataProfesor, dni, nombre, apellido, fecha, pais, provincia,
-                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())), tipo, mail, telefono,
-                    profesion, anioIng, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
+                    localidad, domicilio, sexo, tipo, mail, telefono,
+                    profesion, anioIng, barrio, fechaModificacion);
 
-        } else if (tipo == 4) {
+        } else if (tipo == Utils.TIPO_EGRESADO) {
             resp = String.format(Utils.dataEgresado, dni, nombre, apellido, fecha, pais, provincia,
-                    localidad, domicilio, sexo, key, contrasenia, Utils.getFechaName(new Date(System.currentTimeMillis())),
-                    tipo, mail, telefono, profesion, anioEgreso, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
+                    localidad, domicilio, sexo, tipo, mail, telefono,
+                    profesion, anioEgreso, barrio, fechaModificacion);
         } else {
             resp = String.format(Utils.dataPartiNoDoc, dni, nombre, apellido, fecha, pais, provincia, localidad,
-                    domicilio, sexo, key, contrasenia, Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis())),
-                    tipo, mail, telefono, barrio, Utils.getFechaName(new Date(System.currentTimeMillis())));
+                    domicilio, sexo, tipo, mail, telefono, barrio, fechaModificacion);
         }
         return resp;
     }
 
     public void sendServer(String data) {
-
-
-        String URL = Utils.URL_USUARIO_ACTUALIZAR + data;
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s%s&key=%s&id=%s", Utils.URL_USUARIO_ACTUALIZAR, data, key, idLocal);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -758,7 +929,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -770,21 +941,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-    private String getCarrera(int selectedItemPosition) {
-        switch (selectedItemPosition) {
-            case 0:
-                return faya[spinnerCarrera.getSelectedItemPosition()];
-            case 1:
-                return fceyt[spinnerCarrera.getSelectedItemPosition()];
-            case 2:
-                return fcf[spinnerCarrera.getSelectedItemPosition()];
-            case 3:
-                return fcm[spinnerCarrera.getSelectedItemPosition()];
-            case 4:
-                return fhcys[spinnerCarrera.getSelectedItemPosition()];
-        }
-        return "";
-    }
 
     private void procesarRespuesta(String response) {
         try {
@@ -792,47 +948,54 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(), "Registro actualizado!");
-                    isEdit = false;
-                    activateEditMode();
-                    updateInBD(mUsuario, tipo);
+                    Utils.showToast(getApplicationContext(), getString(R.string.perfilActualizado));
+                    isEditMode = false;
+                    openModeEditor();
+                    if (!isAdminMode)
+                        updateInBD(mUsuario, tipoUsuario);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "Error interno al intentar actualizar, intente nuevamente");
+                    Utils.showToast(getApplicationContext(), getString(R.string.actualizadoError));
                     break;
                 case 4:
                     //Ya existe
-                    Utils.showToast(getApplicationContext(), "El usuario ingresado no existe");
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioNoExiste));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
-    private void updateInBD(Usuario usuario, Object tipo) {
-        UsuariosRepo usuariosRepo = new UsuariosRepo(getApplicationContext());
-        usuariosRepo.update(usuario);
+    private void updateInBD(Usuario mUsuario, Object tipo) {
+        mUsuarioViewModel.update(mUsuario);
         if (tipo instanceof Alumno) {
-            AlumnosRepo alumnosRepo = new AlumnosRepo(getApplicationContext());
-            alumnosRepo.update((Alumno) tipo);
+            AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
+            alumnoViewModel.update((Alumno) tipo);
         } else if (tipo instanceof Profesor) {
-            ProfesorRepo profesorRepo = new ProfesorRepo(getApplicationContext());
-            profesorRepo.update((Profesor) tipo);
+            ProfesorViewModel profesorViewModel = new ProfesorViewModel(getApplicationContext());
+            profesorViewModel.update((Profesor) tipo);
         } else if (tipo instanceof Egresado) {
-            EgresadosRepo egresadosRepo = new EgresadosRepo(getApplicationContext());
-            egresadosRepo.update((Egresado) tipo);
+            EgresadoViewModel egresadoViewModel = new EgresadoViewModel(getApplicationContext());
+            egresadoViewModel.update((Egresado) tipo);
+
         }
         loadInfo();
     }
@@ -844,12 +1007,43 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        isEdit = true;
-        s.toString();
+        if (mode == 1)
+            isEditMode = true;
     }
 
     @Override
     public void afterTextChanged(Editable s) {
 
+
+    }
+
+    private void elegirFechaNacimiento() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String mes, dia;
+                month = month + 1;
+                if (month < 10) {
+                    mes = "0" + month;
+                } else
+                    mes = String.valueOf(month);
+                if (day < 10)
+                    dia = "0" + day;
+                else
+                    dia = String.valueOf(day);
+                final String selectedDate = year + "-" + mes + "-" + dia;
+                if (!edtFechaNac.getText().toString().equals(selectedDate))
+                    isEditMode = true;
+                edtFechaNac.setText(selectedDate);
+            }
+        });
+        newFragment.show(getFragmentManager(), "datePicker");
+
+    }
+
+    private void changeButton() {
+        if (validez == 0)
+            btnAltaBaja.setText(getString(R.string.btnAlta));
+        else btnAltaBaja.setText(getString(R.string.btnBaja));
     }
 }
