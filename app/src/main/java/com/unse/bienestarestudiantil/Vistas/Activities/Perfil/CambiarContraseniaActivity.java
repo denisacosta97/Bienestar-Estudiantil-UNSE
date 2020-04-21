@@ -21,7 +21,7 @@ import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
@@ -94,7 +94,7 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
                 String rePass = edtxRepass.getText().toString();
 
                 Validador validador = new Validador(getApplicationContext());
-                if (!validador.noVacio(actual, newPass, rePass)) {
+                if (false/*!validador.noVacio(actual, newPass, rePass)*/) {
                     if (newPass.equals(rePass)) {
                         if (validador.validarContraseña(rePass)) {
                             if (validador.validarDNI(dni)) {
@@ -170,28 +170,32 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
                     break;
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(), "Contraseña actualizada");
-                    final DialogoMensaje dialogoMensaje = new DialogoMensaje();
-                    dialogoMensaje.loadData(R.drawable.ic_chek, "Contraseña reestablecida, por favor vuelve a iniciar sesón", new YesNoDialogListener() {
-                        @Override
-                        public void yes() {
-                            dialogoMensaje.dismiss();
-                            finishAffinity();
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                            PreferenceManager manager = new PreferenceManager(getApplicationContext());
-                            manager.setValue(Utils.IS_LOGIN, false);
-                        }
+                    Utils.showToast(getApplicationContext(), getString(R.string.contraseniaActualizada));
+                    DialogoGeneral.Builder builder =new DialogoGeneral.Builder(getApplicationContext())
+                            .setTitulo("Contraseña reestablecida")
+                            .setDescripcion("Por favor vuelve a iniciar sesón")
+                            .setIcono(R.drawable.ic_chek)
+                            .setListener(new YesNoDialogListener() {
+                                @Override
+                                public void yes() {
+                                    finishAffinity();
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                    PreferenceManager manager = new PreferenceManager(getApplicationContext());
+                                    manager.setValue(Utils.IS_LOGIN, false);
+                                }
 
-                        @Override
-                        public void no() {
+                                @Override
+                                public void no() {
 
-                        }
-                    }, getApplicationContext());
-                    dialogoMensaje.loadColorButton(R.color.colorGreen);
-                    dialogoMensaje.loadColorTitulo(R.color.colorGreen);
-                    dialogoMensaje.loadTextButton("ACEPTAR");
-                    dialogoMensaje.setCancelable(false);
-                    dialogoMensaje.show(getSupportFragmentManager(), "dialog_gral");
+                                }
+                            })
+                            .setColorBackground(R.color.colorGreen)
+                            .setColorButtonNo(R.color.colorGreen)
+                            .setColorButtonSi(R.color.colorGreen)
+                            .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+                    DialogoGeneral dialogoGeneral = builder.build();
+                    dialogoGeneral.setCancelable(false);
+                    dialogoGeneral.show(getSupportFragmentManager(), "dialog_gral");
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.contraseniaActualInvalida));

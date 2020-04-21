@@ -30,7 +30,7 @@
                     android:id="@+id/imgvIconDeporte"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_ciber" />
+                    android:src="@drawable/ic_zapatilla" />
 
             </LinearLayout>
 

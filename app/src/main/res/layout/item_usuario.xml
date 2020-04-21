@@ -76,6 +76,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/latFoto"
             android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center"

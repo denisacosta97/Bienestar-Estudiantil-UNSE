@@ -1,36 +1,75 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-import java.util.Date;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Rol {
+import java.io.Serializable;
 
-    public static final String TAG = Usuario.class.getSimpleName();
-    public static final String TABLE = "roles";
-    // Labels Table Columns names
-    public static final String KEY_ID = "id";
-    public static final String KEY_ID_USER = "idUsuario";
-    public static final String KEY_TIPO_ROL = "tipoRol";
-    public static final String KEY_FECHA = "fecha";
-    public static final String KEY_CHK_DATA = "checkData";
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-    private int idUsuario, id, tipoRol;
-    private String checkData;
-    private Date fecha;
+@Entity(tableName = "roles", primaryKeys = {"idRol", "idUsuario"})
+public class Rol implements Serializable {
 
-    public Rol(int id, int idUsuario, int tipoRol, String checkData, Date fecha) {
-        this.id = id;
+    @Ignore
+    public static final String TABLE_ROL = "roles";
+    @Ignore
+    public static final String KEY_USER = "idUsuario";
+    @Ignore
+    public static final String KEY_ROL = "idRol";
+
+    @NonNull
+    private int idRol;
+    @NonNull
+    private int idUsuario;
+    @Ignore
+    private int idRolPadre;
+    @Ignore
+    private String descripcion;
+
+    public Rol(int idRol, int idUsuario) {
+        this.idRol = idRol;
         this.idUsuario = idUsuario;
-        this.tipoRol = tipoRol;
-        this.checkData = checkData;
-        this.fecha = fecha;
     }
 
-    public Rol() {
-        this.id = -1;
-        this.idUsuario = -1;
-        this.tipoRol = -1;
-        this.checkData = "";
-        this.fecha = new Date();
+    @Ignore
+    public Rol(int idRol, int idRolPadre, String descripcion) {
+        this.idRol = idRol;
+        this.idRolPadre = idRolPadre;
+        this.descripcion = descripcion;
+    }
+
+    @Ignore
+    public Rol(int idRol, int idUsuario, int idRolPadre) {
+        this.idRol = idRol;
+        this.idUsuario = idUsuario;
+        this.idRolPadre = idRolPadre;
+    }
+
+    protected Rol(Parcel in) {
+        idRol = in.readInt();
+        idUsuario = in.readInt();
+        idRolPadre = in.readInt();
+        descripcion = in.readString();
+    }
+
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 
     public int getIdUsuario() {
@@ -41,35 +80,23 @@ public class Rol {
         this.idUsuario = idUsuario;
     }
 
-    public int getId() {
-        return id;
+    public int getIdRolPadre() {
+        return idRolPadre;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdRolPadre(int idRolPadre) {
+        this.idRolPadre = idRolPadre;
     }
 
-    public int getTipoRol() {
-        return tipoRol;
-    }
-
-    public void setTipoRol(int tipoRol) {
-        this.tipoRol = tipoRol;
-    }
-
-    public String getCheckData() {
-        return checkData;
-    }
-
-    public void setCheckData(String checkData) {
-        this.checkData = checkData;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ID: ");
+        builder.append(idRol);
+        builder.append("\n");
+        builder.append("Desc: ");
+        builder.append(descripcion);
+        return builder.toString();
     }
 }

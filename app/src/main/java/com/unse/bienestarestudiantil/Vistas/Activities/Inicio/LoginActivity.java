@@ -22,6 +22,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
 import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
 import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
+import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -29,11 +30,13 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
+import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.RecuperarContraseniaActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -168,12 +171,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:
                     //Exito
                     Utils.showToast(getApplicationContext(), "¡Sesión iniciada!");
-                    JSONObject datos = jsonObject.getJSONObject("datos");
-                    // JSONObject tipo = jsonObject.getJSONObject("tipo");
                     String token = jsonObject.getJSONObject("token").getString("token");
+
                     //Insertar BD
                     Usuario user = guardarDatos(jsonObject);
-
+                    //Roles
+                    saveRoles(jsonObject, user.getIdUsuario());
                     PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
                     preferenceManager.setValue(Utils.IS_LOGIN, true);
                     int dni = user.getIdUsuario();
@@ -205,6 +208,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
             Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+        }
+    }
+
+    private void saveRoles(JSONObject jsonObject, int id) {
+        RolViewModel rolViewModel = new RolViewModel(getApplicationContext());
+        if (jsonObject.has("roles")){
+            try {
+                JSONArray jsonArray = jsonObject.getJSONArray("roles");
+                for (int i = 0; i<jsonArray.length();i++){
+                    JSONObject object = jsonArray.getJSONObject(i);
+
+                    String rol = object.getString("idRol");
+
+                    Rol ro = new Rol(Integer.parseInt(rol), id);
+
+                    rolViewModel.insert(ro);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -41,8 +41,7 @@ import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 
 import java.util.ArrayList;
 
@@ -228,22 +227,24 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void procesarClick2(RecyclerView parent, View view, int position, int id) {
-        final DialogoMensaje dialogoMensaje = new DialogoMensaje();
-        dialogoMensaje.loadData(R.drawable.ic_repair, "¡Ésta sección se encuentra en desarrollo!",
-                new YesNoDialogListener() {
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setIcono(R.drawable.ic_repair)
+                .setDescripcion( "¡Ésta sección se encuentra en desarrollo!")
+                .setListener(new YesNoDialogListener() {
                     @Override
                     public void yes() {
-                        dialogoMensaje.dismiss();
+
                     }
 
                     @Override
                     public void no() {
 
                     }
-                }, getApplicationContext());
-        dialogoMensaje.setCancelable(false);
-        dialogoMensaje.loadTextButton("ACEPTAR");
-        dialogoMensaje.show(getSupportFragmentManager(), "dialog_proces");
+                })
+                .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+        DialogoGeneral dialogoGeneral = builder.build();
+        dialogoGeneral.setCancelable(false);
+        dialogoGeneral.show(getSupportFragmentManager(), "dialog_proces");
         switch (id) {
             case 1:
                 //startActivity(new Intent(getApplicationContext(), CredencialActivity.class));
@@ -276,28 +277,28 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void logout() {
-        final DialogYesNoGeneral dialog = new DialogYesNoGeneral();
-        YesNoDialogListener listener = new YesNoDialogListener() {
-            @Override
-            public void yes() {
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setTitulo(getString(R.string.advertencia))
+                .setDescripcion("¿Seguro que desea cerrar sesión?")
+                .setListener(new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        Utils.resetData(getApplicationContext());
+                        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+                        manager.setValue(Utils.IS_LOGIN, false);
+                        finishAffinity();
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
 
-                Utils.resetData(getApplicationContext());
-                PreferenceManager manager = new PreferenceManager(getApplicationContext());
-                manager.setValue(Utils.IS_LOGIN, false);
-                dialog.dismiss();
-                finishAffinity();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
+                    @Override
+                    public void no() {
+                    }
+                })
+                .setTipo(DialogoGeneral.TIPO_SI_NO);
+        final DialogoGeneral dialogoGeneral = builder.build();
+        dialogoGeneral.show(getSupportFragmentManager(), "dialog_yesno");
 
-            @Override
-            public void no() {
-                dialog.dismiss();
-            }
-        };
-
-        dialog.loadData("¡Advertencia!", "¿Seguro que desea cerrar sesión?", listener, getApplicationContext());
-        dialog.show(getSupportFragmentManager(), "dialog_yesno");
     }
 
     private void loadViews() {

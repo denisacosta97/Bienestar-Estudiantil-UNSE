@@ -22,6 +22,46 @@ public class Validador {
         return i < (datos.length);
     }
 
+    public boolean validarNumero(EditText editText) {
+        if (noVacio(editText.getText().toString().trim())) {
+            editText.setError(mContext.getString(R.string.campoVacio));
+            return false;
+        }
+        if (validarNumero(editText.getText().toString().trim())) {
+            return true;
+        } else {
+            editText.setError(mContext.getString(R.string.numeroNoValido));
+            return false;
+        }
+    }
+
+    public boolean validarRedes(EditText editText) {
+        if (noVacio(editText.getText().toString().trim())) {
+            editText.setError(mContext.getString(R.string.campoVacio));
+            return false;
+        }
+        if (editText.getText().toString().equals("N/A") || !editText.getText().toString().equals("")) {
+            return true;
+        } else {
+            editText.setError(mContext.getString(R.string.numeroNoValido));
+            return false;
+        }
+    }
+
+    public boolean validarNumeroDecimal(EditText editText) {
+        if (noVacio(editText.getText().toString().trim())) {
+            editText.setError(mContext.getString(R.string.campoVacio));
+            return false;
+        }
+        if (validadNumeroDecimal(editText.getText().toString().trim())) {
+            return true;
+        } else {
+            editText.setError(mContext.getString(R.string.numeroNoValido));
+            return false;
+        }
+    }
+
+
     public boolean validarDNI(EditText editText) {
         if (noVacio(editText.getText().toString().trim())) {
             editText.setError(mContext.getString(R.string.campoVacio));
@@ -249,12 +289,4 @@ public class Validador {
         return c.length() >= 4;
     }
 
-
-    public boolean noVacio(String... horario) {
-        return false;
-    }
-
-    public boolean lengthMores(String... face) {
-        return false;
-    }
 }

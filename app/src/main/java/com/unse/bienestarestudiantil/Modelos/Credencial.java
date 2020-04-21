@@ -2,8 +2,8 @@ package com.unse.bienestarestudiantil.Modelos;
 
 public class Credencial {
 
-    int id, validez;
-    String titulo;
+    private int id, validez;
+    private String titulo;
 
     public Credencial(int id, String titulo, int validez) {
         this.id = id;

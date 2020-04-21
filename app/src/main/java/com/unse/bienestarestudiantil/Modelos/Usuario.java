@@ -22,6 +22,10 @@ public class Usuario implements Parcelable {
     @Ignore
     public static final int COMPLETE = 1;
     @Ignore
+    public static final int BASIC = 2;
+    @Ignore
+    public static final int MEDIUM = 3;
+    @Ignore
     public static final String TABLE_USER = "usuario";
     @Ignore
     public static final String KEY_ID_USER = "idUsuario";
@@ -135,9 +139,10 @@ public class Usuario implements Parcelable {
         int idUsuario, tipoUsuario, validez;
 
         try {
-            JSONObject datos = object.getJSONObject("mensaje");
+
             switch (tipe) {
                 case COMPLETE:
+                    JSONObject datos = object.getJSONObject("mensaje");
                     idUsuario = Integer.parseInt(datos.getString("idUsuario"));
                     tipoUsuario = Integer.parseInt(datos.getString("tipoUsuario"));
                     nombre = datos.getString("nombre");
@@ -159,28 +164,33 @@ public class Usuario implements Parcelable {
                             localidad, domicilio, barrio,telefono, sexo, mail, tipoUsuario, fechaRegistro,
                             fechaModificacion, validez);
                     break;
+                case BASIC:
+                    idUsuario = Integer.parseInt(object.getString("idUsuario"));
+                    tipoUsuario = Integer.parseInt(object.getString("tipoUsuario"));
+                    nombre = object.getString("nombre");
+                    apellido = object.getString("apellido");
+
+                    usuario = new Usuario(idUsuario,nombre, apellido, tipoUsuario);
+                    break;
+                case MEDIUM:
+                    idUsuario = Integer.parseInt(object.getString("idUsuario"));
+                    tipoUsuario = Integer.parseInt(object.getString("tipoUsuario"));
+                    telefono = object.getString("telefono");
+                    nombre = object.getString("nombre");
+                    apellido = object.getString("apellido");
+                    fechaNac = object.getString("fechaNac");
+                    pais = object.getString("pais");
+                    provincia = object.getString("provincia");
+                    localidad = object.getString("localidad");
+                    domicilio = object.getString("domicilio");
+                    barrio = object.getString("barrio");
+                    mail = object.getString("mail");
+                    usuario = new Usuario(idUsuario,nombre, apellido, fechaNac, pais, provincia,localidad,domicilio,
+                            barrio, telefono, null, mail,tipoUsuario,null,null,-1);
+                    break;
             }
 
             return usuario;
-            /*Alumno alumno;
-            Profesor profesor;
-            Egresado egresado;
-            if (object.get("datos") != null) {
-                switch (usuario.getTipoUsuario()) {
-                    case Utils.TIPO_ALUMNO:
-                        alumno = Alumno.mapper(object.getJSONObject("datos"), usuario);
-                        usuario = alumno;
-                        break;
-                    case Utils.TIPO_PROFESOR:
-                        profesor = Profesor.mapper(object.getJSONObject("datos"), usuario);
-                        usuario = profesor;
-                        break;
-                    case Utils.TIPO_EGRESADO:
-                        egresado = Egresado.mapper(object.getJSONObject("datos"), usuario);
-                        usuario = egresado;
-                        break;
-                }
-            }*/
         } catch (JSONException e) {
             e.printStackTrace();
         }

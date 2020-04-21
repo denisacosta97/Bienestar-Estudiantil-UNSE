@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,17 +15,20 @@ import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public static final int TIPO_INSCRIPCIONES = 1;
+    public static final int TIPO_DEPORTES_INSCRIPCIONES = 2;
 
     private Context mContext;
     private ArrayList<ItemBase> lista;
+    private int tipo;
 
-    public FechasAdapter(Context context, ArrayList<ItemBase> lista) {
+    public FechasAdapter(Context context, ArrayList<ItemBase> lista, int tipo) {
         this.lista = lista;
         this.mContext = context;
+        this.tipo = tipo;
 
     }
 
@@ -49,7 +53,7 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return viewHolder;
     }
 
-    public void change(ArrayList<ItemBase> e){
+    public void change(ArrayList<ItemBase> e) {
         this.lista = e;
         notifyDataSetChanged();
     }
@@ -68,8 +72,33 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case ItemBase.TIPO_DATO:
                 ItemDato dateItem = (ItemDato) lista.get(position);
                 DateViewHolder dateViewHolder = (DateViewHolder) viewHolder;
-                dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
-                dateViewHolder.txtNroArchivo.setText(dateItem.getIdValue());
+                if (tipo == TIPO_INSCRIPCIONES) {
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                    dateViewHolder.txtNroArchivo.setText(String.format("#%s", dateItem.getIdValue()));
+                    if (dateItem.getEstadoValueId() != 0) {
+                        dateViewHolder.txtEstado.setVisibility(View.VISIBLE);
+                        dateViewHolder.txtEstado.setText(dateItem.getEstadoValue());
+                        int i = R.color.colorTextDefault;
+                        switch (dateItem.getEstadoValueId()) {
+                            case 1:
+                                i = R.color.colorGreen;
+                                break;
+                            case 2:
+                                i = R.color.colorRed;
+                                break;
+                            case 3:
+                                i = R.color.colorOrange;
+                                break;
+                        }
+                        dateViewHolder.txtEstado.setTextColor(mContext.getResources().getColor(i));
+                        dateViewHolder.txtEstado.setTypeface(null, Typeface.BOLD);
+
+                    } else dateViewHolder.txtEstado.setVisibility(View.GONE);
+                }else if (tipo == TIPO_DEPORTES_INSCRIPCIONES){
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }
                 break;
         }
 
@@ -78,12 +107,13 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     //ViewHolder for date row item
     static class DateViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtTitulo, txtNroArchivo;
+        private TextView txtTitulo, txtNroArchivo, txtEstado;
 
         DateViewHolder(View v) {
             super(v);
             txtTitulo = v.findViewById(R.id.txtTitulo);
             txtNroArchivo = v.findViewById(R.id.txtNroArchivo);
+            txtEstado = v.findViewById(R.id.idEstado);
 
         }
     }

@@ -86,7 +86,7 @@
     <string name="usuarioEliminar">¿Seguro que desea dar de %s al usuario %s %s ?</string>
     <string name="btnAlta">DAR DE ALTA</string>
     <string name="btnBaja">DAR DE BAJA</string>
-    <string name="advertencia">Advertencia</string>
+    <string name="advertencia">¡Advertencia!</string>
     <string name="contraseniaMinimo">La contraseña debe tener mínimo de 4 caracteres</string>
     <string name="contraseniaNoIguales">Las contraseñas no son identicas</string>
     <string name="presionaDeNuevo">Presiona de nuevo para salir</string>
@@ -103,6 +103,17 @@
     <string name="emailInvalido">El email no es válido</string>
     <string name="domicilioInvalido">Debe contener al menos una letra y un número</string>
     <string name="campoNoFormato">El campo solo admite letras</string>
+    <string name="contraseniaActualizada">¡Contraseña actualizada!</string>
+    <string name="documentoNoCompletado">Error al completar el documento</string>
+    <string name="inscripcionNoCarga">Error al obtener la inscripcion. ¿Desea volver a intentarlo?</string>
+    <string name="estadoActualizado">¡Estado actualizado!</string>
+    <string name="numeroNoValido">Valor númerico no valido</string>
+    <string name="errorCrearCredencial">¡Error al crear la credencial!</string>
+    <string name="credencialCreada">¡Credencial creada!\nVuelve a ingresar para visualizarla</string>
+    <string name="permisosActualizados">¡Permisos actualizados!</string>
+    <string name="permisosAlgunosNo">¡Algunos permisos no se actualizaron!</string>
+    <string name="primeroBuscar">¡Primero debe buscar un usuario!</string>
+    <string name="usuarioPermisosOn">El usuario ya posee permisos</string>
 
 </resources>
 

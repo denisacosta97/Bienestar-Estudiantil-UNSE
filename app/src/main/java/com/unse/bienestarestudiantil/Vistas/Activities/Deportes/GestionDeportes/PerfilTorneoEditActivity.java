@@ -174,10 +174,10 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         //Comprobacion que no sean vacios
-        if (!validador.noVacio(name, fechaIni, fechaFin, desc, lugar)) {
+        if (false/*!validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
 
             //Comprobacion del tipo d edatos
-            if (validador.noVacio(name, fechaIni, fechaFin, desc, lugar)) {
+            if (false/*validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
 
                 //Comprobacion de tamaños
                 if (validador.lengthMore(name) && validador.lengthMore(fechaIni)

@@ -2,4 +2,7 @@
 <resources>
     <item name="recyclerview_item_click_support" type="id"/>
     <item name="recyclerview_item_selection_support" type="id"/>
+    <item name="node_header" type="id" />
+    <item name="node_items" type="id" />
+    <item name="tree_items" type="id" />
 </resources>

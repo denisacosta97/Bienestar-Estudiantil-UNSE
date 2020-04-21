@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <include layout="@layout/toolbar_trans" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/layout_vacio_error" />
 
             <android.support.v7.widget.CardView
-                android:id="@+id/card"
+                android:id="@+id/cardSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:layout_margin="3dp"
                 android:focusable="true"
-                android:layout_margin="7dp"
                 android:layout_gravity="center"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp"
@@ -64,6 +66,7 @@
 
                     </android.support.design.widget.TextInputLayout>
 
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -71,18 +74,20 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
+                tools:listitem="@layout/item_usuario"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="17dp"
-            android:src="@drawable/ic_mas"/>
-
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_mas"
+        android:layout_gravity="bottom|end"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_height="wrap_content" />-->
+
+</android.support.design.widget.CoordinatorLayout>

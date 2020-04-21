@@ -2,8 +2,16 @@ package com.unse.bienestarestudiantil.Modelos;
 
 public class ItemFecha extends ItemBase {
 
-    String anio;
+    private String id;
+    private String anio;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public ItemFecha(String anio) {
         this.anio = anio;

@@ -34,8 +34,7 @@ import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.GestionArchivosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoMensaje;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
@@ -160,23 +159,25 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
                     dia = Utils.getFechaNameWithinHour(new Date((Long) isExist[1]));
                 } else
                     dia = "";
-                final DialogYesNoGeneral dialogoMensaje = new DialogYesNoGeneral();
-                dialogoMensaje.loadData(null, String.format("El documento ya se encuentra disponible en tu almacenamiento" +
-                        " con fecha %s. ¿Desea volver a descargarlo o abrir el documento disponible?", dia), new YesNoDialogListener() {
-                    @Override
-                    public void yes() {
-                        download(archivo);
-                        dialogoMensaje.dismiss();
-                    }
+                DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                        .setTitulo(String.format("El documento ya se encuentra disponible en tu almacenamiento" +
+                                " con fecha %s. ¿Desea volver a descargarlo o abrir el documento disponible?", dia))
+                        .setListener(new YesNoDialogListener() {
+                            @Override
+                            public void yes() {
+                                download(archivo);
+                            }
 
-                    @Override
-                    public void no() {
-                        openFile(archivo);
-                        dialogoMensaje.dismiss();
-                    }
-                }, getApplicationContext());
-                dialogoMensaje.loadIcon(R.drawable.ic_find);
-                dialogoMensaje.loadTextButton("DESCARGAR", "ABRIR");
+                            @Override
+                            public void no() {
+                                openFile(archivo);
+                            }
+                        })
+                        .setIcono(R.drawable.ic_find)
+                        .setTipo(DialogoGeneral.TIPO_LIBRE)
+                        .setTextButtonSi("DESCARGAR")
+                        .setTextButtonNo("ABRIR");
+                DialogoGeneral dialogoMensaje = builder.build();
                 dialogoMensaje.show(getSupportFragmentManager(), "dialog_yes");
 
             }
@@ -193,20 +194,25 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
 
             @Override
             public void no() {
-                Utils.showToast(getApplicationContext(), "Error al completar el documento");
-                final DialogoMensaje dialogoMensaje = new DialogoMensaje();
-                dialogoMensaje.loadData(R.drawable.ic_reserva_ocupado, "No fue posible completar el documento, pero puedes " +
-                        "visualizarlo desde tu gestor de archivos en la carpeta BIENESTAR", new YesNoDialogListener() {
-                    @Override
-                    public void yes() {
-                        dialogoMensaje.dismiss();
-                    }
+                Utils.showToast(getApplicationContext(), getString(R.string.documentoNoCompletado));
+                DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                        .setDescripcion("No fue posible completar el documento, pero puedes " +
+                                "visualizarlo desde tu gestor de archivos en la carpeta BIENESTAR")
+                        .setIcono(R.drawable.ic_advertencia)
+                        .setListener(new YesNoDialogListener() {
+                            @Override
+                            public void yes() {
 
-                    @Override
-                    public void no() {
+                            }
 
-                    }
-                }, getApplicationContext());
+                            @Override
+                            public void no() {
+
+                            }
+                        })
+                        .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+                DialogoGeneral dialogoGeneral = builder.build();
+                dialogoGeneral.show(getSupportFragmentManager(), "dialog_pdf");
             }
         }, getSupportFragmentManager());
         loadInfoPDF.execute();
@@ -232,19 +238,24 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
                 Utils.showToast(getApplicationContext(), "Error interno al abrir el archivo");
             } catch (ActivityNotFoundException e){
                 Utils.showToast(getApplicationContext(), "No hay aplicaciones disponibles para abrir PDF");
-                final DialogoMensaje dialogoMensaje = new DialogoMensaje();
-                dialogoMensaje.loadData(R.drawable.ic_reserva_ocupado, "No fue posible abrir el documento, pero puedes " +
-                        "visualizarlo desde tu gestor de archivos en la carpeta BIENESTAR", new YesNoDialogListener() {
-                    @Override
-                    public void yes() {
-                        dialogoMensaje.dismiss();
-                    }
+                DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                        .setDescripcion("No fue posible completar el documento, pero puedes " +
+                                "visualizarlo desde tu gestor de archivos en la carpeta BIENESTAR")
+                        .setIcono(R.drawable.ic_advertencia)
+                        .setListener(new YesNoDialogListener() {
+                            @Override
+                            public void yes() {
 
-                    @Override
-                    public void no() {
+                            }
 
-                    }
-                }, getApplicationContext());
+                            @Override
+                            public void no() {
+
+                            }
+                        })
+                        .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+                DialogoGeneral dialogoGeneral = builder.build();
+                dialogoGeneral.show(getSupportFragmentManager(), "dialog_pdf");
 
             }
         } else

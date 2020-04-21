@@ -257,7 +257,8 @@ public class TarjetaCredencialActivity extends AppCompatActivity {
                 mDeporte.setText(credencialDeporte.getNombre());
                 mApellido.setText(credencialDeporte.getApellido());
                 mNombre.setText(credencialDeporte.getNombre());
-                mNombreEquipo.setText(credencialDeporte.getDescripcion());
+                mNombreEquipo.setText(credencialDeporte.getDescripcion().equals("") ? "NO ASIGNADO" :
+                        credencialDeporte.getDescripcion().equals("null") ? "NO ASIGNADO" : credencialDeporte.getDescripcion());
                 mAnio.setText(String.valueOf(credencialDeporte.getAnio()));
                 mLegajo.setText(String.valueOf(credencialDeporte.getLegajo()));
                 mFacultad.setText(credencialDeporte.getFacultad());

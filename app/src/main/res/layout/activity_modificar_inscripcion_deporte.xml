@@ -88,7 +88,7 @@
 
                         <LinearLayout
                             android:orientation="vertical"
-                            android:layout_margin="10dp"
+                            android:layout_margin="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -96,6 +96,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardElevation="5dp"
+                                android:layout_margin="7dp"
                                 app:cardCornerRadius="20dp">
                                 <LinearLayout
                                     android:visibility="visible"
@@ -130,7 +131,7 @@
 
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -177,7 +178,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -223,7 +224,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -269,7 +270,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -315,7 +316,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -360,7 +361,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -406,7 +407,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -452,7 +453,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -498,7 +499,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -544,7 +545,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -590,7 +591,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -636,7 +637,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -682,7 +683,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -728,7 +729,7 @@
                                         </LinearLayout>
 
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -775,7 +776,7 @@
 
                                         <!--                                        Nuevo-->
                                         <LinearLayout
-
+                                            android:visibility="visible"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
@@ -1135,94 +1136,49 @@
 
                                         </LinearLayout>
 
-
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="10dp"
-                                            android:layout_marginLeft="20dp"
-                                            android:layout_marginRight="20dp"
-                                            android:weightSum="2"
-                                            android:orientation="horizontal">
+                                            android:orientation="vertical"
+                                            android:gravity="center">
 
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="20dp"
-                                            android:layout_marginRight="20dp"
-                                            android:gravity="center"
-                                            android:weightSum="1"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:text="¿Realizó o realiza actividad física?"
-                                                android:layout_weight="0.6"
-                                                android:textStyle="bold"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-                                            <CheckBox
-                                                android:id="@+id/chbxSi"
-                                                android:layout_width="115dp"
-                                                android:layout_height="50dp"
-                                                android:layout_weight="0.2"
-                                                android:buttonTint="@color/colorPrimaryDark"
-                                                android:text="Si"
-                                                android:fontFamily="@font/montserrat_regular"/>
-
-                                            <CheckBox
-                                                android:id="@+id/chbxNo"
-                                                android:layout_width="100dp"
-                                                android:layout_height="50dp"
-                                                android:layout_weight="0.2"
-                                                android:buttonTint="@color/colorPrimaryDark"
-                                                android:text="No"
-                                                android:fontFamily="@font/montserrat_regular"/>
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-
-                                            android:id="@+id/disablePreg"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:weightSum="1"
-                                            android:textCursorDrawable="@drawable/color_cursor"
-                                            android:orientation="vertical">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="10dp"
-                                                android:layout_marginRight="10dp"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:text="¿Cuales?"
-                                                android:textSize="14sp"
-                                                android:fontFamily="@font/montserrat_black"/>
-
-
-                                            <EditText
-                                                android:id="@+id/edtxPreg2"
+                                            <LinearLayout
+                                                android:layout_margin="3dp"
                                                 android:layout_width="match_parent"
-                                                android:layout_height="50dp"
-                                                android:hint="ABCDE"
-                                                android:layout_weight="1"
-                                                android:layout_marginLeft="20dp"
-                                                android:layout_marginRight="20dp"
-                                                android:layout_marginTop="10dp"
-                                                android:padding="15dp"
-                                                android:inputType="textCapSentences|text"
-                                                android:textCursorDrawable="@drawable/color_cursor"
-                                                android:background="@drawable/edit_text_logreg"
-                                                android:textSize="15sp"
-                                                android:fontFamily="@font/montserrat_regular"/>
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:weightSum="1"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="¿Realizó o realiza actividad física?"
+                                                    android:layout_weight="0.6"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textSize="14sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <CheckBox
+                                                    android:id="@+id/chbxSi"
+                                                    android:layout_width="115dp"
+                                                    android:layout_height="50dp"
+                                                    android:layout_weight="0.2"
+                                                    android:buttonTint="@color/colorPrimaryDark"
+                                                    android:text="Si"
+                                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                                <CheckBox
+                                                    android:id="@+id/chbxNo"
+                                                    android:layout_width="100dp"
+                                                    android:layout_height="50dp"
+                                                    android:layout_weight="0.2"
+                                                    android:buttonTint="@color/colorPrimaryDark"
+                                                    android:text="No"
+                                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                            </LinearLayout>
 
                                             <View
                                                 android:layout_marginTop="5dp"
@@ -1232,59 +1188,138 @@
                                                 android:layout_height="1dp"
                                                 android:background="@color/colorGrey"/>
 
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:text="Intensidad:"
-                                                android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
-                                                android:textSize="15sp"
-                                                android:fontFamily="@font/montserrat_black"/>
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/disablePreg"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:weightSum="1"
+                                            android:textCursorDrawable="@drawable/color_cursor"
+                                            android:orientation="vertical">
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginLeft="20dp"
-                                                android:layout_marginRight="20dp"
-                                                android:weightSum="3"
-                                                android:orientation="horizontal">
+                                                android:weightSum="1"
+                                                android:orientation="vertical"
+                                                android:gravity="center">
 
-                                                <CheckBox
-                                                    android:id="@+id/chbxContin"
-                                                    android:layout_width="115dp"
-                                                    android:layout_height="50dp"
-                                                    android:layout_weight="1"
-                                                    android:buttonTint="@color/colorPrimaryDark"
-                                                    android:text="Continua"
-                                                    android:fontFamily="@font/montserrat_regular"/>
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal">
 
-                                                <CheckBox
-                                                    android:id="@+id/chbxMedia"
-                                                    android:layout_width="100dp"
-                                                    android:layout_height="50dp"
-                                                    android:layout_weight="1"
-                                                    android:buttonTint="@color/colorPrimaryDark"
-                                                    android:text="Media"
-                                                    android:fontFamily="@font/montserrat_regular"/>
+                                                    <TextView
+                                                        android:gravity="center"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="match_parent"
+                                                        android:layout_marginLeft="10dp"
+                                                        android:layout_marginRight="10dp"
+                                                        android:textColor="@color/colorGrey2"
+                                                        android:textStyle="bold"
+                                                        android:text="¿Cuales?"
+                                                        android:textSize="14sp"
+                                                        android:fontFamily="@font/montserrat_black"/>
 
-                                                <CheckBox
-                                                    android:id="@+id/chbxBaja"
-                                                    android:layout_width="100dp"
-                                                    android:layout_height="50dp"
-                                                    android:layout_weight="1"
-                                                    android:buttonTint="@color/colorPrimaryDark"
-                                                    android:text="Baja"
-                                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                                    <EditText
+                                                        android:layout_marginTop="5dp"
+                                                        android:id="@+id/edtxPreg2"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="50dp"
+                                                        android:hint="ABCDE"
+                                                        android:layout_weight="1"
+                                                        android:textStyle="bold"
+                                                        android:padding="10dp"
+                                                        android:inputType="textCapSentences|text"
+                                                        android:textCursorDrawable="@drawable/color_cursor"
+                                                        android:background="@drawable/edit_text_logreg"
+                                                        android:textSize="15sp"
+                                                        android:fontFamily="@font/montserrat_regular"/>
+
+                                                </LinearLayout>
+
+                                                <View
+                                                    android:layout_marginTop="5dp"
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginEnd="10dp"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="1dp"
+                                                    android:background="@color/colorGrey"/>
+
 
                                             </LinearLayout>
 
-                                            <View
-                                                android:layout_marginStart="10dp"
-                                                android:layout_marginEnd="10dp"
+                                            <LinearLayout
                                                 android:layout_width="match_parent"
-                                                android:layout_height="1dp"
-                                                android:background="@color/colorGrey"/>
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="10dp"
+                                                    android:layout_marginStart="5dp"
+                                                    android:text="Intensidad:"
+                                                    android:textColor="@color/colorGrey2"
+                                                    android:textStyle="bold"
+                                                    android:textSize="15sp"
+                                                    android:fontFamily="@font/montserrat_black"/>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:layout_marginRight="20dp"
+                                                    android:weightSum="3"
+                                                    android:orientation="horizontal">
+
+                                                    <CheckBox
+                                                        android:id="@+id/chbxContin"
+                                                        android:layout_width="115dp"
+                                                        android:layout_height="50dp"
+                                                        android:layout_weight="1"
+                                                        android:buttonTint="@color/colorPrimaryDark"
+                                                        android:text="Continua"
+                                                        android:fontFamily="@font/montserrat_regular"/>
+
+                                                    <CheckBox
+                                                        android:id="@+id/chbxMedia"
+                                                        android:layout_width="100dp"
+                                                        android:layout_height="50dp"
+                                                        android:layout_weight="1"
+                                                        android:buttonTint="@color/colorPrimaryDark"
+                                                        android:text="Media"
+                                                        android:fontFamily="@font/montserrat_regular"/>
+
+                                                    <CheckBox
+                                                        android:id="@+id/chbxBaja"
+                                                        android:layout_width="100dp"
+                                                        android:layout_height="50dp"
+                                                        android:layout_weight="1"
+                                                        android:buttonTint="@color/colorPrimaryDark"
+                                                        android:text="Baja"
+                                                        android:fontFamily="@font/montserrat_regular"/>
+
+                                                </LinearLayout>
+
+                                                <View
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginEnd="10dp"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="1dp"
+                                                    android:background="@color/colorGrey"/>
+
+                                            </LinearLayout>
+
+
+
+
+
+
 
                                             <LinearLayout
                                                 android:gravity="center"
@@ -1304,15 +1339,15 @@
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
+
                                                     android:id="@+id/edtxPreg3"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="50dp"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
                                                     android:layout_weight="1"
                                                     android:hint="Lugar donde realizó la actividad"
-                                                    android:layout_marginLeft="20dp"
-                                                    android:layout_marginRight="20dp"
-                                                    android:layout_marginBottom="10dp"
+                                                    android:layout_margin="5dp"
                                                     android:padding="15dp"
+                                                    android:textStyle="bold"
                                                     android:inputType="textCapSentences|text"
                                                     android:textCursorDrawable="@drawable/color_cursor"
                                                     android:background="@drawable/edit_text_logreg"
@@ -1368,6 +1403,8 @@
                                                 android:textStyle="bold"
                                                 android:textColor="@color/colorTextDefault"
                                                 android:padding="10dp"
+
+                                                android:layout_marginEnd="5dp"
                                                 android:background="@color/transparente" />
                                         </LinearLayout>
 
@@ -1396,6 +1433,354 @@
 
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/latAdmin"
+                    android:layout_marginTop="-10dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="5dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="20dp">
+                            <LinearLayout
+                                android:visibility="visible"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:background="@color/colorGrey"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:text="OPERACIONES"
+                                        android:fontFamily="@font/montserrat_black"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_margin="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_marginRight="10dp"
+                                                android:textColor="@color/colorGrey2"
+                                                android:textStyle="bold"
+                                                android:text="Fecha Inscripción:"
+                                                android:textSize="14sp"
+                                                android:fontFamily="@font/montserrat_black"/>
+
+                                            <EditText
+                                                android:enabled="false"
+                                                android:id="@+id/edtFechaRegistro"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="14sp"
+                                                android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/colorTextDefault"
+                                                android:padding="10dp"
+                                                android:background="@color/transparente" />
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/colorGrey"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_marginRight="10dp"
+                                                android:textColor="@color/colorGrey2"
+                                                android:textStyle="bold"
+                                                android:text="Fecha Modificación:"
+                                                android:textSize="14sp"
+                                                android:fontFamily="@font/montserrat_black"/>
+
+                                            <EditText
+                                                android:enabled="false"
+                                                android:id="@+id/edtFechaMod"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:textSize="14sp"
+                                                android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/colorTextDefault"
+                                                android:padding="10dp"
+                                                android:background="@color/transparente" />
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/colorGrey"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:weightSum="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <Button
+                                                android:id="@+id/btnAltaBaja"
+                                                android:layout_margin="5dp"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:text="DAR DE BAJA"
+                                                android:textStyle="bold"
+                                                android:padding="12dp"
+                                                android:layout_weight="0.5"
+                                                android:textColor="@color/colorWhite"
+                                                android:background="@drawable/button_border" />
+
+                                            <Button
+                                                android:id="@+id/btnEstado"
+                                                android:layout_margin="5dp"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:text="CAMBIAR ESTADO"
+                                                android:textStyle="bold"
+                                                android:padding="12dp"
+                                                android:layout_weight="0.5"
+                                                android:textColor="@color/colorWhite"
+                                                android:background="@drawable/button_border" />
+
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/colorGrey"/>
+
+                                        <LinearLayout
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:weightSum="1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <Button
+                                                android:id="@+id/btnCarnet"
+                                                android:layout_margin="5dp"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:text="OTORGAR CARNET"
+                                                android:textStyle="bold"
+                                                android:padding="12dp"
+                                                android:layout_weight="0.5"
+                                                android:textColor="@color/colorWhite"
+                                                android:background="@drawable/button_border" />
+
+                                            <Button
+                                                android:id="@+id/btnPDF"
+                                                android:layout_margin="5dp"
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:text="GENERAR PDF"
+                                                android:textStyle="bold"
+                                                android:padding="12dp"
+                                                android:layout_weight="0.5"
+                                                android:textColor="@color/colorWhite"
+                                                android:background="@drawable/button_border" />
+
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/colorGrey"/>
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="5dp" />
+
+
+
+                                    </LinearLayout>
+
+
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:background="@color/transparente" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/transparente" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/latCredencial"
+                    android:layout_marginTop="-10dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="5dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="20dp">
+                            <LinearLayout
+                                android:visibility="visible"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:background="@color/colorGrey"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:textSize="16sp"
+                                        android:textStyle="bold"
+                                        android:text="CREDENCIALES"
+                                        android:fontFamily="@font/montserrat_black"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/recycler"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:background="@color/transparente" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/transparente" />
+
 
             </LinearLayout>
 

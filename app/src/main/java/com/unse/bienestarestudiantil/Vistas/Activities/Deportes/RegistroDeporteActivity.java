@@ -239,7 +239,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         //is wsp, is actividad, is intensidad
         Validador validador = new Validador(getApplicationContext());
 
-        if (!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac, peso, altura, anioIn, objetivo, facebook, inst, fecha)){
+        if (false/*!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac, peso, altura, anioIn, objetivo, facebook, inst, fecha)*/){
             if (validador.validarDNI(doc) && validador.validarNumero(eda) && validador.validarNumero(cantMa)
                 && validador.validarNumero(telef)){
                 if (validador.validarMail(email)){
@@ -247,7 +247,7 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                     String datos = "?idT=%s&idU=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&key=%s";
 
                     if (isActividad){
-                        if (!validador.noVacio(cuales, lug)){
+                        if (false/*!validador.noVacio(cuales, lug)*/){
                             datos = String.format("?idT=%s&id=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
                                     isWsp ? 1 : 2, objetivo, cuales, intensidad, lug, peso, altura, new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
 

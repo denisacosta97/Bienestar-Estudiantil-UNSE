@@ -38,10 +38,10 @@
 
     <!--  SwipeView  -->
 
-    <color name="color1">#760000</color>
-    <color name="color2">#7f0000</color>
-    <color name="color3">#890f04</color>
-    <color name="color4">#921b0c</color>
+    <color name="colorLevel1">#760000</color>
+    <color name="colorLevel2">#7f0000</color>
+    <color name="colorLevel3">#890f04</color>
+    <color name="colorLevel4">#921b0c</color>
     <color name="colorMoney">#216C2A</color>
 
     <color name="black_alpha_40">#66000000</color>

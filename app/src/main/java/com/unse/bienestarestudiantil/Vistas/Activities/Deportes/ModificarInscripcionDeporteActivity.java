@@ -4,9 +4,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,18 +22,28 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
+import com.unse.bienestarestudiantil.Modelos.Credencial;
+import com.unse.bienestarestudiantil.Modelos.CredencialDeporte;
+import com.unse.bienestarestudiantil.Modelos.Estado;
+import com.unse.bienestarestudiantil.Modelos.Inscripcion;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.CredencialesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoListaEstados;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ModificarInscripcionDeporteActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
@@ -42,14 +55,20 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     CheckBox[] noCheck;
     FloatingActionButton fabEditar;
     CheckBox chIsWsp, echSiActividad, chNoActividad, chBaja, chMedia, chAlta;
-    LinearLayout linearActividades;
-    TextView txtTitulo, txtDeporte, edtFechaNac;
+    LinearLayout linearActividades, linearAdmin, linearCredencial;
+    TextView txtTitulo, txtDeporte, edtFechaNac, txtFechaIns, txtFechaModi;
     ImageView btnBack, imgIcono;
+    Button btnBajaAlta, btnEstado, btnCarnet, btnPDF;
+    ArrayList<Credencial> mList;
+    CredencialesAdapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView mRecyclerView;
 
     DialogoProcesamiento dialog;
 
-    boolean isWsp = false, isActividad = false, isEdit = false;
-    int intensidad = 1, idInscrip = -1, idTem, idPre, tipoU, idU, disp, estado, modeUI = 0;
+    boolean isWsp = false, isActividad = false, isEdit = false, isAdmin = false, isEstadoEdit = false;
+    int intensidad = 1, idInscrip = -1, idTem = 0, idPre = 0, tipoU = 0,
+            idU = 0, disp = 0, estado = 0, modeUI = 0, val = 0;
 
 
     @Override
@@ -58,9 +77,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         setContentView(R.layout.activity_modificar_inscripcion_deporte);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if (getIntent().getIntExtra(Utils.CREDENCIAL, -1) != -1) {
-            idInscrip = getIntent().getIntExtra(Utils.CREDENCIAL, -1);
-        }
+        isAdmin();
 
         if (idInscrip != -1) {
             loadViews();
@@ -72,12 +89,22 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             loadListener();
 
             editMode(0);
+
         } else {
-            Utils.showToast(getApplicationContext(), "Error, intente nuevamente");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
             finish();
         }
 
 
+    }
+
+    public void isAdmin() {
+        if (getIntent().getIntExtra(Utils.CREDENCIAL, -1) != -1) {
+            idInscrip = getIntent().getIntExtra(Utils.CREDENCIAL, -1);
+        }
+        if (getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false)) {
+            isAdmin = getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false);
+        }
     }
 
     private void setToolbar() {
@@ -86,6 +113,18 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     }
 
     private void loadData() {
+        if (isAdmin) {
+            linearAdmin.setVisibility(View.VISIBLE);
+            linearCredencial.setVisibility(View.VISIBLE);
+
+        } else {
+            linearAdmin.setVisibility(View.GONE);
+            linearCredencial.setVisibility(View.GONE);
+        }
+        mList = new ArrayList<>();
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         loadInfo();
 
     }
@@ -94,7 +133,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s&idI=%s", Utils.URL_INSCRIPCIONES_PARTICULAR_DEPORTE, id, key, idInscrip);
+        String URL = String.format("%s?id=%s&key=%s&idI=%s", Utils.URL_INSCRIPCION_PARTICULAR, id, key, idInscrip);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -131,15 +170,22 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                     Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
-                    Utils.showToast(getApplicationContext(), getString(R.string.actualizado));
-                    isEdit = false;
-                    edit();
+                    if (isEstadoEdit) {
+                        Utils.showToast(getApplicationContext(), getString(R.string.estadoActualizado));
+                        isEstadoEdit = false;
+                    } else {
+                        Utils.showToast(getApplicationContext(), getString(R.string.actualizado));
+                        isEdit = false;
+                        edit();
+                    }
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.actualizadoError));
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    isEdit = false;
+                    edit();
                     break;
                 case 4:
                     Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
@@ -149,6 +195,9 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                     break;
                 case 5:
                     Utils.showToast(getApplicationContext(), getString(R.string.noActualizableForm));
+                    isEdit = false;
+                    edit();
+
                     break;
                 case 100:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -163,21 +212,23 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     }
 
     private void showDialogs() {
-        final DialogYesNoGeneral mensaje = new DialogYesNoGeneral();
-        mensaje.loadData(null, "Error al obtener la inscripcion. ¿Desea volver a intentarlo?", new YesNoDialogListener() {
-            @Override
-            public void yes() {
-                mensaje.dismiss();
-                loadInfo();
-            }
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setDescripcion(getString(R.string.inscripcionNoCarga))
+                .setIcono(R.drawable.ic_error)
+                .setTipo(DialogoGeneral.TIPO_SI_NO)
+                .setListener(new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        loadInfo();
+                    }
 
-            @Override
-            public void no() {
-                mensaje.dismiss();
-                finish();
-            }
-        }, getApplicationContext());
-        mensaje.loadIcon(R.drawable.ic_error);
+                    @Override
+                    public void no() {
+                        finish();
+                    }
+                })
+                .setTipo(DialogoGeneral.TIPO_SI_NO);
+        final DialogoGeneral mensaje = builder.build();
         mensaje.setCancelable(false);
         mensaje.show(getSupportFragmentManager(), "dialog_error");
     }
@@ -190,6 +241,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             switch (estado) {
                 case -1:
                     Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    showDialogs();
                     break;
                 case 1:
                     //Exito
@@ -225,139 +277,154 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             JSONArray array = jsonObject.getJSONArray("mensaje");
             JSONObject o = array.getJSONObject(0);
 
-            int idInscripcion, idDeporte, disponible, est, idUsuario, idTemporada, wsp, inten, tipoUsuario, cantMaterias, idPreguntas, anio = 0;
-            String facebook, instagram, objetivo, altura, peso,
-                    nombre, nombreD, apellido, fechaNac, pais, provincia, localidad, domicilio,
-                    barrio, telefono, mail, cuales, carrera = "", legajo = "", facultad = "", lugar;
+            int anio = 0, idDeporte;
+            String carrera, facultad, legajo, nombreD;
+            Inscripcion inscripcion = Inscripcion.mapper(o, Inscripcion.COMPLETE);
+            Usuario usuario = Usuario.mapper(o, Usuario.MEDIUM);
+            if (inscripcion != null && usuario != null) {
+                idTem = inscripcion.getIdTemporada();
+                tipoU = usuario.getTipoUsuario();
+                idPre = inscripcion.getIdPregunta();
+                idU = inscripcion.getIdUsuario();
+                disp = inscripcion.getDisponible();
+                estado = inscripcion.getIdEstado();
+                val = inscripcion.getValidez();
+                idDeporte = Integer.parseInt(o.getString("idDeporte"));
+                nombreD = o.getString("nombreD");
+                if (jsonObject.has("dato")) {
+                    JSONObject object = jsonObject.getJSONObject("dato");
+                    anio = Integer.parseInt(object.getString("anio"));
+                    carrera = object.getString("carrera");
+                    facultad = object.getString("facultad");
+                    legajo = object.getString("legajo");
+                } else {
+                    carrera = "N/A";
+                    facultad = "N/A";
+                    legajo = "N/A";
+                    anio = 0;
+                }
+                txtFechaIns.setText(Utils.getFechaFormat(inscripcion.getFechaRegistro()));
+                txtFechaModi.setText(Utils.getFechaFormat(inscripcion.getFechaModificacion()));
+                edtEdad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()))));
+                edtDni.setText(String.valueOf(usuario.getIdUsuario()));
+                edtNombre.setText(usuario.getNombre());
+                edtApellido.setText(usuario.getApellido());
+                edtFechaNac.setText(usuario.getFechaNac());
+                edtBarrio.setText(usuario.getBarrio());
+                edtLocalidad.setText(usuario.getLocalidad());
+                edtProvincia.setText(usuario.getProvincia());
+                edtPais.setText(usuario.getPais());
+                edtDomicilio.setText(usuario.getDomicilio());
+                edtMail.setText(usuario.getMail());
+                edtAnioIngreso.setText(String.valueOf(anio));
+                edtFace.setText(inscripcion.getFacebook());
+                edtInsta.setText(inscripcion.getInstagram());
+                edtPeso.setText(inscripcion.getPeso());
+                edtAltura.setText(inscripcion.getAltura());
+                edtTelefono.setText(usuario.getTelefono());
+                edtLugar.setText(inscripcion.getLugar());
+                edtObj.setText(inscripcion.getObjetivo());
+                edtCuales.setText(inscripcion.getCuales());
+                edtMaterias.setText(String.valueOf(inscripcion.getCantMaterias()));
+                txtDeporte.setText(nombreD);
+                txtTitulo.setText(String.format("Inscripción #%s", inscripcion.getIdInscripcion()));
+                edtCarrera.setText(carrera);
+                edtFacultad.setText(facultad);
+                edtLegajo.setText(legajo);
+                if (inscripcion.getWsp() == 1) {
+                    chIsWsp.setChecked(true);
+                    isWsp = true;
+                } else {
+                    isWsp = false;
+                    chIsWsp.setChecked(false);
 
-
-            idInscripcion = Integer.parseInt(o.getString("idInscripcion"));
-            idUsuario = Integer.parseInt(o.getString("idUsuario"));
-            idTemporada = Integer.parseInt(o.getString("idTemporada"));
-            wsp = Integer.parseInt(o.getString("isWhatsapp"));
-            inten = Integer.parseInt(o.getString("intensidad"));
-            tipoUsuario = Integer.parseInt(o.getString("tipoUsuario"));
-            cantMaterias = Integer.parseInt(o.getString("cantMaterias"));
-            idPreguntas = Integer.parseInt(o.getString("idPregunta"));
-            idDeporte = Integer.parseInt(o.getString("idDeporte"));
-            disponible = Integer.parseInt(o.getString("disponible"));
-            est = Integer.parseInt(o.getString("estado"));
-
-
-            idTem = idTemporada;
-            tipoU = tipoUsuario;
-            idPre = idPreguntas;
-            idU = idUsuario;
-            disp = disponible;
-            estado = est;
-
-            facebook = o.getString("facebook");
-            instagram = o.getString("instagram");
-            telefono = o.getString("telefono");
-            objetivo = o.getString("objetivo");
-            altura = o.getString("altura");
-            peso = o.getString("peso");
-            nombre = o.getString("nombre");
-            apellido = o.getString("apellido");
-            fechaNac = o.getString("fechaNac");
-            pais = o.getString("pais");
-            provincia = o.getString("provincia");
-            localidad = o.getString("localidad");
-            domicilio = o.getString("domicilio");
-            barrio = o.getString("barrio");
-            mail = o.getString("mail");
-            cuales = o.getString("cuales");
-            lugar = o.getString("lugar");
-            nombreD = o.getString("nombreD");
-
-            if (jsonObject.get("dato") != null) {
-                JSONObject object = jsonObject.getJSONObject("dato");
-                anio = Integer.parseInt(object.getString("anio"));
-                carrera = object.getString("carrera");
-                facultad = object.getString("facultad");
-                legajo = object.getString("legajo");
-            } else {
-                carrera = "N/A";
-                facultad = "N/A";
-                legajo = "N/A";
-            }
-
-            edtEdad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(fechaNac))));
-            edtDni.setText(String.valueOf(idUsuario));
-            edtNombre.setText(nombre);
-            edtApellido.setText(apellido);
-            edtFechaNac.setText(fechaNac);
-            edtBarrio.setText(barrio);
-            edtLocalidad.setText(localidad);
-            edtProvincia.setText(provincia);
-            edtPais.setText(pais);
-            edtDomicilio.setText(domicilio);
-            edtMail.setText(mail);
-            edtAnioIngreso.setText(String.valueOf(anio));
-            edtFace.setText(facebook);
-            edtInsta.setText(instagram);
-            edtPeso.setText(peso);
-            edtAltura.setText(altura);
-            edtTelefono.setText(telefono);
-            edtLugar.setText(lugar);
-            edtObj.setText(objetivo);
-            edtCuales.setText(cuales);
-            edtMaterias.setText(String.valueOf(cantMaterias));
-            txtDeporte.setText(nombreD);
-            txtTitulo.setText(String.format("Inscripción #%s", idInscripcion));
-            edtCarrera.setText(carrera);
-            edtFacultad.setText(facultad);
-            edtLegajo.setText(legajo);
-
-            if (wsp == 1) {
-                chIsWsp.setChecked(true);
-                isWsp = true;
-            } else {
-                isWsp = false;
-                chIsWsp.setChecked(false);
-
-            }
-
-            if (inten == -1) {
-                linearActividades.setVisibility(View.GONE);
-                chNoActividad.setChecked(true);
-                echSiActividad.setChecked(false);
-                isActividad = false;
-            } else {
-                linearActividades.setVisibility(View.VISIBLE);
-                echSiActividad.setChecked(true);
-                chNoActividad.setChecked(false);
-                isActividad = true;
-                switch (inten) {
-                    case 1:
-                        chMedia.setChecked(false);
-                        chAlta.setChecked(false);
-                        chBaja.setChecked(true);
-                        intensidad = 1;
-                        break;
-                    case 2:
-                        chMedia.setChecked(false);
-                        chAlta.setChecked(true);
-                        chBaja.setChecked(false);
-                        intensidad = 2;
-                        break;
-                    case 3:
-                        chMedia.setChecked(true);
-                        chAlta.setChecked(false);
-                        chBaja.setChecked(false);
-                        intensidad = 3;
-                        break;
                 }
 
+                updateButton(val);
+
+                if (inscripcion.getIntensidad() == -1) {
+                    linearActividades.setVisibility(View.GONE);
+                    chNoActividad.setChecked(true);
+                    echSiActividad.setChecked(false);
+                    isActividad = false;
+                } else {
+                    linearActividades.setVisibility(View.VISIBLE);
+                    echSiActividad.setChecked(true);
+                    chNoActividad.setChecked(false);
+                    isActividad = true;
+                    switch (inscripcion.getIntensidad()) {
+                        case 1:
+                            chMedia.setChecked(false);
+                            chAlta.setChecked(false);
+                            chBaja.setChecked(true);
+                            intensidad = 1;
+                            break;
+                        case 2:
+                            chMedia.setChecked(false);
+                            chAlta.setChecked(true);
+                            chBaja.setChecked(false);
+                            intensidad = 2;
+                            break;
+                        case 3:
+                            chMedia.setChecked(true);
+                            chAlta.setChecked(false);
+                            chBaja.setChecked(false);
+                            intensidad = 3;
+                            break;
+                    }
+
+
+                }
+                Glide.with(imgIcono.getContext()).load(Utils.getIconDeporte(idDeporte)).into(imgIcono);
+
+                if (jsonObject.has("cred")){
+
+                    JSONArray credencial = jsonObject.getJSONArray("cred");
+
+                    if (credencial.length() > 0){
+                        btnCarnet.setEnabled(false);
+
+                        for (int i = 0; i<credencial.length();i++){
+                            JSONObject object = credencial.getJSONObject(i);
+                            String idCredencial = object.getString("idCredencial");
+                            String idInscripcion = object.getString("idInscripcion");
+                            String validez = object.getString("validez");
+
+                            String titulo = String.format("%s #%s #%s",
+                                    "CREDENCIAL", idCredencial, idInscripcion);
+
+                            Credencial credencial1 = new Credencial(Integer.parseInt(idCredencial), titulo, Integer.parseInt(validez));
+
+                            mList.add(credencial1);
+                        }
+                    }else{
+                        btnCarnet.setEnabled(true);
+                    }
+
+
+                }
+                mAdapter = new CredencialesAdapter(mList, getApplicationContext(), true);
+                mAdapter.setOnClickListenerAdapter(new OnClickListenerAdapter() {
+                    @Override
+                    public void onClick(int id) {
+                        mList.get(id).setValidez(mList.get(id).getValidez() == 1 ? 0 : 1);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+                mRecyclerView.setAdapter(mAdapter);
 
             }
-            Glide.with(imgIcono.getContext()).load(Utils.getIconDeporte(idDeporte)).into(imgIcono);
-
         } catch (JSONException e) {
             e.printStackTrace();
             showDialogs();
         }
 
+    }
+
+    private void updateButton(int val) {
+        if (val == 0)
+            btnBajaAlta.setText("HABILITAR INSCRIPCION");
+        else btnBajaAlta.setText("DESHABILITAR INSCRIPCION");
     }
 
     private void loadListener() {
@@ -369,6 +436,17 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         chMedia.setOnClickListener(this);
         chAlta.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+        btnEstado.setOnClickListener(this);
+        btnPDF.setOnClickListener(this);
+        btnCarnet.setOnClickListener(this);
+        btnBajaAlta.setOnClickListener(this);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                Utils.showToast(getApplicationContext(), mList.get(position).getTitulo());
+            }
+        });
 
     }
 
@@ -398,6 +476,10 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         edtCarrera = findViewById(R.id.edtCarrera);
         edtLegajo = findViewById(R.id.edtLegajo);
         edtFacultad = findViewById(R.id.edtxFacultad);
+        txtFechaIns = findViewById(R.id.edtFechaRegistro);
+        txtFechaModi = findViewById(R.id.edtFechaMod);
+        mRecyclerView = findViewById(R.id.recycler);
+        linearCredencial = findViewById(R.id.latCredencial);
 
         campos = new EditText[]{edtMaterias, edtFace, edtInsta, edtPeso, edtAltura,
                 edtLugar, edtObj, edtCuales};
@@ -414,6 +496,11 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         chMedia = findViewById(R.id.chbxMedia);
         fabEditar = findViewById(R.id.fab);
         chIsWsp = findViewById(R.id.chbxWhats);
+        btnBajaAlta = findViewById(R.id.btnAltaBaja);
+        btnCarnet = findViewById(R.id.btnCarnet);
+        btnPDF = findViewById(R.id.btnPDF);
+        btnEstado = findViewById(R.id.btnEstado);
+        linearAdmin = findViewById(R.id.latAdmin);
 
         noCheck = new CheckBox[]{echSiActividad, chNoActividad, chMedia, chAlta, chBaja, chIsWsp};
 
@@ -427,6 +514,20 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnAltaBaja:
+                if (val == 0)
+                    val = 1;
+                else val = 0;
+                bajaAlta();
+                break;
+            case R.id.btnEstado:
+                openDialogEstado();
+                break;
+            case R.id.btnPDF:
+                break;
+            case R.id.btnCarnet:
+                generarCredencial();
+                break;
             case R.id.fab:
                 edit();
                 break;
@@ -462,11 +563,15 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                 linearActividades.setVisibility(View.GONE);
                 break;
             case R.id.chbxSi:
-                isEdit = true;
+                if (!isActividad) {
+                    isEdit = true;
+                    chNoActividad.setChecked(false);
+                    isActividad = true;
+                    linearActividades.setVisibility(View.VISIBLE);
+                    chBaja.setChecked(true);
+                    intensidad = 1;
+                }
                 echSiActividad.setChecked(true);
-                chNoActividad.setChecked(false);
-                isActividad = true;
-                linearActividades.setVisibility(View.VISIBLE);
                 break;
             case R.id.chbxWhats:
                 isEdit = true;
@@ -479,6 +584,164 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                 }
                 break;
         }
+    }
+
+    private void generarCredencial() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?id=%s&key=%s&idI=%s",
+                Utils.URL_INSCRIPCION_CARNET, id, key, idInscrip);
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                procesarRespuestaCarnet(response);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuestaCarnet(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
+                case 1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.credencialCreada));
+                    btnCarnet.setEnabled(false);
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorCrearCredencial));
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 100:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+        }
+    }
+
+    private void bajaAlta() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?id=%s&key=%s&idI=%s&val=%s",
+                Utils.URL_INSCRIPCION_PARTICULAR_ELIMIAR, id, key, idInscrip, val);
+        StringRequest request = new StringRequest(Request.Method.DELETE, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                procesarRespuestaAltaBaja(response);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
+    }
+
+    private void procesarRespuestaAltaBaja(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
+                case 1:
+                    String mensaje = "";
+                    if (val == 0)
+                        mensaje = "Inscripción deshabilitada";
+                    else mensaje = "Inscripción habilitada";
+                    updateButton(val);
+                    Utils.showToast(getApplicationContext(), mensaje);
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 100:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+        }
+    }
+
+    private void openDialogEstado() {
+        final DialogoListaEstados dialogoListaEstados = new DialogoListaEstados();
+        dialogoListaEstados.setContextEstado(getApplicationContext());
+        final ArrayList<Estado> list = new ArrayList<>();
+        list.add(new Estado(1, "ACEPTADO", false));
+        list.add(new Estado(2, "RECHAZADO", false));
+        list.add(new Estado(3, "EN PROCESO", false));
+        list.get(estado - 1).setSelect(true);
+        dialogoListaEstados.setListener(new OnClickListenerAdapter() {
+            @Override
+            public void onClick(int id) {
+                dialogoListaEstados.dismiss();
+                if (estado == id + 1)
+                    return;
+                isEstadoEdit = true;
+                estado = id + 1;
+                if (estado == 1)
+                    disp = 0;
+                else disp = 1;
+                update();
+            }
+        });
+        dialogoListaEstados.setList(list);
+        dialogoListaEstados.setId(estado - 1);
+        dialogoListaEstados.show(getSupportFragmentManager(), "dialog_estado");
     }
 
     private void edit() {
@@ -506,63 +769,46 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         String altura = edtAltura.getText().toString().trim();
         String fechaM = Utils.getFechaName(new Date(System.currentTimeMillis()));
 
-        if (!validador.noVacio(cantM, obj, peso, altura, fechaM)) {
+        if (!validador.validarNombresEdt(edtObj) && validador.validarNumero(edtMaterias)
+                && validador.validarNumeroDecimal(edtAltura)
+                && validador.validarNumeroDecimal(edtPeso)) {
 
-            if (validador.validarNumero(cantM)) {
+            if (ins.equals(""))
+                ins = "N/A";
+            if (face.equals(""))
+                face = "N/A";
 
-                if (validador.validadNumeroDecimal(peso) && validador.validadPeso(peso)
-                        && validador.validadNumeroDecimal(altura) && validador.validadAltura(altura)) {
+            String datos = "?id=%s&idT=%s&idI=%s&cm=%s&fa=%s&ins=%s&isw=%s&obj=%s&disp=%s&idP=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&fm=%s&est=%s";
 
-                    if (validador.lengthMores(face, ins)) {
+            if (isActividad) {
 
+                if (!validador.validarNombresEdt(edtCuales, edtLugar) && !(cual.equals("N/A") || lugar.equals("N/A"))) {
 
-                        if (ins.equals(""))
-                            ins = "N/A";
-                        if (face.equals(""))
-                            face = "N/A";
+                    if (intensidad != -1)
 
-                        String datos = "?id=%s&idT=%s&idI=%s&cm=%s&fa=%s&ins=%s&isw=%s&obj=%s&disp=%s&idP=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&fm=%s&est=%s";
-
-                        if (isActividad) {
-
-                            if (validador.lengthMores(cual, lugar) && !(cual.equals("N/A") || lugar.equals("N/A"))) {
-
-                                if (intensidad != -1)
-
-                                    //Send
-                                    sendServer(String.format(datos, idU, idTem, idInscrip, cantM, face, ins, isWsp ? 1 : 2, obj, disp, idPre, cual, intensidad,
-                                            lugar, peso, altura, fechaM, estado));
-                                else
-                                    Utils.showToast(getApplicationContext(), getString(R.string.elegirIntensidad));
-
-                            } else
-                                Utils.showToast(getApplicationContext(), getString(R.string.noActividadCompleta));
-
-                        } else {
-                            sendServer(String.format(datos, idU, idTem, idInscrip, cantM, face, ins, isWsp ? 1 : 2, obj, disp, idPre, "N/A", -1,
-                                    "N/A", peso, altura, fechaM, estado));
-                        }
-
-                    } else
-                        Utils.showToast(getApplicationContext(), getString(R.string.redesSociales));
+                        //Send
+                        sendServer(String.format(datos, idU, idTem, idInscrip, cantM, face, ins, isWsp ? 1 : 2, obj, disp, idPre, cual, intensidad,
+                                lugar, peso, altura, fechaM, estado));
+                    else
+                        Utils.showToast(getApplicationContext(), getString(R.string.elegirIntensidad));
 
                 } else
-                    Utils.showToast(getApplicationContext(), getString(R.string.noAlturaPeso));
+                    Utils.showToast(getApplicationContext(), getString(R.string.noActividadCompleta));
 
-            } else
-                Utils.showToast(getApplicationContext(), String.format(getString(R.string.noNumero), String.valueOf(cantM)));
+            } else {
+                sendServer(String.format(datos, idU, idTem, idInscrip, cantM, face, ins, isWsp ? 1 : 2, obj, disp, idPre, "N/A", -1,
+                        "N/A", peso, altura, fechaM, estado));
+            }
 
-        } else {
-            Utils.showToast(getApplicationContext(), getString(R.string.camposVacios));
+
         }
-
 
     }
 
     private void sendServer(String datos) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
-        String URL = String.format("%s%s&key=%s", Utils.URL_INSCRIPCION_ACTUALIZAR, datos, key);
+        String URL = String.format("%s%s&key=%s&ad=%s", Utils.URL_INSCRIPCION_ACTUALIZAR, datos, key, isAdmin ? 1 : 2);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -601,6 +847,16 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             e2.setEnabled(false);
         }
 
+        if (mode != 0){
+            btnPDF.setEnabled(false);
+            btnEstado.setEnabled(false);
+            btnBajaAlta.setEnabled(false);
+        }else{
+            btnPDF.setEnabled(true);
+            btnEstado.setEnabled(true);
+            btnBajaAlta.setEnabled(true);
+        }
+
         for (CheckBox c : noCheck) {
             if (mode == 0)
                 c.setEnabled(false);
@@ -621,6 +877,13 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
 
 
     }
+
+    /*@Override
+    public void onBackPressed() {
+        if (isEdit)
+            Utils.showToast(getApplicationContext(), getString(R.string.modoEdicionOn));
+        super.onBackPressed();
+    }*/
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

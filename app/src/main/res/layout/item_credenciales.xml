@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/layout"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -43,11 +46,29 @@
                 android:id="@+id/txtTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Inscripción al deporte"
                 android:textSize="14sp"
                 android:fontFamily="@font/montserrat_black" />
+
+            <TextView
+                android:id="@+id/idEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="EN PROCESO"
+                android:layout_marginEnd="5dp"
+                android:textStyle="italic|bold"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+            <Switch
+                android:layout_marginStart="3dp"
+                android:id="@+id/switchCred"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

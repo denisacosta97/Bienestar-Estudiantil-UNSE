@@ -204,34 +204,7 @@ public class DeportesFragment extends Fragment {
             try {
                 JSONObject j = mensaje.getJSONObject(i);
 
-                String nombre, descripcion, diasEntreno, horario, lugar, lat, lon, fechaIngreso, nombreP, apellido;
-                int valiz, idDeporte, idEntrenador;
-
-                nombre = j.getString("nombre");
-                descripcion = j.getString("descripcion");
-                diasEntreno = j.getString("diaEntreno");
-                horario = j.getString("horario");
-                lugar = j.getString("lugar");
-                lat = j.getString("lat");
-                lon = j.getString("lon");
-                fechaIngreso = j.getString("fechaIngreso");
-                nombreP = j.getString("nombreP");
-                apellido = j.getString("apellido");
-
-                valiz = Integer.parseInt(j.getString("validez"));
-                idDeporte = Integer.parseInt(j.getString("idDeporte"));
-                idEntrenador = Integer.parseInt(j.getString("idEntrenador"));
-
-
-                Usuario usuario = new Usuario(idEntrenador, nombreP, apellido, 2);
-
-                Profesor profesor = new Profesor(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
-                        usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),
-                        usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(), usuario.getSexo(),
-                        usuario.getMail(), usuario.getTipoUsuario(), usuario.getFechaRegistro(), usuario.getFechaModificacion(),
-                        usuario.getValidez(), idEntrenador, "", fechaIngreso);
-                Deporte deporte = new Deporte(0, idDeporte, nombre, descripcion, lugar, diasEntreno,
-                        horario, lat, lon, valiz, profesor);
+                Deporte deporte = Deporte.mapper(j);
                 mDeportes.add(deporte);
 
 

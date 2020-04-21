@@ -58,7 +58,7 @@ import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogYesNoGeneral;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
@@ -506,11 +506,12 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void altaBajaUser() {
-        final DialogYesNoGeneral dialogYesNoGeneral = new DialogYesNoGeneral();
-        dialogYesNoGeneral.loadData(getString(R.string.advertencia),
-                String.format(getString(R.string.usuarioEliminar), validez == 0 ? "alta" : "baja",
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setTitulo(getString(R.string.advertencia))
+                .setDescripcion( String.format(getString(R.string.usuarioEliminar), validez == 0 ? "alta" : "baja",
                         mUsuario.getNombre(),
-                        mUsuario.getApellido()), new YesNoDialogListener() {
+                        mUsuario.getApellido()))
+                .setListener(new YesNoDialogListener() {
                     @Override
                     public void yes() {
                         if (validez == 0)
@@ -518,17 +519,17 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                         else
                             validez = 0;
                         baja(validez);
-                        dialogYesNoGeneral.dismiss();
                     }
 
                     @Override
                     public void no() {
-                        dialogYesNoGeneral.dismiss();
+
                     }
-                }, getApplicationContext());
-        dialogYesNoGeneral.loadIcon(R.drawable.ic_advertencia);
-        dialogYesNoGeneral.loadTextButton("SI", "NO");
-        dialogYesNoGeneral.show(getSupportFragmentManager(), "dialog_ad");
+                })
+                .setIcono(R.drawable.ic_advertencia)
+                .setTipo(DialogoGeneral.TIPO_SI_NO);
+        DialogoGeneral dialogoGeneral = builder.build();
+        dialogoGeneral.show(getSupportFragmentManager(), "dialog_ad");
     }
 
     private void baja(int val) {

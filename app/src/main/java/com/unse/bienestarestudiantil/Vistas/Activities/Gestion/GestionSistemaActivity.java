@@ -15,7 +15,8 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
@@ -62,6 +63,9 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                     case 1000:
                         startActivity(new Intent(getApplicationContext(), GestionUsuariosActivity.class));
                         break;
+                    case 900:
+                        startActivity(new Intent(getApplicationContext(), GestionRolesActivity.class));
+                        break;
                     case 1:
                         startActivity(new Intent(getApplicationContext(), EstadisticasActivity.class));
                         break;
@@ -69,7 +73,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                         //startActivity(new Intent(getApplicationContext(), AsistenciaClasesActivity.class));
                         break;
                     case 100:
-                        startActivity(new Intent(getApplicationContext(), MainGestionDeportesActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionGeneralDeportesActivity.class));
                         break;
 
                 }
@@ -86,16 +90,16 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
 
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 2, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 900, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
 
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.color2));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.color3));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.color4));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
 
         mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);

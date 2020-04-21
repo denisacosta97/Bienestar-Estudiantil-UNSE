@@ -92,7 +92,7 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
                 String dni = edtDNI.getText().toString().trim();
 
                 Validador validador = new Validador(getApplicationContext());
-                if (!validador.noVacio(email, dni)) {
+                if (false/*!validador.noVacio(email, dni)*/) {
 
                     if (validador.validarMail(email)) {
 

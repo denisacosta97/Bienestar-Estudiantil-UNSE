@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,8 @@ import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
+
+import static android.view.View.GONE;
 
 public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.AlumnoViewHolder> {
 
@@ -61,33 +64,43 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
         if (mList.size() != 0) {
 
             Usuario alumno = mList.get(i);
-            holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
-            holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
-            holder.txtTipo.setText(Utils.getTipoUser(alumno.getTipoUsuario()));
-            switch (tipo) {
-                case Utils.TIPO_USUARIO:
-                    holder.txtRol.setVisibility(View.GONE);
-                    break;
+
+            if (tipo == Utils.TIPO_ROLES){
+                holder.latFotos.setVisibility(GONE);
+                holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
+                holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
+                holder.txtRol.setVisibility(View.VISIBLE);
+                holder.txtRol.setText(String.format("Cant. Roles %s", alumno.getValidez()));
+
+            }else {
+                holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
+                holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
+                holder.txtTipo.setText(Utils.getTipoUser(alumno.getTipoUsuario()));
+                switch (tipo) {
+                    case Utils.TIPO_USUARIO:
+                        holder.txtRol.setVisibility(GONE);
+                        break;
+                }
+                int icon = 0;
+                switch (alumno.getTipoUsuario()) {
+                    case 1:
+                        icon = R.drawable.ic_tipo_usuario;
+                        break;
+                    case 2:
+                        icon = R.drawable.ic_tipo_prof;
+                        break;
+                    case 3:
+                        icon = R.drawable.ic_tipo_nodoc;
+                        break;
+                    case 4:
+                        icon = R.drawable.ic_tipo_egresado;
+                        break;
+                    case 5:
+                        icon = R.drawable.ic_tipo_particular;
+                        break;
+                }
+                Glide.with(holder.imgIconRol.getContext()).load(icon).into(holder.imgIconRol);
             }
-            int icon = 0;
-            switch (alumno.getTipoUsuario()) {
-                case 1:
-                    icon = R.drawable.ic_tipo_usuario;
-                    break;
-                case 2:
-                    icon = R.drawable.ic_tipo_prof;
-                    break;
-                case 3:
-                    icon = R.drawable.ic_tipo_nodoc;
-                    break;
-                case 4:
-                    icon = R.drawable.ic_tipo_egresado;
-                    break;
-                case 5:
-                    icon = R.drawable.ic_tipo_particular;
-                    break;
-            }
-            Glide.with(holder.imgIconRol.getContext()).load(icon).into(holder.imgIconRol);
 
         }
 
@@ -132,8 +145,8 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
                 break;
             case Utils.LIST_NOMBRE:
                 for (Usuario item : mListCopia) {
-                    String nombre = String.format("%s %s", item.getNombre(), item.getApellido());
-                    if (nombre.toLowerCase().contains(txt.toLowerCase())) {
+                    String nombre = String.format("%s %s ", item.getNombre(), item.getApellido());
+                    if (nombre.trim().toLowerCase().contains(txt.toLowerCase())) {
                         result.add(item);
                     }
 
@@ -154,6 +167,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
 
         TextView txtNombre, txtRol, txtDni, txtTipo;
         CardView mCardView;
+        LinearLayout latFotos;
         ImageView imgIconRol;
 
         AlumnoViewHolder(View view) {
@@ -165,6 +179,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
             txtRol = view.findViewById(R.id.txtRol);
             txtTipo = view.findViewById(R.id.txtRolName);
             imgIconRol = view.findViewById(R.id.imgIconRol);
+            latFotos = view.findViewById(R.id.latFoto);
 
 
         }

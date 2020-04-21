@@ -145,7 +145,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
     private void loadData() {
         mList = new ArrayList<>();
 
-        mAdapter = new CredencialesAdapter(mList, getApplicationContext());
+        mAdapter = new CredencialesAdapter(mList, getApplicationContext(),false);
 
         mManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -356,7 +356,7 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
 
                 String titulo = String.format("%s - %s", nombreTorneo, nombreDeporte);
 
-                CredencialTorneo socio = new CredencialTorneo(id, idUsuario,titulo, validez, idTorneo, idDeporte,
+                CredencialTorneo socio = new CredencialTorneo(id, idUsuario, titulo, validez, idTorneo, idDeporte,
                         anio, tipoUsuario, nombreTorneo, lugar, fechaInicio, fechaFin, nombreDeporte, descripcion, nombreUsuario,
                         apellido, fechaNac, sexo);
 
@@ -436,11 +436,12 @@ public class ListaCredencialesActivity extends AppCompatActivity implements View
             try {
                 JSONObject object = mensaje.getJSONObject(i);
 
-                String nombre, descripcion, titulo, legajo = null, facultad = null;
+                String nombre, descripcion = "", titulo, legajo = null, facultad = null;
                 int validez, anio, idTemporada, idDeporte, idCredencial, tipoUsuario;
 
                 nombre = object.getString("nombre");
-                descripcion = object.getString("descripcion");
+                if (object.has("descripcion"))
+                    descripcion = object.getString("descripcion");
                 anio = Integer.parseInt(object.getString("anio"));
                 validez = Integer.parseInt(object.getString("validez"));
                 idTemporada = Integer.parseInt(object.getString("idTemporada"));

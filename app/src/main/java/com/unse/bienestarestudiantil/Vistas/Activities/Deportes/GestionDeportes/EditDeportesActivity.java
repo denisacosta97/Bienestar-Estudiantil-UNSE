@@ -157,10 +157,10 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         //Comprobacion que no sean vacios
-        if (!validador.noVacio(horario, dia, entrenador, lugar)) {
+        if (false/*!validador.noVacio(horario, dia, entrenador, lugar)*/) {
 
             //Comprobacion del tipo d edatos
-            if (validador.validarHora(horario) && validador.noVacio(entrenador, dia, lugar)) {
+            if (validador.validarHora(horario) && false/*validador.noVacio(entrenador, dia, lugar)*/) {
 
                 //Comprobacion de tamaños
                 if (validador.lengthMore(horario) && validador.lengthMore(dia)

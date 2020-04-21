@@ -23,7 +23,7 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ListAsistenciaDeportesActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.MainGestionDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CambiarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Perfil.RecuperarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionProfeActivity" />
@@ -32,8 +32,8 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BecadoActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionBecadosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BMDeportesActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InscriptosActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ABMInscriptosActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.ListaInscriptosActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.InscripcionesActivity" />
         <activity android:name=".Vistas.Fragmentos.ComedorFragment" />
         <activity android:name=".Vistas.Activities.Comedor.MainGestionComedor" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosHistoricosActivity" />
@@ -136,6 +136,8 @@
         <activity android:name=".Vistas.Activities.Deportes.ModificarInscripcionDeporteActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity" />
         <activity android:name=".Vistas.Activities.Perfil.UploadPictureActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionRoles.EditarRolesActivity" />
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

@@ -34,8 +34,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import static android.view.View.GONE;
 
@@ -94,9 +100,9 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         ItemDato itemDato = (ItemDato) itemBase;
         switch (itemDato.getInscripcion().getTipo()) {
             case Inscripcion.TIPO_BECA:
-                intent = new Intent(getApplicationContext(), null);
+               // intent = new Intent(getApplicationContext(), null);
                 int id = itemDato.getInscripcion().getIdConvocatoria();
-                intent.putExtra(Utils.CREDENCIAL, id);
+                //intent.putExtra(Utils.CREDENCIAL, id);
                 //startActivity(intent);
                 break;
             case Inscripcion.TIPO_DEPORTE:
@@ -112,7 +118,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         mList = new ArrayList<>();
         mListOficial = new ArrayList<>();
 
-        mFechasAdapter = new FechasAdapter(getApplicationContext(), mListOficial);
+        mFechasAdapter = new FechasAdapter(getApplicationContext(), mListOficial, FechasAdapter.TIPO_INSCRIPCIONES);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
         mRecyclerView.setHasFixedSize(true);
@@ -151,7 +157,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 updateView(2);
                 dialog.dismiss();
 
@@ -170,28 +176,28 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "No existen datos");
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
-                    break;
-                case 4:
-                    Utils.showToast(getApplicationContext(), "Error interno, contacta al Administrador");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
             updateView(2);
         }
     }
@@ -205,16 +211,17 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    int id = Integer.parseInt(o.getString("idAutorizacion"));
+                    int id = Integer.parseInt(o.getString("idInscripcion"));
                     int idUsuario = Integer.parseInt(o.getString("idUsuario"));
                     int idConvocatoria = Integer.parseInt(o.getString("idConvocatoria"));
                     int anio = Integer.parseInt(o.getString("anio"));
                     int validez = Integer.parseInt(o.getString("validez"));
-
+                    int idEstado = Integer.parseInt(o.getString("idEstado"));
+                    String estado = o.getString("nombreE");
                     String titulo = o.getString("nombreB");
 
                     Inscripcion inscripcion = new Inscripcion(id, titulo, anio, idUsuario, idConvocatoria,
-                            validez, Inscripcion.TIPO_BECA);
+                            validez, Inscripcion.TIPO_BECA, idEstado, estado);
 
                     ItemDato dato = new ItemDato();
                     dato.setInscripcion(inscripcion);
@@ -228,16 +235,17 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
                 JSONObject o = jsonObject.getJSONObject("becas");
 
-                int id = Integer.parseInt(o.getString("idAutorizacion"));
+                int id = Integer.parseInt(o.getString("idInscripcion"));
                 int idUsuario = Integer.parseInt(o.getString("idUsuario"));
                 int idConvocatoria = Integer.parseInt(o.getString("idConvocatoria"));
                 int anio = Integer.parseInt(o.getString("anio"));
                 int validez = Integer.parseInt(o.getString("validez"));
-
+                String estado = o.getString("nombreE");
+                int idEstado = Integer.parseInt(o.getString("idEstado"));
                 String titulo = o.getString("nombreB");
 
                 Inscripcion inscripcion = new Inscripcion(id, titulo, anio, idUsuario, idConvocatoria,
-                        validez, Inscripcion.TIPO_BECA);
+                        validez, Inscripcion.TIPO_BECA, idEstado, estado);
 
                 ItemDato dato = new ItemDato();
                 dato.setInscripcion(inscripcion);
@@ -259,11 +267,13 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
                     int idConvocatoria = Integer.parseInt(o.getString("idTemporada"));
                     int anio = Integer.parseInt(o.getString("anio"));
                     int validez = Integer.parseInt(o.getString("validez"));
+                    int idEstado = Integer.parseInt(o.getString("idEstado"));
+                    String estado = o.getString("nombreE");
 
                     String titulo = o.getString("nombre");
 
                     Inscripcion inscripcion = new Inscripcion(id, titulo, anio, idUsuario, idConvocatoria,
-                            validez, Inscripcion.TIPO_DEPORTE);
+                            validez, Inscripcion.TIPO_DEPORTE, idEstado, estado);
 
                     ItemDato dato = new ItemDato();
                     dato.setInscripcion(inscripcion);
@@ -281,11 +291,13 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
                 int idConvocatoria = Integer.parseInt(o.getString("idTemporada"));
                 int anio = Integer.parseInt(o.getString("anio"));
                 int validez = Integer.parseInt(o.getString("validez"));
+                String estado = o.getString("nombreE");
+                int idEstado = Integer.parseInt(o.getString("idEstado"));
 
                 String titulo = o.getString("nombre");
 
                 Inscripcion inscripcion = new Inscripcion(id, titulo, anio, idUsuario, idConvocatoria,
-                        validez, Inscripcion.TIPO_DEPORTE);
+                        validez, Inscripcion.TIPO_DEPORTE, idEstado, estado);
 
                 ItemDato dato = new ItemDato();
                 dato.setInscripcion(inscripcion);
@@ -299,7 +311,19 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         }
         HashMap<String, List<ItemBase>> groupedHashMap = groupDataIntoHashMap(mList);
 
-        for (String date : groupedHashMap.keySet()) {
+        Comparator<String> comparator = new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        };
+
+        List<String> anios = new ArrayList<>();
+        anios.addAll(groupedHashMap.keySet());
+
+        Collections.sort(anios, comparator);
+
+        for (String date : anios) {
             ItemFecha dateItem = new ItemFecha(date);
             mListOficial.add(dateItem);
 
