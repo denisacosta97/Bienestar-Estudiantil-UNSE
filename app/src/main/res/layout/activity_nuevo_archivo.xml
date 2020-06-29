@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar_trans" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="Nombre del Archivo" />
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/edtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="Área" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/border_spinner" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="Disponibilidad" />
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:id="@+id/latSwitch"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/button_border_select">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/txtDisponibilidad"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="ACTIVADO"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorWhite" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:layout_marginStart="15dp"
+                        android:theme="@style/SwithTeme"
+                        android:layout_marginEnd="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchCred" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:text="Elegir archivo" />
+
+
+            <LinearLayout
+                android:id="@+id/latDatos"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_find" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona aquí para elegir un archivo"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:padding="3dp"
+                    android:weightSum="1"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Nombre del Archivo" />
+
+                    <TextView
+                        android:padding="3dp"
+                        android:id="@+id/txtNombre"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorGreyDark"
+                        android:text="jejejeej.rgergerrgregrgreregrergerpdf" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="3dp"
+                    android:weightSum="1"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Tamaño del Archivo" />
+
+                    <TextView
+                        android:padding="3dp"
+                        android:id="@+id/txtDescripcion"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorGreyDark"
+                        android:text=" 0000 KB" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="3dp"
+                    android:weightSum="1"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="3dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Extensión del Archivo" />
+
+                    <TextView
+                        android:padding="3dp"
+                        android:id="@+id/txtEstado"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorGreyDark"
+                        android:text="PDF" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAceptar"
+                    android:layout_marginTop="10dp"
+                    android:padding="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="GUARDAR"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/viewSpace"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/btnVer"
+                    android:layout_marginTop="10dp"
+                    android:padding="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="VER ARCHIVO"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

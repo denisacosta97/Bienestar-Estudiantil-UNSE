@@ -12,6 +12,7 @@ import java.util.Map;
 public class UploadManager {
 
     public static final int IMAGE = 1;
+    public static final int FILE = 2;
 
     private int metodo = 10;
     private int tipoDato = -1;
@@ -151,8 +152,6 @@ public class UploadManager {
                 throw new NullPointerException("No se indicó la interfaz ResponseListener");
             if (mUploadManager.getErrorListener() == null)
                 throw new NullPointerException("No se indicó la interfaz ResponseErrorListener");
-            if (mUploadManager.getDatos() == null)
-                throw new IllegalArgumentException("No se indicó el dato a subir");
             if (mUploadManager.getTipoDato() == -1)
                 throw new IllegalArgumentException("No se indicó el tipo de dato");
 

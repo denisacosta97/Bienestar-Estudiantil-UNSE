@@ -13,6 +13,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -41,6 +42,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,13 +83,23 @@ public class Utils {
     public static final String ANIO = "anio_temp";
     public static final String ROLES = "roles_all";
     public static final String ROLES_USER = "roles_user";
+    public static final String TIPO_REGISTRO = "tipo_acdeso";
+    public static final String LIST_REGULARIDAD = "lista_regularidad";
+    public static final String ARCHIVO_NAME = "archivo_name";
+    public static final String LIST_HIJOS = "list_hijos";
+    public static final String LIST_SUSCROP = "list_sus";
+    public static final String LIST_CRED = "list_cred";
     //Constantes para activities
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
+    public static final int PERMISSION_ALL = 9092;
+    public static final int GET_FROM_DNI = 9093;
+    public static final int SELECT_FILE = 9094;
     //Constantes para tipos de usuario
     public static final int TIPO_USUARIO = 1;
     public static final int TIPO_ESTUDIANTE = 2;
     public static final int TIPO_ROLES = 10;
+    public static final int TIPO_SOCIO = 11;
     //Constantes para busqueda
     public static final String PATRON_LEGAJO = "[0-9]{1,5}(-|/)[0-9]{2,4}";
     public static final String PATRON_DNI = "([0-9]){5,8}";
@@ -103,11 +115,10 @@ public class Utils {
     public static final int MY_DEFAULT_TIMEOUT = 15000;
     //Constante de nombres de archivos
     public static final String PROFILE_PIC = "%s.jpg";
+    public static final String FILE_EXT = "%s";
     //Constantes de permisos
-    public static final int[] LIST_PERMISOS = new int[]{999,998};
+    public static final int[] LIST_PERMISOS = new int[]{999, 998};
 
-
-    public static final int PERMISSION_ALL = 1010;
 
     public static final int NOTICIA_NORMAL = 3030;
     public static final int NOTICIA_BUTTON_WEB = 3131;
@@ -143,55 +154,62 @@ public class Utils {
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
 
-    public static final int GET_FROM_GALLERY = 1011;
-    public static final int GET_FROM_DNI = 1010;
-
-
-
-    private static final String IP = "192.168.0.12";
+    private static final String IP = "bienestar.unse.edu.ar";
     //USUARIO
-    public static final String URL_USUARIO_INSERTAR = "http://"+IP+"/bienestar/usuario/insertar.php";
-    public static final String URL_USUARIO_ACTUALIZAR = "http://"+IP+"/bienestar/usuario/actualizar.php";
-    public static final String URL_USUARIO_LOGIN = "http://"+IP+"/bienestar/usuario/login.php";
-    public static final String URL_USUARIO_IMAGE = "http://"+IP+"/bienestar/general/uploadImage.php";
-    public static final String URL_USUARIO_IMAGE_LOAD = "http://"+IP+"/bienestar/usuariosImg/";
-    public static final String URL_CAMBIO_CONTRASENIA = "http://"+IP+"/bienestar/usuario/cambiarContrasenia.php";
-    public static final String URL_REC_CONTRASENIA = "http://"+IP+"/bienestar/usuario/recuperarContrasenia.php";
-    public static final String URL_USUARIOS_LISTA = "http://"+IP+"/bienestar/usuario/getUsuarios.php";
-    public static final String URL_USUARIO_BY_ID = "http://"+IP+"/bienestar/usuario/getUser.php";
-    public static final String URL_USUARIO_ELIMINAR = "http://"+IP+"/bienestar/usuario/eliminar.php";
+    public static final String URL_USUARIO_INSERTAR = "http://" + IP + "/bienestar/usuario/insertar.php";
+    public static final String URL_USUARIO_ACTUALIZAR = "http://" + IP + "/bienestar/usuario/actualizar.php";
+    public static final String URL_USUARIO_LOGIN = "http://" + IP + "/bienestar/usuario/login.php";
+    public static final String URL_USUARIO_IMAGE = "http://" + IP + "/bienestar/general/uploadImage.php";
+    public static final String URL_USUARIO_IMAGE_LOAD = "http://" + IP + "/bienestar/usuariosImg/";
+    public static final String URL_CAMBIO_CONTRASENIA = "http://" + IP + "/bienestar/usuario/cambiarContrasenia.php";
+    public static final String URL_REC_CONTRASENIA = "http://" + IP + "/bienestar/usuario/recuperarContrasenia.php";
+    public static final String URL_USUARIOS_LISTA = "http://" + IP + "/bienestar/usuario/getUsuarios.php";
+    public static final String URL_USUARIO_BY_ID = "http://" + IP + "/bienestar/usuario/getUser.php";
+    public static final String URL_USUARIO_ELIMINAR = "http://" + IP + "/bienestar/usuario/eliminar.php";
+    //ALUMNO
+    public static final String URL_REGULARIDAD = "http://" + IP + "/bienestar/usuario/insertarRegularidad.php";
+    public static final String URL_REGULARIDAD_CAMBIAR = "http://" + IP + "/bienestar/usuario/cambiarRegularidad.php";
     //SOCIO
-    public static final String URL_SOCIO_CREDENCIAL = "http://"+IP+"/bienestar/socio/getCredencial.php";
+    public static final String URL_SOCIO_CREDENCIAL = "http://" + IP + "/bienestar/socio/getCredencial.php";
+    public static final String URL_SOCIO_LISTA = "http://" + IP + "/bienestar/socio/getSocios.php";
+    public static final String URL_SOCIO_PARTIULAR = "http://" + IP + "/bienestar/socio/getSocio.php";
+    public static final String URL_SOCIO_FAMILIAR_AGREGAR = "http://" + IP + "/bienestar/socio/insertarFamiliar.php";
+    public static final String URL_SOCIO_FAMILIAR_ACTUALIZAR = "http://" + IP + "/bienestar/socio/actualizarFamiliar.php";
+    public static final String URL_CREDENCIAL_SOCIO_CAMBIAR = "http://" + IP + "/bienestar/socio/cambiarCredencial.php";
+    public static final String URL_SOCIO_SUSCRIPCION = "http://" + IP + "/bienestar/socio/getSuscripcion.php";
+    public static final String URL_SOCIO_SUSCRIPCION_AGREGAR = "http://" + IP + "/bienestar/socio/insertarInscripcion.php";
+    public static final String URL_SOCIO_SUSCRIPCION_CAMBIAR = "http://" + IP + "/bienestar/socio/actualizarSuscripcion.php";
     //ROLES
-    public static final String URL_ROLES_LISTA = "http://"+IP+"/bienestar/general/getRoles.php";
-    public static final String URL_ROLES_INSERTAR = "http://"+IP+"/bienestar/general/insertarRol.php";
-    public static final String URL_ROLES_USER_LISTA = "http://"+IP+"/bienestar/general/getRolesByUsuario.php";
+    public static final String URL_ROLES_LISTA = "http://" + IP + "/bienestar/general/getRoles.php";
+    public static final String URL_ROLES_INSERTAR = "http://" + IP + "/bienestar/general/insertarRol.php";
+    public static final String URL_ROLES_USER_LISTA = "http://" + IP + "/bienestar/general/getRolesByUsuario.php";
     //DEPORTES
-    public static final String URL_DEPORTE_TEMPORADA = "http://"+IP+"/bienestar/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "http://"+IP+"/bienestar/deportes/registrar.php";
-    public static final String URL_DEPORTE_CREDENCIAL = "http://"+IP+"/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://"+IP+"/bienestar/deportes/getAllDeportes.php";
-    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://"+IP+"/bienestar/deportes/getInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "http://"+IP+"/bienestar/beca/getInscripciones.php";
-    public static final String URL_INSCRIPCION_PARTICULAR = "http://"+IP+"/bienestar/deportes/getInscripcion.php";
-    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://"+IP+"/bienestar/deportes/eliminarInscripcion.php";
-    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://"+IP+"/bienestar/deportes/actualizarInscripcion.php";
-    public static final String URL_INSCRIPCION_CARNET = "http://"+IP+"/bienestar/deportes/insertarCredencial.php";
+    public static final String URL_DEPORTE_TEMPORADA = "http://" + IP + "/bienestar/deportes/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "http://" + IP + "/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_CREDENCIAL = "http://" + IP + "/bienestar/deportes/getCredencial.php";
+    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://" + IP + "/bienestar/deportes/getInscriptos.php";
+    public static final String URL_INSCRIPCIONES_GENERALES = "http://" + IP + "/bienestar/beca/getInscripciones.php";
+    public static final String URL_INSCRIPCION_PARTICULAR = "http://" + IP + "/bienestar/deportes/getInscripcion.php";
+    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://" + IP + "/bienestar/deportes/eliminarInscripcion.php";
+    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://" + IP + "/bienestar/deportes/actualizarInscripcion.php";
+    public static final String URL_INSCRIPCION_CARNET = "http://" + IP + "/bienestar/deportes/insertarCredencial.php";
+    public static final String URL_CREDENCIAL_CAMBIAR = "http://" + IP + "/bienestar/deportes/cambiarCredencial.php";
     //TORNEOS
-    public static final String URL_TORNEO_CREDENCIAL = "http://"+IP+"/bienestar/deportes/torneo/getCredencial.php";
-    public static final String URL_TORNEOS_LISTA = "http://"+IP+"/bienestar/deportes/getAllTorneos.php";
+    public static final String URL_TORNEO_CREDENCIAL = "http://" + IP + "/bienestar/deportes/torneo/getCredencial.php";
+    public static final String URL_TORNEOS_LISTA = "http://" + IP + "/bienestar/deportes/getAllTorneos.php";
     //BECAS
-    public static final String URL_BECAS_CREDENCIAL = "http://"+IP+"/bienestar/beca/getCredencial.php";
+    public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
     //GENERALES
-    public static final String URL_CATEGORIAS = "http://"+IP+"/bienestar/general/getArchivos.php";
-    public static final String URL_ARCHIVOS = "http://"+IP+"/bienestar/archivos/";
+    public static final String URL_ARCHIVOS_LISTA = "http://" + IP + "/bienestar/general/getArchivos.php";
+    public static final String URL_ARCHIVOS = "http://" + IP + "/bienestar/archivos/";
+    public static final String URL_UPLOAD_FILE = "http://" + IP + "/bienestar/general/uploadFile.php";
 
     public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
     public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
     public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
-
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
@@ -224,7 +242,7 @@ public class Utils {
 
     public static String dataAlumno = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&car=%s&fac=%s&anio=%s&leg=%s" +
-            "&tipo=%s&mail=%s&tel=%s&barr=%s&fecham=%s";
+            "&tipo=%s&mail=%s&tel=%s&barr=%s&fecham=%s&idReg=%s";
 
     public static String dataProfesor = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&tipo=%s&mail=%s&tel=%s" +
@@ -309,8 +327,33 @@ public class Utils {
     }
 
     public static String getTwoDecimals(double value) {
-        DecimalFormat df = new DecimalFormat("0.0");
+        DecimalFormat df = new DecimalFormat("#.#");
         return df.format(value);
+    }
+
+    public static int getColorIMC(String imc) {
+        double auxImc = Double.parseDouble(imc);
+//        String aux = getTwoDecimals(iMC);
+//        double auxImc = Double.parseDouble(aux);
+        if (auxImc <= 15) {
+            return R.color.colorBrown;
+        } else if (auxImc > 15 && auxImc <= 15.9) {
+            return R.color.colorLightBlue;
+        } else if (auxImc >= 16 && auxImc <= 18.4) {
+            return R.color.colorBlue;
+        } else if (auxImc >= 18.5 && auxImc <= 24.9) {
+            return R.color.colorGreen;
+        } else if (auxImc >= 25 && auxImc <= 29.9) {
+            return R.color.colorOrange;
+        } else if (auxImc >= 30 && auxImc <= 34.9) {
+            return R.color.colorRed;
+        } else if (auxImc >= 35 && auxImc <= 39.9) {
+            return R.color.colorPrimaryDark;
+        } else if (auxImc >= 40) {
+            return R.color.colorPrimaryDark;
+        }
+
+        return R.color.colorRed;
     }
 
     public static String obtainEstado(String imc) {
@@ -340,15 +383,14 @@ public class Utils {
     }
 
     public static String obtainIMC(String peso, String altura) {
-        String imc = " ", aux = " ";
+        String imc = "DESCONOCIDO", aux = "DESCONOCIDO";
         double auximc = 0;
         if (!peso.equals(" ") && !altura.equals(" ")) {
             double pso = Double.parseDouble(peso);
             double alt = Double.parseDouble(altura);
+            alt = alt / 100;
             auximc = pso / (alt * alt);
-            imc = Double.toString(auximc);
-            double iMC = Double.parseDouble(imc);
-            aux = getTwoDecimals(iMC);
+            aux = getTwoDecimals(auximc);
         }
         return aux;
     }
@@ -394,43 +436,16 @@ public class Utils {
 
     }
 
-    public static String crypt(String text) {
-
-        MessageDigest crypt = null;
-        try {
-            crypt = MessageDigest.getInstance("SHA-1");
-            crypt.reset();
-            crypt.update(text.getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return new BigInteger(1, crypt.digest()).toString(16);
-    }
-
-    public static String generateToken(String... data) {
-        String sha = "";
-        if (data.length == 3) {
-            sha = data[0] + data[1] + data[2];
-            return crypt(sha);
-        } else {
-            return sha;
-        }
-
-    }
-
-    public static String getDirectoryPath() {
-        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR_ESTUDIANTIL/";
+    public static String getDirectoryPath(boolean ext, Context context) {
+        String directory_path = (ext ? Environment.getExternalStorageDirectory().getPath() : context.getCacheDir()) + "/BIENESTAR_ESTUDIANTIL/";
         File directorio = new File(directory_path);
         if (!directorio.exists())
             directorio.mkdirs();
         return directory_path;
     }
 
-    public static Object[] exist(Archivo archivo) {
-        File file = new File(getDirectoryPath() + archivo.getNombreArchivo());
+    public static Object[] exist(Archivo archivo, Context context) {
+        File file = new File(getDirectoryPath(true, context) + archivo.getNombreArchivo());
         Object[] a = new Object[2];
         a[0] = file.exists();
         a[1] = file.exists() ? file.lastModified() : 0;
@@ -773,7 +788,6 @@ public class Utils {
     }
 
 
-
     public static String limpiarAcentos(String cadena) {
         String limpio = null;
         if (cadena != null) {
@@ -801,6 +815,26 @@ public class Utils {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
+    }
+
+    public static byte[] getFileDataFromUri(Context context, Uri uri) {
+        InputStream inputStream = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        try {
+            inputStream = context.getContentResolver().openInputStream(uri);
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            int leng = 0;
+            byte[] buf = new byte[1024];
+            while (((leng = inputStream.read(buf)) != -1)) {
+                byteArrayOutputStream.write(buf, 0, leng);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return byteArrayOutputStream != null ? byteArrayOutputStream.toByteArray() : null;
+
     }
 
     public static String getTipoUser(int i) {
@@ -910,6 +944,44 @@ public class Utils {
         new AlumnoViewModel(context).deleteAll();
         new RolViewModel(context).deleteAll();
         FileStorageManager.deleteAll(0);
+    }
+
+    public static String getExtension(String nombreArchivo) {
+        int index = nombreArchivo.lastIndexOf(".");
+        return index != -1 ? nombreArchivo.substring(index + 1) : "";
+    }
+
+    public static int getColorExtension(String ext) {
+        ext = ext.toUpperCase();
+        switch (ext) {
+            case "PNG":
+            case "JPG":
+            case "JPEG":
+                return R.color.colorBrown;
+            case "PDF":
+                return R.color.colorRed;
+            case "DOC":
+            case "DOCX":
+                return R.color.colorBlue;
+            case "PPT":
+                return R.color.colorOrange;
+            case "ZIP":
+            case "RAR":
+                return R.color.colorYellow;
+            case "XLS":
+                return R.color.colorGreen;
+            default:
+                return R.color.colorPink;
+        }
+    }
+
+    public static String getSizeFile(Long size) {
+        Double sizeD = Double.parseDouble(String.valueOf(size));
+        if (sizeD > 1024 * 1024) {
+            return String.format("%s %s", new DecimalFormat("#.##").format(sizeD / (1024 * 1024)), "MB");
+        } else if (sizeD > 1024) {
+            return String.format("%s %s", new DecimalFormat("#.##").format(sizeD / (1024)), "KB");
+        } else return String.format("%s %s", sizeD, "B");
     }
 }
 

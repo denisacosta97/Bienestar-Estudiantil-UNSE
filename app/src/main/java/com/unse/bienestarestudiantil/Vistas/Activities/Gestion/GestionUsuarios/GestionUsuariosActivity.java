@@ -28,6 +28,7 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
+import com.unse.bienestarestudiantil.Modelos.Regularidad;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.RegisterActivity;
@@ -349,6 +350,27 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
                 Intent intent = new Intent(getApplicationContext(), InfoUsuarioActivity.class);
                 intent.putExtra(Utils.USER_INFO, tipo);
                 intent.putExtra(Utils.IS_ADMIN_MODE, true);
+                if (jsonObject.has("reg")){
+
+                    ArrayList<Regularidad> regularidads = new ArrayList<>();
+                    JSONArray jsonArray = jsonObject.getJSONArray("reg");
+                    for (int i = 0; i<jsonArray.length(); i++){
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        int idRegularidad, anio, validez;
+                        String fecha;
+                        fecha = object.getString("fechaInicio");
+                        idRegularidad = Integer.parseInt(object.getString("idRegularidad"));
+                        anio = Integer.parseInt(object.getString("anio"));
+                        validez = Integer.parseInt(object.getString("validez"));
+
+                        Regularidad regularidad = new Regularidad(idRegularidad, anio, fecha, validez);
+
+                        regularidads.add(regularidad);
+
+                    }
+                    intent.putExtra(Utils.LIST_REGULARIDAD, regularidads);
+
+                }
                 startActivity(intent);
             }
         } catch (JSONException e) {

@@ -270,7 +270,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(getApplicationContext(), TiposCredencialesActivity.class));
                 break;
             case 4:
-                startActivity(new Intent(getApplicationContext(), GestionArchivosActivity.class));
+                startActivity(new Intent(getApplicationContext(), ArchivosActivity.class));
                 break;
 
         }

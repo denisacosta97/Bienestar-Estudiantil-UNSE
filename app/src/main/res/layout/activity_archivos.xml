@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Vistas.Activities.AsistenciaActivity">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_trans"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Si usas aplicaciones para liberar memoria en tú celular, es posible que los archivos .pdf también se borren."
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+
+            <include layout="@layout/layout_vacio_error" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerCategorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

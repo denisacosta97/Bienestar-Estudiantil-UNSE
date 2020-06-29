@@ -131,8 +131,8 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
         String key = manager.getValueString(Utils.TOKEN);
         int id = Integer.parseInt(dni);
         String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
-        c1 = Utils.crypt(c1);
-        c2 = Utils.crypt(c2);
+        //c1 = Utils.crypt(c1);
+        //c2 = Utils.crypt(c2);
         String URL = String.format("%s?id=%s&cc=%s&nn=%s&ff=%s&key=%s", Utils.URL_CAMBIO_CONTRASENIA, id, c1, c2, fecha, key);
 
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

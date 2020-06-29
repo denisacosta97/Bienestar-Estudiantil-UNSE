@@ -143,8 +143,8 @@ public class Usuario implements Parcelable {
             switch (tipe) {
                 case COMPLETE:
                     JSONObject datos = object.getJSONObject("mensaje");
-                    idUsuario = Integer.parseInt(datos.getString("idUsuario"));
-                    tipoUsuario = Integer.parseInt(datos.getString("tipoUsuario"));
+                    idUsuario = Integer.parseInt(datos.getString("idusuario"));
+                    tipoUsuario = Integer.parseInt(datos.getString("tipousuario"));
                     nombre = datos.getString("nombre");
                     apellido = datos.getString("apellido");
                     pais = datos.getString("pais");
@@ -155,9 +155,9 @@ public class Usuario implements Parcelable {
                     telefono = datos.getString("telefono");
                     sexo = datos.getString("sexo");
                     mail = datos.getString("mail");
-                    fechaRegistro = datos.getString("fechaRegistro");
-                    fechaNac = datos.getString("fechaNac");
-                    fechaModificacion = datos.getString("fechaModificacion");
+                    fechaRegistro = datos.getString("fecharegistro");
+                    fechaNac = datos.getString("fechanac");
+                    fechaModificacion = datos.getString("fechamodificacion");
                     validez = Integer.parseInt(datos.getString("validez"));
 
                     usuario = new Usuario(idUsuario, nombre, apellido,fechaNac, pais, provincia,
@@ -165,16 +165,16 @@ public class Usuario implements Parcelable {
                             fechaModificacion, validez);
                     break;
                 case BASIC:
-                    idUsuario = Integer.parseInt(object.getString("idUsuario"));
-                    tipoUsuario = Integer.parseInt(object.getString("tipoUsuario"));
+                    idUsuario = Integer.parseInt(object.getString("idusuario"));
+                    tipoUsuario = Integer.parseInt(object.getString("tipousuario"));
                     nombre = object.getString("nombre");
                     apellido = object.getString("apellido");
 
                     usuario = new Usuario(idUsuario,nombre, apellido, tipoUsuario);
                     break;
                 case MEDIUM:
-                    idUsuario = Integer.parseInt(object.getString("idUsuario"));
-                    tipoUsuario = Integer.parseInt(object.getString("tipoUsuario"));
+                    idUsuario = Integer.parseInt(object.getString("idusuario"));
+                    tipoUsuario = Integer.parseInt(object.getString("tipousuario"));
                     telefono = object.getString("telefono");
                     nombre = object.getString("nombre");
                     apellido = object.getString("apellido");

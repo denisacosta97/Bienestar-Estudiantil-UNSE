@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
 import com.unse.bienestarestudiantil.R;
@@ -74,15 +76,18 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
                     holder.mLayout.setEnabled(true);
                 }
             } else {
+                holder.txtEstado.setVisibility(GONE);
                 holder.mSwitch.setVisibility(View.VISIBLE);
                 holder.mNumArchivo.setVisibility(GONE);
                 holder.txtTitulo.setText(credencial.getTitulo());
                 if (credencial.getValidez() == 0) {
-                    holder.mSwitch.setChecked(false);
-                    holder.txtEstado.setText("DESACTIVADO");
+                    Glide.with(holder.mSwitch.getContext()).load(R.drawable.ic_error).into(holder.mSwitch);
+                    //holder.mSwitch.setBackground(context.getResources().getDrawable(R.drawable.ic_error));
+                    //holder.txtEstado.setText("DESACTIVADO");
                 } else {
-                    holder.mSwitch.setChecked(true);
-                    holder.txtEstado.setText("ACTIVADO");
+                    Glide.with(holder.mSwitch.getContext()).load(R.drawable.ic_chek).into(holder.mSwitch);
+                    //holder.mSwitch.setBackground(context.getResources().getDrawable(R.drawable.ic_chek));
+                    //holder.txtEstado.setText("ACTIVADO");
                 }
             }
         }else{
@@ -107,7 +112,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
         TextView txtTitulo, mNumArchivo, txtEstado;
         LinearLayout mPdf;
         LinearLayout mLayout;
-        Switch mSwitch;
+        ImageView mSwitch;
         OnClickListenerAdapter listener;
 
         CredencialViewHolder(View itemView, final OnClickListenerAdapter listene) {
@@ -122,7 +127,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
 
             this.listener = listene;
 
-            if (mSwitch != null){
+           /* if (mSwitch != null){
                 mSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -131,7 +136,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
                         }
                     }
                 });
-            }
+            }*/
 
 
         }

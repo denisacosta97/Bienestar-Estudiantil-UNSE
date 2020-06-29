@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -23,20 +24,20 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.PDF.DownloadPDF;
 import com.unse.bienestarestudiantil.Herramientas.PDF.LoadInfoPDF;
-import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.ArchivosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.GestionArchivosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,14 +50,14 @@ import java.util.Date;
 import static android.view.View.GONE;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class GestionArchivosActivity extends AppCompatActivity implements View.OnClickListener {
+public class ArchivosActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView.LayoutManager mLayoutManager, mLayoutManagerCategoria;
     RecyclerView mRecyclerAsistencia, mRecyclerViewCategorias;
     ArrayList<Archivo> mArchivos;
     ArrayList<Categoria> mCategorias;
     CategoriasAdapter mCategoriasAdapter;
-    GestionArchivosAdapter mGestionArchivosAdapter;
+    ArchivosAdapter mArchivosAdapter;
     LinearLayout latError, latVacio;
     ImageView imgFlecha;
     DialogoProcesamiento dialog;
@@ -66,7 +67,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_archivos);
+        setContentView(R.layout.activity_archivos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
@@ -99,12 +100,12 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
 
         loadArchivos();
 
-        mGestionArchivosAdapter = new GestionArchivosAdapter(mArchivos, this);
+        mArchivosAdapter = new ArchivosAdapter(mArchivos, this);
         mLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
         mRecyclerAsistencia.setNestedScrollingEnabled(true);
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
         mRecyclerAsistencia.setHasFixedSize(true);
-        mRecyclerAsistencia.setAdapter(mGestionArchivosAdapter);
+        mRecyclerAsistencia.setAdapter(mArchivosAdapter);
 
         mCategoriasAdapter = new CategoriasAdapter(mCategorias, getApplicationContext());
         mLayoutManagerCategoria = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -119,7 +120,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                procesarClick(position, id);
+                procesarClick(position, id, getApplicationContext());
             }
         });
 
@@ -129,9 +130,9 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
                 resetear();
                 mCategorias.get(position).setEstado(true);
                 if (id == -1) {
-                    mGestionArchivosAdapter.filtrar(-1);
+                    mArchivosAdapter.filtrar(-1);
                 } else {
-                    mGestionArchivosAdapter.filtrar((int) id);
+                    mArchivosAdapter.filtrar((int) id);
                 }
                 mCategoriasAdapter.notifyDataSetChanged();
             }
@@ -147,10 +148,10 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
         return null;
     }
 
-    private void procesarClick(int position, final long id) {
+    private void procesarClick(int position, final long id, Context context) {
         final Archivo archivo = getArchivo((int) id);
         if (archivo != null) {
-            Object[] isExist = Utils.exist(archivo);
+            Object[] isExist = Utils.exist(archivo, getApplicationContext());
             if (!(boolean) isExist[0]) {
                 download(archivo);
             } else {
@@ -220,7 +221,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
 
     private void openFile(Archivo archivo) {
 
-        File file = new File(Utils.getDirectoryPath() + archivo.getNombreArchivo());
+        File file = new File(Utils.getDirectoryPath(true, getApplicationContext()) + archivo.getNombreArchivo());
 
         if (file.exists()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -236,7 +237,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
             } catch (FileUriExposedException e) {
                 Utils.showToast(getApplicationContext(), "Error interno al abrir el archivo");
-            } catch (ActivityNotFoundException e){
+            } catch (ActivityNotFoundException e) {
                 Utils.showToast(getApplicationContext(), "No hay aplicaciones disponibles para abrir PDF");
                 DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
                         .setDescripcion("No fue posible completar el documento, pero puedes " +
@@ -275,7 +276,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
             public void no() {
                 Utils.showToast(getApplicationContext(), "Error!");
             }
-        });
+        }, true);
         String URL = String.format("%s%s", Utils.URL_ARCHIVOS, archivo.getNombreArchivo());
         downloadPDF.execute(URL);
     }
@@ -290,7 +291,7 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s", Utils.URL_CATEGORIAS, id, key);
+        String URL = String.format("%s?id=%s&key=%s", Utils.URL_ARCHIVOS_LISTA, id, key);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -354,13 +355,8 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
                 try {
                     JSONObject object = mensaje.getJSONObject(i);
 
-                    int id = Integer.parseInt(object.getString("idArchivo"));
-                    int idArea = Integer.parseInt(object.getString("idArea"));
-                    int validez = Integer.parseInt(object.getString("validez"));
-                    String nombre = object.getString("nombre");
-                    String nombreArchivo = object.getString("nombreArchivo");
+                    Archivo archivo = Archivo.toMapper(object);
 
-                    Archivo archivo = new Archivo(id, validez, idArea, nombreArchivo, nombre);
                     if (archivo.getValidez() == 1)
                         mArchivos.add(archivo);
 
@@ -390,9 +386,9 @@ public class GestionArchivosActivity extends AppCompatActivity implements View.O
             }
             mCategorias.add(0, new Categoria(-1, "General", true));
             updateView(1);
-            mGestionArchivosAdapter.setArchivosCopia(mArchivos);
+            mArchivosAdapter.setArchivosCopia(mArchivos);
             mCategoriasAdapter.notifyDataSetChanged();
-            mGestionArchivosAdapter.notifyDataSetChanged();
+            mArchivosAdapter.notifyDataSetChanged();
 
         } else {
             updateView(-1);

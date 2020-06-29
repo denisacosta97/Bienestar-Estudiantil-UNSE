@@ -52,26 +52,26 @@
 
         <menu>
             <item
-                android:id="@+id/item_config"
+                android:id="@+id/item_sistema"
                 android:icon="@drawable/ic_settings"
-                android:title="Gestión del Sistema"/>
+                android:title="@string/itemSistema"/>
             <item
                 android:id="@+id/item_perfil"
                 android:icon="@drawable/ic_user"
-                android:title="Perfil"/>
+                android:title="@string/itemPerfil"/>
 
             <item
                 android:id="@+id/item_about"
                 android:icon="@drawable/ic_b_bienestar"
-                android:title="Sobre nosotros"/>
+                android:title="@string/itemNosotros"/>
             <item
                 android:id="@+id/item_contactos"
                 android:icon="@drawable/ic_informacion"
-                android:title="Contactos"/>
+                android:title="@string/itemContacto"/>
             <item
                 android:id="@+id/item_terminos"
                 android:icon="@drawable/ic_terms"
-                android:title="Términos y condiciones"/>
+                android:title="@string/itemCondiciones"/>
         </menu>
     </item>
 

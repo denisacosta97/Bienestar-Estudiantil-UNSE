@@ -104,7 +104,7 @@ public class Alumno extends Usuario implements Parcelable {
                 String anio = object.getString("anio");
                 String legajo = object.getString("legajo");
                 int idRegularidad = Integer.parseInt(
-                        object.getString("idRegularidad"));
+                        object.getString("idregularidad"));
 
                 alumno = new Alumno(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
                         usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),

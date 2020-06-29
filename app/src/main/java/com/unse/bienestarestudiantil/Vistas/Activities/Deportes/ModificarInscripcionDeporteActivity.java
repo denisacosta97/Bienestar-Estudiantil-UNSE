@@ -29,12 +29,12 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
-import com.unse.bienestarestudiantil.Modelos.CredencialDeporte;
 import com.unse.bienestarestudiantil.Modelos.Estado;
 import com.unse.bienestarestudiantil.Modelos.Inscripcion;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CredencialesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoActivarDesactivar;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoListaEstados;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -50,12 +50,13 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
 
     EditText edtDni, edtNombre, edtApellido, edtEdad, edtBarrio, edtLocalidad, edtProvincia,
             edtPais, edtDomicilio, edtMail, edtAnioIngreso, edtMaterias, edtFace, edtInsta, edtPeso,
-            edtAltura, edtTelefono, edtLugar, edtObj, edtCuales, edtLegajo, edtCarrera, edtFacultad;
+            edtAltura, edtTelefono, edtLugar, edtObj, edtCuales, edtLegajo, edtCarrera, edtFacultad,
+            edtIMC, edtIMCEstado;
     EditText[] campos, noEditables;
     CheckBox[] noCheck;
     FloatingActionButton fabEditar;
     CheckBox chIsWsp, echSiActividad, chNoActividad, chBaja, chMedia, chAlta;
-    LinearLayout linearActividades, linearAdmin, linearCredencial;
+    LinearLayout linearActividades, linearAdmin, linearCredencial, latIMC, latIMCEstado;
     TextView txtTitulo, txtDeporte, edtFechaNac, txtFechaIns, txtFechaModi;
     ImageView btnBack, imgIcono;
     Button btnBajaAlta, btnEstado, btnCarnet, btnPDF;
@@ -68,7 +69,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
 
     boolean isWsp = false, isActividad = false, isEdit = false, isAdmin = false, isEstadoEdit = false;
     int intensidad = 1, idInscrip = -1, idTem = 0, idPre = 0, tipoU = 0,
-            idU = 0, disp = 0, estado = 0, modeUI = 0, val = 0;
+            idU = 0, disp = 0, estado = 0, modeUI = 0, val = 0, positionReg = 0;
 
 
     @Override
@@ -114,10 +115,14 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
 
     private void loadData() {
         if (isAdmin) {
+            latIMCEstado.setVisibility(View.VISIBLE);
+            latIMC.setVisibility(View.VISIBLE);
             linearAdmin.setVisibility(View.VISIBLE);
             linearCredencial.setVisibility(View.VISIBLE);
 
         } else {
+            latIMCEstado.setVisibility(View.GONE);
+            latIMC.setVisibility(View.GONE);
             linearAdmin.setVisibility(View.GONE);
             linearCredencial.setVisibility(View.GONE);
         }
@@ -126,6 +131,8 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         loadInfo();
+
+        updateButtonCarnet();
 
     }
 
@@ -303,6 +310,10 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                     legajo = "N/A";
                     anio = 0;
                 }
+                edtIMC.setText(Utils.obtainIMC(inscripcion.getPeso(), inscripcion.getAltura()));
+                edtIMCEstado.setText(Utils.obtainEstado(edtIMC.getText().toString().trim()).toUpperCase());
+                edtIMCEstado.setTextColor(getApplicationContext().getResources().getColor(
+                        Utils.getColorIMC(edtIMC.getText().toString().trim())));
                 txtFechaIns.setText(Utils.getFechaFormat(inscripcion.getFechaRegistro()));
                 txtFechaModi.setText(Utils.getFechaFormat(inscripcion.getFechaModificacion()));
                 edtEdad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()))));
@@ -377,40 +388,65 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
                 }
                 Glide.with(imgIcono.getContext()).load(Utils.getIconDeporte(idDeporte)).into(imgIcono);
 
-                if (jsonObject.has("cred")){
+                if (jsonObject.has("cred")) {
 
                     JSONArray credencial = jsonObject.getJSONArray("cred");
 
-                    if (credencial.length() > 0){
+                    if (credencial.length() > 0) {
                         btnCarnet.setEnabled(false);
 
-                        for (int i = 0; i<credencial.length();i++){
+                        for (int i = 0; i < credencial.length(); i++) {
                             JSONObject object = credencial.getJSONObject(i);
                             String idCredencial = object.getString("idCredencial");
                             String idInscripcion = object.getString("idInscripcion");
                             String validez = object.getString("validez");
+                            String fecha = object.getString("fechaCreacion");
+                            String aneo = object.getString("anio");
 
-                            String titulo = String.format("%s #%s #%s",
-                                    "CREDENCIAL", idCredencial, idInscripcion);
+                            String titulo = String.format("%s #%s/%s",
+                                    "CREDENCIAL", idCredencial, aneo.substring(2));
 
-                            Credencial credencial1 = new Credencial(Integer.parseInt(idCredencial), titulo, Integer.parseInt(validez));
+                            Credencial credencial1 = new Credencial(Integer.parseInt(idCredencial),
+                                    Integer.parseInt(validez), Integer.parseInt(aneo), titulo, fecha);
 
                             mList.add(credencial1);
                         }
-                    }else{
+                    } else {
                         btnCarnet.setEnabled(true);
                     }
 
 
                 }
                 mAdapter = new CredencialesAdapter(mList, getApplicationContext(), true);
-                mAdapter.setOnClickListenerAdapter(new OnClickListenerAdapter() {
+                ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+                itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                        positionReg = position;
+                        Credencial credencial = mList.get(position);
+                        DialogoActivarDesactivar dialogoActivarDesactivar = new DialogoActivarDesactivar();
+                        dialogoActivarDesactivar.setContext(getApplicationContext());
+                        dialogoActivarDesactivar.setFragmentManager(getSupportFragmentManager());
+                        dialogoActivarDesactivar.setPosition(position);
+                        dialogoActivarDesactivar.setCredencial(credencial);
+                        dialogoActivarDesactivar.setOnClickListenerAdapter(new OnClickListenerAdapter() {
+                            @Override
+                            public void onClick(Object id) {
+                                mList.get(positionReg).setValidez((Integer) id);
+                                mAdapter.notifyDataSetChanged();
+                                updateButtonCarnet();
+                            }
+                        });
+                        dialogoActivarDesactivar.show(getSupportFragmentManager(), "dialogo_act_desc");
+                    }
+                });
+                /*mAdapter.setOnClickListenerAdapter(new OnClickListenerAdapter() {
                     @Override
                     public void onClick(int id) {
                         mList.get(id).setValidez(mList.get(id).getValidez() == 1 ? 0 : 1);
                         mAdapter.notifyDataSetChanged();
                     }
-                });
+                });*/
                 mRecyclerView.setAdapter(mAdapter);
 
             }
@@ -419,6 +455,14 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             showDialogs();
         }
 
+    }
+
+    private void updateButtonCarnet() {
+        if (mList != null && mList.size() > 0 && mList.get(0).getValidez() == 1) {
+            btnCarnet.setEnabled(false);
+        } else {
+            btnCarnet.setEnabled(true);
+        }
     }
 
     private void updateButton(int val) {
@@ -451,6 +495,10 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     }
 
     private void loadViews() {
+        edtIMC = findViewById(R.id.edtIMC);
+        edtIMCEstado = findViewById(R.id.edtIMCEstado);
+        latIMC = findViewById(R.id.latIMC);
+        latIMCEstado = findViewById(R.id.latIMCEstado);
         imgIcono = findViewById(R.id.imgIcon);
         edtDni = findViewById(R.id.edtDNI);
         edtNombre = findViewById(R.id.edtNombre);
@@ -590,8 +638,9 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s&idI=%s",
-                Utils.URL_INSCRIPCION_CARNET, id, key, idInscrip);
+        String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
+        String URL = String.format("%s?id=%s&key=%s&idI=%s&fe=%s",
+                Utils.URL_INSCRIPCION_CARNET, id, key, idInscrip, fecha);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -727,12 +776,12 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
         list.get(estado - 1).setSelect(true);
         dialogoListaEstados.setListener(new OnClickListenerAdapter() {
             @Override
-            public void onClick(int id) {
+            public void onClick(Object id) {
                 dialogoListaEstados.dismiss();
-                if (estado == id + 1)
+                if (estado == (Integer) id + 1)
                     return;
                 isEstadoEdit = true;
-                estado = id + 1;
+                estado = (Integer) id + 1;
                 if (estado == 1)
                     disp = 0;
                 else disp = 1;
@@ -847,11 +896,11 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
             e2.setEnabled(false);
         }
 
-        if (mode != 0){
+        if (mode != 0) {
             btnPDF.setEnabled(false);
             btnEstado.setEnabled(false);
             btnBajaAlta.setEnabled(false);
-        }else{
+        } else {
             btnPDF.setEnabled(true);
             btnEstado.setEnabled(true);
             btnBajaAlta.setEnabled(true);

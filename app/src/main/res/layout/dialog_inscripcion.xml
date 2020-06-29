@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Info Inscripcion"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTitulo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:text="Inscripcion #1/10" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorGrey2"
+                        android:textStyle="bold"
+                        android:text="Año:"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <TextView
+                        android:id="@+id/txtAnio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="2020"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorTextDefault"
+                        android:padding="10dp"
+                        android:background="@color/transparente" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorGrey2"
+                        android:textStyle="bold"
+                        android:text="Fecha \Registro:"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <TextView
+                        android:id="@+id/txtFecha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorTextDefault"
+                        android:padding="10dp"
+                        android:background="@color/transparente" />
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="Estado" />
+
+
+                <Spinner
+                    android:padding="5dp"
+                    android:id="@+id/spinner1"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_spinner" />
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/latSwitch"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/button_border_select">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/txtDescripcion"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="ACTIVADO"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:layout_marginStart="6dp"
+                            android:theme="@style/SwithTeme"
+                            android:layout_marginEnd="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchCred" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnAceptar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ACEPTAR"
+                        android:padding="16dp"
+                        android:background="@drawable/button_border"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/btnAct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ACTUALIZAR"
+                        android:padding="16dp"
+                        android:background="@drawable/button_border"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+</android.support.v7.widget.CardView>

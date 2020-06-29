@@ -34,7 +34,6 @@ public class AccesoDenegadoFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.btnregister:
                 Intent intent = new Intent(getContext(), RegisterActivity.class);
-                intent.putExtra("TYPE_ACCESS", 1);
                 startActivity(intent);
                 break;
         }

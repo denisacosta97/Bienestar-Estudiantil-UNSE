@@ -110,7 +110,7 @@ public class Profesor extends Usuario implements Parcelable {
             if (o.get("datos") != null) {
                 JSONObject object = o.getJSONObject("datos");
                 String profesion = object.getString("profesion");
-                String anioIng = object.getString("fechaIngreso");
+                String anioIng = object.getString("fechaingreso");
                 profesor = new Profesor(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
                         usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),
                         usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(), usuario.getSexo(),

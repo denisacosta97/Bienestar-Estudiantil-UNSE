@@ -7,10 +7,11 @@ public class CredencialSocio extends Credencial implements Parcelable {
 
     private int idSocio, idUsuario, anio, tipoUsuario;
     private String nombre, apellido, fechaRegistro, sexo;
+    private int validez, idSuscripcionSocio, idCredencialSocio;
 
     public CredencialSocio(int id, String titulo, int validez, int idUsuario,
                            int anio, int tipoUsuario, String nombre, String apellido, String fechaRegistro, String sexo) {
-        super(id, titulo, validez);
+        super(id, validez, 0, titulo, null);
         this.idSocio = id;
         this.idUsuario = idUsuario;
         this.anio = anio;
@@ -21,9 +22,20 @@ public class CredencialSocio extends Credencial implements Parcelable {
         this.sexo = sexo;
     }
 
+    public CredencialSocio(int id, int validez, int anio, String titulo, String fecha, int idSocio,
+                           int idUsuario, String nombre, int idSuscripcionSocio, int idCredencialSocio) {
+        super(id, validez, anio, titulo, fecha);
+        this.idSocio = idSocio;
+        this.idUsuario = idUsuario;
+        this.anio = anio;
+        this.nombre = nombre;
+        this.validez = validez;
+        this.idSuscripcionSocio = idSuscripcionSocio;
+        this.idCredencialSocio = idCredencialSocio;
+    }
 
     protected CredencialSocio(Parcel in) {
-        super(in.readInt(), in.readString(), in.readInt());
+        super(in.readInt(), in.readInt(), in.readInt() ,in.readString(), in.readString());
         idSocio = getId();
         idUsuario = in.readInt();
         anio = in.readInt();
@@ -32,6 +44,9 @@ public class CredencialSocio extends Credencial implements Parcelable {
         apellido = in.readString();
         fechaRegistro = in.readString();
         sexo = in.readString();
+        validez = in.readInt();
+        idCredencialSocio = in.readInt();
+        idSuscripcionSocio = in.readInt();
     }
 
     public static final Creator<CredencialSocio> CREATOR = new Creator<CredencialSocio>() {
@@ -45,6 +60,32 @@ public class CredencialSocio extends Credencial implements Parcelable {
             return new CredencialSocio[size];
         }
     };
+
+    @Override
+    public int getValidez() {
+        return validez;
+    }
+
+    @Override
+    public void setValidez(int validez) {
+        this.validez = validez;
+    }
+
+    public int getIdSuscripcionSocio() {
+        return idSuscripcionSocio;
+    }
+
+    public void setIdSuscripcionSocio(int idSuscripcionSocio) {
+        this.idSuscripcionSocio = idSuscripcionSocio;
+    }
+
+    public int getIdCredencialSocio() {
+        return idCredencialSocio;
+    }
+
+    public void setIdCredencialSocio(int idCredencialSocio) {
+        this.idCredencialSocio = idCredencialSocio;
+    }
 
     public int getIdSocio() {
         return idSocio;
@@ -118,8 +159,10 @@ public class CredencialSocio extends Credencial implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getId());
-        dest.writeString(getTitulo());
         dest.writeInt(getValidez());
+        dest.writeInt(getAnio());
+        dest.writeString(getTitulo());
+        dest.writeString(getFecha());
         dest.writeInt(idUsuario);
         dest.writeInt(anio);
         dest.writeInt(tipoUsuario);
@@ -127,5 +170,8 @@ public class CredencialSocio extends Credencial implements Parcelable {
         dest.writeString(apellido);
         dest.writeString(fechaRegistro);
         dest.writeString(sexo);
+        dest.writeInt(validez);
+        dest.writeInt(idCredencialSocio);
+        dest.writeInt(idSuscripcionSocio);
     }
 }

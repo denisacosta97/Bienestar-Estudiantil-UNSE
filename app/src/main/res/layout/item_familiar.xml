@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:weightSum="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NOMBRE DE USUARIO"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtDni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DNI"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_marginStart="5dp"
+                android:id="@+id/txtFechaNac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha Nacimiento"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRol"
+            android:layout_marginEnd="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="RELACIÓN" />
+
+    </LinearLayout>
+
+
+
+
+</android.support.v7.widget.CardView>

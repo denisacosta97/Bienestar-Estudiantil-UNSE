@@ -114,6 +114,43 @@
     <string name="permisosAlgunosNo">¡Algunos permisos no se actualizaron!</string>
     <string name="primeroBuscar">¡Primero debe buscar un usuario!</string>
     <string name="usuarioPermisosOn">El usuario ya posee permisos</string>
+    <string name="mensajeDenegado">Esta función sólo están disponibles para usuarios registrados, si desea utilizarlas por favor regístrese.</string>
+    <string name="itemSistema">Gestión del Sistema</string>
+    <string name="itemPerfil">Perfil</string>
+    <string name="itemNosotros">Sobre nosotros</string>
+    <string name="itemContacto">Contactos</string>
+    <string name="itemCondiciones">Términos y condiciones</string>
+    <string name="sesionIniciada">¡Sesión iniciada!</string>
+    <string name="usuarioInvalido">Usuario o contraseña inválidos</string>
+    <string name="usuarioInhabilitado">Usuario deshabilitado, contacta al Administrador</string>
+    <string name="regularidadVigente">El alumno ya posee una regularidad ese año</string>
+    <string name="regularidadNoAgregada">Regularidad no agregada</string>
+    <string name="regularidadAgregada">¡Regularidad otorgada!</string>
+    <string name="anioInvalido">¡Debe ingresar un año válido!</string>
+    <string name="regularidadActualizada">¡Regularidad actualizada!</string>
+    <string name="regularidadNoCambiada">¡Error al cambiar!</string>
+    <string name="archivosError">Error al obtener archivos, intente nuevamente</string>
+    <string name="archivosVacio">No existen archivos</string>
+    <string name="tituloArchivos">Gestión de Archivos</string>
+    <string name="archivoNoSeleccionado">Archivo no seleccionado</string>
+   <string name="archivoSeleecionError">No se elegió ningun archivo</string>
+   <string name="archivoSubido">¡Archivo subido!</string>
+   <string name="archivoError">¡Error al cargar archivo!</string>
+    <string name="nombreVacio">Debe elegir un nombre</string>
+    <string name="archivoGrande">El archivo es demasiado grande</string>
+    <string name="archivoActualizado">¡Archivo actualizado!</string>
+    <string name="tituloArchivosNuevo">Nuevo Archivo</string>
+    <string name="archivoNoAbrir">No hay aplicaciones disponibles para archivos %s</string>
+    <string name="archivoEliminado">El archivo fue eliminado durante el proceso, reintente</string>
+    <string name="credencialActualizada">¡Credencial actualizada!</string>
+    <string name="sociosError">Error al obtener socios intente nuevamente</string>
+    <string name="sociosVacio">No existe ningún socio</string>
+    <string name="familiarCambiabo">¡Vinculo actualizado!</string>
+    <string name="familiarAgregado">¡Familiar agregado!</string>
+    <string name="suscripcionInvalida">La suscripcion elegida no está disponible</string>
+    <string name="suscripcionInscripto">El socio ya está inscripto en ese año</string>
+    <string name="primeroBuscarSuscrip">Primero debe buscar un año</string>
+    <string name="suscripcionNoExiste">No existen suscripciones en ese año</string>
 
 </resources>
 

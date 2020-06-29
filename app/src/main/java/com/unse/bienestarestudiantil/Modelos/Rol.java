@@ -8,6 +8,7 @@ import java.io.Serializable;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "roles", primaryKeys = {"idRol", "idUsuario"})
@@ -24,18 +25,25 @@ public class Rol implements Serializable {
     private int idRol;
     @NonNull
     private int idUsuario;
+    @NonNull
+    private String descripcion;
     @Ignore
     private int idRolPadre;
-    @Ignore
-    private String descripcion;
 
+    @Ignore
     public Rol(int idRol, int idUsuario) {
         this.idRol = idRol;
         this.idUsuario = idUsuario;
     }
 
+    public Rol(int idRol, int idUsuario, @NonNull String descripcion) {
+        this.idRol = idRol;
+        this.idUsuario = idUsuario;
+        this.descripcion = descripcion;
+    }
+
     @Ignore
-    public Rol(int idRol, int idRolPadre, String descripcion) {
+    public Rol(int idRol, int idRolPadre, @NonNull  String descripcion, int f) {
         this.idRol = idRol;
         this.idRolPadre = idRolPadre;
         this.descripcion = descripcion;
@@ -48,6 +56,7 @@ public class Rol implements Serializable {
         this.idRolPadre = idRolPadre;
     }
 
+    @Ignore
     protected Rol(Parcel in) {
         idRol = in.readInt();
         idUsuario = in.readInt();

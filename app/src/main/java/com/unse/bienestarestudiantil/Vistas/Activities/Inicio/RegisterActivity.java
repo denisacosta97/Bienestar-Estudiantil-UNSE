@@ -340,32 +340,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (!validador.noVacio(faculta) && !validador.noVacio(carrera) &&
                             validador.validarAnio(edtAnioIngresoAlu) && validador.validarLegajo(edtLegajoAlu)) {
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido),
+                                domicilio, barrio, telefono, sexo, "u",
                                 mail, 1, carrera, faculta, anioIngreso2
-                                , legajo, Utils.crypt(pass), null, null));
+                                , legajo, pass, null, null));
                     }
                     break;
                 case Utils.TIPO_PROFESOR:
                     if (validador.validarNombresEdt(edtProfesionProf) && validador.validarAnio(edtAnioIngresoProf)) {
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
-                                domicilio, barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail,
-                                2, null, null, anioIngreso, null, Utils.crypt(pass),
+                                domicilio, barrio, telefono, sexo, "u", mail,
+                                2, null, null, anioIngreso, null, pass,
                                 profesion, null));
                     }
                     break;
                 case Utils.TIPO_EGRESADO:
                     if (validador.validarNombresEdt(edtProfesionEgre) && validador.validarAnio(edtAnioEgresoEgre)) {
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio, barrio,
-                                telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, 4,
-                                null, null, null, null, Utils.crypt(pass),
+                                telefono, sexo, "u", mail, 4,
+                                null, null, null, null, pass,
                                 profesion2, anioEgreso));
                     }
                     break;
                 case Utils.TIPO_NODOCENTE:
                 case Utils.TIPO_PARTICULAR:
                     sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
-                            barrio, telefono, sexo, Utils.generateToken(dni, nombre, apellido), mail, tipoUsuario,
-                            null, null, null, null, Utils.crypt(pass),
+                            barrio, telefono, sexo, "u", mail, tipoUsuario,
+                            null, null, null, null, pass,
                             null, null));
                     break;
             }
@@ -386,7 +386,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (tipo == 1) {
             resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia, localidad,
                     domicilio, sexo, carrera, facultad, anioIng, legajo, tipo, mail, telefono,
-                    barrio, fechaModifCreacion);
+                    barrio, fechaModifCreacion, 0);
 
         } else if (tipo == 2) {
             resp = String.format(Utils.dataProfesor, dni, nombre, apellido, fecha, pais, provincia,
@@ -480,6 +480,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Intent intent = new Intent(getApplicationContext(), UploadPictureActivity.class);
                     intent.putExtra(Utils.MY_ID, idDNI);
                     intent.putExtra(Utils.IS_ADMIN_MODE, isAdminMode);
+                    intent.putExtra(Utils.TIPO_REGISTRO, getIntent().getBooleanExtra(Utils.TIPO_REGISTRO, false));
                     finish();
                     startActivity(intent);
                     Utils.showToast(getApplicationContext(), getString(R.string.usuarioRegistrado));

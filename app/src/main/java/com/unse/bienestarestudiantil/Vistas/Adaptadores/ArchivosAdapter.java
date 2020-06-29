@@ -6,25 +6,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
-import com.unse.bienestarestudiantil.Modelos.Asistencia;
-import com.unse.bienestarestudiantil.Modelos.Noticia;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class GestionArchivosAdapter extends RecyclerView.Adapter<GestionArchivosAdapter.EventosViewHolder>{
+public class ArchivosAdapter extends RecyclerView.Adapter<ArchivosAdapter.EventosViewHolder>{
 
     private ArrayList<Archivo> mArchivos, mArchivosCopia;
     private Context context;
 
-    public GestionArchivosAdapter(ArrayList<Archivo> list, Context ctx) {
+    public ArchivosAdapter(ArrayList<Archivo> list, Context ctx) {
         this.mArchivos = list;
         this.context = ctx;
         this.mArchivosCopia = new ArrayList<>();
@@ -51,9 +47,13 @@ public class GestionArchivosAdapter extends RecyclerView.Adapter<GestionArchivos
     public void onBindViewHolder(@NonNull final EventosViewHolder holder, int position) {
         Archivo archivo = mArchivos.get(position);
 
-        holder.mNumArchivo.setText(String.valueOf(archivo.getId()));
+        holder.mFecha.setText(archivo.getFechaModificacion().substring(0, 10));
         holder.mNombreArchivo.setText(archivo.getNombre());
-        //holder.mFecha.setText(archivo.getFecha());
+        String ext = Utils.getExtension(archivo.getNombreArchivo());
+        holder.txtExtension.setText(ext.length() != 0 ? ext.toUpperCase() : ext);
+        holder.txtExtension.setBackgroundColor(context.getResources().getColor(Utils.getColorExtension(ext)));
+
+
 
     }
 
@@ -87,16 +87,14 @@ public class GestionArchivosAdapter extends RecyclerView.Adapter<GestionArchivos
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mNumArchivo, mNombreArchivo, mFecha;
-        ImageView mPdf;
+        TextView mNombreArchivo, mFecha, txtExtension;
 
         EventosViewHolder(View itemView) {
             super(itemView);
 
-            mNumArchivo = itemView.findViewById(R.id.txtNroArchivo);
-            mNombreArchivo = itemView.findViewById(R.id.txtNameArchivo);
+            mNombreArchivo = itemView.findViewById(R.id.txtTitulo);
             mFecha = itemView.findViewById(R.id.txtFecha);
-            mPdf = itemView.findViewById(R.id.imgIconPdf);
+            txtExtension = itemView.findViewById(R.id.txtExtension);
 
         }
     }

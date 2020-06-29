@@ -6,8 +6,10 @@
 
     <color name="colorRedT">#858F0015</color>
 
+    <color name="colorRedSelect">#75FF0025</color>
+
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGrey">#E7E7E7</color>
+    <color name="colorGrey">#F3F2F2</color>
     <color name="colorGreyT">#C3717171</color>
     <color name="colorGrey2">#BEBEBE</color>
     <color name="colorFCEyT">#024979</color>
@@ -20,9 +22,11 @@
     <color name="colorOrange">#E64A19</color>
     <color name="colorRed">#D32F2F</color>
     <color name="colorPink">#C2185B</color>
+    <color name="colorBrown">#9F2B07</color>
     <color name="colorYellow">#FFA000</color>
     <color name="colorGreeLight">#AFB42B</color>
-    <color name="colorLightBlue">#0097A7</color>
+    <color name="colorBlue">#1976D2</color>
+    <color name="colorLightBlue">#03C5DA</color>
     <color name="colorSelect">#48000000</color>
     <color name="colorGreyDark">#777777</color>
     <color name="colorTextDefault">#808080</color>

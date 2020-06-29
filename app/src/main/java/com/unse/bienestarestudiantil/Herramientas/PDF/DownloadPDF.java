@@ -28,12 +28,14 @@ public class DownloadPDF extends AsyncTask<String, Integer, String> {
 
     DialogoProcesamiento mDialogoProcesamiento;
     FragmentManager mFragmentManager;
+    private boolean isExt = true;
 
-    public DownloadPDF(Context context, String nombre, FragmentManager fragmentManager, YesNoDialogListener listener) {
+    public DownloadPDF(Context context, String nombre, FragmentManager fragmentManager, YesNoDialogListener listener, boolean storage) {
         this.context = context;
         this.nombreArchivo = nombre;
         this.mListener = listener;
         this.mFragmentManager = fragmentManager;
+        this.isExt = storage;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class DownloadPDF extends AsyncTask<String, Integer, String> {
 
             // Descargar archivo
             input = connection.getInputStream();
-            output = new FileOutputStream(Utils.getDirectoryPath()+nombreArchivo);
+            output = new FileOutputStream(Utils.getDirectoryPath(isExt, context)+nombreArchivo);
 
             byte data[] = new byte[4096];
             long total = 0;

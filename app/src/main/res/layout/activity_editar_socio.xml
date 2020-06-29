@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_trans" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:background="@color/colorPrimary"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imgIcon"
+                            android:layout_width="100dp"
+                            android:src="@drawable/ic_user"
+                            app:civ_border_color="#FFFFFF"
+                            app:civ_border_width="2dp"
+                            android:layout_height="100dp" />
+
+                        <TextView
+                            android:id="@+id/txtNombre"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nombre Usuario"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+                        <TextView
+                            android:id="@+id/txtDni"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Identificacion Usuario"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="@color/colorGrey2"
+                                    android:textStyle="bold"
+                                    android:text="Tipo Usuario:"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                                <EditText
+                                    android:id="@+id/edtTipo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text"
+                                    android:textSize="14sp"
+                                    android:text="No Especificado"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorTextDefault"
+                                    android:padding="10dp"
+                                    android:background="@color/transparente" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorGrey"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:textColor="@color/colorGrey2"
+                                    android:textStyle="bold"
+                                    android:text="Fecha de Registro:"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                                <EditText
+                                    android:id="@+id/edtFechaRegistro"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Apellido"
+                                    android:inputType="text"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorTextDefault"
+                                    android:padding="10dp"
+                                    android:background="@color/transparente" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorGrey"/>
+
+                        </LinearLayout>
+
+
+
+
+                        <Button
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/btnAceptar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
+                            android:text="ACEPTAR"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:padding="15dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@color/colorWhite" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:background="@color/colorGreen"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vínculos Familiares"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:id="@+id/recyclerHijos" />
+
+
+                        <Button
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/btnAgregar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
+                            android:text="AGREGAR FAMILIAR"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:padding="15dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@color/colorWhite" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:background="@color/colorBlue"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Credenciales"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:id="@+id/recyclerCredenciales" />
+
+
+                        <Button
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/btnAgregarCred"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
+                            android:text="AGREGAR CREDENCIAL"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:padding="15dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@color/colorWhite" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="5dp"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:background="@color/colorOrange"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Afiliaciones"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:id="@+id/recyclerInscripciones" />
+
+
+                        <Button
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/btnInscribir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_border"
+                            android:text="INSCRIBIR"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:padding="15dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:background="@color/colorWhite" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</android.support.v4.widget.NestedScrollView>

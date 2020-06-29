@@ -2,5 +2,5 @@ package com.unse.bienestarestudiantil.Interfaces;
 
 public interface OnClickListenerAdapter {
 
-    void onClick(int id);
+    void onClick(Object id);
 }

@@ -27,6 +27,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleyMultipartRequest;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Inicio.LoginActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -119,6 +120,9 @@ public class UploadPictureActivity extends AppCompatActivity implements View.OnC
     private void openNext() {
         if (!isAdminMode) {
             Utils.showToast(getApplicationContext(), getString(R.string.iniciarSesionConf));
+        }
+        if (getIntent().getBooleanExtra(Utils.TIPO_REGISTRO, false)){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
         finish();
     }

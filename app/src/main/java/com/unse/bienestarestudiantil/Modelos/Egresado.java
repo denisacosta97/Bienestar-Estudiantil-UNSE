@@ -110,7 +110,7 @@ public class Egresado extends Usuario implements Parcelable {
             if (o.get("datos") != null) {
                 JSONObject object = o.getJSONObject("datos");
                 String profesion = object.getString("profesion");
-                String anioIng = object.getString("fechaEgreso");
+                String anioIng = object.getString("fechaegreso");
                 egresado = new Egresado(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
                         usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),
                         usuario.getDomicilio(), usuario.getBarrio(), usuario.getTelefono(), usuario.getSexo(),

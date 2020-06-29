@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String dni = edtUser.getText().toString().trim();
         String pass = edtPass.getText().toString().trim();
         if (!dni.equals("") && !pass.equals("")) {
-            pass = Utils.crypt(pass);
+            //pass = Utils.crypt(pass);
             String url = String.format("%s?id=%s&pass=%s", Utils.URL_USUARIO_LOGIN, dni, pass);
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
-                    Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                    Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                     dialog.dismiss();
 
                 }
@@ -168,9 +168,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
-                    Utils.showToast(getApplicationContext(), "¡Sesión iniciada!");
+                    Utils.showToast(getApplicationContext(), getString(R.string.sesionIniciada));
                     String token = jsonObject.getJSONObject("token").getString("token");
 
                     //Insertar BD
@@ -189,25 +192,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     break;
                 case 2:
                     //Usuario invalido
-                    Utils.showToast(getApplicationContext(), "Usuario o contraseña inválidos");
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioInvalido));
                     break;
                 case 5:
                     //Usuario invalido
-                    Utils.showToast(getApplicationContext(), "Usuario deshabilitado, contacta al Administrador");
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioInhabilitado));
                     break;
                 case 4:
                     //Usuario invalido
-                    Utils.showToast(getApplicationContext(), "Campos inválidos");
-                    break;
-                case 3:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
@@ -221,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     String rol = object.getString("idRol");
 
-                    Rol ro = new Rol(Integer.parseInt(rol), id);
+                    Rol ro = new Rol(Integer.parseInt(rol), id, "test");
 
                     rolViewModel.insert(ro);
                 }

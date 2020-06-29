@@ -103,7 +103,7 @@ public class FileStorageManager {
             e.printStackTrace();
         } finally {
             try {
-                fos.close();
+                if (fos != null)fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

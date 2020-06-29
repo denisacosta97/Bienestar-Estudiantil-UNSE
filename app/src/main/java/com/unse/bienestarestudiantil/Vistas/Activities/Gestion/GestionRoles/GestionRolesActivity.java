@@ -204,7 +204,7 @@ public class GestionRolesActivity extends AppCompatActivity implements View.OnCl
                     int idRolPadre = Integer.parseInt(object.getString("idRolPadre"));
                     String descripcion = object.getString("descripcion");
 
-                    Rol rol = new Rol(idRol, idRolPadre, descripcion);
+                    Rol rol = new Rol(idRol, idRolPadre, descripcion,0);
 
                     mRoles.add(rol);
                 }

@@ -48,7 +48,7 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
     public LoadInfoPDF(Context context, Archivo archivo, YesNoDialogListener listener, FragmentManager manager) {
         this.mContext = context;
         this.mArchivo = archivo;
-        this.directory_path = Utils.getDirectoryPath();
+        this.directory_path = Utils.getDirectoryPath(true, context);
         this.mListener = listener;
         this.mFragmentManager = manager;
     }

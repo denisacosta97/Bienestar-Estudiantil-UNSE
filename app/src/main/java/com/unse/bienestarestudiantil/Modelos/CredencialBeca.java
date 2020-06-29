@@ -12,7 +12,7 @@ public class CredencialBeca extends Credencial implements Parcelable {
     public CredencialBeca(int id, String titulo, int validez, int idUsuario, int idConvocatoria,
                           int tipoBeca, int anio, int tipoUsuario, String nombreBeca, String nombreU,
                           String apellidoU, String fecha) {
-        super(id, titulo, validez);
+        super(id, validez, 0, titulo, null);
         this.idUsuario = idUsuario;
         this.idConvocatoria = idConvocatoria;
         this.tipoBeca = tipoBeca;
@@ -25,7 +25,7 @@ public class CredencialBeca extends Credencial implements Parcelable {
     }
 
     protected CredencialBeca(Parcel in) {
-        super(in.readInt() ,in.readString(), in.readInt());
+        super(in.readInt(), in.readInt(), in.readInt() ,in.readString(), in.readString());
         idUsuario = in.readInt();
         idConvocatoria = in.readInt();
         tipoBeca = in.readInt();
@@ -156,8 +156,10 @@ public class CredencialBeca extends Credencial implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getId());
-        dest.writeString(getTitulo());
         dest.writeInt(getValidez());
+        dest.writeInt(getAnio());
+        dest.writeString(getTitulo());
+        dest.writeString(getFecha());
         dest.writeInt(idUsuario);
         dest.writeInt(idConvocatoria);
         dest.writeInt(tipoBeca);

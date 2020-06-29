@@ -44,7 +44,7 @@
         <activity android:name=".Vistas.Activities.Becas.InfoBecasActivity" />
         <activity android:name=".Vistas.Fragmentos.BecasFragment" />
         <activity
-            android:name=".Vistas.Activities.Perfil.GestionArchivosActivity"
+            android:name=".Vistas.Activities.Perfil.ArchivosActivity"
             android:label="Gestión de archivos" />
         <activity android:name=".Vistas.Activities.TorneosActivity" />
         <activity android:name=".Vistas.Dialogos.DialogoProfesorDeportes" />
@@ -138,6 +138,10 @@
         <activity android:name=".Vistas.Activities.Perfil.UploadPictureActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.EditarRolesActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionArchivos.GestionArchivosActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionArchivos.NuevoArchivoActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionSocios.EditarSocioActivity" />
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

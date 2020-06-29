@@ -173,31 +173,33 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
      * @throws IOException
      */
     private void buildDataPart(DataOutputStream dataOutputStream, DataPart dataFile, String inputName) throws IOException {
-        dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-        dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" +
-                inputName + "\"; filename=\"" + dataFile.getFileName() + "\"" + lineEnd);
-        if (dataFile.getType() != null && !dataFile.getType().trim().isEmpty()) {
-            dataOutputStream.writeBytes("Content-Type: " + dataFile.getType() + lineEnd);
+        if (dataFile != null) {
+            dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
+            dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" +
+                    inputName + "\"; filename=\"" + dataFile.getFileName() + "\"" + lineEnd);
+            if (dataFile.getType() != null && !dataFile.getType().trim().isEmpty()) {
+                dataOutputStream.writeBytes("Content-Type: " + dataFile.getType() + lineEnd);
+            }
+            dataOutputStream.writeBytes(lineEnd);
+
+            ByteArrayInputStream fileInputStream = new ByteArrayInputStream(dataFile.getContent());
+            int bytesAvailable = fileInputStream.available();
+
+            int maxBufferSize = 1024 * 1024;
+            int bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            byte[] buffer = new byte[bufferSize];
+
+            int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+                dataOutputStream.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+            }
+
+            dataOutputStream.writeBytes(lineEnd);
         }
-        dataOutputStream.writeBytes(lineEnd);
-
-        ByteArrayInputStream fileInputStream = new ByteArrayInputStream(dataFile.getContent());
-        int bytesAvailable = fileInputStream.available();
-
-        int maxBufferSize = 1024 * 1024;
-        int bufferSize = Math.min(bytesAvailable, maxBufferSize);
-        byte[] buffer = new byte[bufferSize];
-
-        int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-        while (bytesRead > 0) {
-            dataOutputStream.write(buffer, 0, bufferSize);
-            bytesAvailable = fileInputStream.available();
-            bufferSize = Math.min(bytesAvailable, maxBufferSize);
-            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-        }
-
-        dataOutputStream.writeBytes(lineEnd);
     }
 
     public static class DataPart {

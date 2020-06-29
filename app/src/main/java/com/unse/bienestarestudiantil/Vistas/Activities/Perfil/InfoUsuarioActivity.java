@@ -16,6 +16,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -47,25 +49,32 @@ import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
 import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.UploadManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleyMultipartRequest;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
+import com.unse.bienestarestudiantil.Modelos.Regularidad;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.RegularidadAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoActivarDesactivar;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoRegularidadAlumno;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -85,23 +94,27 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
     ImageView btnBack;
     CircleImageView imgUser;
-    LinearLayout latGeneral, latAlumno, latProfesor, latEgresado, latAdmin, latUser;
+    LinearLayout latGeneral, latAlumno, latProfesor, latEgresado, latAdmin, latUser, latRegularidades;
     FloatingActionButton fabEditar, fabPic;
     EditText edtNombre, edtApellido, edtDNI, edtSexo, edtMail, edtProfesionProf, edtAnioIngresoProf,
             edtProfesionEgre, edtAnioEgresoEgre, edtAnioIngresoAlu, edtLegajoAlu, edtDomicilio,
             edtProvincia, edtTelefono, edtPais, edtLocalidad, edtBarrio, edtRegistro, edtModificacion,
             edtFechaNac;
-    Button btnAltaBaja;
+    Button btnAltaBaja, btnAgregarReg;
     Spinner spinnerFacultad, spinnerCarrera;
     EditText[] campos;
     ArrayAdapter<String> carreraAdapter;
     ArrayAdapter<String> facultadAdapter;
+    RecyclerView mRecyclerViewRegularidad;
+    RecyclerView.LayoutManager mLayoutManager;
+    RegularidadAdapter mRegularidadAdapter;
+    ArrayList<Regularidad> mRegularidads;
 
 
     DialogoProcesamiento dialog;
     UsuarioViewModel mUsuarioViewModel;
-
     Usuario mUsuario = null;
+
     Object tipoUsuario = null;
     FragmentManager manager = null;
     Bitmap mBitmapFileSelect;
@@ -109,7 +122,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     String nameFileSelect;
 
     boolean isEditMode = false, isReadyForLoad = false, isAdminMode = false;
-    int facultadUser = 0, carreraUser = 0, mode = 0, tipoUsuer = -1, idUser = 0, validez = -1;
+    int facultadUser = 0, carreraUser = 0, mode = 0, tipoUsuer = -1, idUser = 0, validez = -1, position = -1;
 
 
     @Override
@@ -141,6 +154,10 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 mUsuario = getIntent().getParcelableExtra(Utils.USER_INFO);
             }
         }
+        if (getIntent().getSerializableExtra(Utils.LIST_REGULARIDAD) != null) {
+            mRegularidads = (ArrayList<Regularidad>) getIntent().getSerializableExtra(Utils.LIST_REGULARIDAD);
+
+        }
     }
 
     private void setToolbar() {
@@ -154,6 +171,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         fabPic.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnAltaBaja.setOnClickListener(this);
+        btnAgregarReg.setOnClickListener(this);
         if (tipoUsuer == Utils.TIPO_ALUMNO) {
             spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -224,7 +242,34 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             });
             spinnerFacultad.setSelection(facultadUser);
         }
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerViewRegularidad);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                processClick(position);
+            }
+        });
 
+    }
+
+    private void processClick(int pos) {
+        position = pos;
+        Regularidad regularidad = mRegularidads.get(pos);
+        DialogoActivarDesactivar dialogoActivarDesactivar = new DialogoActivarDesactivar();
+        dialogoActivarDesactivar.setContext(getApplicationContext());
+        dialogoActivarDesactivar.setFragmentManager(getSupportFragmentManager());
+        dialogoActivarDesactivar.setIdUsuario(mUsuario.getIdUsuario());
+        dialogoActivarDesactivar.setPosition(position);
+        dialogoActivarDesactivar.setRegularidad(regularidad);
+        dialogoActivarDesactivar.setOnClickListenerAdapter(new OnClickListenerAdapter() {
+            @Override
+            public void onClick(Object id) {
+                mRegularidads.get(position).setValidez((Integer) id);
+                mRegularidadAdapter.notifyDataSetChanged();
+                determinarBoton();
+            }
+        });
+        dialogoActivarDesactivar.show(getSupportFragmentManager(), "dialogo_act_desc");
     }
 
     private void loadViews() {
@@ -261,16 +306,32 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         btnAltaBaja = findViewById(R.id.btnAltaBaja);
         edtRegistro = findViewById(R.id.edtFechaRegistro);
         edtModificacion = findViewById(R.id.edtFechaMod);
+        latRegularidades = findViewById(R.id.latRegularidad);
+        mRecyclerViewRegularidad = findViewById(R.id.recycler);
+        btnAgregarReg = findViewById(R.id.btnRegularidad);
     }
 
     private void loadData() {
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewRegularidad.setHasFixedSize(true);
+        mRecyclerViewRegularidad.setLayoutManager(mLayoutManager);
+        if (mRegularidads != null) {
+            determinarBoton();
+            mRegularidadAdapter = new RegularidadAdapter(getApplicationContext(), mRegularidads);
+            mRecyclerViewRegularidad.setAdapter(mRegularidadAdapter);
+        }
         mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
         if (!isAdminMode) {
             latAdmin.setVisibility(View.GONE);
+            latRegularidades.setVisibility(View.GONE);
             latUser.setVisibility(VISIBLE);
         } else {
             latAdmin.setVisibility(VISIBLE);
             latUser.setVisibility(VISIBLE);
+            if (mUsuario != null && mUsuario.getTipoUsuario() == Utils.TIPO_ALUMNO)
+                latRegularidades.setVisibility(VISIBLE);
+            else
+                latRegularidades.setVisibility(View.GONE);
             edtRegistro.setEnabled(false);
         }
         campos = new EditText[]{edtNombre, edtApellido, edtSexo, edtMail, edtProfesionProf,
@@ -291,6 +352,18 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             }
         }).start();
         loadInfo();
+    }
+
+    private void determinarBoton() {
+        String anioActual = Utils.getFechaName(new Date(System.currentTimeMillis()));
+        anioActual = anioActual.substring(0, 4);
+        if (mRegularidads.size() > 0 &&
+                mRegularidads.get(0).getAnio() == Integer.parseInt(anioActual)
+                && mRegularidads.get(0).getValidez() == 1) {
+            btnAgregarReg.setEnabled(false);
+        } else {
+            btnAgregarReg.setEnabled(true);
+        }
     }
 
     private void loadInfo() {
@@ -386,8 +459,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions()
                     .error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(R.drawable.ic_user)).into(imgUser);
-        } else {
-            Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER,
+        } else { Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER,
                     String.format(Utils.PROFILE_PIC, mUsuario.getIdUsuario()), false);
             if (bitmap != null) {
                 Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
@@ -482,6 +554,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnRegularidad:
+                openBannerReg();
+                break;
             case R.id.btnAltaBaja:
                 altaBajaUser();
                 break;
@@ -500,6 +575,15 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void openBannerReg() {
+        DialogoRegularidadAlumno dialogoRegularidadAlumno = new DialogoRegularidadAlumno();
+        dialogoRegularidadAlumno.setContext(getApplicationContext());
+        dialogoRegularidadAlumno.setFragmentManager(getSupportFragmentManager());
+        dialogoRegularidadAlumno.setIdUsuario(mUsuario.getIdUsuario());
+        dialogoRegularidadAlumno.setRegularidadLista(mRegularidads);
+        dialogoRegularidadAlumno.show(getSupportFragmentManager(), "dialogo_regularidad");
+    }
+
     private void openModeEditor() {
         ObjectAnimator.ofFloat(fabEditar, "rotation", 0f, 360f).setDuration(600).start();
         activateEditMode();
@@ -508,7 +592,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
     private void altaBajaUser() {
         DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
                 .setTitulo(getString(R.string.advertencia))
-                .setDescripcion( String.format(getString(R.string.usuarioEliminar), validez == 0 ? "alta" : "baja",
+                .setDescripcion(String.format(getString(R.string.usuarioEliminar), validez == 0 ? "alta" : "baja",
                         mUsuario.getNombre(),
                         mUsuario.getApellido()))
                 .setListener(new YesNoDialogListener() {
@@ -822,6 +906,9 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         String legajo = edtLegajoAlu.getText().toString().trim();
         String barrio = edtBarrio.getText().toString().trim();
         //Creo un modelo para posterior almacenarlo local
+        int regularidad = 0;
+        if (mUsuario instanceof Alumno)
+            regularidad = ((Alumno) mUsuario).getIdRegularidad();
         mUsuario = new Usuario(Integer.parseInt(dni), nombre, apellido, fecha, pais, provincia, localidad,
                 domicilio, barrio, telefono, sexo, mail, tipoUsuer, mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
                 mUsuario.getValidez());
@@ -837,13 +924,13 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                             validador.validarAnio(edtAnioIngresoAlu) && validador.validarLegajo(edtLegajoAlu)) {
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
                                 domicilio, barrio, telefono, sexo, mail, Utils.TIPO_ALUMNO, carrera, faculta, anioIngreso2
-                                , legajo, null, null));
+                                , legajo, null, null, regularidad));
                         tipoUsuario = new Alumno(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
                                 mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
                                 mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
                                 mUsuario.getMail(), mUsuario.getTipoUsuario(), mUsuario.getFechaRegistro(), mUsuario.getFechaModificacion(),
                                 mUsuario.getValidez(), Integer.parseInt(dni), carrera, faculta,
-                                anioIngreso2, legajo, 0);
+                                anioIngreso2, legajo, regularidad);
                     }
                     break;
                 case Utils.TIPO_PROFESOR:
@@ -852,7 +939,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                         sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad,
                                 domicilio, barrio, telefono, sexo, mail,
                                 Utils.TIPO_PROFESOR, null, null, anioIngreso, null,
-                                profesion, null));
+                                profesion, null, 0));
                         tipoUsuario = new Profesor(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
                                 mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
                                 mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
@@ -866,7 +953,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                                 localidad, domicilio, barrio,
                                 telefono, sexo, mail, Utils.TIPO_EGRESADO,
                                 null, null, null, null,
-                                profesion2, anioEgreso));
+                                profesion2, anioEgreso, 0));
                         tipoUsuario = new Egresado(mUsuario.getIdUsuario(), mUsuario.getNombre(), mUsuario.getApellido(),
                                 mUsuario.getFechaNac(), mUsuario.getPais(), mUsuario.getProvincia(), mUsuario.getLocalidad(),
                                 mUsuario.getDomicilio(), mUsuario.getBarrio(), mUsuario.getTelefono(), mUsuario.getSexo(),
@@ -878,7 +965,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
                 case Utils.TIPO_PARTICULAR:
                     sendServer(processString(dni, nombre, apellido, fecha, pais, provincia, localidad, domicilio,
                             barrio, telefono, sexo, mail, tipoUsuer,
-                            null, null, null, null, null, null));
+                            null, null, null, null, null, null, 0));
                     break;
             }
 
@@ -889,13 +976,13 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             fecha, String pais, String provincia, String localidad, String domicilio,
                                 String barrio, String telefono, String sexo, String mail,
                                 int tipo, String carrera, String facultad, String anioIng,
-                                String legajo, String profesion, String anioEgreso) {
+                                String legajo, String profesion, String anioEgreso, int regularidad) {
         String resp = "";
         String fechaModificacion = Utils.getFechaName(new Date(System.currentTimeMillis()));
         if (tipo == Utils.TIPO_ALUMNO) {
             resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia,
                     localidad, domicilio, sexo, carrera, facultad,
-                    anioIng, legajo, tipo, mail, telefono, barrio, fechaModificacion);
+                    anioIng, legajo, tipo, mail, telefono, barrio, fechaModificacion, regularidad);
 
         } else if (tipo == Utils.TIPO_PROFESOR) {
             resp = String.format(Utils.dataProfesor, dni, nombre, apellido, fecha, pais, provincia,

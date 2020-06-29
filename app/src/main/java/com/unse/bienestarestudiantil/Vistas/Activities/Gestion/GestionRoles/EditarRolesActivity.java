@@ -186,10 +186,10 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
 
     private void sendPermissons() {
         roles.clear();
-        if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[0])))
-            roles.add(String.valueOf(Utils.LIST_PERMISOS[0]));
-        if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[1])))
-            roles.add(String.valueOf(Utils.LIST_PERMISOS[1]));
+        //if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[0])))
+          //  roles.add(String.valueOf(Utils.LIST_PERMISOS[0]));
+        //if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[1])))
+          //  roles.add(String.valueOf(Utils.LIST_PERMISOS[1]));
         visit(mAndroidTreeView.getRoot());
         String rolesURL = "";
         for (String s : roles) {

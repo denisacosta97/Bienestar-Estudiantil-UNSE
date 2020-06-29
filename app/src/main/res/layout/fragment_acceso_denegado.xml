@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estas funciones sólo están disponibles para usuarios registrados, si desea utilizarlas por favor regístrese."
+            android:text="@string/mensajeDenegado"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -33,9 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_border"
-            android:text="REGISTRARSE"
+            android:text="Registrarse"
+            android:textSize="17sp"
             android:textColor="@color/colorWhite"
-            android:padding="15dp"
+            android:padding="17dp"
             android:fontFamily="@font/montserrat_black"/>
 
     </LinearLayout>

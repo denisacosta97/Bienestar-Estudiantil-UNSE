@@ -12,7 +12,7 @@ public class CredencialDeporte extends Credencial implements Parcelable {
     public CredencialDeporte(int id, String titulo, int validez, int idTemporada, int idDeporte,
                              int anio, String nombre, String descripcion, String nombreU,
                              String apellido, String legajo, String facultad) {
-        super(id, titulo, validez);
+        super(id, validez, 0, titulo, null);
         this.idTemporada = idTemporada;
         this.idDeporte = idDeporte;
         this.anio = anio;
@@ -25,7 +25,7 @@ public class CredencialDeporte extends Credencial implements Parcelable {
     }
 
     public CredencialDeporte(Parcel in) {
-        super(in.readInt() ,in.readString(), in.readInt());
+        super(in.readInt(), in.readInt(), in.readInt() ,in.readString(), in.readString());
         idTemporada = in.readInt();
         idDeporte = in.readInt();
         anio = in.readInt();
@@ -129,8 +129,10 @@ public class CredencialDeporte extends Credencial implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(getId());
-        dest.writeString(getTitulo());
         dest.writeInt(getValidez());
+        dest.writeInt(getAnio());
+        dest.writeString(getTitulo());
+        dest.writeString(getFecha());
         dest.writeInt(idTemporada);
         dest.writeInt(idDeporte);
         dest.writeInt(anio);
