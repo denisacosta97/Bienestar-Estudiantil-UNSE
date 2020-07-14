@@ -44,8 +44,8 @@
                 android:text="CANCELAR"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_black" />
 
             <ImageView
                 android:id="@+id/imgRotar"
@@ -66,11 +66,8 @@
                 android:padding="10dp"
                 android:text="OK"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_black" />
 
         </LinearLayout>
 
@@ -78,9 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
-
     </LinearLayout>
-
-
 
 </LinearLayout>

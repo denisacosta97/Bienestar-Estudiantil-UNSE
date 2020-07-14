@@ -3,6 +3,10 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.unse.bienestarestudiantil.Herramientas.Utils;
+
+import org.slf4j.helpers.Util;
+
 import java.util.Date;
 
 public class Torneo implements Parcelable {
@@ -18,22 +22,22 @@ public class Torneo implements Parcelable {
     public static final String KEY_DESC = "descripcion";
     public static final String KEY_UBI = "ubicacion";
 
-    private int id, logo;
-    private String nameTorneo, desc, lugar, ubicacion, lat, lon;
-    private Date fechaInicio, fechaFin;
+    private int id, logo, validez, dispo;
+    private String nameTorneo, desc, lugar, lat, lon, fechaInicio, fechaFin;
 
-    public Torneo(int id, int logo, String nameTorneo, String desc, String lugar, String ubicacion,
-                  String lat, String lon, Date fechaInicio, Date fechaFin) {
+    public Torneo(int id, int logo, String nameTorneo, String desc, String lugar, String lat,
+                  String lon, String fechaInicio, String fechaFin, int validez, int dispo) {
         this.id = id;
         this.logo = logo;
         this.nameTorneo = nameTorneo;
         this.desc = desc;
         this.lugar = lugar;
-        this.ubicacion = ubicacion;
         this.lat = lat;
         this.lon = lon;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.validez = validez;
+        this.dispo = dispo;
     }
 
     public Torneo() {
@@ -42,11 +46,12 @@ public class Torneo implements Parcelable {
         this.nameTorneo = "";
         this.desc = "";
         this.lugar = "";
-        this.ubicacion = "";
         this.lat = "";
         this.lon = "";
-        this.fechaInicio = new Date();
-        this.fechaFin = new Date();
+        this.fechaInicio = "";
+        this.fechaFin = "";
+        this.validez = -1;
+        this.dispo = -1;
     }
 
     protected Torneo(Parcel in) {
@@ -55,9 +60,12 @@ public class Torneo implements Parcelable {
         nameTorneo = in.readString();
         desc = in.readString();
         lugar = in.readString();
-        ubicacion = in.readString();
         lat = in.readString();
         lon = in.readString();
+        fechaInicio = in.readString();
+        fechaFin = in.readString();
+        validez = in.readInt();
+        dispo = in.readInt();
     }
 
     public static final Creator<Torneo> CREATOR = new Creator<Torneo>() {
@@ -112,14 +120,6 @@ public class Torneo implements Parcelable {
         this.lugar = lugar;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
     public String getLat() {
         return lat;
     }
@@ -136,20 +136,36 @@ public class Torneo implements Parcelable {
         this.lon = lon;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public int getValidez() {
+        return validez;
+    }
+
+    public void setValidez(int validez) {
+        this.validez = validez;
+    }
+
+    public int getDispo() {
+        return dispo;
+    }
+
+    public void setDispo(int dispo) {
+        this.dispo = dispo;
     }
 
     @Override
@@ -164,8 +180,11 @@ public class Torneo implements Parcelable {
         dest.writeString(nameTorneo);
         dest.writeString(desc);
         dest.writeString(lugar);
-        dest.writeString(ubicacion);
         dest.writeString(lat);
         dest.writeString(lon);
+        dest.writeString(fechaInicio);
+        dest.writeString(fechaFin);
+        dest.writeInt(validez);
+        dest.writeInt(dispo);
     }
 }

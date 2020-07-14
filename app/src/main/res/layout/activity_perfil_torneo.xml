@@ -73,13 +73,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Lugar: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtLugar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Buenos Aires, Tecnópolis"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -94,13 +95,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Fecha de inicio y fin: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtFechas"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="12/11/2019 - 20/11/2019"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -115,13 +117,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Descripción: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtDesc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -141,8 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:textColor="@color/whiteTextColor"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:background="@drawable/button_border"
                         android:text="POSTULAR LISTA"
                         android:fontFamily="@font/montserrat_black"/>

@@ -13,6 +13,13 @@ public class Horario {
         this.horaFin = horaFin;
     }
 
+    public Horario() {
+        this.id = -1;
+        this.estado = -1;
+        this.horaInicio = "";
+        this.horaFin = "";
+    }
+
     public int getId() {
         return id;
     }

@@ -32,7 +32,6 @@
                 android:text="ADMINISTRAR RESERVA"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>
@@ -78,7 +77,6 @@
                             android:text="OLLEA ALLENDE NICOLE MARIEL"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -88,8 +86,7 @@
                             android:text="40657677"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/montserrat_black"/>
+                            android:fontFamily="@font/montserrat_regular"/>
 
                     </LinearLayout>
 
@@ -98,12 +95,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="DNI: "
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
@@ -111,6 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="123456789"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
@@ -124,6 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre y apellido: "
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
@@ -131,6 +132,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Denis"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </LinearLayout>
@@ -144,10 +146,11 @@
             <Button
                 android:id="@+id/btnAceptar"
                 style="@style/Base.Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_border"
                 android:text="ACEPTAR"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>

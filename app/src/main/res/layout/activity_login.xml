@@ -45,6 +45,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
                     android:hint="DNI"
+                    android:textSize="16sp"
                     android:inputType="number"
                     android:padding="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
@@ -63,15 +64,12 @@
                         android:layout_margin="5dp"
                         android:background="@drawable/edit_text_logreg"
                         android:hint="Contraseña"
+                        android:textSize="16sp"
                         android:inputType="textPassword"
                         android:padding="10dp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
-
-
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,10 +82,9 @@
                         android:id="@+id/sesionOn"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:text="Iniciar sesión"
                         android:textColor="@color/whiteTextColor"
-                        android:textStyle="bold"
                         android:backgroundTint="@color/colorPrimaryDark"
                         android:background="@drawable/corners_rounded_green"
                         android:layout_margin="5dp"
@@ -98,7 +95,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textStyle="bold"
                         android:textSize="18sp"
                         android:padding="10dp"
                         android:text="Registrarme"

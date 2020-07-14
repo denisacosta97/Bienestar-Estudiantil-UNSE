@@ -35,7 +35,6 @@
                     android:text="Menú Comedor Universitario"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:text="Semana del 23 al 27 de Septiembre"
                     android:textColor="@color/colorWhite"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textStyle="italic"
                     android:fontFamily="@font/montserrat_regular"/>
 
@@ -73,7 +72,6 @@
                             android:layout_height="wrap_content"
                             android:text="Lunes"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -81,7 +79,6 @@
                             android:layout_height="wrap_content"
                             android:text="Martes"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -89,7 +86,6 @@
                             android:layout_height="wrap_content"
                             android:text="Miercoles"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -97,7 +93,6 @@
                             android:layout_height="wrap_content"
                             android:text="Jueves"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -105,7 +100,6 @@
                             android:layout_height="wrap_content"
                             android:text="Viernes"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>

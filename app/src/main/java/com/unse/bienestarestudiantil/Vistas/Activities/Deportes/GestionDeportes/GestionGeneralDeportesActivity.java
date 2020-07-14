@@ -15,6 +15,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Deportes.GestionDeportesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Inscripciones.InscripcionesActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 

@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="La necesitarás para tus credenciales virtuales y además ayudarás al personal de Bienestar Estudiantil a identificarte."
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
                         android:fontFamily="@font/montserrat_regular"/>
@@ -94,36 +94,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SALTAR"
+                        android:textSize="16sp"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         style="@style/Widget.AppCompat.Button.Borderless" />
+
                     <Button
                         android:layout_marginStart="10dp"
                         android:id="@+id/btnAceptar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="16sp"
                         android:text="ACEPTAR"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         android:background="@drawable/button_border"
                         android:padding="15dp"
                         />
 
-
-
                 </LinearLayout>
 
-
             </LinearLayout>
-
-
 
         </LinearLayout>
 
     </FrameLayout>
-
-
-
-
 
 </LinearLayout>

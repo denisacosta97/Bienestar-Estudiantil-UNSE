@@ -28,7 +28,6 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
                     android:background="@color/colorGreen"
                     android:text="S.U.M"
                     android:fontFamily="@font/montserrat_black"/>
@@ -60,7 +59,6 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
                     android:background="@color/colorRed"
                     android:text="Quincho gris"
                     android:fontFamily="@font/montserrat_black"/>
@@ -92,7 +90,6 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
                     android:background="@color/colorFCEyT"
                     android:fontFamily="@font/montserrat_black"
                     android:text="Quincho marrón"/>

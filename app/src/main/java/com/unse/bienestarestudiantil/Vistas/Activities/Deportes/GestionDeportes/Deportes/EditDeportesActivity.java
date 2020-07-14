@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Deportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,6 +24,8 @@ import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropDeporte;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropTorneo;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -39,7 +41,7 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
     EditText mHorario, mDia, mEntrenador, edtxLugar;
     TextView mNombreDep;
     ImageView mIcon, btnBack;
-    Button btnModificar, btnGuardar;
+    Button btnModificar, btnGuardar, btnBorrar;
     DialogoProcesamiento dialog;
     EditText[] campos;
     boolean isEdit = false;
@@ -78,7 +80,7 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void loadData() {
-        mEntrenador.setText(mDeporte.getProfesor().getNombre() + " " + mDeporte.getProfesor().getApellido());
+        mEntrenador.setText(String.format("%s %s", mDeporte.getProfesor().getNombre(), mDeporte.getProfesor().getApellido()));
         mHorario.setText(mDeporte.getHorario());
         mDia.setText(mDeporte.getDias());
         mNombreDep.setText(mDeporte.getName());
@@ -90,6 +92,7 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
         btnBack.setOnClickListener(this);
         btnModificar.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
+        btnBorrar.setOnClickListener(this);
     }
 
     private void loadViews() {
@@ -99,7 +102,8 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
         mNombreDep = findViewById(R.id.txtNameDeporte);
         edtxLugar = findViewById(R.id.edtxLugar);
         mIcon = findViewById(R.id.imgvIcon);
-        btnModificar = findViewById(R.id.btnModificar);
+        btnModificar = findViewById(R.id.btnEditar);
+        btnBorrar = findViewById(R.id.btnBorrar);
         btnGuardar = findViewById(R.id.btnGuardar);
         btnBack = findViewById(R.id.btnBack);
 
@@ -111,8 +115,9 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnModificar:
+            case R.id.btnEditar:
                 btnModificar.setVisibility(View.GONE);
+                btnBorrar.setVisibility(View.GONE);
                 btnGuardar.setVisibility(View.VISIBLE);
                 activateEditMode();
                 break;
@@ -122,18 +127,24 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
             case R.id.btnGuardar:
                 btnGuardar.setVisibility(View.GONE);
                 btnModificar.setVisibility(View.VISIBLE);
+                btnBorrar.setVisibility(View.VISIBLE);
                 //GUARDAR DATOS MODIFICADOS
+                if (isEdit) {
+                    save();
+                    activateEditMode();
+                    return;
+                }
+                break;
+            case R.id.btnBorrar:
+                DialogoDropDeporte dialogoDropDeporte = new DialogoDropDeporte();
+                dialogoDropDeporte.loadData(mDeporte);
+                dialogoDropDeporte.show(getSupportFragmentManager(),"dialog_deporte");
                 break;
         }
 
     }
 
     private void activateEditMode() {
-        if (isEdit) {
-            save();
-            return;
-
-        }
         if (mode == 0)
             mode = 1;
         else
@@ -157,10 +168,11 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         //Comprobacion que no sean vacios
-        if (false/*!validador.noVacio(horario, dia, entrenador, lugar)*/) {
+        if (!validador.noVacio(horario) && !validador.noVacio(dia) && !validador.noVacio(entrenador)
+                && !validador.noVacio(lugar)) {
 
             //Comprobacion del tipo d edatos
-            if (validador.validarHora(horario) && false/*validador.noVacio(entrenador, dia, lugar)*/) {
+            if (validador.validarHora(horario)) {
 
                 //Comprobacion de tamaños
                 if (validador.lengthMore(horario) && validador.lengthMore(dia)
@@ -187,6 +199,7 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
         return String.format(data, mDeporte.getIdDep(), mDeporte.getName(), mDeporte.getDesc(),
                 lugar, dia, horario, entrenador, fecha, mDeporte.getLat(), mDeporte.getLon(), token);
     }
+
 
     public void sendServer(String data) {
         String URL = Utils.URL_USUARIO_ACTUALIZAR + data;

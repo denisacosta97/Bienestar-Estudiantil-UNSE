@@ -38,7 +38,6 @@
                     android:layout_height="wrap_content"
                     android:text="BECA COMEDOR"
                     android:textSize="26sp"
-                    android:textStyle="bold"
                     android:gravity="center"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -53,7 +52,6 @@
                         android:layout_height="wrap_content"
                         android:text="Fecha inicio: "
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
@@ -76,7 +74,6 @@
                         android:layout_height="wrap_content"
                         android:text="Fecha fin: "
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <TextView
@@ -102,7 +99,6 @@
                     android:layout_height="wrap_content"
                     android:text="Descripción"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     android:gravity="center"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -127,7 +123,6 @@
                     android:layout_height="wrap_content"
                     android:text="Documentación"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     android:gravity="center"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -149,7 +144,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Ficha inscripción"
-                        android:textStyle="bold"
                         android:textSize="18sp"
                         android:fontFamily="@font/montserrat_regular"/>
 

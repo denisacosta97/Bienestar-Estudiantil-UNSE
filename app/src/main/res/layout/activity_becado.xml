@@ -76,6 +76,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nombre y Apellido: "
+                                android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:fontFamily="@font/montserrat_black"/>
 
@@ -83,6 +84,7 @@
                                 android:id="@+id/txtNamApe"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Buenos Aires, Tecnópolis"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -96,14 +98,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Legajo: "
-                                android:textStyle="bold"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtLegajo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="12/11/2019 - 20/11/2019"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -117,14 +120,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"
-                                android:text="Deporte: "
-                                android:textStyle="bold" />
+                                android:text="Deporte: "/>
 
                             <TextView
                                 android:id="@+id/txtDeporte"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Rugby"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -139,13 +143,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Total asistencia: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtTotAsistencia"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="10"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -159,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:text="Generar PDF"
                         android:textColor="@color/whiteTextColor"
                         android:textStyle="bold"

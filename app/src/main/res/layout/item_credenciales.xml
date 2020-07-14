@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Inscripción al deporte"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_black" />
 
             <TextView
@@ -60,7 +60,7 @@
                 android:text="EN PROCESO"
                 android:layout_marginEnd="5dp"
                 android:textStyle="italic|bold"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             <ImageView
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Descargar"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
         </LinearLayout>

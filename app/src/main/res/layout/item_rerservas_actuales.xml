@@ -40,7 +40,6 @@
                 android:text="OCUPADO"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:fontFamily="@font/montserrat_black"/>
             
             <TextView
@@ -51,7 +50,7 @@
                 android:gravity="center"
                 android:text="10:00hs - 19:00hs"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
         </LinearLayout>

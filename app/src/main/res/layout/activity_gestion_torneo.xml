@@ -26,6 +26,18 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnExport"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/whiteTextColor"
+            android:textSize="16sp"
+            android:background="@drawable/button_border"
+            android:text="EXPORTAR DATOS"
+            android:fontFamily="@font/montserrat_black"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"

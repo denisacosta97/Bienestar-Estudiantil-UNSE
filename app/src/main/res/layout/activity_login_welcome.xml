@@ -21,7 +21,6 @@
             android:text="¡Buenas noches!"
             android:textColor="@color/whiteTextColor"
             android:textSize="40sp"
-            android:textStyle="bold"
             android:gravity="center"
             android:layout_marginTop="18sp"
             android:fontFamily="@font/montserrat_black"/>
@@ -30,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bienvenido/a a la aplicación de Bienestar Estudiantíl."
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_margin="10dp"
             android:textColor="@color/whiteTextColor"
             android:gravity="center"
@@ -54,7 +53,6 @@
                 android:background="@drawable/corners_rounded_green"
                 android:text="                        Iniciar sesión"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:drawableRight="@drawable/flecha_derecha"
                 android:fontFamily="@font/montserrat_black"/>
 
@@ -67,7 +65,6 @@
                 android:background="@drawable/corners_rounded_green"
                 android:text="               Visitante"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 android:drawableRight="@drawable/flecha_derecha"
                 android:fontFamily="@font/montserrat_black"/>
 

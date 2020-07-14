@@ -17,7 +17,6 @@
         android:layout_margin="10dp"
         android:orientation="horizontal">
 
-
             <TextView
                 android:gravity="center"
                 android:id="@+id/txtTitulo"
@@ -25,9 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Inscripción al deporte"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_black" />
-
 
     </LinearLayout>
 

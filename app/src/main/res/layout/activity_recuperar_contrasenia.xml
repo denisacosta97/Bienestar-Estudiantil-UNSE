@@ -38,7 +38,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:textStyle="bold" />
+                android:fontFamily="@font/montserrat_black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,6 +55,7 @@
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Ingresa tu DNI"
+                    android:textSize="16sp"
                     android:inputType="number"
                     android:padding="10dp" />
 
@@ -63,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:textSize="16sp"
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Ingresa el mail asociado"
@@ -86,8 +88,7 @@
                         android:fontFamily="@font/montserrat_black"
                         android:text="Enviar"
                         android:textColor="@color/whiteTextColor"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:visibility="visible"
@@ -108,7 +109,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:background="@color/transparente"/>
-
 
                 </LinearLayout>
 

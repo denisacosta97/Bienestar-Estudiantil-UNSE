@@ -41,7 +41,7 @@ public class TorneosAdapter extends RecyclerView.Adapter<TorneosAdapter.EventosV
     public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
         Torneo torneo = mTorneos.get(position);
 
-        holder.mIcon.setImageResource(torneo.getLogo());
+        holder.mIcon.setImageResource(R.drawable.ic_cup);
         holder.mNameTorneo.setText(torneo.getNameTorneo());
     }
 

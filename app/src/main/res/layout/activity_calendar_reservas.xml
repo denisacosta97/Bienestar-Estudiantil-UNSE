@@ -25,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Seleccione una fecha:"
-                android:textStyle="bold"
                 android:textSize="18sp"
                 android:fontFamily="@font/montserrat_black"/>
 
@@ -44,15 +43,13 @@
                 android:layout_height="wrap_content"
                 android:text="CARGANDO"
                 android:textColor="@color/colorAccent"
-                android:textStyle="bold"
                 android:textSize="20sp"
                 android:fontFamily="@font/montserrat_black"/>
 
-            <CalendarView
+            <com.applandeo.materialcalendarview.CalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

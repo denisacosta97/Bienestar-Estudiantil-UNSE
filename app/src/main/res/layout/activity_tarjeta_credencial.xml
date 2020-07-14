@@ -17,9 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnAceptar"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textColor="@color/colorWhite"
         android:text="GIRAR"
-        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_black"
         android:background="@drawable/button_border" />
+
 </LinearLayout>

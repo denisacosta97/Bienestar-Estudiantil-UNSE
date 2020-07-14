@@ -45,8 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="OLLEA ALLENDE NICOLE MARIEL"
                     android:textColor="@color/colorTextDefault"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
@@ -57,7 +56,6 @@
                     android:text="40657677"
                     android:textColor="@color/colorTextDefault"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </LinearLayout>

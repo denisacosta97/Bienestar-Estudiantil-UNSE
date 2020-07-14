@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Deportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -40,6 +40,7 @@ public class GestionDeportesActivity extends AppCompatActivity implements View.O
         loadListener();
 
         loadData();
+
     }
 
     private void setToolbar() {
@@ -55,12 +56,11 @@ public class GestionDeportesActivity extends AppCompatActivity implements View.O
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), ListAsistenciaDeportesActivity.class));
-                        break;
-                    case 2:
                         startActivity(new Intent(getApplicationContext(), BMDeportesActivity.class));
                         break;
-
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), ControlAsistenciaActivity.class));
+                        break;
                 }
                 Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }

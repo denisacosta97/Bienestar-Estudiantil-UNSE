@@ -41,8 +41,6 @@ public class DialogoReservas extends DialogFragment {
         if (getDialog().getWindow() != null)
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        //Utils.setFont(getContext(),(ViewGroup)view, Utils.MONSERRAT);
-
         loadViews();
 
         loadData();

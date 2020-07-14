@@ -3,11 +3,13 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,10 +37,12 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
 
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView mRecyclerTorneo;
-    ArrayList<Torneo> mTorneos;
+    ArrayList<Torneo> mTorneos, mTorneosBaja;
     TorneosAdapter mTorneosAdapter;
     ImageView imgIcono;
     DialogoProcesamiento dialog;
+    FloatingActionButton btnAdd;
+    Button mExport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +68,14 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
+        mExport.setOnClickListener(this);
 
     }
 
     private void loadDataRecycler() {
         mTorneos = new ArrayList<>();
+        mTorneosBaja = new ArrayList<>();
         //mTorneos.add(new Torneo(0, R.drawable.ic_cup, "UNSE", "Torneo anual de la UNSE", "Polideportivo UNSE","Polideportivo", new Date(14/3/20), new Date(10/4/20)));
         //mTorneos.add(new Torneo(1, R.drawable.ic_cup, "TORNEO JUR", "Torneo JUR desarrollado entre todas las universidades", "Polideportivo UNSE","Polideportivo", new Date(14/3/20), new Date(10/4/20)));
 
@@ -83,7 +90,7 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), PerfilTorneoEditActivity.class);
-                i.putExtra(Utils.TORNEO, (Parcelable) mTorneos.get(position));
+                i.putExtra(Utils.TORNEO, mTorneos.get(position));
                 startActivity(i);
             }
         });
@@ -93,6 +100,8 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
     private void loadViews() {
         mRecyclerTorneo = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
+        btnAdd = findViewById(R.id.fab);
+        mExport = findViewById(R.id.btnExport);
     }
 
     private void getAll() {
@@ -154,16 +163,37 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject j = jsonArray.getJSONObject(i);
 
-            Torneo torneo = new Torneo();
-            torneo.setId(j.getInt("idTorneo"));
-            torneo.setNameTorneo(j.getString("nombre"));
-            torneo.setLugar(j.getString("lugar"));
-            torneo.setFechaInicio(Utils.getFechaDate(j.getString("fechaInicio")));
-            torneo.setFechaFin(Utils.getFechaDate(j.getString("fechaFin")));
-            torneo.setDesc(j.getString("descripcion"));
-            torneo.setUbicacion(j.getString("ubicacion"));
+            int val = j.getInt("validez");
 
-            mTorneos.add(torneo);
+            if(val == 1){
+                Torneo torneo = new Torneo();
+                torneo.setId(j.getInt("idTorneo"));
+                torneo.setNameTorneo(j.getString("nombre"));
+                torneo.setLugar(j.getString("lugar"));
+                torneo.setFechaInicio(j.getString("fechaInicio"));
+                torneo.setFechaFin(j.getString("fechaFin"));
+                torneo.setDesc(j.getString("descripcion"));
+                torneo.setLat(j.getString("latitud"));
+                torneo.setLon(j.getString("longitud"));
+                torneo.setValidez(j.getInt("validez"));
+
+                mTorneos.add(torneo);
+            }
+            else {
+                Torneo torneo = new Torneo();
+                torneo.setId(j.getInt("idTorneo"));
+                torneo.setNameTorneo(j.getString("nombre"));
+                torneo.setLugar(j.getString("lugar"));
+                torneo.setFechaInicio(j.getString("fechaInicio"));
+                torneo.setFechaFin(j.getString("fechaFin"));
+                torneo.setDesc(j.getString("descripcion"));
+                torneo.setLat(j.getString("latitud"));
+                torneo.setLon(j.getString("longitud"));
+                torneo.setValidez(j.getInt("validez"));
+
+                mTorneosBaja.add(torneo);
+            }
+
         }
         mTorneosAdapter.notifyDataSetChanged();
     }
@@ -173,6 +203,12 @@ public class GestionTorneoActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
+                break;
+            case R.id.fab:
+                startActivity(new Intent(getApplicationContext(), AddTorneoActivity.class));
+                break;
+            case R.id.btnExport:
+                //generar pdf
                 break;
         }
     }

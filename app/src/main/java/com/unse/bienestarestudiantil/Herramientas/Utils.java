@@ -83,6 +83,9 @@ public class Utils {
     public static final String ANIO = "anio_temp";
     public static final String ROLES = "roles_all";
     public static final String ROLES_USER = "roles_user";
+    public static final String ASISTENCIA = "asistencia";
+    public static final String FECHA = "fecha";
+    public static final String LINEA_NAME = "linea_name";
     public static final String TIPO_REGISTRO = "tipo_acdeso";
     public static final String LIST_REGULARIDAD = "lista_regularidad";
     public static final String ARCHIVO_NAME = "archivo_name";
@@ -119,7 +122,6 @@ public class Utils {
     //Constantes de permisos
     public static final int[] LIST_PERMISOS = new int[]{999, 998};
 
-
     public static final int NOTICIA_NORMAL = 3030;
     public static final int NOTICIA_BUTTON_WEB = 3131;
     public static final int NOTICIA_BUTTON_TIENDA = 3132;
@@ -148,6 +150,7 @@ public class Utils {
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
     public static final String ALUMNO_NAME = "dato_alumno";
+    public static final String USER_NAME = "dato_user";
     public static final String NUM_INST = "num_inst";
     public static final int LIST_RESET = 0;
     public static final int LIST_LEGAJO = 1;
@@ -185,20 +188,28 @@ public class Utils {
     public static final String URL_ROLES_INSERTAR = "http://" + IP + "/bienestar/general/insertarRol.php";
     public static final String URL_ROLES_USER_LISTA = "http://" + IP + "/bienestar/general/getRolesByUsuario.php";
     //DEPORTES
-    public static final String URL_DEPORTE_TEMPORADA = "http://" + IP + "/bienestar/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "http://" + IP + "/bienestar/deportes/registrar.php";
-    public static final String URL_DEPORTE_CREDENCIAL = "http://" + IP + "/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAllDeportes.php";
-    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://" + IP + "/bienestar/deportes/getInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "http://" + IP + "/bienestar/beca/getInscripciones.php";
-    public static final String URL_INSCRIPCION_PARTICULAR = "http://" + IP + "/bienestar/deportes/getInscripcion.php";
-    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://" + IP + "/bienestar/deportes/eliminarInscripcion.php";
-    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://" + IP + "/bienestar/deportes/actualizarInscripcion.php";
-    public static final String URL_INSCRIPCION_CARNET = "http://" + IP + "/bienestar/deportes/insertarCredencial.php";
-    public static final String URL_CREDENCIAL_CAMBIAR = "http://" + IP + "/bienestar/deportes/cambiarCredencial.php";
+    public static final String URL_DEPORTE_TEMPORADA = "http://"+IP+"/bienestar/deportes/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "http://"+IP+"/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_CREDENCIAL = "http://"+IP+"/bienestar/deportes/getCredencial.php";
+    public static final String URL_DEPORTE_LISTA = "http://"+IP+"/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_DEPORTE_BAJA = "http://"+IP+"/bienestar/deportes/actualizarDeporte.php";
+    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://"+IP+"/bienestar/deportes/getInscriptos.php";
+    public static final String URL_INSCRIPCIONES_GENERALES = "http://"+IP+"/bienestar/beca/getInscripciones.php";
+    public static final String URL_INSCRIPCION_PARTICULAR = "http://"+IP+"/bienestar/deportes/getInscripcion.php";
+    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://"+IP+"/bienestar/deportes/eliminarInscripcion.php";
+    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://"+IP+"/bienestar/deportes/actualizarInscripcion.php";
+    public static final String URL_INSCRIPCION_CARNET = "http://"+IP+"/bienestar/deportes/insertarCredencial.php";
+    public static final String URL_CREDENCIAL_CAMBIAR = "http://"+IP+"/bienestar/deportes/cambiarCredencial.php";
+    public static final String URL_PROFES = "http://"+IP+"/bienestar/deportes/getAllProfesores.php";
+    public static final String URL_BECADOS = "http://"+IP+"/bienestar/beca/getAllBecados.php";
+    public static final String URL_ASISTENCIA = "http://"+IP+"/bienestar/deportes/asistencia.php";
     //TORNEOS
-    public static final String URL_TORNEO_CREDENCIAL = "http://" + IP + "/bienestar/deportes/torneo/getCredencial.php";
-    public static final String URL_TORNEOS_LISTA = "http://" + IP + "/bienestar/deportes/getAllTorneos.php";
+    public static final String URL_TORNEO_CREDENCIAL = "http://"+IP+"/bienestar/deportes/torneo/getCredencial.php";
+    public static final String URL_TORNEOS_LISTA = "http://"+IP+"/bienestar/deportes/torneo/getAllTorneos.php";
+    public static final String URL_TORNEOS_ACTUALIZAR = "http://"+IP+"/bienestar/deportes/torneo/actualizar.php";
+    public static final String URL_TORNEOS_BAJA = "http://"+IP+"/bienestar/deportes/torneo/borrar.php";
+    public static final String URL_TORNEOS_INSERTAR = "http://"+IP+"/bienestar/deportes/torneo/insertar.php";
+
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
     //GENERALES
@@ -206,11 +217,17 @@ public class Utils {
     public static final String URL_ARCHIVOS = "http://" + IP + "/bienestar/archivos/";
     public static final String URL_UPLOAD_FILE = "http://" + IP + "/bienestar/general/uploadFile.php";
 
+    //TRANSPORTE
+    public static final String URL_LINEAS = "http://"+IP+"/bienestar/transporte/getAllLineas.php";
+    public static final String URL_LINEAS_UPDATE = "http://"+IP+"/bienestar/trasporte/actualizar.php";
+    public static final String URL_LINEAS_ADD = "http://"+IP+"/bienestar/transporte/insertar.php";
+
     public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
     public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
     public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
+
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
@@ -396,7 +413,6 @@ public class Utils {
         return aux;
     }
 
-
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -414,12 +430,10 @@ public class Utils {
         return "";
     }
 
-
     public static void setFont(Context context, ViewGroup view, String font) {
         FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), font);
         fontChanger.replaceFonts(view);
     }
-
 
     private static void crearArchivoProvisorio(InputStream inputStream, File file) {
 
@@ -453,7 +467,6 @@ public class Utils {
 
         return a;
     }
-
 
     public static void createPDF(Context context) {
         File file = null;
@@ -558,7 +571,6 @@ public class Utils {
                 : new Paragraph(text).setFontSize(size);
     }
 
-
     public static Date getFechaDate(String fecha) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaI = null;
@@ -601,7 +613,6 @@ public class Utils {
 
     }
 
-
     public static String getHora(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -639,7 +650,6 @@ public class Utils {
 
 
     }
-
 
     public static String getFechaName(Date date) {
 

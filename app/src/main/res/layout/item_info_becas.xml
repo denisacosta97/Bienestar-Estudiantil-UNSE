@@ -48,7 +48,6 @@
                     android:layout_height="wrap_content"
                     android:text="BECA COMEDOR"
                     android:textSize="28sp"
-                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>

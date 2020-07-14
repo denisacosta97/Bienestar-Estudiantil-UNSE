@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:text="REGISTRO"
             android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:textSize="26sp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
@@ -30,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Regístrate para poder realizar tus trámites dentro de Bienestar Estudiantíl. Tienes la opción de escanear el código QR de tu DNI para autocompletar datos."
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:fontFamily="@font/montserrat_regular"/>
@@ -39,8 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Escanear DNI"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_marginRight="15dp"
@@ -79,7 +77,7 @@
                     android:padding="15dp"
                     android:inputType="textCapSentences|textPersonName"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -100,7 +98,7 @@
                 android:padding="15dp"
                 android:inputType="textCapSentences|textEmailSubject"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -129,7 +127,7 @@
                         android:padding="15dp"
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -151,7 +149,7 @@
                         android:inputType="textCapSentences|textShortMessage"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="15sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -172,7 +170,7 @@
                 android:clickable="true"
                 android:maxLines="1"
                 android:background="@drawable/edit_text_logreg"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             <android.support.design.widget.TextInputLayout
@@ -191,7 +189,7 @@
                     android:padding="15dp"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -213,7 +211,7 @@
                     android:inputType="number"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -235,7 +233,7 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -257,7 +255,7 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -279,7 +277,7 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -301,7 +299,7 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -323,7 +321,7 @@
                     android:inputType="textCapSentences|text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -347,7 +345,7 @@
                     android:padding="15dp"
                     android:inputType="textPassword"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -371,7 +369,7 @@
                     android:padding="15dp"
                     android:inputType="textPassword"
                     android:background="@drawable/edit_text_logreg"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -412,7 +410,7 @@
                         android:padding="15dp"
                         android:inputType="textCapSentences|text"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -433,7 +431,7 @@
                         android:padding="15dp"
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -458,7 +456,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Facultad: "
-                        android:textStyle="bold"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <Spinner
@@ -482,7 +480,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Carrera: "
-                        android:textStyle="bold"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <Spinner
@@ -510,7 +508,7 @@
                         android:padding="15dp"
                         android:inputType="text"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -529,7 +527,7 @@
                         android:padding="15dp"
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -548,7 +546,7 @@
                         android:padding="15dp"
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_black"/>
 
                 </android.support.design.widget.TextInputLayout>-->
@@ -577,7 +575,7 @@
                         android:padding="15dp"
                         android:inputType="textCapSentences|text"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -596,7 +594,7 @@
                         android:padding="15dp"
                         android:inputType="number"
                         android:background="@drawable/edit_text_logreg"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -613,7 +611,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:layout_centerInParent="true"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"
                 android:text="Registrarme"
                 android:fontFamily="@font/montserrat_black"/>

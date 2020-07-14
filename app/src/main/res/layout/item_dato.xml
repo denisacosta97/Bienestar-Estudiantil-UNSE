@@ -19,7 +19,6 @@
         android:padding="5dp"
         android:orientation="horizontal">
 
-
         <TextView
             android:padding="10dp"
             android:id="@+id/txtTitulo"
@@ -27,8 +26,7 @@
             android:layout_height="wrap_content"
             android:text="BECA COMEDOR - 2020"
             android:textColor="@color/colorTextDefault"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             android:fontFamily="@font/montserrat_black"/>
 
     </LinearLayout>

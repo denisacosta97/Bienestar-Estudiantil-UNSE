@@ -62,6 +62,7 @@
                             android:layout_height="30dp"
                             android:background="@color/transparente" />
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,6 +100,7 @@
                                 android:layout_margin="2dp"
                                 app:cardElevation="5dp"
                                 app:cardCornerRadius="20dp">
+
                                 <LinearLayout
                                     android:visibility="visible"
                                     android:layout_width="match_parent"
@@ -116,8 +118,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center"
-                                            android:textSize="16sp"
-                                            android:textStyle="bold"
+                                            android:textSize="18sp"
                                             android:text="INFORMACIÓN"
                                             android:fontFamily="@font/montserrat_black"/>
 
@@ -128,8 +129,6 @@
                                         android:layout_margin="5dp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
-
-
 
                                         <LinearLayout
                                             android:layout_width="match_parent"
@@ -151,7 +150,7 @@
                                                     android:textColor="@color/colorGrey2"
                                                     android:textStyle="bold"
                                                     android:text="DNI:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
@@ -162,10 +161,11 @@
                                                     android:textSize="14sp"
                                                     android:text="00.000.000"
                                                     android:inputType="number"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
+
                                             </LinearLayout>
 
                                             <View
@@ -195,22 +195,22 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Nombre:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtNombre"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="Nombre"
                                                     android:inputType="text"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
+
                                             </LinearLayout>
 
                                             <View
@@ -240,19 +240,18 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Apellido:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtApellido"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="Apellido"
                                                     android:inputType="text"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -287,7 +286,7 @@
                                                     android:textColor="@color/colorGrey2"
                                                     android:textStyle="bold"
                                                     android:text="Sexo:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
@@ -295,9 +294,9 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:inputType="text"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="No Especificado"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -330,18 +329,17 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Fecha de Nacimiento:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtFecha"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="0000-00-00"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -374,9 +372,8 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Domicilio:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
@@ -384,9 +381,9 @@
                                                     android:id="@+id/edtDomicilio"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE 0000"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -419,19 +416,17 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Barrio:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtBarrio"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -464,19 +459,17 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Localidad:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtLocalidad"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -509,19 +502,17 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Provincia:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtProvincia"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -554,19 +545,17 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="País:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
                                                     android:id="@+id/edtPais"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -599,9 +588,8 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Email:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
@@ -609,9 +597,9 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:inputType="textEmailAddress"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="ABCDE@ABC.ABC"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -644,9 +632,8 @@
                                                     android:layout_marginLeft="10dp"
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
-                                                    android:textStyle="bold"
                                                     android:text="Celular:"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 
                                                 <EditText
@@ -654,9 +641,9 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:inputType="number"
-                                                    android:textSize="14sp"
+                                                    android:textSize="16sp"
                                                     android:text="123456789"
-                                                    android:textStyle="bold"
+                                                    android:fontFamily="@font/montserrat_black"
                                                     android:textColor="@color/colorTextDefault"
                                                     android:padding="10dp"
                                                     android:background="@color/transparente" />
@@ -702,9 +689,8 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Facultad:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <Spinner
@@ -715,6 +701,7 @@
                                                             android:textStyle="bold"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:layout_margin="10dp" />
+
                                                     </LinearLayout>
 
                                                     <View
@@ -744,9 +731,8 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Carrera:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <Spinner
@@ -786,19 +772,17 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Legajo:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtLegajo"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:text="123/123"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -831,19 +815,18 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Año de Ingreso:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtAnioIngrAlu"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:inputType="number"
                                                             android:text="1234567"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -857,8 +840,6 @@
                                                         android:background="@color/colorGrey"/>
 
                                                 </LinearLayout>
-
-
 
 
                                             </LinearLayout>
@@ -888,18 +869,17 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Profesión:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtProfesion1"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:text="ABCDE"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -932,19 +912,18 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Año de Ingreso:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtAnioIngProf"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:inputType="number"
                                                             android:text="123456789"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -958,8 +937,6 @@
                                                         android:background="@color/colorGrey"/>
 
                                                 </LinearLayout>
-
-
 
 
                                             </LinearLayout>
@@ -989,18 +966,17 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:text="Profesión:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtProfesionEgre"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:text="ABCDE"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -1033,20 +1009,19 @@
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_marginRight="10dp"
                                                             android:textColor="@color/colorGrey2"
-                                                            android:textStyle="bold"
                                                             android:inputType="number"
                                                             android:text="Año de Egreso:"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:fontFamily="@font/montserrat_black"/>
 
                                                         <EditText
                                                             android:id="@+id/edtAnioEgresoEgre"
                                                             android:layout_width="match_parent"
                                                             android:layout_height="wrap_content"
-                                                            android:textSize="14sp"
+                                                            android:textSize="16sp"
                                                             android:inputType="number"
                                                             android:text="123456789"
-                                                            android:textStyle="bold"
+                                                            android:fontFamily="@font/montserrat_black"
                                                             android:textColor="@color/colorTextDefault"
                                                             android:padding="10dp"
                                                             android:background="@color/transparente" />
@@ -1061,21 +1036,13 @@
 
                                                 </LinearLayout>
 
-
-
-
                                             </LinearLayout>
-
-
 
                                         </LinearLayout>
 
                                     </LinearLayout>
 
-
-
                                 </LinearLayout>
-
 
                             </android.support.v7.widget.CardView>
 
@@ -1087,7 +1054,6 @@
                         </LinearLayout>
 
                     </FrameLayout>
-
 
                 </LinearLayout>
 
@@ -1227,6 +1193,7 @@
                             app:cardElevation="5dp"
                             android:layout_margin="2dp"
                             app:cardCornerRadius="20dp">
+
                             <LinearLayout
                                 android:visibility="visible"
                                 android:layout_width="match_parent"
@@ -1244,8 +1211,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold"
+                                        android:textSize="18sp"
                                         android:text="OPERACIONES"
                                         android:fontFamily="@font/montserrat_black"/>
 
@@ -1256,8 +1222,6 @@
                                     android:layout_margin="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
-
-
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1277,9 +1241,8 @@
                                                 android:layout_marginLeft="10dp"
                                                 android:layout_marginRight="10dp"
                                                 android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
                                                 android:text="Fecha Registro:"
-                                                android:textSize="14sp"
+                                                android:textSize="16sp"
                                                 android:fontFamily="@font/montserrat_black"/>
 
                                             <EditText
@@ -1287,12 +1250,13 @@
                                                 android:id="@+id/edtFechaRegistro"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:textSize="14sp"
+                                                android:textSize="16sp"
                                                 android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
-                                                android:textStyle="bold"
+                                                android:fontFamily="@font/montserrat_black"
                                                 android:textColor="@color/colorTextDefault"
                                                 android:padding="10dp"
                                                 android:background="@color/transparente" />
+
                                         </LinearLayout>
 
                                         <View
@@ -1322,9 +1286,8 @@
                                                 android:layout_marginLeft="10dp"
                                                 android:layout_marginRight="10dp"
                                                 android:textColor="@color/colorGrey2"
-                                                android:textStyle="bold"
                                                 android:text="Fecha Modificación:"
-                                                android:textSize="14sp"
+                                                android:textSize="16sp"
                                                 android:fontFamily="@font/montserrat_black"/>
 
                                             <EditText
@@ -1332,9 +1295,9 @@
                                                 android:id="@+id/edtFechaMod"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:textSize="14sp"
+                                                android:textSize="16sp"
                                                 android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
-                                                android:textStyle="bold"
+                                                android:fontFamily="@font/montserrat_black"
                                                 android:textColor="@color/colorTextDefault"
                                                 android:padding="10dp"
                                                 android:background="@color/transparente" />
@@ -1368,7 +1331,8 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:text="DAR DE BAJA"
-                                                android:textStyle="bold"
+                                                android:fontFamily="@font/montserrat_black"
+                                                android:textSize="16sp"
                                                 android:padding="12dp"
                                                 android:layout_weight="0.5"
                                                 android:textColor="@color/colorWhite"
@@ -1379,9 +1343,10 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:text="OTRA OPERACION"
-                                                android:textStyle="bold"
+                                                android:textSize="16sp"
                                                 android:padding="12dp"
                                                 android:layout_weight="0.5"
+                                                android:fontFamily="@font/montserrat_black"
                                                 android:textColor="@color/colorWhite"
                                                 android:background="@drawable/button_border" />
 
@@ -1398,15 +1363,9 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="5dp" />
 
-
-
                                     </LinearLayout>
 
-
-
                                 </LinearLayout>
-
-
 
                             </LinearLayout>
 
@@ -1420,7 +1379,6 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
 
                 <View
@@ -1429,7 +1387,6 @@
                     android:background="@color/transparente" />
 
             </LinearLayout>
-
 
         </FrameLayout>
 

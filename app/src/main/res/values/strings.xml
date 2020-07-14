@@ -1,4 +1,19 @@
 <resources>
+    <array name="material_calendar_months_array">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Augosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Deciembre</item>
+    </array>
+    <integer name="card_name_len">25</integer>
     <string name="app_name">Bienestar Estudiantil - UNSE</string>
     <string name="app_name_shor">Bienestar Estudiantil</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -6,23 +21,22 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
+
     <string name="nav_header_desc">Navigation header</string>
+
     <string name="action_settings">Settings</string>
-
-    <integer name="card_name_len">25</integer>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
 
+    <string name="menu_send">Send</string>
     <string name="next">SIGUIENTE</string>
+
     <string name="start">COMENZAR</string>
 
     <string name="title_activity_profile">Profile</string>
-
     <string name="txtDeportesFrag">La UNSE considera que el deporte es un componente fundamental en la formación de sus estudiantes. El deporte es salud, ocupación del tiempo libre, afán de superación y socialización.\n\n
         El área de deportes es la encargada de programar y coordinar las diversas actividades con el fin de facilitar a los estudiantes los medios necesarios para la práctica deportiva.\n\n
         Cada año se programan ligas deportivas en  las disciplinas de básquet, fútbol, rugby, voleibol y ajedrez. También para aprender o seguir desarrollando las competencias deportivas se ofrece la formación y el entrenamiento en voleibol masculino y femenino, rugby masculino y femenino, cestobol, hockey y fútbol femenino.\n\n
@@ -30,8 +44,8 @@
         Por inscripciones a cualquiera de los deportes, puedes realizarlo mediante la aplicación donde tendrás toda la información y también puedes comunicarte por teléfono o por mail para más información.\n\n
 
  </string>
-    <string name="txtReserva">Elige una fecha para ver la disponibilidad de %s</string>
 
+    <string name="txtReserva">Elige una fecha para ver la disponibilidad de %s</string>
     <string name="txtAfiliados">1. Constancia de descuento del área personal.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
     <string name="txtdocnodoc">1. Constancia de empleado y/o área que presta servicio.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
     <string name="txtalumnegre">1. Constancia de alumno regular y en caso de egresados se elevará una nota solicitando su confirmación como tal.\n2. Recibo SADAIC en caso de fiestas o eventos.\n3. Recibo Calidad de Vida en caso de fiestas y eventos.\n4. Recibo oficial de Tesoría.</string>
@@ -151,6 +165,18 @@
     <string name="suscripcionInscripto">El socio ya está inscripto en ese año</string>
     <string name="primeroBuscarSuscrip">Primero debe buscar un año</string>
     <string name="suscripcionNoExiste">No existen suscripciones en ese año</string>
+
+    <!--  Calendario  -->
+
+    <string name="torneoEliminado">Torneo eliminado</string>
+    <string name="material_calendar_monday">L</string>
+    <string name="material_calendar_tuesday">M</string>
+    <string name="material_calendar_wednesday">M</string>
+    <string name="material_calendar_thursday">J</string>
+    <string name="material_calendar_friday">V</string>
+    <string name="material_calendar_saturday">S</string>
+
+    <string name="material_calendar_sunday">D</string>
 
 </resources>
 

@@ -6,7 +6,6 @@
 
     <include layout="@layout/toolbar_trans" />
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,7 +25,5 @@
             android:background="@color/transparente"/>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

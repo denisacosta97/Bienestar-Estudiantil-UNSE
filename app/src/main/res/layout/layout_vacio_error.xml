@@ -23,10 +23,10 @@
             android:id="@+id/txtError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ERROR AL OBTENER CREDENCIALES, POR FAVOR INTENTA NUEVAMENTE"
+            android:text="ERROR AL OBTENER CREDENCIALES, POR FAVOR INTENTA NUEVAMENTE."
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="17sp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="18sp"
             android:gravity="center" />
 
         <Button
@@ -35,8 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:padding="15dp"
+            android:fontFamily="@font/montserrat_black"
+            android:padding="18dp"
             android:background="@drawable/button_border"
             android:text="REINTENTAR">
         </Button>
@@ -61,10 +61,10 @@
             android:id="@+id/txtVacio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NO POSEE NINGUNA CREDENCIAL DEPORTIVA, PRIMERO DEBE REGISTRARSE A UN DEPORTE"
+            android:text="NO POSEE NINGUNA CREDENCIAL DEPORTIVA, PRIMERO DEBE REGISTRARSE EN UN DEPORTE."
             android:textColor="@color/colorTextDefault"
-            android:textStyle="bold"
-            android:textSize="17sp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="18sp"
             android:gravity="center" />
 
     </LinearLayout>

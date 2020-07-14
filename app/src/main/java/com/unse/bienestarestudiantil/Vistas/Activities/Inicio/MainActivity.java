@@ -41,12 +41,15 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AboutActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.TermsActivity;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.TransporteFragment;
 
 import java.util.HashMap;
 
@@ -302,6 +305,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_becas:
                 fragmentoGenerico = new BecasFragment();
                 break;
+            case R.id.item_transporte:
+                fragmentoGenerico = new TransporteFragment();
+                ((TransporteFragment) fragmentoGenerico).setContext(getApplicationContext());
+                ((TransporteFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
+                break;
             case R.id.item_comedor:
                 fragmentoGenerico = new ComedorFragment();
                 break;
@@ -313,6 +321,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_about:
                 startActivity(new Intent(this, AboutActivity.class));
+                break;
+            case R.id.item_terminos:
+                startActivity(new Intent(this, TermsActivity.class));
                 break;
         }
 

@@ -10,6 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilChoferActivity"></activity>
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilPasajeroActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionPasajeroActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionLineaActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionChoferActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionTransporteActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.RecorridoActivity" />
+        <activity android:name=".Vistas.Fragmentos.TransporteFragment" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.CalendarAsistenciaActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.ControlAsistenciaActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.AddTorneoActivity" />
+        <activity android:name=".Vistas.Dialogos.DialogoDropDeporte" />
+        <activity android:name=".Vistas.Dialogos.DialogoDropTorneo" />
+        <activity android:name=".Vistas.Activities.TermsActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InfoProfesorActivity" />
+        <activity android:name=".Vistas.Activities.AboutActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.unse.bienestarestudiantil.provider"
@@ -22,17 +38,17 @@
 
         <activity android:name=".Vistas.Activities.AboutActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ListAsistenciaDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.EditDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.ListAsistenciaDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CambiarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Perfil.RecuperarContraseniaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionProfeActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionTorneoActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.GestionDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BecadoActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.GestionBecadosActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BMDeportesActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.BMDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.ListaInscriptosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.InscripcionesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.ProfilePictureActivity" />
@@ -139,17 +155,28 @@
         <activity android:name=".Vistas.Activities.Perfil.UploadPictureActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.EditarRolesActivity" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.unse.bienestarestudiantil.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity android:name=".Vistas.Activities.Gestion.GestionArchivos.GestionArchivosActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionArchivos.NuevoArchivoActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionSocios.EditarSocioActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

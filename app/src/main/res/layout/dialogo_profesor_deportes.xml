@@ -32,7 +32,6 @@
                 android:text="ADMINISTRAR DEPORTE"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>

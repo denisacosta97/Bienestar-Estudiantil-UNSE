@@ -3,6 +3,7 @@ package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
@@ -45,6 +49,7 @@ public class DeportesFragment extends Fragment {
     RelativeLayout mImageDeportes;
     DialogoProcesamiento dialog;
     FragmentManager mFragmentManager;
+    LinearLayout layoutFondo;
     Context mContext;
     boolean isOff = false;
 
@@ -52,7 +57,15 @@ public class DeportesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_deportes, container, false);
 
-        //Utils.setFont(getContext(), (ViewGroup)view, Utils.MONSERRAT);
+        layoutFondo = view.findViewById(R.id.backgroundDep);
+
+        Glide.with(this).load(R.drawable.imgdeportes)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        layoutFondo.setBackground(resource);
+                    }
+                });
 
         loadViews();
 
@@ -63,7 +76,6 @@ public class DeportesFragment extends Fragment {
 
     private void loadViews() {
         reciclerDeportes = view.findViewById(R.id.recyclerDeportes);
-        mImageDeportes = view.findViewById(R.id.imgAreaDeportes);
     }
 
     private void loadData() {
@@ -73,7 +85,6 @@ public class DeportesFragment extends Fragment {
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
         reciclerDeportes.setAdapter(mDeportesAdapter);
-        mImageDeportes.requestFocus();
 
         loadInfo();
 
@@ -98,7 +109,6 @@ public class DeportesFragment extends Fragment {
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
 
             }
@@ -206,7 +216,6 @@ public class DeportesFragment extends Fragment {
 
                 Deporte deporte = Deporte.mapper(j);
                 mDeportes.add(deporte);
-
 
             } catch (JSONException e) {
                 e.printStackTrace();

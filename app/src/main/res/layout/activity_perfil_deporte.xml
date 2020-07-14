@@ -57,7 +57,6 @@
                         android:layout_height="wrap_content"
                         android:text="Natación"
                         android:gravity="center"
-                        android:textStyle="bold"
                         android:layout_marginTop="45dp"
                         android:textSize="45sp"
                         android:fontFamily="@font/montserrat_black"/>
@@ -78,7 +77,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Entrenador/a: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
@@ -86,6 +85,7 @@
                                 android:id="@+id/txtEntrenador"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Matías Umañowefunegioegnweoigneiowgnieong"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -101,7 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Días: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
@@ -109,6 +109,7 @@
                                 android:id="@+id/txtDia"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="lunes, miércoles y viernes."
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -124,7 +125,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Horarios: "
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
@@ -132,6 +133,7 @@
                                 android:id="@+id/txtHorarios"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="15:00hs, 16:00hs y 17:00hs."
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -147,7 +149,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Lugar de entrenamiento:"
-                                android:textStyle="bold"
+                                android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
@@ -155,6 +157,7 @@
                                 android:id="@+id/txtLugar"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textSize="16sp"
                                 android:text="Club Dorrego"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -174,8 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:textColor="@color/whiteTextColor"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:background="@drawable/button_border"
                         android:text="REGISTRARME"
                         android:fontFamily="@font/montserrat_black"/>

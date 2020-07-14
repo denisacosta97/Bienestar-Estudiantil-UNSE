@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Deportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -20,7 +20,6 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
-import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -31,20 +30,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BMDeportesActivity extends AppCompatActivity implements View.OnClickListener {
+public class ControlAsistenciaActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView reciclerDeportes;
     ArrayList<Deporte> mDeportes;
-    ArrayList<Profesor> mProfesors;
     DeportesAdapter mDeportesAdapter;
     ImageView imgIcono;
     DialogoProcesamiento dialog;
+    boolean isOff = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bmdeportes);
+        setContentView(R.layout.activity_control_asistencia);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -53,13 +52,11 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
 
         loadListener();
 
-        getAll();
-
         loadDataRecycler();
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Modificar información");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Asistencia");
 
     }
 
@@ -70,7 +67,8 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
 
     private void loadDataRecycler() {
         mDeportes = new ArrayList<>();
-        mProfesors = new ArrayList<>();
+
+        loadInfo();
 
         mDeportesAdapter = new DeportesAdapter(mDeportes, getApplicationContext(), false);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
@@ -82,10 +80,11 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), EditDeportesActivity.class);
-                i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
-                i.putExtra(Utils.DEPORTE_NAME_PROF, mProfesors.get(position));
-                startActivity(i);
+                if (!isOff) {
+                    Intent i = new Intent(getApplicationContext(), CalendarAsistenciaActivity.class);
+                    i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
+                    startActivity(i);
+                }else Utils.showToast(getApplicationContext(), getString(R.string.noConexion));
             }
         });
 
@@ -96,23 +95,23 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
         imgIcono = findViewById(R.id.imgFlecha);
     }
 
-    private void getAll() {
-        String key = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
-        String URL = String.format("%s?key=%s", Utils.URL_DEPORTE_LISTA, key);
-
+    public void loadInfo() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValue(Utils.IS_VISIT) ? 1 : 0;
+        String URL = String.format("%s?key=%s&id=%s", Utils.URL_DEPORTE_LISTA, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                updateView(1);
                 dialog.dismiss();
 
             }
@@ -124,61 +123,87 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
+    private void updateView(int i) {
+        switch (i) {
+            case 2:
+                isOff = false;
+                mDeportes.clear();
+                break;
+            case 1:
+                isOff = true;
+                mDeportes.clear();
+                mDeportes.add(new Deporte(0,1, "Ajedréz", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,2, "Básquet", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,3, "Cestobal", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,4, "Fútbol 11 Masculino", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,5, "Fútbol 11 Femenino", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,6, "Fútbol Sala Masculino", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,7, "Fútbol Sala Femenino", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,8, "Hockey", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,9, "Natación", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,10, "Rugby", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,11, "Tenis de Mesa", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,12, "Voleibol Masculino", "", "", "", "", "", "", 0, null));
+                mDeportes.add(new Deporte(0,13, "Voleibol Femenino", "", "", "", "", "", "", 0, null));
+                mDeportesAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
     private void procesarRespuesta(String response) {
         try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
-                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                    load(jsonArray);
+                    updateView(2);
+                    loadInfoDeportes(jsonObject.getJSONArray("mensaje"));
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "La contraseña actual ingresada es inválida");
+                    Utils.showToast(getApplicationContext(), getString(R.string.noCredenciales));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            updateView(2);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
-    private void load(JSONArray jsonArray) throws JSONException {
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject j = jsonArray.getJSONObject(i);
+    private void loadInfoDeportes(JSONArray mensaje) {
+        for (int i = 0; i < mensaje.length(); i++) {
+            try {
+                JSONObject j = mensaje.getJSONObject(i);
+                int val = j.getInt("validez");
+                if (val == 1) {
+                    Deporte deporte = Deporte.mapper(j);
+                    mDeportes.add(deporte);
+                }
 
-            Deporte deporte = new Deporte();
-            deporte.setIdDep(j.getInt("idDeporte"));
-            deporte.setName(j.getString("nombre"));
-            deporte.setDesc(j.getString("descripcion"));
-            deporte.setDias(j.getString("diaEntreno"));
-            deporte.setHorario(j.getString("horario"));
-            deporte.setLugar(j.getString("lugar"));
-            deporte.setIconDeporte(j.getInt("idDeporte"));
-            mDeportes.add(deporte);
-
-            Profesor profesor = new Profesor();
-            profesor.setIdProfesor(j.getInt("idEntrenador"));
-            profesor.setFechaIngreso(j.getString("fechaIngreso"));
-            profesor.setNombre(j.getString("nombreP"));
-            profesor.setApellido(j.getString("apellido"));
-
-            mProfesors.add(profesor);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                updateView(1);
+            }
 
         }
         mDeportesAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onClick(View v) {
@@ -188,5 +213,4 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
     }
-
 }

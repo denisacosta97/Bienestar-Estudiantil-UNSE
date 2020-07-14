@@ -37,7 +37,6 @@
                     android:layout_height="wrap_content"
                     android:text="REQUISITOS PARA EL ALQUILER DE INSTALACIONES"
                     android:textSize="20sp"
-                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <View
@@ -54,7 +53,6 @@
                     android:text="SUM Y QUINCHOS"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -69,7 +67,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtAfiliados"/>
 
@@ -84,6 +84,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtdocnodoc"/>
@@ -99,6 +101,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtalumnegre"/>
@@ -114,6 +118,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/txtpartic"/>
@@ -132,7 +138,6 @@
                     android:text="UBICACIONES"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -148,6 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dirección: Av. Belgrano Sur 813"
+                    android:textSize="16sp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
 
@@ -169,6 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dirección: Av. Belgrano Norte 448"
+                    android:textSize="16sp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_regular"/>
 

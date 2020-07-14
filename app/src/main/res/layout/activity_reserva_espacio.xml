@@ -44,7 +44,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
                     android:textColor="@color/whiteTextColor"
-                    android:textStyle="bold"
                     android:textSize="22sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
@@ -78,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txtReserva"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             <LinearLayout

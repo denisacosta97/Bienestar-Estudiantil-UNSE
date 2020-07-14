@@ -45,7 +45,6 @@
                     android:text="CARNET\nCOMEDOR"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
                 <ImageView
@@ -76,7 +75,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="AUTORIZACION: 1"
-                        android:textStyle="bold"
                         android:textSize="14sp"
                         android:fontFamily="@font/montserrat_black"/>
 

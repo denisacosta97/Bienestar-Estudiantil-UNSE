@@ -23,7 +23,6 @@
             android:text="Información sobre Becas de la UNSE"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:fontFamily="@font/montserrat_black"/>
 
         <android.support.v7.widget.RecyclerView

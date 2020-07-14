@@ -34,7 +34,6 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="@font/montserrat_regular"/>
 

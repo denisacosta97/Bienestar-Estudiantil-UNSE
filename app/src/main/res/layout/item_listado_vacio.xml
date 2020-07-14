@@ -40,7 +40,6 @@
                 android:text="NO HAY RESULTADOS"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:fontFamily="@font/montserrat_black"/>
 
         </LinearLayout>

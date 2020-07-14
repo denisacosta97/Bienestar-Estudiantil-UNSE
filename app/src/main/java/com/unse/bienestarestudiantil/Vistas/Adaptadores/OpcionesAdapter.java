@@ -29,7 +29,6 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     public OpcionesAdapter(ArrayList<Opciones> list, Context ctx) {
         context = ctx;
         arrayList = list;
-
     }
 
 

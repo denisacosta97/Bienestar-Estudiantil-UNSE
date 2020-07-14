@@ -23,6 +23,7 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropTorneo;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
@@ -99,7 +100,7 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Torneo");
         Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
@@ -110,13 +111,16 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
                 activateEditMode();
                 break;
             case R.id.btnBorrar:
-                //Función para borrar gg
+                DialogoDropTorneo dialogoDrop = new DialogoDropTorneo();
+                dialogoDrop.loadData(mTorneo);
+                dialogoDrop.show(getSupportFragmentManager(),"dialog_torneos");
                 break;
             case R.id.imgIcon:
                 onBackPressed();
                 break;
         }
     }
+
 
     private void editMode(int mode) {
         for (EditText e : campos) {
@@ -152,7 +156,6 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
         if (isEdit) {
             save();
             return;
-
         }
         if (mode == 0)
             mode = 1;
@@ -174,13 +177,13 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
         String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
 
         //Comprobacion que no sean vacios
-        if (false/*!validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
+        if (!validador.noVacio(name)) {
 
             //Comprobacion del tipo d edatos
-            if (false/*validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
+            if (true/*validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
 
                 //Comprobacion de tamaños
-                if (validador.lengthMore(name) && validador.lengthMore(fechaIni)
+                if (validador.lengthMore(fechaIni)
                         && validador.lengthMore(fechaFin) && validador.lengthMore(desc)
                         && validador.lengthMore(lugar)) {
                     sendServer(processString(name, fechaIni, fechaFin, desc, lugar, token, fecha));
@@ -200,13 +203,13 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
 
     private String processString(String nombre, String fechaIni, String fechaFin, String desc, String lugar,
                                  String token, String fecha) {
-        String data = "?idT=%s&nn=%s&lgr=%s&fIn=%s&fFi=%s&dsc=%s&ubi=%s&lat=%s&lon=%s&key=%s";
+        String data = "?idT=%s&nn=%s&lgr=%s&fin=%s&ffi=%s&dsc=%s&lat=%s&lon=%s&dis=%s&val=%s&key=%s";
         return String.format(data, mTorneo.getId(), nombre, lugar, fechaIni, fechaFin, desc,
-                mTorneo.getUbicacion(), token, fecha);
+                mTorneo.getLat(), mTorneo.getLon(), mTorneo.getDispo(), mTorneo.getValidez(), token);
     }
 
     public void sendServer(String data) {
-        String URL = Utils.URL_USUARIO_ACTUALIZAR + data;
+        String URL = Utils.URL_TORNEOS_ACTUALIZAR + data;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -243,10 +246,6 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
                     startActivity(i);
                     break;
                 case 4://No existe
-                case 2:
-                    //Sin Convocatoria
-                    Utils.showToast(getApplicationContext(), "El deporte seleccionado no tiene convocatoria vigente");
-                    break;
                 case 3:
                     Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
                     break;

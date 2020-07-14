@@ -75,20 +75,19 @@
                 android:hint="Observaciones del día"
                 android:layout_marginTop="20dp"
                 android:layout_margin="5dp"
-                android:padding="15dp"
+                android:padding="18dp"
                 android:background="@drawable/edit_text_logreg"
                 android:textSize="18sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
             <Button
                 android:id="@+id/btnFinalizar"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="FINALIZAR"
+                android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                android:padding="15dp"
-                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:background="@drawable/button_border"
                 android:fontFamily="@font/montserrat_black"/>

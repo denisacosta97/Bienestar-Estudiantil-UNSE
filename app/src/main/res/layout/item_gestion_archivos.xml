@@ -43,21 +43,28 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_black"
                 android:text="Inscripción al deporte"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/montserrat_regular"
                 android:text="05/12/19"
-                android:textSize="12sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular" />
 
         </LinearLayout>
 
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Descargar"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_regular"/>
 
     </LinearLayout>
 

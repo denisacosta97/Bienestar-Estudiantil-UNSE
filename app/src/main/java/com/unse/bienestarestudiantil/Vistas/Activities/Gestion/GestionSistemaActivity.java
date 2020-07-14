@@ -20,6 +20,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos.G
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionTransporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -79,6 +80,9 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                         break;
                     case 1200:
                         startActivity(new Intent(getApplicationContext(), GestionSociosActivity.class));
+                        break;
+                    case 600:
+                        startActivity(new Intent(getApplicationContext(), GestionTransporteActivity.class));
                         break;
 
                 }

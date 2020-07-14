@@ -34,7 +34,7 @@ public class CalendarReservasActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar_reservas);
+        setContentView(R.layout.activity_calendar_asistencia);
 
         setToolbar();
 

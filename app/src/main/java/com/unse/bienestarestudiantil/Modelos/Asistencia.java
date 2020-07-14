@@ -5,26 +5,31 @@ import android.os.Parcelable;
 
 public class Asistencia implements Parcelable {
 
-    private int id, idFotoAlum;
-    private Boolean checked, noChecked;
-    private String mName;
+    private int id, idAlumno, idDeporte;
+    private String asistencia, fechaFalta;
 
-    public Asistencia(int id, int idFotoAlum, String name) {
+    public Asistencia(int id, int idAlumno, int idDeporte, String asistencia, String fechaFalta) {
         this.id = id;
-        this.idFotoAlum = idFotoAlum;
-        mName = name;
+        this.idAlumno = idAlumno;
+        this.idDeporte = idDeporte;
+        this.asistencia = asistencia;
+        this.fechaFalta = fechaFalta;
     }
 
     public Asistencia() {
-        this.id = 0;
-        this.idFotoAlum = 0;
-        mName = "";
+        this.id = -1;
+        this.idAlumno = -1;
+        this.idDeporte = -1;
+        this.asistencia = "";
+        this.fechaFalta = "";
     }
 
     protected Asistencia(Parcel in) {
         id = in.readInt();
-        idFotoAlum = in.readInt();
-        mName = in.readString();
+        idAlumno = in.readInt();
+        idDeporte = in.readInt();
+        asistencia = in.readString();
+        fechaFalta = in.readString();
     }
 
     public static final Creator<Asistencia> CREATOR = new Creator<Asistencia>() {
@@ -47,20 +52,36 @@ public class Asistencia implements Parcelable {
         this.id = id;
     }
 
-    public int getIdFotoAlum() {
-        return idFotoAlum;
+    public int getIdAlumno() {
+        return idAlumno;
     }
 
-    public void setIdFotoAlum(int idFotoAlum) {
-        this.idFotoAlum = idFotoAlum;
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
     }
 
-    public String getName() {
-        return mName;
+    public int getIdDeporte() {
+        return idDeporte;
     }
 
-    public void setName(String name) {
-        mName = name;
+    public void setIdDeporte(int idDeporte) {
+        this.idDeporte = idDeporte;
+    }
+
+    public String getAsistencia() {
+        return asistencia;
+    }
+
+    public void setAsistencia(String asistencia) {
+        this.asistencia = asistencia;
+    }
+
+    public String getFechaFalta() {
+        return fechaFalta;
+    }
+
+    public void setFechaFalta(String fechaFalta) {
+        this.fechaFalta = fechaFalta;
     }
 
     @Override
@@ -69,9 +90,11 @@ public class Asistencia implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
-        parcel.writeInt(idFotoAlum);
-        parcel.writeString(mName);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(idAlumno);
+        dest.writeInt(idDeporte);
+        dest.writeString(asistencia);
+        dest.writeString(fechaFalta);
     }
 }

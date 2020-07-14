@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:text="Seguridad"
                 android:textSize="19sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorPrimaryDark" />
 
             <LinearLayout
@@ -41,8 +42,8 @@
                     android:layout_height="wrap_content"
                     android:text="Cambiar contraseña"
                     android:textColor="@color/colorTextDefault"
-                    android:textStyle="italic"
-                    android:textSize="17sp" />
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="18sp" />
 
                 <View
                     android:layout_marginTop="10dp"
@@ -51,7 +52,6 @@
                     android:background="@color/colorGreyDark" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 

@@ -24,11 +24,8 @@
                 android:id="@+id/recycler"
                 android:layout_height="wrap_content" />
 
-
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_trans"></include>
+
+        <ImageView
+            android:id="@+id/imgvUser"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:translationY="10dp"
+            android:elevation="4sp"
+            android:src="@drawable/ic_ciber" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="2sp"
+            app:cardCornerRadius="10dp"
+            android:translationY="-60dp"
+            android:outlineAmbientShadowColor="@color/colorGrey2"
+            android:outlineSpotShadowColor="@color/colorGrey2"
+            card_view:backgroundTint="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtNameProf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chofer"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginTop="45dp"
+                        android:textSize="45sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nombre y apellido: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtNameApe"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Matías Umaño"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="D.N.I.: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtDni"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:text="39986583" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha de nacimiento: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaN"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="26/11/96"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Domicilio: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtDomicilio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="Av. Belgrano Sur 1379"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Barrio: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtBarrio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="B° Dr. Ramón Carillo"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Teléfono: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtTel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="3854436036"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha de ingreso: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaIng"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="20/03/15"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnBaja"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border"
+                            android:text="DAR DE BAJA"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <Button
+                            android:id="@+id/btnEditar"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border"
+                            android:text="EDITAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

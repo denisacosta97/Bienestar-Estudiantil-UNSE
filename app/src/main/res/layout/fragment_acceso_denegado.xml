@@ -23,7 +23,6 @@
             android:text="@string/mensajeDenegado"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:textAlignment="center"
             android:fontFamily="@font/montserrat_black"/>
 
@@ -33,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_border"
-            android:text="Registrarse"
-            android:textSize="17sp"
+            android:text="REGISTRARSE"
+            android:textSize="18sp"
             android:textColor="@color/colorWhite"
             android:padding="17dp"
             android:fontFamily="@font/montserrat_black"/>

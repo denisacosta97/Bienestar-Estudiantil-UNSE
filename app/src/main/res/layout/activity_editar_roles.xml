@@ -52,19 +52,18 @@
                             android:layout_height="wrap_content"
                             android:text="Denis Lionel Acosta"
                             android:textSize="20sp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"
                             android:textColor="@color/colorWhite" />
+
                         <TextView
                             android:id="@+id/txtDni"
                             android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="40657677"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/montserrat_regular"
                             android:textColor="@color/colorWhite" />
-
-
 
                     </LinearLayout>
 
@@ -91,32 +90,22 @@
                             android:background="@drawable/button_border"
                             android:text="ACEPTAR"
                             android:textColor="@color/colorWhite"
-                            android:textStyle="bold"
-                            android:padding="15dp" />
+                            android:fontFamily="@font/montserrat_black"
+                            android:padding="18dp" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="10dp"
                             android:background="@color/colorWhite" />
 
-
                     </LinearLayout>
-
 
                 </LinearLayout>
 
-
-
             </android.support.v7.widget.CardView>
-
-
-
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-
 
 </android.support.v4.widget.NestedScrollView>

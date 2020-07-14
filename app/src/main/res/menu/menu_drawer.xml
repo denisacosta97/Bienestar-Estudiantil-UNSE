@@ -22,7 +22,6 @@
         <item
             android:id="@+id/item_becas"
             android:icon="@drawable/ic_becas"
-            android:visible="false"
             android:title="Área Becas"/>
         <item
             android:id="@+id/item_ciber"
@@ -32,7 +31,6 @@
         <item
             android:id="@+id/item_transporte"
             android:icon="@drawable/ic_transporte"
-            android:visible="false"
             android:title="Transporte"/>
         <item
             android:id="@+id/item_resi"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:layout_margin="6dp"
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="10dp">
@@ -21,8 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TURNO MAÑANA"
-            android:textStyle="bold"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/montserrat_black"/>
 
@@ -40,8 +39,7 @@
             android:gravity="center"
             android:text="A CONFIRMAR"
             android:textColor="@color/colorWhite"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout
@@ -62,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="21:00-01:00"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold|italic"
                 android:fontFamily="@font/montserrat_regular"/>
 

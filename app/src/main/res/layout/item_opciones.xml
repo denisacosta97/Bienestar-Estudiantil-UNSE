@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="5dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="1">
 
         <ImageView
@@ -35,7 +35,7 @@
             android:visibility="visible"
             android:background="@color/transparente"
             android:layout_width="3dp"
-            android:layout_height="60dp" />
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/txtTitulo"
@@ -46,7 +46,6 @@
             android:text="GESTION DE CLIENTES"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:fontFamily="@font/montserrat_black"/>
 
     </LinearLayout>

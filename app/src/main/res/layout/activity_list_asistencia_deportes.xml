@@ -17,20 +17,91 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_margin="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_alumno"
+                        android:tint="@color/colorGreen"/>
+
+                    <TextView
+                        android:id="@+id/txtNumPresentes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="18"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_alumno"
+                        android:tint="@color/colorRed"/>
+
+                    <TextView
+                        android:id="@+id/txtNumAusentes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="18"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat_black"
+                android:text="OBSERVACIONES"/>
+
+            <TextView
+                android:id="@+id/txtObs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorGrey2"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16sp"
+                android:textColor="@color/blackTextColor"
+                android:text="LOREN IMSUNASKLFALSJFLKASJFLKAJSFKLAJSFKLAJSFLK"/>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/borrarbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Borrar esto c:"/>
 
     </LinearLayout>
 

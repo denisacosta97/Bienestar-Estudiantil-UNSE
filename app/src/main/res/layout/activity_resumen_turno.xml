@@ -31,7 +31,6 @@
                         android:textSize="24sp"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:textStyle="bold"
                         android:text="Solicitud de turno"
                         android:fontFamily="@font/montserrat_black"/>
 
@@ -203,6 +202,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="18sp"
                         android:text="CONFIRMAR"
                         android:textColor="@color/colorWhite"
                         android:fontFamily="@font/montserrat_black"/>
@@ -226,7 +226,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="¡CONFIRMADO!"
-            android:textStyle="bold"
             android:textSize="30sp"
             android:gravity="center"
             android:visibility="invisible"

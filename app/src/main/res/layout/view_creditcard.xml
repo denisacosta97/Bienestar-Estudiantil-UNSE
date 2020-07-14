@@ -18,6 +18,7 @@
             android:visibility="gone" />
 
         <include layout="@layout/credencial_frente_outline" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -28,13 +29,10 @@
         android:layout_height="@dimen/height_card"
         android:orientation="horizontal">
 
-
         <include layout="@layout/credencial_frente" />
 
         <include layout="@layout/credencial_atras" />
 
-
     </LinearLayout>
-
 
 </FrameLayout>

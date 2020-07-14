@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="# 200"
-                android:textStyle="bold" />
+                android:fontFamily="@font/montserrat_black" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,8 +65,7 @@
                     android:fontFamily="@font/montserrat_black"
                     android:text="NOMBRE SEGUNDO NOMBRE APELLIDO"
                     android:textColor="@color/colorTextDefault"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txtDescripcion"
@@ -76,12 +75,9 @@
                     android:gravity="center"
                     android:text="D.N.I"
                     android:textColor="@color/colorTextDefault"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
-
-
 
         </LinearLayout>
 
@@ -91,10 +87,8 @@
             android:layout_height="match_parent"
             android:text="EN PROCESO"
             android:gravity="center"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:fontFamily="@font/montserrat_regular"/>
-
-
 
     </LinearLayout>
 
