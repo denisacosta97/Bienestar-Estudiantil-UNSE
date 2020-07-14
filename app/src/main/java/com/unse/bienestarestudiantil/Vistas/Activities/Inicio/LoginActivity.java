@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText edtUser, edtPass;
     VideoView mVideoView;
     UsuarioViewModel mUsuarioViewModel;
+    int dniNumber = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,11 +130,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login() {
-        String dni = edtUser.getText().toString().trim();
+        String dniN = edtUser.getText().toString().trim();
         String pass = edtPass.getText().toString().trim();
-        if (!dni.equals("") && !pass.equals("")) {
+        if (!dniN.equals("") && !pass.equals("")) {
             //pass = Utils.crypt(pass);
-            String url = String.format("%s?id=%s&pass=%s", Utils.URL_USUARIO_LOGIN, dni, pass);
+            try{
+                dniNumber = Integer.parseInt(dniN);
+            }catch (NumberFormatException e){
+
+            }
+            String url = String.format("%s?id=%s&pass=%s", Utils.URL_USUARIO_LOGIN, dniN, pass);
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -164,6 +170,83 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void procesarRespuesta(String response) {
         try {
+            //dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
+                case 1:
+                    //Exito
+                    //Utils.showToast(getApplicationContext(), getString(R.string.sesionIniciada));
+                    String token = jsonObject.getJSONObject("mensaje").getString("token");
+
+                    //Insertar BD
+                    //Usuario user = guardarDatos(jsonObject);
+                    //Roles
+                    //saveRoles(jsonObject, user.getIdUsuario());
+                    PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+                    //preferenceManager.setValue(Utils.IS_LOGIN, true);
+                    //int dni = user.getIdUsuario();
+                    preferenceManager.setValue(Utils.MY_ID, dniNumber);
+                    preferenceManager.setValue(Utils.TOKEN, token);
+                    //preferenceManager.setValue(Utils.IS_VISIT, false);
+                    //Main
+                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    //finishAffinity();
+                    getData(token);
+                    break;
+                case 2:
+                    //Usuario invalido
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioInvalido));
+                    break;
+                case 5:
+                    //Usuario invalido
+                    Utils.showToast(getApplicationContext(), getString(R.string.usuarioInhabilitado));
+                    break;
+                case 4:
+                    //Usuario invalido
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+        }
+    }
+
+    public void getData(String token){
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String url = String.format("%s?idU=%s&key=%s&id=%s", Utils.URL_USUARIO_LOGIN_DATA, id, key, dniNumber);
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                procesarRespuestaLogin(response);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                dialog.dismiss();
+
+            }
+        });
+        //dialog = new DialogoProcesamiento();
+        //dialog.setCancelable(false);
+        //dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuestaLogin(String response) {
+        try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
@@ -174,7 +257,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:
                     //Exito
                     Utils.showToast(getApplicationContext(), getString(R.string.sesionIniciada));
-                    String token = jsonObject.getJSONObject("token").getString("token");
+                    //String token = jsonObject.getJSONObject("token").getString("token");
 
                     //Insertar BD
                     Usuario user = guardarDatos(jsonObject);
@@ -183,8 +266,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
                     preferenceManager.setValue(Utils.IS_LOGIN, true);
                     int dni = user.getIdUsuario();
-                    preferenceManager.setValue(Utils.MY_ID, dni);
-                    preferenceManager.setValue(Utils.TOKEN, token);
+                    //preferenceManager.setValue(Utils.MY_ID, dniNumber);
+                    //preferenceManager.setValue(Utils.TOKEN, token);
                     preferenceManager.setValue(Utils.IS_VISIT, false);
                     //Main
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -210,6 +293,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
     private void saveRoles(JSONObject jsonObject, int id) {
         RolViewModel rolViewModel = new RolViewModel(getApplicationContext());
         if (jsonObject.has("roles")){
@@ -218,7 +302,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 for (int i = 0; i<jsonArray.length();i++){
                     JSONObject object = jsonArray.getJSONObject(i);
 
-                    String rol = object.getString("idRol");
+                    String rol = object.getString("idrol");
 
                     Rol ro = new Rol(Integer.parseInt(rol), id, "test");
 

@@ -169,6 +169,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         edtFechaNac.setOnClickListener(this);
         fabEditar.setOnClickListener(this);
         fabPic.setOnClickListener(this);
+        imgUser.setOnClickListener(this);
         btnBack.setOnClickListener(this);
         btnAltaBaja.setOnClickListener(this);
         btnAgregarReg.setOnClickListener(this);
@@ -459,7 +460,8 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             Glide.with(imgUser.getContext()).load(URL).apply(new RequestOptions()
                     .error(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(R.drawable.ic_user)).into(imgUser);
-        } else { Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER,
+        } else {
+            Bitmap bitmap = FileStorageManager.getBitmap(getApplicationContext(), Utils.FOLDER,
                     String.format(Utils.PROFILE_PIC, mUsuario.getIdUsuario()), false);
             if (bitmap != null) {
                 Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
@@ -572,7 +574,16 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             case R.id.fab:
                 openModeEditor();
                 break;
+            case R.id.imgUserPerfil:
+                openPicture();
+                break;
         }
+    }
+
+    private void openPicture() {
+        Intent intent = new Intent(getApplicationContext(), ProfilePictureActivity.class);
+        startActivity(intent);
+
     }
 
     private void openBannerReg() {
@@ -827,6 +838,12 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             FileStorageManager.deleteFileFromUri(getApplicationContext(), uriFileSelect);
             Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadProfilePicture();
     }
 
 

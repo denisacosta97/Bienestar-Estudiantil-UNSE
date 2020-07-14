@@ -159,6 +159,7 @@ public class Utils {
     public static final String URL_USUARIO_INSERTAR = "http://" + IP + "/bienestar/usuario/insertar.php";
     public static final String URL_USUARIO_ACTUALIZAR = "http://" + IP + "/bienestar/usuario/actualizar.php";
     public static final String URL_USUARIO_LOGIN = "http://" + IP + "/bienestar/usuario/login.php";
+    public static final String URL_USUARIO_LOGIN_DATA = "http://" + IP + "/bienestar/usuario/loginInfo.php";
     public static final String URL_USUARIO_IMAGE = "http://" + IP + "/bienestar/general/uploadImage.php";
     public static final String URL_USUARIO_IMAGE_LOAD = "http://" + IP + "/bienestar/usuariosImg/";
     public static final String URL_CAMBIO_CONTRASENIA = "http://" + IP + "/bienestar/usuario/cambiarContrasenia.php";

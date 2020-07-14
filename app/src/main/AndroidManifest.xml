@@ -19,7 +19,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-        <activity android:name=".Vistas.Activities.AboutActivity"></activity>
+
+        <activity android:name=".Vistas.Activities.AboutActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.EditDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.ListAsistenciaDeportesActivity" />
@@ -34,7 +35,7 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.BMDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.ListaInscriptosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.InscripcionesActivity" />
-        <activity android:name=".Vistas.Fragmentos.ComedorFragment" />
+        <activity android:name=".Vistas.Activities.Perfil.ProfilePictureActivity" />
         <activity android:name=".Vistas.Activities.Comedor.MainGestionComedor" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosDiaActivity" />

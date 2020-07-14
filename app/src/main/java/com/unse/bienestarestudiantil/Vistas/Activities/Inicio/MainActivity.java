@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         seleccionarItem(menuItem);
-                        //          drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         return true;
                     }
                 });
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, idUser);
             Glide.with(imgPerfil.getContext()).load(URL)
                     .apply(new RequestOptions().error(R.drawable.ic_user)
-                            .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.ic_user))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ic_user))
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
