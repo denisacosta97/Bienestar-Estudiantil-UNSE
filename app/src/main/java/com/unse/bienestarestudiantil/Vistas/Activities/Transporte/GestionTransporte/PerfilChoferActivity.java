@@ -1,24 +1,18 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Deporte;
-import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TorneosAdapter;
 
 import java.util.ArrayList;

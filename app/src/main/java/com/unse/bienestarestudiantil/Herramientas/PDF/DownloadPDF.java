@@ -3,7 +3,7 @@ package com.unse.bienestarestudiantil.Herramientas.PDF;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.PowerManager;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 import android.widget.ProgressBar;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;

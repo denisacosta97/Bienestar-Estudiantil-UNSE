@@ -7,14 +7,14 @@
     tools:context=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         style="@style/AppTheme.PopupOverlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -49,7 +49,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <com.github.badoualy.datepicker.DatePickerTimeline
             android:id="@+id/calendario"
@@ -58,10 +58,10 @@
             app:mti_ringLblDateSelectedColor="@color/colorPrimary"
             app:mti_bgLblDateSelectedColor="@color/colorPrimaryDark"/>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -86,14 +86,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_margin="5dp"
                     android:id="@+id/recycler"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_margin="5dp"
                     android:layout_gravity="center"
                     android:id="@+id/recycler2"
@@ -104,6 +104,6 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

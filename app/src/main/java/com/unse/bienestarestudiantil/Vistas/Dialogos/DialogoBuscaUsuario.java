@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,21 +25,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Estado;
 import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.EditarRolesActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.EstadoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.helpers.Util;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DialogoBuscaUsuario extends DialogFragment {
 

@@ -1,17 +1,12 @@
 package com.unse.bienestarestudiantil.Herramientas.TreeView;
 
 import android.content.Context;
-import android.support.v7.view.ContextThemeWrapper;
+import androidx.appcompat.view.ContextThemeWrapper;
 import android.text.TextUtils;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;

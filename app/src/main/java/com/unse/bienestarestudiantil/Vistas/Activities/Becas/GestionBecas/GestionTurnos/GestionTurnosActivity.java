@@ -2,10 +2,10 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.Gesti
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,9 +15,6 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;

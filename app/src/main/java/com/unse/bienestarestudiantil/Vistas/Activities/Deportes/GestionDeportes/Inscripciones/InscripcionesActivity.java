@@ -3,9 +3,9 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,7 +27,6 @@ import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.Modelos.Temporada;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 

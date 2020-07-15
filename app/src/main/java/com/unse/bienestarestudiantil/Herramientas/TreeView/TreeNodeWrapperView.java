@@ -1,7 +1,7 @@
 package com.unse.bienestarestudiantil.Herramientas.TreeView;
 
 import android.content.Context;
-import android.support.v7.view.ContextThemeWrapper;
+import androidx.appcompat.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;

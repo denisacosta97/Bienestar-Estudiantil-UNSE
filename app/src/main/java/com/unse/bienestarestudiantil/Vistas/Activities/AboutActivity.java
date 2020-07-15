@@ -2,7 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {

@@ -21,7 +21,7 @@
             android:textSize="18sp"
             android:fontFamily="@font/montserrat_regular"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"

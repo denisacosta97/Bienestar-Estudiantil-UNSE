@@ -1,10 +1,9 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 

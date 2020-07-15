@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -81,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <android.support.design.widget.FloatingActionButton
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
                             android:layout_margin="15dp"
                             android:id="@+id/fab"
                             android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <android.support.v7.widget.CardView
+                            <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardElevation="5dp"
@@ -1468,7 +1468,7 @@
 
                                 </LinearLayout>
 
-                            </android.support.v7.widget.CardView>
+                            </androidx.cardview.widget.CardView>
 
                             <View
                                 android:layout_width="match_parent"
@@ -1498,7 +1498,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp">
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardElevation="5dp"
@@ -1723,7 +1723,7 @@
 
                             </LinearLayout>
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
                         <View
                             android:layout_width="match_parent"
@@ -1756,7 +1756,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp">
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardElevation="5dp"
@@ -1791,7 +1791,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
-                                    <android.support.v7.widget.RecyclerView
+                                    <androidx.recyclerview.widget.RecyclerView
                                         android:id="@+id/recycler"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content" />
@@ -1800,7 +1800,7 @@
 
                             </LinearLayout>
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
                         <View
                             android:layout_width="match_parent"
@@ -1822,4 +1822,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

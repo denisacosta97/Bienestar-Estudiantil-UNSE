@@ -2,18 +2,16 @@ package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,14 +21,10 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Transporte;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.InfoBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.TurnosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.RecorridoActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TransporteAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 

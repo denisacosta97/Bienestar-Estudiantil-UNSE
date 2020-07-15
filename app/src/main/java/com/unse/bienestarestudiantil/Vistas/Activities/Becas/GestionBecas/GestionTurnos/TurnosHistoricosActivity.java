@@ -1,17 +1,16 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos;
 
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosHistoricosAdapter;
 
 import java.util.ArrayList;

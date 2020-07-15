@@ -2,7 +2,7 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,7 +23,6 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropTorneo;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;

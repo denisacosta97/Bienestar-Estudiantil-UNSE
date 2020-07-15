@@ -27,7 +27,7 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InfoProfesorActivity" />
         <activity android:name=".Vistas.Activities.AboutActivity" />
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.unse.bienestarestudiantil.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -157,7 +157,7 @@
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.EditarRolesActivity" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.unse.bienestarestudiantil.provider"
             android:exported="false"
             android:grantUriPermissions="true">

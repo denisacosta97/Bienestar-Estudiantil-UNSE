@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -90,7 +90,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorWhite" />
 
-                    <android.support.v7.widget.SwitchCompat
+                    <androidx.appcompat.widget.SwitchCompat
                         android:layout_marginStart="15dp"
                         android:theme="@style/SwithTeme"
                         android:layout_marginEnd="6dp"
@@ -298,4 +298,4 @@
 
 
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

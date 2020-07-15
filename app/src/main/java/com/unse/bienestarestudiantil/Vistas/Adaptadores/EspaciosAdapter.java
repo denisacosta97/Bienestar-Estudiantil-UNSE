@@ -1,22 +1,19 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.FontChangeUtil;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Espacio;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.EspacioViewHolder> {
 

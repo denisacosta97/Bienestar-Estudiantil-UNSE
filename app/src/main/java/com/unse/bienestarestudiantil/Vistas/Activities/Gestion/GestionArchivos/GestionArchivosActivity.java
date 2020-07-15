@@ -1,17 +1,15 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUriExposedException;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,26 +21,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.PDF.DownloadPDF;
-import com.unse.bienestarestudiantil.Herramientas.PDF.LoadInfoPDF;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
 import com.unse.bienestarestudiantil.Modelos.Area;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.ArchivosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class GestionArchivosActivity extends AppCompatActivity implements View.OnClickListener {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:orientation="vertical"
             android:layout_marginTop="10dp">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -80,9 +80,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -101,7 +101,7 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                 android:weightSum="1"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilDni"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -130,9 +130,9 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilSexo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -173,7 +173,7 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"/>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -192,9 +192,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCelu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -214,9 +214,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilDomic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -236,9 +236,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBarrio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -258,9 +258,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLocalidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -280,9 +280,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilProvincia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -302,9 +302,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -324,9 +324,9 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilContra"
                 android:layout_width="match_parent"
                 app:passwordToggleEnabled="true"
@@ -348,10 +348,10 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilRecontra"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleDrawable="@drawable/ic_pass_toggle"
@@ -372,14 +372,14 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:id="@+id/recycler"
                     android:layout_height="wrap_content" />
@@ -394,7 +394,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilProfesion1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -413,9 +413,9 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilAnioIng"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -434,7 +434,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -494,7 +494,7 @@
 
                 </LinearLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilLeg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -511,9 +511,9 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilAnioIngAlu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -530,7 +530,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
              <!--   <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilCantMat"
@@ -561,7 +561,7 @@
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilProfesion2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -578,9 +578,9 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilAnioEgre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -597,7 +597,7 @@
                         android:textSize="16sp"
                         android:fontFamily="@font/montserrat_regular"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -620,4 +620,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>
