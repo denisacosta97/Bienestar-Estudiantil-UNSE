@@ -78,7 +78,7 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
                         startActivity(new Intent(getApplicationContext(), MiServicioActivity.class));
                         break;
                     case 107:
-                        startActivity(new Intent(getApplicationContext(), GestionColectivosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), RecorridoActivity.class));
                         break;
 
                 }

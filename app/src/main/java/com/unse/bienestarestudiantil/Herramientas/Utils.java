@@ -15,9 +15,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -56,6 +53,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class Utils {
 
@@ -185,27 +186,27 @@ public class Utils {
     public static final String URL_ROLES_INSERTAR = "http://" + IP + "/bienestar/general/insertarRol.php";
     public static final String URL_ROLES_USER_LISTA = "http://" + IP + "/bienestar/general/getRolesByUsuario.php";
     //DEPORTES
-    public static final String URL_DEPORTE_TEMPORADA = "http://"+IP+"/bienestar/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "http://"+IP+"/bienestar/deportes/registrar.php";
-    public static final String URL_DEPORTE_CREDENCIAL = "http://"+IP+"/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://"+IP+"/bienestar/deportes/getAllDeportes.php";
-    public static final String URL_DEPORTE_BAJA = "http://"+IP+"/bienestar/deportes/actualizarDeporte.php";
-    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://"+IP+"/bienestar/deportes/getInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "http://"+IP+"/bienestar/beca/getInscripciones.php";
-    public static final String URL_INSCRIPCION_PARTICULAR = "http://"+IP+"/bienestar/deportes/getInscripcion.php";
-    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://"+IP+"/bienestar/deportes/eliminarInscripcion.php";
-    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://"+IP+"/bienestar/deportes/actualizarInscripcion.php";
-    public static final String URL_INSCRIPCION_CARNET = "http://"+IP+"/bienestar/deportes/insertarCredencial.php";
-    public static final String URL_CREDENCIAL_CAMBIAR = "http://"+IP+"/bienestar/deportes/cambiarCredencial.php";
-    public static final String URL_PROFES = "http://"+IP+"/bienestar/deportes/getAllProfesores.php";
-    public static final String URL_BECADOS = "http://"+IP+"/bienestar/beca/getAllBecados.php";
-    public static final String URL_ASISTENCIA = "http://"+IP+"/bienestar/deportes/asistencia.php";
+    public static final String URL_DEPORTE_TEMPORADA = "http://" + IP + "/bienestar/deportes/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "http://" + IP + "/bienestar/deportes/registrar.php";
+    public static final String URL_DEPORTE_CREDENCIAL = "http://" + IP + "/bienestar/deportes/getCredencial.php";
+    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_DEPORTE_BAJA = "http://" + IP + "/bienestar/deportes/actualizarDeporte.php";
+    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://" + IP + "/bienestar/deportes/getInscriptos.php";
+    public static final String URL_INSCRIPCIONES_GENERALES = "http://" + IP + "/bienestar/beca/getInscripciones.php";
+    public static final String URL_INSCRIPCION_PARTICULAR = "http://" + IP + "/bienestar/deportes/getInscripcion.php";
+    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://" + IP + "/bienestar/deportes/eliminarInscripcion.php";
+    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://" + IP + "/bienestar/deportes/actualizarInscripcion.php";
+    public static final String URL_INSCRIPCION_CARNET = "http://" + IP + "/bienestar/deportes/insertarCredencial.php";
+    public static final String URL_CREDENCIAL_CAMBIAR = "http://" + IP + "/bienestar/deportes/cambiarCredencial.php";
+    public static final String URL_PROFES = "http://" + IP + "/bienestar/deportes/getAllProfesores.php";
+    public static final String URL_BECADOS = "http://" + IP + "/bienestar/beca/getAllBecados.php";
+    public static final String URL_ASISTENCIA = "http://" + IP + "/bienestar/deportes/asistencia.php";
     //TORNEOS
-    public static final String URL_TORNEO_CREDENCIAL = "http://"+IP+"/bienestar/deportes/torneo/getCredencial.php";
-    public static final String URL_TORNEOS_LISTA = "http://"+IP+"/bienestar/deportes/torneo/getAllTorneos.php";
-    public static final String URL_TORNEOS_ACTUALIZAR = "http://"+IP+"/bienestar/deportes/torneo/actualizar.php";
-    public static final String URL_TORNEOS_BAJA = "http://"+IP+"/bienestar/deportes/torneo/borrar.php";
-    public static final String URL_TORNEOS_INSERTAR = "http://"+IP+"/bienestar/deportes/torneo/insertar.php";
+    public static final String URL_TORNEO_CREDENCIAL = "http://" + IP + "/bienestar/deportes/torneo/getCredencial.php";
+    public static final String URL_TORNEOS_LISTA = "http://" + IP + "/bienestar/deportes/torneo/getAllTorneos.php";
+    public static final String URL_TORNEOS_ACTUALIZAR = "http://" + IP + "/bienestar/deportes/torneo/actualizar.php";
+    public static final String URL_TORNEOS_BAJA = "http://" + IP + "/bienestar/deportes/torneo/borrar.php";
+    public static final String URL_TORNEOS_INSERTAR = "http://" + IP + "/bienestar/deportes/torneo/insertar.php";
 
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
@@ -215,16 +216,45 @@ public class Utils {
     public static final String URL_UPLOAD_FILE = "http://" + IP + "/bienestar/general/uploadFile.php";
 
     //TRANSPORTE
-    public static final String URL_LINEAS = "http://"+IP+"/bienestar/transporte/getAllLineas.php";
-    public static final String URL_LINEAS_UPDATE = "http://"+IP+"/bienestar/trasporte/actualizar.php";
-    public static final String URL_LINEAS_ADD = "http://"+IP+"/bienestar/transporte/insertar.php";
+    public static final String URL_LINEAS = "http://" + IP + "/bienestar/transporte/getAllLineas.php";
+    public static final String URL_LINEAS_UPDATE = "http://" + IP + "/bienestar/trasporte/actualizar.php";
+    public static final String URL_LINEAS_ADD = "http://" + IP + "/bienestar/transporte/insertar.php";
+
+    public static final String URL_ACTUALIZAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/actualizarChofer.php";
+    public static final String URL_ELIMINAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/eliminarChofer.php";
+    public static final String URL_ACTUALIZAR_TEMPORADA = "http://" + IP + "/bienestar/transporte/chofer/actualizarTemporada.php";
+    public static final String URL_GET_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getChofer.php";
+    public static final String URL_GET_CHOFERES = "http://" + IP + "/bienestar/transporte/chofer/getChoferes.php";
+    public static final String URL_SERVICIOS_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getServiciosByChofer.php";
+    public static final String URL_INSERTAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/insertarChofer.php";
+    public static final String URL_TEMPORADA_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/registrarTemporada.php";
+
+    public static final String URL_ACTUALIZAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/actualizarColectivo.php";
+    public static final String URL_ELIMINAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/eliminarColectivo.php";
+    public static final String URL_GET_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/getColectivo.php";
+    public static final String URL_GET_COLECTIVOS = "http://" + IP + "/bienestar/transporte/chofer/getColectivos.php";
+    public static final String URL_INSERTAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/insertarColectivo.php";
+
+    public static final String URL_ELIMINAR_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/eliminarRecorrido.php";
+    public static final String URL_GET_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/getRecorrido.php";
+    public static final String URL_GET_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/getRecorridos.php";
+    public static final String URL_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/recorridos.json";
+
+    public static final String URL_FINALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/finalizarServicio.php";
+    public static final String URL_ULTIMO_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/getLastPoint.php";
+    public static final String URL_GET_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/getServicio.php";
+    public static final String URL_SERVICIO_ALUMNOS = "http://" + IP + "/bienestar/transporte/chofer/getServiciosAlumno.php";
+    public static final String URL_SERVICIO_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getServiciosChofer.php";
+    public static final String URL_INICIAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/insertarServicio.php";
+    public static final String URL_PASAJERO_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/registrarPasajero.php";
+    public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/updatePosition.php";
+
 
     public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
     public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
     public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
-
 
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};

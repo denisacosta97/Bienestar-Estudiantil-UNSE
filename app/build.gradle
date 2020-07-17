@@ -31,8 +31,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/kernel-7.1.6.jar')
     implementation files('libs/layout-7.1.6.jar')
-    //implementation files('libs/barcodes-7.1.6.jar')
-    //implementation files('libs/font-asian-7.1.6.jar')
     implementation files('libs/hyph-7.1.6.jar')
     implementation files('libs/io-7.1.6.jar')
     implementation files('libs/forms-7.1.6.jar')
@@ -48,7 +46,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    testImplementation 'junit:junit:4.12'
     //Calendario
     implementation 'com.github.badoualy:datepicker-timeline:1.0.1'
     implementation 'com.applandeo:material-calendar-view:1.4.0'
@@ -65,10 +62,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.github.kenglxn.QRGen:android:2.6.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //implementation files('libs/jtds-1.2.5.jar')
     //Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -83,8 +77,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+   implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
 
     // implementation 'io.reactivex:rxandroid:1.2.1'
