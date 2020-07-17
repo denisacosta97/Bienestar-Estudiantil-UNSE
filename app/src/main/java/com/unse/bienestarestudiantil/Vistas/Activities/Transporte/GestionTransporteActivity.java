@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte;
+package com.unse.bienestarestudiantil.Vistas.Activities.Transporte;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,13 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.EstadisticasTransporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionChoferActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionColectivosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionPasajeroActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionRecorridosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionServicioActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.MiServicioActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -56,10 +63,22 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
                         startActivity(new Intent(getApplicationContext(), GestionChoferActivity.class));
                         break;
                     case 102:
-                        startActivity(new Intent(getApplicationContext(), GestionLineaActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionRecorridosActivity.class));
                         break;
                     case 103:
                         startActivity(new Intent(getApplicationContext(), GestionPasajeroActivity.class));
+                        break;
+                    case 104:
+                        startActivity(new Intent(getApplicationContext(), EstadisticasTransporteActivity.class));
+                        break;
+                    case 105:
+                        startActivity(new Intent(getApplicationContext(), GestionServicioActivity.class));
+                        break;
+                    case 106:
+                        startActivity(new Intent(getApplicationContext(), MiServicioActivity.class));
+                        break;
+                    case 107:
+                        startActivity(new Intent(getApplicationContext(), GestionColectivosActivity.class));
                         break;
 
                 }
@@ -75,6 +94,11 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Gestión de choferes", R.drawable.ic_conductor, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de líneas", R.drawable.ic_transporte, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Gestión de pasajeros", R.drawable.ic_pasajeros, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 104, "Estadísticas", R.drawable.ic_estadistica, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 105, "Gestión de servicios", R.drawable.ic_transporte, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 106, "Mi servicio", R.drawable.ic_conductor, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 107, "Gestión de colectivos", R.drawable.ic_transporte, R.color.colorFCEyT));
+
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

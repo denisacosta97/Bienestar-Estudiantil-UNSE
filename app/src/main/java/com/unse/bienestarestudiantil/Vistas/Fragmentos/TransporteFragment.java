@@ -21,11 +21,11 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Transporte;
+import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.TurnosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.RecorridoActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TransporteAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.RecorridoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -39,8 +39,8 @@ public class TransporteFragment extends Fragment implements View.OnClickListener
     View view;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView reciclerTrans;
-    ArrayList<Transporte> mTransportes;
-    TransporteAdapter mTransporteAdapter;
+    ArrayList<Recorrido> mRecorridos;
+    RecorridoAdapter mTransporteAdapter;
     DialogoProcesamiento dialog;
     FragmentManager mFragmentManager;
     Context mContext;
@@ -59,8 +59,8 @@ public class TransporteFragment extends Fragment implements View.OnClickListener
     }
 
     private void loadData() {
-        mTransportes = new ArrayList<>();
-        mTransporteAdapter = new TransporteAdapter(mTransportes, getContext());
+        mRecorridos = new ArrayList<>();
+        mTransporteAdapter = new RecorridoAdapter(mRecorridos, getContext());
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
         reciclerTrans.setNestedScrollingEnabled(true);
         reciclerTrans.setLayoutManager(mLayoutManager);
@@ -73,7 +73,7 @@ public class TransporteFragment extends Fragment implements View.OnClickListener
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(), RecorridoActivity.class);
-                i.putExtra(Utils.LINEA_NAME, mTransportes.get(position));
+                i.putExtra(Utils.RECORRIDO, mRecorridos.get(position));
                 startActivity(i);
             }
         });
@@ -179,8 +179,8 @@ public class TransporteFragment extends Fragment implements View.OnClickListener
             try {
                 JSONObject j = mensaje.getJSONObject(i);
 
-                Transporte transporte = Transporte.mapper(j);
-                mTransportes.add(transporte);
+//                Recorrido transporte = Recorrido.mapper(j);
+//                mRecorridos.add(transporte);
 
             } catch (JSONException e) {
                 e.printStackTrace();

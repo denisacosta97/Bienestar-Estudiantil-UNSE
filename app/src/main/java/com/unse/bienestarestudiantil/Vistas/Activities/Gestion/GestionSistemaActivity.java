@@ -20,7 +20,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos.G
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionTransporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;

@@ -1,38 +1,20 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Profesor;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-
-import java.util.ArrayList;
 
 public class GestionChoferActivity extends AppCompatActivity implements View.OnClickListener {
 
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView mRecyclerChofer;
-    ArrayList<Usuario> mUsuarios;
-    ArrayList<Profesor> mProfesors;
-    UsuariosAdapter mUsuariosAdapter;
     ImageView imgIcono;
-    DialogoProcesamiento dialog;
-    TextView txtEstado;
+    TextView txtEstado, scrollingText;
     Button btnOn, btnOff;
 
     @Override
@@ -44,9 +26,9 @@ public class GestionChoferActivity extends AppCompatActivity implements View.OnC
 
         loadViews();
 
-        loadListener();
+        loadData();
 
-        loadDataRecycler();
+        loadListener();
 
     }
 
@@ -62,35 +44,18 @@ public class GestionChoferActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void loadDataRecycler() {
-        mProfesors = new ArrayList<>();
-        mUsuarios = new ArrayList<>();
-
-        mUsuariosAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext(),  Utils.TIPO_ESTUDIANTE);
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
-        mRecyclerChofer.setNestedScrollingEnabled(true);
-        mRecyclerChofer.setLayoutManager(mLayoutManager);
-        mRecyclerChofer.setAdapter(mUsuariosAdapter);
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerChofer);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), PerfilChoferActivity.class);
-                i.putExtra(Utils.USER_NAME, mUsuarios.get(position));
-                startActivity(i);
-            }
-        });
-
+    private void loadData() {
+        scrollingText.setSelected(true);
     }
 
     private void loadViews() {
-        mRecyclerChofer = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
 
         txtEstado = findViewById(R.id.txtEstado);
         btnOn = findViewById(R.id.btnOn);
         btnOff = findViewById(R.id.btnOff);
+        scrollingText = findViewById(R.id.scrollingtexthrs);
+
     }
 
     @Override

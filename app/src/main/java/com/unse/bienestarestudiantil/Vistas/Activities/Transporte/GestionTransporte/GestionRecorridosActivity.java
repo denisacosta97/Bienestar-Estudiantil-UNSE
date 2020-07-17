@@ -12,27 +12,26 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Transporte;
+import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TransporteAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.RecorridoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import java.util.ArrayList;
 
-public class GestionLineaActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionRecorridosActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView mRecyclerT;
-    ArrayList<Transporte> mTransportes;
-    TransporteAdapter mTransporteAdapter;
+    ArrayList<Recorrido> mRecorridos;
+    RecorridoAdapter mRecorridoAdapter;
     ImageView imgIcono;
     DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_linea);
+        setContentView(R.layout.activity_gestion_recorridos);
 
         setToolbar();
 
@@ -44,7 +43,7 @@ public class GestionLineaActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de líneas");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de recorridos");
 
     }
 
@@ -60,20 +59,20 @@ public class GestionLineaActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void loadDataRecycler() {
-        mTransportes = new ArrayList<>();
+        mRecorridos = new ArrayList<>();
 
-        mTransporteAdapter = new TransporteAdapter(mTransportes, getApplicationContext());
+        mRecorridoAdapter = new RecorridoAdapter(mRecorridos, getApplicationContext());
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
         mRecyclerT.setNestedScrollingEnabled(true);
         mRecyclerT.setLayoutManager(mLayoutManager);
-        mRecyclerT.setAdapter(mTransporteAdapter);
+        mRecyclerT.setAdapter(mRecorridoAdapter);
 
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerT);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), PerfilTorneoEditActivity.class);
-                i.putExtra(Utils.TORNEO, mTransportes.get(position));
+                Intent i = new Intent(getApplicationContext(), PerfilRecorridoActivity.class);
+                i.putExtra(Utils.RECORRIDO, mRecorridos.get(position));
                 startActivity(i);
             }
         });

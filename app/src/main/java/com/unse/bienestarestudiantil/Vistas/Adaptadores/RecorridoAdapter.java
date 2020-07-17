@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.unse.bienestarestudiantil.Modelos.Transporte;
+import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class TransporteAdapter extends RecyclerView.Adapter<TransporteAdapter.TransporteViewHolder> {
-    private ArrayList<Transporte> mList;
+public class RecorridoAdapter extends RecyclerView.Adapter<RecorridoAdapter.TransporteViewHolder> {
+    private ArrayList<Recorrido> mList;
     private Context context;
 
-    public TransporteAdapter(ArrayList<Transporte> models, Context context) {
+    public RecorridoAdapter(ArrayList<Recorrido> models, Context context) {
         this.mList = models;
         this.context = context;
     }
@@ -25,16 +25,16 @@ public class TransporteAdapter extends RecyclerView.Adapter<TransporteAdapter.Tr
 
     @NonNull
     @Override
-    public TransporteAdapter.TransporteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_transporte, parent, false);
-        return new TransporteAdapter.TransporteViewHolder(view);
+    public RecorridoAdapter.TransporteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recorrido, parent, false);
+        return new RecorridoAdapter.TransporteViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TransporteAdapter.TransporteViewHolder holder, int position) {
-        Transporte transporte = mList.get(position);
+    public void onBindViewHolder(@NonNull RecorridoAdapter.TransporteViewHolder holder, int position) {
+        Recorrido recorrido = mList.get(position);
 
-        holder.txtLinea.setText(transporte.getNombre());
+        holder.txtLinea.setText(recorrido.getDescripcion());
 
     }
 

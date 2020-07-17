@@ -147,9 +147,9 @@
     <string name="archivosVacio">No existen archivos</string>
     <string name="tituloArchivos">Gestión de Archivos</string>
     <string name="archivoNoSeleccionado">Archivo no seleccionado</string>
-   <string name="archivoSeleecionError">No se elegió ningun archivo</string>
-   <string name="archivoSubido">¡Archivo subido!</string>
-   <string name="archivoError">¡Error al cargar archivo!</string>
+    <string name="archivoSeleecionError">No se elegió ningun archivo</string>
+    <string name="archivoSubido">¡Archivo subido!</string>
+    <string name="archivoError">¡Error al cargar archivo!</string>
     <string name="nombreVacio">Debe elegir un nombre</string>
     <string name="archivoGrande">El archivo es demasiado grande</string>
     <string name="archivoActualizado">¡Archivo actualizado!</string>
@@ -177,6 +177,10 @@
     <string name="material_calendar_saturday">S</string>
 
     <string name="material_calendar_sunday">D</string>
+
+    <string name="mision0">Desarrollar acciones orientadas a la mejora de la calidad de vida en relación a la actividad universitaria, contribuyendo al acceso, permanencia y egreso, el esparcimiento, la orientación y la información de los estudiantes.</string>
+    <string name="mision1">La estructura funcional de la Secretaría se conforma con las siguientes Áreas de gestión que abarca el Bienestar Universitario: Becas, Salud, Deportes, Bienestar, Accesibilidad, Servicios de Salud, Complejo Polideportivo y Residencia Universitaria.</string>
+    <string name="vision">Ser un área que diseñe e implemente proyectos, programas y acciones, innovadoras y sostenibles orientadas a las problemáticas, necesidades, intereses y expectativas de los estudiantes que contribuyan a su formación integral y al ejercicio de la ciudadanía que les permita lograr su realización personal y social.</string>
 
 </resources>
 

@@ -16,7 +16,6 @@ import com.unse.bienestarestudiantil.R;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout layoutFondo;
     ImageView imgIcono;
 
     @Override
@@ -24,16 +23,6 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        layoutFondo = findViewById(R.id.backgroundAbout);
-
-        Glide.with(this).load(R.drawable.img_unse2)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        layoutFondo.setBackground(resource);
-                    }
-                });
 
         loadViews();
 

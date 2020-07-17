@@ -88,6 +88,7 @@ public class Utils {
     public static final String LIST_HIJOS = "list_hijos";
     public static final String LIST_SUSCROP = "list_sus";
     public static final String LIST_CRED = "list_cred";
+    public static final String RECORRIDO = "recorrido";
     //Constantes para activities
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
