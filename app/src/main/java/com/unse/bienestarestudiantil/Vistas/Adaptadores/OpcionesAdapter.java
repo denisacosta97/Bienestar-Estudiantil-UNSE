@@ -1,10 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +14,11 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static android.view.View.GONE;
 
 
@@ -25,10 +26,12 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
 
     private ArrayList<Opciones> arrayList;
     private Context context;
+    private int tipo;
 
-    public OpcionesAdapter(ArrayList<Opciones> list, Context ctx) {
+    public OpcionesAdapter(ArrayList<Opciones> list, Context ctx, int tipo) {
         context = ctx;
         arrayList = list;
+        this.tipo = tipo;
     }
 
 
@@ -52,37 +55,47 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
 
         Opciones s = arrayList.get(position);
 
-        holder.txtTitulo.setText(s.getTitulo());
-        if (s.getColorText() != 0)
-            holder.txtTitulo.setTextColor(context.getResources().getColor(s.getColorText()));
-        if (s.getSizeText() != 0)
-            holder.txtTitulo.setTextSize(Float.parseFloat(String.valueOf(s.getSizeText())));
-        if (s.getIcon() != 0)
-            Glide.with(holder.imgIcono.getContext())
-                    .load(s.getIcon())
-                    .into(holder.imgIcono);
-        else
-            holder.imgIcono.setVisibility(GONE);
-        holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
+        if (tipo == 1) {
 
-        if (s.getOrientation() == LinearLayoutManager.VERTICAL) {
+            holder.txtTitulo.setText(s.getTitulo());
+            if (s.getColorText() != 0)
+                holder.txtTitulo.setTextColor(context.getResources().getColor(s.getColorText()));
+            if (s.getSizeText() != 0)
+                holder.txtTitulo.setTextSize(Float.parseFloat(String.valueOf(s.getSizeText())));
+            if (s.getIcon() != 0)
+                Glide.with(holder.imgIcono.getContext())
+                        .load(s.getIcon())
+                        .into(holder.imgIcono);
+            else
+                holder.imgIcono.setVisibility(GONE);
+            holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
+
+            if (s.getOrientation() == LinearLayoutManager.VERTICAL) {
+                holder.mLinearLayout.setOrientation(LinearLayout.VERTICAL);
+                holder.mView.setVisibility(GONE);
+            } else {
+                holder.mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                holder.mView.setVisibility(View.VISIBLE);
+            }
+
+            if (!s.getDisponibility()) {
+                holder.mCardView.setEnabled(false);
+                holder.imgIcono.setEnabled(false);
+                holder.imgIcono.setAlpha(0.4f);
+                holder.txtTitulo.setAlpha(0.4f);
+            } else {
+                holder.mCardView.setEnabled(true);
+                holder.imgIcono.setEnabled(true);
+                holder.txtTitulo.setEnabled(true);
+
+            }
+        } else {
+            holder.mCardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorWhite));
             holder.mLinearLayout.setOrientation(LinearLayout.VERTICAL);
             holder.mView.setVisibility(GONE);
-        } else {
-            holder.mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-            holder.mView.setVisibility(View.VISIBLE);
-        }
-
-        if (!s.getDisponibility()) {
-            holder.mCardView.setEnabled(false);
-            holder.imgIcono.setEnabled(false);
-            holder.imgIcono.setAlpha(0.4f);
-            holder.txtTitulo.setAlpha(0.4f);
-        } else {
-            holder.mCardView.setEnabled(true);
-            holder.imgIcono.setEnabled(true);
-            holder.txtTitulo.setEnabled(true);
-
+            holder.imgIcono.setVisibility(GONE);
+            holder.txtTitulo.setText(s.getTitulo());
+            holder.txtTitulo.setTextColor(context.getResources().getColor(R.color.blackTextColor));
         }
     }
 

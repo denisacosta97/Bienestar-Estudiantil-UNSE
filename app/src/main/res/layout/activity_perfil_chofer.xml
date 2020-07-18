@@ -2,8 +2,9 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorGrey"
     xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical">
 
@@ -12,16 +13,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_trans"></include>
+        <include layout="@layout/toolbar_trans" />
 
-        <ImageView
-            android:id="@+id/imgvUser"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgUser"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:translationY="10dp"
             android:elevation="4sp"
-            android:src="@drawable/ic_ciber" />
+            android:src="@drawable/ic_user" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="fill_parent"
@@ -46,24 +47,17 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtNameProf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Chofer"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:layout_marginTop="45dp"
-                        android:textSize="45sp"
-                        android:fontFamily="@font/montserrat_black"/>
-
                     <LinearLayout
+                        android:layout_marginTop="70dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:gravity="center"
+                            android:layout_gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -71,15 +65,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Nombre y apellido: "
+                                android:text="Nombre y Apellido: "
                                 android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
                                 android:id="@+id/txtNameApe"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Matías Umaño"
+                                android:text="Matías ddddddd"
                                 android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_regular"/>
 
@@ -115,7 +109,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Fecha de nacimiento: "
+                                android:text="Fecha de Nacimiento: "
                                 android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
@@ -137,77 +131,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Domicilio: "
+                                android:text="Fecha de Ingreso: "
                                 android:textSize="16sp"
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <TextView
-                                android:id="@+id/txtDomicilio"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:text="Av. Belgrano Sur 1379"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Barrio: "
-                                android:textSize="16sp"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                            <TextView
-                                android:id="@+id/txtBarrio"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:text="B° Dr. Ramón Carillo"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Teléfono: "
-                                android:textSize="16sp"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                            <TextView
-                                android:id="@+id/txtTel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="3854436036"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Fecha de ingreso: "
-                                android:textSize="16sp"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                            <TextView
+                                android:padding="5dp"
                                 android:id="@+id/txtFechaIng"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -217,9 +146,75 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha de Modificación: "
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaMod"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="20/03/15"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cantidad de Servicios"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/txtServicios"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="Recorrido 1 - Cantidad X"
+                            android:fontFamily="@font/montserrat_regular"/>
+
+                        <LinearLayout
+                            android:layout_marginTop="4dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Temporadas"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
+
+
                     <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="10dp"
                         android:id="@+id/recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -231,7 +226,7 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btnBaja"
+                            android:id="@+id/btnAltaBaja"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"

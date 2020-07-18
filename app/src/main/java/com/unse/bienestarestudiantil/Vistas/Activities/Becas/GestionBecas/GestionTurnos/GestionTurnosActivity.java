@@ -76,7 +76,7 @@ public class GestionTurnosActivity extends AppCompatActivity implements View.OnC
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

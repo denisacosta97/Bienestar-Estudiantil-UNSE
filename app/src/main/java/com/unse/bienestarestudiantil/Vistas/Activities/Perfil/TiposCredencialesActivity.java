@@ -92,7 +92,7 @@ public class TiposCredencialesActivity extends AppCompatActivity implements View
         mList.add(new Opciones(true,LinearLayout.HORIZONTAL, 4, "CREDENCIAL SOCIO", R.drawable.ic_socio, R.color.colorWhite, R.color.colorTextDefault));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new OpcionesAdapter(mList, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mList, getApplicationContext(),1);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

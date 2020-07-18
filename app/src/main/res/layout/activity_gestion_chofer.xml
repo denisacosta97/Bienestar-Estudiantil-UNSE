@@ -1,217 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <include layout="@layout/toolbar_trans" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtEstado"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fuera de servicio"
-                    android:textColor="@color/colorGreyDark"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/montserrat_black"/>
-
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:id="@+id/latVacio"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <Button
-                        android:id="@+id/btnOn"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/whiteTextColor"
-                        android:textSize="16sp"
-                        android:text="ENCENDER"
-                        android:backgroundTint="@color/colorGreen"
-                        android:background="@drawable/button_border"
-                        android:fontFamily="@font/montserrat_black"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:srcCompat="@drawable/ic_user" />
 
-                    <Button
-                        android:id="@+id/btnOff"
-                        android:layout_width="150dp"
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/whiteTextColor"
-                        android:textSize="16sp"
-                        android:background="@drawable/button_border"
-                        android:backgroundTint="@color/colorGreyT"
-                        android:text="APAGAR"
-                        android:fontFamily="@font/montserrat_black"/>
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="No existen choferes actualmente" />
 
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"/>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="2sp"
-            app:cardCornerRadius="10dp"
-            android:layout_gravity="bottom"
-            android:outlineAmbientShadowColor="@color/colorGrey2"
-            android:outlineSpotShadowColor="@color/colorGrey2"
-            card_view:backgroundTint="@color/colorWhite">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAdd"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:tint="@color/whiteTextColor"
+                android:layout_gravity="end|bottom"
+                app:srcCompat="@drawable/ic_mas"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        </RelativeLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:weightSum="1"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.45"
-                            android:gravity="left"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hs Inicio: "
-                                android:textSize="16sp"
-                                android:textColor="@color/blackTextColor"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                            <TextView
-                                android:id="@+id/txtInicio"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:text="15:44"
-                                android:textColor="@color/blackTextColor"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="2dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:background="@color/colorGreyT"/>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.45"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hs Fin: "
-                                android:textSize="16sp"
-                                android:textColor="@color/blackTextColor"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                            <TextView
-                                android:id="@+id/txtFin"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:text="16:30"
-                                android:textColor="@color/blackTextColor"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/scrollingtexthrs"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Tienes un retraso de 00:15 minutos"
-                            android:textSize="16sp"
-                            android:textColor="@color/blackTextColor"
-                            android:fontFamily="@font/montserrat_regular"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:text="Tiempo transcurrido"
-                        android:textColor="@color/blackTextColor"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                    <TextView
-                        android:id="@+id/txtTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="30sp"
-                        android:gravity="center"
-                        android:text="00:25:12"
-                        android:textColor="@color/blackTextColor"
-                        android:layout_margin="10dp"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -6,7 +6,7 @@ public class Opciones {
     private int icon, orientation;
     private int color, colorText = 0, sizeText =0;
     private int id;
-    private boolean disponibility;
+    private boolean disponibility = true;
 
     public Opciones(int orientation, int id,String titulo, int icon, int color) {
         this.titulo = titulo;
@@ -63,6 +63,11 @@ public class Opciones {
         this.orientation = orientation;
         this.disponibility = disponibility;
     }
+
+    public Opciones(String titulo) {
+        this.titulo = titulo;
+    }
+
 
     public int getOrientation() {
         return orientation;

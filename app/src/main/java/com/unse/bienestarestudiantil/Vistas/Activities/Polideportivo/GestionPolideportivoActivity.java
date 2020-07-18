@@ -83,7 +83,7 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -83,7 +83,7 @@ public class FuncionesProfesorActivity extends AppCompatActivity implements View
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

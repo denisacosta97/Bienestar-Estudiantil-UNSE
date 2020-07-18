@@ -96,7 +96,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 2, "Configuraciones", R.drawable.ic_settings, R.color.colorWhite, R.color.colorTextDefault, 12));
         mList.add(new Opciones(LinearLayout.VERTICAL, true, 6, "Cerrar Sesión", R.drawable.ic_cerrar_e, R.color.colorWhite, R.color.colorTextDefault, 12));
 
-        mAdapter = new OpcionesAdapter(mList, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mList, getApplicationContext(),1);
 
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
 
@@ -110,7 +110,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         mListActividades.add(new Opciones(LinearLayout.VERTICAL, false, 3, "Historial de Turnos", R.drawable.ic_turnos, R.color.colorWhite, R.color.colorTextDefault, 12));
 
 
-        mAdapterActividades = new OpcionesAdapter(mListActividades, getApplicationContext());
+        mAdapterActividades = new OpcionesAdapter(mListActividades, getApplicationContext(),1);
         mLayoutActividades = new GridLayoutManager(getApplicationContext(), 3);
 
         mRecyclerActividades.setLayoutManager(mLayoutActividades);

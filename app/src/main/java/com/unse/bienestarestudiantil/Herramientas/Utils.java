@@ -21,6 +21,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.itextpdf.forms.PdfAcroForm;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
@@ -90,17 +94,24 @@ public class Utils {
     public static final String LIST_SUSCROP = "list_sus";
     public static final String LIST_CRED = "list_cred";
     public static final String RECORRIDO = "recorrido";
+    public static final String SERVICIO = "servicio_info";
+    public static final String PUNTO = "punto_info";
     //Constantes para activities
+    public static final long UPDATE_INTERVAL = 5000;
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
     public static final int PERMISSION_ALL = 9092;
     public static final int GET_FROM_DNI = 9093;
     public static final int SELECT_FILE = 9094;
+    public static final int REQUEST_GROUP_PERMISSIONS_LOCATION = 9095;
+    public static final int REQUEST_LOCATION = 9096;
+    public static final int REQUEST_CHECK_SETTINGS = 9097;
     //Constantes para tipos de usuario
     public static final int TIPO_USUARIO = 1;
     public static final int TIPO_ESTUDIANTE = 2;
     public static final int TIPO_ROLES = 10;
     public static final int TIPO_SOCIO = 11;
+    public static final int TIPO_CHOFER = 12;
     //Constantes para busqueda
     public static final String PATRON_LEGAJO = "[0-9]{1,5}(-|/)[0-9]{2,4}";
     public static final String PATRON_DNI = "([0-9]){5,8}";
@@ -155,6 +166,7 @@ public class Utils {
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
 
+
     private static final String IP = "bienestar.unse.edu.ar";
     //USUARIO
     public static final String URL_USUARIO_INSERTAR = "http://" + IP + "/bienestar/usuario/insertar.php";
@@ -168,6 +180,7 @@ public class Utils {
     public static final String URL_USUARIOS_LISTA = "http://" + IP + "/bienestar/usuario/getUsuarios.php";
     public static final String URL_USUARIO_BY_ID = "http://" + IP + "/bienestar/usuario/getUser.php";
     public static final String URL_USUARIO_ELIMINAR = "http://" + IP + "/bienestar/usuario/eliminar.php";
+    public static final String URL_USUARIO_BY_ID_REDUCE = "http://" + IP + "/bienestar/usuario/getUserReduce.php";
     //ALUMNO
     public static final String URL_REGULARIDAD = "http://" + IP + "/bienestar/usuario/insertarRegularidad.php";
     public static final String URL_REGULARIDAD_CAMBIAR = "http://" + IP + "/bienestar/usuario/cambiarRegularidad.php";
@@ -222,32 +235,32 @@ public class Utils {
 
     public static final String URL_ACTUALIZAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/actualizarChofer.php";
     public static final String URL_ELIMINAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/eliminarChofer.php";
-    public static final String URL_ACTUALIZAR_TEMPORADA = "http://" + IP + "/bienestar/transporte/chofer/actualizarTemporada.php";
+    //public static final String URL_ACTUALIZAR_TEMPORADA = "http://" + IP + "/bienestar/transporte/chofer/actualizarTemporada.php";
     public static final String URL_GET_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getChofer.php";
     public static final String URL_GET_CHOFERES = "http://" + IP + "/bienestar/transporte/chofer/getChoferes.php";
     public static final String URL_SERVICIOS_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getServiciosByChofer.php";
     public static final String URL_INSERTAR_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/insertarChofer.php";
-    public static final String URL_TEMPORADA_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/registrarTemporada.php";
+    //public static final String URL_TEMPORADA_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/registrarTemporada.php";
 
-    public static final String URL_ACTUALIZAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/actualizarColectivo.php";
-    public static final String URL_ELIMINAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/eliminarColectivo.php";
-    public static final String URL_GET_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/getColectivo.php";
-    public static final String URL_GET_COLECTIVOS = "http://" + IP + "/bienestar/transporte/chofer/getColectivos.php";
-    public static final String URL_INSERTAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/chofer/insertarColectivo.php";
+    public static final String URL_ACTUALIZAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/colectivo/actualizarColectivo.php";
+    public static final String URL_ELIMINAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/colectivo/eliminarColectivo.php";
+    public static final String URL_GET_COLECTIVO = "http://" + IP + "/bienestar/transporte/colectivo/getColectivo.php";
+    public static final String URL_GET_COLECTIVOS = "http://" + IP + "/bienestar/transporte/colectivocolectivo/getColectivos.php";
+    public static final String URL_INSERTAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/colectivo/insertarColectivo.php";
 
     public static final String URL_ELIMINAR_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/eliminarRecorrido.php";
     public static final String URL_GET_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/getRecorrido.php";
     public static final String URL_GET_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/getRecorridos.php";
     public static final String URL_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/recorridos.json";
 
-    public static final String URL_FINALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/finalizarServicio.php";
-    public static final String URL_ULTIMO_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/getLastPoint.php";
-    public static final String URL_GET_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/getServicio.php";
-    public static final String URL_SERVICIO_ALUMNOS = "http://" + IP + "/bienestar/transporte/chofer/getServiciosAlumno.php";
-    public static final String URL_SERVICIO_CHOFER = "http://" + IP + "/bienestar/transporte/chofer/getServiciosChofer.php";
-    public static final String URL_INICIAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/insertarServicio.php";
-    public static final String URL_PASAJERO_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/registrarPasajero.php";
-    public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/chofer/updatePosition.php";
+    public static final String URL_FINALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/finalizarServicio.php";
+    public static final String URL_ULTIMO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/getLastPoint.php";
+    public static final String URL_GET_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/getServicio.php";
+    public static final String URL_SERVICIO_ALUMNOS = "http://" + IP + "/bienestar/transporte/servicio/getServiciosAlumno.php";
+    public static final String URL_SERVICIO_CHOFER = "http://" + IP + "/bienestar/transporte/servicio/getServiciosChofer.php";
+    public static final String URL_INICIAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/insertarServicio.php";
+    public static final String URL_PASAJERO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/registrarPasajero.php";
+    public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/updatePosition.php";
 
 
     public static final long SECONS_TIMER = 15000;
@@ -1020,6 +1033,57 @@ public class Utils {
         } else if (sizeD > 1024) {
             return String.format("%s %s", new DecimalFormat("#.##").format(sizeD / (1024)), "KB");
         } else return String.format("%s %s", sizeD, "B");
+    }
+
+    public static RequestBuilder<Drawable> loadPicture(ImageView img, int id) {
+        String URL = String.format("%s%s.jpg", Utils.URL_USUARIO_IMAGE_LOAD, id);
+        return Glide.with(img.getContext()).load(URL)
+
+                .apply(new RequestOptions().error(R.drawable.ic_user)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE));
+
+    }
+
+    public static String getFechaOrder(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        if (date != null) {
+            cal.setTime(date);
+            String mesS, diaS, minutosS, segS, horasS;
+            int mes = cal.get(Calendar.MONTH) + 1;
+            if (mes < 10) {
+                mesS = "0" + mes;
+            } else
+                mesS = String.valueOf(mes);
+
+            int dia = cal.get(Calendar.DAY_OF_MONTH);
+            if (dia < 10) {
+                diaS = "0" + dia;
+            } else
+                diaS = String.valueOf(dia);
+
+            int minutos = cal.get(Calendar.MINUTE);
+            if (minutos < 10) {
+                minutosS = "0" + minutos;
+            } else
+                minutosS = String.valueOf(minutos);
+
+            int seg = cal.get(Calendar.SECOND);
+            if (seg < 10) {
+                segS = "0" + seg;
+            } else
+                segS = String.valueOf(seg);
+
+            int horas = cal.get(Calendar.HOUR_OF_DAY);
+            if (horas < 10)
+                horasS = "0" + horas;
+            else
+                horasS = String.valueOf(horas);
+
+            return String.format("%s/%s/%s - %s:%s:%s", diaS, mesS, cal.get(Calendar.YEAR), horasS, minutosS, segS);
+        } else return "NO FECHA";
+
     }
 }
 

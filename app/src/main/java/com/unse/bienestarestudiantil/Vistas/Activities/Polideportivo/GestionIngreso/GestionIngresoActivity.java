@@ -73,7 +73,7 @@ public class GestionIngresoActivity extends AppCompatActivity implements View.On
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

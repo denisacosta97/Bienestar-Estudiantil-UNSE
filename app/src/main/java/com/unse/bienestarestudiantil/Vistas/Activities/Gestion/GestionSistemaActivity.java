@@ -115,7 +115,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
         mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpcionesFinal, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpcionesFinal, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
 
 //        filtrarOpciones();
