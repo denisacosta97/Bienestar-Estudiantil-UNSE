@@ -15,11 +15,14 @@ import java.util.ArrayList;
 
 public class RecorridoAdapter extends RecyclerView.Adapter<RecorridoAdapter.TransporteViewHolder> {
     private ArrayList<Recorrido> mList;
+    private ArrayList<Recorrido> mListCopia;
     private Context context;
 
     public RecorridoAdapter(ArrayList<Recorrido> models, Context context) {
         this.mList = models;
         this.context = context;
+        this.mListCopia = new ArrayList<>();
+        this.mListCopia.addAll(mList);
     }
 
 
@@ -39,6 +42,11 @@ public class RecorridoAdapter extends RecyclerView.Adapter<RecorridoAdapter.Tran
     }
 
     @Override
+    public long getItemId(int position) {
+        return mList.get(position).getIdRecorrido();
+    }
+
+    @Override
     public int getItemCount() {
         return mList.size();
     }
@@ -52,5 +60,13 @@ public class RecorridoAdapter extends RecyclerView.Adapter<RecorridoAdapter.Tran
             txtLinea = itemView.findViewById(R.id.txtLinea);
 
         }
+
+    }
+
+    public void change(ArrayList<Recorrido> list) {
+        mList = list;
+        this.mListCopia = new ArrayList<>();
+        this.mListCopia.addAll(mList);
+        notifyDataSetChanged();
     }
 }

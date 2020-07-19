@@ -183,6 +183,7 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
                     recorridos.add(recor);
                     listRecorridos.add(opciones);
                 }
+
                 JSONArray arrayVehiculos = jsonObject.getJSONArray("datos");
                 for (int i = 0; i < arrayVehiculos.length(); i++) {
                     JSONObject o = arrayVehiculos.getJSONObject(i);
@@ -321,7 +322,7 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
     private void loadData() {
         mOpciones = new ArrayList<>();
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Gestión de choferes", R.drawable.ic_conductor, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de líneas", R.drawable.ic_transporte, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de recorridos", R.drawable.ic_transporte, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Gestión de pasajeros", R.drawable.ic_pasajeros, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 104, "Estadísticas", R.drawable.ic_estadistica, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 105, "Mis Servicios", R.drawable.ic_transporte, R.color.colorFCEyT));
