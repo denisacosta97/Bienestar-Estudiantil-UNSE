@@ -10,9 +10,18 @@ public class Punto implements Parcelable {
 
     public static final int COMPLETE = 1;
 
+    private int id;
+    private int idRecorrido;
     private String fechaRecepcion;
     private Double latitud;
     private Double longitud;
+
+    public Punto(int id, int idRecorrido, Double latitud, Double longitud) {
+        this.id = id;
+        this.idRecorrido = idRecorrido;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
 
     public Punto(String fechaRecepcion, Double latitud, Double longitud) {
         this.fechaRecepcion = fechaRecepcion;
@@ -49,6 +58,22 @@ public class Punto implements Parcelable {
             return new Punto[size];
         }
     };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdRecorrido() {
+        return idRecorrido;
+    }
+
+    public void setIdRecorrido(int idRecorrido) {
+        this.idRecorrido = idRecorrido;
+    }
 
     public String getFechaRecepcion() {
         return fechaRecepcion;
