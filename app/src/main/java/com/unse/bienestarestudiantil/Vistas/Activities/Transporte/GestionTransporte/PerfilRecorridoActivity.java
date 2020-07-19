@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -32,6 +33,7 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Paradas;
+import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -45,16 +47,17 @@ import java.util.Objects;
 
 public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
 
-    private TextView textView;
     private GoogleMap map;
     private ArrayList<LatLng> points;
     private ArrayList<Marker> listMarker;
     private ArrayList<Paradas> paradas;
+    private Recorrido mRecorridos;
     private PolylineOptions polylineOptions;
     private Button back;
-    private CardView buttonIda, buttonVuelta;
+    private CardView buttonIda;
     private SupportMapFragment mapFragment;
     DialogoProcesamiento dialog;
+    ImageView imgIcono;
 
     private int id, colorPolyline;
     private int type = -1;
@@ -64,6 +67,10 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_recorrido);
 
+        if (getIntent().getParcelableExtra(Utils.RECORRIDO) != null) {
+            mRecorridos = getIntent().getParcelableExtra(Utils.RECORRIDO);
+        }
+
         loadViews();
 
         loadData();
@@ -71,6 +78,14 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
         loadListener();
 
         loadInfo();
+
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((TextView) findViewById(R.id.txtTitulo)).setText(mRecorridos.getDescripcion());
+        Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
     private void loadData() {
@@ -85,17 +100,14 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
 
     private void loadListener() {
         buttonIda.setOnClickListener(this);
-        buttonVuelta.setOnClickListener(this);
-
+        imgIcono.setOnClickListener(this);
     }
 
 
     private void loadViews() {
-        textView = findViewById(R.id.txtTitulo);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        //back = findViewById(R.id.btnback);
+        imgIcono = findViewById(R.id.imgFlecha);
         buttonIda = findViewById(R.id.btnida);
-        buttonVuelta = findViewById(R.id.btnvuelta);
     }
 
     @Override
@@ -334,13 +346,6 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
                 map.clear();
                 loadPoints(colorPolyline);
                 loadParadas();
-                break;
-            case R.id.btnvuelta:
-//                if (id != 0) {
-//                    map.clear();
-//                    type = 1;
-//                    loadAllParadas(view);
-//                }
                 break;
         }
 
