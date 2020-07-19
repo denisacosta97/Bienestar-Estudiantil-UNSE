@@ -1,5 +1,6 @@
 package com.unse.bienestarestudiantil.Herramientas;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -17,8 +18,12 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -96,6 +101,7 @@ public class Utils {
     public static final String RECORRIDO = "recorrido";
     public static final String SERVICIO = "servicio_info";
     public static final String PUNTO = "punto_info";
+    public static final String COLECTIVO = "cole";
     //Constantes para activities
     public static final long UPDATE_INTERVAL = 5000;
     public static final int PICK_IMAGE = 9090;
@@ -248,10 +254,10 @@ public class Utils {
     public static final String URL_GET_COLECTIVOS = "http://" + IP + "/bienestar/transporte/colectivocolectivo/getColectivos.php";
     public static final String URL_INSERTAR_COLECTIVO = "http://" + IP + "/bienestar/transporte/colectivo/insertarColectivo.php";
 
-    public static final String URL_ELIMINAR_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/eliminarRecorrido.php";
-    public static final String URL_GET_RECORRIDO = "http://" + IP + "/bienestar/transporte/chofer/getRecorrido.php";
-    public static final String URL_GET_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/getRecorridos.php";
-    public static final String URL_RECORRIDOS = "http://" + IP + "/bienestar/transporte/chofer/recorridos.json";
+    public static final String URL_ELIMINAR_RECORRIDO = "http://" + IP + "/bienestar/transporte/recorrido/eliminarRecorrido.php";
+    public static final String URL_GET_RECORRIDO = "http://" + IP + "/bienestar/transporte/recorrido/getRecorrido.php";
+    public static final String URL_GET_RECORRIDOS = "http://" + IP + "/bienestar/transporte/recorrido/getRecorridos.php";
+    public static final String URL_RECORRIDOS = "http://" + IP + "/bienestar/transporte/recorrido/recorridos.json";
 
     public static final String URL_FINALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/finalizarServicio.php";
     public static final String URL_ULTIMO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/getLastPoint.php";
@@ -355,24 +361,21 @@ public class Utils {
         return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
     }
 
-//    public static void showCustomToast(Activity activity, Context context, String text, int icon){
-//        LayoutInflater inflater = activity.getLayoutInflater();
-//        View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) activity.findViewById(R.id.toast_layout));
-//
-//        FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), "product_sans_regular.ttf");
-//        fontChanger.replaceFonts((ViewGroup) layout);
-//
-//        ImageView image = layout.findViewById(R.id.image);
-//        image.setImageResource(icon);
-//        TextView text2 = layout.findViewById(R.id.text);
-//        text2.setText(text);
-//
-//        Toast toast = new Toast(context);
-//        toast.setGravity(Gravity.BOTTOM, 0, 30);
-//        toast.setDuration(Toast.LENGTH_LONG + 4);
-//        toast.setView(layout);
-//        toast.show();
-//    }
+    public static void showCustomToast(Activity activity, Context context, String text, int icon){
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) activity.findViewById(R.id.toast_layout));
+
+        ImageView image = layout.findViewById(R.id.image);
+        image.setImageResource(icon);
+        TextView text2 = layout.findViewById(R.id.text);
+        text2.setText(text);
+
+        Toast toast = new Toast(context);
+        toast.setGravity(Gravity.BOTTOM, 0, 30);
+        toast.setDuration(Toast.LENGTH_LONG + 4);
+        toast.setView(layout);
+        toast.show();
+    }
 
 
     //Metodo para saber si un permiso esta autorizado o no

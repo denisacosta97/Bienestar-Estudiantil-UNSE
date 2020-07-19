@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
+import com.unse.bienestarestudiantil.Modelos.Pasajero;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
@@ -31,8 +32,7 @@ public class GestionPasajeroActivity extends AppCompatActivity implements View.O
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView mRecyclerUsuarios;
     ArrayList<Usuario> mUsuarios;
-    ArrayList<Profesor> mProfesors;
-    ArrayList<Deporte> mDeportes;
+    ArrayList<Pasajero> mPasajeros;
     UsuariosAdapter mUsuariosAdapter;
     ImageView imgIcono;
     DialogoProcesamiento dialog;
@@ -53,7 +53,7 @@ public class GestionPasajeroActivity extends AppCompatActivity implements View.O
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de profesores");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de pasajeros");
 
     }
 
@@ -79,9 +79,8 @@ public class GestionPasajeroActivity extends AppCompatActivity implements View.O
     }
 
     private void loadDataRecycler() {
-        mProfesors = new ArrayList<>();
+        mPasajeros = new ArrayList<>();
         mUsuarios = new ArrayList<>();
-        mDeportes = new ArrayList<>();
 
         mUsuariosAdapter = new UsuariosAdapter(mUsuarios, getApplicationContext(),  Utils.TIPO_ESTUDIANTE);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
