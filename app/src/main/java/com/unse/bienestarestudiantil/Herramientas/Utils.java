@@ -101,10 +101,12 @@ public class Utils {
     public static final String RECORRIDO = "recorrido";
     public static final String SERVICIO = "servicio_info";
     public static final String PUNTO = "punto_info";
+    public static final String COLECTIVO = "cole_info";
     public static final String COLECTIVO = "cole";
     public static final String IMPRESION = "impresion";
     public static final String CANCHA = "cancha";
     //Constantes para activities
+    public static final long UPDATE_INTERVAL = 12000;
     public static final long UPDATE_INTERVAL = 10000;
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
@@ -282,8 +284,9 @@ public class Utils {
     public static final String URL_SERVICIO_ALUMNOS = "http://" + IP + "/bienestar/transporte/servicio/getServiciosAlumno.php";
     public static final String URL_SERVICIO_CHOFER = "http://" + IP + "/bienestar/transporte/servicio/getServiciosChofer.php";
     public static final String URL_INICIAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/insertarServicio.php";
-    public static final String URL_PASAJERO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/registrarPasajero.php";
+    public static final String URL_PASAJERO_REGISTRAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/registrarPasajero.php";
     public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/updatePosition.php";
+    public static final String URL_PASAJERO_INFO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/getPasajeroServicio.php";
 
     //NOTICIAS
     public static final String URL_ADD_NOTICIA = "http://sis.bienestar.unse.edu.ar/api/general/noticia/insertar.php";
@@ -392,7 +395,7 @@ public class Utils {
         return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
     }
 
-    public static void showCustomToast(Activity activity, Context context, String text, int icon){
+    public static void showCustomToast(Activity activity, Context context, String text, int icon) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) activity.findViewById(R.id.toast_layout));
 
@@ -769,6 +772,8 @@ public class Utils {
 
     }
 
+
+
     public static String getBirthday(Date date) {
 
         Calendar cal = Calendar.getInstance();
@@ -1116,6 +1121,30 @@ public class Utils {
                 horasS = String.valueOf(horas);
 
             return String.format("%s/%s/%s - %s:%s:%s", diaS, mesS, cal.get(Calendar.YEAR), horasS, minutosS, segS);
+        } else return "NO FECHA";
+
+    }
+
+    public static String getFechaOrderOnly(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        if (date != null) {
+            cal.setTime(date);
+            String mesS, diaS;
+            int mes = cal.get(Calendar.MONTH) + 1;
+            if (mes < 10) {
+                mesS = "0" + mes;
+            } else
+                mesS = String.valueOf(mes);
+
+            int dia = cal.get(Calendar.DAY_OF_MONTH);
+            if (dia < 10) {
+                diaS = "0" + dia;
+            } else
+                diaS = String.valueOf(dia);
+
+
+            return String.format("%s/%s/%s", diaS, mesS, cal.get(Calendar.YEAR));
         } else return "NO FECHA";
 
     }

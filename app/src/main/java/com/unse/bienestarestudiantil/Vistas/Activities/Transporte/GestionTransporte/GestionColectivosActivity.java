@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -69,9 +67,6 @@ public class GestionColectivosActivity extends AppCompatActivity implements View
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), PerfilPasajeroActivity.class);
-                i.putExtra(Utils.COLECTIVO, mColectivos.get(position));
-                startActivity(i);
             }
         });
 

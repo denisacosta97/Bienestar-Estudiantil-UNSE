@@ -11,7 +11,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,8 +66,6 @@ public class NuevoServicioActivity extends AppCompatActivity implements
         LocationListener, GoogleApiClient.ConnectionCallbacks,
         ResultCallback<Status> {
 
-
-    private static final String TAG = "jejee";
     ImageView imgIcono;
     TextView txtEstado, txtPatente, txtServicio, txtHoraInicio, txtHoraFin, txtTime, txtPosition;
     Button btnOn, btnOff;
@@ -79,6 +76,7 @@ public class NuevoServicioActivity extends AppCompatActivity implements
     Punto mPunto;
     DialogoProcesamiento dialog;
     boolean isService = true;
+    int errores = 0;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -335,7 +333,7 @@ public class NuevoServicioActivity extends AppCompatActivity implements
     }
 
     private void loadPunto() {
-        //mGoogleMap.clear();
+        mGoogleMap.clear();
         if (mPunto != null) {
             LatLng latLng = new LatLng(mPunto.getLatitud(), mPunto.getLongitud());
             mGoogleMap.addMarker(new MarkerOptions().position(latLng));
@@ -413,6 +411,7 @@ public class NuevoServicioActivity extends AppCompatActivity implements
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        Utils.showToast(getApplicationContext(), getString(R.string.ajustesInvalidos));
                         break;
 
                 }
@@ -424,11 +423,98 @@ public class NuevoServicioActivity extends AppCompatActivity implements
     private void updateLocationUI() {
         if (mPunto == null)
             mPunto = new Punto();
-        String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
-        mPunto.setFechaRecepcion(fecha);
-        mPunto.setLatitud(mLastLocation.getLatitude());
-        mPunto.setLongitud(mLastLocation.getLongitude());
-        loadPunto();
+        sendToServer();
+
+    }
+
+    private void sendToServer() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?key=%s&idU=%s&is=%s&la=%s&lo=%s",
+                Utils.URL_ACTUALIZAR_SERVICIO, key,
+                idLocal, mServicio != null ? mServicio.getIdServicio() : 0,
+                mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        StringRequest requestImage = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaPosition(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                errores++;
+                Utils.showLog("GPS", "Error +1");
+                if (errores >= 3) {
+                    mostrarDialogoConexion();
+                }
+                //Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+            }
+        });
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
+    }
+
+    private void procesarRespuestaPosition(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
+                case 1:
+                    //Exito
+                    if (mPunto == null)
+                        mPunto = new Punto();
+                    String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
+                    mPunto.setFechaRecepcion(fecha);
+                    mPunto.setLatitud(mLastLocation.getLatitude());
+                    mPunto.setLongitud(mLastLocation.getLongitude());
+                    Utils.showLog("GPS", "Cargado y enviado");
+                    loadPunto();
+                    break;
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.posicionError));
+                    errores++;
+                    if (errores >= 3) {
+                        mostrarDialogoConexion();
+                    }
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 100:
+                    //No autorizado
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+        }
+    }
+
+    private void mostrarDialogoConexion() {
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setTitulo(getString(R.string.advertencia))
+                .setDescripcion(getString(R.string.errorConexion))
+                .setIcono(R.drawable.ic_error)
+                .setListener(new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        errores = 0;
+                    }
+
+                    @Override
+                    public void no() {
+                    }
+                })
+                .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+        final DialogoGeneral mensaje = builder.build();
+        mensaje.setCancelable(false);
+        mensaje.show(getSupportFragmentManager(), "dialog_error");
     }
 
 
@@ -548,7 +634,7 @@ public class NuevoServicioActivity extends AppCompatActivity implements
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d(TAG, String.format("Nueva ubicación: (%s, %s)",
+        Utils.showLog("GPS", String.format("Nueva ubicación: (%s, %s)",
                 location.getLatitude(), location.getLongitude()));
         mLastLocation = location;
         updateLocationUI();

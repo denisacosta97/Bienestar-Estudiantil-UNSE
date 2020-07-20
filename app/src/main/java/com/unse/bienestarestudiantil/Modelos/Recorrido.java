@@ -10,15 +10,7 @@ public class Recorrido implements Parcelable {
 
     private int idRecorrido, idPunto, validez;
     private String descripcion;
-    private Double lat, lon;
 
-    public Recorrido(int idRecorrido, int idPunto, String descripcion, Double lat, Double lon) {
-        this.idRecorrido = idRecorrido;
-        this.idPunto = idPunto;
-        this.descripcion = descripcion;
-        this.lat = lat;
-        this.lon = lon;
-    }
 
     public Recorrido(int idRecorrido, String descripcion, int validez) {
         this.idRecorrido = idRecorrido;
@@ -30,8 +22,6 @@ public class Recorrido implements Parcelable {
         this.idRecorrido = -1;
         this.idPunto = -1;
         this.descripcion = "";
-        this.lat = null;
-        this.lon = null;
     }
 
     protected Recorrido(Parcel in) {
@@ -39,16 +29,6 @@ public class Recorrido implements Parcelable {
         idPunto = in.readInt();
         descripcion = in.readString();
         validez = in.readInt();
-        if (in.readByte() == 0) {
-            lat = null;
-        } else {
-            lat = in.readDouble();
-        }
-        if (in.readByte() == 0) {
-            lon = null;
-        } else {
-            lon = in.readDouble();
-        }
     }
 
     public static final Creator<Recorrido> CREATOR = new Creator<Recorrido>() {
@@ -87,21 +67,6 @@ public class Recorrido implements Parcelable {
         this.descripcion = descripcion;
     }
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
 
     public int getValidez() {
         return validez;
@@ -116,11 +81,11 @@ public class Recorrido implements Parcelable {
 
         int idRecorrido, validez;
         String descripcion;
-
         try {
             idRecorrido = Integer.parseInt(object.getString("idrecorrido"));
             validez = Integer.parseInt(object.getString("validez"));
             descripcion = object.getString("descripcion");
+            recorrido = new Recorrido(idRecorrido, descripcion, 1);
             //lat = object.getDouble("lat");
             //lon = object.getDouble("long");
 
@@ -144,17 +109,5 @@ public class Recorrido implements Parcelable {
         dest.writeInt(idPunto);
         dest.writeString(descripcion);
         dest.writeInt(validez);
-        if (lat == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(lat);
-        }
-        if (lon == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(lon);
-        }
     }
 }

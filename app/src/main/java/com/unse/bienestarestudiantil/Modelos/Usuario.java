@@ -169,7 +169,6 @@ public class Usuario implements Parcelable {
                     tipoUsuario = Integer.parseInt(object.getString("tipousuario"));
                     nombre = object.getString("nombre");
                     apellido = object.getString("apellido");
-
                     usuario = new Usuario(idUsuario,nombre, apellido, tipoUsuario);
                     break;
                 case MEDIUM:

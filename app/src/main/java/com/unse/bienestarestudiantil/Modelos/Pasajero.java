@@ -3,10 +3,14 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Pasajero implements Parcelable {
 
+    public static final int MEDIUM = 1;
     private int dni, idRecorrido;
-    private String nombre, apellido, dia, mes, anio, fechaRegistro, fechaLocal;
+    private String nombre, apellido, dia, mes, anio, fechaRegistro, fechaLocal, patente;
     private Double lat, lon;
 
     public Pasajero(int dni, int idRecorrido, String nombre, String apellido, String dia, String mes,
@@ -38,6 +42,14 @@ public class Pasajero implements Parcelable {
         this.lon = null;
     }
 
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
     protected Pasajero(Parcel in) {
         dni = in.readInt();
         idRecorrido = in.readInt();
@@ -48,6 +60,7 @@ public class Pasajero implements Parcelable {
         anio = in.readString();
         fechaRegistro = in.readString();
         fechaLocal = in.readString();
+        patente = in.readString();
         if (in.readByte() == 0) {
             lat = null;
         } else {
@@ -71,6 +84,35 @@ public class Pasajero implements Parcelable {
             return new Pasajero[size];
         }
     };
+
+    public static Pasajero mapper(JSONObject o, int tipo) {
+        Pasajero pasajero = new Pasajero();
+        String fechaRegistro, fechaLocal, patente;
+        int idRecorrido, dia, mes, anio;
+        try {
+            switch (tipo) {
+                case MEDIUM:
+                    idRecorrido = Integer.parseInt(o.getString("idrecorrido"));
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
+                    fechaRegistro = o.getString("fecharegistro");
+                    fechaLocal = o.getString("fechalocal");
+                    patente = o.getString("patente");
+                    pasajero = new Pasajero(0, idRecorrido, "", "", String.valueOf(dia),
+                            String.valueOf(mes), String.valueOf(anio), fechaRegistro, fechaLocal,
+                            0d, 0d);
+                    pasajero.setPatente(patente);
+                    break;
+            }
+            return pasajero;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return pasajero;
+    }
 
     public int getDni() {
         return dni;
@@ -176,6 +218,7 @@ public class Pasajero implements Parcelable {
         dest.writeString(anio);
         dest.writeString(fechaRegistro);
         dest.writeString(fechaLocal);
+        dest.writeString(patente);
         if (lat == null) {
             dest.writeByte((byte) 0);
         } else {

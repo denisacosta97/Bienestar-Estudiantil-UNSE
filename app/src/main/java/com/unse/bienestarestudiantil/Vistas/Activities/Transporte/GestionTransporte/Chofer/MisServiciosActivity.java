@@ -31,7 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GestionServiciosActivity extends AppCompatActivity implements View.OnClickListener {
+public class MisServiciosActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imgBack;
     RecyclerView mRecyclerView;

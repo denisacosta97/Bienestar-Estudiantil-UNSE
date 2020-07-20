@@ -45,11 +45,10 @@
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilRecorridoActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionColectivosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.NuevoServicioActivity" />
-        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.GestionServiciosActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.MisServiciosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.EstadisticasTransporteActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.PerfilChoferActivity" />
-        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilPasajeroActivity" />
-        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionPasajeroActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Pasajero.GestionPasajeroActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionRecorridosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.GestionChoferActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporteActivity" />

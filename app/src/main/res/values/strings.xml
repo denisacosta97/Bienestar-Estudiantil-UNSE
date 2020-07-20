@@ -193,6 +193,9 @@
     <string name="serviciosNoHay">¡No existen datos disponibles!</string>
     <string name="servicioFinalizar">¿Esta seguro que desea finalizar el servicio?</string>
     <string name="servicioFinalizarAntiguo">Está a punto a finalizar un servicio previo</string>
+    <string name="errorConexion">¡Revise su conexión a internet!</string>
+    <string name="ajustesInvalidos">¡Ajuste del GPS inválido!</string>
+    <string name="posicionError">¡Error al actualizar GPS!</string>
 
     <string name="reservaOk">¡Fecha y hora libre!\n¿Desea reservar?</string>
 

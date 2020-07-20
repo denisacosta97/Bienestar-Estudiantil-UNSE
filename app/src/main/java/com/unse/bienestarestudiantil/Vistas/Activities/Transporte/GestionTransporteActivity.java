@@ -23,10 +23,11 @@ import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.Modelos.Servicio;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.Chofer.GestionChoferActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.Chofer.GestionServiciosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.Chofer.MisServiciosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.Chofer.NuevoServicioActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.EstadisticasTransporteActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionPasajeroActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionServiciosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.Pasajero.GestionPasajeroActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.GestionRecorridosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
@@ -91,7 +92,7 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
                         startActivity(new Intent(getApplicationContext(), EstadisticasTransporteActivity.class));
                         break;
                     case 105:
-                        startActivity(new Intent(getApplicationContext(), GestionServiciosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MisServiciosActivity.class));
                         break;
                     case 106:
                         getServicios();
@@ -99,9 +100,11 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
                     case 107:
                         startActivity(new Intent(getApplicationContext(), RecorridoActivity.class));
                         break;
+                    case 108:
+                        startActivity(new Intent(getApplicationContext(), GestionServiciosActivity.class));
+                        break;
 
                 }
-                Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -321,13 +324,14 @@ public class GestionTransporteActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Gestión de choferes", R.drawable.ic_conductor, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de recorridos", R.drawable.ic_transporte, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Gestión de pasajeros", R.drawable.ic_pasajeros, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Gestión de Choferes", R.drawable.ic_conductor, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de Recorridos", R.drawable.ic_transporte, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Gestión de Pasajeros", R.drawable.ic_pasajeros, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 104, "Estadísticas", R.drawable.ic_estadistica, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 105, "Mis Servicios", R.drawable.ic_transporte, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 106, "Nuevo Servicio", R.drawable.ic_conductor, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 107, "Gestión de colectivos", R.drawable.ic_transporte, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 107, "Gestión de Colectivos", R.drawable.ic_transporte, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 108, "Gestión de Servicios", R.drawable.ic_transporte, R.color.colorFCEyT));
 
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
