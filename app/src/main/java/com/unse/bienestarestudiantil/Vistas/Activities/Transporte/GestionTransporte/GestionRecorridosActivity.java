@@ -82,15 +82,12 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
     }
 
     private void loadDataRecycler() {
-        mRecorridos = new ArrayList<>();
+        //mRecorridos = new ArrayList<>();
 
         loadInfo();
-
-        mRecorridoAdapter = new RecorridoAdapter(mRecorridos, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         mRecyclerT.setNestedScrollingEnabled(true);
         mRecyclerT.setLayoutManager(mLayoutManager);
-        mRecyclerT.setAdapter(mRecorridoAdapter);
 
     }
 
@@ -179,8 +176,8 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
                     mRecorridos.add(recorrido);
 
                 }
-                mRecorridoAdapter.change(mRecorridos);
-                mRecorridoAdapter.notifyDataSetChanged();
+                mRecorridoAdapter = new RecorridoAdapter(mRecorridos, getApplicationContext());
+                mRecyclerT.setAdapter(mRecorridoAdapter);
 
             }
         } catch (JSONException e) {

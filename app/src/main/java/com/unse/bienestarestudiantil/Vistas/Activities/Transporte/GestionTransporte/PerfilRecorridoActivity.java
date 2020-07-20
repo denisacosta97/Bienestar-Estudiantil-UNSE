@@ -33,6 +33,7 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Paradas;
+import com.unse.bienestarestudiantil.Modelos.Punto;
 import com.unse.bienestarestudiantil.Modelos.Recorrido;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
@@ -51,6 +52,7 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
     private ArrayList<LatLng> points;
     private ArrayList<Marker> listMarker;
     private ArrayList<Paradas> paradas;
+    private ArrayList<Punto> mPuntos;
     private Recorrido mRecorridos;
     private PolylineOptions polylineOptions;
     private Button back;
@@ -184,22 +186,40 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        loadInfo(jsonObject);
+        loadInfo(jsonObject, mRecorridos.getIdRecorrido());
 
     }
 
-    private void loadInfo(JSONObject jsonObject) {
+    private void loadInfo(JSONObject jsonObject, int idRecorrido) {
         try {
-
             JSONObject recorridos = jsonObject.getJSONObject("recorridos");
-            JSONObject u_z = recorridos.getJSONObject("1");
-            JSONArray puntos = u_z.getJSONArray("p");
-
             JSONObject par = jsonObject.getJSONObject("paradas");
-            JSONObject prdaUZ = par.getJSONObject("1");
-            JSONArray puntitos = prdaUZ.getJSONArray("p");
+            JSONArray puntos = null, puntitos = null;
+            switch (idRecorrido){
+                case 1:
+                    JSONObject up = recorridos.getJSONObject("1");
+                    puntos = up.getJSONArray("p");
 
-            points = new ArrayList<>();
+                    JSONObject prdaUP = par.getJSONObject("1");
+                    puntitos = prdaUP.getJSONArray("p");
+                    break;
+                case 2:
+                    JSONObject upp = recorridos.getJSONObject("2");
+                    puntos = upp.getJSONArray("p");
+
+                    JSONObject prdaUPP = par.getJSONObject("2");
+                    puntitos = prdaUPP.getJSONArray("p");
+                    break;
+                case 3:
+                    JSONObject u_z = recorridos.getJSONObject("3");
+                    puntos = u_z.getJSONArray("p");
+
+                    JSONObject prdaUZ = par.getJSONObject("3");
+                    puntitos = prdaUZ.getJSONArray("p");
+                    break;
+            }
+
+            mPuntos = new ArrayList<>();
             paradas = new ArrayList<>();
 
             for (int i = 0; i < puntos.length(); i++) {
@@ -208,8 +228,13 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
                 double lat = o.getDouble(1);
                 double lon = o.getDouble(0);
 
-                LatLng recorrido = new LatLng(lat, lon);
-                points.add(recorrido);
+                Punto pnto = new Punto();
+                pnto.setIdRecorrido(idRecorrido);
+                pnto.setId(i);
+                pnto.setFechaRecepcion(String.valueOf(0));
+                pnto.setLatitud(lat);
+                pnto.setLongitud(lon);
+                mPuntos.add(pnto);
             }
 
             for (int i = 0; i < puntitos.length(); i++) {
@@ -221,7 +246,7 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
                 double lon = latlng.getDouble(0);
 
                 Paradas p = new Paradas();
-                p.setIdRecorrido(1);
+                p.setIdRecorrido(idRecorrido);
                 p.setIdParada(i);
                 p.setLat(lat);
                 p.setLon(lon);
@@ -245,7 +270,8 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
         else
             polylineOptions.color(Color.BLACK);
 
-        if (points.size() > 0) {
+        if (mPuntos.size() > 0) {
+            convertToLatLong(mPuntos);
             polylineOptions.width(10);
             polylineOptions.addAll(points);
             //polylineOptions.endCap(new CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_circle_arrow1), 16));
@@ -283,6 +309,14 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
                     .icon(BitmapDescriptorFactory.fromBitmap(smallMarker2)));
         }*/
 
+    }
+
+    private void convertToLatLong(ArrayList<Punto> puntos) {
+        LatLng pnto = null;
+        for (int i = 0; i < puntos.size() ; i++) {
+            pnto = new LatLng(puntos.get(i).getLatitud(), puntos.get(i).getLongitud());
+            points.add(pnto);
+        }
     }
 
     private void loadParadas() {
@@ -346,6 +380,9 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
                 map.clear();
                 loadPoints(colorPolyline);
                 loadParadas();
+                break;
+            case R.id.imgFlecha:
+                onBackPressed();
                 break;
         }
 

@@ -114,18 +114,17 @@ public class Recorrido implements Parcelable {
     public static Recorrido mapper(JSONObject object) {
         Recorrido recorrido = new Recorrido();
 
-        int idRecorrido, idPunto;
+        int idRecorrido, validez;
         String descripcion;
-        Double lat, lon;
 
         try {
-            idRecorrido = Integer.parseInt(object.getString("idRecorrido"));
-            idPunto = Integer.parseInt(object.getString("idPunto"));
+            idRecorrido = Integer.parseInt(object.getString("idrecorrido"));
+            validez = Integer.parseInt(object.getString("validez"));
             descripcion = object.getString("descripcion");
-            lat = object.getDouble("lat");
-            lon = object.getDouble("long");
+            //lat = object.getDouble("lat");
+            //lon = object.getDouble("long");
 
-            recorrido = new Recorrido(idRecorrido, idPunto, descripcion, lat, lon);
+            recorrido = new Recorrido(idRecorrido, descripcion, validez);
         } catch (JSONException e) {
             e.printStackTrace();
         }

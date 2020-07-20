@@ -63,6 +63,7 @@
     <string name="tokenInexistente">Necesita de un token para operar en el sistema</string>
     <string name="noData">No existen datos</string>
     <string name="servidorOff">Error de conexión o servidor fuera de rango</string>
+    <string name="errorLocation">Error al obtener ubicación</string>
     <string name="elegirIntensidad">Debe elegir la intensidad de su actividad</string>
     <string name="noActualizableForm">No se puede actualizar, el formulario ya fue presentado</string>
     <string name="noExiste">Registro inexistente</string>

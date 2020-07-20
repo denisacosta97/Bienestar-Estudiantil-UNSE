@@ -10,6 +10,7 @@ public class Servicio implements Parcelable {
 
     public static final int MEDIUM = 1;
     public static final int COMPLETE = 2;
+    public static final int SERVICIO = 3;
 
     private int idServicio, dniChofer, idRecorrido, dia, mes, anio, estado;
     private String nombre, apellido, descripcio, patente, fechaInicio, fechaFin;
@@ -217,6 +218,17 @@ public class Servicio implements Parcelable {
                     servicio = new Servicio(idServicio, idChofer, idRecorrido,
                             nombre, apellido, recorrido, patente,
                             dia, mes, anio, fechaInicio, fechaFin);
+                    break;
+                case 3:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    idRecorrido = Integer.parseInt(o.getString("idrecorrido"));
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
+                    recorrido = o.getString("descripcion");
+                    servicio = new Servicio(idServicio, 0, idRecorrido,
+                            "", "", recorrido, "",
+                            dia, mes, anio, "", "");
                     break;
             }
             return servicio;

@@ -7,6 +7,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -29,11 +34,14 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
@@ -41,6 +49,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.AboutActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.TermsActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
@@ -49,7 +58,12 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.TransporteFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     //SlidingLayout mSlidingLayout;
     PreferenceManager manager;
+    DialogoProcesamiento dialog;
     UsuarioViewModel mUsuarioViewModel;
     RolViewModel mRolViewModel;
     Toolbar mToolbar;
@@ -307,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentoGenerico = new TransporteFragment();
                 ((TransporteFragment) fragmentoGenerico).setContext(getApplicationContext());
                 ((TransporteFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
+                ((TransporteFragment) fragmentoGenerico).setActivity(MainActivity.this);
                 break;
             case R.id.item_comedor:
                 fragmentoGenerico = new ComedorFragment();
@@ -375,6 +391,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     /*public void toggleMenu() {
         mSlidingLayout.toggleMenu();
 
@@ -410,6 +427,95 @@ public class MainActivity extends AppCompatActivity {
             isOpen = false;
         }
     }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult intentIntegrator = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentIntegrator != null) {
+            if (intentIntegrator.getContents() == null) {
+                Utils.showCustomToast(MainActivity.this, getApplicationContext(), "Cancelaste", R.drawable.ic_error);
+
+            } else {
+                String contenido = intentIntegrator.getContents();
+                decodeQR(contenido);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void decodeQR(String contenido) {
+        String pat = "ABC 123";
+        String idR = "1";
+        //idUsuario, patente, fechalocal, lat, long, idRecorrido, dia, mes, anio
+    }
+
+    private void changeEstado(String idReserva, String dni) {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?idU=%s&key=%s&ir=%s&ie=%s&e=%s&d=%s", Utils.URL_PASAJERO_SERVICIO, id, key, idReserva, id, 3, dni);
+        StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaActualizar(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                        getString(R.string.servidorOff), R.drawable.ic_error);
+                dialog.dismiss();
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuestaActualizar(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    break;
+                case 1:
+                    //Exito
+                    break;
+                case 2:
+                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                            "", R.drawable.ic_error);
+                    break;
+                case 3:
+                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    break;
+                case 4:
+                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                            getString(R.string.camposIncompletos), R.drawable.ic_error);
+                    break;
+                case 100:
+                    //No autorizado
+                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+
+        }
+    }
 
     @Override
     public void onBackPressed() {

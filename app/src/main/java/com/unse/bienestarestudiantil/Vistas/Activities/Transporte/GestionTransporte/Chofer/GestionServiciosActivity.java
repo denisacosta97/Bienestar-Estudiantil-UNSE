@@ -126,7 +126,6 @@ public class GestionServiciosActivity extends AppCompatActivity implements View.
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
     }
 
-
     private void procesarRespuestaServicio(String response, int position) {
         try {
             dialog.dismiss();

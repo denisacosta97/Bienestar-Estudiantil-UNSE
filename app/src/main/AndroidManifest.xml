@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Vistas.Activities.Transporte.RecorridoRealActivity"></activity>
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilRecorridoActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionColectivosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.NuevoServicioActivity" />
@@ -150,10 +151,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.unse.bienestarestudiantil.provider"
@@ -163,16 +160,22 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-    </application>
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+    <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

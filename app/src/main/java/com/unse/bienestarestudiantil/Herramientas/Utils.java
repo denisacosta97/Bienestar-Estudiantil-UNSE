@@ -103,7 +103,7 @@ public class Utils {
     public static final String PUNTO = "punto_info";
     public static final String COLECTIVO = "cole";
     //Constantes para activities
-    public static final long UPDATE_INTERVAL = 5000;
+    public static final long UPDATE_INTERVAL = 10000;
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
     public static final int PERMISSION_ALL = 9092;

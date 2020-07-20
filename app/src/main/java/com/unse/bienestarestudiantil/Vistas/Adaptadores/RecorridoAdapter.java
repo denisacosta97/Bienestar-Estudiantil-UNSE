@@ -51,7 +51,7 @@ public class RecorridoAdapter extends RecyclerView.Adapter<RecorridoAdapter.Tran
         return mList.size();
     }
 
-    public class TransporteViewHolder extends RecyclerView.ViewHolder {
+    public static class TransporteViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtLinea;
 
