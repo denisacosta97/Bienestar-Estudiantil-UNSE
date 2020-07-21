@@ -35,6 +35,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loadData() {
+
     }
 
     private void loadListener() {
