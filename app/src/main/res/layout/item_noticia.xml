@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_inicio"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="320dp"
         android:layout_margin="5dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="Paro de colectivos a partir de las 12hs"
                     android:textColor="#000"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -59,8 +59,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:textColor="@color/blackTextColor"
                     android:text="Lorem ipsum dolor sit amet consectetur adipiscing, elit velit porttitor nunc integer cubilia, per placerat nec leo habitasse."
-                    android:textSize="11sp"
+                    android:textSize="14sp"
                     android:fontFamily="@font/montserrat_regular"/>
 
                 <TextView

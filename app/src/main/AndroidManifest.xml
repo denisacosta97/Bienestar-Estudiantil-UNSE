@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unse.bienestarestudiantil">
 
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +21,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.Transporte.RecorridoRealActivity"></activity>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresosHistoricosActivity"></activity>
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.ListadoIngresosPiletaActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPiletaActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.ReservasCanchasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.DialogBuscarCancha" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.GestionReservasInstActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.GestionReservasCanchasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.CanchasSelectActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.CanchasActivity" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.AgregarImpresionActivity" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.EstadisticasCiberActivity" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.GestionImpresionesActivity" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.NuevoIngresoDialog" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiberActivity" />
+        <activity android:name=".Vistas.Fragmentos.CiberFragment" />
+        <activity android:name=".Vistas.Activities.Transporte.RecorridoRealActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilRecorridoActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionColectivosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.NuevoServicioActivity" />
@@ -56,8 +82,8 @@
             android:label="Gestión de archivos" />
         <activity android:name=".Vistas.Activities.TorneosActivity" />
         <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservas.AdministrarReservasActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPolideportivoActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.AdministrarReservasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.DialogIngresoPolideportivo" />
         <activity android:name=".Vistas.BarcodeActivity" />
         <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity" />
         <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
@@ -68,7 +94,7 @@
             android:name=".Vistas.Activities.Perfil.PerfilActivity"
             android:label="Perfil" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity"
+            android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity"
             android:label="Confirmar Reserva" />
         <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
@@ -76,7 +102,7 @@
             android:name=".Vistas.Activities.AsistenciaActivity"
             android:label="Asistencia" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservas.ReservaEspacioActivity"
+            android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
         <activity android:name=".Vistas.Activities.Perfil.TiposCredencialesActivity" />
         <activity
@@ -93,7 +119,7 @@
         <activity android:name=".Vistas.Activities.Inicio.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity"
+            android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.EspaciosActivity"
             android:label="Espacios Disponibles" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
@@ -105,7 +131,7 @@
             android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
             android:label="Gestión de Finanzas" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity"
+            android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.GestionReservasActivity"
             android:label="Gestión de Reservas" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity"
@@ -165,17 +191,5 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-    <uses-feature android:name="android.hardware.location.gps" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

@@ -60,7 +60,7 @@ public class GestionColectivosActivity extends AppCompatActivity implements View
         mColectivos = new ArrayList<>();
 
         mColectivoAdapter = new ColectivoAdapter(mColectivos, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayout.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         mRecyclerColectivo.setNestedScrollingEnabled(true);
         mRecyclerColectivo.setLayoutManager(mLayoutManager);
         mRecyclerColectivo.setAdapter(mColectivoAdapter);

@@ -16,6 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoReservas;
 
 import java.util.ArrayList;
 
@@ -48,15 +49,26 @@ public class GestionIngresoActivity extends AppCompatActivity implements View.On
 
     }
 
-
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), IngresoPiletaActivity.class));
+                        break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), IngresoPolideportivoActivity.class));
+                        DialogIngresoPolideportivo dialog = new DialogIngresoPolideportivo(
+                                getApplicationContext(), getSupportFragmentManager());
+                        dialog.setContext(getApplicationContext());
+                        dialog.show(getSupportFragmentManager(),"dialog_resevas");
+                        break;
+                    case 3:
+                        startActivity(new Intent(getApplicationContext(), ListadoIngresosPiletaActivity.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(getApplicationContext(), IngresosHistoricosActivity.class));
                         break;
                 }
                 Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
@@ -70,6 +82,7 @@ public class GestionIngresoActivity extends AppCompatActivity implements View.On
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Ingreso a pileta",R.drawable.ic_ingreso_pileta, R.color.colorFCEyT ));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Ingreso a polideportivo",R.drawable.ic_ingreso_poli, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Ingresos del dia", R.drawable.ic_ingresos_poli_dia, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Ingresos históricos", R.drawable.ic_ingreso, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

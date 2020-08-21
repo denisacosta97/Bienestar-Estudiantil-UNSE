@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Info Regularidad"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -43,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="17sp"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:text="Regularidad #000 - 2020" />
 
@@ -59,11 +61,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/colorGrey2"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textColor="@color/blackTextColor"
                     android:textStyle="bold"
                     android:text="Fecha \nOtorgamiento:"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/montserrat_black"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtFecha"
@@ -72,6 +74,7 @@
                     android:textSize="14sp"
                     android:text="Lunes 30 de Diciembre de 2019 - 12:45:90"
                     android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textColor="@color/colorTextDefault"
                     android:padding="10dp"
                     android:background="@color/transparente" />
@@ -99,6 +102,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="ACTIVADO"
+                        android:fontFamily="@font/montserrat_black"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorWhite" />
@@ -125,9 +129,10 @@
 
                 <Button
                     android:id="@+id/btnAceptar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="ACEPTAR"
+                    android:fontFamily="@font/montserrat_black"
                     android:padding="16dp"
                     android:background="@drawable/button_border"
                     android:textColor="@color/colorWhite"
@@ -142,8 +147,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

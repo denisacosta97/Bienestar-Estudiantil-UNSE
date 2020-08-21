@@ -1,35 +1,37 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionIngreso;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst;
 
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapters;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoIngresoPolideportivo;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class IngresoPolideportivoActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionReservasInstActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    UsuariosAdapters mAdapter;
-    ArrayList<Usuario> mUsuarios;
+    OpcionesAdapter mAdapter;
+    ArrayList<Opciones> mOpciones;
     ImageView imgIcono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingreso_polideportivo);
+        setContentView(R.layout.activity_gestion_reservas_inst);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -53,21 +55,24 @@ public class IngresoPolideportivoActivity extends AppCompatActivity implements V
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Item: "+mUsuarios.get(position).getNombre());
-                DialogoIngresoPolideportivo dialogoIngresoPolideportivo = new DialogoIngresoPolideportivo();
-                dialogoIngresoPolideportivo.loadDataFromUser(mUsuarios.get(position));
-                dialogoIngresoPolideportivo.show(getSupportFragmentManager(),"dialog_ingreso");
+                if(position == 0) {
+                    Intent i = new Intent(getApplicationContext(), AdministrarReservasActivity.class);
+                    startActivity(i);
+                }
             }
         });
         imgIcono.setOnClickListener(this);
     }
 
     private void loadData() {
-        mUsuarios = new ArrayList<>();
+        mOpciones = new ArrayList<>();
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,0,"Buscar reserva",R.drawable.ic_buscar, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1, "Ver reservas del dia",R.drawable.ic_reservas_dia, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Confirmar reserva", R.drawable.ic_confirmar_reserva, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new UsuariosAdapters(mUsuarios, getApplicationContext());
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

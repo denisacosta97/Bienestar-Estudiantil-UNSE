@@ -21,8 +21,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorPrimary"
                 android:text="Nombre del Archivo" />
 
@@ -41,7 +42,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_black"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:text="Área" />
@@ -57,8 +59,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorPrimary"
                 android:text="Disponibilidad" />
 
@@ -88,6 +91,7 @@
                         android:text="ACTIVADO"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         android:textColor="@color/colorWhite" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -99,18 +103,17 @@
                         android:id="@+id/switchCred" />
                 </LinearLayout>
 
-
             </LinearLayout>
 
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorPrimary"
                 android:text="Elegir archivo" />
-
 
             <LinearLayout
                 android:id="@+id/latDatos"
@@ -134,8 +137,9 @@
                     android:layout_height="wrap_content"
                     android:text="Selecciona aquí para elegir un archivo"
                     android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:gravity="center" />
 
             </LinearLayout>
@@ -158,8 +162,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         android:textColor="@color/colorPrimary"
                         android:text="Nombre del Archivo" />
 
@@ -171,9 +176,10 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorGreyDark"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/blackTextColor"
                         android:text="jejejeej.rgergerrgregrgreregrergerpdf" />
 
                 </LinearLayout>
@@ -191,8 +197,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         android:textColor="@color/colorPrimary"
                         android:text="Tamaño del Archivo" />
 
@@ -204,9 +211,10 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textStyle="bold"
-                        android:textColor="@color/colorGreyDark"
+                        android:textColor="@color/blackTextColor"
                         android:text=" 0000 KB" />
 
                 </LinearLayout>
@@ -224,8 +232,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_black"
                         android:textColor="@color/colorPrimary"
                         android:text="Extensión del Archivo" />
 
@@ -237,8 +246,9 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textColor="@color/colorGreyDark"
                         android:text="PDF" />
 
@@ -257,10 +267,11 @@
                     android:id="@+id/btnAceptar"
                     android:layout_marginTop="10dp"
                     android:padding="16sp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_border"
                     android:text="GUARDAR"
+                    android:fontFamily="@font/montserrat_black"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -274,28 +285,19 @@
                     android:id="@+id/btnVer"
                     android:layout_marginTop="10dp"
                     android:padding="16sp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_border"
                     android:text="VER ARCHIVO"
+                    android:fontFamily="@font/montserrat_black"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
             </LinearLayout>
-
-
-
-
-
-
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-
 
 </androidx.core.widget.NestedScrollView>

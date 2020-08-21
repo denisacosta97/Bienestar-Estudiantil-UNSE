@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirmar Regularidad"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -47,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="17sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:text="Para añadir una regularidad, ingrese el año de la misma" />
 
@@ -58,6 +60,8 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:hint="Año"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/blackTextColor"
                 android:inputType="number"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp" />
@@ -73,9 +77,10 @@
 
                 <Button
                     android:id="@+id/btnAceptar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="AÑADIR"
+                    android:fontFamily="@font/montserrat_black"
                     android:background="@drawable/button_border"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
@@ -90,8 +95,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

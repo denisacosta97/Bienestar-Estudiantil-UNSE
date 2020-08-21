@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Aquí puedes visualizar las gestiones que tienes habilitadas"
             android:textSize="18sp"
+            android:textColor="@color/blackTextColor"
             android:fontFamily="@font/montserrat_regular"/>
 
         <androidx.recyclerview.widget.RecyclerView

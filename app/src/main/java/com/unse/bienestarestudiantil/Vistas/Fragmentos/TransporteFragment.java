@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.Fragment;
+
+import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.cardview.widget.CardView;
@@ -196,9 +198,25 @@ public class TransporteFragment extends Fragment implements View.OnClickListener
                 getServicios();
                 break;
             case R.id.cardScanner:
-                scanQR();
+                int gps = checkGPS();
+                if(gps == 1){
+                    scanQR();
+                } else
+                    Toast.makeText(mContext, "GPS deshabilitado", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private int checkGPS() {
+        int gps = -1;
+        final LocationManager manager = (LocationManager)getContext().getSystemService(Context.LOCATION_SERVICE );
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            gps = 0;
+        }
+        else {
+            gps = 1;
+        }
+        return gps;
     }
 
     public void scanQR() {

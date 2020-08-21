@@ -29,6 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Info Inscripcion"
+                    android:fontFamily="@font/montserrat_black"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -49,6 +50,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_black"
                     android:text="Inscripcion #1/10" />
 
                 <LinearLayout
@@ -64,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="@color/colorGrey2"
+                        android:textColor="@color/blackTextColor"
                         android:textStyle="bold"
                         android:text="Año:"
                         android:textSize="14sp"
@@ -79,6 +81,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorTextDefault"
                         android:padding="10dp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:background="@color/transparente" />
                 </LinearLayout>
 
@@ -95,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="@color/colorGrey2"
+                        android:textColor="@color/blackTextColor"
                         android:textStyle="bold"
                         android:text="Fecha \Registro:"
                         android:textSize="14sp"
@@ -110,6 +113,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/colorTextDefault"
                         android:padding="10dp"
+                        android:fontFamily="@font/montserrat_regular"
                         android:background="@color/transparente" />
                 </LinearLayout>
 
@@ -119,8 +123,11 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:textColor="@color/blackTextColor"
+                    android:fontFamily="@font/montserrat_black"
                     android:text="Estado" />
 
 
@@ -160,6 +167,7 @@
                             android:text="ACTIVADO"
                             android:textSize="20sp"
                             android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_black"
                             android:textColor="@color/colorWhite" />
 
                         <androidx.appcompat.widget.SwitchCompat
@@ -184,10 +192,11 @@
 
                     <Button
                         android:id="@+id/btnAceptar"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="ACEPTAR"
                         android:padding="16dp"
+                        android:fontFamily="@font/montserrat_black"
                         android:background="@drawable/button_border"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"
@@ -196,8 +205,9 @@
                     <Button
                         android:layout_marginStart="10dp"
                         android:id="@+id/btnAct"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_black"
                         android:text="ACTUALIZAR"
                         android:padding="16dp"
                         android:background="@drawable/button_border"
@@ -213,12 +223,8 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-
-
 
 </androidx.cardview.widget.CardView>

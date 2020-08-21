@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Usuario"
+            android:fontFamily="@font/montserrat_black"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:background="@drawable/back_spinner"
+            android:id="@+id/txtPop"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_height="45dp"
+            android:text="Seleccione una opción"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:visibility="gone"
+            android:id="@+id/spineer"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnRemoveMay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_remove" />
+
+                <TextView
+                    android:id="@+id/txtCantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="50"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnAddMay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textColor="@color/colorGreen"
+                    android:gravity="center"
+                    android:id="@+id/txtPrecio"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:text="$ 120"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mantener presionado para borrar."
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/blackTextColor"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

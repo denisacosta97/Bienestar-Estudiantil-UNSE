@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst;
 
 import android.content.pm.ActivityInfo;
 import androidx.appcompat.app.AppCompatActivity;

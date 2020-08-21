@@ -23,15 +23,6 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Aquí podrás realizar las reservas de la cancha de fútbol 11 por hora como también las reservas del SUM y los quinchos."
-                    android:textSize="14sp"
-                    android:fontFamily="@font/montserrat_regular"/>
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_two"
                     android:layout_width="match_parent"

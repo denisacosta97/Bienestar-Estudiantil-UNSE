@@ -24,7 +24,7 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="¿Qué día te es más cómodo?"
+                android:text="¿Qué día prefieres?"
                 android:fontFamily="@font/montserrat_black"/>
 
             <LinearLayout

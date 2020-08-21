@@ -15,11 +15,13 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiberActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos.GestionArchivosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
@@ -71,6 +73,12 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                         break;
                     case 100:
                         startActivity(new Intent(getApplicationContext(), GestionGeneralDeportesActivity.class));
+                        break;
+                    case 200:
+                        startActivity(new Intent(getApplicationContext(), GestionPolideportivoActivity.class));
+                        break;
+                    case 500:
+                        startActivity(new Intent(getApplicationContext(), GestionCiberActivity.class));
                         break;
                     case 1000:
                         startActivity(new Intent(getApplicationContext(), GestionUsuariosActivity.class));

@@ -26,7 +26,6 @@
         <item
             android:id="@+id/item_ciber"
             android:icon="@drawable/ic_ciber"
-            android:visible="false"
             android:title="Ciber"/>
         <item
             android:id="@+id/item_transporte"

@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Inicio"
                 android:textStyle="bold"
                 android:textSize="15sp" />

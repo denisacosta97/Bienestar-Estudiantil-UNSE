@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/toolbar_trans" />
+
+            <TextView
+                android:id="@+id/tv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="Nueva impresión"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="30sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DNI"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtDni"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad de páginas"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtCantPag"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtPrecio"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number|textCapWords"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descripción"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="textCapWords|text"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dejar vacío en caso de no ser necesaria una descripción."
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="12dp"
+                    android:textColor="@color/blackTextColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="Cancelar"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_border"
+                    android:text="Guardar"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

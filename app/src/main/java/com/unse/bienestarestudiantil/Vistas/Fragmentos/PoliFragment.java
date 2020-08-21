@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.EspaciosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst.EspaciosActivity;
 
 public class PoliFragment extends Fragment {
 
     View view;
-    Button btnReservas;
+    Button btnReservas, btnCanchas;
     CardView cardOne;
 
     @Override

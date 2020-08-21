@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="BECA COMEDOR - 2020"
-            android:textColor="@color/colorTextDefault"
+            android:textColor="@color/blackTextColor"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_black"/>
 

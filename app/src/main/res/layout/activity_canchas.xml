@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_trans" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Seleccione el turno:"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/blackTextColor"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDia"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:background="@drawable/button_border"
+                    android:text="DÍA"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <Button
+                    android:id="@+id/btnNoche"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:background="@drawable/button_border"
+                    android:text="NOCHE"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Seleccione la cancha:"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/blackTextColor"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerCancha"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Seleccione la hora:"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/blackTextColor"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerHora"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccione la fecha:"
+                android:textSize="16dp"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/blackTextColor"/>
+
+            <EditText
+                android:id="@+id/edtFecha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:longClickable="false"
+                android:maxLines="1"
+                android:inputType="textCapSentences|text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="BUSCAR"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

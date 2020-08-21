@@ -68,7 +68,7 @@
 
                 <Button
                     android:id="@+id/btnBuscar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="BUSCAR"
                     android:background="@drawable/button_border"
@@ -83,7 +83,7 @@
 
                 <Button
                     android:id="@+id/btnAceptar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="ACEPTAR"
                     android:background="@drawable/button_border"

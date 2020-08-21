@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.github.badoualy.datepicker.DatePickerTimeline;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.*;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.ConfirmarReservaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.*;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;

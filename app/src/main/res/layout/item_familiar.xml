@@ -8,7 +8,6 @@
     android:focusable="true"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
-
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -31,6 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NOMBRE DE USUARIO"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/blackTextColor"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -40,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DNI"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/blackTextColor"
                 android:textSize="16sp"
                 android:textStyle="italic" />
 
@@ -49,9 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha Nacimiento"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/blackTextColor"
                 android:textSize="16sp"
                 android:textStyle="italic" />
-
 
         </LinearLayout>
 
@@ -61,12 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:fontFamily="@font/montserrat_black"
+            android:textColor="@color/blackTextColor"
             android:textSize="20sp"
             android:text="RELACIÓN" />
 
     </LinearLayout>
-
-
-
 
 </androidx.cardview.widget.CardView>

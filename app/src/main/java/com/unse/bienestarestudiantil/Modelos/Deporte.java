@@ -180,21 +180,21 @@ public class Deporte implements Parcelable {
             String nombre, descripcion, diasEntreno, horario, lugar, lat, lon, fechaIngreso, nombreP, apellido;
             int valiz, idDeporte, idEntrenador;
 
-            nombre = object.getString("nombre");
+            idDeporte = Integer.parseInt(object.getString("iddeporte"));
+            nombre = object.getString("descripcion");
             descripcion = object.getString("descripcion");
-            diasEntreno = object.getString("diaEntreno");
+            diasEntreno = object.getString("diaentreno");
             horario = object.getString("horario");
             lugar = object.getString("lugar");
             lat = object.getString("lat");
             lon = object.getString("lon");
-            fechaIngreso = object.getString("fechaIngreso");
-            nombreP = object.getString("nombreP");
-            apellido = object.getString("apellido");
-
             valiz = Integer.parseInt(object.getString("validez"));
-            idDeporte = Integer.parseInt(object.getString("idDeporte"));
-            idEntrenador = Integer.parseInt(object.getString("idEntrenador"));
 
+            idEntrenador = Integer.parseInt(object.getString("identrenador"));
+            fechaIngreso = object.getString("fechaingreso");
+
+            nombreP = object.getString("nombre");
+            apellido = object.getString("apellido");
 
             Usuario usuario = new Usuario(idEntrenador, nombreP, apellido, 2);
 

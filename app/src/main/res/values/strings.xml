@@ -194,5 +194,7 @@
     <string name="servicioFinalizar">¿Esta seguro que desea finalizar el servicio?</string>
     <string name="servicioFinalizarAntiguo">Está a punto a finalizar un servicio previo</string>
 
+    <string name="reservaOk">¡Fecha y hora libre!\n¿Desea reservar?</string>
+
 </resources>
 

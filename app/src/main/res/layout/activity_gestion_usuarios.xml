@@ -60,12 +60,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Buscar"
+                            android:background="@null"
                             android:inputType="text"
                             android:singleLine="true"
                             android:fontFamily="@font/montserrat_regular"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                 </LinearLayout>
 

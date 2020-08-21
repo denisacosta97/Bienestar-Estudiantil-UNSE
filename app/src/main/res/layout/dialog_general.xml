@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="¡Advertencia!"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:fontFamily="@font/montserrat_black" />
 
         </LinearLayout>
@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
+                android:textColor="@color/blackTextColor"
                 android:text="¿Seguro que desea cerrar sesión?"
                 android:fontFamily="@font/montserrat_black"
                 android:gravity="center" />

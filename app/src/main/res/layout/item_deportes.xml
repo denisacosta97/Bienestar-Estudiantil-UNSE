@@ -46,7 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="FUTBOL SALA FEMENINO"
-                    android:textSize="28sp"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="26sp"
                     android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>

@@ -49,16 +49,6 @@
 
                 <TextView
                     android:gravity="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:id="@+id/txtDni"
-                    android:layout_width="match_parent"
-                    android:text="40657677"
-                    android:fontFamily="@font/montserrat_black"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:gravity="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:id="@+id/txtNombreUser"
@@ -69,7 +59,17 @@
 
                 <TextView
                     android:gravity="center"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:id="@+id/txtDni"
+                    android:layout_width="match_parent"
+                    android:text="40657677"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:gravity="center"
+                    android:textSize="16sp"
                     android:textStyle="italic"
                     android:id="@+id/txtCuerpo"
                     android:layout_width="match_parent"

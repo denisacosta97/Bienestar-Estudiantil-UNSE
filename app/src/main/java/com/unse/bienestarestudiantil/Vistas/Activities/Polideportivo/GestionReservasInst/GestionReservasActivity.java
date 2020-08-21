@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +15,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasCanchas.GestionReservasCanchasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -54,9 +55,13 @@ public class GestionReservasActivity extends AppCompatActivity implements View.O
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                if(position == 0) {
-                    Intent i = new Intent(getApplicationContext(), AdministrarReservasActivity.class);
-                    startActivity(i);
+                switch (position){
+                    case 0:
+                        startActivity(new Intent(getApplicationContext(), GestionReservasInstActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), GestionReservasCanchasActivity.class));
+                        break;
                 }
             }
         });
@@ -65,9 +70,8 @@ public class GestionReservasActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Buscar reserva",R.drawable.ic_buscar, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Ver reservas del dia",R.drawable.ic_reservas_dia, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Confirmar reserva", R.drawable.ic_confirmar_reserva, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,0,"Reservas de instalaciones",R.drawable.ic_quincho, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1, "Reservas de canchas",R.drawable.ic_cancha, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

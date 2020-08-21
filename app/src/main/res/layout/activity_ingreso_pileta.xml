@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_trans" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_ingreso" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="NUEVO INGRESO A PILETA"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DNI"
+                        android:fontFamily="@font/montserrat_black"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtDNI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:background="@drawable/edit_text_logreg"
+                        android:inputType="number"
+                        android:padding="10dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Tipo de Usuario"
+                        android:fontFamily="@font/montserrat_black"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:background="@drawable/back_spinner"
+                        android:id="@+id/spineer"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Tipo"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnDia"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.33"
+                            android:fontFamily="@font/montserrat_black"
+                            android:text="Día"
+                            android:textStyle="bold"
+                            android:layout_margin="5dp"
+                            android:textColor="@color/colorWhite"
+                            android:background="@drawable/button_border"/>
+
+                        <Button
+                            android:id="@+id/btnSemana"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.33"
+                            android:fontFamily="@font/montserrat_black"
+                            android:text="Semana"
+                            android:layout_margin="5dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:background="@drawable/button_border"/>
+
+                        <Button
+                            android:id="@+id/btnMes"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.33"
+                            android:fontFamily="@font/montserrat_black"
+                            android:layout_margin="5dp"
+                            android:text="Mes"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:background="@drawable/button_border"/>
+
+                    </LinearLayout>
+
+                    <CheckBox
+                        android:id="@+id/checkFamiliar"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="GRUPO FAMILAR"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:id="@+id/layoutAcompañantes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Acompañantes"
+                            android:fontFamily="@font/montserrat_black"
+                            android:textColor="@color/colorAccent"
+                            android:layout_marginTop="10dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/btnAñadir"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Añadir  "
+                                android:layout_marginLeft="10dp"
+                                android:fontFamily="@font/montserrat_black"
+                                android:drawableLeft="@drawable/ic_mas"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:background="@drawable/button_border" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <ImageButton
+                                        android:id="@+id/btnRemoveMay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="@color/colorAccent"
+                                        android:src="@drawable/ic_remove" />
+
+                                    <TextView
+                                        android:id="@+id/txtCantidadMay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:layout_margin="3dp"
+                                        android:text="50"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:id="@+id/btnAddMay"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="@color/colorAccent"
+                                        android:src="@drawable/ic_add" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/montserrat_black"
+                                    android:text="Mayores"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:weightSum="1">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <ImageButton
+                                        android:id="@+id/btnRemoveMen"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="@color/colorAccent"
+                                        android:src="@drawable/ic_remove" />
+
+                                    <TextView
+                                        android:id="@+id/txtCantidadMen"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="3dp"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:text="50"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:id="@+id/btnAddMen"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="@color/colorAccent"
+                                        android:src="@drawable/ic_add" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:gravity="center"
+                                    android:text="Menores"
+                                    android:fontFamily="@font/montserrat_black"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Mantener presionado para borrar."
+                                android:fontFamily="@font/montserrat_regular"
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:fontFamily="@font/montserrat_black"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:textColor="@color/colorMoney"
+                        android:textStyle="bold"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="$0" />
+
+                    <Button
+                        android:id="@+id/btnGuardar"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="GUARDAR"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:background="@drawable/corners_rounded_green"
+                        android:layout_margin="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="310dp"
+                    android:layout_height="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

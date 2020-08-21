@@ -45,6 +45,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:hint="AÑO"
+                android:fontFamily="@font/montserrat_regular"
                 android:inputType="number"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp" />
@@ -59,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="5dp"
                 android:id="@+id/txtAnio"
+                android:fontFamily="@font/montserrat_black"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
@@ -72,7 +74,7 @@
 
                 <Button
                     android:id="@+id/btnBuscar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="BUSCAR"
                     android:background="@drawable/button_border"
@@ -87,7 +89,7 @@
 
                 <Button
                     android:id="@+id/btnAceptar"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="ACEPTAR"
                     android:background="@drawable/button_border"
@@ -104,8 +106,6 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

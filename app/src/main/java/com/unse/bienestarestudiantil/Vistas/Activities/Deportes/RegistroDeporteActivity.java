@@ -275,7 +275,6 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
     }
 
-
     private void sendServer(String datos) {
         String URL = Utils.URL_DEPORTE_INSCRIPCION+datos;
 

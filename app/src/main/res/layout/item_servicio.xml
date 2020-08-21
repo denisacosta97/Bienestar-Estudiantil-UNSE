@@ -37,21 +37,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="UNSE - Parque Industrial"
-                android:textSize="17sp"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtPatente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="UTY 510"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtFechaIni"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="Fecha de Inicio: 2020-10-10 12:34:43"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
@@ -60,6 +66,8 @@
                 android:id="@+id/txtFechaFin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="Fecha de Fin: 2020-10-10 12:34:43"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
@@ -69,6 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ACTIVO"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_regular"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

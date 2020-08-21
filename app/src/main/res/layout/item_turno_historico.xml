@@ -62,6 +62,7 @@
                             android:layout_marginTop="5dp"
                             android:text="DNI: "
                             android:textSize="16sp"
+                            android:textColor="@color/blackTextColor"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -85,7 +86,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="Nombre: "
-                            android:textSize="12sp"
+                            android:textColor="@color/blackTextColor"
+                            android:textSize="16sp"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
@@ -109,6 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="Apellido: "
+                            android:textColor="@color/blackTextColor"
                             android:textSize="16sp"
                             android:fontFamily="@font/montserrat_black"/>
 

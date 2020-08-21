@@ -29,6 +29,7 @@ import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.RecorridoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -79,7 +80,7 @@ public class DeportesFragment extends Fragment {
     private void loadData() {
         mDeportes = new ArrayList<>();
         mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
-        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
         reciclerDeportes.setAdapter(mDeportesAdapter);
@@ -103,7 +104,7 @@ public class DeportesFragment extends Fragment {
         PreferenceManager manager = new PreferenceManager(getContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValue(Utils.IS_VISIT) ? 1 : 0;
-        String URL = String.format("%s?key=%s&id=%s", Utils.URL_DEPORTE_LISTA, key, id);
+        String URL = String.format("%s?key=%s&t=%s", Utils.URL_DEPORTE_LISTA, key, 2);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -221,7 +222,8 @@ public class DeportesFragment extends Fragment {
             }
 
         }
-        mDeportesAdapter.notifyDataSetChanged();
+        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
+        reciclerDeportes.setAdapter(mDeportesAdapter);
     }
 
 }

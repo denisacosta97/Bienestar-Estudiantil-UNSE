@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.Espacio;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.RequisitosReservasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.EspaciosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
@@ -32,7 +31,7 @@ import java.util.Calendar;
 
 public class ConfirmarReservaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView txtReserva;
+    TextView txtReserva, txtTotal;
     EditText date, time, txtQS;
     Button cancel, reservar, requisitos;
     ImageView imgFlecha;
@@ -111,6 +110,7 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
         mRecyclerView = findViewById(R.id.recycler);
         imgFlecha = findViewById(R.id.imgFlecha);
         requisitos = findViewById(R.id.btnRequisitos);
+        txtTotal = findViewById(R.id.txtTotal);
     }
 
     private void setToolbar() {
@@ -126,6 +126,21 @@ public class ConfirmarReservaActivity extends AppCompatActivity implements View.
             s.setSeleccionado(false);
         }
         models.get(position).setSeleccionado(true);
+
+        switch (position){
+            case 0:
+                txtTotal.setText("$4200");
+                break;
+            case 1:
+                txtTotal.setText("$2000");
+                break;
+            case 2:
+                txtTotal.setText("$3500");
+                break;
+            case 3:
+                txtTotal.setText("$3200");
+                break;
+        }
     }
 
     private void showDateDialog() {

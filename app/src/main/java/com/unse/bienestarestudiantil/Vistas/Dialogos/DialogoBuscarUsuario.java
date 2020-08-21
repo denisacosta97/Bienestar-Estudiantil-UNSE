@@ -142,10 +142,14 @@ public class DialogoBuscarUsuario extends DialogFragment {
     }
 
     private boolean isAdd(String dni) {
-        for (Usuario usuario : mList) {
-            if (dni.equals(String.valueOf(usuario.getIdUsuario())))
-                return true;
+        if (mList != null){
+            for (Usuario usuario : mList) {
+                if (dni.equals(String.valueOf(usuario.getIdUsuario())))
+                    return true;
+            }
+            return false;
         }
+
         return false;
     }
 

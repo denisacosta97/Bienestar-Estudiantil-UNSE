@@ -102,6 +102,8 @@ public class Utils {
     public static final String SERVICIO = "servicio_info";
     public static final String PUNTO = "punto_info";
     public static final String COLECTIVO = "cole";
+    public static final String IMPRESION = "impresion";
+    public static final String CANCHA = "cancha";
     //Constantes para activities
     public static final long UPDATE_INTERVAL = 10000;
     public static final int PICK_IMAGE = 9090;
@@ -208,7 +210,7 @@ public class Utils {
     public static final String URL_DEPORTE_TEMPORADA = "http://" + IP + "/bienestar/deportes/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "http://" + IP + "/bienestar/deportes/registrar.php";
     public static final String URL_DEPORTE_CREDENCIAL = "http://" + IP + "/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAllDeportes.php";
+    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAll.php";
     public static final String URL_DEPORTE_BAJA = "http://" + IP + "/bienestar/deportes/actualizarDeporte.php";
     public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://" + IP + "/bienestar/deportes/getInscriptos.php";
     public static final String URL_INSCRIPCIONES_GENERALES = "http://" + IP + "/bienestar/beca/getInscripciones.php";
@@ -220,6 +222,13 @@ public class Utils {
     public static final String URL_PROFES = "http://" + IP + "/bienestar/deportes/getAllProfesores.php";
     public static final String URL_BECADOS = "http://" + IP + "/bienestar/beca/getAllBecados.php";
     public static final String URL_ASISTENCIA = "http://" + IP + "/bienestar/deportes/asistencia.php";
+
+    //POLIDEPORTIVO
+    public static final String URL_INGRESO_POLI = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPoli.php";
+    public static final String URL_INGRESO_PILE = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPileta.php";
+    public static final String URL_INGRESO_TEMPORADA = "http://" + IP + "/bienestar/polideportivo/pileta/getIngresosByTemporada.php";
+    public static final String URL_INGRESO_EMPLEADO = "http://" + IP + "/bienestar/polideportivo/pileta/getIngresosByEmpleado.php";
+
     //TORNEOS
     public static final String URL_TORNEO_CREDENCIAL = "http://" + IP + "/bienestar/deportes/torneo/getCredencial.php";
     public static final String URL_TORNEOS_LISTA = "http://" + IP + "/bienestar/deportes/torneo/getAllTorneos.php";
@@ -229,6 +238,10 @@ public class Utils {
 
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
+
+    //CIBER
+    public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";
+
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "http://" + IP + "/bienestar/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "http://" + IP + "/bienestar/archivos/";
@@ -269,6 +282,7 @@ public class Utils {
     public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/updatePosition.php";
 
 
+
     public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
@@ -303,6 +317,17 @@ public class Utils {
             "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
+
+    public static String[] categorias = {"Seleccione una opción...", "Alumno", "Profesor", "Nodocente", "Egresado",
+            "Particular", "Afiliado", "Jubilado", "Otro"};
+
+    public static String[] horaCanchasDía = {"10:00", "11:00", "12:00", "13:00", "14:00", "15:00",
+            "16:00", "17:00", "18:00"};
+
+    public static String[] horaCanchasNoche = {"19:00", "20:00", "21:00", "22:00", "23:00", "00:00",
+            "01:00", "02:00"};
+
+    public static String[] canchas = {"Fútbol 11", "Fútbol 8", "Fútbol 5", "Futsal"};
 
     public static String dataAlumno = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&car=%s&fac=%s&anio=%s&leg=%s" +
@@ -1088,5 +1113,66 @@ public class Utils {
         } else return "NO FECHA";
 
     }
+
+    public static String getYear(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int value = cal.get(Calendar.YEAR);
+
+        return String.valueOf(value);
+    }
+
+    public static String getDay(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int value = cal.get(Calendar.DAY_OF_MONTH);
+
+        return String.valueOf(value);
+    }
+
+
+    public static String getMes(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        switch (cal.get(Calendar.MONTH)) {
+            case Calendar.JANUARY:
+                return "Enero";
+            case Calendar.FEBRUARY:
+                return "Febrero";
+            case Calendar.MARCH:
+                return "Marzo";
+            case Calendar.APRIL:
+                return "Abril";
+            case Calendar.MAY:
+                return "Mayo";
+            case Calendar.JUNE:
+                return "Junio";
+            case Calendar.JULY:
+                return "Julio";
+            case Calendar.AUGUST:
+                return "Agosto";
+            case Calendar.SEPTEMBER:
+                return "Septiembre";
+            case Calendar.OCTOBER:
+                return "Octubre";
+            case Calendar.NOVEMBER:
+                return "Noviembre";
+            case Calendar.DECEMBER:
+                return "Diciembre";
+        }
+
+        return "";
+    }
+
+    public static String getFechaOnlyDay(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String value = cal.get(Calendar.DAY_OF_MONTH) + "/"
+                + (cal.get(Calendar.MONTH) + 1) + "/" +
+                cal.get(Calendar.YEAR);
+
+        return value;
+    }
+
 }
 

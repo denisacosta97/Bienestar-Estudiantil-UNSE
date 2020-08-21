@@ -38,8 +38,8 @@
                     android:layout_height="wrap_content"
                     android:text="REGULARIDAD 2020"
                     android:gravity="center"
-                    android:textColor="@color/colorTextDefault"
-                    android:textSize="14sp"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_black"/>
 
@@ -49,8 +49,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Viernes xx dee fg rrr"
-                    android:textColor="@color/colorTextDefault"
-                    android:textSize="13sp"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_regular"/>
 

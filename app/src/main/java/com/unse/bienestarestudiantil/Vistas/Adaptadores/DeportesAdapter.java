@@ -41,9 +41,6 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
         else
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deportes, parent, false);
 
-        FontChangeUtil fontChanger = new FontChangeUtil(context.getAssets(), "Montserrat-Regular.ttf");
-        fontChanger.replaceFonts((ViewGroup) view);
-
         return new EventosViewHolder(view);
     }
 
@@ -52,7 +49,6 @@ public class DeportesAdapter extends RecyclerView.Adapter<DeportesAdapter.Evento
         Deporte depo = deport.get(position);
         holder.mIcon.setImageResource(iconDeporte[depo.getIdDep()]);
         deport.get(position).setIconDeporte(iconDeporte[depo.getIdDep()]);
-
 
         holder.mNameDeport.setText(depo.getName());
     }

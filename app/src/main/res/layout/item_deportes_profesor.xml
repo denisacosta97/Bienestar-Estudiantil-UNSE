@@ -46,6 +46,7 @@
                     android:id="@+id/txtNameDeporte"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/blackTextColor"
                     android:text="FUTBOL SALA FEMENINO"
                     android:textSize="18sp"
                     android:fontFamily="@font/montserrat_black"/>

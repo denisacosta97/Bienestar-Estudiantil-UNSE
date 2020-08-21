@@ -134,6 +134,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="3dp"
                                 android:text="50"
+                                android:fontFamily="@font/montserrat_black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -184,6 +185,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="3dp"
                                 android:text="50"
+                                android:fontFamily="@font/montserrat_black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 

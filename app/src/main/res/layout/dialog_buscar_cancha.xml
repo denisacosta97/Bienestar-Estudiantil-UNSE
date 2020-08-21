@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="BUSCAR RESERVA"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linlayEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingrese el DNI"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtDniImput"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <Button
+                    android:id="@+id/btnBuscar"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/button_border"
+                    android:layout_gravity="center"
+                    android:text="BUSCAR"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayInfo"
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtNomAp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="OLLEA ALLENDE NICOLE MARIEL"
+                            android:textColor="@color/blackTextColor"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <TextView
+                            android:id="@+id/txtDni"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="40657677"
+                            android:textColor="@color/blackTextColor"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_regular"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reservado para las: "
+                        android:textColor="@color/blackTextColor"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <TextView
+                        android:id="@+id/txtHora"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="20:00hs"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blackTextColor"
+                        android:text="Fecha: "
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <TextView
+                        android:id="@+id/txtFecha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="20/08/20"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blackTextColor"
+                        android:text="Cancha: "
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <TextView
+                        android:id="@+id/txtCancha"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fútbol 5"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAceptar"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/button_border"
+                    android:layout_gravity="center"
+                    android:text="ACEPTAR"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayNo"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_error" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="NO EXISTE UNA RESERVA PARA EL DNI INGRESADO"
+                    android:textColor="@color/blackTextColor"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="310dp"
+                android:layout_height="8dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

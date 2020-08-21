@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_ingreso" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="INGRESO POLIDEPORTIVO"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linlayEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingrese el DNI"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtDniImput"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad de personas"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <EditText
+                    android:id="@+id/edtCant"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_text_logreg"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Seleccione la categoría"
+                    android:textColor="@color/blackTextColor"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+                <Spinner
+                    android:id="@+id/spineer"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:background="@drawable/back_spinner"
+                    android:layout_marginTop="10dp"/>
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_border"
+                    android:layout_gravity="center"
+                    android:text="GUARDAR"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_black"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="310dp"
+                android:layout_height="8dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

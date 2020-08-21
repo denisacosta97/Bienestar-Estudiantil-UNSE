@@ -45,6 +45,7 @@
                     android:id="@+id/txtNameTorneo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/blackTextColor"
                     android:text="TORNEO JUR"
                     android:textSize="28sp"
                     android:fontFamily="@font/montserrat_black"/>

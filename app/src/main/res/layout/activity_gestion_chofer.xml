@@ -41,6 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textColor="@color/blackTextColor"
                         android:textSize="20sp"
                         android:fontFamily="@font/montserrat_black"
                         android:text="No existen choferes actualmente" />
@@ -67,9 +68,6 @@
 
         </RelativeLayout>
 
-
     </LinearLayout>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

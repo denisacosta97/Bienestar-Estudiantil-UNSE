@@ -46,8 +46,9 @@
                     android:id="@+id/txtNameBeca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/blackTextColor"
                     android:text="BECA COMEDOR"
-                    android:textSize="28sp"
+                    android:textSize="26sp"
                     android:fontFamily="@font/montserrat_black"/>
 
             </LinearLayout>

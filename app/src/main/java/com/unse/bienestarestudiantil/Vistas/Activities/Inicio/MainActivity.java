@@ -1,10 +1,14 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
@@ -12,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -52,6 +58,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.TermsActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
+import com.unse.bienestarestudiantil.Vistas.Fragmentos.CiberFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
@@ -61,7 +68,10 @@ import com.unse.bienestarestudiantil.Vistas.Fragmentos.TransporteFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
     //RecyclerView mRecyclerView;
     //LinearLayout mLayout;
     //boolean isOpen = false;
+    Double lat, lon;
+    public Boolean isReady = false, qrCiber = false;
+    String pat = "", idR = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -298,26 +311,30 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-
     private void seleccionarItem(MenuItem itemDrawer/*int itemDrawer, int position*/) {
         Fragment fragmentoGenerico = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (itemDrawer.getItemId()) {
+            case R.id.item_becas:
+                fragmentoGenerico = new BecasFragment();
+                break;
             case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
                 break;
             case R.id.item_poli:
                 fragmentoGenerico = new PoliFragment();
                 break;
+            case R.id.item_ciber:
+                fragmentoGenerico = new CiberFragment();
+                ((CiberFragment) fragmentoGenerico).setActivity(MainActivity.this);
+                break;
             case R.id.item_deporte:
                 fragmentoGenerico = new DeportesFragment();
                 ((DeportesFragment) fragmentoGenerico).setContext(getApplicationContext());
                 ((DeportesFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
                 break;
-            case R.id.item_becas:
-                fragmentoGenerico = new BecasFragment();
-                break;
+
             case R.id.item_transporte:
                 fragmentoGenerico = new TransporteFragment();
                 ((TransporteFragment) fragmentoGenerico).setContext(getApplicationContext());
@@ -437,25 +454,106 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
                 String contenido = intentIntegrator.getContents();
-                decodeQR(contenido);
+                if (qrCiber)
+                    decordeQRCiber(contenido);
+                else
+                    decodeQR(contenido);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void decodeQR(String contenido) {
-        String pat = "ABC 123";
-        String idR = "1";
-        //idUsuario, patente, fechalocal, lat, long, idRecorrido, dia, mes, anio
+    private void decordeQRCiber(String contenido) {
+        String code = "";
+        Pattern pattern = Pattern.compile("MAQ-[0-9]+");
+        Matcher matcher = pattern.matcher(contenido);
+        if(matcher.find()){
+            code = matcher.group();
+        }
+        registrarUso(code);
     }
 
-    private void changeEstado(String idReserva, String dni) {
+    private void registrarUso(String code) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&ir=%s&ie=%s&e=%s&d=%s", Utils.URL_PASAJERO_SERVICIO, id, key, idReserva, id, 3, dni);
-        StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
+        //CAMBIAR URL EN UTILS
+        String URL = String.format("%s?idU=%s&key=%s&co=%s", Utils.URL_REGISTRAR_INGRESO, id, key, code);
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaActualizar(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showCustomToast(MainActivity.this, getApplicationContext(),
+                        getString(R.string.servidorOff), R.drawable.ic_error);
+                dialog.dismiss();
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void decodeQR(String contenido) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9 ]+");
+        Matcher matcher = pattern.matcher(contenido);
+        if(matcher.find()){
+            pat = matcher.group();
+        }
+
+        pattern = Pattern.compile("-[0-9]+");
+        matcher = pattern.matcher(contenido);
+        if(matcher.find()){
+            idR = matcher.group();
+            idR = idR.substring(1);
+        }
+        getLatLong();
+        isReady = true;
+    }
+
+    private void getLatLong() {
+        Criteria criteria = new Criteria();
+        LocationManager locationManager = (LocationManager) Objects.requireNonNull(getApplicationContext()).getSystemService(LOCATION_SERVICE);
+        //VERIFICAR 23/07
+        String provider = locationManager != null ? locationManager.getBestProvider(criteria, true) : null;
+        if (provider != null) {
+            Location location = locationManager.getLastKnownLocation(provider);
+            lat = location.getLatitude();
+            lon = location.getLongitude();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isReady){
+            isReady = false;
+            changeEstado(pat, idR);
+        }
+    }
+
+    private void changeEstado(String pat, String idR) {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        Date date = new Date(System.currentTimeMillis());
+        String fecha = Utils.getFechaName(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        int mes = calendar.get(Calendar.MONTH)+1;
+        int anio = calendar.get(Calendar.YEAR);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&pat=%s&fl=%s&la=%s&lo=%s&ir=%s&d=%s&m=%s&a=%s",
+                Utils.URL_PASAJERO_SERVICIO, id, key, id, pat, fecha, lat, lon, idR, dia, mes, anio);
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 procesarRespuestaActualizar(response);
@@ -489,6 +587,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 1:
                     //Exito
+                    Toast.makeText(this, "Listo prro", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
                     Utils.showCustomToast(MainActivity.this, getApplicationContext(),

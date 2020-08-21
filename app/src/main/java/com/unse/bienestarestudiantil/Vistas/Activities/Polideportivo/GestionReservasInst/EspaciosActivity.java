@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas;
+package com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.CalendarReservasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.CanchasActivity;
 
 public class EspaciosActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -55,6 +56,7 @@ public class EspaciosActivity extends AppCompatActivity implements View.OnClickL
             case R.id.layCancha:
 //                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_CANCHA);
 //                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), CanchasActivity.class));
                 break;
             case R.id.laySalon:
 //                i.putExtra(Utils.DATA_RESERVA, Utils.TIPO_QUINCHO);

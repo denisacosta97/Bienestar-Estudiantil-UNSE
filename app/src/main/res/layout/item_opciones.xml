@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:text="GESTION DE CLIENTES"
+            android:text="GESTIÓN DE CLIENTES"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_black"/>

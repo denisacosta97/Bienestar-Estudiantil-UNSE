@@ -17,7 +17,7 @@ import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionIngreso.GestionIngresoActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.GestionReservasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst.GestionReservasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -48,9 +48,7 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-
     }
-
 
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
@@ -79,7 +77,7 @@ public class GestionPolideportivoActivity extends AppCompatActivity implements V
         mOpciones = new ArrayList<>();
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Gestión de Finanzas",R.drawable.ic_finanzas, R.color.colorFCEyT ));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Gestión de Reservas",R.drawable.ic_reservas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Ingreso", R.drawable.ic_ingreso, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Pileta", R.drawable.ic_ingreso, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -12,6 +12,7 @@
 
         <ImageView
             android:id="@+id/image"
+            android:layout_gravity="center"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_keyboard_arrow" />
@@ -23,6 +24,7 @@
             android:layout_marginStart="10dp"
             android:layout_gravity="center"
             android:text="List Item"
+            android:textColor="@color/blackTextColor"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_black" />
@@ -30,6 +32,7 @@
         <CheckBox
             android:layout_marginStart="15dp"
             android:id="@+id/checkbox"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

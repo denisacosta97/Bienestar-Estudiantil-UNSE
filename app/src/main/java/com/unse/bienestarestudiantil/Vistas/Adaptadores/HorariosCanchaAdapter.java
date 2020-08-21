@@ -110,7 +110,6 @@ public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAd
             super(itemView);
 
             imgIcon = itemView.findViewById(R.id.imgIcon);
-            imgIconPelota = itemView.findViewById(R.id.imgIconPelota);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             txtHorario = itemView.findViewById(R.id.txtDescripcion);
             mCardView = itemView.findViewById(R.id.card);

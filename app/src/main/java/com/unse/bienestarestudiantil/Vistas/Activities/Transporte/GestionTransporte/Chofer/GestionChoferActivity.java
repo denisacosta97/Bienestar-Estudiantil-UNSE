@@ -147,14 +147,10 @@ public class GestionChoferActivity extends AppCompatActivity implements View.OnC
     private void loadInfoChofer(JSONObject jsonObject) {
         if (jsonObject.has("mensaje") && jsonObject.has("datos") &&
                 jsonObject.has("servicios")) {
-
-
             Chofer chofer = Chofer.mapper(jsonObject, Chofer.COMPLETE);
             Intent intent = new Intent(getApplicationContext(), PerfilChoferActivity.class);
             intent.putExtra(Utils.USER_NAME, chofer);
             startActivity(intent);
-
-
         }
 
     }
@@ -276,7 +272,6 @@ public class GestionChoferActivity extends AppCompatActivity implements View.OnC
             case R.id.fabAdd:
                 openDialog();
                 break;
-
         }
     }
 

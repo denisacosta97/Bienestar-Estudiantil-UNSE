@@ -14,7 +14,6 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Instalacion;
 import com.unse.bienestarestudiantil.Modelos.Reserva;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservas.ConfirmarReservaActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.InstalacionesAdapter;
 
 import java.util.ArrayList;

@@ -22,6 +22,7 @@
             android:layout_height="match_parent"
             android:background="@color/colorRed"
             android:gravity="center"
+            android:fontFamily="@font/montserrat_black"
             android:padding="10dp"
             android:text="PDF"
             android:textColor="@color/colorWhite"
@@ -56,11 +57,10 @@
 
         </LinearLayout>
 
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/blackTextColor"
                 android:gravity="center"
                 android:text="Descargar"
                 android:textSize="14sp"

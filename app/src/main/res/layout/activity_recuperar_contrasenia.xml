@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña"
+                android:text="Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña."
                 android:padding="10dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
