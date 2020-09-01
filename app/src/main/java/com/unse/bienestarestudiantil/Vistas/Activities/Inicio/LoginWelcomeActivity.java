@@ -23,7 +23,6 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
 
     Button mLogin, mInvitado;
     TextView txtWelcome;
-    LinearLayout layoutFondo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +37,6 @@ public class LoginWelcomeActivity extends AppCompatActivity implements View.OnCl
 
             setContentView(R.layout.activity_login_welcome);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-            layoutFondo = findViewById(R.id.backgroundwelcome);
-
-            Glide.with(this).load(R.drawable.img_unse2)
-                    .into(new SimpleTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                            layoutFondo.setBackground(resource);
-                        }
-                    });
 
             loadViews();
 

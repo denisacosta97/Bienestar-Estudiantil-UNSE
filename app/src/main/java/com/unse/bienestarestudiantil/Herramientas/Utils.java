@@ -228,6 +228,10 @@ public class Utils {
     public static final String URL_INGRESO_PILE = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPileta.php";
     public static final String URL_INGRESO_TEMPORADA = "http://" + IP + "/bienestar/polideportivo/pileta/getIngresosByTemporada.php";
     public static final String URL_INGRESO_EMPLEADO = "http://" + IP + "/bienestar/polideportivo/pileta/getIngresosByEmpleado.php";
+    public static final String URL_RESERVAS_ESPACIOS_FECHA = "http://" + IP + "/bienestar/polideportivo/espacio/getReservas.php";
+    public static final String URL_RESERVA_ESPACIOS = "http://" + IP + "/bienestar/polideportivo/espacio/getReserva.php";
+    public static final String URL_RESERVAS_ESPACIOS_ID = "http://" + IP + "/bienestar/polideportivo/espacio/getReservaByUser.php";
+
 
     //TORNEOS
     public static final String URL_TORNEO_CREDENCIAL = "http://" + IP + "/bienestar/deportes/torneo/getCredencial.php";
@@ -281,6 +285,8 @@ public class Utils {
     public static final String URL_PASAJERO_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/registrarPasajero.php";
     public static final String URL_ACTUALIZAR_SERVICIO = "http://" + IP + "/bienestar/transporte/servicio/updatePosition.php";
 
+    //NOTICIAS
+    public static final String URL_ADD_NOTICIA = "http://sis.bienestar.unse.edu.ar/api/general/noticia/insertar.php";
 
 
     public static final long SECONS_TIMER = 15000;

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Vistas.Activities.TorneosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLay"
+            layout="@layout/toolbar_trans"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Ingrese una fecha"
+            android:layout_margin="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/blackTextColor"
+            android:fontFamily="@font/montserrat_black"/>
+
+        <EditText
+            android:id="@+id/edtFecha"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text_logreg"
+            android:clickable="true"
+            android:focusable="false"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <Button
+            android:id="@+id/btnBuscar"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_border"
+            android:layout_gravity="center"
+            android:text="BUSCAR"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_black"/>
+
+        <LinearLayout
+            android:id="@+id/linlayListado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Listado de reservas del mes"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/linlayNo"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_error" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="NO EXISTEN RESERVAS EN EL MES SELECCIONADO"
+                android:textColor="@color/blackTextColor"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

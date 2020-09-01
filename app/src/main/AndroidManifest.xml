@@ -21,7 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresosHistoricosActivity"></activity>
+        <activity android:name=".Vistas.Activities.Gestion.GestionNoticias.ListadoNoticiasActivity"></activity>
+        <activity android:name=".Vistas.Activities.Gestion.GestionNoticias.AddNoticiaActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionNoticiasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.InfoReservaInstActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.ListadoReservasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.ListadoIngresosPiletaActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.IngresoPiletaActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.ReservasCanchasActivity" />
@@ -82,7 +87,7 @@
             android:label="Gestión de archivos" />
         <activity android:name=".Vistas.Activities.TorneosActivity" />
         <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.AdministrarReservasActivity" />
+        <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.DialogBuscarReservas" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.DialogIngresoPolideportivo" />
         <activity android:name=".Vistas.BarcodeActivity" />
         <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity" />
@@ -102,7 +107,7 @@
             android:name=".Vistas.Activities.AsistenciaActivity"
             android:label="Asistencia" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.ReservaEspacioActivity"
+            android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity"
             android:label="Realizar Reserva" />
         <activity android:name=".Vistas.Activities.Perfil.TiposCredencialesActivity" />
         <activity
@@ -119,7 +124,7 @@
         <activity android:name=".Vistas.Activities.Inicio.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.EspaciosActivity"
+            android:name=".Vistas.Activities.Polideportivo.EspaciosActivity"
             android:label="Espacios Disponibles" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"

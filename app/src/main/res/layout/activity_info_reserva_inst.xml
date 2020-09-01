@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar_trans"/>
+
+        <ImageView
+            android:id="@+id/imgvIcon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:translationY="10dp"
+            android:elevation="4sp"
+            android:src="@drawable/ic_reservas" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="2sp"
+            app:cardCornerRadius="10dp"
+            android:translationY="-60dp"
+            android:outlineAmbientShadowColor="@color/colorGrey2"
+            android:outlineSpotShadowColor="@color/colorGrey2"
+            card_view:backgroundTint="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtIdReserva"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="15"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginTop="45dp"
+                        android:textSize="30sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Espacio: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtEspacio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="Quincho gris"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha evento: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaEv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="12/11/2019"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fecha reserva: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaRes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="10/11/19"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hora inicio: "
+                                    android:textColor="@color/blackTextColor"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                                <TextView
+                                    android:id="@+id/txtHoraIni"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:text="20:00"
+                                    android:fontFamily="@font/montserrat_regular"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hora fin: "
+                                    android:textColor="@color/blackTextColor"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                                <TextView
+                                    android:id="@+id/txtHoraFin"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:text="06:00"
+                                    android:fontFamily="@font/montserrat_regular"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Estado: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtEstado"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="RESERVADO"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Precio: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtPrecio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorMoney"
+                                android:textSize="16sp"
+                                android:text="$3000"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Datos del cliente"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_marginTop="10dp"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nombre y apellido: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtNomAp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="Nicole Mariel Olea Allende"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DNI: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtDni"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="39986583"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Categoría: "
+                                android:textColor="@color/blackTextColor"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtCategoria"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="Nodocente"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cuotas"
+                        android:textColor="@color/blackTextColor"
+                        android:layout_marginTop="10dp"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/btnAddCuota"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AÑADIR CUOTA "
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/montserrat_black"
+                            android:drawableLeft="@drawable/ic_mas"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/linlayNo"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_error"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No registra pagos de cuotas."
+                            android:textColor="@color/blackTextColor"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnCancelar"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="18sp"
+                            android:background="@drawable/button_border"
+                            android:text="CANCELAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <Button
+                            android:id="@+id/btnConfirmar"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="18sp"
+                            android:background="@drawable/button_border"
+                            android:text="CONFIRMAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

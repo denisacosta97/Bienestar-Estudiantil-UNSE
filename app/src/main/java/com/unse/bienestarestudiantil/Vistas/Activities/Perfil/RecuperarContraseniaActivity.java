@@ -32,7 +32,6 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
     Button btnEnviar;
     ImageView imgBack;
     EditText edtxMail, edtDNI;
-    LinearLayout layoutFondo;
     TextView txtTengoClave;
 
     DialogoProcesamiento dialog;
@@ -44,16 +43,6 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
-
-       /* layoutFondo = findViewById(R.id.backgroundwelcome);
-
-        Glide.with(this).load(R.drawable.img_unse2)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        layoutFondo.setBackground(resource);
-                    }
-                });*/
 
         loadViews();
 

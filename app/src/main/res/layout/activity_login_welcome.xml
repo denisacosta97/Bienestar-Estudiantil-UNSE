@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/backgroundwelcome"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Vistas.Activities.Inicio.LoginWelcomeActivity"
+    android:background="@drawable/img_unse2"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,27 +14,34 @@
         android:background="@color/black_alpha_40"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtWelcome"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¡Buenas noches!"
-            android:textColor="@color/whiteTextColor"
-            android:textSize="40sp"
-            android:gravity="center"
-            android:layout_marginTop="18sp"
-            android:fontFamily="@font/montserrat_black"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bienvenido/a a la aplicación de Bienestar Estudiantíl."
-            android:textSize="16sp"
-            android:layout_margin="10dp"
-            android:textColor="@color/whiteTextColor"
-            android:gravity="center"
-            android:layout_marginTop="10sp"
-            android:fontFamily="@font/montserrat_regular"/>
+            <TextView
+                android:id="@+id/txtWelcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="¡Buenas noches!"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="35sp"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat_black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido/a a la aplicación del \nComedor Universitario."
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/whiteTextColor"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

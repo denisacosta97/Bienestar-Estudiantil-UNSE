@@ -92,6 +92,9 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
                     case 600:
                         startActivity(new Intent(getApplicationContext(), GestionTransporteActivity.class));
                         break;
+                    case 1300:
+                        startActivity(new Intent(getApplicationContext(), GestionNoticiasActivity.class));
+                        break;
 
                 }
                 Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
@@ -118,7 +121,7 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
-
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1300, "Gestión Noticias", R.drawable.ic_noticias, R.color.colorGreen));
 
         mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);

@@ -1,7 +1,5 @@
 package com.unse.bienestarestudiantil.Modelos;
 
-import android.app.job.JobService;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

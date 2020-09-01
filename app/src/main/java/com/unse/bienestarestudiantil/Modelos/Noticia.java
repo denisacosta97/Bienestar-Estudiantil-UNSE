@@ -5,45 +5,30 @@ import android.os.Parcelable;
 
 public class Noticia implements Parcelable {
 
-    private String titulo, cuerpo, fechahora, urlImagen, urlWeb, etiqueta;
-    private int id, idTipoNoticias, idCategoria;
-    private boolean isURL = false, isEncuesta = false, isButton = false;
+    private int idNoticia, idUsuario, idArea, validez;
+    private String titulo, descripcion, fechaRegistro, fechaModif;
 
-    public Noticia() {
-        this.titulo = "";
-        this.cuerpo = "";
-        this.fechahora = "";
-        this.id = -1;
-        this.idTipoNoticias = 0;
-        this.etiqueta = "";
-    }
-
-    public Noticia(String titulo, String cuerpo, String fechahora, String urlImagen, int id, int idTipoNoticias, int cat, String
-            etiqueta) {
+    public Noticia(int idNoticia, int idUsuario, int idArea, int validez, String titulo,
+                   String descripcion, String fechaRegistro, String fechaModif) {
+        this.idNoticia = idNoticia;
+        this.idUsuario = idUsuario;
+        this.idArea = idArea;
+        this.validez = validez;
         this.titulo = titulo;
-        this.cuerpo = cuerpo;
-        this.fechahora = fechahora;
-        this.urlImagen = urlImagen;
-        this.id = id;
-        this.idTipoNoticias = idTipoNoticias;
-        this.idCategoria = cat;
-        this.etiqueta = etiqueta;
+        this.descripcion = descripcion;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaModif = fechaModif;
     }
-
 
     protected Noticia(Parcel in) {
+        idNoticia = in.readInt();
+        idUsuario = in.readInt();
+        idArea = in.readInt();
+        validez = in.readInt();
         titulo = in.readString();
-        cuerpo = in.readString();
-        fechahora = in.readString();
-        urlImagen = in.readString();
-        urlWeb = in.readString();
-        etiqueta = in.readString();
-        id = in.readInt();
-        idTipoNoticias = in.readInt();
-        idCategoria = in.readInt();
-        isURL = in.readByte() != 0;
-        isEncuesta = in.readByte() != 0;
-        isButton = in.readByte() != 0;
+        descripcion = in.readString();
+        fechaRegistro = in.readString();
+        fechaModif = in.readString();
     }
 
     public static final Creator<Noticia> CREATOR = new Creator<Noticia>() {
@@ -58,119 +43,69 @@ public class Noticia implements Parcelable {
         }
     };
 
-    public int getIdTipoNoticias() {
-        return idTipoNoticias;
+    public int getIdNoticia() {
+        return idNoticia;
     }
 
-    public void setIdTipoNoticias(int idTipoNoticias) {
-        this.idTipoNoticias = idTipoNoticias;
+    public void setIdNoticia(int idNoticia) {
+        this.idNoticia = idNoticia;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public boolean isButton() {
-        return isButton;
+    public int getIdArea() {
+        return idArea;
     }
 
-    public void setButton(boolean button) {
-        isButton = button;
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
+    public int getValidez() {
+        return validez;
+    }
+
+    public void setValidez(int validez) {
+        this.validez = validez;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public Noticia setTitulo(String titulo) {
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
-        return this;
     }
 
-    public String getCuerpo() {
-        return cuerpo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public Noticia setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-        return this;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getFechahora() {
-        return fechahora;
+    public String getFechaRegistro() {
+        return fechaRegistro;
     }
 
-    public Noticia setFechahora(String fechahora) {
-        this.fechahora = fechahora;
-        return this;
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
-    public int getId() {
-        return id;
+    public String getFechaModif() {
+        return fechaModif;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFechaModif(String fechaModif) {
+        this.fechaModif = fechaModif;
     }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-
-    }
-
-    public String getUrlWeb() {
-        return urlWeb;
-    }
-
-    public void setUrlWeb(String urlWeb) {
-        this.urlWeb = urlWeb;
-        setButton(true);
-        setURL(true);
-
-    }
-
-    public int getIdTipo() {
-        return idTipoNoticias;
-    }
-
-    public void setIdTipo(int idTipoNoticias) {
-        this.idTipoNoticias = idTipoNoticias;
-
-    }
-
-    public boolean isURL() {
-        return isURL;
-    }
-
-    public void setURL(boolean URL) {
-        isURL = URL;
-    }
-
-    public boolean isEncuesta() {
-        return isEncuesta;
-    }
-
-    public void setEncuesta(boolean encuesta) {
-        isEncuesta = encuesta;
-        setButton(true);
-    }
-
-    public String getEtiqueta() {
-        return etiqueta;
-    }
-
-    public void setEtiqueta(String etiqueta) {
-        this.etiqueta = etiqueta;
-    }
-
 
     @Override
     public int describeContents() {
@@ -179,17 +114,13 @@ public class Noticia implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idNoticia);
+        dest.writeInt(idUsuario);
+        dest.writeInt(idArea);
+        dest.writeInt(validez);
         dest.writeString(titulo);
-        dest.writeString(cuerpo);
-        dest.writeString(fechahora);
-        dest.writeString(urlImagen);
-        dest.writeString(urlWeb);
-        dest.writeString(etiqueta);
-        dest.writeInt(id);
-        dest.writeInt(idTipoNoticias);
-        dest.writeInt(idCategoria);
-        dest.writeByte((byte) (isURL ? 1 : 0));
-        dest.writeByte((byte) (isEncuesta ? 1 : 0));
-        dest.writeByte((byte) (isButton ? 1 : 0));
+        dest.writeString(descripcion);
+        dest.writeString(fechaRegistro);
+        dest.writeString(fechaModif);
     }
 }

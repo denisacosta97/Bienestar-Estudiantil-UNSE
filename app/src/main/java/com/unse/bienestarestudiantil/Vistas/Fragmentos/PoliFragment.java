@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionReservasInst.EspaciosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.EspaciosActivity;
 
 public class PoliFragment extends Fragment {
 

@@ -2,23 +2,18 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
 import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
 import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
@@ -44,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button mInicio;
     ImageView btnBack;
-    LinearLayout layoutFondo;
     DialogoProcesamiento dialog;
     EditText edtUser, edtPass;
     VideoView mVideoView;
@@ -57,22 +51,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        layoutFondo = findViewById(R.id.backgroundlogin);
-
-        Glide.with(this).load(R.drawable.img_unse2)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        layoutFondo.setBackground(resource);
-                    }
-                });
-
         loadViews();
 
         loadListener();
 
         loadData();
-
 
     }
 
@@ -225,10 +208,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuestaLogin(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
