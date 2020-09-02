@@ -250,7 +250,7 @@ public class MisServiciosActivity extends AppCompatActivity implements View.OnCl
                 }
 
                 if (mList.size() > 0) {
-                    mServiciosAdapter = new ServiciosAdapter(mList, getApplicationContext());
+                    mServiciosAdapter = new ServiciosAdapter(mList, getApplicationContext(),1);
                     mRecyclerView.setAdapter(mServiciosAdapter);
                 }
             }

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class Pasajero implements Parcelable {
 
     public static final int MEDIUM = 1;
+    public static final int COMPLETE = 2;
     private int dni, idRecorrido;
     private String nombre, apellido, dia, mes, anio, fechaRegistro, fechaLocal, patente;
     private Double lat, lon;
@@ -87,8 +88,8 @@ public class Pasajero implements Parcelable {
 
     public static Pasajero mapper(JSONObject o, int tipo) {
         Pasajero pasajero = new Pasajero();
-        String fechaRegistro, fechaLocal, patente;
-        int idRecorrido, dia, mes, anio;
+        String fechaRegistro, fechaLocal, patente, nombre, apellido;
+        int idRecorrido, dia, mes, anio, dni;
         try {
             switch (tipo) {
                 case MEDIUM:
@@ -103,6 +104,25 @@ public class Pasajero implements Parcelable {
                             String.valueOf(mes), String.valueOf(anio), fechaRegistro, fechaLocal,
                             0d, 0d);
                     pasajero.setPatente(patente);
+                    break;
+                case COMPLETE:
+                    idRecorrido = Integer.parseInt(o.getString("idrecorrido"));
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
+                    dni = Integer.parseInt(o.getString("idusuario"));
+                    fechaRegistro = o.getString("fecharegistro");
+                    fechaLocal = o.getString("fechalocal");
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    patente = o.getString("patente");
+                    pasajero = new Pasajero(0, idRecorrido, "", "", String.valueOf(dia),
+                            String.valueOf(mes), String.valueOf(anio), fechaRegistro, fechaLocal,
+                            0d, 0d);
+                    pasajero.setPatente(patente);
+                    pasajero.setNombre(nombre);
+                    pasajero.setApellido(apellido);
+                    pasajero.setDni(dni);
                     break;
             }
             return pasajero;

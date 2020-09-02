@@ -20,10 +20,12 @@ public class PasajeroAdapter extends RecyclerView.Adapter<PasajeroAdapter.Pasaje
 
     private ArrayList<Pasajero> mList;
     private Context mContext;
+    private int tipo;
 
-    public PasajeroAdapter(ArrayList<Pasajero> list, Context context) {
+    public PasajeroAdapter(ArrayList<Pasajero> list, Context context, int tipo) {
         mList = list;
         mContext = context;
+        this.tipo = tipo;
     }
 
     @NonNull
@@ -37,9 +39,13 @@ public class PasajeroAdapter extends RecyclerView.Adapter<PasajeroAdapter.Pasaje
     public void onBindViewHolder(@NonNull PasajeroViewHolder holder, int position) {
         Pasajero pasajero = mList.get(position);
         Date date = Utils.getFechaDateWithHour(pasajero.getFechaLocal());
-        holder.txtFecha.setText(String.format("Fecha: %s",Utils.getFechaOrderOnly(date)));
-        holder.txtHora.setText(String.format("Hora: %s",Utils.getHora(date)));
-        holder.txtDescripcion.setText(pasajero.getNombre());
+        holder.txtFecha.setText(String.format("Fecha: %s", Utils.getFechaOrderOnly(date)));
+        holder.txtHora.setText(String.format("Hora: %s", Utils.getHora(date)));
+        holder.txtDescripcion.setText(String.format("%s %s",
+                pasajero.getNombre(),
+                tipo == 1 ?
+                        ""
+                        : pasajero.getApellido()));
 
     }
 

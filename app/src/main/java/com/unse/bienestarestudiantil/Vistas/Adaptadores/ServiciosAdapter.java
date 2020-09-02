@@ -21,10 +21,12 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.Serv
 
     private ArrayList<Servicio> mList;
     private Context mContext;
+    int tipo;
 
-    public ServiciosAdapter(ArrayList<Servicio> list, Context context) {
+    public ServiciosAdapter(ArrayList<Servicio> list, Context context, int tipo) {
         mList = list;
         mContext = context;
+        this.tipo = tipo;
     }
 
     @NonNull
@@ -43,7 +45,8 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.Serv
         holder.txtFechaFin.setText(String.format("Fecha de Fin: %s",
                 Utils.getFechaOrder(Utils.getFechaDateWithHour(servicio.getFechaFin()))));
         holder.txtPatente.setText(servicio.getPatente());
-        holder.txtPatente.setVisibility(View.GONE);
+        if (tipo == 1) holder.txtPatente.setVisibility(View.GONE);
+        else holder.txtPatente.setVisibility(View.VISIBLE);
         String texto = "";
         int color = 0, image = 0;
         switch (servicio.getEstado()) {
@@ -63,8 +66,16 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.Serv
                 color = R.color.colorRed;
                 break;
         }
-        holder.txtEstado.setText(texto);
-        holder.txtEstado.setTextColor(mContext.getResources().getColor(color));
+
+        if (tipo == 1) {
+            holder.txtEstado.setText(texto);
+            holder.txtEstado.setTextColor(mContext.getResources().getColor(color));
+            holder.txtEstado.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.imgIcon.setVisibility(View.GONE);
+            holder.txtEstado.setText(String.format("%s %s", servicio.getNombre(), servicio.getApellido()));
+        }
         Glide.with(holder.imgIcon.getContext()).load(image).into(holder.imgIcon);
 
     }

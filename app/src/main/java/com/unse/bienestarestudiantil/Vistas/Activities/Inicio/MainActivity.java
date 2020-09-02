@@ -400,9 +400,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-
                 drawerLayout.openDrawer(Gravity.START);
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -554,6 +552,8 @@ public class MainActivity extends AppCompatActivity {
         String URL = String.format("%s?idU=%s&key=%s&iu=%s&pat=%s&fl=%s&la=%s&lo=%s&ir=%s&d=%s&m=%s&a=%s",
                 Utils.URL_PASAJERO_SERVICIO, id, key, id, pat, fecha, lat, lon, idR, dia, mes, anio);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        String URL = String.format("%s?idU=%s&key=%s&ir=%s&ie=%s&e=%s&d=%s", Utils.URL_PASAJERO_REGISTRAR_SERVICIO, id, key, idReserva, id, 3, dni);
+        StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 procesarRespuestaActualizar(response);

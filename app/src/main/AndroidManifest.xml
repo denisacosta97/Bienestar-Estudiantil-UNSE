@@ -176,6 +176,8 @@
         <activity android:name=".Vistas.Activities.Gestion.GestionArchivos.NuevoArchivoActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionSocios.EditarSocioActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionServiciosActivity" />
+        <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.InfoServicioActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

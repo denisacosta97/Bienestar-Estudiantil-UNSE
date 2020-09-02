@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,6 +47,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -74,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Categoria> mList;
     DialogoProcesamiento dialog;
     Spinner spinnerFacultad, spinnerCarrera;
+    HashMap<String, String> param = new HashMap<>();
 
     ArrayAdapter<String> facultadAdapter, carreraAdapter;
 
@@ -333,7 +337,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 && validador.validarFecha(edtFechaNac) && validador.validarContraseña(edtContra, edtContraConf)
                 && validador.validarDomicilio(edtDomicilio)
                 && !validador.validarNombresEdt(edtNombre, edtApellido, edtPais,
-                edtProvincia, edtLocalidad, edtBarrio, edtSexo)) {
+                edtProvincia, edtLocalidad, edtBarrio)) {
             idDNI = Integer.parseInt(dni);
             switch (tipoUsuario) {
                 case Utils.TIPO_ALUMNO:
@@ -387,6 +391,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             resp = String.format(Utils.dataAlumno, dni, nombre, apellido, fecha, pais, provincia, localidad,
                     domicilio, sexo, carrera, facultad, anioIng, legajo, tipo, mail, telefono,
                     barrio, fechaModifCreacion, 0);
+            param.put("idU", String.valueOf(dni));
+            param.put("nom", nombre);
+            param.put("ape", apellido);
+            param.put("fechan", fecha);
+            param.put("pais", pais);
+            param.put("prov", provincia);
+            param.put("local", localidad);
+            param.put("dom", domicilio);
+            param.put("sex", sexo);
+            param.put("car", carrera);
+            param.put("fac", facultad);
+            param.put("anio", anioIng);
+            param.put("leg", legajo);
+            param.put("tipo", String.valueOf(tipo));
+            param.put("mail", mail);
+            param.put("tel", telefono);
+            param.put("barr", barrio);
+            param.put("idReg", "0");
 
         } else if (tipo == 2) {
             resp = String.format(Utils.dataProfesor, dni, nombre, apellido, fecha, pais, provincia,
@@ -401,7 +423,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             resp = String.format(Utils.dataPartiNoDoc, dni, nombre, apellido, fecha, pais, provincia, localidad,
                     domicilio, sexo, tipo, mail, telefono, barrio, fecha);
         }
-        resp = String.format("%s&key=%s&pass=%s", resp, key, contrasenia);
+        param.put("pass", contrasenia);
+        //resp = String.format("%s&key=%s&pass=%s", resp, key, contrasenia);
         return resp;
     }
 
@@ -425,7 +448,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void sendServer(String data) {
-        String URL = Utils.URL_USUARIO_INSERTAR + data;
+        String URL = Utils.URL_USUARIO_INSERTAR;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -439,10 +462,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onErrorResponse(VolleyError error) {
                 dialog.dismiss();
                 error.printStackTrace();
+                String location = error.networkResponse.headers.get("Location");
+                Utils.showLog("dff", location);
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
 
             }
-        });
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                param.put("key","jeje");
+                return param;
+            }
+        };
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
@@ -453,15 +489,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String getCarrera(int selectedItemPosition) {
         switch (selectedItemPosition) {
             case 0:
-                return faya[spinnerFacultad.getSelectedItemPosition()];
+                return faya[spinnerCarrera.getSelectedItemPosition()];
             case 1:
-                return fceyt[spinnerFacultad.getSelectedItemPosition()];
+                return fceyt[spinnerCarrera.getSelectedItemPosition()];
             case 2:
-                return fcf[spinnerFacultad.getSelectedItemPosition()];
+                return fcf[spinnerCarrera.getSelectedItemPosition()];
             case 3:
-                return fcm[spinnerFacultad.getSelectedItemPosition()];
+                return fcm[spinnerCarrera.getSelectedItemPosition()];
             case 4:
-                return fhcys[spinnerFacultad.getSelectedItemPosition()];
+                return fhcys[spinnerCarrera.getSelectedItemPosition()];
         }
         return "";
     }

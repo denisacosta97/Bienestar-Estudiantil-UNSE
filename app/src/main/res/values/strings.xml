@@ -196,6 +196,7 @@
     <string name="errorConexion">¡Revise su conexión a internet!</string>
     <string name="ajustesInvalidos">¡Ajuste del GPS inválido!</string>
     <string name="posicionError">¡Error al actualizar GPS!</string>
+    <string name="primeroFecha">¡Primero elija una fecha!</string>
 
     <string name="reservaOk">¡Fecha y hora libre!\n¿Desea reservar?</string>
 

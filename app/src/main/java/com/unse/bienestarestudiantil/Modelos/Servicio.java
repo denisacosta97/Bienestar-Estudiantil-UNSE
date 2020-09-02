@@ -212,14 +212,16 @@ public class Servicio implements Parcelable {
                     recorrido = o.getString("descripcion");
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
-                    fechaInicio = o.getString("fechainicio");
-                    fechaFin = "null";
+                    if (o.has("fechainicio")) fechaInicio = o.getString("fechainicio");
+                    else fechaInicio = "null";
+                    if (o.has("fechafin")) fechaFin = o.getString("fechafin");
+                    else fechaFin = "null";
                     patente = o.getString("patente");
                     servicio = new Servicio(idServicio, idChofer, idRecorrido,
                             nombre, apellido, recorrido, patente,
                             dia, mes, anio, fechaInicio, fechaFin);
                     break;
-                case 3:
+                case SERVICIO:
                     idServicio = Integer.parseInt(o.getString("idservicio"));
                     idRecorrido = Integer.parseInt(o.getString("idrecorrido"));
                     dia = Integer.parseInt(o.getString("dia"));

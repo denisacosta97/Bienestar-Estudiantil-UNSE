@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar_trans" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_gravity="center"
+                card_view:backgroundTint="@color/colorWhite">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:text="Denis Lionel Acosta"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DNI: "
+                                android:textSize="18sp"
+                                android:textColor="@color/blackTextColor"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                            <TextView
+                                android:id="@+id/txtDni"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:text="40657677"
+                                android:textColor="@color/blackTextColor"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/txtServicios"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:text="UNSE - Parque Industrial"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:weightSum="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hs Inicio: "
+                                    android:textSize="16sp"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                <TextView
+                                    android:id="@+id/txtInicio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:text="15:44"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:background="@color/colorGreyT"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Hs Fin: "
+                                    android:textSize="16sp"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                <TextView
+                                    android:id="@+id/txtFin"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:text="16:30"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                app:srcCompat="@drawable/ic_transporte" />
+
+                            <LinearLayout
+                                android:layout_marginStart="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vehículo: "
+                                    android:textSize="16sp"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_regular"/>
+
+                                <TextView
+                                    android:id="@+id/txtPatente"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:text="AB 123 AC"
+                                    android:textColor="@color/blackTextColor"
+                                    android:fontFamily="@font/montserrat_black"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:text="Tiempo"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <TextView
+                            android:id="@+id/txtTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="35sp"
+                            android:gravity="center"
+                            android:text="00:25:12"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_margin="5dp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_gravity="center"
+                card_view:backgroundTint="@color/colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtPasajeros"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:gravity="center"
+                        android:text="NO REGISTRO DE PASAJEROS"
+                        android:textColor="@color/blackTextColor"
+                        android:layout_margin="5dp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/transparente" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

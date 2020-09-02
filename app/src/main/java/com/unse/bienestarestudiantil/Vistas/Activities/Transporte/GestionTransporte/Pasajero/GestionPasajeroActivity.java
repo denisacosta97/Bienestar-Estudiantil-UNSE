@@ -229,7 +229,7 @@ public class GestionPasajeroActivity extends AppCompatActivity implements View.O
             mRecyclerUsuarios.setLayoutManager(mLayoutManager);
             mRecyclerUsuarios.setHasFixedSize(true);
             mRecyclerUsuarios.setNestedScrollingEnabled(true);
-            mAdapter = new PasajeroAdapter(mList, getApplicationContext());
+            mAdapter = new PasajeroAdapter(mList, getApplicationContext(), 1);
             mRecyclerUsuarios.setAdapter(mAdapter);
             mRecyclerUsuarios.setVisibility(View.VISIBLE);
             txtViajes.setText("Viajes realizados");

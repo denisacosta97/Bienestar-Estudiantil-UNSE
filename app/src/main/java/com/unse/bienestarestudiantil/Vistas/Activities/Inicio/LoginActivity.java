@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void procesarRespuesta(String response) {
         try {
-            //dialog.dismiss();
+            dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
@@ -219,9 +219,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        //dialog = new DialogoProcesamiento();
-        //dialog.setCancelable(false);
-        //dialog.show(getSupportFragmentManager(), "dialog_process");
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
@@ -237,8 +237,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case 1:
                     //Exito
                     Utils.showToast(getApplicationContext(), getString(R.string.sesionIniciada));
-                    //String token = jsonObject.getJSONObject("token").getString("token");
-
                     //Insertar BD
                     Usuario user = guardarDatos(jsonObject);
                     //Roles
@@ -246,8 +244,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
                     preferenceManager.setValue(Utils.IS_LOGIN, true);
                     int dni = user.getIdUsuario();
-                    //preferenceManager.setValue(Utils.MY_ID, dniNumber);
-                    //preferenceManager.setValue(Utils.TOKEN, token);
+                    preferenceManager.setValue(Utils.MY_ID, dniNumber);
                     preferenceManager.setValue(Utils.IS_VISIT, false);
                     //Main
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

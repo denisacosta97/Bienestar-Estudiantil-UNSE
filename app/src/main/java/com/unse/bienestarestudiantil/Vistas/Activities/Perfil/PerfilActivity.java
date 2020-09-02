@@ -211,7 +211,6 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Tocaste: " + mList.get(position).getTitulo());
                 procesarClick(parent, view, position, (int) id);
             }
         });
@@ -220,8 +219,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         itemClickSupport2.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Utils.showToast(getApplicationContext(), "Tocaste: " + mListActividades.get(position).getTitulo());
-                procesarClick2(parent, view, position, (int) id);
+                 procesarClick2(parent, view, position, (int) id);
             }
         });
     }
