@@ -75,6 +75,19 @@ public class Validador {
         }
     }
 
+    public boolean validarTexto(EditText editText) {
+        if (noVacio(editText.getText().toString().trim())) {
+            editText.setError(mContext.getString(R.string.campoVacio));
+            return false;
+        }
+        if (lengthMore(editText.getText().toString().trim())) {
+            return true;
+        }else{
+            editText.setError(mContext.getString(R.string.campoNoGrande));
+            return false;
+        }
+    }
+
     public boolean validarNombres(EditText editText) {
         if (noVacio(editText.getText().toString().trim())) {
             editText.setError(mContext.getString(R.string.campoVacio));

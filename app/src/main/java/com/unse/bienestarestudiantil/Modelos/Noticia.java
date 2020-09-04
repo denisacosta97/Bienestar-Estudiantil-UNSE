@@ -3,21 +3,29 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Noticia implements Parcelable {
 
+    public static final int COMPLETE = 1;
+    public static final int TIPO_ADMIN = 10;
     private int idNoticia, idUsuario, idArea, validez;
-    private String titulo, descripcion, fechaRegistro, fechaModif;
+    private String titulo, subtitlo, descripcion, fechaRegistro, fechaModif, imagen
+            , nombre, apellido, nombreArea;
 
-    public Noticia(int idNoticia, int idUsuario, int idArea, int validez, String titulo,
-                   String descripcion, String fechaRegistro, String fechaModif) {
+    public Noticia(int idNoticia, int idUsuario, int idArea, int validez, String titulo, String subtitlo,
+                   String descripcion, String fechaRegistro, String fechaModif, String imagen) {
         this.idNoticia = idNoticia;
         this.idUsuario = idUsuario;
         this.idArea = idArea;
         this.validez = validez;
         this.titulo = titulo;
+        this.subtitlo = subtitlo;
         this.descripcion = descripcion;
         this.fechaRegistro = fechaRegistro;
         this.fechaModif = fechaModif;
+        this.imagen = imagen;
     }
 
     protected Noticia(Parcel in) {
@@ -26,9 +34,14 @@ public class Noticia implements Parcelable {
         idArea = in.readInt();
         validez = in.readInt();
         titulo = in.readString();
+        subtitlo = in.readString();
         descripcion = in.readString();
         fechaRegistro = in.readString();
         fechaModif = in.readString();
+        imagen = in.readString();
+        nombre = in.readString();
+        apellido = in.readString();
+        nombreArea = in.readString();
     }
 
     public static final Creator<Noticia> CREATOR = new Creator<Noticia>() {
@@ -42,6 +55,40 @@ public class Noticia implements Parcelable {
             return new Noticia[size];
         }
     };
+
+    public static Noticia mapper(JSONObject o, int complete) {
+        Noticia noticia = null;
+         int idNoticia, idUsuario, idArea, validez;
+         String titulo, subtitulo, descripcion, fechaRegistro, fechaModif, imagen, nombre, apellido, nombreArea;
+        try {
+            switch (complete){
+                case COMPLETE:
+                    idNoticia = Integer.parseInt(o.getString("idnoticia"));
+                    idArea = Integer.parseInt(o.getString("idarea"));
+                    validez = Integer.parseInt(o.getString("validez"));
+                    titulo = o.getString("titulo");
+                    subtitulo = o.getString("subtitulo");
+                    descripcion = o.getString("descripcion");
+                    imagen = o.getString("imagen");
+                    fechaRegistro = o.getString("fecharegistro");
+                    fechaModif = o.getString("fechamodificacion");
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    nombreArea = o.getString("area");
+                    noticia = new Noticia(idNoticia, 0, idArea, validez, titulo, subtitulo, descripcion,
+                            fechaRegistro, fechaModif, imagen);
+                    noticia.setNombre(nombre);
+                    noticia.setApellido(apellido);
+                    noticia.setNombreArea(nombreArea);
+                    break;
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return noticia;
+    }
 
     public int getIdNoticia() {
         return idNoticia;
@@ -61,6 +108,38 @@ public class Noticia implements Parcelable {
 
     public int getIdArea() {
         return idArea;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombreArea() {
+        return nombreArea;
+    }
+
+    public void setNombreArea(String nombreArea) {
+        this.nombreArea = nombreArea;
     }
 
     public void setIdArea(int idArea) {
@@ -99,6 +178,14 @@ public class Noticia implements Parcelable {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public String getSubtitlo() {
+        return subtitlo;
+    }
+
+    public void setSubtitlo(String subtitlo) {
+        this.subtitlo = subtitlo;
+    }
+
     public String getFechaModif() {
         return fechaModif;
     }
@@ -119,8 +206,13 @@ public class Noticia implements Parcelable {
         dest.writeInt(idArea);
         dest.writeInt(validez);
         dest.writeString(titulo);
+        dest.writeString(subtitlo);
         dest.writeString(descripcion);
         dest.writeString(fechaRegistro);
         dest.writeString(fechaModif);
+        dest.writeString(imagen);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+        dest.writeString(nombreArea);
     }
 }

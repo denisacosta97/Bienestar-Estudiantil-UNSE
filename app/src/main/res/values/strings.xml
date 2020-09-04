@@ -99,6 +99,7 @@
     <string name="usuarioDeshabilitado">¡Usuario deshabilidado!</string>
     <string name="usuarioHabilitado">¡Usuario habilitado!</string>
     <string name="usuarioEliminar">¿Seguro que desea dar de %s al usuario %s %s ?</string>
+    <string name="noticiaEliminar">¿Seguro que desea dar de %s la noticia?</string>
     <string name="btnAlta">DAR DE ALTA</string>
     <string name="btnBaja">DAR DE BAJA</string>
     <string name="advertencia">¡Advertencia!</string>
@@ -199,6 +200,20 @@
     <string name="primeroFecha">¡Primero elija una fecha!</string>
 
     <string name="reservaOk">¡Fecha y hora libre!\n¿Desea reservar?</string>
+    <string name="errorImagenLoad">¡Error al cargar imagen!</string>
+    <string name="noticiaError">¡Error al subir la noticia!</string>
+    <string name="noticiaAgregada">¡Noticias agregada!</string>
+    <string name="categoriaElegir">¡Debe elegir una categoría!</string>
+    <string name="noticiaListError">Error al obtener noticias, intente nuevamente</string>
+    <string name="noticiaListVacio">No hay noticias</string>
+    <string name="noticiaNoExiste">¡Noticia inexistente!</string>
+    <string name="tituloNoticias">Lista noticias</string>
+    <string name="noticiaActualizada">¡Noticia actualizada!</string>
+   <string name="noticiaActualizarError">¡Error al actualizar la noticia!</string>
+    <string name="noticiaDeshabilitado">¡Noticia desactivada!</string>
+    <string name="noticiaHabilitado">¡Noticia activada!</string>
+    <string name="btnHabilitar">HABILITAR</string>
+    <string name="btnDeshabilitar">DESHABILITAR</string>
 
 </resources>
 

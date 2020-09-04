@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loadListener() {
-        btnBack.setOnClickListener(this);
+        //btnBack.setOnClickListener(this);
         mInicio.setOnClickListener(this);
     }
 

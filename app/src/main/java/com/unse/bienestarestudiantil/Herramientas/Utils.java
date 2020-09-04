@@ -76,6 +76,7 @@ public class Utils {
     public static final String TOKEN = "my_token";
     public static final String IS_VISIT = "visit";
     //Constantes para activities
+    public static final String IS_EDIT_MODE = "edit_mode";
     public static final String USER_INFO = "user_info";
     public static final String DEPORTE_NAME = "dato_deporte";
     public static final String DEPORTE_ID = "id_deporte";
@@ -102,14 +103,13 @@ public class Utils {
     public static final String SERVICIO = "servicio_info";
     public static final String PUNTO = "punto_info";
     public static final String COLECTIVO = "cole_info";
+    public static final String NOTICIA_INFO = "noticia_info";
     public static final String PASAJERO = "pasajeros";
 
-    public static final String COLECTIVO = "cole";
     public static final String IMPRESION = "impresion";
     public static final String CANCHA = "cancha";
     //Constantes para activities
     public static final long UPDATE_INTERVAL = 12000;
-    public static final long UPDATE_INTERVAL = 10000;
     public static final int PICK_IMAGE = 9090;
     public static final int EDIT_IMAGE = 9091;
     public static final int PERMISSION_ALL = 9092;
@@ -118,6 +118,7 @@ public class Utils {
     public static final int REQUEST_GROUP_PERMISSIONS_LOCATION = 9095;
     public static final int REQUEST_LOCATION = 9096;
     public static final int REQUEST_CHECK_SETTINGS = 9097;
+    public static final int GET_FROM_GALLERY = 9096;
     //Constantes para tipos de usuario
     public static final int TIPO_USUARIO = 1;
     public static final int TIPO_ESTUDIANTE = 2;
@@ -226,21 +227,6 @@ public class Utils {
     public static final String URL_PROFES = "https://" + IP + "/deportes/getAllProfesores.php";
     public static final String URL_BECADOS = "https://" + IP + "/beca/getAllBecados.php";
     public static final String URL_ASISTENCIA = "https://" + IP + "/deportes/asistencia.php";
-    public static final String URL_DEPORTE_TEMPORADA = "http://" + IP + "/bienestar/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "http://" + IP + "/bienestar/deportes/registrar.php";
-    public static final String URL_DEPORTE_CREDENCIAL = "http://" + IP + "/bienestar/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "http://" + IP + "/bienestar/deportes/getAll.php";
-    public static final String URL_DEPORTE_BAJA = "http://" + IP + "/bienestar/deportes/actualizarDeporte.php";
-    public static final String URL_INSCRIPCIONES_POR_DEPORTE = "http://" + IP + "/bienestar/deportes/getInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "http://" + IP + "/bienestar/beca/getInscripciones.php";
-    public static final String URL_INSCRIPCION_PARTICULAR = "http://" + IP + "/bienestar/deportes/getInscripcion.php";
-    public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "http://" + IP + "/bienestar/deportes/eliminarInscripcion.php";
-    public static final String URL_INSCRIPCION_ACTUALIZAR = "http://" + IP + "/bienestar/deportes/actualizarInscripcion.php";
-    public static final String URL_INSCRIPCION_CARNET = "http://" + IP + "/bienestar/deportes/insertarCredencial.php";
-    public static final String URL_CREDENCIAL_CAMBIAR = "http://" + IP + "/bienestar/deportes/cambiarCredencial.php";
-    public static final String URL_PROFES = "http://" + IP + "/bienestar/deportes/getAllProfesores.php";
-    public static final String URL_BECADOS = "http://" + IP + "/bienestar/beca/getAllBecados.php";
-    public static final String URL_ASISTENCIA = "http://" + IP + "/bienestar/deportes/asistencia.php";
 
     //POLIDEPORTIVO
     public static final String URL_INGRESO_POLI = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPoli.php";
@@ -264,12 +250,11 @@ public class Utils {
 
     //CIBER
     public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";
-
-    public static final String URL_BECAS_CREDENCIAL = "https://" + IP + "/beca/getCredencial.php";
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "https://" + IP + "/archivos/";
     public static final String URL_UPLOAD_FILE = "https://" + IP + "/general/uploadFile.php";
+
 
     //TRANSPORTE
     public static final String URL_LINEAS = "https://" + IP + "/transporte/getAllLineas.php";
@@ -308,7 +293,13 @@ public class Utils {
     public static final String URL_SERVICIOS_BY_FECHA = "https://" + IP + "/transporte/servicio/getServicios.php";
 
     //NOTICIAS
-    public static final String URL_ADD_NOTICIA = "http://sis.bienestar.unse.edu.ar/api/general/noticia/insertar.php";
+    public static final String URL_IMAGE_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/img/%s";
+    public static final String URL_NOTICIA_BY_ID = "https://sis.bienestar.unse.edu.ar/api/general/noticia/get.php";
+    public static final String URL_LISTA_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/getNoticias.php";
+    public static final String URL_AGREGAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/insertar.php";
+    public static final String URL_ELIMINAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/eliminar.php";
+    public static final String URL_ACTUALIZAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/actualizar.php";
+    public static final String URL_NOTICIA_IMAGE = "https://sis.bienestar.unse.edu.ar/api/general/noticia/uploadImage.php";
 
 
     public static final long SECONS_TIMER = 15000;
@@ -714,15 +705,16 @@ public class Utils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String value = "";
-        if (cal.get(Calendar.MINUTE) <= 9) {
-            value = cal.get(Calendar.HOUR_OF_DAY) + ":0" +
-                    cal.get(Calendar.MINUTE);
+        if (cal.get(Calendar.HOUR_OF_DAY) <= 9) {
+            value = "0" + cal.get(Calendar.HOUR_OF_DAY);
         } else {
-            value = cal.get(Calendar.HOUR_OF_DAY) + ":" +
-                    cal.get(Calendar.MINUTE);
+            value = "" + cal.get(Calendar.HOUR_OF_DAY);
         }
-
-
+        if (cal.get(Calendar.MINUTE) <= 9) {
+            value = value + "0" + cal.get(Calendar.MINUTE);
+        } else {
+            value = value + "" + cal.get(Calendar.MINUTE);
+        }
         return value;
 
 
@@ -733,15 +725,21 @@ public class Utils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String value = "";
-        if (cal.get(Calendar.MINUTE) <= 9) {
-            value = cal.get(Calendar.HOUR_OF_DAY) + ":0" +
-                    cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+        if (cal.get(Calendar.HOUR_OF_DAY) <= 9) {
+            value = "0" + cal.get(Calendar.HOUR_OF_DAY);
         } else {
-            value = cal.get(Calendar.HOUR_OF_DAY) + ":" +
-                    cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+            value = "" + cal.get(Calendar.HOUR_OF_DAY);
         }
-
-
+        if (cal.get(Calendar.MINUTE) <= 9) {
+            value = value + "0" + cal.get(Calendar.MINUTE);
+        } else {
+            value = value + "" + cal.get(Calendar.MINUTE);
+        }
+        if (cal.get(Calendar.SECOND) <= 9) {
+            value = value + "0" + cal.get(Calendar.SECOND);
+        } else {
+            value = value + "" + cal.get(Calendar.SECOND);
+        }
         return value;
 
 
@@ -790,7 +788,6 @@ public class Utils {
         return value;
 
     }
-
 
 
     public static String getBirthday(Date date) {

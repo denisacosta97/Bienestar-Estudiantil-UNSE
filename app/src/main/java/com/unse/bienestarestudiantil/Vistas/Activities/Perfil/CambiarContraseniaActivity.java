@@ -36,7 +36,6 @@ public class CambiarContraseniaActivity extends AppCompatActivity implements Vie
     ImageView btnBack;
     TextView txtRecuperar;
     EditText edtActual, edtxNewPass, edtxRepass, edtDNI;
-    LinearLayout layoutFondo;
 
     DialogoProcesamiento dialog;
 

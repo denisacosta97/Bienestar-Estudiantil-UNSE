@@ -130,6 +130,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         int idLocal = manager.getValueInt(Utils.MY_ID);
         usuario = mUsuarioViewModel.getById(idLocal);
+        
         if (txtNombre != null) {
             txtNombre.setText("NOMBRE");
             txtDescripcion.setText("CARRERA");

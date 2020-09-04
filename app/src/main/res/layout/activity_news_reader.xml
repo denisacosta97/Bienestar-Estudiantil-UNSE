@@ -71,13 +71,12 @@
 
             </LinearLayout>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgPortada"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/bienesplash"/>
+                android:layout_gravity="center"/>
 
             <TextView
                 android:id="@+id/txtCuerpo"

@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -10,21 +9,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.navigation.NavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,6 +28,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.unse.bienestarestudiantil.Databases.RolViewModel;
@@ -74,6 +63,15 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -321,6 +319,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
+                ((InicioFragmento) fragmentoGenerico).setContext(getApplicationContext());
+                ((InicioFragmento) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
                 break;
             case R.id.item_poli:
                 fragmentoGenerico = new PoliFragment();
@@ -466,7 +466,7 @@ public class MainActivity extends AppCompatActivity {
         String code = "";
         Pattern pattern = Pattern.compile("MAQ-[0-9]+");
         Matcher matcher = pattern.matcher(contenido);
-        if(matcher.find()){
+        if (matcher.find()) {
             code = matcher.group();
         }
         registrarUso(code);
@@ -502,13 +502,13 @@ public class MainActivity extends AppCompatActivity {
     private void decodeQR(String contenido) {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9 ]+");
         Matcher matcher = pattern.matcher(contenido);
-        if(matcher.find()){
+        if (matcher.find()) {
             pat = matcher.group();
         }
 
         pattern = Pattern.compile("-[0-9]+");
         matcher = pattern.matcher(contenido);
-        if(matcher.find()){
+        if (matcher.find()) {
             idR = matcher.group();
             idR = idR.substring(1);
         }
@@ -532,7 +532,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(isReady){
+        if (isReady) {
             isReady = false;
             changeEstado(pat, idR);
         }
@@ -547,12 +547,10 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH)+1;
+        int mes = calendar.get(Calendar.MONTH) + 1;
         int anio = calendar.get(Calendar.YEAR);
         String URL = String.format("%s?idU=%s&key=%s&iu=%s&pat=%s&fl=%s&la=%s&lo=%s&ir=%s&d=%s&m=%s&a=%s",
-                Utils.URL_PASAJERO_SERVICIO, id, key, id, pat, fecha, lat, lon, idR, dia, mes, anio);
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-        String URL = String.format("%s?idU=%s&key=%s&ir=%s&ie=%s&e=%s&d=%s", Utils.URL_PASAJERO_REGISTRAR_SERVICIO, id, key, idReserva, id, 3, dni);
+                Utils.URL_PASAJERO_REGISTRAR_SERVICIO, id, key, id, pat, fecha, lat, lon, idR, dia, mes, anio);
         StringRequest request = new StringRequest(Request.Method.PUT, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

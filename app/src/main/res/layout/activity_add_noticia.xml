@@ -65,12 +65,12 @@
                     <EditText
                         android:id="@+id/edtTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"
                         android:background="@drawable/edit_text_logreg"
-                        android:inputType="text|textCapSentences"
+                        android:inputType="textMultiLine|text|textCapSentences"
                         android:padding="10dp" />
 
                     <TextView
@@ -85,12 +85,12 @@
                     <EditText
                         android:id="@+id/edtSubTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"
                         android:background="@drawable/edit_text_logreg"
-                        android:inputType="text|textCapSentences"
+                        android:inputType="textMultiLine|text|textCapSentences"
                         android:padding="10dp" />
 
                     <TextView
@@ -129,7 +129,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"
                         android:background="@drawable/edit_text_logreg"
-                        android:inputType="text|textCapSentences"
+                        android:inputType="text|textCapSentences|textMultiLine"
                         android:padding="10dp" />
 
                     <TextView
@@ -141,15 +141,29 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <ImageButton
-                        android:id="@+id/imgvAddImg"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                    <FrameLayout
                         android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_add"
-                        android:background="@color/blackTransparente2"
-                        android:tint="@color/blackTextColor"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/blackTransparente2" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_add"
+                            />
+
+
+                    </FrameLayout>
+
+
 
                     <Button
                         android:id="@+id/btnGuardar"
@@ -164,6 +178,36 @@
                         android:textStyle="bold"
                         android:background="@drawable/button_border"
                         android:layout_margin="5dp"/>
+
+                    <Button
+                        android:id="@+id/btnAltaBaja"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="DESHABILITAR"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:background="@drawable/button_border"
+                        android:layout_margin="5dp"/>
+
+                    <Button
+                        android:padding="3dp"
+                        android:id="@+id/btnNotificacion"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="ENVIAR NOTIFICACIÓN"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold"
+                        android:background="@drawable/button_border"
+                        android:layout_margin="5dp"/>
+
 
                 </LinearLayout>
 
