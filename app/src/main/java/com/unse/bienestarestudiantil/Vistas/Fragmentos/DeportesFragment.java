@@ -2,17 +2,13 @@ package com.unse.bienestarestudiantil.Vistas.Fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.graphics.drawable.Drawable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,7 +25,6 @@ import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.DeportesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.RecorridoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -38,6 +33,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class DeportesFragment extends Fragment {
 
     View view;
@@ -45,19 +45,53 @@ public class DeportesFragment extends Fragment {
     RecyclerView reciclerDeportes;
     ArrayList<Deporte> mDeportes;
     DeportesAdapter mDeportesAdapter;
-    RelativeLayout mImageDeportes;
     DialogoProcesamiento dialog;
     FragmentManager mFragmentManager;
-    LinearLayout layoutFondo;
+    LinearLayout layoutFondo, latError;
     Context mContext;
-    boolean isOff = false;
+    Button btnError;
+
+    public DeportesFragment(FragmentManager fragmentManager, Context context) {
+        mFragmentManager = fragmentManager;
+        mContext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_deportes, container, false);
 
-        layoutFondo = view.findViewById(R.id.backgroundDep);
 
+        loadViews();
+
+        loadData();
+
+        loadListener();
+
+        updateView(0);
+
+        return view;
+    }
+
+    private void loadListener() {
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(reciclerDeportes);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                Intent i = new Intent(getContext(), PerfilDeporteActivity.class);
+                i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
+                startActivity(i);
+            }
+        });
+    }
+
+    private void loadViews() {
+        btnError = view.findViewById(R.id.btnError);
+        latError = view.findViewById(R.id.layoutError);
+        layoutFondo = view.findViewById(R.id.backgroundDep);
+        reciclerDeportes = view.findViewById(R.id.recyclerDeportes);
+    }
+
+    private void loadData() {
         Glide.with(this).load(R.drawable.imgdeportes)
                 .into(new SimpleTarget<Drawable>() {
                     @Override
@@ -65,57 +99,32 @@ public class DeportesFragment extends Fragment {
                         layoutFondo.setBackground(resource);
                     }
                 });
-
-        loadViews();
-
-        loadData();
-
-        return view;
-    }
-
-    private void loadViews() {
-        reciclerDeportes = view.findViewById(R.id.recyclerDeportes);
-    }
-
-    private void loadData() {
-        mDeportes = new ArrayList<>();
-        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
         mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         reciclerDeportes.setNestedScrollingEnabled(true);
         reciclerDeportes.setLayoutManager(mLayoutManager);
-        reciclerDeportes.setAdapter(mDeportesAdapter);
 
         loadInfo();
 
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(reciclerDeportes);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                if (!isOff) {
-                    Intent i = new Intent(getContext(), PerfilDeporteActivity.class);
-                    i.putExtra(Utils.DEPORTE_NAME, mDeportes.get(position));
-                    startActivity(i);
-                }else Utils.showToast(getContext(), getString(R.string.noConexion));
-            }
-        });
+
     }
 
     public void loadInfo() {
-        PreferenceManager manager = new PreferenceManager(getContext());
+        PreferenceManager manager = new PreferenceManager(mContext);
         String key = manager.getValueString(Utils.TOKEN);
-        int id = manager.getValue(Utils.IS_VISIT) ? 1 : 0;
-        String URL = String.format("%s?key=%s&t=%s", Utils.URL_DEPORTE_LISTA, key, 2);
+        int id = manager.getValueInt(Utils.MY_ID);
+        if (id == 0)
+            id = 1;
+        String URL = String.format("%s?key=%s&idU=%s", Utils.URL_DEPORTE_LISTA, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 procesarRespuesta(response);
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getContext(), getString(R.string.servidorOff));
+                Utils.showToast(mContext, getString(R.string.servidorOff));
                 updateView(1);
                 dialog.dismiss();
 
@@ -124,50 +133,18 @@ public class DeportesFragment extends Fragment {
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
-        dialog.show(getManagerFragment(), "dialog_process");
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(request);
+        dialog.show(mFragmentManager, "dialog_process");
+        VolleySingleton.getInstance(mContext).addToRequestQueue(request);
     }
 
-    public void setFragmentManager(FragmentManager fragmentManager) {
-        this.mFragmentManager = fragmentManager;
-    }
-
-    public FragmentManager getManagerFragment() {
-        return this.mFragmentManager;
-    }
-
-    @Override
-    public Context getContext() {
-        return mContext;
-    }
-
-    public void setContext(Context context) {
-        mContext = context;
-    }
 
     private void updateView(int i) {
         switch (i) {
-            case 2:
-                isOff = false;
-                mDeportes.clear();
+            case 0:
+                latError.setVisibility(View.GONE);
                 break;
             case 1:
-                isOff = true;
-                mDeportes.clear();
-                mDeportes.add(new Deporte(0,1, "Ajedréz", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,2, "Básquet", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,3, "Cestobal", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,4, "Fútbol 11 Masculino", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,5, "Fútbol 11 Femenino", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,6, "Fútbol Sala Masculino", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,7, "Fútbol Sala Femenino", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,8, "Hockey", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,9, "Natación", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,10, "Rugby", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,11, "Tenis de Mesa", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,12, "Voleibol Masculino", "", "", "", "", "", "", 0, null));
-                mDeportes.add(new Deporte(0,13, "Voleibol Femenino", "", "", "", "", "", "", 0, null));
-                mDeportesAdapter.notifyDataSetChanged();
+                latError.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -180,24 +157,26 @@ public class DeportesFragment extends Fragment {
             switch (estado) {
                 case -1:
                     Utils.showToast(getContext(), getString(R.string.errorInternoAdmin));
+                    updateView(1);
                     break;
                 case 1:
-                    //Exito
-                    updateView(2);
-                    loadInfoDeportes(jsonObject.getJSONArray("mensaje"));
+                    loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showToast(getContext(), getString(R.string.noCredenciales));
+                    updateView(1);
                     break;
                 case 3:
                     Utils.showToast(getContext(), getString(R.string.tokenInvalido));
+                    updateView(1);
                     break;
                 case 4:
                     Utils.showToast(getContext(), getString(R.string.camposInvalidos));
+                    updateView(1);
                     break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getContext(), getString(R.string.tokenInexistente));
+                    updateView(1);
                     break;
             }
 
@@ -208,22 +187,46 @@ public class DeportesFragment extends Fragment {
         }
     }
 
-    private void loadInfoDeportes(JSONArray mensaje) {
-        for (int i = 0; i < mensaje.length(); i++) {
-            try {
-                JSONObject j = mensaje.getJSONObject(i);
+    private void loadInfo(JSONObject mensaje) {
 
-                Deporte deporte = Deporte.mapper(j);
-                mDeportes.add(deporte);
+        if (mensaje.has("mensaje")) {
+
+            try {
+                JSONArray datos = mensaje.getJSONArray("mensaje");
+
+                mDeportes = new ArrayList<>();
+
+                for (int i = 0; i < datos.length(); i++) {
+                    try {
+                        JSONObject o = datos.getJSONObject(i);
+
+                        Deporte deporte = Deporte.mapper(o, Deporte.COMPLETE);
+                        deporte.setIcon();
+
+                        mDeportes.add(deporte);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        updateView(1);
+                    }
+                }
+                if (mDeportes.size() > 0) {
+                    mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
+                    reciclerDeportes.setAdapter(mDeportesAdapter);
+                } else {
+                    updateView(1);
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 updateView(1);
             }
 
+        } else {
+            updateView(1);
         }
-        mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), false);
-        reciclerDeportes.setAdapter(mDeportesAdapter);
+
+
     }
 
 }

@@ -29,6 +29,7 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickListenerAdapter;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Credencial;
+import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Estado;
 import com.unse.bienestarestudiantil.Modelos.Inscripcion;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
@@ -64,6 +65,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
     CredencialesAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView mRecyclerView;
+    Deporte deporte;
 
     DialogoProcesamiento dialog;
 
@@ -386,7 +388,7 @@ public class ModificarInscripcionDeporteActivity extends AppCompatActivity imple
 
 
                 }
-                Glide.with(imgIcono.getContext()).load(Utils.getIconDeporte(idDeporte)).into(imgIcono);
+                Glide.with(imgIcono.getContext()).load(deporte.getIconDeporte()).into(imgIcono);
 
                 if (jsonObject.has("cred")) {
 

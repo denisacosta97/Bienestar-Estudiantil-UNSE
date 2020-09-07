@@ -45,11 +45,6 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
     EditText[] campos;
     boolean isEdit = false;
     int mode = 0, TIPO_USER = -1;
-    int[] iconDeporte = {R.drawable.ic_ajedrez, R.drawable.ic_basquet, R.drawable.ic_becas,
-            R.drawable.ic_futbol_masc, R.drawable.ic_futbol_fem, R.drawable.ic_futbol_masc,
-            R.drawable.ic_futbol_masc, R.drawable.ic_hockey, R.drawable.ic_natacion,
-            R.drawable.ic_rugby, R.drawable.ic_tenis_mesa, R.drawable.ic_voley_masc,
-            R.drawable.ic_voley_fem};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

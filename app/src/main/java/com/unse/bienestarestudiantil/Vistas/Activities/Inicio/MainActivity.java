@@ -330,9 +330,7 @@ public class MainActivity extends AppCompatActivity {
                 ((CiberFragment) fragmentoGenerico).setActivity(MainActivity.this);
                 break;
             case R.id.item_deporte:
-                fragmentoGenerico = new DeportesFragment();
-                ((DeportesFragment) fragmentoGenerico).setContext(getApplicationContext());
-                ((DeportesFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
+                fragmentoGenerico = new DeportesFragment(getSupportFragmentManager(),getApplicationContext());
                 break;
 
             case R.id.item_transporte:

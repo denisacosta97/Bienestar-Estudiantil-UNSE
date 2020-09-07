@@ -9,6 +9,7 @@ public class Inscripcion {
     public static final int TIPO_DEPORTE = 2;
 
     public static final int COMPLETE = 1;
+    public static final int PARCIAL = 2;
 
     private int idInscripcion;
     private int idEstado;
@@ -31,10 +32,8 @@ public class Inscripcion {
     private String lugar;
 
     private String nombreEstado;
-
     private String titulo;
     private int anio, idConvocatoria, tipo;
-
     //Inscripcion principal
     public Inscripcion(int idInscripcion, int idEstado, int idUsuario, int idTemporada, int wsp,
                        int cantMaterias, String facebook, String instagram, String objetivo,
@@ -63,16 +62,13 @@ public class Inscripcion {
     }
 
     //Inscripcion para el perfil, muestra inscripciones generales
-    public Inscripcion(int idInscripcion, String titulo, int anio, int idUsuario,
-                       int idConvocatoria, int validez, int tipo, int idEstado, String estado) {
+    public Inscripcion(int idInscripcion, String titulo, int anio, int validez, int tipo, String estado, String fechaRegistro) {
         this.idInscripcion = idInscripcion;
         this.titulo = titulo;
+        this.fechaRegistro = fechaRegistro;
         this.anio = anio;
-        this.idUsuario = idUsuario;
-        this.idConvocatoria = idConvocatoria;
         this.validez = validez;
         this.tipo = tipo;
-        this.idEstado = idEstado;
         this.nombreEstado = estado;
     }
 
@@ -311,6 +307,17 @@ public class Inscripcion {
                             instagram, objetivo, peso, altura, fechaRegistro, fechaModificacion,
                             disponible, validez, idPreguntas, cuales, inten, lugar);
                     break;
+                case PARCIAL:
+                    int id = Integer.parseInt(o.getString("idinscripcion"));
+                    idEstado = Integer.parseInt(o.getString("idestado"));
+                    int anio = Integer.parseInt(o.getString("anio"));
+                    String nombreDeporte = o.getString("nombredeporte");
+                     validez = Integer.parseInt(o.getString("validez"));fechaRegistro = o.getString("fecharegistro");
+                    String estado = o.getString("nombree");
+
+                    inscripcion = new Inscripcion(id, nombreDeporte, anio,
+                            validez, Inscripcion.TIPO_DEPORTE, estado, fechaRegistro);
+                    inscripcion.setIdEstado(idEstado);
             }
 
         } catch (JSONException e) {

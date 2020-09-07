@@ -79,6 +79,7 @@ public class Utils {
     public static final String IS_EDIT_MODE = "edit_mode";
     public static final String USER_INFO = "user_info";
     public static final String DEPORTE_NAME = "dato_deporte";
+    public static final String DEPORTE_TEMPORADA = "temporada_deporte";
     public static final String DEPORTE_ID = "id_deporte";
     public static final String TIPO_CREDENCIAL = "tipo_cred";
     public static final String TIPO_CREDENCIAL_DATO = "tipo_cred_dato";
@@ -212,13 +213,16 @@ public class Utils {
     public static final String URL_ROLES_INSERTAR = "https://" + IP + "/general/insertarRol.php";
     public static final String URL_ROLES_USER_LISTA = "https://" + IP + "/general/getRolesByUsuario.php";
     //DEPORTES
-    public static final String URL_DEPORTE_TEMPORADA = "https://" + IP + "/deportes/getTemporada.php";
-    public static final String URL_DEPORTE_INSCRIPCION = "https://" + IP + "/deportes/registrar.php";
+    public static final String URL_DEPORTE_LISTA = "https://" + IP + "/deportes/getDeportes.php";
+    public static final String URL_DEPORTE_TEMPORADA = "https://" + IP + "/deportes/inscripcion/getTemporada.php";
+    public static final String URL_DEPORTE_INSCRIPCION = "https://" + IP + "/deportes/inscripcion/insertar.php";
+    public static final String URL_INSCRIPCIONES_GENERALES = "https://" + IP + "/becas/getInscripciones.php";
+
+
     public static final String URL_DEPORTE_CREDENCIAL = "https://" + IP + "/deportes/getCredencial.php";
-    public static final String URL_DEPORTE_LISTA = "https://" + IP + "/deportes/getAllDeportes.php";
     public static final String URL_DEPORTE_BAJA = "https://" + IP + "/deportes/actualizarDeporte.php";
     public static final String URL_INSCRIPCIONES_POR_DEPORTE = "https://" + IP + "/deportes/getInscriptos.php";
-    public static final String URL_INSCRIPCIONES_GENERALES = "https://" + IP + "/beca/getInscripciones.php";
+
     public static final String URL_INSCRIPCION_PARTICULAR = "https://" + IP + "/deportes/getInscripcion.php";
     public static final String URL_INSCRIPCION_PARTICULAR_ELIMIAR = "https://" + IP + "/deportes/eliminarInscripcion.php";
     public static final String URL_INSCRIPCION_ACTUALIZAR = "https://" + IP + "/deportes/actualizarInscripcion.php";
@@ -957,55 +961,6 @@ public class Utils {
                 return "Particular";
         }
         return "";
-    }
-
-    public static int getIconDeporte(int idDeporte) {
-        int icon = 0;
-        switch (idDeporte) {
-            case 1:
-                icon = R.drawable.ic_ajedrez;
-                break;
-            case 2:
-                icon = R.drawable.ic_basquet;
-                break;
-            case 3:
-                icon = R.drawable.ic_becas;
-                break;
-            case 4:
-            case 6:
-            case 7:
-                icon = R.drawable.ic_futbol_masc;
-                break;
-            case 5:
-                icon = R.drawable.ic_futbol_fem;
-                break;
-
-            case 8:
-                icon = R.drawable.ic_hockey;
-                break;
-            case 9:
-                icon = R.drawable.ic_natacion;
-                break;
-            case 10:
-                icon = R.drawable.ic_rugby;
-                break;
-            case 11:
-                icon = R.drawable.ic_tenis_mesa;
-                break;
-            case 12:
-                icon = R.drawable.ic_voley_masc;
-                break;
-            case 13:
-                icon = R.drawable.ic_voley_fem;
-                break;
-            case 14:
-                break;
-            default:
-                icon = R.drawable.ic_zapatilla;
-                break;
-        }
-        return icon;
-
     }
 
     public static String getFechaFormat(String fechaRegistro) {

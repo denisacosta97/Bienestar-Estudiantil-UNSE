@@ -275,6 +275,8 @@ public class Validador {
     }
 
     public boolean validadAltura(String numero) {
+        if (numero.equals(""))
+            return false;
         float num = Float.parseFloat(numero);
         if (num < 54)
             return false;
@@ -282,6 +284,8 @@ public class Validador {
     }
 
     public boolean validadPeso(String numero) {
+        if (numero.equals(""))
+            return false;
         float num = Float.parseFloat(numero);
         return (num > 0);
     }

@@ -66,8 +66,8 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
         loadListener();
 
-        loadInfo(R.drawable.ic_error, "Error al obtener las inscripciones, por favor intenta nuevamente",
-                R.drawable.ic_vacio, "No existe ninguna inscripcion realizada a un deporte o beca");
+        loadInfo(R.drawable.ic_error, getString(R.string.credencialesListError),
+                R.drawable.ic_vacio, getString(R.string.credencialesListVacia));
 
         updateView(-1);
 
@@ -84,6 +84,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
+
                 procesarClick(position);
             }
         });
@@ -93,21 +94,25 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
     private void procesarClick(int position) {
         Intent intent = null;
         ItemBase itemBase = mListOficial.get(position);
-        ItemDato itemDato = (ItemDato) itemBase;
-        switch (itemDato.getInscripcion().getTipo()) {
-            case Inscripcion.TIPO_BECA:
-               // intent = new Intent(getApplicationContext(), null);
-                int id = itemDato.getInscripcion().getIdConvocatoria();
-                //intent.putExtra(Utils.CREDENCIAL, id);
-                //startActivity(intent);
-                break;
-            case Inscripcion.TIPO_DEPORTE:
-                int id2 = itemDato.getInscripcion().getIdInscripcion();
-                intent = new Intent(getApplicationContext(), ModificarInscripcionDeporteActivity.class);
-                intent.putExtra(Utils.CREDENCIAL, id2);
-                startActivity(intent);
-                break;
+        if (itemBase instanceof ItemDato){
+            ItemDato itemDato = (ItemDato) itemBase;
+            switch (itemDato.getInscripcion().getTipo()) {
+                case Inscripcion.TIPO_BECA:
+                    // intent = new Intent(getApplicationContext(), null);
+                    //int id = itemDato.getInscripcion().getIdConvocatoria();
+                    //intent.putExtra(Utils.CREDENCIAL, id);
+                    //startActivity(intent);
+                    break;
+                case Inscripcion.TIPO_DEPORTE:
+                    //openInscripcion();
+                    int id2 = itemDato.getInscripcion().getIdInscripcion();
+                    intent = new Intent(getApplicationContext(), ModificarInscripcionDeporteActivity.class);
+                    intent.putExtra(Utils.CREDENCIAL, id2);
+                    startActivity(intent);
+                    break;
+            }
         }
+
     }
 
     private void loadData() {
@@ -140,7 +145,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s", Utils.URL_INSCRIPCIONES_GENERALES, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_INSCRIPCIONES_GENERALES, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -200,7 +205,27 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-            if (jsonObject.get("becas") != null && jsonObject.get("becas") instanceof JSONArray) {
+
+            if (jsonObject.has("deportes")){
+
+                JSONArray jsonArray = jsonObject.getJSONArray("deportes");
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject o = jsonArray.getJSONObject(i);
+
+                    Inscripcion inscripcion = Inscripcion.mapper(o, Inscripcion.PARCIAL);
+
+                    ItemDato dato = new ItemDato();
+                    dato.setInscripcion(inscripcion);
+                    dato.setTipo(ItemDato.TIPO_INSCRIPCION);
+
+                    mList.add(dato);
+
+                }
+
+            }
+            /*if (jsonObject.get("becas") != null && jsonObject.get("becas") instanceof JSONArray) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("becas");
 
@@ -253,31 +278,7 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
 
             if (jsonObject.get("deportes") != null && jsonObject.get("deportes") instanceof JSONArray) {
 
-                JSONArray jsonArray = jsonObject.getJSONArray("deportes");
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject o = jsonArray.getJSONObject(i);
-
-                    int id = Integer.parseInt(o.getString("idInscripcion"));
-                    int idUsuario = Integer.parseInt(o.getString("idUsuario"));
-                    int idConvocatoria = Integer.parseInt(o.getString("idTemporada"));
-                    int anio = Integer.parseInt(o.getString("anio"));
-                    int validez = Integer.parseInt(o.getString("validez"));
-                    int idEstado = Integer.parseInt(o.getString("idEstado"));
-                    String estado = o.getString("nombreE");
-
-                    String titulo = o.getString("nombre");
-
-                    Inscripcion inscripcion = new Inscripcion(id, titulo, anio, idUsuario, idConvocatoria,
-                            validez, Inscripcion.TIPO_DEPORTE, idEstado, estado);
-
-                    ItemDato dato = new ItemDato();
-                    dato.setInscripcion(inscripcion);
-                    dato.setTipo(ItemDato.TIPO_INSCRIPCION);
-
-                    mList.add(dato);
-
-                }
 
             } else {
                 JSONObject o = jsonObject.getJSONObject("deportes");
@@ -300,13 +301,14 @@ public class InscripcionesActivity extends AppCompatActivity implements View.OnC
                 dato.setTipo(ItemDato.TIPO_INSCRIPCION);
 
                 mList.add(dato);
-            }
+            }*/
         } catch (JSONException e) {
             e.printStackTrace();
             updateView(2);
         }
-        HashMap<String, List<ItemBase>> groupedHashMap = groupDataIntoHashMap(mList);
 
+
+        HashMap<String, List<ItemBase>> groupedHashMap = groupDataIntoHashMap(mList);
         Comparator<String> comparator = new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {

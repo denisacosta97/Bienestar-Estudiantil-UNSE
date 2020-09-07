@@ -1,7 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
 import android.content.pm.ActivityInfo;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,20 +29,28 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 public class RegistroDeporteActivity extends AppCompatActivity implements View.OnClickListener {
 
     Deporte mDeporte;
-    EditText edtNombreDep, nombre, apellido, dni, edad, fechaNac, domicilio, barrio, carrera, legajo,
-    facultad, ciudad, provincia, pais, anioIng, cantMatAprob, face, insta, mail, tel, actvFis,
-            lugarActiv, objet, mPeso, mAltura ;
+    EditText edtNombreDep, edtNombre, edtApellido, edtDni, edtEdad, edtFechaNac, edtDomicilio,
+            edtBarrio, edtCarrera, edtLegajo,
+            edtFacultad, edtCiudad, edtProvincia, edtPais, edtAnioIngeso, edtCantMaterias, edtFacebook,
+            edtInstagram, edtMail, edtTelefono, edtActividadFisica,
+            edtLugarActividad, edtObjetivo, edtPeso, edtAltura;
     CheckBox checkwhatsApp, checksi, checkno, checkcont, checkmedia, checkbaja;
-    LinearLayout actividad;
+    LinearLayout latActividad;
     ImageView btnBack;
     Button btnRegistrar;
-    boolean isWsp = false, isActividad = false;
-    int intensidad = 1;
     String peso, altura;
     DialogoProcesamiento dialog;
+    boolean isWsp = false, isActividad = false;
+    int intensidad = -1, anio = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +58,11 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_registro_deporte);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null){
+        if (getIntent().getParcelableExtra(Utils.DEPORTE_NAME) != null) {
             mDeporte = getIntent().getParcelableExtra(Utils.DEPORTE_NAME);
+        }
+        if (getIntent().getIntExtra(Utils.DEPORTE_TEMPORADA, -1) != -1) {
+            anio = getIntent().getIntExtra(Utils.DEPORTE_TEMPORADA, -1);
         }
 
         loadViews();
@@ -76,40 +87,52 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         checkno.setChecked(true);
-        actividad.setVisibility(View.GONE);
+        latActividad.setVisibility(View.GONE);
 
         UsuarioViewModel usuarioViewModel = new UsuarioViewModel(getApplicationContext());
         int idLocal = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
 
         Usuario usuario = usuarioViewModel.getById(idLocal);
         edtNombreDep.setText(mDeporte.getName());
-        nombre.setText(usuario.getNombre());
-        apellido.setText(usuario.getApellido());
-        dni.setText(String.valueOf(usuario.getIdUsuario()));
-        edad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()))));
-        fechaNac.setText(Utils.getFechaNameWithinHour(Utils.getFechaDate(usuario.getFechaNac())));
-        domicilio.setText(usuario.getDomicilio());
-        barrio.setText(usuario.getBarrio());
-        ciudad.setText(usuario.getLocalidad());
-        provincia.setText(usuario.getProvincia());
-        pais.setText(usuario.getPais());
-        mail.setText(usuario.getMail());
-        tel.setText(String.valueOf(usuario.getTelefono()));
+        edtNombre.setText(usuario.getNombre());
+        edtApellido.setText(usuario.getApellido());
+        edtDni.setText(String.valueOf(usuario.getIdUsuario()));
+        edtEdad.setText(String.valueOf(Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()))));
+        edtFechaNac.setText(Utils.getFechaNameWithinHour(Utils.getFechaDate(usuario.getFechaNac())));
+        edtDomicilio.setText(usuario.getDomicilio());
+        edtBarrio.setText(usuario.getBarrio());
+        edtCiudad.setText(usuario.getLocalidad());
+        edtProvincia.setText(usuario.getProvincia());
+        edtPais.setText(usuario.getPais());
+        edtMail.setText(usuario.getMail());
+        edtTelefono.setText(usuario.getTelefono());
 
-        if (usuario.getTipoUsuario() == 1){
+        EditText[] lock = new EditText[]{edtNombreDep, edtNombre, edtApellido, edtDni, edtEdad, edtFechaNac, edtDomicilio,
+            edtBarrio, edtCiudad, edtProvincia, edtPais, edtMail, edtTelefono};
+
+        for (EditText edt : lock){
+            edt.setEnabled(false);
+        }
+
+        if (usuario.getTipoUsuario() == Utils.TIPO_ALUMNO) {
             AlumnoViewModel alumnoViewModel = new AlumnoViewModel(getApplicationContext());
             Alumno alumno = alumnoViewModel.getById(usuario.getIdUsuario());
-            facultad.setText(alumno.getFacultad());
-            carrera.setText(alumno.getCarrera());
-            legajo.setText(alumno.getLegajo());
-            anioIng.setText(alumno.getAnio());
-        }else{
-            Utils.showToast(getApplicationContext(), "No eres alumno, se rellena con campos por defecto");
-            carrera.setText("N/A");
-            legajo.setText("N/A");
-            facultad.setText("N/A");
-            anioIng.setText("N/A");
-            cantMatAprob.setText("0");
+            edtFacultad.setText(alumno.getFacultad());
+            edtCarrera.setText(alumno.getCarrera());
+            edtLegajo.setText(alumno.getLegajo());
+            edtAnioIngeso.setText(alumno.getAnio());
+
+            edtFacultad.setEnabled(false);
+            edtCarrera.setEnabled(false);
+            edtLegajo.setEnabled(false);
+            edtAnioIngeso.setEnabled(false);
+        } else {
+            Utils.showToast(getApplicationContext(), getString(R.string.usuarioNoAlumno));
+            edtCarrera.setText(" ");
+            edtLegajo.setText(" ");
+            edtFacultad.setText(" ");
+            edtAnioIngeso.setText(" ");
+            edtCantMaterias.setText("0");
         }
 
 
@@ -117,32 +140,32 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
 
     private void loadViews() {
         edtNombreDep = findViewById(R.id.edtDeporte);
-        nombre = findViewById(R.id.edtNombre);
-        apellido = findViewById(R.id.edtApellido);
-        dni = findViewById(R.id.edxtDni);
-        edad = findViewById(R.id.edtxEdad);
-        fechaNac = findViewById(R.id.txtDateAlumno);
-        domicilio = findViewById(R.id.edtxDomicilio);
-        barrio = findViewById(R.id.edtxBarrio);
-        carrera = findViewById(R.id.edxtCarrera);
-        legajo = findViewById(R.id.edtxLegajo);
-        facultad = findViewById(R.id.edtxFacultad);
-        ciudad = findViewById(R.id.edxtCiudad);
-        provincia = findViewById(R.id.edtxProvincia);
-        pais = findViewById(R.id.txtPais);
-        anioIng = findViewById(R.id.edxtAnoIng);
-        cantMatAprob = findViewById(R.id.edtxCantMat);
-        face = findViewById(R.id.txtFacebook);
-        insta = findViewById(R.id.txtInstagram);
-        mail = findViewById(R.id.txtMail);
-        tel = findViewById(R.id.edxtTel);
-        actvFis = findViewById(R.id.edtxPreg2);
-        lugarActiv = findViewById(R.id.edtxPreg3);
-        objet = findViewById(R.id.edtxPreg4);
-        btnBack = findViewById(R.id.btnBack);
+        edtNombre = findViewById(R.id.edtNombre);
+        edtApellido = findViewById(R.id.edtApellido);
+        edtDni = findViewById(R.id.edxtDni);
+        edtEdad = findViewById(R.id.edtxEdad);
+        edtFechaNac = findViewById(R.id.txtDateAlumno);
+        edtDomicilio = findViewById(R.id.edtxDomicilio);
+        edtBarrio = findViewById(R.id.edtxBarrio);
+        edtCarrera = findViewById(R.id.edxtCarrera);
+        edtLegajo = findViewById(R.id.edtxLegajo);
+        edtFacultad = findViewById(R.id.edtxFacultad);
+        edtCiudad = findViewById(R.id.edxtCiudad);
+        edtProvincia = findViewById(R.id.edtxProvincia);
+        edtPais = findViewById(R.id.txtPais);
+        edtAnioIngeso = findViewById(R.id.edxtAnoIng);
+        edtCantMaterias = findViewById(R.id.edtxCantMat);
+        edtFacebook = findViewById(R.id.txtFacebook);
+        edtInstagram = findViewById(R.id.txtInstagram);
+        edtMail = findViewById(R.id.txtMail);
+        edtTelefono = findViewById(R.id.edxtTel);
+        edtActividadFisica = findViewById(R.id.edtxPreg2);
+        edtLugarActividad = findViewById(R.id.edtxPreg3);
+        edtObjetivo = findViewById(R.id.edtxPreg4);
+        btnBack = findViewById(R.id.imgFlecha);
 
-        mPeso = findViewById(R.id.edxtPeso);
-        mAltura = findViewById(R.id.edtxAltura);
+        edtPeso = findViewById(R.id.edxtPeso);
+        edtAltura = findViewById(R.id.edtxAltura);
 
         checkwhatsApp = findViewById(R.id.chbxWhats);
         checksi = findViewById(R.id.chbxSi);
@@ -151,14 +174,14 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
         checkbaja = findViewById(R.id.chbxBaja);
         checkmedia = findViewById(R.id.chbxMedia);
 
-        actividad = findViewById(R.id.disablePreg);
+        latActividad = findViewById(R.id.disablePreg);
         btnRegistrar = findViewById(R.id.btnregister);
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnregister:
                 register();
                 break;
@@ -187,21 +210,21 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                 checkno.setChecked(true);
                 checksi.setChecked(false);
                 isActividad = false;
-                actividad.setVisibility(View.GONE);
-                actvFis.setVisibility(View.GONE);
+                latActividad.setVisibility(View.GONE);
+                edtActividadFisica.setVisibility(View.GONE);
                 break;
             case R.id.chbxSi:
                 checksi.setChecked(true);
                 checkno.setChecked(false);
                 isActividad = true;
-                actividad.setVisibility(View.VISIBLE);
-                actvFis.setVisibility(View.VISIBLE);
+                latActividad.setVisibility(View.VISIBLE);
+                edtActividadFisica.setVisibility(View.VISIBLE);
                 break;
             case R.id.chbxWhats:
-                if (isWsp){
+                if (isWsp) {
                     isWsp = false;
                     checkwhatsApp.setChecked(isWsp);
-                }else{
+                } else {
                     isWsp = true;
                     checkwhatsApp.setChecked(isWsp);
                 }
@@ -210,74 +233,90 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
     }
 
     private void register() {
-        int idDeporte = mDeporte.getIdDep();
-        String nom = nombre.getText().toString().trim();
-        String ape = apellido.getText().toString().trim();
-        String doc = dni.getText().toString().trim();
-        String eda = edad.getText().toString().trim();
-        String fecha = fechaNac.getText().toString().trim();
-        String dom = domicilio.getText().toString().trim();
-        String barr = barrio.getText().toString().trim();
-        String local = ciudad.getText().toString().trim();
-        String prov = provincia.getText().toString().trim();
-        String pai = pais.getText().toString().trim();
-        String carr = carrera.getText().toString().trim();
-        String leg = legajo.getText().toString().trim();
-        String fac = facultad.getText().toString().trim();
-        String anioIn = anioIng.getText().toString().trim();
-        String cantMa = cantMatAprob.getText().toString().trim();
-        String facebook = face.getText().toString().trim();
-        String inst = insta.getText().toString().trim();
-        String email = mail.getText().toString().trim();
-        String telef = tel.getText().toString().trim();
-        peso = mPeso.getText().toString().trim();
-        altura = mAltura.getText().toString().trim();
-        String cuales = actvFis.getText().toString().trim();
-        String lug = lugarActiv.getText().toString().trim();
-        String objetivo = objet.getText().toString().trim();
-        int idTemporada = getIntent().getIntExtra(Utils.DEPORTE_ID, -1);
-        //is wsp, is actividad, is intensidad
+        String nom = edtNombre.getText().toString().trim();
+        String ape = edtApellido.getText().toString().trim();
+        String doc = edtDni.getText().toString().trim();
+        String eda = edtEdad.getText().toString().trim();
+        String fecha = edtFechaNac.getText().toString().trim();
+        String dom = edtDomicilio.getText().toString().trim();
+        String barr = edtBarrio.getText().toString().trim();
+        String local = edtCiudad.getText().toString().trim();
+        String prov = edtProvincia.getText().toString().trim();
+        String pai = edtPais.getText().toString().trim();
+        String carr = edtCarrera.getText().toString().trim();
+        String leg = edtLegajo.getText().toString().trim();
+        String fac = edtFacultad.getText().toString().trim();
+        String anioIn = edtAnioIngeso.getText().toString().trim();
+        String cantMa = edtCantMaterias.getText().toString().trim();
+        String facebook = edtFacebook.getText().toString().trim();
+        String inst = edtInstagram.getText().toString().trim();
+        String email = edtMail.getText().toString().trim();
+        String telef = edtTelefono.getText().toString().trim();
+        peso = edtPeso.getText().toString().trim();
+        altura = edtAltura.getText().toString().trim();
+        String cuales = edtActividadFisica.getText().toString().trim();
+        String lug = edtLugarActividad.getText().toString().trim();
+        String objetivo = edtObjetivo.getText().toString().trim();
+
         Validador validador = new Validador(getApplicationContext());
 
-        if (false/*!validador.noVacio(nom, ape, dom, barr, local, prov, pai, carr, leg, fac, peso, altura, anioIn, objetivo, facebook, inst, fecha)*/){
-            if (validador.validarDNI(doc) && validador.validarNumero(eda) && validador.validarNumero(cantMa)
-                && validador.validarNumero(telef)){
-                if (validador.validarMail(email)){
+        if (validador.validarDNI(edtDni) && validador.validarNombres(edtNombre)
+                && validador.validarNombres(edtApellido) && validador.validarNumero(edtEdad)
+                && validador.validarFecha(edtFechaNac)
+                && validador.validarTexto(edtDomicilio) && validador.validarTexto(edtBarrio)
+                && validador.validarTexto(edtCiudad) && validador.validarTexto(edtProvincia)
+                && validador.validarTexto(edtPais) && validador.validarTexto(edtCarrera)
+                && validador.validarLegajo(edtLegajo) && validador.validarNumero(edtAnioIngeso)
+                && validador.validarNumero(edtCantMaterias)
+                && validador.validarTexto(edtFacultad) && validador.validarMail(edtMail)
+                && validador.validarTelefono(edtTelefono) && validador.validarTexto(edtObjetivo)
+        ) {
+            if (facebook.equals("")) {
+                facebook = " ";
+            }
+            if (inst.equals("")) {
+                inst = " ";
+            }
+            if (validador.validadPeso(peso) && validador.validadAltura(altura)) {
 
-                    String datos = "?idT=%s&idU=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&key=%s";
-
-                    if (isActividad){
-                        if (false/*!validador.noVacio(cuales, lug)*/){
-                            datos = String.format("?idT=%s&id=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
-                                    isWsp ? 1 : 2, objetivo, cuales, intensidad, lug, peso, altura, new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
-
-                            sendServer(datos);
-                        }else{
-                            Utils.showToast(getApplicationContext(),"Debe indicar cuales actividades realizó");
-                        }
-
-                    }else{
-                        datos = String.format("?idT=%s&id=%s&cm=%s&fa=%s&ins=%s&wsp=%s&isw=%s&obj=%s&cual=%s&inte=%s&lug=%s&pes=%s&alt=%s&key=%s", idTemporada, doc, Integer.parseInt(cantMa), facebook, inst, telef,
-                                isWsp ? 1 : 2, objetivo, "N/A", -1, "N/A", peso, altura, new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
-
+                HashMap<String, String> datos = new HashMap<>();
+                datos.put("iu", "");
+                datos.put("id", String.valueOf(mDeporte.getIdDep()));
+                datos.put("cm", cantMa);
+                datos.put("fa", facebook);
+                datos.put("in", inst);
+                datos.put("ws", String.valueOf(isWsp ? 1 : 2));
+                datos.put("ob", objetivo);
+                datos.put("pe", peso);
+                datos.put("al", altura);
+                datos.put("cu", cuales.equals("") ? " " : cuales);
+                datos.put("int", String.valueOf(intensidad));
+                datos.put("lu", lug.equals("") ? " ": lug);
+                if (isActividad) {
+                    if (validador.validarTexto(edtLugarActividad) && validador.validarTexto(edtActividadFisica)) {
                         sendServer(datos);
+
+                    } else {
+                        Utils.showToast(getApplicationContext(), getString(R.string.noActividadCompleta));
                     }
-                }else{
-                    Utils.showToast(getApplicationContext(),"Mail inválido");
+                } else {
+                    sendServer(datos);
                 }
 
-            }else{
-                Utils.showToast(getApplicationContext(), "Hay campos numéricos invalidos");
-            }
-        }else{
-            Utils.showToast(getApplicationContext(), "Hay campos sin completar");
-        }
 
+            } else {
+                Utils.showToast(getApplicationContext(), getString(R.string.noAlturaPeso));
+            }
+
+        } else
+            Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
     }
 
-    private void sendServer(String datos) {
-        String URL = Utils.URL_DEPORTE_INSCRIPCION+datos;
-
+    private void sendServer(final HashMap<String, String> datos) {
+        String URL = Utils.URL_DEPORTE_INSCRIPCION;
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        final int id = preferenceManager.getValueInt(Utils.MY_ID);
+        final String token = preferenceManager.getValueString(Utils.TOKEN);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -289,11 +328,24 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
-        });
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                datos.put("key", token);
+                datos.put("idU", String.valueOf(id));
+                datos.put("iu", String.valueOf(id));
+                return datos;
+            }
+        };
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
@@ -312,8 +364,8 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                     break;
                 case 1:
                     //Exito
-                   finish();
-                   Utils.showToast(getApplicationContext(),getString(R.string.inscripcionExitosa));
+                    finish();
+                    Utils.showToast(getApplicationContext(), getString(R.string.inscripcionExitosa));
                     break;
                 case 2:
                     //Error
@@ -325,15 +377,17 @@ public class RegistroDeporteActivity extends AppCompatActivity implements View.O
                 case 4:
                     Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.inscripcionYaRegistrada));
+                    break;
                 case 100:
-                    //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
         }
     }
 }

@@ -198,7 +198,7 @@ public class BMDeportesActivity extends AppCompatActivity implements View.OnClic
                 JSONObject j = mensaje.getJSONObject(i);
                 int val = j.getInt("validez");
                 if (val == 1) {
-                    Deporte deporte = Deporte.mapper(j);
+                    Deporte deporte = Deporte.mapper(j, Deporte.COMPLETE);
                     mDeportes.add(deporte);
                 }
 

@@ -32,13 +32,6 @@
 
         </LinearLayout>
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:text="@string/txtDeportesFrag"-->
-<!--            android:textSize="14sp" />-->
-
         <View
             android:layout_width="60dp"
             android:layout_height="12dp"
@@ -62,6 +55,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
+
+        <LinearLayout
+            android:id="@+id/layoutError"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgIconError"
+                android:padding="10dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_error" />
+
+            <TextView
+                android:id="@+id/txtError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ERROR AL OBTENER LISTADO DE DEPORTES"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="18sp"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnError"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat_black"
+                android:padding="18dp"
+                android:background="@drawable/button_border"
+                android:text="REINTENTAR">
+            </Button>
+
+        </LinearLayout>
 
         <View
             android:layout_width="60dp"

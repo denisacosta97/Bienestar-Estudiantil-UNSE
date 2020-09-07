@@ -76,9 +76,9 @@
     <string name="noCredenciales">No posee credenciales de este tipo</string>
     <string name="inscripcionExitosa">¡Inscripción realizada!</string>
     <string name="inscripcionErronea">Error al inscribirse, intente nuevamente</string>
-    <string name="deportesSinConvocatoria">El deporte seleccionado no tiene convocatoria vigente</string>
-    <string name="deporteCerroConvocatoria">El deporte seleccionado cerró su convocatoria</string>
-    <string name="deporteYaInscripto">Ya se encuentra inscripto en la actividad</string>
+    <string name="deportesSinConvocatoria">El deporte no tiene convocatoria vigente</string>
+    <string name="deporteCerroConvocatoria">El deporte cerró su convocatoria</string>
+    <string name="deporteYaInscripto">Ya estas inscripto en la actividad</string>
     <string name="noConexion">Para visualizar el elemento debe estar conectado a Internet</string>
     <string name="usuarioListError">Error al obtener usuarios intente nuevamente</string>
     <string name="usuarioListVacio">No existe ningún usuario</string>
@@ -214,6 +214,11 @@
     <string name="noticiaHabilitado">¡Noticia activada!</string>
     <string name="btnHabilitar">HABILITAR</string>
     <string name="btnDeshabilitar">DESHABILITAR</string>
+    <string name="noAsignado">NO ASIGNADO</string>
+    <string name="usuarioNoAlumno">No eres alumno, se rellena con campos por defecto</string>
+    <string name="inscripcionYaRegistrada">¡Ya existe una inscripción anterior!</string>
+    <string name="credencialesListError">Error al obtener las inscripciones, por favor intenta nuevamente</string>
+    <string name="credencialesListVacia">No existe ninguna inscripcion realizada a un deporte o beca</string>
 
 </resources>
 

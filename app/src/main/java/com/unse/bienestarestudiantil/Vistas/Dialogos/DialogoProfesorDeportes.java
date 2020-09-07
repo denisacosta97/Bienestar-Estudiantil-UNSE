@@ -80,7 +80,7 @@ public class DialogoProfesorDeportes extends DialogFragment {
         mDeportes = new ArrayList<>();
 
 //        mDeportes.add(new Deporte(3, R.drawable.ic_futbol_masc, "Fútbol 11 Masculino", "José Grecco", "lunes, miércoles y viernes","20:30hs a 23:00hs"));
-//        mDeportes.add(new Deporte(4, R.drawable.ic_futbol_fem, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
+//        mDeportes.add(new Deporte(4, R.drawable.ic_futbol, "Fútbol 11 Femenino", "José Grecco", "lunes, miércoles y viernes","18:30hs a 20:30hs"));
 
         mDeportesAdapter = new DeportesAdapter(mDeportes, getContext(), true);
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);

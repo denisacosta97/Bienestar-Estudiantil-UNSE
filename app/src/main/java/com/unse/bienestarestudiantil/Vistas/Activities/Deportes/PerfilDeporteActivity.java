@@ -3,7 +3,6 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,15 +23,13 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PerfilDeporteActivity extends AppCompatActivity implements View.OnClickListener {
 
     Deporte mDeporte;
-    TextView mHorario, mDia, mEntrenador, mNombreDep;
-    ImageView mIcon, btnBack;
+    TextView txtHorario, txtDia, txtEntrenador, txtNombre;
+    ImageView imgIcon, btnBack;
     Button btnRegister;
     DialogoProcesamiento dialog;
 
@@ -47,25 +44,28 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
         }
 
         if (mDeporte != null) {
+
             loadViews();
 
             loadListener();
 
             loadData();
         } else {
-            Utils.showToast(getApplicationContext(), "ERROR al abrir, vuelta a intentar");
+            Utils.showToast(getApplicationContext(), getString(R.string.noData));
             finish();
         }
 
     }
 
     private void loadData() {
-        mEntrenador.setText(String.format("%s %s", mDeporte.getProfesor().getNombre(), mDeporte.getProfesor().getApellido()));
-        mHorario.setText(mDeporte.getHorario());
-        mDia.setText(mDeporte.getDias());
-        mNombreDep.setText(mDeporte.getName());
-        Glide.with(mIcon.getContext()).load(Utils.getIconDeporte(mDeporte.getIdDep())).into(mIcon);
-        mIcon.setImageResource(mDeporte.getIconDeporte());
+        if (mDeporte.getProfesor().getIdProfesor() == 0)
+            txtEntrenador.setText(getString(R.string.noAsignado));
+        else txtEntrenador.setText(String.format("%s %s", mDeporte.getProfesor().getNombre(),
+                mDeporte.getProfesor().getApellido()));
+        txtHorario.setText(mDeporte.getHorario());
+        txtDia.setText(mDeporte.getDias());
+        txtNombre.setText(mDeporte.getName());
+        Glide.with(imgIcon.getContext()).load(mDeporte.getIconDeporte()).into(imgIcon);
     }
 
     private void loadListener() {
@@ -75,19 +75,19 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
     }
 
     private void loadViews() {
-        mHorario = findViewById(R.id.txtHorarios);
-        mDia = findViewById(R.id.txtDia);
-        mEntrenador = findViewById(R.id.txtEntrenador);
-        mNombreDep = findViewById(R.id.txtNameDeporte);
-        mIcon = findViewById(R.id.imgvIcon);
-        btnRegister = findViewById(R.id.btnRegisterDep);
-        btnBack = findViewById(R.id.btnBack);
+        txtHorario = findViewById(R.id.txtHorarios);
+        txtDia = findViewById(R.id.txtDia);
+        txtEntrenador = findViewById(R.id.txtEntrenador);
+        txtNombre = findViewById(R.id.txtNameDeporte);
+        imgIcon = findViewById(R.id.imgvIcon);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnBack = findViewById(R.id.imgFlecha);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnRegisterDep:
+        switch (v.getId()) {
+            case R.id.btnRegister:
                 checkDisponibility();
                 break;
             case R.id.btnBack:
@@ -98,17 +98,11 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
     }
 
     private void checkDisponibility() {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(new Date(System.currentTimeMillis()));
-
-        int anio = calendar.get(Calendar.YEAR);
-
-        int id = new PreferenceManager(getApplicationContext()).getValueInt(Utils.MY_ID);
-
-        String URL = String.format("%s?idD=%s&anio=%s&id=%s&key=%s",
-                Utils.URL_DEPORTE_TEMPORADA, mDeporte.getIdDep(), anio, id,
-                new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN));
-
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        int id = preferenceManager.getValueInt(Utils.MY_ID);
+        String token = preferenceManager.getValueString(Utils.TOKEN);
+        String URL = String.format("%s?idU=%s&key=%s&id=%s",
+                Utils.URL_DEPORTE_TEMPORADA, id,token,mDeporte.getIdDep());
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -146,22 +140,21 @@ public class PerfilDeporteActivity extends AppCompatActivity implements View.OnC
                     //Exito
                     Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
                     i.putExtra(Utils.DEPORTE_NAME, mDeporte);
-                    int id = jsonObject.getInt("id");
-                    i.putExtra(Utils.DEPORTE_ID, id);
+                    int anio = jsonObject.getInt("id");
+                    i.putExtra(Utils.DEPORTE_TEMPORADA, anio);
                     startActivity(i);
-                    break;
-
-                case 5:
-                    Utils.showToast(getApplicationContext(), getString(R.string.deportesSinConvocatoria));
-                    break;
-                case 3:
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
-                   break;
-                case 4:
-                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.deporteCerroConvocatoria));
+                    break;
+                case 3:
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.deportesSinConvocatoria));
                     break;
                 case 6:
                     Utils.showToast(getApplicationContext(), getString(R.string.deporteYaInscripto));

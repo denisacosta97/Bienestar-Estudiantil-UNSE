@@ -80,13 +80,13 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         dateViewHolder.txtEstado.setText(dateItem.getEstadoValue());
                         int i = R.color.colorTextDefault;
                         switch (dateItem.getEstadoValueId()) {
-                            case 1:
+                            case 2:
                                 i = R.color.colorGreen;
                                 break;
-                            case 2:
+                            case 3:
                                 i = R.color.colorRed;
                                 break;
-                            case 3:
+                            case 1:
                                 i = R.color.colorOrange;
                                 break;
                         }
@@ -112,7 +112,7 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         DateViewHolder(View v) {
             super(v);
             txtTitulo = v.findViewById(R.id.txtTitulo);
-            txtNroArchivo = v.findViewById(R.id.txtNroArchivo);
+            txtNroArchivo = v.findViewById(R.id.txtId);
             txtEstado = v.findViewById(R.id.idEstado);
 
         }
