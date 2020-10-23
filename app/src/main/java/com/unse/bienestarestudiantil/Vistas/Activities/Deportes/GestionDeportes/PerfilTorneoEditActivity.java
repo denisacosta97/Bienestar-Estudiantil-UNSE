@@ -22,7 +22,6 @@ import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropTorneo;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -239,11 +238,12 @@ public class PerfilTorneoEditActivity extends AppCompatActivity implements View.
             switch (estado) {
                 case 1:
                     //Exito
-                    Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
-                    i.putExtra(Utils.TORNEO, mTorneo);
-                    int id = jsonObject.getInt("id");
-                    i.putExtra(Utils.TORNEO, id);
-                    startActivity(i);
+                    finish();
+//                    Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
+//                    i.putExtra(Utils.TORNEO, mTorneo);
+//                    int id = jsonObject.getInt("id");
+//                    i.putExtra(Utils.TORNEO, id);
+//                    startActivity(i);
                     break;
                 case 4://No existe
                 case 3:

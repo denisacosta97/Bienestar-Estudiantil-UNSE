@@ -6,41 +6,6 @@
             android:id="@+id/item_inicio"
             android:icon="@drawable/ic_home"
             android:title="Inicio"/>
-        <item
-            android:id="@+id/item_poli"
-            android:icon="@drawable/ic_poli"
-            android:title="Polideportivo"/>
-        <item
-            android:id="@+id/item_deporte"
-            android:icon="@drawable/ic_deportes"
-            android:title="Deportes"/>
-        <item
-            android:id="@+id/item_upa"
-            android:icon="@drawable/ic_upa"
-            android:visible="false"
-            android:title="UPA"/>
-        <item
-            android:id="@+id/item_becas"
-            android:icon="@drawable/ic_becas"
-            android:title="Área Becas"/>
-        <item
-            android:id="@+id/item_ciber"
-            android:icon="@drawable/ic_ciber"
-            android:title="Ciber"/>
-        <item
-            android:id="@+id/item_transporte"
-            android:icon="@drawable/ic_transporte"
-            android:title="Transporte"/>
-        <item
-            android:id="@+id/item_resi"
-            android:icon="@drawable/ic_residencia"
-            android:visible="false"
-            android:title="Residencia"/>
-        <item
-            android:id="@+id/item_comedor"
-            android:icon="@drawable/ic_menu_comedor"
-            android:visible="false"
-            android:title="Comedor"/>
     </group>
 
     <item
@@ -61,14 +26,6 @@
                 android:id="@+id/item_about"
                 android:icon="@drawable/ic_b_bienestar"
                 android:title="@string/itemNosotros"/>
-            <item
-                android:id="@+id/item_contactos"
-                android:icon="@drawable/ic_informacion"
-                android:title="@string/itemContacto"/>
-            <item
-                android:id="@+id/item_terminos"
-                android:icon="@drawable/ic_terms"
-                android:title="@string/itemCondiciones"/>
         </menu>
     </item>
 

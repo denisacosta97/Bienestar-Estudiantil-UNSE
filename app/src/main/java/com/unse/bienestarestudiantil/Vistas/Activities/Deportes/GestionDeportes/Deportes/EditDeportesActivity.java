@@ -23,7 +23,6 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Deporte;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.RegistroDeporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropDeporte;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -262,11 +261,12 @@ public class EditDeportesActivity extends AppCompatActivity implements View.OnCl
             switch (estado) {
                 case 1:
                     //Exito
-                    Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
-                    i.putExtra(Utils.DEPORTE_NAME, mDeporte);
-                    int id = jsonObject.getInt("id");
-                    i.putExtra(Utils.DEPORTE_ID, id);
-                    startActivity(i);
+                    finish();
+//                    Intent i = new Intent(getApplicationContext(), RegistroDeporteActivity.class);
+//                    i.putExtra(Utils.DEPORTE_NAME, mDeporte);
+//                    int id = jsonObject.getInt("id");
+//                    i.putExtra(Utils.DEPORTE_ID, id);
+//                    startActivity(i);
                     break;
                 case 4://No existe
                 case 2:

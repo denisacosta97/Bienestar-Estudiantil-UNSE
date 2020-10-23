@@ -41,11 +41,11 @@ public class TurnosAdapter extends RecyclerView.Adapter<TurnosAdapter.TurnoViewH
 
         if (mList.size() != 0) {
             Turno turno = mList.get(i);
-            holder.txtTitulo.setText(turno.getTitulo());
-            holder.txtFecha.setText(String.format("%s, %s - %s", turno.getFecha(), turno.getFechaInicio(),
-                    turno.getFechaFin()));
+            holder.txtTitulo.setText(turno.getNomBeca());
+            String fecha = turno.getDia() + "/" + turno.getMes() + "/" + turno.getAnio();
+            holder.txtFecha.setText(String.format("%s", fecha));
             int estado = 0;
-            switch (turno.getEstado()) {
+            switch (turno.getDescBeca()) {
                 case "PENDIENTE":
                     estado = R.drawable.ic_reserva_espera_turno;
                     holder.txtEstado.setBackgroundColor(mContext.getResources().getColor(R.color.colorAccent));
@@ -58,10 +58,14 @@ public class TurnosAdapter extends RecyclerView.Adapter<TurnosAdapter.TurnoViewH
                     estado = R.drawable.ic_reserva_ocupado_turno;
                     holder.txtEstado.setBackgroundColor(mContext.getResources().getColor(R.color.colorOrange));
                     break;
+                case "CANCELADO":
+                    estado = R.drawable.ic_reserva_ocupado_turno;
+                    holder.txtEstado.setBackgroundColor(mContext.getResources().getColor(R.color.colorOrange));
+                    break;
             }
             Glide.with(holder.imgIcon.getContext()).load(estado).into(holder.imgIcon);
             holder.txtEstado.setText(turno.getEstado());
-            holder.txtDesc.setText(turno.getDescripcion());
+            holder.txtDesc.setText(turno.getDescBeca());
 
            /*Drawable drawable = holder.imgIcon.;
            // drawable.mutate();

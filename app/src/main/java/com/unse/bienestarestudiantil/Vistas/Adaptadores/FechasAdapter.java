@@ -2,8 +2,10 @@ package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.graphics.Typeface;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static final int TIPO_INSCRIPCIONES = 1;
     public static final int TIPO_DEPORTES_INSCRIPCIONES = 2;
+    public static final int TIPO_TURNO = 3;
 
     private Context mContext;
     private ArrayList<ItemBase> lista;
@@ -94,11 +97,16 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         dateViewHolder.txtEstado.setTypeface(null, Typeface.BOLD);
 
                     } else dateViewHolder.txtEstado.setVisibility(View.GONE);
-                }else if (tipo == TIPO_DEPORTES_INSCRIPCIONES){
+                } else if (tipo == TIPO_DEPORTES_INSCRIPCIONES) {
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                } else if (tipo == TIPO_TURNO) {
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
                 }
+
                 break;
         }
 

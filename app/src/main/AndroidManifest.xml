@@ -21,7 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.Gestion.GestionNoticias.ListadoNoticiasActivity"></activity>
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.ListadoTurnosMesActivity"></activity>
+        <activity android:name=".Vistas.Dialogos.DialogAtenderBecas" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.ListadoFechasInhabilitadasActivity" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.AgregarFechasActivity" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.ListadoConsultaActivity" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.AgregarConsultaActivity" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionConsultasActivity" />
+        <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionFechasActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionNoticias.ListadoNoticiasActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionNoticias.AddNoticiaActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionNoticiasActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.InfoReservaInstActivity" />
@@ -33,15 +41,12 @@
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.DialogBuscarCancha" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.GestionReservasInstActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasCanchas.GestionReservasCanchasActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.CanchasSelectActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.CanchasActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.AgregarImpresionActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.EstadisticasCiberActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.GestionImpresionesActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.NuevoIngresoDialog" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiberActivity" />
         <activity android:name=".Vistas.Fragmentos.CiberFragment" />
-        <activity android:name=".Vistas.Activities.Transporte.RecorridoRealActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.PerfilRecorridoActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionColectivosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.NuevoServicioActivity" />
@@ -52,7 +57,6 @@
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionRecorridosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.Chofer.GestionChoferActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporteActivity" />
-        <activity android:name=".Vistas.Activities.Transporte.RecorridoActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.CalendarAsistenciaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.ControlAsistenciaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.AddTorneoActivity" />
@@ -79,35 +83,24 @@
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosDiaActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity" />
-        <activity android:name=".Vistas.Activities.PerfilBecasActivity" />
-        <activity android:name=".Vistas.Activities.Becas.InfoBecasActivity" />
         <activity
             android:name=".Vistas.Activities.Perfil.ArchivosActivity"
             android:label="Gestión de archivos" />
         <activity android:name=".Vistas.Activities.TorneosActivity" />
-        <activity android:name=".Vistas.Activities.NoticiaLectorActivity" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionReservasInst.DialogBuscarReservas" />
         <activity android:name=".Vistas.Activities.Polideportivo.GestionIngreso.DialogIngresoPolideportivo" />
         <activity android:name=".Vistas.BarcodeActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.PerfilDeporteActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.RegistroDeporteActivity" />
         <activity
             android:name=".Vistas.Activities.Perfil.InfoUsuarioActivity"
             android:label="Información" />
         <activity
             android:name=".Vistas.Activities.Perfil.PerfilActivity"
             android:label="Perfil" />
-        <activity
-            android:name=".Vistas.Activities.Polideportivo.ConfirmarReservaActivity"
-            android:label="Confirmar Reserva" />
         <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
         <activity
             android:name=".Vistas.Activities.AsistenciaActivity"
             android:label="Asistencia" />
-        <activity
-            android:name=".Vistas.Activities.Polideportivo.ReservaEspacioActivity"
-            android:label="Realizar Reserva" />
         <activity android:name=".Vistas.Activities.Perfil.TiposCredencialesActivity" />
         <activity
             android:name=".Vistas.Activities.Inicio.MainActivity"
@@ -123,14 +116,8 @@
         <activity android:name=".Vistas.Activities.Inicio.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
-            android:name=".Vistas.Activities.Polideportivo.EspaciosActivity"
-            android:label="Espacios Disponibles" />
-        <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
             android:label="Gestión de Polideportivo" />
-        <activity
-            android:name=".Vistas.Activities.Polideportivo.RequisitosReservasActivity"
-            android:label="Requisitos de Reservas" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionFinanzas.GestionFinanzasActivity"
             android:label="Gestión de Finanzas" />
@@ -153,21 +140,11 @@
         <activity
             android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
             android:label="Estadisticas" />
-        <activity
-            android:name=".Vistas.Activities.Becas.TurnosActivity"
-            android:label="Turnos" />
-        <activity android:name=".Vistas.Activities.Becas.TipoTurnosActivity" />
-        <activity android:name=".Vistas.Activities.Becas.SelectorFechaActivity" />
-        <activity android:name=".Vistas.Activities.Becas.SelectorReceptoresActivity" />
-        <activity android:name=".Vistas.Activities.Becas.ResumenTurnoActivity" />
         <activity android:name=".Vistas.Activities.Perfil.ConfiguracionesActivities" />
         <activity android:name=".Vistas.Activities.Perfil.ListaCredencialesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.TarjetaCredencialActivity" />
         <activity android:name=".Vistas.Activities.Perfil.CropImageActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.CalendarReservasActivity" />
-        <activity android:name=".Vistas.Activities.Polideportivo.SelectInstActivity" />
         <activity android:name=".Vistas.Activities.Perfil.InscripcionesActivity" />
-        <activity android:name=".Vistas.Activities.Deportes.ModificarInscripcionDeporteActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity" />
         <activity android:name=".Vistas.Activities.Perfil.UploadPictureActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity" />

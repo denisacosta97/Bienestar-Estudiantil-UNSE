@@ -6,45 +6,45 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Categoria;
-import com.unse.bienestarestudiantil.Modelos.Noticia;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.NoticiaLectorActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.NoticiasAdapter;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiberActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.EstadisticasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos.GestionArchivosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticiasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class InicioFragmento extends Fragment {
 
-    RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
-    RecyclerView recyclerCategorias, recyclerNoticias;
-    ArrayList<Categoria> mCategorias;
-    CategoriasAdapter mAdapter;
-    View view;
-    NoticiasAdapter mNoticiasAdapter;
-    ArrayList<Noticia> mListNoticias;
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    OpcionesAdapter mAdapter;
+    ArrayList<Opciones> mOpciones, mOpcionesFinal;
+    ArrayList<String> ids;
+    ImageView imgIcono;
     Context mContext;
     FragmentManager mFragmentManager;
+    View view;
 
     public void setContext(Context context) {
         mContext = context;
@@ -67,166 +67,102 @@ public class InicioFragmento extends Fragment {
 
         loadViews();
 
-        loadDataRecycler();
+        loadData();
+
+        loadListener();
 
         return view;
     }
 
-    private void loadViews() {
-        recyclerCategorias = view.findViewById(R.id.recyclerCategorias);
-        recyclerNoticias = view.findViewById(R.id.recyclerNoticias);
+    private void loadData() {
+        mOpciones = new ArrayList<>();
+        mOpcionesFinal = new ArrayList<>();
+        ids = new ArrayList<>();
+
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1200, "Gestión de Socios", R.drawable.ic_socio, R.color.colorPrimary));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 900, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1100, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorRed));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1300, "Gestión Noticias", R.drawable.ic_noticias, R.color.colorGreen));
+
+        mOpcionesFinal.addAll(mOpciones);
+        mLayoutManager = new GridLayoutManager(mContext, 2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new OpcionesAdapter(mOpcionesFinal, mContext,1);
+        mRecyclerView.setAdapter(mAdapter);
+
+//        filtrarOpciones();
+
+        mAdapter.notifyDataSetChanged();
     }
 
-    private void loadDataRecycler() {
-        loadCategorias();
-        mAdapter = new CategoriasAdapter(mCategorias, getContext());
-        mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        recyclerCategorias.setLayoutManager(mLayoutManager);
-        recyclerCategorias.setAdapter(mAdapter);
+    private void loadViews() {
+        mRecyclerView = view.findViewById(R.id.recycler);
+        imgIcono = view.findViewById(R.id.imgFlecha);
+    }
 
-        recyclerCategorias.setVisibility(View.GONE);
+    private void filtrarOpciones() {
+        for (Opciones e : mOpciones) {
+            if (ids.contains(String.valueOf(e.getId())))
+                mOpcionesFinal.add(e);
+        }
+    }
 
-        loadInfo();
+    private void loadListener() {
 
-        mListNoticias = new ArrayList<>();
-        mNoticiasAdapter = new NoticiasAdapter(mListNoticias, getContext(), 0);
-        mLayoutManager2 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        recyclerNoticias.setLayoutManager(mLayoutManager2);
-
-        recyclerNoticias.setAdapter(mNoticiasAdapter);
-        recyclerNoticias.setNestedScrollingEnabled(false);
-
-        ItemClickSupport itemClickSupport2 = ItemClickSupport.addTo(recyclerNoticias);
-        itemClickSupport2.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(), NoticiaLectorActivity.class);
-                i.putExtra(Utils.NOTICIA, mListNoticias.get(position));
-                startActivity(i);
-            }
-        });
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerCategorias);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                resetear();
-                mCategorias.get(position).setEstado(true);
-                mNoticiasAdapter.filtrarNoticias((int) id);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-    private void resetear() {
-        for (Categoria c : mCategorias) {
-            c.setEstado(false);
-        }
-    }
-
-    private void loadInfo() {
-        PreferenceManager manager = new PreferenceManager(mContext);
-        String key = manager.getValueString(Utils.TOKEN);
-        int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_LISTA_NOTICIA, id, key);
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                procesarRespuesta(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Utils.showToast(mContext, getString(R.string.servidorOff));
-                dialog.dismiss();
-
-            }
-        });
-        //Abro dialogo para congelar pantalla
-        dialog = new DialogoProcesamiento();
-        dialog.setCancelable(false);
-        dialog.show(mFragmentManager, "dialog_process");
-        VolleySingleton.getInstance(mContext).addToRequestQueue(request);
-    }
-
-    private void procesarRespuesta(String response) {
-        try {
-            dialog.dismiss();
-            JSONObject jsonObject = new JSONObject(response);
-            int estado = jsonObject.getInt("estado");
-            switch (estado) {
-                case -1:
-                    Utils.showToast(mContext, getString(R.string.errorInternoAdmin));
-                    break;
-                case 1:
-                    //Exito
-                    loadInfo(jsonObject);
-                    break;
-                case 2:
-                    Utils.showToast(mContext, getString(R.string.noData));
-                    //updateView(0);
-                    break;
-                case 3:
-                    Utils.showToast(mContext, getString(R.string.tokenInvalido));
-                    break;
-                case 100:
-                    //No autorizado
-                    Utils.showToast(mContext, getString(R.string.tokenInexistente));
-                    break;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Utils.showToast(mContext, getString(R.string.errorInternoAdmin));
-            //updateView(2);
-        }
-    }
-
-    private void loadInfo(JSONObject jsonObject) {
-        try {
-            if (jsonObject.has("mensaje")) {
-
-                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
-                mListNoticias = new ArrayList<>();
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject o = jsonArray.getJSONObject(i);
-
-                    Noticia noticia = Noticia.mapper(o, Noticia.COMPLETE);
-
-                    mListNoticias.add(noticia);
+                switch ((int) id) {
+                    case 900:
+                        startActivity(new Intent(mContext, GestionRolesActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(mContext, EstadisticasActivity.class));
+                        break;
+                    case 100:
+                        startActivity(new Intent(mContext, GestionGeneralDeportesActivity.class));
+                        break;
+                    case 200:
+                        startActivity(new Intent(mContext, GestionPolideportivoActivity.class));
+                        break;
+                    case 400:
+                        startActivity(new Intent(mContext, MainGestionBecasActivity.class));
+                        break;
+                    case 500:
+                        startActivity(new Intent(mContext, GestionCiberActivity.class));
+                        break;
+                    case 1000:
+                        startActivity(new Intent(mContext, GestionUsuariosActivity.class));
+                        break;
+                    case 1100:
+                        startActivity(new Intent(mContext, GestionArchivosActivity.class));
+                        break;
+                    case 1200:
+                        startActivity(new Intent(mContext, GestionSociosActivity.class));
+                        break;
+                    case 600:
+                        startActivity(new Intent(mContext, GestionTransporteActivity.class));
+                        break;
+                    case 1300:
+                        startActivity(new Intent(mContext, GestionNoticiasActivity.class));
+                        break;
 
                 }
-                if (mListNoticias.size() >0){
-                    recyclerCategorias.setVisibility(View.VISIBLE);
-                }
-                mNoticiasAdapter.setList(mListNoticias);
-                //updateView(1);
-
-
+                Utils.showToast(mContext, "Item: " + mOpciones.get(position).getTitulo());
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            //updateView(2);
-        }
+        });
 
     }
 
-
-    private void loadCategorias() {
-        mCategorias = new ArrayList<>();
-        mCategorias.add(new Categoria(9, "Todo"));
-        mCategorias.add(new Categoria(1, "Comedor Universitario"));
-        mCategorias.add(new Categoria(2, "Deportes"));
-        mCategorias.add(new Categoria(3, "Transporte"));
-        mCategorias.add(new Categoria(4, "Becas"));
-        mCategorias.add(new Categoria(5, "Residencia"));
-        mCategorias.add(new Categoria(6, "Ciber Estudiantil"));
-        mCategorias.add(new Categoria(7, "UPA"));
-        mCategorias.add(new Categoria(8, "Polideportivo"));
-        mCategorias.get(0).setEstado(true);
-    }
 }

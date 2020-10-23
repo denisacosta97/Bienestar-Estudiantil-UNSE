@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void loadViews() {
         mInicio = findViewById(R.id.sesionOn);
         btnBack = findViewById(R.id.btnBack);
-        mVideoView = findViewById(R.id.videoView);
+        //mVideoView = findViewById(R.id.videoView);
         edtPass = findViewById(R.id.edtPass);
         edtUser = findViewById(R.id.edtUser);
     }

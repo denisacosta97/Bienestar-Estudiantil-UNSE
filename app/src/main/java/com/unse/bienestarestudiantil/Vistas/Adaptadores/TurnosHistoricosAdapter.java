@@ -37,17 +37,17 @@ public class TurnosHistoricosAdapter extends RecyclerView.Adapter<TurnosHistoric
     public void onBindViewHolder(@NonNull TurnosHistoricosAdapter.EventosViewHolder holder, int position) {
         Turno turno = mTurnos.get(position);
 
-        holder.mTitulo.setText(turno.getTitulo());
-        holder.mDni.setText(turno.getDni());
-        holder.mNombre.setText(turno.getNombre());
-        holder.mApellido.setText(turno.getApellido());
+        holder.mTitulo.setText(turno.getNomBeca());
+        holder.mDni.setText(String.valueOf(turno.getIdUsuario()));
+        String nombre = turno.getNom() + " " + turno.getApe();
+        holder.mNombre.setText(nombre);
         holder.mEstado.setText(turno.getEstado());
     }
 
 
     @Override
     public long getItemId(int position) {
-        return mTurnos.get(position).getId();
+        return mTurnos.get(position).getIdUsuario();
     }
 
     @Override
@@ -64,8 +64,7 @@ public class TurnosHistoricosAdapter extends RecyclerView.Adapter<TurnosHistoric
             super(itemView);
             mTitulo = itemView.findViewById(R.id.txtTitulo);
             mDni = itemView.findViewById(R.id.txtDni);
-            mNombre = itemView.findViewById(R.id.txtNombre);
-            mApellido = itemView.findViewById(R.id.txtApellido);
+            mNombre = itemView.findViewById(R.id.txtNomAp);
             mEstado = itemView.findViewById(R.id.txtEstado);
 
         }

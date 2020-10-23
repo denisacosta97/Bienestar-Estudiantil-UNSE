@@ -251,6 +251,14 @@ public class Utils {
 
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
+    public static final String URL_INSERTAR_CONSULTA = "https://" + IP + "/becas/consulta/insertar.php";
+    public static final String URL_CONSULTAS = "https://" + IP + "/becas/consulta/getConsultas.php";
+    public static final String URL_CAMBIAR_FECHA = "https://" + IP + "/becas/fecha/eliminar.php";
+    public static final String URL_FECHAS_INHAB = "https://" + IP + "/becas/fecha/getFechas.php";
+    public static final String URL_INSERTAR_FECHAS = "https://" + IP + "/becas/fecha/insertar.php";
+    public static final String URL_TURNOS_DIA = "https://" + IP + "/becas/turno/getTurnosToday.php";
+    public static final String URL_TURNOS_LISTA = "https://" + IP + "/becas/turno/getTurnos.php";
+    public static final String URL_TURNOS_ACT = "https://" + IP + "/becas/turno/actualizar.php";
 
     //CIBER
     public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";
@@ -870,6 +878,15 @@ public class Utils {
         char in = mes.charAt(0);
 
         return in + mes.substring(1);
+    }
+
+    public static String getMonth(int date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(System.currentTimeMillis()));
+        cal.set(Calendar.MONTH, date - 1);
+        String mes = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        char in = mes.charAt(0);
+        return String.valueOf(in).toUpperCase() + mes.substring(1);
     }
 
     public static boolean isDateHabilited(Calendar calendar) {

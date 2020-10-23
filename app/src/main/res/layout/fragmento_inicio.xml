@@ -2,45 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorGrey"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearSi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCategorias"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:text="Aquí puedes visualizar las gestiones que tienes habilitadas"
+            android:textSize="18sp"
+            android:textColor="@color/blackTextColor"
+            android:fontFamily="@font/montserrat_regular"/>
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/item_opciones"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/item_menu_comedor" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerNoticias"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

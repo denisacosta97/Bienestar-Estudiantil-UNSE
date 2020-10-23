@@ -14,7 +14,7 @@
         <item>Deciembre</item>
     </array>
     <integer name="card_name_len">25</integer>
-    <string name="app_name">Bienestar Estudiantil - UNSE</string>
+    <string name="app_name">Bienestar Estudiantil</string>
     <string name="app_name_shor">Bienestar Estudiantil</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -167,6 +167,10 @@
     <string name="suscripcionInscripto">El socio ya está inscripto en ese año</string>
     <string name="primeroBuscarSuscrip">Primero debe buscar un año</string>
     <string name="suscripcionNoExiste">No existen suscripciones en ese año</string>
+    <string name="exito">Guardado con éxito.</string>
+    <string name="fechaModif">Estado de fecha modificado</string>
+    <string name="fechaNoModif">Fecha no modificada</string>
+    <string name="turnoAct">Turno actualizado</string>
 
     <!--  Calendario  -->
 
@@ -209,7 +213,7 @@
     <string name="noticiaNoExiste">¡Noticia inexistente!</string>
     <string name="tituloNoticias">Lista noticias</string>
     <string name="noticiaActualizada">¡Noticia actualizada!</string>
-   <string name="noticiaActualizarError">¡Error al actualizar la noticia!</string>
+    <string name="noticiaActualizarError">¡Error al actualizar la noticia!</string>
     <string name="noticiaDeshabilitado">¡Noticia desactivada!</string>
     <string name="noticiaHabilitado">¡Noticia activada!</string>
     <string name="btnHabilitar">HABILITAR</string>

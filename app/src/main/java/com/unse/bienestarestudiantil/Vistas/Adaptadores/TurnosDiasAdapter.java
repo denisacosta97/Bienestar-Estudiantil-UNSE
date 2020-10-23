@@ -2,28 +2,31 @@ package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogAtenderBecas;
 
 import java.util.ArrayList;
 
 public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.EventosViewHolder> {
 
-    private ArrayList<Turno> mTurnos;
+    ArrayList<Turno> mTurnos;
     private Context context;
+    FragmentManager mFragmentManager;
     View view;
 
-    public TurnosDiasAdapter(ArrayList<Turno> list, Context ctx) {
+    public TurnosDiasAdapter(ArrayList<Turno> list, Context ctx, FragmentManager fragmentManager) {
         this.mTurnos = list;
         this.context = ctx;
+        this.mFragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -35,19 +38,55 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TurnosDiasAdapter.EventosViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TurnosDiasAdapter.EventosViewHolder holder, final int position) {
         Turno turno = mTurnos.get(position);
 
-        holder.mTitulo.setText(turno.getTitulo());
-        holder.mDni.setText(turno.getDni());
-        holder.mNombre.setText(turno.getNombre());
-        holder.mApellido.setText(turno.getApellido());
+        holder.mTitulo.setText(turno.getNomBeca());
+        holder.mDni.setText(String.valueOf(turno.getIdUsuario()));
+        String nombre = turno.getNom() + " " + turno.getApe();
+        holder.mNombre.setText(nombre);
+        holder.mHorario.setText(turno.getHorario());
+
+        switch (turno.getDescBeca()) {
+            case "PENDIENTE":
+                holder.mEstado.setText("PENDIENTE");
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorYellow));
+                break;
+            case "CONFIRMADO":
+                holder.mEstado.setText("CONFIRMADO");
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorGreen));
+                break;
+            case "AUSENTE":
+                holder.mEstado.setText("AUSENTE");
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
+                break;
+            case "CANCELADO":
+                holder.mEstado.setText("CANCELADO");
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorRed));
+                break;
+        }
+
+        if(!turno.getDescBeca().equals("PENDIENTE")){
+            holder.btnAtender.setText("MODIFICAR");
+        }
+
+        holder.btnAtender.setTag(position);
+        holder.btnAtender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogAtenderBecas dialogAtender = new DialogAtenderBecas();
+                dialogAtender.loadData(mTurnos.get(position));
+                dialogAtender.setFragmentManager(mFragmentManager);
+                dialogAtender.setContext(context);
+                dialogAtender.show(mFragmentManager,"dialog_turnos");
+            }
+        });
     }
 
 
     @Override
     public long getItemId(int position) {
-        return mTurnos.get(position).getId();
+        return mTurnos.get(position).getIdUsuario();
     }
 
     @Override
@@ -57,34 +96,17 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTitulo, mDni, mNombre, mApellido;
-        Button btnConfirmar, btnAusente;
-        String estado = "Pendiente";
+        TextView mTitulo, mDni, mNombre, mEstado, mHorario;
+        Button btnAtender;
 
         EventosViewHolder(final View itemView) {
             super(itemView);
             mTitulo = itemView.findViewById(R.id.txtTitulo);
             mDni = itemView.findViewById(R.id.txtDni);
-            mNombre = itemView.findViewById(R.id.txtNombre);
-            mApellido = itemView.findViewById(R.id.txtApellido);
-            btnConfirmar = itemView.findViewById(R.id.btnConfirmar);
-            btnAusente = itemView.findViewById(R.id.btnAusente);
-
-            btnConfirmar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    estado = "Confirmado";
-                    Toast.makeText(itemView.getContext(), "Confirmado", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            btnAusente.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    estado = "Ausente";
-                    Toast.makeText(itemView.getContext(), "Ausente", Toast.LENGTH_SHORT).show();
-                }
-            });
+            mNombre = itemView.findViewById(R.id.txtNomAp);
+            mHorario = itemView.findViewById(R.id.txtHorario);
+            btnAtender = itemView.findViewById(R.id.btnAtender);
+            mEstado = itemView.findViewById(R.id.txtEstado);
 
         }
 

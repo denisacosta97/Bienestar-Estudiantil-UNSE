@@ -5,9 +5,49 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar_trans">
-    </include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/imgFlecha"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="0.1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_flecha_atras" />
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:translationX="-24dp"
+            android:gravity="center"
+            android:layout_weight="0.7"
+            android:text="jeje"
+            android:textColor="@color/colorAccent"
+            android:textSize="22sp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <ImageView
+            android:id="@+id/imgRefresh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:layout_weight="0.2"
+            android:src="@drawable/ic_refresh"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

@@ -1,13 +1,17 @@
 package com.unse.bienestarestudiantil.Modelos;
 
+import com.unse.bienestarestudiantil.Herramientas.Utils;
+
 public class ItemDato extends ItemBase {
 
     public static final int TIPO_INSCRIPCION = 1;
     public static final int TIPO_TEMPORADA = 2;
     public static final int TIPO_DEPORTE = 3;
+    public static final int TIPO_TURNO = 4;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
+    private Turno mTurno;
     private int tipo;
 
     public ItemDato() {
@@ -29,6 +33,8 @@ public class ItemDato extends ItemBase {
                 return String.valueOf(getTemporada().getAnio());
             case TIPO_DEPORTE:
                 return getDeporte().getName();
+            case TIPO_TURNO:
+                return String.format("%s %s", Utils.getDayWeek(Utils.getFechaDate(mTurno.getFechaRegistro())), mTurno.getDia());
 
         }
         return null;
@@ -81,6 +87,14 @@ public class ItemDato extends ItemBase {
 
     public void setTemporada(Temporada temporada) {
         mTemporada = temporada;
+    }
+
+    public Turno getTurno() {
+        return mTurno;
+    }
+
+    public void setTurno(Turno turno) {
+        mTurno = turno;
     }
 
     public void setTipo(int tipo) {

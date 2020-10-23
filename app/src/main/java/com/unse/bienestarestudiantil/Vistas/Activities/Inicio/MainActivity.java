@@ -46,13 +46,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.TermsActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.BecasFragment;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.CiberFragment;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.ComedorFragment;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.DeportesFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.PoliFragment;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.TransporteFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    //SlidingLayout mSlidingLayout;
     PreferenceManager manager;
     DialogoProcesamiento dialog;
     UsuarioViewModel mUsuarioViewModel;
@@ -89,12 +82,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgPerfil, imgBienestar;
     TextView txtNombre;
     HashMap<String, Integer> ids;
-    //ItemDrawerAdapter mAdapter;
-    //ArrayList<ItemDrawer> mItemDrawers;
-    //RecyclerView.LayoutManager mLayoutManager;
-    //RecyclerView mRecyclerView;
-    //LinearLayout mLayout;
-    //boolean isOpen = false;
     Double lat, lon;
     public Boolean isReady = false, qrCiber = false;
     String pat = "", idR = "";
@@ -152,31 +139,10 @@ public class MainActivity extends AppCompatActivity {
         ids.put(getString(R.string.itemPerfil), R.id.item_perfil);
         ids.put(getString(R.string.itemSistema), R.id.item_sistema);
         ids.put(getString(R.string.itemNosotros), R.id.item_about);
-        ids.put(getString(R.string.itemCondiciones), R.id.item_terminos);
-        ids.put(getString(R.string.itemContacto), R.id.item_contactos);
         mRolViewModel = new RolViewModel(getApplicationContext());
         manager = new PreferenceManager(getApplicationContext());
         mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
-      /*  mItemDrawers = new ArrayList<>();
-        mItemDrawers.add(new ItemDrawer(R.id.item_inicio, "Inicio", R.drawable.ic_home, true, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_poli, "Polideportivo", R.drawable.ic_poli, false, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_deporte, "Deportes", R.drawable.ic_deportes, false, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(4, "UPA", R.drawable.ic_upa, true, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(5, "Área Becas", R.drawable.ic_becas, true, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(6, "Ciber", R.drawable.ic_ciber, true, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(7, "Transporte", R.drawable.ic_transporte, true, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(8, "Residencia", R.drawable.ic_residencia, true, ItemDrawer.TIPO_OPCION));
-        //mItemDrawers.add(new ItemDrawer(9, "Comedor", R.drawable.ic_menu_comedor, true, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_sistema, "Gestión del Sistema", R.drawable.ic_settings, false, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_perfil, "Perfil", R.drawable.ic_user, false, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_about, "Sobre nosotros", R.drawable.ic_b_bienestar, false, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_contactos, "Contactos", R.drawable.ic_informacion, false, ItemDrawer.TIPO_OPCION));
-        mItemDrawers.add(new ItemDrawer(R.id.item_terminos, "Términos y condiciones", R.drawable.ic_terms, false, ItemDrawer.TIPO_OPCION));
-        mAdapter = new ItemDrawerAdapter(mItemDrawers, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);*/
+
     }
 
     private void loadViews() {
@@ -314,33 +280,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (itemDrawer.getItemId()) {
-            case R.id.item_becas:
-                fragmentoGenerico = new BecasFragment();
-                break;
             case R.id.item_inicio:
                 fragmentoGenerico = new InicioFragmento();
                 ((InicioFragmento) fragmentoGenerico).setContext(getApplicationContext());
                 ((InicioFragmento) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
-                break;
-            case R.id.item_poli:
-                fragmentoGenerico = new PoliFragment();
-                break;
-            case R.id.item_ciber:
-                fragmentoGenerico = new CiberFragment();
-                ((CiberFragment) fragmentoGenerico).setActivity(MainActivity.this);
-                break;
-            case R.id.item_deporte:
-                fragmentoGenerico = new DeportesFragment(getSupportFragmentManager(),getApplicationContext());
-                break;
-
-            case R.id.item_transporte:
-                fragmentoGenerico = new TransporteFragment();
-                ((TransporteFragment) fragmentoGenerico).setContext(getApplicationContext());
-                ((TransporteFragment) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
-                ((TransporteFragment) fragmentoGenerico).setActivity(MainActivity.this);
-                break;
-            case R.id.item_comedor:
-                fragmentoGenerico = new ComedorFragment();
                 break;
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
@@ -350,9 +293,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_about:
                 startActivity(new Intent(this, AboutActivity.class));
-                break;
-            case R.id.item_terminos:
-                startActivity(new Intent(this, TermsActivity.class));
                 break;
         }
 
