@@ -80,6 +80,8 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Gestión de Becas",R.drawable.ic_becas, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Consultas",R.drawable.ic_becas, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión de Fechas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Gestión de Comedor",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,6, "Gestión de Residencia",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -14,7 +14,7 @@
         <item>Deciembre</item>
     </array>
     <integer name="card_name_len">25</integer>
-    <string name="app_name">Bienestar Estudiantil</string>
+    <string name="app_name">Gestión Bienestar Estudiantil</string>
     <string name="app_name_shor">Bienestar Estudiantil</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
