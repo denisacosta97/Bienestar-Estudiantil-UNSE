@@ -172,6 +172,7 @@ public class Utils {
     public static final String NOTICIA = "dato_noticias";
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
+    public static final String DATA_TURNO = "data_turno";
     public static final String ALUMNO_NAME = "dato_alumno";
     public static final String USER_NAME = "dato_user";
     public static final String NUM_INST = "num_inst";
@@ -251,14 +252,19 @@ public class Utils {
 
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
+
     public static final String URL_INSERTAR_CONSULTA = "https://" + IP + "/becas/consulta/insertar.php";
     public static final String URL_CONSULTAS = "https://" + IP + "/becas/consulta/getConsultas.php";
+
     public static final String URL_CAMBIAR_FECHA = "https://" + IP + "/becas/fecha/eliminar.php";
     public static final String URL_FECHAS_INHAB = "https://" + IP + "/becas/fecha/getFechas.php";
     public static final String URL_INSERTAR_FECHAS = "https://" + IP + "/becas/fecha/insertar.php";
+
     public static final String URL_TURNOS_DIA = "https://" + IP + "/becas/turno/getTurnosToday.php";
+    public static final String URL_TURNOS_BY_DAY = "https://" + IP + "/becas/turno/getTurnosByDay.php";
     public static final String URL_TURNOS_LISTA = "https://" + IP + "/becas/turno/getTurnos.php";
-    public static final String URL_TURNOS_ACT = "https://" + IP + "/becas/turno/actualizar.php";
+    public static final String URL_TURNOS_ACTUALIZAR = "https://" + IP + "/becas/turno/actualizar.php";
+    public static final String URL_TURNOS_ATENDER = "https://" + IP + "/becas/turno/atender.php";
 
     //CIBER
     public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";

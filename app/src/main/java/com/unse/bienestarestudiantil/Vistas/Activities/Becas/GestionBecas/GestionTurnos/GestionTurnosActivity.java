@@ -43,7 +43,7 @@ public class GestionTurnosActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Turnos");
 
     }
 

@@ -20,7 +20,7 @@ public class Turno implements Parcelable {
     public static final int MEDIUM = 3;
 
     int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni;
-    String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca;
+    String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, carrera, facultad;
 
     public Turno(int idUsuario, int idBeca, int idReceptor, int dia, int mes, int anio, int estado,
                  int validez, int dni, String horario, String fechaRegistro,
@@ -74,6 +74,8 @@ public class Turno implements Parcelable {
         tipoBeca = in.readString();
         nom = in.readString();
         ape = in.readString();
+        carrera = in.readString();
+        facultad = in.readString();
     }
 
     public static final Creator<Turno> CREATOR = new Creator<Turno>() {
@@ -87,6 +89,22 @@ public class Turno implements Parcelable {
             return new Turno[size];
         }
     };
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -227,9 +245,25 @@ public class Turno implements Parcelable {
     public static Turno mapper(JSONObject o, int tipo) {
         Turno turno = null;
         int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni;
-        String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca;
+        String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, facultad, carrera;
         try {
             switch (tipo){
+                case MEDIUM:
+                    idUsuario = Integer.parseInt(o.getString("idusuario"));
+                    horario = o.getString("horario");
+                    nom = o.getString("nombre");
+                    ape = o.getString("apellido");
+                    nomBeca = o.getString("nombrebeca");
+                    descBeca = o.getString("descripcion");
+                    estado = Integer.parseInt(o.getString("estado"));
+                    carrera = o.has("carrera") ? o.getString("carrera") : "NO ASIGNADO";
+                    facultad = o.has("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+
+                    turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);
+                    turno.setCarrera(carrera);
+                    turno.setFacultad(facultad);
+                    turno.setEstado(estado);
+                    break;
                 case LOW:
                     dia = Integer.parseInt(o.getString("dia"));
                     mes = Integer.parseInt(o.getString("mes"));
@@ -245,9 +279,9 @@ public class Turno implements Parcelable {
                     ape = o.getString("apellido");
                     nomBeca = o.getString("nombrebeca");
                     descBeca = o.getString("descripcion");
-
+                    estado = Integer.parseInt(o.getString("estado"));
                     turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);
-
+                    turno.setEstado(estado);
                     break;
                 case COMPLETE:
                     idUsuario = Integer.parseInt(o.getString("idusuario"));
@@ -300,5 +334,7 @@ public class Turno implements Parcelable {
         dest.writeString(tipoBeca);
         dest.writeString(nom);
         dest.writeString(ape);
+        dest.writeString(carrera);
+        dest.writeString(facultad);
     }
 }

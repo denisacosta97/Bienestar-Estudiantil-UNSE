@@ -1,11 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Dialogos;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,31 +19,39 @@ import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+
 public class DialogAtenderBecas extends DialogFragment implements View.OnClickListener {
 
     View view;
     Button btnConfirm, btnAusente;
     Turno mTurno;
+    TextView txtNombre, txtFacultad, txtDni, txtHorario;
     DialogoProcesamiento dialog;
     FragmentManager fragmentManager;
     Context context;
 
-    public void loadData(Turno turno){
+    public void loadData(Turno turno) {
         this.mTurno = turno;
     }
 
-    public void setFragmentManager(FragmentManager fragmentManager){
+    public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 
-    public void setContext(Context context){
+    public void setContext(Context context) {
         this.context = context;
     }
 
@@ -61,9 +65,18 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
 
         loadViews();
 
+        loadData();
+
         loadListener();
 
         return view;
+    }
+
+    private void loadData() {
+        txtNombre.setText(String.format("%s %s", mTurno.getNom(), mTurno.getApe()));
+        txtHorario.setText("-\n" + mTurno.getHorario());
+        txtDni.setText(String.valueOf(mTurno.getIdUsuario()));
+        txtFacultad.setText(String.format("%s,%s",mTurno.getCarrera(), mTurno.getFacultad()));
     }
 
     private void loadListener() {
@@ -74,11 +87,15 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
     private void loadViews() {
         btnConfirm = view.findViewById(R.id.btnConfirm);
         btnAusente = view.findViewById(R.id.btnAusente);
+        txtNombre = view.findViewById(R.id.txtNombre);
+        txtDni = view.findViewById(R.id.txtDni);
+        txtFacultad = view.findViewById(R.id.txtFacultad);
+        txtHorario = view.findViewById(R.id.txtHorario);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnConfirm:
                 sendServer(6);
                 break;
@@ -88,14 +105,11 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
         }
     }
 
-    public void sendServer(int op) {
+    public void sendServer(final int op) {
         PreferenceManager manager = new PreferenceManager(context);
-        String key = manager.getValueString(Utils.TOKEN);
-        int id = manager.getValueInt(Utils.MY_ID);
-
-        String URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s&ho=%s&es=%s&ir=%s",
-                Utils.URL_TURNOS_ACT, id, key, mTurno.getDia(), mTurno.getMes(), mTurno.getAnio(),
-                mTurno.getHorario(), op, id);
+        final String key = manager.getValueString(Utils.TOKEN);
+        final int id = manager.getValueInt(Utils.MY_ID);
+        String URL = Utils.URL_TURNOS_ACTUALIZAR;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -109,7 +123,26 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
                 dialog.dismiss();
 
             }
-        });
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> param = new HashMap<>();
+                param.put("key", key);
+                param.put("idU", String.valueOf(id));
+                param.put("di", String.valueOf(mTurno.getDia()));
+                param.put("me", String.valueOf(mTurno.getMes()));
+                param.put("an", String.valueOf(mTurno.getAnio()));
+                param.put("ho", mTurno.getHorario());
+                param.put("ir", String.valueOf(id));
+                param.put("es", String.valueOf(op));
+                return param;
+            }
+        };
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
@@ -128,18 +161,24 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
                     Utils.showToast(getContext(), getString(R.string.turnoAct));
                     dismiss();
                     break;
+                case 2:
+                    Utils.showToast(getContext(), getString(R.string.turnoErrorAtender));
+                    break;
                 case 3:
-                    Utils.showToast(getContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getContext(), getString(R.string.errorInternoAdmin));
         }
     }
 }

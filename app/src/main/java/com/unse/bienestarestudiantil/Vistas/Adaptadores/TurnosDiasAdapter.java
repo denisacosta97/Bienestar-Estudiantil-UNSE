@@ -1,40 +1,41 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogAtenderBecas;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.EventosViewHolder> {
 
     ArrayList<Turno> mTurnos;
     private Context context;
-    FragmentManager mFragmentManager;
     View view;
+    OnClickOptionListener listener;
 
-    public TurnosDiasAdapter(ArrayList<Turno> list, Context ctx, FragmentManager fragmentManager) {
+    public TurnosDiasAdapter(ArrayList<Turno> list, Context ctx, OnClickOptionListener listener) {
         this.mTurnos = list;
         this.context = ctx;
-        this.mFragmentManager = fragmentManager;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public TurnosDiasAdapter.EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_turno_dia, parent, false);
 
-        return new TurnosDiasAdapter.EventosViewHolder(view);
+        return new TurnosDiasAdapter.EventosViewHolder(view, listener);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
         switch (turno.getDescBeca()) {
             case "PENDIENTE":
                 holder.mEstado.setText("PENDIENTE");
-                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorYellow));
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
                 break;
             case "CONFIRMADO":
                 holder.mEstado.setText("CONFIRMADO");
@@ -58,7 +59,7 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
                 break;
             case "AUSENTE":
                 holder.mEstado.setText("AUSENTE");
-                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
+                holder.mEstado.setTextColor(context.getResources().getColor(R.color.colorPink));
                 break;
             case "CANCELADO":
                 holder.mEstado.setText("CANCELADO");
@@ -66,21 +67,12 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
                 break;
         }
 
-        if(!turno.getDescBeca().equals("PENDIENTE")){
+        if (listener == null) {
+            holder.btnAtender.setVisibility(View.GONE);
+        } else if (!turno.getDescBeca().equals("PENDIENTE")) {
             holder.btnAtender.setText("MODIFICAR");
         }
 
-        holder.btnAtender.setTag(position);
-        holder.btnAtender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogAtenderBecas dialogAtender = new DialogAtenderBecas();
-                dialogAtender.loadData(mTurnos.get(position));
-                dialogAtender.setFragmentManager(mFragmentManager);
-                dialogAtender.setContext(context);
-                dialogAtender.show(mFragmentManager,"dialog_turnos");
-            }
-        });
     }
 
 
@@ -98,8 +90,9 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
 
         TextView mTitulo, mDni, mNombre, mEstado, mHorario;
         Button btnAtender;
+        OnClickOptionListener listener;
 
-        EventosViewHolder(final View itemView) {
+        EventosViewHolder(final View itemView, final OnClickOptionListener listener) {
             super(itemView);
             mTitulo = itemView.findViewById(R.id.txtTitulo);
             mDni = itemView.findViewById(R.id.txtDni);
@@ -107,6 +100,14 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
             mHorario = itemView.findViewById(R.id.txtHorario);
             btnAtender = itemView.findViewById(R.id.btnAtender);
             mEstado = itemView.findViewById(R.id.txtEstado);
+            this.listener = listener;
+
+            btnAtender.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(getAdapterPosition());
+                }
+            });
 
         }
 

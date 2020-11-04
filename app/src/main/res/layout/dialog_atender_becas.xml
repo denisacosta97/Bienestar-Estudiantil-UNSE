@@ -47,9 +47,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:id="@+id/txtNombre"
+                        android:layout_width="match_parent"
+                        android:text="Denis Lionel Acosta"
+                        android:fontFamily="@font/montserrat_black"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:id="@+id/txtDni"
+                        android:layout_width="match_parent"
+                        android:text="40657677"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        android:id="@+id/txtFacultad"
+                        android:layout_width="match_parent"
+                        android:text="FCM"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:id="@+id/txtHorario"
+                        android:layout_width="match_parent"
+                        android:text="-\n10:30 - 10:45"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
                 <TextView
+                    android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:id="@+id/txtNombreUser"
                     android:layout_width="match_parent"

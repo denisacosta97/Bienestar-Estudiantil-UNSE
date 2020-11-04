@@ -202,9 +202,10 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 if (mListOficial.get(position) instanceof ItemDato) {
-                    //Intent i = new Intent(getApplicationContext(), ListadoTurnosMesActivity.class);
-                    //i.putExtra(Utils.DATA_RESERVA, ((ItemDato) mListOficial.get(position)).getTurno());
-                    //startActivity(i);
+                    Intent i = new Intent(getApplicationContext(), ListadoTurnosMesActivity.class);
+                    Turno turno = ((ItemDato) mListOficial.get(position)).getTurno();
+                    i.putExtra(Utils.DATA_TURNO, turno);
+                    startActivity(i);
                 }
             }
         });

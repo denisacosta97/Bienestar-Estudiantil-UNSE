@@ -14,11 +14,12 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginLeft="10dp"
+
             android:id="@+id/imgFlecha"
-            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_weight="0.1"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -26,25 +27,23 @@
 
         <TextView
             android:id="@+id/txtTitulo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:translationX="-24dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_weight="0.7"
             android:text="jeje"
             android:textColor="@color/colorAccent"
             android:textSize="22sp"
             android:fontFamily="@font/montserrat_regular"/>
 
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/imgRefresh"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            android:layout_weight="0.2"
+            android:layout_width="34dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="34dp"
+            android:visibility="visible"
             android:src="@drawable/ic_refresh"/>
 
     </LinearLayout>
