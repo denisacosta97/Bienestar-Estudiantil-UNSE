@@ -75,7 +75,7 @@ public class ListadoTurnosMesActivity extends AppCompatActivity implements View.
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText(String.format("Turnos del %s%s", mTurno.getDia(), mTurno.getMes()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText(String.format("Turnos del %s/%s", mTurno.getDia(), mTurno.getMes()));
 
     }
 

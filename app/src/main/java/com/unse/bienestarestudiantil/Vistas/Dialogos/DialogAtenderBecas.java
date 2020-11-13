@@ -139,6 +139,7 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
                 param.put("an", String.valueOf(mTurno.getAnio()));
                 param.put("ho", mTurno.getHorario());
                 param.put("ir", String.valueOf(id));
+                param.put("re", String.valueOf(mTurno.getReceptor()));
                 param.put("es", String.valueOf(op));
                 return param;
             }

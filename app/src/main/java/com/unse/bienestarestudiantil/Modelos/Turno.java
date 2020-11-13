@@ -3,10 +3,10 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.room.Ignore;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.room.Ignore;
 
 public class Turno implements Parcelable {
 
@@ -19,7 +19,7 @@ public class Turno implements Parcelable {
     @Ignore
     public static final int MEDIUM = 3;
 
-    int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni;
+    int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni, receptor;
     String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, carrera, facultad;
 
     public Turno(int idUsuario, int idBeca, int idReceptor, int dia, int mes, int anio, int estado,
@@ -76,6 +76,7 @@ public class Turno implements Parcelable {
         ape = in.readString();
         carrera = in.readString();
         facultad = in.readString();
+        receptor = in.readInt();
     }
 
     public static final Creator<Turno> CREATOR = new Creator<Turno>() {
@@ -89,6 +90,14 @@ public class Turno implements Parcelable {
             return new Turno[size];
         }
     };
+
+    public int getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(int receptor) {
+        this.receptor = receptor;
+    }
 
     public String getCarrera() {
         return carrera;
@@ -244,10 +253,10 @@ public class Turno implements Parcelable {
 
     public static Turno mapper(JSONObject o, int tipo) {
         Turno turno = null;
-        int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni;
+        int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni, receptor;
         String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, facultad, carrera;
         try {
-            switch (tipo){
+            switch (tipo) {
                 case MEDIUM:
                     idUsuario = Integer.parseInt(o.getString("idusuario"));
                     horario = o.getString("horario");
@@ -258,11 +267,13 @@ public class Turno implements Parcelable {
                     estado = Integer.parseInt(o.getString("estado"));
                     carrera = o.has("carrera") ? o.getString("carrera") : "NO ASIGNADO";
                     facultad = o.has("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+                    receptor = Integer.parseInt(o.getString("receptor"));
 
                     turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);
                     turno.setCarrera(carrera);
                     turno.setFacultad(facultad);
                     turno.setEstado(estado);
+                    turno.setReceptor(receptor);
                     break;
                 case LOW:
                     dia = Integer.parseInt(o.getString("dia"));
@@ -280,8 +291,10 @@ public class Turno implements Parcelable {
                     nomBeca = o.getString("nombrebeca");
                     descBeca = o.getString("descripcion");
                     estado = Integer.parseInt(o.getString("estado"));
+                    receptor = Integer.parseInt(o.getString("receptor"));
                     turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);
                     turno.setEstado(estado);
+                    turno.setReceptor(receptor);
                     break;
                 case COMPLETE:
                     idUsuario = Integer.parseInt(o.getString("idusuario"));
@@ -301,11 +314,11 @@ public class Turno implements Parcelable {
                     ape = o.getString("apellido");
 
                     turno = new Turno(idUsuario, idBeca, idReceptor, dia, mes, anio, estado,
-                    validez, dni, horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape);
+                            validez, dni, horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape);
                     break;
             }
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -336,5 +349,6 @@ public class Turno implements Parcelable {
         dest.writeString(ape);
         dest.writeString(carrera);
         dest.writeString(facultad);
+        dest.writeInt(receptor);
     }
 }

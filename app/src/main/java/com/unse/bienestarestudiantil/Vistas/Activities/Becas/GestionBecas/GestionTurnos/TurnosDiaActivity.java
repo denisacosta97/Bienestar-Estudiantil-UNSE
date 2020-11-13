@@ -137,6 +137,7 @@ public class TurnosDiaActivity extends AppCompatActivity implements View.OnClick
                 param.put("an", String.valueOf(pos.getAnio()));
                 param.put("ho", pos.getHorario());
                 param.put("ir", String.valueOf(id));
+                param.put("re", String.valueOf(pos.getReceptor()));
                 param.put("es", String.valueOf(pos.getEstado()));
                 return param;
             }
