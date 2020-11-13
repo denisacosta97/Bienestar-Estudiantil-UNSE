@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar_trans"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            android:outlineAmbientShadowColor="@color/colorGrey2"
+            android:outlineSpotShadowColor="@color/colorGrey2"
+            card_view:backgroundTint="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="Beca alv"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackTextColor"
+                        android:padding="10dp"
+                        android:background="@color/transparente"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Desde: "
+                                android:textSize="16sp"
+                                android:textColor="@color/blackTextColor"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaDesde"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="04/11/2020"
+                                android:textColor="@color/blackTextColor"
+                                android:padding="10dp"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hasta: "
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="@color/blackTextColor"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtFechaHasta"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="12/11/2019"
+                                android:textColor="@color/blackTextColor"
+                                android:padding="10dp"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Disponibilidad: "
+                                android:textSize="16sp"
+                                android:textColor="@color/blackTextColor"
+                                android:fontFamily="@font/montserrat_black"/>
+
+                            <TextView
+                                android:id="@+id/txtDispo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="Activa"
+                                android:textColor="@color/blackTextColor"
+                                android:padding="10dp"
+                                android:background="@color/transparente"
+                                android:fontFamily="@font/montserrat_regular"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnEditar"
+                            android:layout_width="150dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border"
+                            android:text="GUARDAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <Button
+                            android:id="@+id/btnDeshabilitar"
+                            android:layout_width="150dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border"
+                            android:text="DESHABILITAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <Button
+                            android:id="@+id/btnHabilitar"
+                            android:visibility="gone"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/whiteTextColor"
+                            android:textSize="16sp"
+                            android:background="@drawable/button_border"
+                            android:text="HABILITAR"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

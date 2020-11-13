@@ -1,9 +1,11 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber;
+package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecadosDeportes;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,102 +13,64 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Consulta;
-import com.unse.bienestarestudiantil.Modelos.Impresion;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ImpresionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.ConsultasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-
-import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GestionImpresionesActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
 
-    ImageView imgIcono;
-    EditText mEditText;
-    FloatingActionButton fabAgregar;
+public class BecadosActualesDActivity extends AppCompatActivity implements View.OnClickListener {
+
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ImpresionesAdapter impresionesAdapter;
-    ArrayList<Impresion> mImpresiones;
+    ArrayList<Consulta> mList;
+    ConsultasAdapter mAdapter;
+    ImageView imgIcono;
     DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_impresiones);
-
-        setToolbar();
+        setContentView(R.layout.activity_becados_actuales_d);
 
         loadViews();
 
         loadListener();
 
-        loadDataRecycler();
+        loadData();
 
-        loadInfo();
-
-    }
-
-    private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de impresiones");
-    }
-
-    private void loadListener() {
-        imgIcono.setOnClickListener(this);
-        fabAgregar.setOnClickListener(this);
-    }
-
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
-        mEditText = findViewById(R.id.edtBuscar);
-        fabAgregar = findViewById(R.id.fabAdd);
-    }
-
-    private void loadDataRecycler() {
-        mImpresiones = new ArrayList<>();
-
-        impresionesAdapter = new ImpresionesAdapter(mImpresiones, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        mRecyclerView.setNestedScrollingEnabled(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(impresionesAdapter);
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                //Intent i = new Intent(getApplicationContext(), PerfilPasajeroActivity.class);
-                //i.putExtra(Utils.IMPRESION, mImpresiones.get(position));
-                //startActivity(i);
-            }
-        });
-
+        setToolbar();
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imgFlecha:
-                onBackPressed();
-                break;
-            case R.id.fabAdd:
-                startActivity(new Intent(getApplicationContext(), AgregarImpresionActivity.class));
-                break;
-        }
+    protected void onRestart() {
+        super.onRestart();
+        loadInfo();
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado consultas");
+    }
+
+    private void loadData() {
+        mList = new ArrayList<>();
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mAdapter = new ConsultasAdapter(mList, getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+
+        loadInfo();
+
     }
 
     private void loadInfo() {
@@ -176,16 +140,38 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Impresion impresion = Impresion.mapper(o);
-                    mImpresiones.add(impresion);
+                    Consulta noticia = Consulta.mapper(o);
+                    mList.add(noticia);
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        impresionesAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
 
+    }
+
+    private void loadListener() {
+        imgIcono.setOnClickListener(this);
+
+    }
+
+    private void loadViews() {
+        imgIcono = findViewById(R.id.imgFlecha);
+        mRecyclerView = findViewById(R.id.recycler);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
+            case R.id.btnError:
+                loadInfo();
+                break;
+        }
     }
 
 }

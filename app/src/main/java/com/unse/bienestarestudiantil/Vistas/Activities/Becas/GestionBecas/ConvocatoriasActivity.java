@@ -1,19 +1,13 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos;
-
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
+package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,50 +18,30 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
-import com.unse.bienestarestudiantil.Modelos.ItemBase;
-import com.unse.bienestarestudiantil.Modelos.ItemDato;
-import com.unse.bienestarestudiantil.Modelos.ItemFecha;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
-import com.unse.bienestarestudiantil.Modelos.Turno;
+import com.unse.bienestarestudiantil.Modelos.Convocatoria;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosHistoricosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.ConvocatoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.helpers.Util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-public class TurnosHistoricosActivity extends AppCompatActivity implements View.OnClickListener {
-
-    DialogoProcesamiento dialog;
-    ArrayList<Turno> mTurnos;
-    ArrayList<ItemBase> mItems;
-    ArrayList<ItemBase> mListOficial;
+public class ConvocatoriasActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    FechasAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-
+    ArrayList<Convocatoria> mList;
+    ConvocatoriasAdapter mAdapter;
     ImageView imgIcono;
-    ProgressBar mProgressBar;
-    String mes = "";
-    int numberMes;
+    DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_turnos_historicos);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_convocatorias);
 
         loadViews();
 
@@ -76,25 +50,30 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
         loadData();
 
         setToolbar();
-
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Historial de Turnos");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de Convocatorias");
     }
 
     private void loadData() {
-        loadInfo();
+        mList = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mAdapter = new ConvocatoriasAdapter(mList, getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+
+        loadInfo();
+
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_TURNOS_LISTA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_CONVOCATORIA, id, key);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -153,44 +132,18 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
-                mTurnos = new ArrayList<>();
-
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
-
-                    Turno turno = Turno.mapper(o, Turno.LOW);
-                    mTurnos.add(turno);
+                    Convocatoria c = Convocatoria.mapper(o);
+                    mList.add(c);
                 }
-
-                mItems = new ArrayList<>();
-                for (Turno m : mTurnos) {
-                    ItemDato itemDato = new ItemDato();
-                    itemDato.setTurno(m);
-                    itemDato.setTipo(ItemDato.TIPO_TURNO);
-                    mItems.add(itemDato);
-                }
-
-                mListOficial = new ArrayList<>();
-                HashMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
-                List<String> meses = new ArrayList<>();
-                meses.addAll(datos.keySet());
-                for (String date : meses) {
-                    ItemFecha dateItem = new ItemFecha(Utils.getMonth(Integer.parseInt(date)));
-                    mListOficial.add(dateItem);
-                    for (ItemBase item : datos.get(date)) {
-                        ItemDato generalItem = (ItemDato) item;
-                        mListOficial.add(generalItem);
-                    }
-                }
-                adapter = new FechasAdapter(getApplicationContext(), mListOficial, FechasAdapter.TIPO_TURNO);
-                mRecyclerView.setAdapter(adapter);
-                //adapter.change(mListOficial);
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -201,10 +154,10 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                if (mListOficial.get(position) instanceof ItemDato) {
-                    Intent i = new Intent(getApplicationContext(), ListadoTurnosMesActivity.class);
-                    Turno turno = ((ItemDato) mListOficial.get(position)).getTurno();
-                    i.putExtra(Utils.DATA_TURNO, turno);
+                if (mList.size() != 0) {
+                    Intent i = new Intent(getApplicationContext(), PerfilConvocatoriaActivity.class);
+                    Convocatoria conv = mList.get(position);
+                    i.putExtra(Utils.NUM_CONVOC, conv);
                     startActivity(i);
                 }
             }
@@ -213,44 +166,9 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
 
     private void loadViews() {
         imgIcono = findViewById(R.id.imgFlecha);
-        mProgressBar = findViewById(R.id.progress_bar);
         mRecyclerView = findViewById(R.id.recycler);
     }
 
-    private HashMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
-
-        HashMap<String, List<ItemBase>> groupedHashMap = new HashMap<>();
-
-        for (ItemBase dato : list) {
-
-            ItemDato itemDatoKey = (ItemDato) dato;
-
-            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_TURNO) {
-
-                String mes = String.valueOf(itemDatoKey.getTurno().getMes());
-
-                if (!groupedHashMap.containsKey(mes)) {
-
-                    for (ItemBase item : list) {
-
-                        ItemDato itemDato = (ItemDato) item;
-
-                        if (itemDato.getTurno().getMes() == itemDatoKey.getTurno().getMes()) {
-                            if (groupedHashMap.containsKey(mes)) {
-                                groupedHashMap.get(mes).add(itemDato);
-                            } else {
-                                List<ItemBase> nuevaLista = new ArrayList<>();
-                                nuevaLista.add(itemDato);
-                                groupedHashMap.put(mes, nuevaLista);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-        return groupedHashMap;
-    }
 
     @Override
     public void onClick(View v) {
@@ -258,7 +176,9 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
+            case R.id.btnError:
+                loadInfo();
+                break;
         }
     }
-
 }

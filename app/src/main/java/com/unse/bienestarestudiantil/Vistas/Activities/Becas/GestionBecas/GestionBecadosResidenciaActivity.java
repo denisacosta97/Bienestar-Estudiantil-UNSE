@@ -1,11 +1,12 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas;
 
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,12 +16,13 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecadosDeportes.BecadosActualesDActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecadosDeportes.BecadosHistoricosDActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class MainGestionBecasActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionBecadosResidenciaActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -31,7 +33,7 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_gestion_becas);
+        setContentView(R.layout.activity_gestion_becados_residencia);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -46,7 +48,7 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Becas");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Becados Deportes");
     }
 
 
@@ -57,16 +59,10 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), GestionTurnosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), BecadosActualesDActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), GestionBecasActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(), GestionConsultasActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(getApplicationContext(), GestionFechasActivity.class));
+                        startActivity(new Intent(getApplicationContext(), BecadosHistoricosDActivity.class));
                         break;
 
                 }
@@ -79,10 +75,8 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Gestión de Turnos",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Gestión de Becas",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Gestión de Consultas",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión de Fechas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Becados actuales",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Becados históricos",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -103,5 +97,4 @@ public class MainGestionBecasActivity extends AppCompatActivity implements View.
                 break;
         }
     }
-
 }

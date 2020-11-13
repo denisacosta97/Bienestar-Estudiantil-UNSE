@@ -1,16 +1,12 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos;
-
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
+package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecadosDeportes;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -24,28 +20,24 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.ListadoTurnosMesActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosHistoricosAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.helpers.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TurnosHistoricosActivity extends AppCompatActivity implements View.OnClickListener {
+public class BecadosHistoricosDActivity extends AppCompatActivity implements View.OnClickListener {
 
     DialogoProcesamiento dialog;
     ArrayList<Turno> mTurnos;
@@ -66,7 +58,7 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_turnos_historicos);
+        setContentView(R.layout.activity_becados_historicos_d);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
