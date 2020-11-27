@@ -3,45 +3,32 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Consulta;
-import com.unse.bienestarestudiantil.Modelos.Impresion;
+import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ImpresionesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
 
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class GestionImpresionesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgIcono;
-    EditText mEditText;
-    FloatingActionButton fabAgregar;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ImpresionesAdapter impresionesAdapter;
-    ArrayList<Impresion> mImpresiones;
-    DialogoProcesamiento dialog;
+    OpcionesAdapter mAdapter;
+    ArrayList<Opciones> mOpciones;
+    ImageView imgIcono;
+    FloatingActionButton fabAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +41,7 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
 
         loadListener();
 
-        loadDataRecycler();
-
-        loadInfo();
+        loadData();
 
     }
 
@@ -64,37 +49,44 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
         ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de impresiones");
     }
 
+
     private void loadListener() {
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                switch ((int) id) {
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), ImpresionesDiaActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), ImpresionesHistoricasActivity.class));
+                        break;
+
+                }
+                Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
+            }
+        });
         imgIcono.setOnClickListener(this);
         fabAgregar.setOnClickListener(this);
+
+    }
+
+    private void loadData() {
+        mOpciones = new ArrayList<>();
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1, "Impresiones del día", R.drawable.ic_anadir_ciber, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 2, "Impresiones históricas", R.drawable.ic_impresion, R.color.colorFCEyT));
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(), 1);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
-        mEditText = findViewById(R.id.edtBuscar);
         fabAgregar = findViewById(R.id.fabAdd);
-    }
-
-    private void loadDataRecycler() {
-        mImpresiones = new ArrayList<>();
-
-        impresionesAdapter = new ImpresionesAdapter(mImpresiones, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        mRecyclerView.setNestedScrollingEnabled(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(impresionesAdapter);
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                //Intent i = new Intent(getApplicationContext(), PerfilPasajeroActivity.class);
-                //i.putExtra(Utils.IMPRESION, mImpresiones.get(position));
-                //startActivity(i);
-            }
-        });
-
     }
 
     @Override
@@ -107,85 +99,6 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
                 startActivity(new Intent(getApplicationContext(), AgregarImpresionActivity.class));
                 break;
         }
-    }
-
-    private void loadInfo() {
-        PreferenceManager manager = new PreferenceManager(getApplicationContext());
-        String key = manager.getValueString(Utils.TOKEN);
-        int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_CONSULTAS, id, key);
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                procesarRespuesta(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
-                dialog.dismiss();
-
-            }
-        });
-        //Abro dialogo para congelar pantalla
-        dialog = new DialogoProcesamiento();
-        dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), "dialog_process");
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
-    }
-
-    private void procesarRespuesta(String response) {
-        try {
-            dialog.dismiss();
-            JSONObject jsonObject = new JSONObject(response);
-            int estado = jsonObject.getInt("estado");
-            switch (estado) {
-                case -1:
-                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
-                    break;
-                case 1:
-                    //Exito
-                    loadInfo(jsonObject);
-                    break;
-                case 2:
-                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
-                    break;
-                case 3:
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
-                    break;
-                case 100:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
-                    break;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
-        }
-    }
-
-    private void loadInfo(JSONObject jsonObject) {
-        try {
-            if (jsonObject.has("mensaje")) {
-
-                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject o = jsonArray.getJSONObject(i);
-
-                    Impresion impresion = Impresion.mapper(o);
-                    mImpresiones.add(impresion);
-                }
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        impresionesAdapter.notifyDataSetChanged();
-
     }
 
 }

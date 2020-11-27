@@ -23,6 +23,8 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int TIPO_INSCRIPCIONES = 1;
     public static final int TIPO_DEPORTES_INSCRIPCIONES = 2;
     public static final int TIPO_TURNO = 3;
+    public static final int TIPO_INGRESO = 4;
+    public static final int TIPO_IMPRE = 5;
 
     private Context mContext;
     private ArrayList<ItemBase> lista;
@@ -102,6 +104,14 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
                 } else if (tipo == TIPO_TURNO) {
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }else if (tipo == TIPO_INGRESO) {
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }else if (tipo == TIPO_IMPRE) {
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());

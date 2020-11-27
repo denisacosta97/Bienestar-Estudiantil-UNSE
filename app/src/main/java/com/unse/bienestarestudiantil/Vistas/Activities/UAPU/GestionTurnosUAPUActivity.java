@@ -1,10 +1,11 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Gestion;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,14 +16,11 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.EstadisticasCiberActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias.AddNoticiaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias.ListadoNoticiasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class GestionNoticiasActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionTurnosUAPUActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -33,7 +31,8 @@ public class GestionNoticiasActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_noticias);
+        setContentView(R.layout.activity_gestion_turnos_uapu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
 
@@ -46,7 +45,8 @@ public class GestionNoticiasActivity extends AppCompatActivity implements View.O
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de noticias");
+        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Turnos");
     }
 
 
@@ -55,18 +55,16 @@ public class GestionNoticiasActivity extends AppCompatActivity implements View.O
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id) {
-                    case 101:
-                        startActivity(new Intent(getApplicationContext(), AddNoticiaActivity.class));
+                switch ((int) id){
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class));
                         break;
-                    case 102:
-                        startActivity(new Intent(getApplicationContext(),  ListadoNoticiasActivity.class));
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), TurnosHistUAPUActivity.class));
                         break;
-                    case 103:
-                        startActivity(new Intent(getApplicationContext(), EstadisticasCiberActivity.class));
-                        break;
+
                 }
-                Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
+                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -75,13 +73,12 @@ public class GestionNoticiasActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Nueva noticia", R.drawable.ic_add, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Listado de noticias", R.drawable.ic_listado, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Estadísticas", R.drawable.ic_estadisticas_color, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Turnos Históricos",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(), 1);
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -92,11 +89,10 @@ public class GestionNoticiasActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
         }
     }
-
 }

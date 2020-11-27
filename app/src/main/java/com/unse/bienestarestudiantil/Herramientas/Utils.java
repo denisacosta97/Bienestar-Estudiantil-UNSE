@@ -269,7 +269,14 @@ public class Utils {
     public static final String URL_BAJA_CONVOCATORIA = "https://" + IP + "/becas/convocatoria/actualizar.php";
 
     //CIBER
-    public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";
+    public static final String URL_REGISTRAR_INGRESO = "https://" + IP + "/ciber/maquina/insertar.php";
+    public static final String URL_LISTA_INGRESOS = "https://" + IP + "/ciber/maquina/getUsosByDay.php";
+    public static final String URL_LISTA_INGRESOS_HOY = "https://" + IP + "/ciber/maquina/getUsosToday.php";
+    public static final String URL_HISTORICOS_INGRESOS = "https://" + IP + "/ciber/maquina/getUsos.php";
+    public static final String URL_IMPRESIONES_HOY = "https://" + IP + "/ciber/impresion/getImpresionesToday.php";
+    public static final String URL_IMPRESIONES_DIA = "https://" + IP + "/ciber/impresion/getImpresionByDay.php";
+    public static final String URL_IMPRESIONES_HIST = "https://" + IP + "/ciber/impresion/getImpresiones.php";
+    public static final String URL_REGISTRAR_IMPR = "https://" + IP + "/ciber/impresion/insertar.php";
 
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
