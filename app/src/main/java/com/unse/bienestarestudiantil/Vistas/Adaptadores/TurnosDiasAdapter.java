@@ -47,6 +47,7 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
         String nombre = turno.getNom() + " " + turno.getApe();
         holder.mNombre.setText(nombre);
         holder.mHorario.setText(turno.getHorario());
+        holder.mReceptor.setText(turno.getReceptorString());
 
         switch (turno.getDescBeca()) {
             case "PENDIENTE":
@@ -88,7 +89,7 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTitulo, mDni, mNombre, mEstado, mHorario;
+        TextView mTitulo, mDni, mNombre, mEstado, mHorario, mReceptor;
         Button btnAtender;
         OnClickOptionListener listener;
 
@@ -100,6 +101,7 @@ public class TurnosDiasAdapter extends RecyclerView.Adapter<TurnosDiasAdapter.Ev
             mHorario = itemView.findViewById(R.id.txtHorario);
             btnAtender = itemView.findViewById(R.id.btnAtender);
             mEstado = itemView.findViewById(R.id.txtEstado);
+            mReceptor = itemView.findViewById(R.id.txtReceptor);
             this.listener = listener;
 
             btnAtender.setOnClickListener(new View.OnClickListener() {

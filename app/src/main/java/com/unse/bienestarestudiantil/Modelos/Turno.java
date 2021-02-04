@@ -20,7 +20,7 @@ public class Turno implements Parcelable {
     public static final int MEDIUM = 3;
 
     int idUsuario, idBeca, idReceptor, dia, mes, anio, estado, validez, dni, receptor;
-    String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, carrera, facultad;
+    String horario, fechaRegistro, fechaModificacion, tipoBeca, nom, ape, nomBeca, descBeca, carrera, facultad, receptorString;
 
     public Turno(int idUsuario, int idBeca, int idReceptor, int dia, int mes, int anio, int estado,
                  int validez, int dni, String horario, String fechaRegistro,
@@ -77,6 +77,7 @@ public class Turno implements Parcelable {
         carrera = in.readString();
         facultad = in.readString();
         receptor = in.readInt();
+        receptorString = in.readString();
     }
 
     public static final Creator<Turno> CREATOR = new Creator<Turno>() {
@@ -295,6 +296,7 @@ public class Turno implements Parcelable {
                     turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);
                     turno.setEstado(estado);
                     turno.setReceptor(receptor);
+                    turno.setReceptorString(String.format("Receptor %s", receptor));
                     break;
                 case COMPLETE:
                     idUsuario = Integer.parseInt(o.getString("idusuario"));
@@ -350,5 +352,14 @@ public class Turno implements Parcelable {
         dest.writeString(carrera);
         dest.writeString(facultad);
         dest.writeInt(receptor);
+        dest.writeString(receptorString);
+    }
+
+    public String getReceptorString() {
+        return receptorString;
+    }
+
+    public void setReceptorString(String receptorString) {
+        this.receptorString = receptorString;
     }
 }

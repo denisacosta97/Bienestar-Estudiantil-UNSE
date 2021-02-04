@@ -329,6 +329,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         } else {
             latAdmin.setVisibility(VISIBLE);
             latUser.setVisibility(VISIBLE);
+            fabEditar.setVisibility(View.GONE);
             if (mUsuario != null && mUsuario.getTipoUsuario() == Utils.TIPO_ALUMNO)
                 latRegularidades.setVisibility(VISIBLE);
             else

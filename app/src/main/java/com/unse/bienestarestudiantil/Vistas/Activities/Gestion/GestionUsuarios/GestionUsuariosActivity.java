@@ -193,7 +193,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-            if (jsonObject.get("mensaje") != null && jsonObject.get("mensaje") instanceof JSONArray) {
+            if (jsonObject.has("mensaje") && jsonObject.get("mensaje") instanceof JSONArray) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
@@ -201,12 +201,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    int id = Integer.parseInt(o.getString("idUsuario"));
-                    int tipoUsuario = Integer.parseInt(o.getString("tipoUsuario"));
-                    String nombre = o.getString("nombre");
-                    String apellido = o.getString("apellido");
-
-                    Usuario usuario = new Usuario(id, nombre, apellido,tipoUsuario);
+                    Usuario usuario = Usuario.mapper(o, Usuario.BASIC);
 
                     mList.add(usuario);
 
@@ -328,7 +323,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
 
     private void loadInfoUsuario(JSONObject jsonObject) {
         try {
-            if (jsonObject.get("mensaje") != null) {
+            if (jsonObject.has("mensaje")) {
                 Usuario usuario = Usuario.mapper(jsonObject, Usuario.COMPLETE);
                 Usuario tipo = null;
                 switch (usuario.getTipoUsuario()){
