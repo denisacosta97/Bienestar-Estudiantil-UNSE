@@ -261,9 +261,4 @@ public class TurnosHistoricosActivity extends AppCompatActivity implements View.
         }
     }
 
-
-
-
-
-
 }

@@ -24,6 +24,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.Ges
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -86,7 +87,7 @@ public class InicioFragmento extends Fragment {
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1100, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorRed));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UAPU", R.drawable.ic_config, R.color.colorAccent));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
@@ -135,6 +136,9 @@ public class InicioFragmento extends Fragment {
                         break;
                     case 200:
                         startActivity(new Intent(mContext, GestionPolideportivoActivity.class));
+                        break;
+                    case 300:
+                        startActivity(new Intent(mContext, GestionUAPUActivity.class));
                         break;
                     case 400:
                         startActivity(new Intent(mContext, MainGestionBecasActivity.class));

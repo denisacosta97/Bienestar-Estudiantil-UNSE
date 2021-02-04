@@ -37,15 +37,15 @@ public class ImpresionesAdapter extends RecyclerView.Adapter<ImpresionesAdapter.
     public void onBindViewHolder(@NonNull ImpresionesAdapter.ImpresionesViewHolder holder, int position) {
         Impresion impresion = mList.get(position);
 
-        holder.txtdni.setText(impresion.getDni());
-        holder.txtcantpag.setText(impresion.getCantpag());
+        holder.txtdni.setText(String.valueOf(impresion.getDni()));
+        holder.txtcantpag.setText(String.valueOf(impresion.getCantpag()));
         holder.txtdescripcion.setText(impresion.getDescripcion());
-        holder.txtprecio.setText(impresion.getPrecio());
+        holder.txtprecio.setText(String.valueOf(impresion.getPrecio()));
     }
 
     @Override
     public long getItemId(int position) {
-        return mList.get(position).getIdImpresion();
+        return mList.get(position).getDni();
     }
 
     @Override

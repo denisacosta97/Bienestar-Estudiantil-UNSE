@@ -16,8 +16,6 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.EstadisticasCiberActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.GestionImpresionesActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.NuevoIngresoDialog;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias.AddNoticiaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias.ListadoNoticiasActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;

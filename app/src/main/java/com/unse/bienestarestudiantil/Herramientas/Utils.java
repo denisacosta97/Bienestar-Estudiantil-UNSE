@@ -176,6 +176,7 @@ public class Utils {
     public static final String ALUMNO_NAME = "dato_alumno";
     public static final String USER_NAME = "dato_user";
     public static final String NUM_INST = "num_inst";
+    public static final String NUM_CONVOC = "num_conv";
     public static final int LIST_RESET = 0;
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
@@ -196,9 +197,11 @@ public class Utils {
     public static final String URL_USUARIO_BY_ID = "https://" + IP + "/usuario/getUser.php";
     public static final String URL_USUARIO_ELIMINAR = "https://" + IP + "/usuario/eliminar.php";
     public static final String URL_USUARIO_BY_ID_REDUCE = "https://" + IP + "/usuario/getUserReduce.php";
+
     //ALUMNO
     public static final String URL_REGULARIDAD = "https://" + IP + "/usuario/insertarRegularidad.php";
     public static final String URL_REGULARIDAD_CAMBIAR = "https://" + IP + "/usuario/cambiarRegularidad.php";
+
     //SOCIO
     public static final String URL_SOCIO_CREDENCIAL = "https://" + IP + "/socio/getCredencial.php";
     public static final String URL_SOCIO_LISTA = "https://" + IP + "/socio/getSocios.php";
@@ -209,16 +212,17 @@ public class Utils {
     public static final String URL_SOCIO_SUSCRIPCION = "https://" + IP + "/socio/getSuscripcion.php";
     public static final String URL_SOCIO_SUSCRIPCION_AGREGAR = "https://" + IP + "/socio/insertarInscripcion.php";
     public static final String URL_SOCIO_SUSCRIPCION_CAMBIAR = "https://" + IP + "/socio/actualizarSuscripcion.php";
+
     //ROLES
     public static final String URL_ROLES_LISTA = "https://" + IP + "/general/getRoles.php";
     public static final String URL_ROLES_INSERTAR = "https://" + IP + "/general/insertarRol.php";
     public static final String URL_ROLES_USER_LISTA = "https://" + IP + "/general/getRolesByUsuario.php";
+
     //DEPORTES
     public static final String URL_DEPORTE_LISTA = "https://" + IP + "/deportes/getDeportes.php";
     public static final String URL_DEPORTE_TEMPORADA = "https://" + IP + "/deportes/inscripcion/getTemporada.php";
     public static final String URL_DEPORTE_INSCRIPCION = "https://" + IP + "/deportes/inscripcion/insertar.php";
     public static final String URL_INSCRIPCIONES_GENERALES = "https://" + IP + "/becas/getInscripciones.php";
-
 
     public static final String URL_DEPORTE_CREDENCIAL = "https://" + IP + "/deportes/getCredencial.php";
     public static final String URL_DEPORTE_BAJA = "https://" + IP + "/deportes/actualizarDeporte.php";
@@ -242,7 +246,6 @@ public class Utils {
     public static final String URL_RESERVA_ESPACIOS = "http://" + IP + "/bienestar/polideportivo/espacio/getReserva.php";
     public static final String URL_RESERVAS_ESPACIOS_ID = "http://" + IP + "/bienestar/polideportivo/espacio/getReservaByUser.php";
 
-
     //TORNEOS
     public static final String URL_TORNEO_CREDENCIAL = "https://" + IP + "/deportes/torneo/getCredencial.php";
     public static final String URL_TORNEOS_LISTA = "https://" + IP + "/deportes/torneo/getAllTorneos.php";
@@ -252,33 +255,38 @@ public class Utils {
 
     //BECAS
     public static final String URL_BECAS_CREDENCIAL = "http://" + IP + "/bienestar/beca/getCredencial.php";
-
     public static final String URL_INSERTAR_CONSULTA = "https://" + IP + "/becas/consulta/insertar.php";
     public static final String URL_CONSULTAS = "https://" + IP + "/becas/consulta/getConsultas.php";
-
     public static final String URL_CAMBIAR_FECHA = "https://" + IP + "/becas/fecha/eliminar.php";
     public static final String URL_FECHAS_INHAB = "https://" + IP + "/becas/fecha/getFechas.php";
     public static final String URL_INSERTAR_FECHAS = "https://" + IP + "/becas/fecha/insertar.php";
-
     public static final String URL_TURNOS_DIA = "https://" + IP + "/becas/turno/getTurnosToday.php";
     public static final String URL_TURNOS_BY_DAY = "https://" + IP + "/becas/turno/getTurnosByDay.php";
     public static final String URL_TURNOS_LISTA = "https://" + IP + "/becas/turno/getTurnos.php";
     public static final String URL_TURNOS_ACTUALIZAR = "https://" + IP + "/becas/turno/actualizar.php";
     public static final String URL_TURNOS_ATENDER = "https://" + IP + "/becas/turno/atender.php";
+    public static final String URL_CONVOCATORIA = "https://" + IP + "/becas/convocatoria/getConvocatorias.php";
+    public static final String URL_BAJA_CONVOCATORIA = "https://" + IP + "/becas/convocatoria/actualizar.php";
 
     //CIBER
-    public static final String URL_REGISTRAR_INGRESO = "http://" + IP + "/bienestar/ciber/getCredencial.php";
+    public static final String URL_REGISTRAR_INGRESO = "https://" + IP + "/ciber/maquina/insertar.php";
+    public static final String URL_LISTA_INGRESOS = "https://" + IP + "/ciber/maquina/getUsosByDay.php";
+    public static final String URL_LISTA_INGRESOS_HOY = "https://" + IP + "/ciber/maquina/getUsosToday.php";
+    public static final String URL_HISTORICOS_INGRESOS = "https://" + IP + "/ciber/maquina/getUsos.php";
+    public static final String URL_IMPRESIONES_HOY = "https://" + IP + "/ciber/impresion/getImpresionesToday.php";
+    public static final String URL_IMPRESIONES_DIA = "https://" + IP + "/ciber/impresion/getImpresionByDay.php";
+    public static final String URL_IMPRESIONES_HIST = "https://" + IP + "/ciber/impresion/getImpresiones.php";
+    public static final String URL_REGISTRAR_IMPR = "https://" + IP + "/ciber/impresion/insertar.php";
+
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "https://" + IP + "/archivos/";
     public static final String URL_UPLOAD_FILE = "https://" + IP + "/general/uploadFile.php";
 
-
     //TRANSPORTE
     public static final String URL_LINEAS = "https://" + IP + "/transporte/getAllLineas.php";
     public static final String URL_LINEAS_UPDATE = "https://" + IP + "/trasporte/actualizar.php";
     public static final String URL_LINEAS_ADD = "https://" + IP + "/transporte/insertar.php";
-
     public static final String URL_ACTUALIZAR_CHOFER = "https://" + IP + "/transporte/chofer/actualizarChofer.php";
     public static final String URL_ELIMINAR_CHOFER = "https://" + IP + "/transporte/chofer/eliminarChofer.php";
     //public static final String URL_ACTUALIZAR_TEMPORADA = "https://" + IP + "/transporte/chofer/actualizarTemporada.php";
@@ -287,18 +295,15 @@ public class Utils {
     public static final String URL_SERVICIOS_CHOFER = "https://" + IP + "/transporte/chofer/getServiciosByChofer.php";
     public static final String URL_INSERTAR_CHOFER = "https://" + IP + "/transporte/chofer/insertarChofer.php";
     //public static final String URL_TEMPORADA_CHOFER = "https://" + IP + "/transporte/chofer/registrarTemporada.php";
-
     public static final String URL_ACTUALIZAR_COLECTIVO = "https://" + IP + "/transporte/colectivo/actualizarColectivo.php";
     public static final String URL_ELIMINAR_COLECTIVO = "https://" + IP + "/transporte/colectivo/eliminarColectivo.php";
     public static final String URL_GET_COLECTIVO = "https://" + IP + "/transporte/colectivo/getColectivo.php";
     public static final String URL_GET_COLECTIVOS = "https://" + IP + "/transporte/colectivocolectivo/getColectivos.php";
     public static final String URL_INSERTAR_COLECTIVO = "https://" + IP + "/transporte/colectivo/insertarColectivo.php";
-
     public static final String URL_ELIMINAR_RECORRIDO = "https://" + IP + "/transporte/recorrido/eliminarRecorrido.php";
     public static final String URL_GET_RECORRIDO = "https://" + IP + "/transporte/recorrido/getRecorrido.php";
     public static final String URL_GET_RECORRIDOS = "https://" + IP + "/transporte/recorrido/getRecorridos.php";
     public static final String URL_RECORRIDOS = "https://" + IP + "/transporte/recorrido/recorridos.json";
-
     public static final String URL_FINALIZAR_SERVICIO = "https://" + IP + "/transporte/servicio/finalizarServicio.php";
     public static final String URL_ULTIMO_SERVICIO = "https://" + IP + "/transporte/servicio/getLastPoint.php";
     public static final String URL_GET_SERVICIO = "https://" + IP + "/transporte/servicio/getServicio.php";
@@ -319,13 +324,11 @@ public class Utils {
     public static final String URL_ACTUALIZAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/actualizar.php";
     public static final String URL_NOTICIA_IMAGE = "https://sis.bienestar.unse.edu.ar/api/general/noticia/uploadImage.php";
 
-
     public static final long SECONS_TIMER = 15000;
 
     //CARPETAS
     public static final String FOLDER = "BIENESTAR_ESTUDIANTIL/";
     public static final String FOLDER_CREDENCIALES = FOLDER + "CREDENCIALES/";
-
 
     public static String[] facultad = {"FAyA", "FCEyT", "FCF", "FCM", "FHCSyS"};
     public static String[] faya = {"Ingeniería Agronómica", "Ingeniería en Alimentos", "Licenciatura en Biotecnología",

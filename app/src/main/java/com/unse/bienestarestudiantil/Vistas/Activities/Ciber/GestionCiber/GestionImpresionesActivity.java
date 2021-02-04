@@ -3,32 +3,32 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Modelos.Impresion;
+import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ImpresionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
 
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class GestionImpresionesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgIcono;
-    EditText mEditText;
-    FloatingActionButton fabAgregar;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ImpresionesAdapter impresionesAdapter;
-    ArrayList<Impresion> mImpresiones;
+    OpcionesAdapter mAdapter;
+    ArrayList<Opciones> mOpciones;
+    ImageView imgIcono;
+    FloatingActionButton fabAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
 
         loadListener();
 
-        loadDataRecycler();
+        loadData();
 
     }
 
@@ -49,37 +49,44 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
         ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de impresiones");
     }
 
+
     private void loadListener() {
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                switch ((int) id) {
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(), ImpresionesDiaActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getApplicationContext(), ImpresionesHistoricasActivity.class));
+                        break;
+
+                }
+                Utils.showToast(getApplicationContext(), "Item: " + mOpciones.get(position).getTitulo());
+            }
+        });
         imgIcono.setOnClickListener(this);
         fabAgregar.setOnClickListener(this);
+
+    }
+
+    private void loadData() {
+        mOpciones = new ArrayList<>();
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1, "Impresiones del día", R.drawable.ic_anadir_ciber, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 2, "Impresiones históricas", R.drawable.ic_impresion, R.color.colorFCEyT));
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(), 1);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
-        mEditText = findViewById(R.id.edtBuscar);
         fabAgregar = findViewById(R.id.fabAdd);
-    }
-
-    private void loadDataRecycler() {
-        mImpresiones = new ArrayList<>();
-
-        impresionesAdapter = new ImpresionesAdapter(mImpresiones, getApplicationContext());
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        mRecyclerView.setNestedScrollingEnabled(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(impresionesAdapter);
-
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                //Intent i = new Intent(getApplicationContext(), PerfilPasajeroActivity.class);
-                //i.putExtra(Utils.IMPRESION, mImpresiones.get(position));
-                //startActivity(i);
-            }
-        });
-
     }
 
     @Override
@@ -93,4 +100,5 @@ public class GestionImpresionesActivity extends AppCompatActivity implements Vie
                 break;
         }
     }
+
 }

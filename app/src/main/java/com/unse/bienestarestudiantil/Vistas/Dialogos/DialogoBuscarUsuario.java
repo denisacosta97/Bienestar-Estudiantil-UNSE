@@ -23,6 +23,7 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
+import com.unse.bienestarestudiantil.Modelos.IngresoCiber;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 
@@ -49,6 +50,11 @@ public class DialogoBuscarUsuario extends DialogFragment {
     int dni = 0;
     ArrayList<Usuario> mList;
     OnClickUser mOnClickUser;
+    boolean isNoValid = false;
+
+    public void setNoValid(boolean noValid) {
+        isNoValid = noValid;
+    }
 
     public DialogoBuscarUsuario(Context context, FragmentManager fragmentManager, ArrayList<Usuario> list, OnClickUser onClickUser) {
         mContext = context;
@@ -102,10 +108,13 @@ public class DialogoBuscarUsuario extends DialogFragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dni != 0) {
+                if (isNoValid)
+                    dni = Integer.parseInt(edtDNI.getText().toString());
+                if (dni != 0 || isNoValid) {
                     if (mOnClickUser != null) {
-                        mOnClickUser.onUserSelected(dni);
                         dismiss();
+                        mOnClickUser.onUserSelected(dni);
+
                     }
                 } else {
                     Utils.showToast(getContextDialog(), getContextDialog().getString(R.string.primeroBuscar));

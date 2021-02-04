@@ -13,15 +13,12 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.EstadisticasCiberActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.GestionImpresionesActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.NuevoIngresoDialog;
+import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiber.GestionIngresosCiberActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropDeporte;
 
 import java.util.ArrayList;
 
@@ -60,9 +57,7 @@ public class GestionCiberActivity extends AppCompatActivity implements View.OnCl
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
                     case 101:
-                        NuevoIngresoDialog nuevoIngresoDialog = new NuevoIngresoDialog(getApplicationContext(),
-                                getSupportFragmentManager());
-                        nuevoIngresoDialog.show(getSupportFragmentManager(),"dialog_nuevoing");
+                        startActivity(new Intent(getApplicationContext(), GestionIngresosCiberActivity.class));
                         break;
                     case 102:
                         startActivity(new Intent(getApplicationContext(), GestionImpresionesActivity.class));
@@ -80,7 +75,7 @@ public class GestionCiberActivity extends AppCompatActivity implements View.OnCl
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Nuevo ingreso", R.drawable.ic_anadir_ciber, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Gestión de ingresos", R.drawable.ic_anadir_ciber, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de impresiones", R.drawable.ic_impresion, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Estadísticas", R.drawable.ic_estadisticas_color, R.color.colorFCEyT));
 

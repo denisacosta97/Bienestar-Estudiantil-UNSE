@@ -1,0 +1,158 @@
+package com.unse.bienestarestudiantil.Modelos;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Doctor implements Parcelable {
+
+    private int idUsuario, anio, validez;
+    private String especialidad, matricula, casaestudio, nombre, apellido;
+
+    public Doctor(int idUsuario, int anio, int validez, String especialidad, String matricula,
+                  String casaestudio, String nombre, String apellido) {
+        this.idUsuario = idUsuario;
+        this.anio = anio;
+        this.validez = validez;
+        this.especialidad = especialidad;
+        this.matricula = matricula;
+        this.casaestudio = casaestudio;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public Doctor() {
+    }
+
+    protected Doctor(Parcel in) {
+        idUsuario = in.readInt();
+        anio = in.readInt();
+        validez = in.readInt();
+        especialidad = in.readString();
+        matricula = in.readString();
+        casaestudio = in.readString();
+        nombre = in.readString();
+        apellido = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idUsuario);
+        dest.writeInt(anio);
+        dest.writeInt(validez);
+        dest.writeString(especialidad);
+        dest.writeString(matricula);
+        dest.writeString(casaestudio);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Doctor> CREATOR = new Creator<Doctor>() {
+        @Override
+        public Doctor createFromParcel(Parcel in) {
+            return new Doctor(in);
+        }
+
+        @Override
+        public Doctor[] newArray(int size) {
+            return new Doctor[size];
+        }
+    };
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public int getValidez() {
+        return validez;
+    }
+
+    public void setValidez(int validez) {
+        this.validez = validez;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getCasaestudio() {
+        return casaestudio;
+    }
+
+    public void setCasaestudio(String casaestudio) {
+        this.casaestudio = casaestudio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public static ServiciosU mapper(JSONObject o) {
+
+        ServiciosU servicio = new ServiciosU();
+        String nombre, descripcion, horario, dias, usuarios;
+        int idServicio, validez, idUsuario;
+
+        try {
+
+            idServicio = Integer.parseInt(o.getString("idservicio"));
+            nombre = o.getString("nombre");
+            descripcion = o.getString("descripcion");
+            horario = o.getString("horario");
+            //titulo = o.getString("dias");
+            usuarios = o.getString("usuarios");
+//nom, ap, ids,esp
+            //servicio = new ServiciosU(idServicio, descripcion, horario, dias, usuarios, validez);
+
+        }
+
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return servicio;
+    }
+
+}

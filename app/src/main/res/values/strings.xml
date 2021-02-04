@@ -224,11 +224,11 @@
     <string name="credencialesListError">Error al obtener las inscripciones, por favor intenta nuevamente</string>
     <string name="credencialesListVacia">No existe ninguna inscripcion realizada a un deporte o beca</string>
     <string name="turnoConfirmacion">¿Desea atender a %s %s?</string>
-   <string name="turnoAtendido">¡Turno en proceso de atención!</string>
-   <string name="turnoErrorAtender">¡Error al atender el turno!</string>
+    <string name="turnoAtendido">¡Turno en proceso de atención!</string>
+    <string name="turnoErrorAtender">¡Error al atender el turno!</string>
     <string name="turnoEnProceso">El turno ya se encuentra en proceso ¿realmente desea continuar?</string>
-   <string name="turnoModificar">¿Desea modificar el estado del turno de %s %s?</string>
-   <string name="turnoModificarAtendido">El turno ya fue atendido  ¿realmente desea continuar?</string>
+    <string name="turnoModificar">¿Desea modificar el estado del turno de %s %s?</string>
+    <string name="turnoModificarAtendido">El turno ya fue atendido  ¿realmente desea continuar?</string>
 
 </resources>
 

@@ -115,9 +115,9 @@ public class GestionSistemaActivity extends AppCompatActivity implements View.On
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1100, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorRed));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UPA", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UAPU", R.drawable.ic_config, R.color.colorAccent));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Ciber", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));

@@ -8,32 +8,54 @@ import org.json.JSONObject;
 
 public class Impresion implements Parcelable {
 
-    private int idImpresion, dni, cantpag;
-    private String descripcion, precio, fecha;
+    public static final int COMPLETE = 1;
+    public static final int MEDIUM = 2;
 
-    public Impresion(int idImpresion, int dni, int cantpag, String descripcion, String precio) {
-        this.idImpresion = idImpresion;
+    private int dni, cantpag;
+    private String descripcion, precio, nombre, apellido, fecharegistro, dia, mes, anio;
+
+    public Impresion(int dni, int cantpag, String descripcion, String precio, String nombre,
+                     String apellido, String fecharegistro) {
         this.dni = dni;
         this.cantpag = cantpag;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fecharegistro = fecharegistro;
+    }
+
+    public Impresion(String dia, String mes, String anio) {
+        this.dia = dia;
+        this.mes = mes;
+        this.anio = anio;
     }
 
     public Impresion() {
-        this.idImpresion = -1;
         this.dni = -1;
         this.cantpag = -1;
         this.descripcion = "";
         this.precio = "";
+        this.nombre = "";
+        this.apellido = "";
+        this.fecharegistro = "";
     }
 
+
     protected Impresion(Parcel in) {
-        idImpresion = in.readInt();
+
         dni = in.readInt();
         cantpag = in.readInt();
         descripcion = in.readString();
         precio = in.readString();
+        nombre = in.readString();
+        apellido = in.readString();
+        fecharegistro = in.readString();
+        dia = in.readString();
+        mes = in.readString();
+        anio = in.readString();
     }
+
 
     public static final Creator<Impresion> CREATOR = new Creator<Impresion>() {
         @Override
@@ -46,14 +68,6 @@ public class Impresion implements Parcelable {
             return new Impresion[size];
         }
     };
-
-    public int getIdImpresion() {
-        return idImpresion;
-    }
-
-    public void setIdImpresion(int idImpresion) {
-        this.idImpresion = idImpresion;
-    }
 
     public int getDni() {
         return dni;
@@ -87,20 +101,82 @@ public class Impresion implements Parcelable {
         this.precio = precio;
     }
 
-    public static Impresion mapper(JSONObject object) {
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getFecharegistro() {
+        return fecharegistro;
+    }
+
+    public void setFecharegistro(String fecharegistro) {
+        this.fecharegistro = fecharegistro;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAnio() {
+        return anio;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
+    }
+
+    public static Impresion mapper(JSONObject object, int op) {
         Impresion impresion = new Impresion();
 
-        int idImpresion, dni, cantpag;
-        String descripcion, precio;
+        int dni, cantpag;
+        String descripcion, precio, nombre, apellido, fecharegistro, dia, mes, anio;
 
         try {
-            idImpresion = Integer.parseInt(object.getString("idrecorrido"));
-            dni = Integer.parseInt(object.getString("dni"));
-            cantpag = Integer.parseInt(object.getString("cantpag"));
-            descripcion = object.getString("descripcion");
-            precio = object.getString("precio");
+            switch (op){
+                case MEDIUM:
+                    dia = object.getString("dia");
+                    mes = object.getString("mes");
+                    anio = object.getString("anio");
 
-            impresion = new Impresion(idImpresion, dni, cantpag, descripcion, precio);
+                    impresion = new Impresion(dia, mes, anio);
+                    break;
+                case COMPLETE:
+                    dni = Integer.parseInt(object.getString("idusuario"));
+                    cantpag = Integer.parseInt(object.getString("cantidad"));
+                    descripcion = object.getString("descripcion");
+                    precio = object.getString("precio");
+                    nombre = !object.isNull("nombre") ? object.getString("nombre") : " - ";
+                    apellido = !object.isNull("apellido") ? object.getString("apellido") : " - ";
+                    fecharegistro = (object.getString("fecharegistro"));
+
+                    impresion = new Impresion(dni, cantpag, descripcion, precio, nombre, apellido, fecharegistro);
+                    break;
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,10 +191,15 @@ public class Impresion implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idImpresion);
         dest.writeInt(dni);
         dest.writeInt(cantpag);
         dest.writeString(descripcion);
         dest.writeString(precio);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+        dest.writeString(fecharegistro);
+        dest.writeString(dia);
+        dest.writeString(mes);
+        dest.writeString(anio);
     }
 }
