@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -15,11 +17,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.ServiciosU;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.ServiciosUPAAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -29,21 +36,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionServiciosUActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    TurnosDiasAdapter mAdapter; //DEFINIR ADAPTER
-    ArrayList<Turno> mTurnos; //DEFINIR
+    ServiciosUPAAdapter mAdapter;
+    ArrayList<ServiciosU> mServiciosU;
     DialogoProcesamiento dialog;
     ImageView imgRefresh;
     ImageView imgIcono;
-    OnClickOptionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_turnos_dia_uapu);
+        setContentView(R.layout.activity_gestion_servicios_u);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
@@ -59,7 +65,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Turnos del día");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Servicios");
         imgRefresh.setVisibility(View.VISIBLE);
     }
 
@@ -70,10 +76,10 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
 
 
     private void loadData() {
-        mTurnos = new ArrayList<>();
+        mServiciosU = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TurnosDiasAdapter(mTurnos, getApplicationContext(), mListener);
+        mAdapter = new ServiciosUPAAdapter(mServiciosU, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -151,12 +157,9 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Turno turno = Turno.mapper(o, Turno.BASIC);
-                    turno.setDia(Integer.parseInt(fecha.getString(0)));
-                    turno.setMes(Integer.parseInt(fecha.getString(1)));
-                    turno.setAnio(Integer.parseInt(fecha.getString(2)));
+                    ServiciosU turno = ServiciosU.mapper(o);
 
-                    mTurnos.add(turno);
+                    mServiciosU.add(turno);
                 }
 
             }
@@ -172,10 +175,6 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
-                break;
-            case R.id.imgRefresh:
-                mTurnos.clear();
-                loadInfo();
                 break;
         }
     }

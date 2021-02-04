@@ -16,15 +16,11 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionConsultasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionFechasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class GestionUAPUActivity extends AppCompatActivity implements View.OnClickListener {
+public class CertificadosUActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -35,7 +31,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_uapu);
+        setContentView(R.layout.activity_certificados_u);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -50,7 +46,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de UAPU");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Turnos");
     }
 
 
@@ -61,22 +57,10 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), GestionTurnosUAPUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), AtencionesActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(), GestionServiciosUActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(getApplicationContext(), GestionDoctoresActivity.class));
-                        break;
-                    case 5:
-                        startActivity(new Intent(getApplicationContext(), GestionConsultasUActivity.class));
-                        break;
-                    case 6:
-                        startActivity(new Intent(getApplicationContext(), CertificadosUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), TurnosHistUAPUActivity.class));
                         break;
 
                 }
@@ -89,13 +73,8 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Atenciones",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Servicios",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión Doctores",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Consultas",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,6, "Certificados",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,7, "Estadisticas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Turnos Históricos",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

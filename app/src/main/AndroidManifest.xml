@@ -21,7 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.IngresosCiberHistoricosActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.EditServicioUActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.CertificadosUActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionConsultasUActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionDoctoresActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionServiciosUActivity" />
+        <activity android:name=".Vistas.Activities.Ciber.GestionCiber.IngresosCiberHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.GestionIngresosCiberActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.IngresosCiberDiaActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.ImpresionesDiaActivity" />
