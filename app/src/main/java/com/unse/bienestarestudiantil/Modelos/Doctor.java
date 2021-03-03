@@ -6,10 +6,12 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Doctor implements Parcelable {
+public class Doctor extends Lista implements Parcelable {
 
     private int idUsuario, anio, validez;
     private String especialidad, matricula, casaestudio, nombre, apellido;
+
+    public static final int BASIC = 3;
 
     public Doctor(int idUsuario, int anio, int validez, String especialidad, String matricula,
                   String casaestudio, String nombre, String apellido) {
@@ -19,6 +21,13 @@ public class Doctor implements Parcelable {
         this.especialidad = especialidad;
         this.matricula = matricula;
         this.casaestudio = casaestudio;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public Doctor(int idUsuario, int validez, String nombre, String apellido) {
+        this.idUsuario = idUsuario;
+        this.validez = validez;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -130,29 +139,31 @@ public class Doctor implements Parcelable {
         this.apellido = apellido;
     }
 
-    public static ServiciosU mapper(JSONObject o) {
+    public static Doctor mapper(JSONObject o, int tipo) {
 
-        ServiciosU servicio = new ServiciosU();
-        String nombre, descripcion, horario, dias, usuarios;
-        int idServicio, validez, idUsuario;
+        Doctor doctor = new Doctor();
+        String nombre, apellido;
+        int validez, idUsuario;
 
         try {
 
-            idServicio = Integer.parseInt(o.getString("idservicio"));
-            nombre = o.getString("nombre");
-            descripcion = o.getString("descripcion");
-            horario = o.getString("horario");
-            //titulo = o.getString("dias");
-            usuarios = o.getString("usuarios");
-//nom, ap, ids,esp
-            //servicio = new ServiciosU(idServicio, descripcion, horario, dias, usuarios, validez);
+            switch (tipo) {
+                case BASIC:
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    idUsuario = Integer.parseInt(o.getString("idusuario"));
+                    validez = Integer.parseInt(o.getString("validez"));
+                    doctor = new Doctor(idUsuario, validez, nombre, apellido);
+                    break;
 
-        }
+            }
 
-        catch (JSONException e) {
+            return doctor;
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return servicio;
+        return doctor;
     }
 
 }

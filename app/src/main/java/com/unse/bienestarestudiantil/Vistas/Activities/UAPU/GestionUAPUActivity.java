@@ -16,10 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionConsultasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionFechasActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;

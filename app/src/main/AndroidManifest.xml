@@ -24,7 +24,7 @@
         <activity android:name=".Vistas.Activities.UAPU.EditServicioUActivity"></activity>
         <activity android:name=".Vistas.Activities.UAPU.CertificadosUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionConsultasUActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.GestionDoctoresActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionServiciosUActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.IngresosCiberHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.GestionIngresosCiberActivity" />
@@ -182,6 +182,7 @@
         <activity android:name=".Vistas.Activities.Gestion.GestionSocios.EditarSocioActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionServiciosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.InfoServicioActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionDoctores.PerfilProfesionalActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

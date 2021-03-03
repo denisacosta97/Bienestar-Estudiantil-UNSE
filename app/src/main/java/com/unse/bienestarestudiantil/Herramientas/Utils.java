@@ -278,6 +278,11 @@ public class Utils {
     public static final String URL_IMPRESIONES_HIST = "https://" + IP + "/ciber/impresion/getImpresiones.php";
     public static final String URL_REGISTRAR_IMPR = "https://" + IP + "/ciber/impresion/insertar.php";
 
+    //UPA
+    public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
+    //public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
+    //public static final String URL_LISTA_INGRESOS = "https://" + IP + "/ciber/maquina/getUsosByDay.php";
+
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "https://" + IP + "/archivos/";
@@ -344,6 +349,7 @@ public class Utils {
             "Tecnicatura Universitaria en Organización y Control de la Producción"};
     public static String[] fcf = {"Ingeniería Forestal", "Ingeniería en Industrias Forestales",
             "Licenciatura en Ecología y Conservación del Ambiente",
+            "Licenciatura en Biología",
             "Tecnicatura Universitaria Fitosanitarista",
             "Tecnicatura Universitaria en Viveros y Plantaciones Forestales",
             "Tecnicatura Universitaria en Aserraderos y Carpintería Industrial"};
