@@ -32,7 +32,6 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:enabled="false"
                         android:id="@+id/edtName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -66,7 +65,6 @@
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <EditText
-                                android:enabled="false"
                                 android:id="@+id/edtNameDoc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -198,6 +196,17 @@
                             android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
+
+                    <Button
+                        android:layout_margin="10dp"
+                        android:id="@+id/btnDeshabilitar"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_border"
+                        android:text="DESHABILITAR"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black" />
 
                 </LinearLayout>
 

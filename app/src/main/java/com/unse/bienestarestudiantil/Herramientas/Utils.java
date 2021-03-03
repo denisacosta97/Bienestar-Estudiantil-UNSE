@@ -106,6 +106,8 @@ public class Utils {
     public static final String COLECTIVO = "cole_info";
     public static final String NOTICIA_INFO = "noticia_info";
     public static final String PASAJERO = "pasajeros";
+    public static final String SERVUAPU = "servi";
+    public static final String DOCTOR = "doc";
 
     public static final String IMPRESION = "impresion";
     public static final String CANCHA = "cancha";
@@ -328,6 +330,11 @@ public class Utils {
     public static final String URL_ELIMINAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/eliminar.php";
     public static final String URL_ACTUALIZAR_NOTICIA = "https://sis.bienestar.unse.edu.ar/api/general/noticia/actualizar.php";
     public static final String URL_NOTICIA_IMAGE = "https://sis.bienestar.unse.edu.ar/api/general/noticia/uploadImage.php";
+
+    //UAPU
+    public static final String URL_SERVICIOS = "https://" + IP + "/uapu/servicio/getServicios.php";
+    public static final String URL_EDIT_SERVICIOS = "https://" + IP + "/uapu/servicio/actualizar.php";
+    public static final String URL_BAJA_SERVICIOS = "https://" + IP + "/uapu/servicio/eliminar.php";
 
     public static final long SECONS_TIMER = 15000;
 

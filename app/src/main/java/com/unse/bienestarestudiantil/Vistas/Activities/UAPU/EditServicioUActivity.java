@@ -21,27 +21,25 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.ServiciosU;
-import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoDropTorneo;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 public class EditServicioUActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     ServiciosU mServiciosU;
+    Doctor mDoctor;
     EditText edtName, edtNameDoc, edtDia, edtHorarios, edtDesc;
     ImageView imgIcono;
-    Button btnBorrar, btnEditar;
+    Button btnCancelar, btnEditar, btnDeshabilitar;
     DialogoProcesamiento dialog;
     EditText[] campos;
     boolean isEdit = false;
-    int mode = 0, TIPO_USER = -1;
+    int mode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,12 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_edit_servicio_u);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if (getIntent().getParcelableExtra(Utils.TORNEO) != null) {
-            mServiciosU = getIntent().getParcelableExtra(Utils.TORNEO);
+        if (getIntent().getParcelableExtra(Utils.SERVUAPU) != null) {
+            mServiciosU = getIntent().getParcelableExtra(Utils.SERVUAPU);
+        }
+
+        if (getIntent().getParcelableExtra(Utils.DOCTOR) != null) {
+            mDoctor = getIntent().getParcelableExtra(Utils.DOCTOR);
         }
 
         if (mServiciosU != null) {
@@ -72,7 +74,8 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void loadData() {
         edtName.setText(mServiciosU.getTitulo());
-        edtNameDoc.setText(mServiciosU.getTitulo());
+        String nombre = String.format(mDoctor.getNombre(), mDoctor.getApellido());
+        edtNameDoc.setText(nombre);
         edtDia.setText(mServiciosU.getDias());
         edtHorarios.setText(mServiciosU.getHorario());
         edtDesc.setText(mServiciosU.getDescripcion());
@@ -81,8 +84,9 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
-        btnBorrar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
         btnEditar.setOnClickListener(this);
+        btnDeshabilitar.setOnClickListener(this);
     }
 
     private void loadViews() {
@@ -92,11 +96,18 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
         edtHorarios = findViewById(R.id.edtHorarios);
         edtDesc = findViewById(R.id.edtDesc);
 
-        btnBorrar = findViewById(R.id.btnBorrar);
+        btnCancelar = findViewById(R.id.btnCancelar);
         btnEditar = findViewById(R.id.btnEditar);
+        btnDeshabilitar = findViewById(R.id.btnDeshabilitar);
         imgIcono = findViewById(R.id.imgFlecha);
 
-        campos = new EditText[]{edtName, edtNameDoc, edtDia, edtHorarios, edtDesc};
+        if(mServiciosU.getValidez() == 1){
+            btnDeshabilitar.setText("Deshabilitar");
+        } else if(mServiciosU.getValidez() == 0){
+            btnDeshabilitar.setText("Habilitar");
+        }
+
+        campos = new EditText[]{edtDia, edtHorarios, edtDesc};
     }
 
     private void setToolbar() {
@@ -109,9 +120,18 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnEditar:
+                btnEditar.setText("Guardar");
                 activateEditMode();
                 break;
             case R.id.btnCancelar:
+                finish();
+                break;
+            case R.id.btnDeshabilitar:
+                if(mServiciosU.getValidez() == 1){
+                    sendServerDes(0);
+                } else if(mServiciosU.getValidez() == 0){
+                    sendServerDes(1);
+                }
 
                 break;
             case R.id.imgIcon:
@@ -153,6 +173,7 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void activateEditMode() {
         if (isEdit) {
+            Toast.makeText(this, "GUARDADO", Toast.LENGTH_SHORT).show();
             save();
             return;
         }
@@ -164,24 +185,23 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
     }
 
     private void save() {
-        String name = edtName.getText().toString().trim();
-        String fechaIni = edtNameDoc.getText().toString().trim();
-        String fechaFin = edtDia.getText().toString().trim();
-        String desc = edtHorarios.getText().toString().trim();
-        String lugar = edtDesc.getText().toString().trim();
-        String fecha = Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis()));
+        //String name = edtName.getText().toString().trim();
+        //String nombreD = edtNameDoc.getText().toString().trim();
+        String dia = edtDia.getText().toString().trim();
+        String hora = edtHorarios.getText().toString().trim();
+        String desc = edtDesc.getText().toString().trim();
         Validador validador = new Validador(getBaseContext());
-        /*if (!validador.noVacio(dni) && !validador.noVacio(cantP) && !validador.noVacio(precio)) {
-            sendServer(dni, cantP, precio, desc);
-        }*/
+        if (!validador.noVacio(dia) && !validador.noVacio(hora) && !validador.noVacio(desc)) {
+            sendServer(dia, hora, desc);
+        }
     }
 
-    private void sendServer(String dni, String cantP, String precio, String desc) {
+    private void sendServer(String dias, String horario, String descripcion) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?key=%s&idU=%s&iu=%s&de=%s&ca=%s&pr=%s",
-                Utils.URL_REGISTRAR_IMPR, key, id, dni, desc, cantP, precio);
+        String URL = String.format("%s?key=%s&idU=%s&is=%s&de=%s&ho=%s&di=%s",
+                Utils.URL_EDIT_SERVICIOS, key, id, mServiciosU.getIdServicio(), descripcion, horario, dias); //FALTA LINK Y DEPURAR
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -204,6 +224,70 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
     }
 
     private void procesarRespuesta2(String response) {
+        try {
+            dialog.dismiss();
+            JSONObject jsonObject = new JSONObject(response);
+            int estado = jsonObject.getInt("estado");
+            switch (estado) {
+                case -1:
+                    Toast.makeText(getApplicationContext(), getString(R.string.errorInternoAdmin), Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), "Servicio modificado", Toast.LENGTH_SHORT).show();
+                    btnEditar.setText("Editar");
+                    //Exito
+                    //loadInfo(jsonObject);
+                    finish();
+                    break;
+                case 2:
+                    Toast.makeText(getApplicationContext(), "Error interno", Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(getApplicationContext(), getString(R.string.camposInvalidos), Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(getApplicationContext(), getString(R.string.tokenInvalido), Toast.LENGTH_SHORT).show();
+                    break;
+                case 100:
+                    //No autorizado
+                    Toast.makeText(getApplicationContext(), getString(R.string.tokenInexistente), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), getString(R.string.errorInternoAdmin), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendServerDes(int var) {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?key=%s&idU=%s&is=%s&val=%s",
+                Utils.URL_BAJA_SERVICIOS, key, id, mServiciosU.getIdServicio(), var); //FALTA LINK Y DEPURAR
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuestaDes(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Toast.makeText(getApplicationContext(), getString(R.string.servidorOff), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuestaDes(String response) {
         try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);

@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 public class Doctor extends Lista implements Parcelable {
 
+    public static final int COMPLETE = 1;
+    public static final int MEDIUM = 2;
     private int idUsuario, anio, validez;
     private String especialidad, matricula, casaestudio, nombre, apellido;
 
@@ -21,6 +23,13 @@ public class Doctor extends Lista implements Parcelable {
         this.especialidad = especialidad;
         this.matricula = matricula;
         this.casaestudio = casaestudio;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public Doctor(int idUsuario, String nombre, String apellido, String especialidad) {
+        this.idUsuario = idUsuario;
+        this.especialidad = especialidad;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -142,11 +151,11 @@ public class Doctor extends Lista implements Parcelable {
     public static Doctor mapper(JSONObject o, int tipo) {
 
         Doctor doctor = new Doctor();
-        String nombre, apellido;
+        String nombre, apellido, especialidad;
+        int idServicio;
         int validez, idUsuario;
 
         try {
-
             switch (tipo) {
                 case BASIC:
                     nombre = o.getString("nombre");
@@ -155,12 +164,20 @@ public class Doctor extends Lista implements Parcelable {
                     validez = Integer.parseInt(o.getString("validez"));
                     doctor = new Doctor(idUsuario, validez, nombre, apellido);
                     break;
+                case MEDIUM:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    especialidad = o.getString("especialidad");
 
+                    doctor = new Doctor(idServicio, nombre, apellido, especialidad);
+
+                    break;
             }
 
-            return doctor;
+        }
 
-        } catch (JSONException e) {
+        catch (JSONException e) {
             e.printStackTrace();
         }
         return doctor;

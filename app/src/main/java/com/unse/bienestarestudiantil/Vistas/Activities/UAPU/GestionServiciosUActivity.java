@@ -21,10 +21,12 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.ServiciosU;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.Deportes.EditDeportesActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.ServiciosUPAAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiasAdapter;
@@ -42,8 +44,8 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
     RecyclerView.LayoutManager mLayoutManager;
     ServiciosUPAAdapter mAdapter;
     ArrayList<ServiciosU> mServiciosU;
+    ArrayList<Doctor> mDoctors;
     DialogoProcesamiento dialog;
-    ImageView imgRefresh;
     ImageView imgIcono;
 
     @Override
@@ -66,26 +68,35 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
         ((TextView) findViewById(R.id.txtTitulo)).setText("Servicios");
-        imgRefresh.setVisibility(View.VISIBLE);
     }
 
     private void loadListener() {
-        imgRefresh.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
     }
 
 
     private void loadData() {
         mServiciosU = new ArrayList<>();
+        mDoctors = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ServiciosUPAAdapter(mServiciosU, getApplicationContext());
+        mAdapter = new ServiciosUPAAdapter(mServiciosU, mDoctors, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), EditServicioUActivity.class);
+                i.putExtra(Utils.SERVUAPU, mServiciosU.get(position));
+                i.putExtra(Utils.DOCTOR, mDoctors.get(position));
+                startActivity(i);
+            }
+        });
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
-        imgRefresh = findViewById(R.id.imgRefresh);
         imgIcono = findViewById(R.id.imgFlecha);
     }
 
@@ -93,7 +104,7 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_TURNOS_DIA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_SERVICIOS, id, key);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -151,15 +162,24 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
             if (jsonObject.has("mensaje")) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                JSONArray fecha = jsonObject.getJSONArray("datos");
+                JSONArray doc = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    ServiciosU turno = ServiciosU.mapper(o);
+                    ServiciosU serv = ServiciosU.mapper(o);
 
-                    mServiciosU.add(turno);
+                    mServiciosU.add(serv);
+                }
+
+                for (int j = 0; j < doc.length(); j++) {
+
+                    JSONObject o = doc.getJSONObject(j);
+
+                    Doctor doctor = Doctor.mapper(o, 2);
+
+                    mDoctors.add(doctor);
                 }
 
             }
