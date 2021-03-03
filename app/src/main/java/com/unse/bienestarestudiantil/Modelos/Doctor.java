@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 public class Doctor implements Parcelable {
 
+    public static final int COMPLETE = 1;
+    public static final int MEDIUM = 2;
     private int idUsuario, anio, validez;
     private String especialidad, matricula, casaestudio, nombre, apellido;
 
@@ -19,6 +21,13 @@ public class Doctor implements Parcelable {
         this.especialidad = especialidad;
         this.matricula = matricula;
         this.casaestudio = casaestudio;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+
+    public Doctor(int idUsuario, String nombre, String apellido, String especialidad) {
+        this.idUsuario = idUsuario;
+        this.especialidad = especialidad;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -130,29 +139,31 @@ public class Doctor implements Parcelable {
         this.apellido = apellido;
     }
 
-    public static ServiciosU mapper(JSONObject o) {
+    public static Doctor mapper(JSONObject o, int tipo) {
 
-        ServiciosU servicio = new ServiciosU();
-        String nombre, descripcion, horario, dias, usuarios;
-        int idServicio, validez, idUsuario;
+        Doctor doctor = new Doctor();
+        String nombre, apellido, especialidad;
+        int idServicio;
 
         try {
+            switch (tipo) {
+                case MEDIUM:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    especialidad = o.getString("especialidad");
 
-            idServicio = Integer.parseInt(o.getString("idservicio"));
-            nombre = o.getString("nombre");
-            descripcion = o.getString("descripcion");
-            horario = o.getString("horario");
-            //titulo = o.getString("dias");
-            usuarios = o.getString("usuarios");
-//nom, ap, ids,esp
-            //servicio = new ServiciosU(idServicio, descripcion, horario, dias, usuarios, validez);
+                    doctor = new Doctor(idServicio, nombre, apellido, especialidad);
+
+                    break;
+            }
 
         }
 
         catch (JSONException e) {
             e.printStackTrace();
         }
-        return servicio;
+        return doctor;
     }
 
 }

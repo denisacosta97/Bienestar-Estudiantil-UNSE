@@ -3,8 +3,6 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.unse.bienestarestudiantil.Herramientas.Utils;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
