@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,9 +26,7 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.ServiciosU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios.EditServicioUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.ServiciosUPAAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,57 +34,54 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class GestionServiciosUActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewTurnoUAPUActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
+    TextView txtDescripcion;
+    ServiciosUPAAdapter adapter;
     RecyclerView.LayoutManager mLayoutManager;
-    ServiciosUPAAdapter mAdapter;
-    ArrayList<ServiciosU> mServiciosU;
+    ArrayList<ServiciosU> mList;
     ArrayList<Doctor> mDoctors;
-    DialogoProcesamiento dialog;
-    ImageView imgIcono;
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_servicios_u);
+        setContentView(R.layout.activity_turno_uapu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 
-        setToolbar();
-
-        loadListener();
-
         loadData();
 
-        loadInfo();
+        loadListener();
     }
 
-    private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Servicios");
+    private void loadData() {
+        mList = new ArrayList<>();
+        mDoctors = new ArrayList<>();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            Drawable progress = mProgressBar.getIndeterminateDrawable();
+            progress.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+            mProgressBar.setIndeterminateDrawable(progress);
+        }
+        loadInfo();
+
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        adapter = new ServiciosUPAAdapter(mList, mDoctors, getApplicationContext());
+        mRecyclerView.setAdapter(adapter);
+
     }
 
     private void loadListener() {
-        imgIcono.setOnClickListener(this);
-    }
-
-
-    private void loadData() {
-        mServiciosU = new ArrayList<>();
-        mDoctors = new ArrayList<>();
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ServiciosUPAAdapter(mServiciosU, mDoctors, getApplicationContext());
-        mRecyclerView.setAdapter(mAdapter);
-
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), EditServicioUActivity.class);
-                i.putExtra(Utils.SERVUAPU, mServiciosU.get(position));
+                Intent i = new Intent(getApplicationContext(), SelectorFechaActivity.class);
+                i.putExtra(Utils.SERVUAPU, mList.get(position));
                 i.putExtra(Utils.DOCTOR, mDoctors.get(position));
                 startActivity(i);
             }
@@ -90,16 +89,17 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
     }
 
     private void loadViews() {
+        txtDescripcion = findViewById(R.id.txtDescripcion);
         mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
+        mProgressBar = findViewById(R.id.progres);
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
-        int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_SERVICIOS, id, key);
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        int idLocal = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?key=%s&idU=%s&iu=%s", Utils.URL_SERVICIOS_TURNO, key, idLocal, idLocal);
+        StringRequest requestImage = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 procesarRespuesta(response);
@@ -107,22 +107,16 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
-                dialog.dismiss();
-
+                mProgressBar.setVisibility(View.GONE);
             }
         });
-        //Abro dialogo para congelar pantalla
-        dialog = new DialogoProcesamiento();
-        dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), "dialog_process");
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(requestImage);
     }
 
     private void procesarRespuesta(String response) {
         try {
-            dialog.dismiss();
+            mProgressBar.setVisibility(View.GONE);
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
@@ -134,13 +128,15 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
+                    Utils.showToast(getApplicationContext(), "ERROR 2");
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
                 case 100:
-                    //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
@@ -159,37 +155,21 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
                 JSONArray doc = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
-                    ServiciosU serv = ServiciosU.mapper(o, ServiciosU.COMPLETE);
-
-                    mServiciosU.add(serv);
+                    ServiciosU serv = ServiciosU.mapper(o, ServiciosU.LOW);
+                    mList.add(serv);
                 }
 
                 for (int j = 0; j < doc.length(); j++) {
-
                     JSONObject o = doc.getJSONObject(j);
-
                     Doctor doctor = Doctor.mapper(o, 2);
-
                     mDoctors.add(doctor);
                 }
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mAdapter.notifyDataSetChanged();
-
+        adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imgFlecha:
-                onBackPressed();
-                break;
-        }
-    }
 }

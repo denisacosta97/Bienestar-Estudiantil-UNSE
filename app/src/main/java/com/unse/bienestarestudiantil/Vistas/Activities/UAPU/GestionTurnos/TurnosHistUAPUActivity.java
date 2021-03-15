@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
 import androidx.appcompat.app.AppCompatActivity;
 

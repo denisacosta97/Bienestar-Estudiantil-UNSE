@@ -3,17 +3,24 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Ignore;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ServiciosU implements Parcelable {
 
+    @Ignore
+    public static final int LOW = 0;
+    @Ignore
+    public static final int COMPLETE = 1;
+
     private String titulo, descripcion, horario, dias, usuarios;
-    private int idServicio, validez;
+    private int idServicio, validez, turno;
     private Doctor mDoctor;
 
     public ServiciosU(int idServicio, String titulo, String descripcion, String horario,
-                      String dias, String usuarios, int validez, Doctor doctor) {
+                      String dias, String usuarios, int validez, int turno, Doctor doctor) {
         this.idServicio = idServicio;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -21,7 +28,13 @@ public class ServiciosU implements Parcelable {
         this.dias = dias;
         this.usuarios = usuarios;
         this.validez = validez;
+        this.turno = turno;
         mDoctor = doctor;
+    }
+
+    public ServiciosU(String titulo, int idServicio) {
+        this.titulo = titulo;
+        this.idServicio = idServicio;
     }
 
     public ServiciosU() {
@@ -32,6 +45,7 @@ public class ServiciosU implements Parcelable {
         this.dias = "";
         this.usuarios = "";
         this.validez = -1;
+        this.turno = -1;
         mDoctor = new Doctor();
     }
 
@@ -43,6 +57,7 @@ public class ServiciosU implements Parcelable {
         dias = in.readString();
         usuarios = in.readString();
         validez = in.readInt();
+        turno = in.readInt();
         mDoctor = in.readParcelable(Profesor.class.getClassLoader());
     }
 
@@ -122,29 +137,47 @@ public class ServiciosU implements Parcelable {
         mDoctor = doctor;
     }
 
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
-    public static ServiciosU mapper(JSONObject o) {
+    public static ServiciosU mapper(JSONObject o, int tipo) {
 
         ServiciosU servicio = new ServiciosU();
         String titulo, descripcion, horario, dias, usuarios;
-        int idServicio, validez, idUsuario;
+        int idServicio, validez, idUsuario, turno;
 
         try {
 
-            idServicio = Integer.parseInt(o.getString("idservicio"));
-            titulo = o.getString("titulo");
-            descripcion = o.getString("descripcion");
-            horario = o.getString("horario");
-            dias = o.getString("dias");
-            usuarios = o.getString("usuarios");
+            switch (tipo){
+                case LOW:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    titulo = o.getString("titulo");
 
-            servicio = new ServiciosU(idServicio, titulo, descripcion, horario, dias,
-                    usuarios, 1, null);
+                    servicio = new ServiciosU(titulo, idServicio);
+                    break;
+                case COMPLETE:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    titulo = o.getString("titulo");
+                    descripcion = o.getString("descripcion");
+                    horario = o.getString("horario");
+                    dias = o.getString("dias");
+                    usuarios = o.getString("usuarios");
+                    turno = Integer.parseInt(o.getString("turno"));
 
+                    servicio = new ServiciosU(idServicio, titulo, descripcion, horario, dias,
+                            usuarios, 1, turno, null);
+                    break;
+                }
             }
 
          catch (JSONException e) {
@@ -163,6 +196,7 @@ public class ServiciosU implements Parcelable {
         dest.writeString(dias);
         dest.writeString(usuarios);
         dest.writeInt(validez);
+        dest.writeInt(turno);
         dest.writeParcelable(mDoctor, flags);
     }
 }

@@ -12,11 +12,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.NewTurnoUAPUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosDiaUAPUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
 
 import java.util.ArrayList;
 
@@ -27,6 +33,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
     OpcionesAdapter mAdapter;
     ArrayList<Opciones> mOpciones;
     ImageView imgIcono;
+    FloatingActionButton fabAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
             }
         });
         imgIcono.setOnClickListener(this);
+        fabAgregar.setOnClickListener(this);
 
     }
 
@@ -85,6 +93,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
+        fabAgregar = findViewById(R.id.fabAdd);
     }
 
     @Override
@@ -92,6 +101,9 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
         switch (v.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
+                break;
+            case R.id.fabAdd:
+                startActivity(new Intent(getApplicationContext(), NewTurnoUAPUActivity.class));
                 break;
         }
     }

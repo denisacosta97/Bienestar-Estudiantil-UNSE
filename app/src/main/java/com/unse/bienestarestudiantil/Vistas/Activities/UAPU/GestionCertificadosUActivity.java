@@ -16,11 +16,15 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.CertificadosEmitidosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.NewCertificadoActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosDiaUAPUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class CertificadosUActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionCertificadosUActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -46,7 +50,7 @@ public class CertificadosUActivity extends AppCompatActivity implements View.OnC
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Turnos");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Certificados");
     }
 
 
@@ -57,10 +61,10 @@ public class CertificadosUActivity extends AppCompatActivity implements View.OnC
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewCertificadoActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), TurnosHistUAPUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CertificadosEmitidosActivity.class));
                         break;
 
                 }
@@ -73,8 +77,8 @@ public class CertificadosUActivity extends AppCompatActivity implements View.OnC
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Turnos Históricos",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Nuevo certificado",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Certificados emitidos",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

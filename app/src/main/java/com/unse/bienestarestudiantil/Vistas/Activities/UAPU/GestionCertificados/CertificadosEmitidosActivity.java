@@ -1,6 +1,9 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +15,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Doctor;
-import com.unse.bienestarestudiantil.Modelos.Lista;
+import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Certificado;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ListaGeneralAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.CertificadosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -27,76 +31,67 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-public class GestionDoctoresActivity extends AppCompatActivity implements View.OnClickListener {
+public class CertificadosEmitidosActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ListaGeneralAdapter mAdapter;
-    ImageView imgIcono;
-    ArrayList<Lista> mDoctors;
+    CertificadosAdapter mAdapter;
+    ArrayList<Certificado> mCertificados;
     DialogoProcesamiento dialog;
+    ImageView imgRefresh;
+    ImageView imgIcono;
+    OnClickOptionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_doctores);
+        setContentView(R.layout.activity_certificados_emitidos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        setToolbar();
-
         loadViews();
+
+        setToolbar();
 
         loadListener();
 
         loadData();
 
+        loadInfo();
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Doctores");
+        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de certificados");
+        imgRefresh.setVisibility(View.VISIBLE);
     }
-
 
     private void loadListener() {
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Doctor doctor = (Doctor) mDoctors.get(position);
-                Intent intent = new Intent(getApplicationContext(), PerfilProfesionalActivity.class);
-                intent.putExtra(Utils.USER_NAME, doctor);
-                startActivity(intent);
-            }
-        });
         imgIcono.setOnClickListener(this);
-
     }
 
-    private void loadData() {
 
-        loadInfo();
+    private void loadData() {
+        mCertificados = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CertificadosAdapter(mCertificados, getApplicationContext(), mListener);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
+    private void loadViews() {
+        mRecyclerView = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_DOCTORES_LISTA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -147,59 +142,24 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-
             if (jsonObject.has("mensaje")) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
-                JSONArray jsonArrayServ = jsonObject.getJSONArray("servicios");
-
-                mDoctors = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Doctor doctor = Doctor.mapper(o, Doctor.BASIC);
-
-                    StringBuilder especialidad = new StringBuilder();
-
-                    for (int j = 0; j<jsonArrayServ.length(); j++){
-                        JSONObject m = jsonArrayServ.getJSONObject(j);
-
-                        if (m.getString("iddoctor").equals(String.valueOf(doctor.getIdUsuario()))){
-                            especialidad.append(m.getString("titulo")).append(" - ")
-                                    .append(Utils.getYear(Utils.getFechaDateWithHour(m.getString("fecharegistro"))));
-                            especialidad.append("\n");
-                        }
-
-                    }
-
-                    doctor.setEspecialidad(especialidad.toString());
-
-                    mDoctors.add(doctor);
-
+                    Certificado cert = Certificado.mapper(o);
+                    mCertificados.add(cert);
                 }
 
             }
-
-            if (mDoctors.size() > 0) {
-                mAdapter = new ListaGeneralAdapter(mDoctors, getApplicationContext(), 1);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setNestedScrollingEnabled(false);
-            }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        mAdapter.notifyDataSetChanged();
 
-
-    }
-
-
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
     }
 
     @Override

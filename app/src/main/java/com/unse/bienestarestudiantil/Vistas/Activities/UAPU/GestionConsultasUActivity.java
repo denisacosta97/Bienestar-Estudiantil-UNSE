@@ -16,6 +16,8 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosDiaUAPUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class GestionConsultasUActivity extends AppCompatActivity implements View
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Turnos");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Consultas");
     }
 
 
@@ -57,7 +59,7 @@ public class GestionConsultasUActivity extends AppCompatActivity implements View
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), PacientesDiaActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), TurnosHistUAPUActivity.class));
@@ -73,8 +75,8 @@ public class GestionConsultasUActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Turnos Históricos",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Agregar consulta",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Consultas Históricas",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

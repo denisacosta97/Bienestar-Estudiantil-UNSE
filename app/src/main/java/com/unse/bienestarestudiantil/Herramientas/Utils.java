@@ -98,6 +98,7 @@ public class Utils {
     public static final String LIST_REGULARIDAD = "lista_regularidad";
     public static final String ARCHIVO_NAME = "archivo_name";
     public static final String LIST_HIJOS = "list_hijos";
+    public static final String DATA_FECHA = "data_fecha";
     public static final String LIST_SUSCROP = "list_sus";
     public static final String LIST_CRED = "list_cred";
     public static final String RECORRIDO = "recorrido";
@@ -335,6 +336,13 @@ public class Utils {
     public static final String URL_SERVICIOS = "https://" + IP + "/uapu/servicio/getServicios.php";
     public static final String URL_EDIT_SERVICIOS = "https://" + IP + "/uapu/servicio/actualizar.php";
     public static final String URL_BAJA_SERVICIOS = "https://" + IP + "/uapu/servicio/eliminar.php";
+    public static final String URL_TURNOS_DIA_UAPU = "https://" + IP + "/uapu/turno/getAllByDay.php";
+    public static final String URL_TURNOS_HIST_UAPU = "https://" + IP + "/uapu/turno/getAll.php";
+    public static final String URL_TURNOS_UAPU_BY_DAY = "https://" + IP + "/uapu/turno/getAllByDay.php";
+    public static final String URL_SERVICIOS_TURNO = "https://" + IP + "/uapu/turno/getAllServices.php";
+    public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
+
+    public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 
     public static final long SECONS_TIMER = 15000;
 
