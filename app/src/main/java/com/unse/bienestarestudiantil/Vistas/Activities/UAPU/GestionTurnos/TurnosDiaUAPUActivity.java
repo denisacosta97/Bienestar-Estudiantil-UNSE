@@ -89,7 +89,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.CertificadosEmitidosActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.ListadoMesTurnoActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.CertificadosEmitidosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.NewCertificadoActivity" />
         <activity android:name=".Vistas.Activities.UAPU.AddConsultaUAPUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.PacientesDiaActivity" />

@@ -98,7 +98,7 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_SERVICIOS, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&ad=%s", Utils.URL_SERVICIOS, id, key, 1);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

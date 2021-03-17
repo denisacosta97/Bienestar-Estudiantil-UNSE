@@ -38,7 +38,6 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
     CertificadosAdapter mAdapter;
     ArrayList<Certificado> mCertificados;
     DialogoProcesamiento dialog;
-    ImageView imgRefresh;
     ImageView imgIcono;
     OnClickOptionListener mListener;
 
@@ -62,7 +61,6 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
         ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de certificados");
-        imgRefresh.setVisibility(View.VISIBLE);
     }
 
     private void loadListener() {

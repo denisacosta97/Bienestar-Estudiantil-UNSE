@@ -1227,5 +1227,30 @@ public class Utils {
         return value;
     }
 
+    public static String getInfoDate(int dia, int mes, int anio) {
+        Date fecha = getFechaDateDMA(String.format("%02d-%02d-%02d", dia, mes, anio));
+        if (fecha != null) {
+            String diaSemana = getDayWeek(fecha);
+            return String.format("%s %02d", diaSemana, dia);
+        }
+        return "";
+
+    }
+
+    public static Date getFechaDateDMA(String fecha) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaI = null;
+        if (fecha != null)
+            try {
+                fechaI = simpleDateFormat.parse(fecha);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        return fechaI;
+
+    }
+
 }
 

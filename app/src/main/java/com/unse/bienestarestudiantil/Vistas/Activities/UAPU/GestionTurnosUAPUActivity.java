@@ -93,7 +93,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
         imgIcono = findViewById(R.id.imgFlecha);
-        fabAgregar = findViewById(R.id.fabAdd);
+        fabAgregar = findViewById(R.id.fab);
     }
 
     @Override

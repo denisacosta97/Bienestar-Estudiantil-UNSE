@@ -37,6 +37,12 @@ public class TurnosUAPU implements Parcelable {
         this.descripcion = descripcion;
     }
 
+    public TurnosUAPU(int dia, int mes, int anio) {
+        this.dia = dia;
+        this.mes = mes;
+        this.anio = anio;
+    }
+
     protected TurnosUAPU(Parcel in) {
         idTurno = in.readInt();
         idUsuario = in.readInt();
@@ -167,7 +173,11 @@ public class TurnosUAPU implements Parcelable {
         try {
             switch (tipo) {
                 case LOW:
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
 
+                    turno = new TurnosUAPU(dia, mes, anio);
                     break;
                 case MEDIUM:
 

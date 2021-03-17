@@ -147,7 +147,7 @@ public class ListadoConsultaActivity extends AppCompatActivity implements View.O
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Consulta noticia = Consulta.mapper(o);
+                    Consulta noticia = Consulta.mapper(o, Consulta.LOW);
                     mList.add(noticia);
                 }
 

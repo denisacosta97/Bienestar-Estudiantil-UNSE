@@ -173,9 +173,10 @@ public class ServiciosU implements Parcelable {
                     dias = o.getString("dias");
                     usuarios = o.getString("usuarios");
                     turno = Integer.parseInt(o.getString("turno"));
+                    validez = Integer.parseInt(o.getString("validez"));
 
                     servicio = new ServiciosU(idServicio, titulo, descripcion, horario, dias,
-                            usuarios, 1, turno, null);
+                            usuarios, validez , turno, null);
                     break;
                 }
             }

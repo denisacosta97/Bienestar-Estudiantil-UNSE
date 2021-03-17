@@ -70,7 +70,7 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
 
     private void loadViews() {
         btnCancel = findViewById(R.id.btnCancel);
-        btnEmitir = findViewById(R.id.btnGuardar);
+        btnEmitir = findViewById(R.id.btnEmitir);
         edtDni = findViewById(R.id.edtDni);
         txtFecha = findViewById(R.id.txtFecha);
         edtDescripcion = findViewById(R.id.edtDesc);

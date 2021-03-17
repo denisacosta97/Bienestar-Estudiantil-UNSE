@@ -12,12 +12,14 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_TURNO = 4;
     public static final int TIPO_IMPRE = 5;
     public static final int TIPO_INGRESO = 6;
+    public static final int TIPO_TURNO_UAPU = 7;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
     private Turno mTurno;
     private Impresion mImpre;
     private IngresoCiber mIngreso;
+    private TurnosUAPU mTurnosUAPU;
     private int tipo;
 
     public ItemDato() {
@@ -51,6 +53,11 @@ public class ItemDato extends ItemBase {
                 calendar2.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mImpre.getAnio(),
                         mImpre.getMes(), mImpre.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar2.getTime()), calendar2.get(Calendar.DAY_OF_MONTH));
+            case TIPO_TURNO_UAPU:
+                Calendar calendar3 = Calendar.getInstance();
+                calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mTurnosUAPU.getAnio(),
+                        mTurnosUAPU.getMes(), mTurnosUAPU.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
 
         }
         return null;
@@ -88,6 +95,8 @@ public class ItemDato extends ItemBase {
                 return String.format("%s", getImpre().getDni());
             case TIPO_INGRESO:
                 return String.format("%s", getIngreso().getDni());
+            case TIPO_TURNO_UAPU:
+                return String.format("%s", getTurnosUAPU().getIdTurno());
 
         }
         return null;
@@ -139,6 +148,14 @@ public class ItemDato extends ItemBase {
 
     public int getTipoDato() {
         return tipo;
+    }
+
+    public TurnosUAPU getTurnosUAPU() {
+        return mTurnosUAPU;
+    }
+
+    public void setTurnosUAPU(TurnosUAPU turnosUAPU) {
+        mTurnosUAPU = turnosUAPU;
     }
 
     @Override

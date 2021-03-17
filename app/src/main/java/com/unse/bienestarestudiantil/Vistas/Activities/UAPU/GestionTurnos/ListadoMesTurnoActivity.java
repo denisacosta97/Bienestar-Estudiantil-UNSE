@@ -1,12 +1,16 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionBecadosComedor;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -14,11 +18,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Consulta;
+import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Reserva;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ConsultasAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -27,58 +35,71 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BecadosActualesActivity extends AppCompatActivity implements View.OnClickListener {
+public class ListadoMesTurnoActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
+    LinearLayout latVacio;
     RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Consulta> mList;
-    ConsultasAdapter mAdapter;
-    ImageView imgIcono;
+    TurnosDiaUAdapter mAdapter;
+    ArrayList<TurnosUAPU> mTurnos;
+    TurnosUAPU mTurnosUAPU;
     DialogoProcesamiento dialog;
+    ImageView imgIcono;
+    OnClickOptionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_becados_actuales);
+        setContentView(R.layout.activity_listado_mes_turno);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getParcelableExtra(Utils.DATA_TURNO) != null) {
+            mTurnosUAPU = getIntent().getParcelableExtra(Utils.DATA_TURNO);
+        }
 
         loadViews();
+
+        setToolbar();
 
         loadListener();
 
         loadData();
 
-        setToolbar();
+        loadInfo();
+
     }
 
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        loadInfo();
+    private void loadListener() {
+        imgIcono.setOnClickListener(this);
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado consultas");
+        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Turnos del día");
     }
 
+
     private void loadData() {
-        mList = new ArrayList<>();
+        latVacio.setVisibility(View.GONE);
+        mTurnos = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new ConsultasAdapter(mList, getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new TurnosDiaUAdapter(mTurnos, getApplicationContext(), mListener);
         mRecyclerView.setAdapter(mAdapter);
+    }
 
-        loadInfo();
-
+    private void loadViews() {
+        latVacio = findViewById(R.id.latVacio);
+        mRecyclerView = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_CONSULTAS, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s",
+                Utils.URL_TURNOS_UAPU_BY_DAY, id, key, id, mTurnosUAPU.getDia(), mTurnosUAPU.getMes(), mTurnosUAPU.getAnio());
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -90,7 +111,6 @@ public class BecadosActualesActivity extends AppCompatActivity implements View.O
                 error.printStackTrace();
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -141,8 +161,8 @@ public class BecadosActualesActivity extends AppCompatActivity implements View.O
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Consulta noticia = Consulta.mapper(o, Consulta.LOW);
-                    mList.add(noticia);
+                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.COMPLETE);
+                    mTurnos.add(turno);
                 }
 
             }
@@ -153,24 +173,14 @@ public class BecadosActualesActivity extends AppCompatActivity implements View.O
 
     }
 
-    private void loadListener() {
-        imgIcono.setOnClickListener(this);
-
-    }
-
-    private void loadViews() {
-        imgIcono = findViewById(R.id.imgFlecha);
-        mRecyclerView = findViewById(R.id.recycler);
-    }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
-            case R.id.btnError:
+            case R.id.imgRefresh:
+                mTurnos.clear();
                 loadInfo();
                 break;
         }
