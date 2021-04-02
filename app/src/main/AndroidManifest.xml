@@ -33,7 +33,7 @@
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.ImpresionesHistoricasActivity" />
         <activity android:name=".Vistas.Activities.UAPU.TurnosHistUAPUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.TurnosDiaUAPUActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.AtencionesActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnosUAPUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionUAPUActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.PerfilConvocatoriaActivity" />
@@ -183,6 +183,9 @@
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.GestionServiciosActivity" />
         <activity android:name=".Vistas.Activities.Transporte.GestionTransporte.InfoServicioActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionDoctores.PerfilProfesionalActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesDiariasActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesHistoricasActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.NuevaAtencionActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

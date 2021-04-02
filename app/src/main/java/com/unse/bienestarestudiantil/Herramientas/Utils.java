@@ -282,7 +282,8 @@ public class Utils {
 
     //UPA
     public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
-    //public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
+    public static final String URL_ATENCION_DIARIA = "https://" + IP + "/uapu/atencion/getByDay.php";
+    public static final String URL_ATENCION_HISTORICA = "https://" + IP + "/uapu/atencion/getAll.php";
     //public static final String URL_LISTA_INGRESOS = "https://" + IP + "/ciber/maquina/getUsosByDay.php";
 
     //GENERALES

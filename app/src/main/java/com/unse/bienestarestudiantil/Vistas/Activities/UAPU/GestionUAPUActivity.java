@@ -16,6 +16,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
@@ -56,7 +57,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id){
+                switch ((int) id) {
                     case 1:
                         startActivity(new Intent(getApplicationContext(), GestionTurnosUAPUActivity.class));
                         break;
@@ -77,7 +78,6 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         break;
 
                 }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);

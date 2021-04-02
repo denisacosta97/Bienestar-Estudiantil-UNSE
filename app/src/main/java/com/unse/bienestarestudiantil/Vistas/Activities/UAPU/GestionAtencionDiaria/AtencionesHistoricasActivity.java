@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,12 +15,12 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Doctor;
-import com.unse.bienestarestudiantil.Modelos.Lista;
+import com.unse.bienestarestudiantil.Modelos.ItemBase;
+import com.unse.bienestarestudiantil.Modelos.ItemDato;
+import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosDiaUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosHistUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ListaGeneralAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -28,70 +28,90 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GestionDoctoresActivity extends AppCompatActivity implements View.OnClickListener {
+public class AtencionesHistoricasActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ListaGeneralAdapter mAdapter;
+    FechasAdapter mAdapter;
+    ArrayList<AtencionDiaria> mList;
     ImageView imgIcono;
-    ArrayList<Lista> mDoctors;
     DialogoProcesamiento dialog;
+
+    ArrayList<ItemBase> mItems;
+    ArrayList<ItemBase> mListOficial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_doctores);
+        setContentView(R.layout.activity_atencion_diaria_historial);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
 
         loadViews();
 
+        loadData();
+
         loadListener();
 
-        loadData();
+    }
+
+    private void loadData() {
+        loadInfo(1);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void loadViews() {
+        mRecyclerView = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
 
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Doctores");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Registros Históricos");
     }
-
 
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Doctor doctor = (Doctor) mDoctors.get(position);
-                Intent intent = new Intent(getApplicationContext(), PerfilProfesionalActivity.class);
-                intent.putExtra(Utils.USER_NAME, doctor);
-                startActivity(intent);
+                ItemBase itemBase = mListOficial.get(position);
+                if (!(itemBase instanceof ItemFecha)) {
+                    ItemDato itemDato = (ItemDato) itemBase;
+                    AtencionDiaria atencionDiaria = itemDato.getAtencionDiaria();
+                    Intent intent = new Intent(getApplicationContext(), AtencionesDiariasActivity.class);
+                    intent.putExtra(Utils.USER_INFO, atencionDiaria);
+                    startActivity(intent);
+                }
+
             }
         });
         imgIcono.setOnClickListener(this);
 
     }
 
-    private void loadData() {
-
-        loadInfo();
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-    }
-
-    private void loadInfo() {
+    private void loadInfo(int i) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_DOCTORES_LISTA, id, key);
+        String URL = null;
+        if (i == 1) {
+            URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_ATENCION_HISTORICA, id, key, id);
+        } else {
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_ATENCION_DIARIA, id, key,
+                    -1, -1, -1);
+        }
+
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -135,6 +155,9 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -154,38 +177,44 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
-                JSONArray jsonArrayServ = jsonObject.getJSONArray("servicios");
-
-                mDoctors = new ArrayList<>();
+                mList = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Doctor doctor = Doctor.mapper(o, Doctor.BASIC);
+                    AtencionDiaria atencionDiaria = AtencionDiaria.mapper(o, AtencionDiaria.FECHA);
 
-                    StringBuilder especialidad = new StringBuilder();
-
-                    for (int j = 0; j<jsonArrayServ.length(); j++){
-                        JSONObject m = jsonArrayServ.getJSONObject(j);
-
-                        if (m.getString("iddoctor").equals(String.valueOf(doctor.getIdUsuario()))){
-                            especialidad.append(m.getString("titulo")).append(" - ")
-                                    .append(Utils.getYear(Utils.getFechaDateWithHour(m.getString("fecharegistro"))));
-                            especialidad.append("\n");
-                        }
-
-                    }
-                    doctor.setEspecialidad(especialidad.toString());
-
-                    mDoctors.add(doctor);
+                    mList.add(atencionDiaria);
 
                 }
 
             }
 
-            if (mDoctors.size() > 0) {
-                mAdapter = new ListaGeneralAdapter(mDoctors, getApplicationContext(), 1);
+            mItems = new ArrayList<>();
+            for (AtencionDiaria m : mList) {
+                ItemDato itemDato = new ItemDato();
+                itemDato.setAtencionDiaria(m);
+                itemDato.setTipo(ItemDato.TIPO_ATENCION);
+                mItems.add(itemDato);
+            }
+            mListOficial = new ArrayList<>();
+            TreeMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
+            List<String> meses = new ArrayList<>();
+            meses.addAll(datos.keySet());
+            for (String date : meses) {
+                ItemFecha dateItem = new ItemFecha(Utils.getMonth(Integer.parseInt(date)));
+                mListOficial.add(dateItem);
+                for (ItemBase item : datos.get(date)) {
+                    ItemDato generalItem = (ItemDato) item;
+                    mListOficial.add(generalItem);
+                }
+            }
+
+            if (mListOficial.size() > 0) {
+                mAdapter = new FechasAdapter(this, mListOficial, FechasAdapter.TIPO_ATENCION);
+                mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setNestedScrollingEnabled(false);
             }
@@ -197,11 +226,41 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
 
     }
 
+    private TreeMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
 
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
+        TreeMap<String, List<ItemBase>> groupedHashMap = new TreeMap<>();
+
+        for (ItemBase dato : list) {
+
+            ItemDato itemDatoKey = (ItemDato) dato;
+
+            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_ATENCION) {
+
+                String mes = String.valueOf(itemDatoKey.getAtencionDiaria().getMes());
+
+                if (!groupedHashMap.containsKey(mes)) {
+
+                    for (ItemBase item : list) {
+
+                        ItemDato itemDato = (ItemDato) item;
+
+                        if (itemDato.getAtencionDiaria().getMes() == itemDatoKey.getAtencionDiaria().getMes()) {
+                            if (groupedHashMap.containsKey(mes)) {
+                                groupedHashMap.get(mes).add(itemDato);
+                            } else {
+                                List<ItemBase> nuevaLista = new ArrayList<>();
+                                nuevaLista.add(itemDato);
+                                groupedHashMap.put(mes, nuevaLista);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        return groupedHashMap;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -211,4 +270,5 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                 break;
         }
     }
+
 }

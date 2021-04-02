@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Modelos;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
 
 import java.util.Calendar;
 
@@ -12,10 +13,12 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_TURNO = 4;
     public static final int TIPO_IMPRE = 5;
     public static final int TIPO_INGRESO = 6;
+    public static final int TIPO_ATENCION = 7;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
     private Turno mTurno;
+    private AtencionDiaria mAtencionDiaria;
     private Impresion mImpre;
     private IngresoCiber mIngreso;
     private int tipo;
@@ -46,6 +49,11 @@ public class ItemDato extends ItemBase {
                 calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mIngreso.getAnio(),
                         mIngreso.getMes(), mIngreso.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
+            case TIPO_ATENCION:
+                Calendar calendar3 = Calendar.getInstance();
+                calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mAtencionDiaria.getAnio(),
+                        mAtencionDiaria.getMes(), mAtencionDiaria.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
             case TIPO_IMPRE:
                 Calendar calendar2 = Calendar.getInstance();
                 calendar2.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mImpre.getAnio(),
@@ -91,6 +99,14 @@ public class ItemDato extends ItemBase {
 
         }
         return null;
+    }
+
+    public AtencionDiaria getAtencionDiaria() {
+        return mAtencionDiaria;
+    }
+
+    public void setAtencionDiaria(AtencionDiaria atencionDiaria) {
+        mAtencionDiaria = atencionDiaria;
     }
 
     public Deporte getDeporte() {

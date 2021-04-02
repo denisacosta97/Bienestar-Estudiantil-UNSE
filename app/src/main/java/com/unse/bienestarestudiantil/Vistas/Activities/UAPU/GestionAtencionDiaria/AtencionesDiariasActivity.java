@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,12 +15,9 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Doctor;
-import com.unse.bienestarestudiantil.Modelos.Lista;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosDiaUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosHistUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.ListaGeneralAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiariaAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -30,60 +27,66 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GestionDoctoresActivity extends AppCompatActivity implements View.OnClickListener {
+public class AtencionesDiariasActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ListaGeneralAdapter mAdapter;
+    AtencionDiariaAdapter mAdapter;
+    ArrayList<AtencionDiaria> mList;
     ImageView imgIcono;
-    ArrayList<Lista> mDoctors;
     DialogoProcesamiento dialog;
+    AtencionDiaria mAtencionDiaria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_doctores);
+        setContentView(R.layout.activity_atencion_diaria);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getParcelableExtra(Utils.USER_INFO) != null){
+            mAtencionDiaria = getIntent().getParcelableExtra(Utils.USER_INFO);
+        }
 
         setToolbar();
 
         loadViews();
 
+        loadData();
+
         loadListener();
 
-        loadData();
+    }
+
+    private void loadData() {
+        loadInfo();
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void loadViews() {
+        mRecyclerView = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
 
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Doctores");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Registros del Día");
     }
-
 
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Doctor doctor = (Doctor) mDoctors.get(position);
-                Intent intent = new Intent(getApplicationContext(), PerfilProfesionalActivity.class);
-                intent.putExtra(Utils.USER_NAME, doctor);
-                startActivity(intent);
+
             }
         });
         imgIcono.setOnClickListener(this);
-
-    }
-
-    private void loadData() {
-
-        loadInfo();
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
 
@@ -91,7 +94,14 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_DOCTORES_LISTA, id, key);
+        String URL = null;
+        if (mAtencionDiaria != null){
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_ATENCION_DIARIA, id, key,
+                    mAtencionDiaria.getDia(), mAtencionDiaria.getMes(), mAtencionDiaria.getAnio());
+        }else{
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_ATENCION_DIARIA, id, key,
+                    -1, -1, -1);
+        }
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -135,6 +145,9 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -154,38 +167,22 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
-                JSONArray jsonArrayServ = jsonObject.getJSONArray("servicios");
-
-                mDoctors = new ArrayList<>();
+                mList = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Doctor doctor = Doctor.mapper(o, Doctor.BASIC);
+                    AtencionDiaria atencionDiaria = AtencionDiaria.mapper(o, AtencionDiaria.BASIC);
 
-                    StringBuilder especialidad = new StringBuilder();
-
-                    for (int j = 0; j<jsonArrayServ.length(); j++){
-                        JSONObject m = jsonArrayServ.getJSONObject(j);
-
-                        if (m.getString("iddoctor").equals(String.valueOf(doctor.getIdUsuario()))){
-                            especialidad.append(m.getString("titulo")).append(" - ")
-                                    .append(Utils.getYear(Utils.getFechaDateWithHour(m.getString("fecharegistro"))));
-                            especialidad.append("\n");
-                        }
-
-                    }
-                    doctor.setEspecialidad(especialidad.toString());
-
-                    mDoctors.add(doctor);
+                    mList.add(atencionDiaria);
 
                 }
 
             }
 
-            if (mDoctors.size() > 0) {
-                mAdapter = new ListaGeneralAdapter(mDoctors, getApplicationContext(), 1);
+            if (mList.size() > 0) {
+                mAdapter = new AtencionDiariaAdapter(mList, getApplicationContext());
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setNestedScrollingEnabled(false);
             }
@@ -198,11 +195,6 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
     }
 
 
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -211,4 +203,6 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                 break;
         }
     }
+
+
 }
