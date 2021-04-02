@@ -171,7 +171,7 @@
     <string name="fechaModif">Estado de fecha modificado</string>
     <string name="fechaNoModif">Fecha no modificada</string>
     <string name="turnoAct">Turno actualizado</string>
-   <string name="noTurnoMesDato">¡Sin turnos en el mes!</string>
+    <string name="noTurnoMesDato">¡Sin turnos en el mes!</string>
 
     <!--  Calendario  -->
 

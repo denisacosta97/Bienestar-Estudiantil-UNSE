@@ -341,6 +341,11 @@ public class Utils {
     public static final String URL_TURNOS_UAPU_BY_DAY = "https://" + IP + "/uapu/turno/getAllByDay.php";
     public static final String URL_SERVICIOS_TURNO = "https://" + IP + "/uapu/turno/getAllServices.php";
     public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
+    public static final String URL_MEDICAM_INSERT = "https://" + IP + "/uapu/medicamento/insertar.php";
+    public static final String URL_MEDICAM_DAY  = "https://" + IP + "/uapu/medicamento/getByDay.php";
+    public static final String URL_MEDICAM_USER  = "https://" + IP + "/uapu/medicamento/getByUser.php";
+    public static final String URL_MEDICAM_UPDATE  = "https://" + IP + "/uapu/medicamento/actualizar.php";
+    public static final String URL_MEDICAM_ALL  = "https://" + IP + "/uapu/medicamento/getAll.php";
 
     public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 

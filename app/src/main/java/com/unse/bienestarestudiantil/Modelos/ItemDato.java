@@ -13,6 +13,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_IMPRE = 5;
     public static final int TIPO_INGRESO = 6;
     public static final int TIPO_TURNO_UAPU = 7;
+    public static final int TIPO_MEDICAM_UAPU = 8;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -20,6 +21,7 @@ public class ItemDato extends ItemBase {
     private Impresion mImpre;
     private IngresoCiber mIngreso;
     private TurnosUAPU mTurnosUAPU;
+    private Medicamento mMedicamento;
     private int tipo;
 
     public ItemDato() {
@@ -58,6 +60,11 @@ public class ItemDato extends ItemBase {
                 calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mTurnosUAPU.getAnio(),
                         mTurnosUAPU.getMes(), mTurnosUAPU.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
+            case TIPO_MEDICAM_UAPU:
+                Calendar calendar4 = Calendar.getInstance();
+                calendar4.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
+                        mMedicamento.getMes(), mMedicamento.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar4.getTime()), calendar4.get(Calendar.DAY_OF_MONTH));
 
         }
         return null;
@@ -97,6 +104,8 @@ public class ItemDato extends ItemBase {
                 return String.format("%s", getIngreso().getDni());
             case TIPO_TURNO_UAPU:
                 return String.format("%s", getTurnosUAPU().getIdTurno());
+            case TIPO_MEDICAM_UAPU:
+                return String.format("%s", getMedicamento().getIdUsuario());
 
         }
         return null;
@@ -152,6 +161,14 @@ public class ItemDato extends ItemBase {
 
     public TurnosUAPU getTurnosUAPU() {
         return mTurnosUAPU;
+    }
+
+    public Medicamento getMedicamento() {
+        return mMedicamento;
+    }
+
+    public void setMedicamento(Medicamento medicamento) {
+        mMedicamento = medicamento;
     }
 
     public void setTurnosUAPU(TurnosUAPU turnosUAPU) {

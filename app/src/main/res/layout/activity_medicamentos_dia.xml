@@ -51,7 +51,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Listado de pacientes"
+        android:text="Listado de turnos"
         android:gravity="center"
         android:textSize="20sp"
         android:fontFamily="@font/montserrat_black"/>
