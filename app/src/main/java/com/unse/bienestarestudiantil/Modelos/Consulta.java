@@ -3,6 +3,8 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Ignore;
+
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 
@@ -11,14 +13,29 @@ import org.json.JSONObject;
 
 public class Consulta implements Parcelable {
 
+    @Ignore
+    public static final int LOW = 0;
+    @Ignore
+    public static final int UAPU = 1;
+
     private int dni, dniReceptor;
     private String fecha, consulta;
+    private String nomAp, motivo;
 
     public Consulta(int dni, int dniReceptor, String fecha, String consulta) {
         this.dni = dni;
         this.dniReceptor = dniReceptor;
         this.fecha = fecha;
         this.consulta = consulta;
+    }
+
+    public Consulta(int dni, int dniReceptor, String fecha, String consulta, String nomAp, String motivo) {
+        this.dni = dni;
+        this.dniReceptor = dniReceptor;
+        this.fecha = fecha;
+        this.consulta = consulta;
+        this.nomAp = nomAp;
+        this.motivo = motivo;
     }
 
     protected Consulta(Parcel in) {
@@ -40,16 +57,33 @@ public class Consulta implements Parcelable {
         }
     };
 
-    public static Consulta mapper(JSONObject o) {
+    public static Consulta mapper(JSONObject o, int tipo) {
         Consulta consulta = null;
         int dni;
         String cons, fecha;
+        String nomAp, motivo;
         try {
-            fecha = o.getString("fecharegistro");
-            cons = o.getString("descripcion");
-            dni = Integer.parseInt(o.getString("idusuario"));
 
-            consulta = new Consulta(dni, 0, fecha, cons);
+            switch (tipo){
+                case LOW:
+                    fecha = o.getString("fecharegistro");
+                    cons = o.getString("descripcion");
+                    dni = Integer.parseInt(o.getString("idusuario"));
+
+                    consulta = new Consulta(dni, 0, fecha, cons);
+                    break;
+                case UAPU:
+                    fecha = o.getString("fecharegistro");
+                    cons = o.getString("descripcion");
+                    dni = Integer.parseInt(o.getString("idusuario"));
+                    nomAp = o.getString("nombre");
+                    motivo = o.getString("motivo");
+
+                    consulta = new Consulta(dni, 0, fecha, cons, nomAp, motivo);
+                    break;
+            }
+
+
 
         }catch (JSONException e){
             e.printStackTrace();

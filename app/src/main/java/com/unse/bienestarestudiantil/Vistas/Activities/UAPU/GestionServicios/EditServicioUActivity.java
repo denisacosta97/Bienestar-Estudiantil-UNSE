@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -265,7 +265,7 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
         String URL = String.format("%s?key=%s&idU=%s&is=%s&val=%s",
-                Utils.URL_BAJA_SERVICIOS, key, id, mServiciosU.getIdServicio(), var); //FALTA LINK Y DEPURAR
+                Utils.URL_BAJA_SERVICIOS, key, id, mServiciosU.getIdServicio(), var);
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

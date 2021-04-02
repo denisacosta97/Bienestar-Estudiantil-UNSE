@@ -1,7 +1,6 @@
 package com.unse.bienestarestudiantil.Modelos;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
 
 import java.util.Calendar;
 
@@ -13,6 +12,8 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_TURNO = 4;
     public static final int TIPO_IMPRE = 5;
     public static final int TIPO_INGRESO = 6;
+    public static final int TIPO_TURNO_UAPU = 7;
+    public static final int TIPO_MEDICAM_UAPU = 8;
     public static final int TIPO_ATENCION = 7;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
@@ -21,6 +22,8 @@ public class ItemDato extends ItemBase {
     private AtencionDiaria mAtencionDiaria;
     private Impresion mImpre;
     private IngresoCiber mIngreso;
+    private TurnosUAPU mTurnosUAPU;
+    private Medicamento mMedicamento;
     private int tipo;
 
     public ItemDato() {
@@ -59,6 +62,16 @@ public class ItemDato extends ItemBase {
                 calendar2.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mImpre.getAnio(),
                         mImpre.getMes(), mImpre.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar2.getTime()), calendar2.get(Calendar.DAY_OF_MONTH));
+            case TIPO_TURNO_UAPU:
+                Calendar calendar3 = Calendar.getInstance();
+                calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mTurnosUAPU.getAnio(),
+                        mTurnosUAPU.getMes(), mTurnosUAPU.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
+            case TIPO_MEDICAM_UAPU:
+                Calendar calendar4 = Calendar.getInstance();
+                calendar4.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
+                        mMedicamento.getMes(), mMedicamento.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar4.getTime()), calendar4.get(Calendar.DAY_OF_MONTH));
 
         }
         return null;
@@ -96,6 +109,10 @@ public class ItemDato extends ItemBase {
                 return String.format("%s", getImpre().getDni());
             case TIPO_INGRESO:
                 return String.format("%s", getIngreso().getDni());
+            case TIPO_TURNO_UAPU:
+                return String.format("%s", getTurnosUAPU().getIdTurno());
+            case TIPO_MEDICAM_UAPU:
+                return String.format("%s", getMedicamento().getIdUsuario());
 
         }
         return null;
@@ -155,6 +172,22 @@ public class ItemDato extends ItemBase {
 
     public int getTipoDato() {
         return tipo;
+    }
+
+    public TurnosUAPU getTurnosUAPU() {
+        return mTurnosUAPU;
+    }
+
+    public Medicamento getMedicamento() {
+        return mMedicamento;
+    }
+
+    public void setMedicamento(Medicamento medicamento) {
+        mMedicamento = medicamento;
+    }
+
+    public void setTurnosUAPU(TurnosUAPU turnosUAPU) {
+        mTurnosUAPU = turnosUAPU;
     }
 
     @Override

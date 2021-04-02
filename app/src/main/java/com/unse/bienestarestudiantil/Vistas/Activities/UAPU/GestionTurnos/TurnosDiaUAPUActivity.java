@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +19,9 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Modelos.Turno;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -33,8 +35,8 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    TurnosDiasAdapter mAdapter; //DEFINIR ADAPTER
-    ArrayList<Turno> mTurnos; //DEFINIR
+    TurnosDiaUAdapter mAdapter;
+    ArrayList<TurnosUAPU> mTurnos;
     DialogoProcesamiento dialog;
     ImageView imgRefresh;
     ImageView imgIcono;
@@ -73,7 +75,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         mTurnos = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TurnosDiasAdapter(mTurnos, getApplicationContext(), mListener);
+        mAdapter = new TurnosDiaUAdapter(mTurnos, getApplicationContext(), mListener);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -87,7 +89,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_TURNOS_DIA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -145,17 +147,12 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
             if (jsonObject.has("mensaje")) {
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                JSONArray fecha = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Turno turno = Turno.mapper(o, Turno.BASIC);
-                    turno.setDia(Integer.parseInt(fecha.getString(0)));
-                    turno.setMes(Integer.parseInt(fecha.getString(1)));
-                    turno.setAnio(Integer.parseInt(fecha.getString(2)));
-
+                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.COMPLETE);
                     mTurnos.add(turno);
                 }
 

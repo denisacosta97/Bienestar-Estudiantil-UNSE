@@ -18,8 +18,6 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.Lista;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosDiaUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.TurnosHistUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.ListaGeneralAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 

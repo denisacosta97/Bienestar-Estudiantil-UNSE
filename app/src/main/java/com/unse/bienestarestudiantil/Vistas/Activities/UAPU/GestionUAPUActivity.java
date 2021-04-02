@@ -74,9 +74,11 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), GestionConsultasUActivity.class));
                         break;
                     case 6:
-                        startActivity(new Intent(getApplicationContext(), CertificadosUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionCertificadosUActivity.class));
                         break;
-
+                    case 7:
+                        startActivity(new Intent(getApplicationContext(), MedicamentosActivity.class));
+                        break;
                 }
             }
         });
@@ -90,9 +92,10 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Atenciones",R.drawable.ic_becas, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Servicios",R.drawable.ic_becas, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión Doctores",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Consultas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Pacientes",R.drawable.ic_becas, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.VERTICAL,6, "Certificados",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,7, "Estadisticas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,7, "Medicamentos",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.VERTICAL,8, "Estadisticas",R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
