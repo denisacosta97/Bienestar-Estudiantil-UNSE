@@ -20,6 +20,7 @@
     <!--Colores varios-->
     <color name="colorGreen">#32AC37</color>
     <color name="colorOrange">#E64A19</color>
+    <color name="colorOrangeLigth">#F57C00</color>
     <color name="colorRed">#D32F2F</color>
     <color name="colorPink">#C2185B</color>
     <color name="colorBrown">#9F2B07</color>

@@ -347,6 +347,7 @@ public class Utils {
     public static final String URL_MEDICAM_USER  = "https://" + IP + "/uapu/medicamento/getByUser.php";
     public static final String URL_MEDICAM_UPDATE  = "https://" + IP + "/uapu/medicamento/actualizar.php";
     public static final String URL_MEDICAM_ALL  = "https://" + IP + "/uapu/medicamento/getAll.php";
+    public static final String URL_MEDICAM_ESTADISTICA  = "https://" + IP + "/uapu/medicamento/getEstadistica.php";
 
     public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 

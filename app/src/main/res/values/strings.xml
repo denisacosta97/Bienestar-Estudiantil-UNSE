@@ -230,6 +230,7 @@
     <string name="turnoEnProceso">El turno ya se encuentra en proceso ¿realmente desea continuar?</string>
     <string name="turnoModificar">¿Desea modificar el estado del turno de %s %s?</string>
     <string name="turnoModificarAtendido">El turno ya fue atendido  ¿realmente desea continuar?</string>
+    <string name="rangoFechaInvalido">Rango de fechas inválido</string>
 
 </resources>
 

@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Vistas.Activities.UAPU.MedicamentosActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity"></activity>
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.ListadoMesTurnoActivity" />
@@ -198,6 +198,7 @@
         <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesDiariasActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesHistoricasActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.NuevaAtencionActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.EstadisticasMedicamentosActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

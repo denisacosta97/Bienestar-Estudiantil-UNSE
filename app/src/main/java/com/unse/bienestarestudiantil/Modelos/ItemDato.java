@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Modelos;
 
 import com.unse.bienestarestudiantil.Herramientas.Utils;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
 
 import java.util.Calendar;
 
@@ -14,7 +15,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_INGRESO = 6;
     public static final int TIPO_TURNO_UAPU = 7;
     public static final int TIPO_MEDICAM_UAPU = 8;
-    public static final int TIPO_ATENCION = 7;
+    public static final int TIPO_ATENCION = 9;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -38,6 +39,7 @@ public class ItemDato extends ItemBase {
     }
 
     public String getTextValue() {
+        Calendar calendar = null;
         switch (getTipoDato()) {
             case TIPO_INSCRIPCION:
                 return String.format("%s - %s", getInscripcion().getTitulo(), getInscripcion().getAnio());
@@ -48,30 +50,30 @@ public class ItemDato extends ItemBase {
             case TIPO_TURNO:
                 return String.format("%s %s", Utils.getDayWeek(Utils.getFechaDate(mTurno.getFechaRegistro())), mTurno.getDia());
             case TIPO_INGRESO:
-                Calendar calendar = Calendar.getInstance();
+                calendar = Calendar.getInstance();
                 calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mIngreso.getAnio(),
                         mIngreso.getMes(), mIngreso.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
             case TIPO_ATENCION:
-                Calendar calendar3 = Calendar.getInstance();
-                calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mAtencionDiaria.getAnio(),
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mAtencionDiaria.getAnio(),
                         mAtencionDiaria.getMes(), mAtencionDiaria.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
             case TIPO_IMPRE:
-                Calendar calendar2 = Calendar.getInstance();
-                calendar2.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mImpre.getAnio(),
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mImpre.getAnio(),
                         mImpre.getMes(), mImpre.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar2.getTime()), calendar2.get(Calendar.DAY_OF_MONTH));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
             case TIPO_TURNO_UAPU:
-                Calendar calendar3 = Calendar.getInstance();
-                calendar3.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mTurnosUAPU.getAnio(),
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mTurnosUAPU.getAnio(),
                         mTurnosUAPU.getMes(), mTurnosUAPU.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar3.getTime()), calendar3.get(Calendar.DAY_OF_MONTH));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
             case TIPO_MEDICAM_UAPU:
-                Calendar calendar4 = Calendar.getInstance();
-                calendar4.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
                         mMedicamento.getMes(), mMedicamento.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar4.getTime()), calendar4.get(Calendar.DAY_OF_MONTH));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
 
         }
         return null;

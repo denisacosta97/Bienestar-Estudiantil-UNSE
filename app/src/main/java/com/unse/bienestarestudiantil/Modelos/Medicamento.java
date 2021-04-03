@@ -10,6 +10,7 @@ public class Medicamento implements Parcelable {
 
     public static final int COMPLETE = 1;
     public static final int LOW = 2;
+    public static final int LOW2 = 3;
 
     private int idUsuario, estado, dia, mes, anio;
     private String tipoMedicamento, fechaRegistro, fechaHora, nombre, apellido, facultad, carrera, descripcion;
@@ -210,6 +211,15 @@ public class Medicamento implements Parcelable {
                     med = new Medicamento(idUsuario, estado, tipoMedicamento, fechaRegistro, fechaHora,
                             nombre, apellido, facultad, carrera, descripcion);
 
+                    break;
+                case LOW2:
+                    tipoMedicamento = o.getString("tipomedicamento");
+                    fechaRegistro = o.getString("fecharegistro");
+                    fechaHora = o.getString("fechamodificacion");
+                    med = new Medicamento(0, 0, 0);
+                    med.setTipoMedicamento(tipoMedicamento);
+                    med.setFechaRegistro(fechaRegistro);
+                    med.setFechaHora(fechaHora);
                     break;
                 case LOW:
                     dia = Integer.parseInt(o.getString("dia"));

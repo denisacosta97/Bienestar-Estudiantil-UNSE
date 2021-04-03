@@ -7,32 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
-import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.CertificadosUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionConsultasUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.PerfilProfesionalActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServiciosUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnosUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiariaAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -65,7 +45,6 @@ public class AtencionesActivity extends AppCompatActivity implements View.OnClic
         loadListener();
 
 
-
     }
 
     private void loadListener() {
@@ -73,7 +52,7 @@ public class AtencionesActivity extends AppCompatActivity implements View.OnClic
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id){
+                switch ((int) id) {
                     case 1:
                         startActivity(new Intent(getApplicationContext(), AtencionesDiariasActivity.class));
                         break;
@@ -98,12 +77,12 @@ public class AtencionesActivity extends AppCompatActivity implements View.OnClic
     private void loadData() {
 
         mList = new ArrayList<>();
-        mList.add(new Opciones(LinearLayout.VERTICAL,1,"Registro del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mList.add(new Opciones(LinearLayout.VERTICAL,2, "Atenciones Históricas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.VERTICAL, 1, "Registro del día", R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.VERTICAL, 2, "Atenciones Históricas", R.drawable.ic_becas, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mList, getApplicationContext(),1);
+        mAdapter = new OpcionesAdapter(mList, getApplicationContext(), 1);
         mRecyclerView.setAdapter(mAdapter);
 
     }

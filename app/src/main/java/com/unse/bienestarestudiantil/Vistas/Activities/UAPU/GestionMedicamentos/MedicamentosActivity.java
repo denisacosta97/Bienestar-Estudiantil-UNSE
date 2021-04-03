@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,16 +59,18 @@ public class MedicamentosActivity extends AppCompatActivity implements View.OnCl
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id){
+                switch ((int) id) {
                     case 1:
                         startActivity(new Intent(getApplicationContext(), MedicamentosDiaActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), MedicamentosHistoricosActivity.class));
                         break;
+                    case 3:
+                        startActivity(new Intent(getApplicationContext(), EstadisticasMedicamentosActivity.class));
+                        break;
 
                 }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
