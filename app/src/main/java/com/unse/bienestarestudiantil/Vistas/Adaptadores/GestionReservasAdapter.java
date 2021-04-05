@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,12 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class GestionReservasAdapter extends RecyclerView.Adapter<GestionReservasAdapter.EventosViewHolder>{
+public class GestionReservasAdapter extends RecyclerView.Adapter<GestionReservasAdapter.EventosViewHolder> {
 
     private ArrayList<Reserva> mGestionReservas;
     private Context context;
 
-    public GestionReservasAdapter (ArrayList<Reserva> list, Context ctx) {
+    public GestionReservasAdapter(ArrayList<Reserva> list, Context ctx) {
         this.mGestionReservas = list;
         this.context = ctx;
     }
@@ -36,7 +38,6 @@ public class GestionReservasAdapter extends RecyclerView.Adapter<GestionReservas
         return new GestionReservasAdapter.EventosViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull EventosViewHolder holder, int position) {
         Reserva depo = mGestionReservas.get(position);
@@ -45,7 +46,6 @@ public class GestionReservasAdapter extends RecyclerView.Adapter<GestionReservas
         holder.mTitulo.setText(depo.getTitulo());
         holder.mRangoHorario.setText(depo.getRangoHora().getHoraInicio());
     }
-
 
     @Override
     public long getItemId(int position) {

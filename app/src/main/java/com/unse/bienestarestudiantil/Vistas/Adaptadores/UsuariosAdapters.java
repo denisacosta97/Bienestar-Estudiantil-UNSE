@@ -1,9 +1,11 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,6 @@ public class UsuariosAdapters extends RecyclerView.Adapter<UsuariosAdapters.Usua
 
     }
 
-
     @Override
     public long getItemId(int position) {
         return mList.get(position).getIdUsuario();
@@ -38,18 +39,13 @@ public class UsuariosAdapters extends RecyclerView.Adapter<UsuariosAdapters.Usua
     @NonNull
     @Override
     public UsuariosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usuarios, parent, false);
-
-
         return new UsuariosViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UsuariosViewHolder holder, int position) {
-
         Usuario user = mList.get(position);
-
         holder.txtTitulo.setText(String.format("%s\n%s", user.getApellido(), user.getNombre()));
         holder.txtDescripcion.setText(String.format("%s", user.getIdUsuario()));
 

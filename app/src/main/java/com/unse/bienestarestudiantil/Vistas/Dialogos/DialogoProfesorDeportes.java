@@ -3,12 +3,16 @@ package com.unse.bienestarestudiantil.Vistas.Dialogos;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +64,7 @@ public class DialogoProfesorDeportes extends DialogFragment {
     }
 
     private void loadData() {
-        if(mDeporte != null){
+        if (mDeporte != null) {
             txtNombre.setText(mDeporte.getName());
             imgIcon.setImageResource(mDeporte.getIconDeporte());
 

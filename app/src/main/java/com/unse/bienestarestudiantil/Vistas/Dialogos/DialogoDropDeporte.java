@@ -2,9 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Dialogos;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,7 @@ public class DialogoDropDeporte extends DialogFragment implements View.OnClickLi
     Deporte mDeporte;
     DialogoProcesamiento dialog;
 
-    public void loadData(Deporte deporte){
+    public void loadData(Deporte deporte) {
         this.mDeporte = deporte;
     }
 
@@ -62,7 +64,7 @@ public class DialogoDropDeporte extends DialogFragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnConfirm:
                 save();
                 break;

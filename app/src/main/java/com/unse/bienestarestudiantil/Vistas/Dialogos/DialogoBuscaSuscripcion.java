@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -149,8 +151,6 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
             public void onResponse(String response) {
                 isCred = true;
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -158,7 +158,6 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
                 error.printStackTrace();
                 Utils.showToast(getContextDialog(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -177,10 +176,7 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -188,7 +184,6 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
                 error.printStackTrace();
                 Utils.showToast(getContextDialog(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -218,7 +213,8 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
                 case 2:
                     if (isCred)
                         Utils.showToast(getContextDialog(), getString(R.string.errorCrearCredencial));
-                    else  Utils.showToast(getContextDialog(), getString(R.string.suscripcionNoExiste));
+                    else
+                        Utils.showToast(getContextDialog(), getString(R.string.suscripcionNoExiste));
                     break;
                 case 3:
                     Utils.showToast(getContextDialog(), getString(R.string.tokenInvalido));
@@ -245,7 +241,6 @@ public class DialogoBuscaSuscripcion extends DialogFragment {
                 JSONObject datos = jsonObject.getJSONObject("mensaje");
                 idSuscrip = Integer.parseInt(datos.getString("idSuscripcion"));
                 validez = Integer.parseInt(datos.getString("validez"));
-
                 txtAnio.setText(String.format("%s", datos.getString("anio")));
                 txtAnio.setVisibility(View.VISIBLE);
             }

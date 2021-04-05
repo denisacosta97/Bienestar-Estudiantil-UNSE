@@ -3,9 +3,11 @@ package com.unse.bienestarestudiantil.Vistas.Dialogos;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,12 @@ public class DialogoIngresoPolideportivo extends DialogFragment {
     ImageView imgFoto;
     ImageButton btnMasMay, btnMasMen, btnMenosMay, btnMenosMen;
     Button btnAceptar;
-    TextView txtCantidadMay, txtCantidadMen,txtNombre, txtDNI;
+    TextView txtCantidadMay, txtCantidadMen, txtNombre, txtDNI;
     Usuario usuario;
 
     int contadorMay = 0, contadorMeno = 0;
 
-    public void loadDataFromUser(Usuario usuario){
+    public void loadDataFromUser(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -55,16 +57,16 @@ public class DialogoIngresoPolideportivo extends DialogFragment {
 
     private void loadData() {
         contadorMeno = contadorMay = 0;
-        if(usuario != null){
+        if (usuario != null) {
             txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
             txtDNI.setText(String.format("%s", usuario.getIdUsuario()));
             updateCounter(contadorMay, contadorMeno);
         }
     }
 
-    private void updateCounter(int c1, int c2){
-        txtCantidadMay.setText(c1+"");
-        txtCantidadMen.setText(c2+"");
+    private void updateCounter(int c1, int c2) {
+        txtCantidadMay.setText(c1 + "");
+        txtCantidadMen.setText(c2 + "");
     }
 
     private void loadListener() {
@@ -87,8 +89,6 @@ public class DialogoIngresoPolideportivo extends DialogFragment {
         btnMenosMen = view.findViewById(R.id.btnRemoveMen);
         txtDNI = view.findViewById(R.id.txtDescripcion);
         txtNombre = view.findViewById(R.id.txtTitulo);
-
-
     }
 
 }

@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity"></activity>
+        <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PerfilPacienteActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.MedicamentosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity"></activity>
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity" />
@@ -28,11 +31,11 @@
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.CertificadosEmitidosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.NewCertificadoActivity" />
         <activity android:name=".Vistas.Activities.UAPU.AddConsultaUAPUActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.PacientesDiaActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesDiaActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.NewTurnoUAPUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionServicios.EditServicioUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificadosUActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.GestionConsultasUActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionPacientesUActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionServiciosUActivity" />
         <activity android:name=".Vistas.Activities.Ciber.GestionCiber.IngresosCiberHistoricosActivity" />
@@ -135,7 +138,6 @@
         <activity
             android:name=".Vistas.Activities.Perfil.PerfilActivity"
             android:label="Perfil" />
-        <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity" />
         <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
         <activity
             android:name=".Vistas.Activities.AsistenciaActivity"
@@ -144,7 +146,7 @@
         <activity
             android:name=".Vistas.Activities.Inicio.MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".Vistas.Activities.Inicio.SlideWelcomeActivity">
+        <activity android:name=".Vistas.Activities.Inicio.LoginWelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -152,7 +154,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vistas.Activities.Inicio.RegisterActivity" />
-        <activity android:name=".Vistas.Activities.Inicio.SplashScreenActivity" />
         <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"

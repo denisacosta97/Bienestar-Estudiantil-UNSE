@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class ArchivosAdapter extends RecyclerView.Adapter<ArchivosAdapter.EventosViewHolder>{
+public class ArchivosAdapter extends RecyclerView.Adapter<ArchivosAdapter.EventosViewHolder> {
 
     private ArrayList<Archivo> mArchivos, mArchivosCopia;
     private Context context;
@@ -51,9 +53,6 @@ public class ArchivosAdapter extends RecyclerView.Adapter<ArchivosAdapter.Evento
         String ext = Utils.getExtension(archivo.getNombreArchivo());
         holder.txtExtension.setText(ext.length() != 0 ? ext.toUpperCase() : ext);
         holder.txtExtension.setBackgroundColor(context.getResources().getColor(Utils.getColorExtension(ext)));
-
-
-
     }
 
     public void filtrar(int tipo) {

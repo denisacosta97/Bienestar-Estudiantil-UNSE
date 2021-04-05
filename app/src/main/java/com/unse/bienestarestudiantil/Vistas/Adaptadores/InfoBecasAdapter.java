@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class InfoBecasAdapter extends RecyclerView.Adapter<InfoBecasAdapter.EventosViewHolder>{
+public class InfoBecasAdapter extends RecyclerView.Adapter<InfoBecasAdapter.EventosViewHolder> {
 
     private ArrayList<InfoBecas> mInfoBecas;
     private Context context;

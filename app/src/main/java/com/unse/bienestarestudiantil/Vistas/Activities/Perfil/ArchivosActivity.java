@@ -49,7 +49,6 @@ import java.util.Date;
 
 import static android.view.View.GONE;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class ArchivosActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView.LayoutManager mLayoutManager, mLayoutManagerCategoria;
@@ -84,7 +83,9 @@ public class ArchivosActivity extends AppCompatActivity implements View.OnClickL
                 R.drawable.ic_vacio, "No existe ningún archivo disponible para descargar");
 
         StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            builder.detectFileUriExposure();
+        }
 
     }
 
@@ -235,8 +236,6 @@ public class ArchivosActivity extends AppCompatActivity implements View.OnClickL
 
             try {
                 startActivity(intent);
-            } catch (FileUriExposedException e) {
-                Utils.showToast(getApplicationContext(), "Error interno al abrir el archivo");
             } catch (ActivityNotFoundException e) {
                 Utils.showToast(getApplicationContext(), "No hay aplicaciones disponibles para abrir PDF");
                 DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())

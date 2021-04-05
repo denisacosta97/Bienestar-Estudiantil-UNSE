@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Vistas.Activities.Inicio.LoginWelcomeActivity"
     android:background="@drawable/img_unse2"
+    android:fillViewport="true"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_alpha_40"
@@ -33,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bienvenido/a a la aplicación del \nComedor Universitario."
+                android:text="@string/welcome"
                 android:textSize="18sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -46,8 +47,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="150dp"
+            android:layout_centerInParent="true"
             android:translationX="-120dp"
             android:orientation="vertical">
 
@@ -63,7 +63,9 @@
                 android:drawableRight="@drawable/flecha_derecha"
                 android:fontFamily="@font/montserrat_black"/>
 
+            <!--HABILITAR VISIBILIDAD-->
             <Button
+                android:visibility="gone"
                 android:id="@+id/visit"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
@@ -77,18 +79,33 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/black_alpha_40"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="250dp"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_logo_bienestar_01"/>
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_logo_bienestar_01" />
 
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:paddingTop="5dp"
+                app:srcCompat="@drawable/logo_unse" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

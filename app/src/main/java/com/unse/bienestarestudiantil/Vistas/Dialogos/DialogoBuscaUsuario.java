@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,25 +106,26 @@ public class DialogoBuscaUsuario extends DialogFragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if (mUsuarios.size() > 0){
-                        boolean isIgual = false;
-                        for (Usuario usuario : mUsuariosLista){
-                            if (usuario.getIdUsuario() == mUsuarios.get(0).getIdUsuario()){
-                                isIgual = true;
-                                break;
-                            }
+                if (mUsuarios.size() > 0) {
+                    boolean isIgual = false;
+                    for (Usuario usuario : mUsuariosLista) {
+                        if (usuario.getIdUsuario() == mUsuarios.get(0).getIdUsuario()) {
+                            isIgual = true;
+                            break;
                         }
-                        if (!isIgual) {
-                            dismiss();
-                            Intent intent = new Intent(getContextDialog(), EditarRolesActivity.class);
-                            intent.putExtra(Utils.USER_INFO, mUsuarios.get(0));
-                            intent.putExtra(Utils.ROLES_USER, new ArrayList<String>());
-                            intent.putExtra(Utils.ROLES, mRoles);
-                            intent.putExtra(Utils.IS_ADMIN_MODE, true);
-                            startActivity(intent);
-                        }else Utils.showToast(getContextDialog(), getString(R.string.usuarioPermisosOn));
+                    }
+                    if (!isIgual) {
+                        dismiss();
+                        Intent intent = new Intent(getContextDialog(), EditarRolesActivity.class);
+                        intent.putExtra(Utils.USER_INFO, mUsuarios.get(0));
+                        intent.putExtra(Utils.ROLES_USER, new ArrayList<String>());
+                        intent.putExtra(Utils.ROLES, mRoles);
+                        intent.putExtra(Utils.IS_ADMIN_MODE, true);
+                        startActivity(intent);
+                    } else
+                        Utils.showToast(getContextDialog(), getString(R.string.usuarioPermisosOn));
 
-                    }else Utils.showToast(getContextDialog(), getString(R.string.primeroBuscar));
+                } else Utils.showToast(getContextDialog(), getString(R.string.primeroBuscar));
             }
         });
         btnBuscar.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +179,7 @@ public class DialogoBuscaUsuario extends DialogFragment {
                     break;
                 case 1:
                     //Exito
-                   loadInfo(jsonObject);
+                    loadInfo(jsonObject);
                     break;
                 case 2:
                     Utils.showToast(getContextDialog(), getString(R.string.usuarioNoExiste));

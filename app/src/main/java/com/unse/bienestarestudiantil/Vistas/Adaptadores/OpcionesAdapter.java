@@ -21,20 +21,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.View.GONE;
 
-
 public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.OpcionesViewHolder> {
 
     private ArrayList<Opciones> arrayList;
     private Context context;
     private int tipo;
 
-
     public OpcionesAdapter(ArrayList<Opciones> list, Context ctx, int tipo) {
         context = ctx;
         arrayList = list;
         this.tipo = tipo;
     }
-
 
     @Override
     public long getItemId(int position) {

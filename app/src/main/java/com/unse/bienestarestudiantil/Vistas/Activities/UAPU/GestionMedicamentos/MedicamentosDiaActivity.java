@@ -24,7 +24,6 @@ import com.unse.bienestarestudiantil.Modelos.Medicamento;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.MedicamentoAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogAtenderBecas;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;

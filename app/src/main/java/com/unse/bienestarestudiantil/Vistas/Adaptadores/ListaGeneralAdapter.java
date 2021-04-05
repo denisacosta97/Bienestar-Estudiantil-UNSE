@@ -42,17 +42,12 @@ public class ListaGeneralAdapter extends RecyclerView.Adapter<ListaGeneralAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ListaViewHolder holder, int position) {
-
         if (tipo == ListaGeneralAdapter.DOCTOR) {
-
             Doctor doctor = (Doctor) lista.get(position);
 
             holder.txtNombre.setText(String.format("%s %s", doctor.getNombre(), doctor.getApellido()));
             holder.txtDni.setText(String.valueOf(doctor.getIdUsuario()));
-
-
         }
-
     }
 
     @Override
@@ -61,10 +56,8 @@ public class ListaGeneralAdapter extends RecyclerView.Adapter<ListaGeneralAdapte
     }
 
     static class ListaViewHolder extends RecyclerView.ViewHolder {
-
         TextView txtNombre, txtDni;
         CardView mCardView;
-
 
         ListaViewHolder(View view, int tipo) {
             super(view);
@@ -74,9 +67,6 @@ public class ListaGeneralAdapter extends RecyclerView.Adapter<ListaGeneralAdapte
                 txtNombre = view.findViewById(R.id.txtNombre);
                 txtDni = view.findViewById(R.id.txtDescripcion);
             }
-
-
         }
-
     }
 }

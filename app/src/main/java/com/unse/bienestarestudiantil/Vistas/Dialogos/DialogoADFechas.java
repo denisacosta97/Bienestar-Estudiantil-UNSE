@@ -118,7 +118,7 @@ public class DialogoADFechas extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                    dismiss();
+                dismiss();
 
             }
         });

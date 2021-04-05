@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +54,7 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
         return new CredencialesAdapter.CredencialViewHolder(view, mOnClickListenerAdapter);
     }
 
-    public void setList(ArrayList<Credencial> credencials){
+    public void setList(ArrayList<Credencial> credencials) {
         this.mArchivos = credencials;
         notifyDataSetChanged();
     }
@@ -89,11 +91,9 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
                     //holder.txtEstado.setText("ACTIVADO");
                 }
             }
-        }else{
+        } else {
             holder.txtTitulo.setText("CREDENCIALES NO ASIGNADAS");
         }
-
-
     }
 
     @Override
@@ -137,8 +137,6 @@ public class CredencialesAdapter extends RecyclerView.Adapter<CredencialesAdapte
                 });
             }*/
 
-
         }
     }
-
 }

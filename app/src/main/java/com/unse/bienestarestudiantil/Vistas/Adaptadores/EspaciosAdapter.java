@@ -1,9 +1,11 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,6 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
         this.context = context;
     }
 
-
     @NonNull
     @Override
     public EspacioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,9 +47,9 @@ public class EspaciosAdapter extends RecyclerView.Adapter<EspaciosAdapter.Espaci
         holder.txtPrecio.setText(espacio.getPrize());
         holder.txtDescrip.setText(espacio.getDesc());
 
-        if(espacio.isSeleccionado()){
+        if (espacio.isSeleccionado()) {
             holder.mCardView.setAlpha(0.5f);
-        }else{
+        } else {
             holder.mCardView.setAlpha(1f);
         }
 

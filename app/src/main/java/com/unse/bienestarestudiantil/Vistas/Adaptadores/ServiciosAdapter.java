@@ -71,8 +71,7 @@ public class ServiciosAdapter extends RecyclerView.Adapter<ServiciosAdapter.Serv
             holder.txtEstado.setText(texto);
             holder.txtEstado.setTextColor(mContext.getResources().getColor(color));
             holder.txtEstado.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.imgIcon.setVisibility(View.GONE);
             holder.txtEstado.setText(String.format("%s %s", servicio.getNombre(), servicio.getApellido()));
         }

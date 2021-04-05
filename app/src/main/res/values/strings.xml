@@ -172,6 +172,9 @@
     <string name="fechaNoModif">Fecha no modificada</string>
     <string name="turnoAct">Turno actualizado</string>
     <string name="noTurnoMesDato">¡Sin turnos en el mes!</string>
+    <string name="welcome">Bienvenido/a a la aplicación de la Secretaría de Bienestar Estudiantil.</string>
+    <string name="alert3">Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña.</string>
+    <string name="contraseniaReco">Si pasaron más de 3 minutos e intentaste varias veces, por favor comunicate con la Secretaría de Bienestar Estudiantil</string>
 
     <!--  Calendario  -->
 

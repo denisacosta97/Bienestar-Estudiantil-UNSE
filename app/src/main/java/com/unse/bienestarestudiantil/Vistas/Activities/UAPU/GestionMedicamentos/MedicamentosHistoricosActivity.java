@@ -24,9 +24,7 @@ import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
-import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos.ListadoTurnosMesActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -69,7 +67,6 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
         loadData();
 
         setToolbar();
-
     }
 
     private void setToolbar() {
@@ -143,15 +140,10 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
     private void loadInfo(JSONObject jsonObject) {
         try {
             if (jsonObject.has("mensaje")) {
-
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
                 mMedicamentos = new ArrayList<>();
-
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     Medicamento turno = Medicamento.mapper(o, Medicamento.LOW);
                     mMedicamentos.add(turno);
                 }
@@ -179,7 +171,6 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
                 adapter = new FechasAdapter(getApplicationContext(), mListOficial, FechasAdapter.TIPO_TURNO);
                 mRecyclerView.setAdapter(adapter);
                 //adapter.change(mListOficial);
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -211,23 +202,14 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
     }
 
     private HashMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
-
         HashMap<String, List<ItemBase>> groupedHashMap = new HashMap<>();
-
         for (ItemBase dato : list) {
-
             ItemDato itemDatoKey = (ItemDato) dato;
-
             if (itemDatoKey.getTipoDato() == ItemDato.TIPO_MEDICAM_UAPU) {
-
                 String mes = String.valueOf(itemDatoKey.getMedicamento().getMes());
-
                 if (!groupedHashMap.containsKey(mes)) {
-
                     for (ItemBase item : list) {
-
                         ItemDato itemDato = (ItemDato) item;
-
                         if (itemDato.getMedicamento().getMes() == itemDatoKey.getMedicamento().getMes()) {
                             if (groupedHashMap.containsKey(mes)) {
                                 groupedHashMap.get(mes).add(itemDato);
@@ -240,7 +222,6 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
                     }
                 }
             }
-
         }
         return groupedHashMap;
     }

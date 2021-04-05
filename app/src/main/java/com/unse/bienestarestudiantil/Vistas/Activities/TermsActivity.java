@@ -1,7 +1,9 @@
 package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.pm.ActivityInfo;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,7 +48,7 @@ public class TermsActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
                 break;

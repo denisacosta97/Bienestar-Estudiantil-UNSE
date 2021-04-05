@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.unse.bienestarestudiantil.Modelos.Impresion;
 import com.unse.bienestarestudiantil.Modelos.ReservaCancha;
 import com.unse.bienestarestudiantil.R;
 

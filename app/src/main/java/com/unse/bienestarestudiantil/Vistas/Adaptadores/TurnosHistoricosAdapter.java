@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,6 @@ import com.unse.bienestarestudiantil.R;
 import java.util.ArrayList;
 
 public class TurnosHistoricosAdapter extends RecyclerView.Adapter<TurnosHistoricosAdapter.EventosViewHolder> {
-
 
     private ArrayList<Turno> mTurnos;
     private Context context;

@@ -1,9 +1,11 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +41,11 @@ public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAd
     public HorarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = null;
-        if(viewType == Utils.TIPO_QUINCHO){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horario_reserva,parent, false);
+        if (viewType == Utils.TIPO_QUINCHO) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horario_reserva, parent, false);
 
-        }else if(viewType == Utils.TIPO_CANCHA){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reserva_cancha,parent, false);
+        } else if (viewType == Utils.TIPO_CANCHA) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reserva_cancha, parent, false);
 
         }
         return new HorarioViewHolder(view);
@@ -57,7 +59,7 @@ public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAd
 
         String hora = String.format("%s-%s", horario.getHoraInicio(), horario.getHoraFin());
         holder.txtHorario.setText(hora);
-        switch (horario.getEstado()){
+        switch (horario.getEstado()) {
             case 1:
                 holder.txtTitulo.setText("LIBRE");
                 Glide.with(holder.imgIcon.getContext()).load(R.drawable.ic_reserva_libre).into(holder.imgIcon);
@@ -75,8 +77,7 @@ public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAd
                 break;
         }
 
-        if(getItemViewType(position) == Utils.TIPO_QUINCHO) {
-
+        if (getItemViewType(position) == Utils.TIPO_QUINCHO) {
 
 
             if (horario.getTurno() == 1) {
@@ -84,15 +85,13 @@ public class HorariosCanchaAdapter extends RecyclerView.Adapter<HorariosCanchaAd
             } else {
                 holder.txtTurno.setText("TURNO NOCHE");
             }
-        }else{
+        } else {
             if (horario.getTurno() == 1) {
                 holder.txtTurno.setText("CANCHA C/LUZ");
             } else {
                 holder.txtTurno.setText("CANCHA S/LUZ");
             }
         }
-
-
     }
 
     @Override

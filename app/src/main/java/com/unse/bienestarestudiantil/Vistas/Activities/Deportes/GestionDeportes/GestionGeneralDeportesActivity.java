@@ -82,11 +82,11 @@ public class GestionGeneralDeportesActivity extends AppCompatActivity implements
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 101, "Inscripciones", R.drawable.ic_usuarios, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 102, "Gestión de Becados", R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 103, "Gestión de Deportes", R.drawable.ic_deportes, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 104, "Gestión de Profesores", R.drawable.ic_entrenador, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 105, "Gestión de Torneos", R.drawable.ic_cup, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 101, "Inscripciones", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 102, "Gestión de Becados", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 103, "Gestión de Deportes", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 104, "Gestión de Profesores", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 105, "Gestión de Torneos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

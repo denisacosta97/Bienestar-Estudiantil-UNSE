@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,7 @@ public class RegularidadAdapter extends RecyclerView.Adapter<RegularidadAdapter.
         Regularidad regularidad = mList.get(i);
 
         holder.txtTitulo.setText(String.format("%s %s", regularidad.getValidez() == 1 ? "VIGENTE" : "NO VIGENTE"
-        , regularidad.getAnio()));
+                , regularidad.getAnio()));
         Glide.with(holder.imgIcon.getContext()).load(regularidad.getValidez() == 1 ? R.drawable.ic_chek : R.drawable.ic_error)
                 .into(holder.imgIcon);
         holder.txtFecha.setText(Utils.getFechaFormat(regularidad.getFechaOtorg()));
@@ -51,7 +53,7 @@ public class RegularidadAdapter extends RecyclerView.Adapter<RegularidadAdapter.
         return mList.size();
     }
 
-    public static class RegularidadViewHolder extends RecyclerView.ViewHolder{
+    public static class RegularidadViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imgIcon;
         private TextView txtTitulo, txtFecha;

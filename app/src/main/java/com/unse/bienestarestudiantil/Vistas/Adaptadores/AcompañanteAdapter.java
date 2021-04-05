@@ -18,7 +18,6 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-
 public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapter.AcompañanteViewHolder> {
 
     ArrayList<PiletaAcompañante> mList;
@@ -40,15 +39,12 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
     @NonNull
     @Override
     public AcompañanteAdapter.AcompañanteViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_ingreso_poli, viewGroup, false);
-
         return new AcompañanteViewHolder(view, mObservadorPrecio);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AcompañanteAdapter.AcompañanteViewHolder holder, int position) {
-
         PiletaAcompañante acompanante = mList.get(position);
 
         holder.txtPrecio.setText(String.format("$ %s", acompanante.getPrecioTotal()));
@@ -75,7 +71,7 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
         return mList.size();
     }
 
-    public int getCategoriaGral(){
+    public int getCategoriaGral() {
         return categoriaGral;
     }
 
@@ -83,11 +79,11 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
         this.categoriaGral = i;
     }
 
-    class AcompañanteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener ,
+    class AcompañanteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener {
 
         ImageButton btnMas, btnMenos;
-       // Spinner mSpinner;
+        // Spinner mSpinner;
         TextView txtPrecio, txtCantidad, txtPop;
         ObservadorPrecio mObservadorPrecio;
         //ArrayAdapter<String> dataAdapter2;
@@ -157,14 +153,14 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             //menuInfo is null
-            for(int i = 0; i<categorias.length;i++){
-                menu.add(Menu.NONE, i,0,categorias[i]);
+            for (int i = 0; i < categorias.length; i++) {
+                menu.add(Menu.NONE, i, 0, categorias[i]);
             }
         }
     }
 
     public void update() {
-        if(mList.size() != 0) {
+        if (mList.size() != 0) {
             float precio = calcularPrecio(mList.get(getPosition()).getCategoria(), 0);
             mList.get(getPosition()).setPrecioTotal(precio * mList.get(this.getPosition())
                     .getCantidad());
@@ -176,7 +172,7 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
     private float calcularPrecio(int categ, int tipo) {
         float precioTotal = 0;
 
-        switch (categ+1) {
+        switch (categ + 1) {
             case 6:
                 //Afiliados
                 precioTotal = 0;
@@ -198,10 +194,10 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
                 precioTotal = 200;
                 break;
             case 8:
-                if (getCategoriaGral() == 0){
+                if (getCategoriaGral() == 0) {
                     precioTotal = 100;
-                }else{
-                    precioTotal = calcularPrecio(getCategoriaGral(),0);
+                } else {
+                    precioTotal = calcularPrecio(getCategoriaGral(), 0);
                 }
                 break;
             default:
@@ -217,5 +213,5 @@ public class AcompañanteAdapter extends RecyclerView.Adapter<AcompañanteAdapte
         }
         return precioTotal;
     }
-    
+
 }

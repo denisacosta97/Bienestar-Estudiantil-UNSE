@@ -71,7 +71,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
                         break;
 
                 }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
+                //Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -81,8 +81,8 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos del día",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Turnos Históricos",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Turnos del día",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Turnos Históricos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +74,6 @@ public class DialogoActivarDesactivar extends DialogFragment {
     public void setOnClickListenerAdapter(OnClickListenerAdapter onClickListenerAdapter) {
         mOnClickListenerAdapter = onClickListenerAdapter;
     }
-
 
     public Credencial getCredencial() {
         return mCredencial;
@@ -155,13 +156,11 @@ public class DialogoActivarDesactivar extends DialogFragment {
         String URL = mRegularidad != null ? String.format("%s?id=%s&key=%s&idU=%s&est=%s&idReg=%s", Utils.URL_REGULARIDAD_CAMBIAR,
                 id, key, getIdUsuario(), isActive ? 1 : 0, mRegularidad.getIdRegularidad())
                 : !(mCredencial instanceof CredencialSocio) ? String.format("%s?id=%s&key=%s&idC=%s&est=%s", Utils.URL_CREDENCIAL_CAMBIAR, id, key, mCredencial.getId(), isActive ? 1 : 0)
-                : String.format("%s?id=%s&key=%s&idC=%s&est=%s",Utils.URL_CREDENCIAL_SOCIO_CAMBIAR, id, key, ((CredencialSocio)mCredencial).getIdCredencialSocio(), isActive ? 1 : 0);
+                : String.format("%s?id=%s&key=%s&idC=%s&est=%s", Utils.URL_CREDENCIAL_SOCIO_CAMBIAR, id, key, ((CredencialSocio) mCredencial).getIdCredencialSocio(), isActive ? 1 : 0);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
 
             }
         }, new Response.ErrorListener() {
@@ -171,7 +170,6 @@ public class DialogoActivarDesactivar extends DialogFragment {
                 isActive = !isActive;
                 Utils.showToast(getContextDialog(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -235,7 +233,6 @@ public class DialogoActivarDesactivar extends DialogFragment {
         }
     }
 
-
     private void loadData() {
         txtTituloPrin.setText(mRegularidad != null ? "Info Regularidad" : "Info Credencial");
         isActive = mRegularidad != null ? mRegularidad.getValidez() == 1 : mCredencial.getValidez() == 1;
@@ -246,8 +243,6 @@ public class DialogoActivarDesactivar extends DialogFragment {
         txtFecha.setText(Utils.getFechaFormat(mRegularidad != null ?
                 mRegularidad.getFechaOtorg()
                 : mCredencial.getFecha()));
-
-
     }
 
     private void loadViews() {

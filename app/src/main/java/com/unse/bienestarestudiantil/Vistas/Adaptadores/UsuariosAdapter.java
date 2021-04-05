@@ -2,9 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.graphics.Typeface;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,33 +68,31 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
 
             Usuario alumno = mList.get(i);
 
-            if (tipo == Utils.TIPO_CHOFER){
+            if (tipo == Utils.TIPO_CHOFER) {
                 holder.latFotos.setVisibility(GONE);
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
                 holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
                 holder.txtRol.setVisibility(View.VISIBLE);
                 holder.txtRol.setTypeface(null, Typeface.BOLD);
                 holder.txtRol.setText(String.format("%s", alumno.getValidez() == 1 ? "ACTIVO" : "INACTIVO"));
-                holder.txtRol.setTextColor(mContext.getResources().getColor(alumno.getValidez() == 1 ? R.color.colorGreen: R.color.colorRed));
+                holder.txtRol.setTextColor(mContext.getResources().getColor(alumno.getValidez() == 1 ? R.color.colorGreen : R.color.colorRed));
 
-            }
-            else if (tipo == Utils.TIPO_SOCIO){
+            } else if (tipo == Utils.TIPO_SOCIO) {
                 holder.latFotos.setVisibility(GONE);
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
                 holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
                 holder.txtRol.setVisibility(View.VISIBLE);
                 holder.txtRol.setTypeface(null, Typeface.BOLD);
                 holder.txtRol.setText(String.format("%s", alumno.getValidez() == 1 ? "ACTIVO" : "INACTIVO"));
-                holder.txtRol.setTextColor(mContext.getResources().getColor(alumno.getValidez() == 1 ? R.color.colorGreen: R.color.colorRed));
-            }
-            else if (tipo == Utils.TIPO_ROLES){
+                holder.txtRol.setTextColor(mContext.getResources().getColor(alumno.getValidez() == 1 ? R.color.colorGreen : R.color.colorRed));
+            } else if (tipo == Utils.TIPO_ROLES) {
                 holder.latFotos.setVisibility(GONE);
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
                 holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
                 holder.txtRol.setVisibility(View.VISIBLE);
                 holder.txtRol.setText(String.format("Cant. Roles %s", alumno.getValidez()));
 
-            }else {
+            } else {
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
                 holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
                 holder.txtTipo.setText(Utils.getTipoUser(alumno.getTipoUsuario()));

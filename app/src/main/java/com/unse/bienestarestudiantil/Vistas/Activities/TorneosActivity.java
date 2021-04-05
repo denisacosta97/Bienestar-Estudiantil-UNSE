@@ -3,9 +3,11 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +36,6 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
     TextView mNombreAlu, idAlumno;
     Button btnFinalizar;
     ImageView imgIcono;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class TorneosActivity extends AppCompatActivity implements View.OnClickLi
         mRecyclerAsistencia.setLayoutManager(mLayoutManager);
         mRecyclerAsistencia.setAdapter(mTorneosAdapter);
 
-        if(mTorneos.size() == 0){ //Código para usar los custom toast.
+        if (mTorneos.size() == 0) { //Código para usar los custom toast.
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.toast_layout));
 

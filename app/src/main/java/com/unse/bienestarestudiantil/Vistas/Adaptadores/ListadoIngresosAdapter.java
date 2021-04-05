@@ -45,9 +45,9 @@ public class ListadoIngresosAdapter extends RecyclerView.Adapter<ListadoIngresos
         holder.txtCat.setText(getCategoria(piletaIngreso.getCategoria()));
 
         holder.txtFecha.setText(piletaIngreso.getFecha());
-        if(piletaIngreso.getPrecio1() != -1) {
+        if (piletaIngreso.getPrecio1() != -1) {
             holder.txtPrecio.setText(String.valueOf(piletaIngreso.getPrecio1()));
-        }else{
+        } else {
             holder.txtPrecio.setVisibility(View.GONE);
         }
     }
@@ -107,7 +107,6 @@ public class ListadoIngresosAdapter extends RecyclerView.Adapter<ListadoIngresos
         this.mListCopia = new ArrayList<>();
         this.mListCopia.addAll(mList);
     }
-
 
 
 }

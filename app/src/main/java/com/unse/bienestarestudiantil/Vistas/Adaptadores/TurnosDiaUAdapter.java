@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class TurnosDiaUAdapter extends RecyclerView.Adapter<TurnosDiaUAdapter.EventosViewHolder>  {
+public class TurnosDiaUAdapter extends RecyclerView.Adapter<TurnosDiaUAdapter.EventosViewHolder> {
 
     ArrayList<TurnosUAPU> mTurnos;
     private Context context;

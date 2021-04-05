@@ -1,13 +1,12 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.android.volley.Request;
@@ -35,12 +34,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button mInicio;
     ImageView btnBack;
     DialogoProcesamiento dialog;
     EditText edtUser, edtPass;
+    TextView txtWelcome;
     VideoView mVideoView;
     UsuarioViewModel mUsuarioViewModel;
     int dniNumber = 0;
@@ -57,6 +61,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loadData();
 
+        changeTextWelcome();
+
+    }
+
+    public void changeTextWelcome() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if (timeOfDay >= 6 && timeOfDay <= 12) {
+            txtWelcome.setText("¡Buen día!");
+        } else if (timeOfDay >= 13 && timeOfDay <= 19) {
+            txtWelcome.setText("¡Buenas tardes!");
+        } else if (timeOfDay >= 20)
+            txtWelcome.setText("¡Buenas noches!");
     }
 
     private void loadData() {
@@ -87,10 +105,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loadViews() {
         mInicio = findViewById(R.id.sesionOn);
-        btnBack = findViewById(R.id.btnBack);
-        //mVideoView = findViewById(R.id.videoView);
         edtPass = findViewById(R.id.edtPass);
         edtUser = findViewById(R.id.edtUser);
+        txtWelcome = findViewById(R.id.txtWelcome);
     }
 
 
@@ -105,9 +122,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.txtPassMissed:
                 startActivity(new Intent(LoginActivity.this, RecuperarContraseniaActivity.class));
-                break;
-            case R.id.btnBack:
-                onBackPressed();
                 break;
         }
     }
@@ -126,10 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-
                     procesarRespuesta(response);
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -137,7 +148,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     error.printStackTrace();
                     Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                     dialog.dismiss();
-
                 }
             });
             dialog = new DialogoProcesamiento();
@@ -325,3 +335,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 }
+

@@ -76,7 +76,7 @@ public class DialogAtenderBecas extends DialogFragment implements View.OnClickLi
         txtNombre.setText(String.format("%s %s", mTurno.getNom(), mTurno.getApe()));
         txtHorario.setText("-\n" + mTurno.getHorario());
         txtDni.setText(String.valueOf(mTurno.getIdUsuario()));
-        txtFacultad.setText(String.format("%s,%s",mTurno.getCarrera(), mTurno.getFacultad()));
+        txtFacultad.setText(String.format("%s,%s", mTurno.getCarrera(), mTurno.getFacultad()));
     }
 
     private void loadListener() {

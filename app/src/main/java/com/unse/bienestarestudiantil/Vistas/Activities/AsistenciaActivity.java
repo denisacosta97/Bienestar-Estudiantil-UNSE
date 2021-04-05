@@ -2,9 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,7 +49,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         loadData();
 
         setToolbar();
-
     }
 
     private void setToolbar() {
@@ -90,9 +91,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLinearLayout.requestFocus();
 
         mLinearLayout.requestFocus();
-
     }
-
 
     private void loadListener() {
         btnFinalizar.setOnClickListener(this);
@@ -106,7 +105,6 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
         mLinearLayout = findViewById(R.id.layout);
         btnFinalizar = findViewById(R.id.btnFinalizar);
         imgFlecha = findViewById(R.id.imgFlecha);
-
     }
 
     @Override
@@ -116,9 +114,7 @@ public class AsistenciaActivity extends AppCompatActivity implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.btnFinalizar:
-
                 break;
         }
-
     }
 }

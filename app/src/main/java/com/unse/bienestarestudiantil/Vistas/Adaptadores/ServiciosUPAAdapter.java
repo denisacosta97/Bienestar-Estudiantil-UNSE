@@ -39,11 +39,15 @@ public class ServiciosUPAAdapter extends RecyclerView.Adapter<ServiciosUPAAdapte
     @Override
     public void onBindViewHolder(@NonNull ServiciosUPAAdapter.EventosViewHolder holder, int position) {
         ServiciosU upa = serviciosUPA.get(position);
-        Doctor doctor = mDoctors.get(position);
+        try {
+            Doctor doctor = mDoctors.get(position);
+            String name = doctor.getNombre() + " " + doctor.getApellido();
+            holder.mDesc.setText(name);
+        } catch (IndexOutOfBoundsException e) {
+
+        }
 
         holder.mName.setText(upa.getTitulo());
-        String name = doctor.getNombre() + " " + doctor.getApellido();
-        holder.mDesc.setText(name);
 
     }
 

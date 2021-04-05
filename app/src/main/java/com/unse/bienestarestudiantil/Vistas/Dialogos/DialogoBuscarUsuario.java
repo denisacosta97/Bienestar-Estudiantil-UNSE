@@ -23,7 +23,6 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
-import com.unse.bienestarestudiantil.Modelos.IngresoCiber;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 
@@ -114,7 +113,6 @@ public class DialogoBuscarUsuario extends DialogFragment {
                     if (mOnClickUser != null) {
                         dismiss();
                         mOnClickUser.onUserSelected(dni);
-
                     }
                 } else {
                     Utils.showToast(getContextDialog(), getContextDialog().getString(R.string.primeroBuscar));
@@ -151,7 +149,7 @@ public class DialogoBuscarUsuario extends DialogFragment {
     }
 
     private boolean isAdd(String dni) {
-        if (mList != null){
+        if (mList != null) {
             for (Usuario usuario : mList) {
                 if (dni.equals(String.valueOf(usuario.getIdUsuario())))
                     return true;

@@ -43,7 +43,6 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
         loadListener();
 
         loadData();
-
     }
 
     private void setToolbar() {
@@ -71,7 +70,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), GestionDoctoresActivity.class));
                         break;
                     case 5:
-                        startActivity(new Intent(getApplicationContext(), GestionConsultasUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionPacientesUActivity.class));
                         break;
                     case 6:
                         startActivity(new Intent(getApplicationContext(), GestionCertificadosUActivity.class));
@@ -80,6 +79,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), MedicamentosActivity.class));
                         break;
                 }
+                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);
@@ -88,14 +88,14 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Turnos",R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2, "Atenciones",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,3, "Servicios",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,4, "Gestión Doctores",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,5, "Pacientes",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,6, "Certificados",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,7, "Medicamentos",R.drawable.ic_becas, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,8, "Estadisticas",R.drawable.ic_becas, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Turnos",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Atenciones",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3, "Servicios",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,4, "Gestión Doctores",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,5, "Pacientes",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,6, "Certificados",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,7, "Medicamentos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,8, "Estadisticas",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -14,7 +14,7 @@ import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
-public class ConvocatoriasAdapter extends RecyclerView.Adapter<ConvocatoriasAdapter.TransporteViewHolder>  {
+public class ConvocatoriasAdapter extends RecyclerView.Adapter<ConvocatoriasAdapter.TransporteViewHolder> {
 
     private ArrayList<Convocatoria> mList;
     private ArrayList<Convocatoria> mListCopia;

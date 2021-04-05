@@ -80,25 +80,26 @@ public class InicioFragmento extends Fragment {
         mOpcionesFinal = new ArrayList<>();
         ids = new ArrayList<>();
 
-        mOpciones.add(new Opciones(true, LinearLayout.HORIZONTAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1200, "Gestión de Socios", R.drawable.ic_socio, R.color.colorPrimary));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 900, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1100, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorRed));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 300, "Gestión UAPU", R.drawable.ic_config, R.color.colorAccent));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true,LinearLayout.HORIZONTAL, 1300, "Gestión Noticias", R.drawable.ic_noticias, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1200, "Gestión de Socios", R.drawable.ic_config, R.color.colorPrimary));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 900, "Gestión de Roles", R.drawable.ic_usuarios, R.color.colorGreyDark));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1100, "Gestión de Archivos", R.drawable.ic_pdf, R.color.colorRed));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 100, "Gestión Deportes", R.drawable.ic_config, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 200, "Gestión Polideportivo", R.drawable.ic_config, R.color.colorOrange));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 300, "Gestión UAPU", R.drawable.ic_config, R.color.colorAccent));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 400, "Gestión Área Becas", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 500, "Gestión Cyber", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 600, "Gestión Transporte", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 700, "Gestión Residencia", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1300, "Gestión Noticias", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1400, "Puntos de Conectividad", R.drawable.ic_config, R.color.colorGreen));
 
         mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpcionesFinal, mContext,1);
+        mAdapter = new OpcionesAdapter(mOpcionesFinal, mContext, 1);
         mRecyclerView.setAdapter(mAdapter);
 
 //        filtrarOpciones();
@@ -119,7 +120,6 @@ public class InicioFragmento extends Fragment {
     }
 
     private void loadListener() {
-
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
@@ -163,7 +163,7 @@ public class InicioFragmento extends Fragment {
                         break;
 
                 }
-                Utils.showToast(mContext, "Item: " + mOpciones.get(position).getTitulo());
+                //Utils.showToast(mContext, "Item: " + mOpciones.get(position).getTitulo());
             }
         });
 

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,8 +122,6 @@ public class DialogoGeneral extends DialogFragment implements View.OnClickListen
 
             return mDialogoGeneral;
         }
-
-
     }
 
 
@@ -227,7 +227,6 @@ public class DialogoGeneral extends DialogFragment implements View.OnClickListen
         btnNo.setOnClickListener(this);
         btnSi.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {

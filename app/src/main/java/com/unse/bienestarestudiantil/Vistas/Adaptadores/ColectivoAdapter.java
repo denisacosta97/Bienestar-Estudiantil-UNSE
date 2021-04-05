@@ -27,7 +27,6 @@ public class ColectivoAdapter extends RecyclerView.Adapter<ColectivoAdapter.Cole
         this.mListCopia.addAll(mList);
     }
 
-
     @NonNull
     @Override
     public ColectivoAdapter.ColectivoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,9 +61,7 @@ public class ColectivoAdapter extends RecyclerView.Adapter<ColectivoAdapter.Cole
             super(itemView);
             txtNameCol = itemView.findViewById(R.id.txtNombreColec);
             txtMatricula = itemView.findViewById(R.id.txtMatricula);
-
         }
-
     }
 
     public void change(ArrayList<Colectivo> list) {

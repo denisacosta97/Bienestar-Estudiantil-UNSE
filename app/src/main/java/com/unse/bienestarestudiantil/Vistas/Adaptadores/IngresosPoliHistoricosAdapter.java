@@ -9,13 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.ItemDatoPileta;
 import com.unse.bienestarestudiantil.Modelos.ItemFechaPileta;
 import com.unse.bienestarestudiantil.Modelos.ItemListado;
 import com.unse.bienestarestudiantil.R;
 
-import java.util.Date;
 import java.util.List;
 
 public class IngresosPoliHistoricosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -54,7 +52,7 @@ public class IngresosPoliHistoricosAdapter extends RecyclerView.Adapter<Recycler
 
             case ItemListado.TIPO_FECHA:
                 ItemFechaPileta itemFecha = (ItemFechaPileta) lista.get(position);
-                FechaViewHolder fechaViewHolder= (FechaViewHolder) viewHolder;
+                FechaViewHolder fechaViewHolder = (FechaViewHolder) viewHolder;
                 fechaViewHolder.txtFecha.setText(itemFecha.getFecha());
                 break;
 
@@ -62,14 +60,14 @@ public class IngresosPoliHistoricosAdapter extends RecyclerView.Adapter<Recycler
                 ItemDatoPileta dateItem = (ItemDatoPileta) lista.get(position);
                 DateViewHolder dateViewHolder = (DateViewHolder) viewHolder;
                 dateViewHolder.txtDNI.setText(String.valueOf(dateItem.getPiletaIngreso().getDni()));
-                dateViewHolder.txtCategoria.setText(getCategoria(dateItem.getPiletaIngreso().getCategoria()-1));
+                dateViewHolder.txtCategoria.setText(getCategoria(dateItem.getPiletaIngreso().getCategoria() - 1));
                 dateViewHolder.txtPrecio.setText(String.valueOf(dateItem.getPiletaIngreso().getPrecio1()));
                 dateViewHolder.txtCantidad.setText(String.valueOf(dateItem.getPiletaIngreso().getCantidadTotal()));
                 break;
         }
     }
 
-    public String getCategoria(int i){
+    public String getCategoria(int i) {
         String[] categorias = {"Alumno", "Profesor", "Nodocente", "Egresado", "Particular",
                 "Afiliado", "Jubilado", "Otro"};
         return categorias[i];

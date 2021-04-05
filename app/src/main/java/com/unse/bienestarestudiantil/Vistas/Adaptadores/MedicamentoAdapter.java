@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
-import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
 public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.EventosViewHolder> {
-    
+
     ArrayList<Medicamento> mMedicamentos;
     private Context context;
     View view;

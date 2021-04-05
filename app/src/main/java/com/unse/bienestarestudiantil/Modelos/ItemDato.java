@@ -16,6 +16,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_TURNO_UAPU = 7;
     public static final int TIPO_MEDICAM_UAPU = 8;
     public static final int TIPO_ATENCION = 9;
+    public static final int TIPO_PACIENTE = 9;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -25,6 +26,7 @@ public class ItemDato extends ItemBase {
     private IngresoCiber mIngreso;
     private TurnosUAPU mTurnosUAPU;
     private Medicamento mMedicamento;
+    private Paciente mPaciente;
     private int tipo;
 
     public ItemDato() {
@@ -73,6 +75,12 @@ public class ItemDato extends ItemBase {
                 calendar = Calendar.getInstance();
                 calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
                         mMedicamento.getMes(), mMedicamento.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar4.getTime()), calendar4.get(Calendar.DAY_OF_MONTH));
+            case TIPO_PACIENTE:
+                Calendar calendar5 = Calendar.getInstance();
+                calendar5.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mPaciente.getAnio(),
+                        mPaciente.getMes(), mPaciente.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar5.getTime()), calendar5.get(Calendar.DAY_OF_MONTH));
                 return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
 
         }
@@ -115,6 +123,8 @@ public class ItemDato extends ItemBase {
                 return String.format("%s", getTurnosUAPU().getIdTurno());
             case TIPO_MEDICAM_UAPU:
                 return String.format("%s", getMedicamento().getIdUsuario());
+            case TIPO_PACIENTE:
+                return String.format("%s", getPaciente().getIdUsuario());
 
         }
         return null;
@@ -186,6 +196,14 @@ public class ItemDato extends ItemBase {
 
     public void setMedicamento(Medicamento medicamento) {
         mMedicamento = medicamento;
+    }
+
+    public Paciente getPaciente() {
+        return mPaciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        mPaciente = paciente;
     }
 
     public void setTurnosUAPU(TurnosUAPU turnosUAPU) {

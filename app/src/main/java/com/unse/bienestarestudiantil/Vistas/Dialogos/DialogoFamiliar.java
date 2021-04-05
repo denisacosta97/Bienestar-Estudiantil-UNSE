@@ -5,11 +5,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -141,7 +143,7 @@ public class DialogoFamiliar extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mFamiliar != null){
+                if (mFamiliar != null) {
                     edit = true;
                     btnAceptar.setEnabled(false);
                 }
@@ -155,7 +157,10 @@ public class DialogoFamiliar extends DialogFragment {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != positionVin){ edit = true; btnAceptar.setEnabled(false);}
+                if (position != positionVin) {
+                    edit = true;
+                    btnAceptar.setEnabled(false);
+                }
             }
 
             @Override
@@ -183,7 +188,6 @@ public class DialogoFamiliar extends DialogFragment {
                     mOnClickListenerAdapter.onClick(mFamiliar);
                     dismiss();
                 }
-
 
             }
         });
@@ -224,8 +228,6 @@ public class DialogoFamiliar extends DialogFragment {
         String fecha = txtFechaNac.getText().toString().trim();
         Validador validador = new Validador(getContext());
         if (validador.validarDNI(edtDNI) && !validador.validarNombresEdt(edtNombre, edtApellido) && !fecha.equals("")) {
-
-
             cambiar(nom, apell, dni, vinculos[mSpinner.getSelectedItemPosition()], fecha);
         }
 
@@ -321,10 +323,7 @@ public class DialogoFamiliar extends DialogFragment {
         StringRequest request = new StringRequest(mFamiliar != null ? Request.Method.POST : Request.Method.PUT, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -333,7 +332,6 @@ public class DialogoFamiliar extends DialogFragment {
                 isActive = !isActive;
                 Utils.showToast(getContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -361,8 +359,7 @@ public class DialogoFamiliar extends DialogFragment {
                         updateReg(isActive);
                         edit = false;
                         btnAceptar.setEnabled(true);
-                    }
-                    else {
+                    } else {
                         loadDataFam();
                         mOnClickListenerAdapter.onClick(mFamiliar);
                         dismiss();

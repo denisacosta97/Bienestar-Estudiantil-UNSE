@@ -20,7 +20,6 @@ public class TreeAdapter extends TreeNode.BaseNodeViewHolder<TreeAdapter.IconTre
     private TextView tvValue;
     private CheckBox mCheckBox;
 
-
     private Context mContext;
     private boolean isOpen;
     private int tipoNodo;
@@ -98,7 +97,7 @@ public class TreeAdapter extends TreeNode.BaseNodeViewHolder<TreeAdapter.IconTre
        /* if (nod.getChildren().size() == 0)
             img.setImageDrawable(null);
         else*/
-        ObjectAnimator animator = ObjectAnimator.ofFloat(img,"rotation",
+        ObjectAnimator animator = ObjectAnimator.ofFloat(img, "rotation",
                 active ? 0 : 90, active ? 90 : 0);
         animator.setDuration(200);
         animator.start();

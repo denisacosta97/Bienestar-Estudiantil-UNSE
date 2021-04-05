@@ -35,7 +35,6 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.lista = lista;
         this.mContext = context;
         this.tipo = tipo;
-
     }
 
     @Override
@@ -108,11 +107,11 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
-                }else if (tipo == TIPO_INGRESO) {
+                } else if (tipo == TIPO_INGRESO) {
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
-                }else if (tipo == TIPO_IMPRE) {
+                } else if (tipo == TIPO_IMPRE) {
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());

@@ -1,8 +1,10 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +50,7 @@ public class ItemDrawerAdapter extends RecyclerView.Adapter<ItemDrawerAdapter.It
         if (itemDrawer.isSelect()) {
             Utils.changeColor(holder.mLayout.getBackground(), mContext, R.color.colorRedSelect);
             holder.txtTitulo.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
-        }
-        else {
+        } else {
             holder.txtTitulo.setTextColor(mContext.getResources().getColor(R.color.colorTextDefault));
             Utils.changeColor(holder.mLayout.getBackground(), mContext, R.color.transparente);
         }

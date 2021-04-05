@@ -63,7 +63,6 @@ public class ConsultasAdapter extends RecyclerView.Adapter<ConsultasAdapter.Tran
             txtFecha = itemView.findViewById(R.id.txtFecha);
             txtConsulta = itemView.findViewById(R.id.txtConsulta);
         }
-
     }
 
     public void change(ArrayList<Consulta> list) {

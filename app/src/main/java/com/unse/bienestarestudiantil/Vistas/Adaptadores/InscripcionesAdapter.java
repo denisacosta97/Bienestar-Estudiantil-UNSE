@@ -2,8 +2,10 @@ package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
 import android.graphics.Typeface;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,7 @@ public class InscripcionesAdapter extends RecyclerView.Adapter<InscripcionesAdap
     public void onBindViewHolder(@NonNull InscripcionViewHolder holder, int position) {
         Inscripcion inscripcion = mList.get(position);
 
-        holder.txtNumero.setText(String.format("# %s",inscripcion.getIdInscripcion()));
+        holder.txtNumero.setText(String.format("# %s", inscripcion.getIdInscripcion()));
         holder.txtNombre.setText(inscripcion.getTitulo());
         holder.txtDni.setText(String.valueOf(inscripcion.getIdUsuario()));
         holder.txtEstado.setText(inscripcion.getNombreEstado());

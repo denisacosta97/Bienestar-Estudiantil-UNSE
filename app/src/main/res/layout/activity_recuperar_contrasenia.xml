@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/img_unse2"
@@ -16,6 +17,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_error"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicio momentáneamente suspendido."
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@color/whiteTextColor"
+                android:fontFamily="@font/montserrat_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="20dp"
@@ -27,12 +52,12 @@
                 android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/ic_candado" />
+                app:srcCompat="@drawable/ic_candado" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña."
+                android:text="@string/alert3"
                 android:padding="10dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
@@ -53,7 +78,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="Ingresa tu DNI"
+                    android:hint="Ingresá tu DNI"
                     android:textSize="16sp"
                     android:inputType="number"
                     android:padding="10dp" />
@@ -66,7 +91,7 @@
                     android:textSize="16sp"
                     android:background="@drawable/edit_text_logreg"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="Ingresa el mail asociado"
+                    android:hint="Ingresá el mail asociado"
                     android:inputType="textEmailAddress"
                     android:padding="10dp" />
 
@@ -82,8 +107,7 @@
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:background="@drawable/corners_rounded_green"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:background="@drawable/button_border"
                         android:fontFamily="@font/montserrat_black"
                         android:text="Enviar"
                         android:textColor="@color/whiteTextColor"
@@ -94,12 +118,12 @@
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="10dp"
-                        android:id="@+id/txtTengoClave"
+                        android:id="@+id/txtNoLlega"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="18sp"
-                        android:text="Ya tengo mi nueva contraseña"
+                        android:text="¿El mensaje no llega?"
                         android:textColor="@color/whiteTextColor"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"/>

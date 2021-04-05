@@ -109,6 +109,8 @@ public class Utils {
     public static final String PASAJERO = "pasajeros";
     public static final String SERVUAPU = "servi";
     public static final String DOCTOR = "doc";
+    public static final String FECHA_PASS = "fecha_pass";
+    public static final String PACIENTE = "paciente";
 
     public static final String IMPRESION = "impresion";
     public static final String CANCHA = "cancha";
@@ -195,7 +197,7 @@ public class Utils {
     public static final String URL_USUARIO_IMAGE = "https://" + IP + "/general/uploadImage.php";
     public static final String URL_USUARIO_IMAGE_LOAD = "https://" + IP + "/usuariosImg/";
     public static final String URL_CAMBIO_CONTRASENIA = "https://" + IP + "/usuario/cambiarContrasenia.php";
-    public static final String URL_REC_CONTRASENIA = "https://" + IP + "/usuario/recuperarContrasenia.php";
+    public static final String URL_REC_CONTRASENIA = "https://" + IP + "/mail/restablecer.php";
     public static final String URL_USUARIOS_LISTA = "https://" + IP + "/usuario/getUsuarios.php";
     public static final String URL_USUARIO_BY_ID = "https://" + IP + "/usuario/getUser.php";
     public static final String URL_USUARIO_ELIMINAR = "https://" + IP + "/usuario/eliminar.php";

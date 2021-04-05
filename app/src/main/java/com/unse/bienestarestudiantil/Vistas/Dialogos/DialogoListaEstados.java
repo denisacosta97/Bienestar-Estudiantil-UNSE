@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +37,19 @@ public class DialogoListaEstados extends DialogFragment implements View.OnClickL
     OnClickListenerAdapter mListenerAdapter;
     Context mContext;
 
-    public void setList(ArrayList<Estado> list){
+    public void setList(ArrayList<Estado> list) {
         this.mOpciones = list;
     }
 
-    public void setContextEstado(Context contextEstado){
+    public void setContextEstado(Context contextEstado) {
         this.mContext = contextEstado;
     }
 
-    public void setListener(OnClickListenerAdapter listener){
+    public void setListener(OnClickListenerAdapter listener) {
         this.mListenerAdapter = listener;
     }
-    public void setId(int i){
+
+    public void setId(int i) {
         this.select = i;
     }
 
@@ -82,7 +85,7 @@ public class DialogoListaEstados extends DialogFragment implements View.OnClickL
     }
 
     private void reset() {
-        for (Estado e: mOpciones){
+        for (Estado e : mOpciones) {
             e.setSelect(false);
         }
     }
@@ -104,9 +107,9 @@ public class DialogoListaEstados extends DialogFragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnSI:
-                if (mListenerAdapter != null){
+                if (mListenerAdapter != null) {
                     mListenerAdapter.onClick(select);
                 }
                 break;

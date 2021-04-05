@@ -2,9 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Dialogos;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,7 @@ public class DialogoReservas extends DialogFragment {
     Reserva reserva;
     Usuario mUsuario;
 
-    public void loadDataFromReserva(Reserva reserva){
+    public void loadDataFromReserva(Reserva reserva) {
         this.reserva = reserva;
     }
 
@@ -49,7 +51,7 @@ public class DialogoReservas extends DialogFragment {
     }
 
     private void loadData() {
-        if(reserva != null){
+        if (reserva != null) {
             txtNombre.setText(reserva.getTitulo());
             txtDesc.setText(String.format("%s %s", reserva.getRangoHora().getHoraInicio(), reserva.getRangoHora().getHoraFin()));
 //            txtName.setText(String.format("%s %s", mUsuario.getNombre(), mUsuario.getApellido()));

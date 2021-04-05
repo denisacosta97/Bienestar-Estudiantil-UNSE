@@ -16,6 +16,7 @@
     <color name="transparente">#00E7E7E7</color>
     <color name="blackTransparente">#5B000000</color>
     <color name="blackTransparente2">#22000000</color>
+    <color name="whiteTransparente">#40FFFFFF</color>
 
     <!--Colores varios-->
     <color name="colorGreen">#32AC37</color>

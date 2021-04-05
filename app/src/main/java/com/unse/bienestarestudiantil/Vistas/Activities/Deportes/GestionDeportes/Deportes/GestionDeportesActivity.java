@@ -71,8 +71,8 @@ public class GestionDeportesActivity extends AppCompatActivity implements View.O
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,2,"Asistencia",R.drawable.ic_listado, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.VERTICAL,1,"Modificar información",R.drawable.ic_editar, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2,"Asistencia",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Modificar información",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

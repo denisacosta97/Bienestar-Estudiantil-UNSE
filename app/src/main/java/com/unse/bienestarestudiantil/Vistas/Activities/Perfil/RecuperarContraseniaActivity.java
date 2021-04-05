@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Perfil;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,21 +17,23 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class RecuperarContraseniaActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnEnviar;
     ImageView imgBack;
     EditText edtxMail, edtDNI;
-    TextView txtTengoClave;
-
+    TextView txtNoLlega;
     DialogoProcesamiento dialog;
 
     @Override
@@ -46,6 +46,8 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
 
         loadViews();
 
+        update();
+
         loadListener();
     }
 
@@ -56,14 +58,14 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
     private void loadListener() {
         imgBack.setOnClickListener(this);
         btnEnviar.setOnClickListener(this);
-        txtTengoClave.setOnClickListener(this);
+        txtNoLlega.setOnClickListener(this);
     }
 
     private void loadViews() {
         btnEnviar = findViewById(R.id.btnEnviar);
         edtxMail = findViewById(R.id.edtMail);
         edtDNI = findViewById(R.id.edtDNI);
-        txtTengoClave = findViewById(R.id.txtTengoClave);
+        txtNoLlega = findViewById(R.id.txtNoLlega);
         imgBack = findViewById(R.id.imgFlecha);
     }
 
@@ -73,43 +75,54 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
-            case R.id.txtTengoClave:
-                startActivity(new Intent(getApplicationContext(), CambiarContraseniaActivity.class));
+            case R.id.txtNoLlega:
+                showDialog();
                 break;
             case R.id.btnEnviar:
-                String email = edtxMail.getText().toString().trim();
-                String dni = edtDNI.getText().toString().trim();
-
-                Validador validador = new Validador(getApplicationContext());
-                if (false/*!validador.noVacio(email, dni)*/) {
-
-                    if (validador.validarMail(email)) {
-
-                        if (validador.validarNumero(dni)) {
-
-                            recuperarClave(dni, email);
-
-                        } else
-                            Utils.showToast(getApplicationContext(), "Numero de DNI inválido");
-
-                    } else {
-                        Utils.showToast(getApplicationContext(), "Campo mail inválido");
-                    }
-
-                } else {
-                    Utils.showToast(getApplicationContext(), "Hay campos vacíos");
-                }
+                chequear();
                 break;
         }
 
     }
 
+    private void showDialog() {
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setTitulo(getString(R.string.advertencia))
+                .setDescripcion(getString(R.string.contraseniaReco))
+                .setListener(new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+
+                    }
+
+                    @Override
+                    public void no() {
+
+                    }
+                })
+                .setTipo(DialogoGeneral.TIPO_ACEPTAR);
+        DialogoGeneral dialogoGeneral = builder.build();
+        dialogoGeneral.show(getSupportFragmentManager(), "dialog");
+    }
+
+    private void chequear() {
+        String email = edtxMail.getText().toString().trim();
+        String dni = edtDNI.getText().toString().trim();
+
+        Validador validador = new Validador(getApplicationContext());
+        if (validador.validarDNI(edtDNI) && validador.validarMail(edtxMail)) {
+
+            recuperarClave(dni, email);
+
+        } else {
+            Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+        }
+    }
+
     private void recuperarClave(String dni, String email) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String token = manager.getValueString(Utils.TOKEN);
-        String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
-        String URL = String.format("%s?id=%s&ee=%s&ff=%s&key=%s", Utils.URL_REC_CONTRASENIA, dni, email, fecha, token);
-
+        String URL = String.format("%s?iu=%s&em=%s", Utils.URL_REC_CONTRASENIA, dni, email);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -140,37 +153,48 @@ public class RecuperarContraseniaActivity extends AppCompatActivity implements V
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
-                case -1:
-                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
-                    break;
                 case 1:
                     //Exito
-                    String msj = jsonObject.getString("mensaje");
-                    Utils.showLog("PASS NEW", msj);
                     Utils.showToast(getApplicationContext(), "¡Revisa tu mail!");
-                    finish();
+                    PreferenceManager manager = new PreferenceManager(getApplicationContext());
+                    Date date = new Date(System.currentTimeMillis());
+                    String fecha = Utils.getFechaName(date);
+                    manager.setValue(Utils.FECHA_PASS, fecha);
+                    update();
                     break;
-                case 2:
+                case 4:
+                case 5:
                     Utils.showToast(getApplicationContext(), getString(R.string.noCambioContrasenia));
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
-                    break;
-                case 4:
                     Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
-                case 5:
+                case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.cuentaInexistente));
-                    break;
-                case 100:
-                    //No autorizado
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
             Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+        }
+    }
+
+    private void update() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String fecha = manager.getValueString(Utils.FECHA_PASS);
+        if (!fecha.equals("")) {
+            Date date = Utils.getFechaDateWithHour(fecha);
+            Date now = new Date(System.currentTimeMillis());
+            long diff = now.getTime() - date.getTime();
+            long min = TimeUnit.MILLISECONDS.toMinutes(diff);
+            if (min < 3) {
+                btnEnviar.setEnabled(false);
+                btnEnviar.setText(String.format("Disponible en %s MIN", 3));
+            } else {
+                btnEnviar.setEnabled(true);
+                btnEnviar.setText("ENVIAR");
+            }
         }
     }
 

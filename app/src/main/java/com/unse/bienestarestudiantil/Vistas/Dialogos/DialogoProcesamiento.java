@@ -3,9 +3,11 @@ package com.unse.bienestarestudiantil.Vistas.Dialogos;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.unse.bienestarestudiantil.R;
 
-public class DialogoProcesamiento  extends DialogFragment {
+public class DialogoProcesamiento extends DialogFragment {
 
     View view;
     ProgressBar mProgressBar;
@@ -53,11 +55,9 @@ public class DialogoProcesamiento  extends DialogFragment {
     private void loadData() {
     }
 
-
     private void loadListener() {
 
     }
-
 
 
 }
