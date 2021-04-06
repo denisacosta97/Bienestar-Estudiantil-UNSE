@@ -66,11 +66,11 @@
 
                                 <TextView
                                     android:gravity="center"
-                                    android:id="@+id/txtFechaInhab"
+                                    android:id="@+id/txtInfo"
                                     android:layout_width="match_parent"
-                                    android:layout_height="50dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginBottom="10dp"
-                                    android:padding="15dp"
+                                    android:padding="5dp"
                                     android:text="SIN INFORMACIÓN"
                                     android:textSize="16sp"
                                     android:fontFamily="@font/montserrat_regular" />
@@ -78,22 +78,11 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="DNI"
+                                    android:text="Usuario"
                                     android:fontFamily="@font/montserrat_black"
                                     android:textColor="@color/colorAccent"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
-
-                                <EditText
-                                    android:id="@+id/edtDNI"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:layout_marginTop="10dp"
-                                    android:fontFamily="@font/montserrat_regular"
-                                    android:background="@drawable/edit_text_logreg"
-                                    android:inputType="number"
-                                    android:padding="10dp" />
 
                                 <Button
                                     android:id="@+id/btnVer"
@@ -105,7 +94,7 @@
                                     android:textColor="@color/whiteTextColor"
                                     android:textSize="18sp"
                                     android:background="@drawable/button_border"
-                                    android:text="VERIFICAR"
+                                    android:text="BUSCAR"
                                     android:fontFamily="@font/montserrat_black"/>
 
 
@@ -123,10 +112,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
+                                    android:maxLines="10"
                                     android:layout_marginTop="10dp"
                                     android:fontFamily="@font/montserrat_regular"
                                     android:background="@drawable/edit_text_logreg"
-                                    android:inputType="number"
+                                    android:inputType="textMultiLine|text"
                                     android:padding="10dp" />
 
                             </LinearLayout>

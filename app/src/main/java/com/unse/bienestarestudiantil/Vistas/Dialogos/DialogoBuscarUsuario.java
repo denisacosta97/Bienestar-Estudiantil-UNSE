@@ -50,6 +50,7 @@ public class DialogoBuscarUsuario extends DialogFragment {
     ArrayList<Usuario> mList;
     OnClickUser mOnClickUser;
     boolean isNoValid = false;
+    String data = "NO REGISTRADO";
 
     public void setNoValid(boolean noValid) {
         isNoValid = noValid;
@@ -107,12 +108,21 @@ public class DialogoBuscarUsuario extends DialogFragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isNoValid)
-                    dni = Integer.parseInt(edtDNI.getText().toString());
-                if (dni != 0 || isNoValid) {
+                boolean isCath = false;
+                if (isNoValid) {
+
+                    try {
+                        dni = Integer.parseInt(edtDNI.getText().toString());
+                    } catch (NumberFormatException e) {
+                        dni = 0;
+                        Utils.showToast(getContextDialog(), getString(R.string.dniInvalido));
+                        isCath = true;
+                    }
+                }
+                if (!isCath && (dni != 0 || isNoValid)) {
                     if (mOnClickUser != null) {
                         dismiss();
-                        mOnClickUser.onUserSelected(dni);
+                        mOnClickUser.onUserSelected(dni, data);
                     }
                 } else {
                     Utils.showToast(getContextDialog(), getContextDialog().getString(R.string.primeroBuscar));
@@ -161,6 +171,7 @@ public class DialogoBuscarUsuario extends DialogFragment {
     }
 
     private void buscar(String dni) {
+        data = "NO REGISTRADO";
         PreferenceManager manager = new PreferenceManager(getContextDialog());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
@@ -237,6 +248,8 @@ public class DialogoBuscarUsuario extends DialogFragment {
                 txtCuerpo.setText("");
                 txtDNI.setText(dniNumber);
                 txtNombre.setText(String.format("%s %s", nombre, apellido));
+
+                data = String.format("%s %s", nombre, apellido);
 
                 dni = Integer.parseInt(dniNumber);
 

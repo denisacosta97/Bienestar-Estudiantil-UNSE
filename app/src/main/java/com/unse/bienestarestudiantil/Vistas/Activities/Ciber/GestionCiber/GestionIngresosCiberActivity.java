@@ -113,7 +113,7 @@ public class GestionIngresosCiberActivity extends AppCompatActivity implements V
                 DialogoBuscarUsuario nuevoIngresoDialog = new DialogoBuscarUsuario(getApplicationContext(),
                         getSupportFragmentManager(), null, new OnClickUser() {
                     @Override
-                    public void onUserSelected(int idUsuario) {
+                    public void onUserSelected(int idUsuario, Object text) {
                         sendServer(String.valueOf(idUsuario));
                     }
                 });

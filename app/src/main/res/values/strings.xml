@@ -234,6 +234,8 @@
     <string name="turnoModificar">¿Desea modificar el estado del turno de %s %s?</string>
     <string name="turnoModificarAtendido">El turno ya fue atendido  ¿realmente desea continuar?</string>
     <string name="rangoFechaInvalido">Rango de fechas inválido</string>
+    <string name="errorAtencion">¡Error al registrar!</string>
+   <string name="registrado">¡Registrado!</string>
 
 </resources>
 

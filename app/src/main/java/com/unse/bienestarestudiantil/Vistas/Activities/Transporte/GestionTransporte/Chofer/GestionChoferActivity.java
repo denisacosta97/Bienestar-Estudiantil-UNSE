@@ -279,7 +279,7 @@ public class GestionChoferActivity extends AppCompatActivity implements View.OnC
         DialogoBuscarUsuario dialogoBuscarUsuario = new DialogoBuscarUsuario(getApplicationContext(),
                 getSupportFragmentManager(), mList, new OnClickUser() {
             @Override
-            public void onUserSelected(int idUsuario) {
+            public void onUserSelected(int idUsuario, Object text) {
                 addChofer(idUsuario);
             }
         });

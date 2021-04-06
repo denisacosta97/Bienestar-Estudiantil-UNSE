@@ -79,7 +79,6 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), MedicamentosActivity.class));
                         break;
                 }
-                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);

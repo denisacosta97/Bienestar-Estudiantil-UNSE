@@ -2,5 +2,5 @@ package com.unse.bienestarestudiantil.Interfaces;
 
 public interface OnClickUser {
 
-    void onUserSelected(int idUsuario);
+    void onUserSelected(int idUsuario, Object text);
 }

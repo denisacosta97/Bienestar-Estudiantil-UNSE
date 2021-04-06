@@ -16,7 +16,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_TURNO_UAPU = 7;
     public static final int TIPO_MEDICAM_UAPU = 8;
     public static final int TIPO_ATENCION = 9;
-    public static final int TIPO_PACIENTE = 9;
+    public static final int TIPO_PACIENTE = 10;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -75,12 +75,11 @@ public class ItemDato extends ItemBase {
                 calendar = Calendar.getInstance();
                 calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mMedicamento.getAnio(),
                         mMedicamento.getMes(), mMedicamento.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar4.getTime()), calendar4.get(Calendar.DAY_OF_MONTH));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
             case TIPO_PACIENTE:
-                Calendar calendar5 = Calendar.getInstance();
-                calendar5.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mPaciente.getAnio(),
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mPaciente.getAnio(),
                         mPaciente.getMes(), mPaciente.getDia())));
-                return String.format("%s %s", Utils.getDayWeek(calendar5.getTime()), calendar5.get(Calendar.DAY_OF_MONTH));
                 return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
 
         }

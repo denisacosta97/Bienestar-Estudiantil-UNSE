@@ -7,21 +7,34 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         testInstrumentationRunner 'android.test.runner.AndroidJUnitRunner'
         multiDexEnabled = true
     }
+
+    signingConfigs {
+        release {
+            storeFile file("E:/Cosas de Denis/BienestarEstudiantilFinal/key_bienestar_2.jks")
+            storePassword "unse@belgrano"
+            keyAlias "BienestarUser"
+            keyPassword "unse@belgrano"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
             debuggable false
             jniDebuggable false
             renderscriptDebuggable false
             pseudoLocalesEnabled false
             zipAlignEnabled true
+            shrinkResources true
         }
     }
+
 }
 
 dependencies {

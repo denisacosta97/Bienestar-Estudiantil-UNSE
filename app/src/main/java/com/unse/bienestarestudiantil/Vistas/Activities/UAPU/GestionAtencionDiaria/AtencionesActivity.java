@@ -65,6 +65,7 @@ public class AtencionesActivity extends AppCompatActivity implements View.OnClic
             }
         });
         imgIcono.setOnClickListener(this);
+        fab.setOnClickListener(this);
 
     }
 
