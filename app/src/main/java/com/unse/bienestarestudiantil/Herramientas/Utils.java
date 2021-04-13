@@ -283,13 +283,6 @@ public class Utils {
     public static final String URL_IMPRESIONES_HIST = "https://" + IP + "/ciber/impresion/getImpresiones.php";
     public static final String URL_REGISTRAR_IMPR = "https://" + IP + "/ciber/impresion/insertar.php";
 
-    //UPA
-    public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
-    public static final String URL_ATENCION_DIARIA = "https://" + IP + "/uapu/atencion/getByDay.php";
-    public static final String URL_ATENCION_HISTORICA = "https://" + IP + "/uapu/atencion/getAll.php";
-    public static final String URL_ATENCION_NUEVA = "https://" + IP + "/uapu/atencion/insertarAtencion.php";
-    //public static final String URL_LISTA_INGRESOS = "https://" + IP + "/ciber/maquina/getUsosByDay.php";
-
     //GENERALES
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "https://" + IP + "/archivos/";
@@ -337,6 +330,10 @@ public class Utils {
     public static final String URL_NOTICIA_IMAGE = "https://sis.bienestar.unse.edu.ar/api/general/noticia/uploadImage.php";
 
     //UAPU
+    public static final String URL_DOCTORES_LISTA = "https://" + IP + "/uapu/doctor/getDoctors.php";
+    public static final String URL_ATENCION_DIARIA = "https://" + IP + "/uapu/atencion/getByDay.php";
+    public static final String URL_ATENCION_HISTORICA = "https://" + IP + "/uapu/atencion/getAll.php";
+    public static final String URL_ATENCION_NUEVA = "https://" + IP + "/uapu/atencion/insertarAtencion.php";
     public static final String URL_SERVICIOS = "https://" + IP + "/uapu/servicio/getServicios.php";
     public static final String URL_EDIT_SERVICIOS = "https://" + IP + "/uapu/servicio/actualizar.php";
     public static final String URL_BAJA_SERVICIOS = "https://" + IP + "/uapu/servicio/eliminar.php";
@@ -351,6 +348,9 @@ public class Utils {
     public static final String URL_MEDICAM_UPDATE  = "https://" + IP + "/uapu/medicamento/actualizar.php";
     public static final String URL_MEDICAM_ALL  = "https://" + IP + "/uapu/medicamento/getAll.php";
     public static final String URL_MEDICAM_ESTADISTICA  = "https://" + IP + "/uapu/medicamento/getEstadistica.php";
+    public static final String URL_INFO_CONSULTA  = "https://" + IP + "/uapu/atencion/getConsulta.php";
+    public static final String URL_PACIENTES_DIARIA  = "https://" + IP + "/uapu/turno/getTurnoByDay.php";
+    public static final String URL_NUEVA_CONSULTA  = "https://" + IP + "/uapu/atencion/insertarConsulta.php";
 
     public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 
@@ -762,6 +762,7 @@ public class Utils {
         } else {
             value = "" + cal.get(Calendar.HOUR_OF_DAY);
         }
+        value = value + ":";
         if (cal.get(Calendar.MINUTE) <= 9) {
             value = value + "0" + cal.get(Calendar.MINUTE);
         } else {

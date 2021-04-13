@@ -18,6 +18,7 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +34,7 @@ public class NuevaAtencionActivity extends AppCompatActivity implements View.OnC
     EditText edtMotivo;
     Button btnGuardar, btnVerificar;
     int dni = 0;
+    DialogoProcesamiento dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class NuevaAtencionActivity extends AppCompatActivity implements View.OnC
     }
 
     private void sendServer() {
+
         final HashMap<String, String> map = new HashMap<>();
         String URL = Utils.URL_ATENCION_NUEVA;
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
@@ -106,6 +109,7 @@ public class NuevaAtencionActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                dialog.dismiss();
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
 
 
@@ -127,11 +131,15 @@ public class NuevaAtencionActivity extends AppCompatActivity implements View.OnC
                 return map;
             }
         };
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog");
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
     private void procesarRespuesta(String response) {
         try {
+            dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {

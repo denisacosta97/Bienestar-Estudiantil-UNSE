@@ -266,8 +266,9 @@ public class Turno implements Parcelable {
                     nomBeca = o.getString("nombrebeca");
                     descBeca = o.getString("descripcion");
                     estado = Integer.parseInt(o.getString("estado"));
-                    carrera = o.has("carrera") ? o.getString("carrera") : "NO ASIGNADO";
-                    facultad = o.has("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+                    carrera = o.has("carrera") && !o.isNull("carrera") ? o.getString("carrera") : "NO ASIGNADO";
+                    facultad = o.has("facultad") && !o.isNull("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+
                     receptor = Integer.parseInt(o.getString("receptor"));
 
                     turno = new Turno(idUsuario, horario, nom, ape, nomBeca, descBeca);

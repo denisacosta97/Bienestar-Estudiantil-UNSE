@@ -1,9 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -20,10 +16,10 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Consulta;
+import com.unse.bienestarestudiantil.Modelos.Lista;
 import com.unse.bienestarestudiantil.Modelos.Paciente;
-import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte.PerfilRecorridoActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.PacientesAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -32,6 +28,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PacientesDiaActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +43,7 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
     DialogoProcesamiento dialog;
     ImageView imgRefresh;
     ImageView imgIcono;
+    int pos = -1, idServicio = -1;
     OnClickOptionListener mListener;
 
     @Override
@@ -63,7 +64,7 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
 
         loadData();
 
-        loadInfo();
+
     }
 
     private void setToolbar() {
@@ -80,42 +81,22 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), PerfilPacienteActivity.class);
-                i.putExtra(Utils.PACIENTE, mPacientes.get(position));
-                startActivity(i);
+                pos = position;
+                getInfo();
             }
         });
     }
 
-
-    private void loadData() {
-        mPacientes = new ArrayList<>();
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new PacientesAdapter(mPacientes, getApplicationContext(), mListener);
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgRefresh = findViewById(R.id.imgRefresh);
-        imgIcono = findViewById(R.id.imgFlecha);
-    }
-
-    private void loadInfo() {
+    private void getInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = null;
-        if (mPaciente != null)
-            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_MEDICAM_DAY, id, key,
-                    mPaciente.getDia(), mPaciente.getMes(), mPaciente.getAnio());
-        else
-            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_MEDICAM_DAY, id, key, -1, -1, -1);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&id=%s", Utils.URL_INFO_CONSULTA, id, key,
+                mPacientes.get(pos).getIdUsuario(), id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                procesarRespuesta(response);
+                procesarRespuesta(response, 2);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -133,7 +114,57 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
-    private void procesarRespuesta(String response) {
+
+    private void loadData() {
+        mPacientes = new ArrayList<>();
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void loadViews() {
+        mRecyclerView = findViewById(R.id.recycler);
+        imgRefresh = findViewById(R.id.imgRefresh);
+        imgIcono = findViewById(R.id.imgFlecha);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadInfo();
+    }
+
+    private void loadInfo() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = null;
+        if (mPaciente != null)
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_MEDICAM_DAY, id, key,
+                    mPaciente.getDia(), mPaciente.getMes(), mPaciente.getAnio());
+        else
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s&id=%s", Utils.URL_PACIENTES_DIARIA, id, key, -1, -1, -1, id);
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                procesarRespuesta(response, 1);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                dialog.dismiss();
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private void procesarRespuesta(String response, int tipo) {
         try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
@@ -144,13 +175,19 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
                     break;
                 case 1:
                     //Exito
-                    loadInfo(jsonObject);
+                    loadInfo(jsonObject, tipo);
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.noAutorizacion));
                     break;
                 case 100:
                     //No autorizado
@@ -164,20 +201,53 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void loadInfo(JSONObject jsonObject) {
+    private void loadInfo(JSONObject jsonObject, int tipo) {
         try {
-            if (jsonObject.has("mensaje")) {
-                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject o = jsonArray.getJSONObject(i);
-                    Paciente pas = Paciente.mapper(o, TurnosUAPU.LOW);
-                    mPacientes.add(pas);
+            if (tipo == 1) {
+                if (jsonObject.has("mensaje")) {
+                    mPacientes = new ArrayList<>();
+                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject o = jsonArray.getJSONObject(i);
+                        Paciente pas = Paciente.mapper(o, Paciente.MEDIUM);
+                        mPacientes.add(pas);
+                    }
+                    idServicio = jsonObject.getInt("servicio");
+                    if (mPacientes.size() > 0) {
+                        mAdapter = new PacientesAdapter(mPacientes, getApplicationContext(), mListener);
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+                }
+            }else
+            if (tipo == 2) {
+                if (jsonObject.has("mensaje") && jsonObject.has("datos")) {
+
+                    ArrayList<Lista> listas = new ArrayList<>();
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject o = jsonArray.getJSONObject(i);
+                        Consulta pas = Consulta.mapper(o, Consulta.HISTORIAL);
+                        listas.add(pas);
+                    }
+                    jsonArray = jsonObject.getJSONArray("datos");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject o = jsonArray.getJSONObject(i);
+                        Consulta pas = Consulta.mapper(o, Consulta.HISTORIAL_2);
+                        listas.add(pas);
+                    }
+
+                    Intent i = new Intent(getApplicationContext(), PerfilPacienteActivity.class);
+                    i.putExtra(Utils.IS_ADMIN_MODE, mPaciente != null);
+                    i.putExtra(Utils.PACIENTE, mPacientes.get(pos));
+                    i.putExtra(Utils.DATA_TURNO, listas);
+                    i.putExtra(Utils.SERVICIO, idServicio);
+                    startActivity(i);
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override

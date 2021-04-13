@@ -56,8 +56,6 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     HistorialTurnosUAPUAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
     ImageView imgIcono;
     ProgressBar mProgressBar;

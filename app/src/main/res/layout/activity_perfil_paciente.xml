@@ -15,22 +15,12 @@
         <include
             layout="@layout/toolbar_trans"/>
 
-        <ImageView
-            android:id="@+id/imgvIcon"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:translationY="10dp"
-            android:elevation="4sp"
-            android:src="@drawable/ic_medico" />
-
         <androidx.cardview.widget.CardView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:elevation="2sp"
             app:cardCornerRadius="10dp"
-            android:translationY="-60dp"
             android:outlineAmbientShadowColor="@color/colorGrey2"
             android:outlineSpotShadowColor="@color/colorGrey2"
             card_view:backgroundTint="@color/colorWhite">
@@ -55,7 +45,7 @@
                         android:textSize="25sp"
                         android:gravity="center"
                         android:text="Datos del paciente"
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="5dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorTextDefault"
                         android:padding="10dp"
@@ -168,22 +158,25 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="25sp"
-                        android:gravity="center"
-                        android:text="Historial"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorTextDefault"
-                        android:padding="10dp"
-                        android:background="@color/transparente"
-                        android:fontFamily="@font/montserrat_black"/>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:enabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="25sp"
+                            android:gravity="center"
+                            android:text="Dato de Consulta"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorTextDefault"
+                            android:padding="5dp"
+                            android:background="@color/transparente"
+                            android:fontFamily="@font/montserrat_black"/>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -231,34 +224,7 @@
                                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                                 android:textColor="@color/colorTextDefault"
                                 android:padding="10dp"
-                                android:background="@color/transparente"
-                                android:fontFamily="@font/montserrat_regular"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tratamiento: "
-                                android:textColor="@color/blackTextColor"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/montserrat_black"/>
-
-                            <EditText
-                                android:enabled="false"
-                                android:id="@+id/edtxTratamiento"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                android:textColor="@color/colorTextDefault"
-                                android:padding="10dp"
-                                android:background="@color/transparente"
+                                android:background="@drawable/edit_text_logreg"
                                 android:fontFamily="@font/montserrat_regular"/>
 
                         </LinearLayout>
@@ -279,10 +245,28 @@
                             android:textColor="@color/whiteTextColor"
                             android:textSize="16sp"
                             android:background="@drawable/button_border"
-                            android:text="EDITAR HISTORIAL"
+                            android:text="EDITAR"
                             android:fontFamily="@font/montserrat_black"/>
 
                     </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:gravity="center"
+                        android:text="Historial"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorTextDefault"
+                        android:padding="10dp"
+                        android:background="@color/transparente"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
 
                 </LinearLayout>
 

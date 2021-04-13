@@ -1,7 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,26 +19,38 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Modelos.Lista;
 import com.unse.bienestarestudiantil.Modelos.Paciente;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.ListaGeneralAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PerfilPacienteActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     Paciente mPaciente;
-    EditText edtMotivoCons, edtxTratamiento;
+    EditText edtMotivoCons;
     TextView txtDni, txtNomAp, txtCarrera, txtFacultad, txtFechaTurno;
     ImageView imgIcono;
+    RecyclerView mRecyclerView;
+    ArrayList<Lista> mConsultas;
+    ListaGeneralAdapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
     Button btnEditar;
     DialogoProcesamiento dialog;
     EditText[] campos;
-    boolean isEdit = false;
-    int mode = 0, TIPO_USER = -1;
+    boolean isEdit = false, isNew = false;
+    int mode = 0, idServicio = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +60,18 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
 
         if (getIntent().getParcelableExtra(Utils.PACIENTE) != null) {
             mPaciente = getIntent().getParcelableExtra(Utils.PACIENTE);
+        }
+
+        if (getIntent().getIntExtra(Utils.SERVICIO, 0) != 0) {
+            idServicio = getIntent().getIntExtra(Utils.SERVICIO, 0);
+        }
+
+        if (getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false)) {
+            isNew = getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false);
+        }
+
+        if (getIntent().getSerializableExtra(Utils.DATA_TURNO) != null) {
+            mConsultas = (ArrayList<Lista>) getIntent().getSerializableExtra(Utils.DATA_TURNO);
         }
 
         if (mPaciente != null) {
@@ -69,14 +92,20 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
     }
 
     private void loadData() {
-        txtDni.setText(mPaciente.getIdUsuario());
+        txtDni.setText(String.valueOf(mPaciente.getIdUsuario()));
         String name = mPaciente.getNombre() + " " + mPaciente.getApellido();
         txtNomAp.setText(name);
         txtCarrera.setText(mPaciente.getCarrera());
         txtFacultad.setText(mPaciente.getFacultad());
-        txtFechaTurno.setText(mPaciente.getFecha());
+        txtFechaTurno.setText(Utils.getFechaFormat(mPaciente.getFecha()));
         edtMotivoCons.setText(mPaciente.getMotivoconsulta());
-        edtxTratamiento.setText(mPaciente.getTratamiento());
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setNestedScrollingEnabled(true);
+        mAdapter = new ListaGeneralAdapter(mConsultas, getApplicationContext(), ListaGeneralAdapter.HISTORIAL);
+        mRecyclerView.setAdapter(mAdapter);
+
 
     }
 
@@ -92,23 +121,23 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         txtFacultad = findViewById(R.id.txtFacultad);
         txtFechaTurno = findViewById(R.id.txtFechaTurno);
         edtMotivoCons = findViewById(R.id.edtMotivoCons);
-        edtxTratamiento = findViewById(R.id.edtxTratamiento);
+        mRecyclerView = findViewById(R.id.recycler);
 
         btnEditar = findViewById(R.id.btnEditar);
         imgIcono = findViewById(R.id.imgFlecha);
 
-        campos = new EditText[]{edtMotivoCons, edtxTratamiento};
+        campos = new EditText[]{edtMotivoCons};
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Torneo");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Paciente");
         Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnEditar:
                 btnEditar.setText("Guardar");
                 activateEditMode();
@@ -155,46 +184,34 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
             save();
             return;
         }
-        if (mode == 0)
+        if (mode == 0) {
+            btnEditar.setText("GUARDAR");
             mode = 1;
-        else
+        }
+        else {
+            btnEditar.setText("EDITAR");
             mode = 0;
+        }
         editMode(mode);
     }
 
     private void save() {
         Validador validador = new Validador(getApplicationContext());
         String motivo = edtMotivoCons.getText().toString().trim();
-        String tratat = edtxTratamiento.getText().toString().trim();
-
-        String fecha = Utils.getFechaNameWithinHour(new Date(System.currentTimeMillis()));
-
-        String token = new PreferenceManager(getApplicationContext()).getValueString(Utils.TOKEN);
-
         //Comprobacion que no sean vacios
-        if (!validador.noVacio(motivo)) {
-
-            //Comprobacion del tipo d edatos
-            if (true/*validador.noVacio(name, fechaIni, fechaFin, desc, lugar)*/) {
-                sendServer(processString(motivo, tratat));
-            } else {
-                Utils.showToast(getApplicationContext(), "Hay campos invalidos, corrijalos");
-            }
-
-        } else {
-            Utils.showToast(getApplicationContext(), "Por favor, complete todos los campos");
+        if (validador.validarTexto(edtMotivoCons)) {
+            sendServer(motivo);
         }
 
     }
 
-    private String processString(String motivo, String tratar) {
-        String data = "?idT=%s&nn=%s&lgr=%s&fin=%s&ffi=%s&dsc=%s&lat=%s&lon=%s&dis=%s&val=%s&key=%s";
-        //return String.format(data, mTorneo.getId(), nombre, lugar, fechaIni, fechaFin, desc, token);
-        return "";
-    }
-
-    public void sendServer(String data) {
-        String URL = Utils.URL_TORNEOS_ACTUALIZAR + data;
+    public void sendServer(final String data) {
+        String URL = null;
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        final int id = preferenceManager.getValueInt(Utils.MY_ID);
+        final String token = preferenceManager.getValueString(Utils.TOKEN);
+        if (!isNew)
+            URL = Utils.URL_NUEVA_CONSULTA;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -204,10 +221,28 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showToast(getApplicationContext(), "Error de conexión o servidor fuera de rango");
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
             }
-        });
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<>();
+                map.put("key", token);
+                map.put("idU", String.valueOf(id));
+                map.put("id", String.valueOf(id));
+                map.put("iu", String.valueOf(mPaciente.getIdUsuario()));
+                map.put("is", String.valueOf(idServicio));
+                map.put("de", data);
+                return map;
+            }
+        };
+        ;
         //Abro dialogo para congelar pantalla
         dialog = new DialogoProcesamiento();
         dialog.setCancelable(false);
@@ -221,27 +256,33 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
+                case -1:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    break;
                 case 1:
                     //Exito
-                    btnEditar.setText("Editar");
-                    //finish();
+                    Utils.showToast(getApplicationContext(), getString(R.string.registrado));
+                    isEdit = false;
+                    activateEditMode();
                     break;
-                case 4://No existe
+                case 2:
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorRegistro));
+                    break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), "No se puede procesar la tarea solicitada");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
-                case 5:
-                    Utils.showToast(getApplicationContext(), "Ya se encuentra inscripto en la actividad");
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showToast(getApplicationContext(), "No está autorizado para realizar ésta operación");
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), "Error desconocido, contacta al Administrador");
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

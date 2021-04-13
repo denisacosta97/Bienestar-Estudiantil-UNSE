@@ -236,6 +236,8 @@
     <string name="rangoFechaInvalido">Rango de fechas inválido</string>
     <string name="errorAtencion">¡Error al registrar!</string>
    <string name="registrado">¡Registrado!</string>
+    <string name="noAutorizacion">No tiene autorización para los datos</string>
+    <string name="errorRegistro">¡Error al registrar!</string>
 
 </resources>
 

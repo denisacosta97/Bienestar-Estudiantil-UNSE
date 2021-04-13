@@ -3,20 +3,15 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.room.Ignore;
-
-import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Consulta implements Parcelable {
+public class Consulta extends Lista implements Parcelable {
 
-    @Ignore
     public static final int LOW = 0;
-    @Ignore
     public static final int UAPU = 1;
+    public static final int HISTORIAL = 2;
+    public static final int HISTORIAL_2 = 3;
 
     private int dni, dniReceptor;
     private String fecha, consulta;
@@ -64,7 +59,17 @@ public class Consulta implements Parcelable {
         String nomAp, motivo;
         try {
 
-            switch (tipo){
+            switch (tipo) {
+                case HISTORIAL:
+                    fecha = o.getString("fechaconsulta");
+                    cons = o.getString("titulo");
+                    consulta = new Consulta(0, 0, fecha, cons);
+                    break;
+                case HISTORIAL_2:
+                    fecha = o.getString("fechaconsulta");
+                    cons = o.getString("consulta");
+                    consulta = new Consulta(0, 0, fecha, cons);
+                    break;
                 case LOW:
                     fecha = o.getString("fecharegistro");
                     cons = o.getString("descripcion");
@@ -84,8 +89,7 @@ public class Consulta implements Parcelable {
             }
 
 
-
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

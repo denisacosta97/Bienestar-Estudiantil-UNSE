@@ -75,8 +75,8 @@ public class GestionPacientesUActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Pacientes históricos",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Historia clínica",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Pacientes del día",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Pacientes Historícos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

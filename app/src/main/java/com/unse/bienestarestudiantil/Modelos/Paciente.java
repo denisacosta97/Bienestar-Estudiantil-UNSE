@@ -10,9 +10,11 @@ import org.json.JSONObject;
 public class Paciente implements Parcelable {
     public static final int COMPLETE = 1;
     public static final int LOW = 2;
+    public static final int MEDIUM = 3;
 
-    private int idUsuario, estado, dia, mes, anio;
-    private String nombre, apellido, facultad, carrera, doctor, fecha, hora, motivoconsulta, tratamiento;
+    private int idUsuario, estado, dia, mes, anio, id;
+    private String nombre, apellido, facultad, carrera, doctor, fecha, hora, motivoconsulta, tratamiento,
+            descripcionEstado;
 
     public Paciente(int idUsuario, int estado, String nombre, String apellido, String facultad,
                     String carrera, String doctor, String fecha, String hora, String motivoconsulta,
@@ -36,12 +38,14 @@ public class Paciente implements Parcelable {
         this.anio = anio;
     }
 
+
     protected Paciente(Parcel in) {
         idUsuario = in.readInt();
         estado = in.readInt();
         dia = in.readInt();
         mes = in.readInt();
         anio = in.readInt();
+        id = in.readInt();
         nombre = in.readString();
         apellido = in.readString();
         facultad = in.readString();
@@ -51,6 +55,32 @@ public class Paciente implements Parcelable {
         hora = in.readString();
         motivoconsulta = in.readString();
         tratamiento = in.readString();
+        descripcionEstado = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idUsuario);
+        dest.writeInt(estado);
+        dest.writeInt(dia);
+        dest.writeInt(mes);
+        dest.writeInt(anio);
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+        dest.writeString(facultad);
+        dest.writeString(carrera);
+        dest.writeString(doctor);
+        dest.writeString(fecha);
+        dest.writeString(hora);
+        dest.writeString(motivoconsulta);
+        dest.writeString(tratamiento);
+        dest.writeString(descripcionEstado);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Paciente> CREATOR = new Creator<Paciente>() {
@@ -64,6 +94,22 @@ public class Paciente implements Parcelable {
             return new Paciente[size];
         }
     };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescripcionEstado() {
+        return descripcionEstado;
+    }
+
+    public void setDescripcionEstado(String descripcionEstado) {
+        this.descripcionEstado = descripcionEstado;
+    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -179,10 +225,34 @@ public class Paciente implements Parcelable {
 
     public static Paciente mapper(JSONObject o, int tipo) {
         Paciente paciente = null;
-        int idUsuario, estado, dia, mes, anio;
-        String nombre, apellido, facultad, carrera, doctor, fecha, hora, motivoconsulta, tratamiento;
+        int idUsuario, estado, dia, mes, anio, id;
+        String nombre, apellido, facultad, carrera, doctor, fecha,
+                hora, motivoconsulta, tratamiento, descripcion, horario, fechaRegistro;
         try {
             switch (tipo) {
+                case MEDIUM:
+                    id = Integer.parseInt(o.getString("idturno"));
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
+                    idUsuario = Integer.parseInt(o.getString("idusuario"));
+                    estado = Integer.parseInt(o.getString("estado"));
+                    descripcion = o.getString("descripcion");
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    carrera = o.has("carrera") && !o.isNull("carrera") ? o.getString("carrera") : "NO ASIGNADO";
+                    facultad = o.has("facultad") && !o.isNull("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+                    motivoconsulta = o.has("motivo") && !o.isNull("motivo") ? o.getString("motivo") : "NO ASIGNADO";
+                    horario = o.getString("horario");
+                    fechaRegistro = o.getString("fecharegistro");
+                    paciente = new Paciente(idUsuario, estado, nombre, apellido, facultad,
+                            carrera, "", fechaRegistro, horario, motivoconsulta, "");
+                    paciente.setDia(dia);
+                    paciente.setMes(mes);
+                    paciente.setAnio(anio);
+                    paciente.setDescripcionEstado(descripcion);
+                    paciente.setId(id);
+                    break;
                 case LOW:
                     dia = Integer.parseInt(o.getString("dia"));
                     mes = Integer.parseInt(o.getString("mes"));
@@ -195,15 +265,15 @@ public class Paciente implements Parcelable {
                     estado = Integer.parseInt(o.getString("estado"));
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
-                    facultad = o.getString("facultad");
-                    carrera = o.getString("carrera");
+                    carrera = o.has("carrera") && !o.isNull("carrera") ? o.getString("carrera") : "NO ASIGNADO";
+                    facultad = o.has("facultad") && !o.isNull("facultad") ? o.getString("facultad") : "NO ASIGNADO";
                     doctor = o.getString("doctor");
                     fecha = o.getString("fecha");
                     hora = o.getString("hora");
                     motivoconsulta = o.getString("motivoconsulta");
                     tratamiento = o.getString("tratamiento");
                     paciente = new Paciente(idUsuario, estado, nombre, apellido, facultad,
-                        carrera, doctor, fecha, hora, motivoconsulta, tratamiento);
+                            carrera, doctor, fecha, hora, motivoconsulta, tratamiento);
                     break;
             }
 
@@ -214,26 +284,5 @@ public class Paciente implements Parcelable {
         return paciente;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idUsuario);
-        dest.writeInt(estado);
-        dest.writeInt(dia);
-        dest.writeInt(mes);
-        dest.writeInt(anio);
-        dest.writeString(nombre);
-        dest.writeString(apellido);
-        dest.writeString(facultad);
-        dest.writeString(carrera);
-        dest.writeString(doctor);
-        dest.writeString(fecha);
-        dest.writeString(hora);
-        dest.writeString(motivoconsulta);
-        dest.writeString(tratamiento);
-    }
 }
