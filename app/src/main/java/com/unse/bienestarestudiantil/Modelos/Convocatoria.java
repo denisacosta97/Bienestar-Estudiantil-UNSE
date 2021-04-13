@@ -9,7 +9,23 @@ import org.json.JSONObject;
 public class Convocatoria implements Parcelable {
 
     private int idBeca, anio, disponibilidad;
-    private String nombre, fechaInicio, fechaFin;
+    private String nombre, fechaInicio, fechaFin, nombreBeca;
+
+    public String getNombreBeca() {
+        return nombreBeca;
+    }
+
+    public void setNombreBeca(String nombreBeca) {
+        this.nombreBeca = nombreBeca;
+    }
+
+    public Convocatoria(int idBeca, int anio, String nombreBeca, String fechaInicio, String fechaFin) {
+        this.idBeca = idBeca;
+        this.anio = anio;
+        this.nombreBeca = nombreBeca;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
 
     public Convocatoria(int idBeca, int anio, String nombre, String fechaInicio, String fechaFin, int disponibilidad) {
         this.idBeca = idBeca;
@@ -27,6 +43,7 @@ public class Convocatoria implements Parcelable {
         fechaInicio = in.readString();
         fechaFin = in.readString();
         disponibilidad = in.readInt();
+        nombreBeca = in.readString();
     }
 
     public static final Creator<Convocatoria> CREATOR = new Creator<Convocatoria>() {
@@ -123,5 +140,6 @@ public class Convocatoria implements Parcelable {
         dest.writeString(fechaInicio);
         dest.writeString(fechaFin);
         dest.writeInt(disponibilidad);
+        dest.writeString(nombreBeca);
     }
 }

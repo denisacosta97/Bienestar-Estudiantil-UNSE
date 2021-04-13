@@ -42,17 +42,12 @@ public class MedicamentosHistoricosActivity extends AppCompatActivity implements
     ArrayList<Medicamento> mMedicamentos;
     ArrayList<ItemBase> mItems;
     ArrayList<ItemBase> mListOficial;
-
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     FechasAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-
     ImageView imgIcono;
     ProgressBar mProgressBar;
-    String mes = "";
-    int numberMes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

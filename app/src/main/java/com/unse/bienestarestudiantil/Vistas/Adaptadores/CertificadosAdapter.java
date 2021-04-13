@@ -6,25 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Certificado;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class CertificadosAdapter extends RecyclerView.Adapter<CertificadosAdapter.EventosViewHolder> {
+
     ArrayList<Certificado> mCertificados;
     private Context context;
     View view;
-    OnClickOptionListener listener;
 
-    public CertificadosAdapter(ArrayList<Certificado> list, Context ctx, OnClickOptionListener listener) {
+    public CertificadosAdapter(ArrayList<Certificado> list, Context ctx) {
         this.mCertificados = list;
         this.context = ctx;
-        this.listener = listener;
     }
 
     @NonNull
@@ -33,18 +32,19 @@ public class CertificadosAdapter extends RecyclerView.Adapter<CertificadosAdapte
 
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_certificado, parent, false);
 
-        return new CertificadosAdapter.EventosViewHolder(view, listener);
+        return new CertificadosAdapter.EventosViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CertificadosAdapter.EventosViewHolder holder, final int position) {
         Certificado cert = mCertificados.get(position);
 
-        holder.txtDni.setText(String.valueOf(cert.getIdUsuario()));
-        String fechita = cert.getDia() + "/" + cert.getMes() + "/" + cert.getAnio();
-        holder.txtFecha.setText(fechita);
-        holder.txtDesc.setText(cert.getDescripcion());
-        holder.txtFechaEmit.setText(cert.getFechaRegistro());
+        holder.mDni.setText(String.valueOf(cert.getIdUsuario()));
+        String fechita = Utils.getFechaFormat(cert.getFechaRegistro());
+        holder.txtNomAp.setText(String.format("%s %s", cert.getNombre(), cert.getApellido()));
+        holder.txtFacultad.setText(cert.getFacultad());
+        holder.txtCarrera.setText(cert.getCarrera());
+        holder.txtFechaEmision.setText(fechita);
 
     }
 
@@ -61,14 +61,16 @@ public class CertificadosAdapter extends RecyclerView.Adapter<CertificadosAdapte
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtDni, txtFecha, txtDesc, txtFechaEmit;
+        TextView mDni, txtFechaEmision, txtNomAp, txtCarrera, txtFacultad;
 
-        EventosViewHolder(final View itemView, final OnClickOptionListener listener) {
+        EventosViewHolder(final View itemView) {
             super(itemView);
-            txtDni = itemView.findViewById(R.id.txtDni);
-            txtFecha = itemView.findViewById(R.id.txtFecha);
-            txtDesc = itemView.findViewById(R.id.txtDesc);
-            txtFechaEmit = itemView.findViewById(R.id.txtFechaEmit);
+
+            mDni = itemView.findViewById(R.id.txtDni);
+            txtNomAp = itemView.findViewById(R.id.txtNomAp);
+            txtFacultad = itemView.findViewById(R.id.txtFacultad);
+            txtCarrera = itemView.findViewById(R.id.txtCarrera);
+            txtFechaEmision = itemView.findViewById(R.id.txtFechaMod);
 
         }
 

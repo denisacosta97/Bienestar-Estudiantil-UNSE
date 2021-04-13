@@ -1,9 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -18,11 +14,9 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
-import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -30,6 +24,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,12 +39,17 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
     ImageView imgRefresh;
     ImageView imgIcono;
     OnClickOptionListener mListener;
+    TurnosUAPU mTurnosUAPU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turnos_dia_uapu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getParcelableExtra(Utils.DATA_TURNO) != null) {
+            mTurnosUAPU = getIntent().getParcelableExtra(Utils.DATA_TURNO);
+        }
 
         loadViews();
 
@@ -61,8 +64,13 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Turnos del día");
-        imgRefresh.setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.txtTitulo)).setText(mTurnosUAPU == null ? "Turnos del día" :
+                String.format("%s/%s/%s", mTurnosUAPU.getDia(), mTurnosUAPU.getMes(),
+                        mTurnosUAPU.getAnio()));
+        if (mTurnosUAPU == null)
+            imgRefresh.setVisibility(View.VISIBLE);
+        else
+            imgRefresh.setVisibility(View.GONE);
     }
 
     private void loadListener() {
@@ -89,7 +97,13 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
+        String URL = null;
+        if (mTurnosUAPU == null)
+            URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
+        else
+            URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, mTurnosUAPU.getDia()
+                    , mTurnosUAPU.getMes(), mTurnosUAPU.getAnio());
+
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

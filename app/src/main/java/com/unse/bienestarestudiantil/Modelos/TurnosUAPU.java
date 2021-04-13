@@ -189,8 +189,8 @@ public class TurnosUAPU implements Parcelable {
                     mes = Integer.parseInt(o.getString("mes"));
                     anio = Integer.parseInt(o.getString("anio"));
                     estado = o.getString("estado");
-                    nombre = o.getString("nombre");
-                    apellido = o.getString("apellido");
+                    nombre = o.getString("nombre").equals("null") ? "SIN" : o.getString("nombre");
+                    apellido = o.getString("apellido").equals("null") ? "DATOS" : o.getString("apellido");
                     horario = o.getString("horario");
                     fechaRegistro = o.getString("fecharegistro");
                     titulo = o.getString("titulo");

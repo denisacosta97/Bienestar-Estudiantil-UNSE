@@ -1,8 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -22,7 +18,6 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Doctor;
 import com.unse.bienestarestudiantil.Modelos.ServiciosU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios.EditServicioUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.ServiciosUPAAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -31,6 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class GestionServiciosUActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -81,9 +80,10 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), EditServicioUActivity.class);
+                Intent i = new Intent(getApplicationContext(), InfoServicioUActivity.class);
                 i.putExtra(Utils.SERVUAPU, mServiciosU.get(position));
-                i.putExtra(Utils.DOCTOR, mDoctors.get(position));
+                if (mDoctors.size() > position)
+                    i.putExtra(Utils.DOCTOR, mDoctors.get(position));
                 startActivity(i);
             }
         });

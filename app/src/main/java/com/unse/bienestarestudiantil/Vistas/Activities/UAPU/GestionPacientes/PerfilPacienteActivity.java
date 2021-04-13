@@ -19,6 +19,7 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Modelos.Consulta;
 import com.unse.bienestarestudiantil.Modelos.Lista;
 import com.unse.bienestarestudiantil.Modelos.Paciente;
 import com.unse.bienestarestudiantil.R;
@@ -103,6 +104,9 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setNestedScrollingEnabled(true);
+        if (mConsultas.size() == 0) {
+            mConsultas.add(new Consulta(0, 0, "", "SIN HISTORIAL"));
+        }
         mAdapter = new ListaGeneralAdapter(mConsultas, getApplicationContext(), ListaGeneralAdapter.HISTORIAL);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -187,8 +191,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         if (mode == 0) {
             btnEditar.setText("GUARDAR");
             mode = 1;
-        }
-        else {
+        } else {
             btnEditar.setText("EDITAR");
             mode = 0;
         }
@@ -211,7 +214,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         final int id = preferenceManager.getValueInt(Utils.MY_ID);
         final String token = preferenceManager.getValueString(Utils.TOKEN);
         if (!isNew)
-            URL = Utils.URL_NUEVA_CONSULTA;
+            URL = Utils.URL_ACTUALIZAR_CONSULTA;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -235,9 +238,12 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
                 HashMap<String, String> map = new HashMap<>();
                 map.put("key", token);
                 map.put("idU", String.valueOf(id));
-                map.put("id", String.valueOf(id));
+                map.put("it", String.valueOf(mPaciente.getId()));
                 map.put("iu", String.valueOf(mPaciente.getIdUsuario()));
                 map.put("is", String.valueOf(idServicio));
+                if (mPaciente.getEstado() == 1){
+                    map.put("es", "4");
+                }
                 map.put("de", data);
                 return map;
             }

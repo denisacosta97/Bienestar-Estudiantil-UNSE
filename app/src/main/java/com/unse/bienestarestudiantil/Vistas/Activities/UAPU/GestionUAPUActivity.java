@@ -15,9 +15,13 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.GestionAtencionesActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.GestionCertificadosUActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.GestionMedicamentosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes.GestionPacientesUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios.GestionServiciosUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.GestionTurnosUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -61,7 +65,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), GestionTurnosUAPUActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), AtencionesActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionAtencionesActivity.class));
                         break;
                     case 3:
                         startActivity(new Intent(getApplicationContext(), GestionServiciosUActivity.class));
@@ -76,7 +80,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), GestionCertificadosUActivity.class));
                         break;
                     case 7:
-                        startActivity(new Intent(getApplicationContext(), MedicamentosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), GestionMedicamentosActivity.class));
                         break;
                 }
             }

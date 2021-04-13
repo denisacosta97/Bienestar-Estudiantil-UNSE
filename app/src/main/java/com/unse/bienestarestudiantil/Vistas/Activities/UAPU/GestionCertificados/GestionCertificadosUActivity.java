@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,13 +15,13 @@ import android.widget.TextView;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.CertificadosHistoricosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.NuevoCertificadoActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
 
-public class MedicamentosActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionCertificadosUActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -32,7 +32,7 @@ public class MedicamentosActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medicamentos);
+        setContentView(R.layout.activity_certificados_u);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -47,21 +47,23 @@ public class MedicamentosActivity extends AppCompatActivity implements View.OnCl
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Medicamentos");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de Certificados");
     }
+
 
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                switch ((int) id) {
+                switch ((int) id){
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), MedicamentosDiaActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NuevoCertificadoActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), MedicamentosHistoricosActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CertificadosHistoricosActivity.class));
                         break;
+
                 }
                 //Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
@@ -72,13 +74,12 @@ public class MedicamentosActivity extends AppCompatActivity implements View.OnCl
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Nuevo certificado",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Certificados emitidos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(), 1);
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -89,7 +90,7 @@ public class MedicamentosActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId()){
             case R.id.imgFlecha:
                 onBackPressed();
                 break;

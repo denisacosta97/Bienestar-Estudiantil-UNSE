@@ -177,6 +177,7 @@ public class Utils {
     public static final String NOTICIA = "dato_noticias";
     public static final String RESERVA = "dato_reserva";
     public static final String DATA_RESERVA = "dato_reserva";
+    public static final String DATA_CONVOCATORIA = "dato_convocatoria";
     public static final String DATA_TURNO = "data_turno";
     public static final String ALUMNO_NAME = "dato_alumno";
     public static final String USER_NAME = "dato_user";
@@ -186,6 +187,7 @@ public class Utils {
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
+
 
 
     private static final String IP = "sis.bienestar.unse.edu.ar/api";
@@ -341,7 +343,7 @@ public class Utils {
     public static final String URL_TURNOS_HIST_UAPU = "https://" + IP + "/uapu/turno/getAll.php";
     public static final String URL_TURNOS_UAPU_BY_DAY = "https://" + IP + "/uapu/turno/getAllByDay.php";
     public static final String URL_SERVICIOS_TURNO = "https://" + IP + "/uapu/turno/getAllServices.php";
-    public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
+    public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/getTurnoHorarios.php";
     public static final String URL_MEDICAM_INSERT = "https://" + IP + "/uapu/medicamento/insertar.php";
     public static final String URL_MEDICAM_DAY  = "https://" + IP + "/uapu/medicamento/getByDay.php";
     public static final String URL_MEDICAM_USER  = "https://" + IP + "/uapu/medicamento/getByUser.php";
@@ -350,7 +352,13 @@ public class Utils {
     public static final String URL_MEDICAM_ESTADISTICA  = "https://" + IP + "/uapu/medicamento/getEstadistica.php";
     public static final String URL_INFO_CONSULTA  = "https://" + IP + "/uapu/atencion/getConsulta.php";
     public static final String URL_PACIENTES_DIARIA  = "https://" + IP + "/uapu/turno/getTurnoByDay.php";
-    public static final String URL_NUEVA_CONSULTA  = "https://" + IP + "/uapu/atencion/insertarConsulta.php";
+    public static final String URL_PACIENTES_HISTORICO  = "https://" + IP + "/uapu/turno/getTurnos.php";
+    public static final String URL_ACTUALIZAR_CONSULTA  = "https://" + IP + "/uapu/turno/actualizar.php";
+    public static final String URL_TURNO_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
+    public static final String URL_TURNO_NUEVO = "https://" + IP + "/becas/turno/insertar.php";
+    public static final String URL_TURNO_UAPU_NUEVO = "https://" + IP + "/uapu/turno/insertar.php";
+    public static final String URL_CERTIFICADOS = "https://" + IP + "/uapu/certificado/getCertificados.php";
+    public static final String URL_CERTIFICADOS_NUEVO = "https://" + IP + "/uapu/certificado/insertar.php";
 
     public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 

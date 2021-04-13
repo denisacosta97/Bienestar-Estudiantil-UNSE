@@ -174,17 +174,6 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/btnCancelar"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:textColor="@color/whiteTextColor"
-                            android:textSize="16sp"
-                            android:background="@drawable/button_border"
-                            android:text="CANCELAR"
-                            android:fontFamily="@font/montserrat_black"/>
-
-                        <Button
                             android:id="@+id/btnEditar"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"

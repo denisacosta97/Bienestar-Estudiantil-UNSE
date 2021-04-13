@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CertificadosEmitidosActivity extends AppCompatActivity implements View.OnClickListener {
+public class CertificadosHistoricosActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
@@ -39,7 +39,6 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
     ArrayList<Certificado> mCertificados;
     DialogoProcesamiento dialog;
     ImageView imgIcono;
-    OnClickOptionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de certificados");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de Certificados");
     }
 
     private void loadListener() {
@@ -72,8 +71,7 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
         mCertificados = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new CertificadosAdapter(mCertificados, getApplicationContext(), mListener);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     private void loadViews() {
@@ -85,7 +83,7 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id);
+        String URL = String.format("%s?idU=%s&key=%s&id=%s", Utils.URL_CERTIFICADOS, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -126,6 +124,12 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+                    break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.noAutorizacion));
+                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -148,15 +152,19 @@ public class CertificadosEmitidosActivity extends AppCompatActivity implements V
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Certificado cert = Certificado.mapper(o);
+                    Certificado cert = Certificado.mapper(o, Certificado.COMPLETE);
                     mCertificados.add(cert);
+                }
+
+                if (mCertificados.size() > 0){
+                    mAdapter = new CertificadosAdapter(mCertificados, getApplicationContext());
+                    mRecyclerView.setAdapter(mAdapter);
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mAdapter.notifyDataSetChanged();
 
     }
 

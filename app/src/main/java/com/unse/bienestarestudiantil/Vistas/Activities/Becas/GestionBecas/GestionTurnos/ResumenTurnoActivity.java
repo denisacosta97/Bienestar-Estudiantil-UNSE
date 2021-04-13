@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
+package com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.GestionTurnos;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -12,10 +12,9 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,46 +24,56 @@ import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Doctor;
-import com.unse.bienestarestudiantil.Modelos.ServiciosU;
+import com.unse.bienestarestudiantil.Modelos.Convocatoria;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.SelectorFechaUPAActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
 
-    TextView txtEsp, txtHora, txtFecha, txtDoct, txtConfirmar, txtTitulo;
+public class ResumenTurnoActivity extends AppCompatActivity implements View.OnClickListener {
+
+    TextView txtTipoTurno, txtHora, txtFecha, txtReceptor, txtConfirmar, txtTitulo;
     ProgressBar mProgressBar;
     FrameLayout frame;
     View revealView;
     int[] mCalendar;
-    String horarios;
-    ServiciosU mServiciosU;
-    Doctor mDoctor;
+    boolean isUPA = false;
+    LinearLayout latReceptor;
+    String horarios, receptores;
+    Convocatoria mConvocatoria;
+    int userDNI = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resumen_turno_uapu);
+        setContentView(R.layout.activity_resumen_turno);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (getIntent().getStringExtra(Utils.DATA_RESERVA) != null) {
             horarios = getIntent().getStringExtra(Utils.DATA_RESERVA);
         }
+        if (getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false)) {
+            isUPA = getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false);
+        }
+        if (getIntent().getStringExtra(Utils.DATA_TURNO) != null) {
+            receptores = getIntent().getStringExtra(Utils.DATA_TURNO);
+        }
         if (getIntent().getIntArrayExtra(Utils.DATA_FECHA) != null) {
             mCalendar = getIntent().getIntArrayExtra(Utils.DATA_FECHA);
         }
-
-        if (getIntent().getParcelableExtra(Utils.SERVUAPU) != null) {
-            mServiciosU = getIntent().getParcelableExtra(Utils.SERVUAPU);
+        if (getIntent().getParcelableExtra(Utils.DATA_CONVOCATORIA) != null) {
+            mConvocatoria = (Convocatoria) getIntent().getParcelableExtra(Utils.DATA_CONVOCATORIA);
         }
-
-        if (getIntent().getParcelableExtra(Utils.DOCTOR) != null) {
-            mDoctor = getIntent().getParcelableExtra(Utils.DOCTOR);
+        if (getIntent().getIntExtra(Utils.USER_INFO, 0) != 0) {
+            userDNI = getIntent().getIntExtra(Utils.USER_INFO, 0);
         }
 
         loadViews();
@@ -75,11 +84,18 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
     }
 
     private void loadData() {
-        txtEsp.setText(mServiciosU.getTitulo());
-        String name = mDoctor.getNombre() + " " + mDoctor.getApellido();
-        txtDoct.setText(name);
-        txtFecha.setText(String.format("%s/%s/%s", mCalendar[0], mCalendar[1], mCalendar[2]));
+        txtTipoTurno.setText(mConvocatoria.getNombreBeca());
+        txtFecha.setText(String.format("%s/%s/%s", mCalendar[0]
+                , mCalendar[1], mCalendar[2]));
         txtHora.setText(horarios);
+        if (receptores != null) {
+            txtReceptor.setText(receptores);
+        } else {
+            if (latReceptor != null) {
+                latReceptor.setVisibility(View.GONE);
+            }
+        }
+
 
     }
 
@@ -88,11 +104,11 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
     }
 
     private void loadViews() {
-
-        txtEsp = findViewById(R.id.txtEsp);
+        latReceptor = findViewById(R.id.latReceptor);
+        txtTipoTurno = findViewById(R.id.txtTipoBeca);
         txtHora = findViewById(R.id.txtHora);
         txtFecha = findViewById(R.id.txtFecha);
-        txtDoct = findViewById(R.id.txtDoct);
+        txtReceptor = findViewById(R.id.txtReceptor);
         txtConfirmar = findViewById(R.id.txtLogin);
         revealView = findViewById(R.id.revealView);
         mProgressBar = findViewById(R.id.progress);
@@ -194,7 +210,13 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SelectorFechaActivity.instance.finish();
+                if (isUPA) {
+                    SelectorFechaUPAActivity.instance.finish();
+                } else {
+                    //SelectorReceptoresActivity.instance.finish();
+                    //SelectorFechaActivity.instance.finish();
+                    //TipoTurnosActivity.instance.finish();
+                }
                 finish();
                 //Utils.createPDF(getApplicationContext(), "COMPROBANTE_TURNO.pdf");
             }
@@ -230,7 +252,11 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
 
     private void sendServer() {
         final HashMap<String, String> map = new HashMap<>();
-        String URL = "";
+        String URL = null;
+        if (!isUPA)
+            URL = Utils.URL_TURNO_NUEVO;
+        else
+            URL = Utils.URL_TURNO_UAPU_NUEVO;
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
         final int id = preferenceManager.getValueInt(Utils.MY_ID);
         final String token = preferenceManager.getValueString(Utils.TOKEN);
@@ -262,10 +288,22 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
                 map.put("di", String.valueOf(mCalendar[0]));
                 map.put("me", String.valueOf(mCalendar[1]));
                 map.put("an", String.valueOf(mCalendar[2]));
-
                 map.put("ho", horarios);
-                map.put("iu", String.valueOf(id));
-
+                if (userDNI == 0)
+                    map.put("iu", String.valueOf(id));
+                else
+                    map.put("iu", String.valueOf(userDNI));
+                if (isUPA) {
+                    map.put("is", String.valueOf(mConvocatoria.getIdBeca()));
+                } else {
+                    map.put("ib", String.valueOf(mConvocatoria.getIdBeca()));
+                    Pattern pattern = Pattern.compile("[0-9]");
+                    Matcher matcher = pattern.matcher(receptores);
+                    String num = "";
+                    if (matcher.find())
+                        num = matcher.group();
+                    map.put("ir", num);
+                }
                 return map;
             }
         };
@@ -298,7 +336,7 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
                     loadError();
                     break;
                 case 5:
-                    Utils.showToast(getApplicationContext(), "Turno ya reservado");
+                    Utils.showToast(getApplicationContext(), getString(R.string.becaTurnoYaReservado));
                     showProgressDialog(false);
                     animateButtonWidth(false);
                     fadeOutInTextProgress();
@@ -320,7 +358,7 @@ public class ResumenTurnoUAPUActivity extends AppCompatActivity implements View.
         showProgressDialog(false);
         animateButtonWidth(false);
         fadeOutInTextProgress();
-        Utils.showToast(getApplicationContext(), "¡Error al reservar el turno!");
+        Utils.showToast(getApplicationContext(), getString(R.string.becaTurnoError));
     }
 
     public void fadeOutInTextProgress() {

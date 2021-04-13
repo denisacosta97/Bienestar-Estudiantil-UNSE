@@ -9,7 +9,9 @@ import org.json.JSONObject;
 public class Certificado implements Parcelable {
 
     private int idEmisor, idUsuario, dia, mes, anio, validez;
-    private String fechaRegistro, descripcion;
+    private String fechaRegistro, descripcion, nombreM, apellidoM, nombre, apellido,carrera, facultad;
+
+    public static final int COMPLETE = 1;
 
     public Certificado(int idEmisor, int idUsuario, int dia, int mes, int anio, int validez,
                        String fechaRegistro, String descripcion) {
@@ -23,6 +25,7 @@ public class Certificado implements Parcelable {
         this.descripcion = descripcion;
     }
 
+
     protected Certificado(Parcel in) {
         idEmisor = in.readInt();
         idUsuario = in.readInt();
@@ -32,6 +35,35 @@ public class Certificado implements Parcelable {
         validez = in.readInt();
         fechaRegistro = in.readString();
         descripcion = in.readString();
+        nombreM = in.readString();
+        apellidoM = in.readString();
+        nombre = in.readString();
+        apellido = in.readString();
+        carrera = in.readString();
+        facultad = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idEmisor);
+        dest.writeInt(idUsuario);
+        dest.writeInt(dia);
+        dest.writeInt(mes);
+        dest.writeInt(anio);
+        dest.writeInt(validez);
+        dest.writeString(fechaRegistro);
+        dest.writeString(descripcion);
+        dest.writeString(nombreM);
+        dest.writeString(apellidoM);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+        dest.writeString(carrera);
+        dest.writeString(facultad);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Certificado> CREATOR = new Creator<Certificado>() {
@@ -45,6 +77,54 @@ public class Certificado implements Parcelable {
             return new Certificado[size];
         }
     };
+
+    public String getNombreM() {
+        return nombreM;
+    }
+
+    public void setNombreM(String nombreM) {
+        this.nombreM = nombreM;
+    }
+
+    public String getApellidoM() {
+        return apellidoM;
+    }
+
+    public void setApellidoM(String apellidoM) {
+        this.apellidoM = apellidoM;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
 
     public int getIdEmisor() {
         return idEmisor;
@@ -110,27 +190,43 @@ public class Certificado implements Parcelable {
         this.descripcion = descripcion;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+
+    public Certificado(int idEmisor, int idUsuario, String fechaRegistro, String descripcion, String nombreM, String apellidoM, String nombre, String apellido, String carrera, String facultad) {
+        this.idEmisor = idEmisor;
+        this.idUsuario = idUsuario;
+        this.fechaRegistro = fechaRegistro;
+        this.descripcion = descripcion;
+        this.nombreM = nombreM;
+        this.apellidoM = apellidoM;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.carrera = carrera;
+        this.facultad = facultad;
     }
 
-    public static Certificado mapper(JSONObject o) {
+    public static Certificado mapper(JSONObject o, int tipo) {
         Certificado cert = null;
         int idEmisor, idUsuario, dia, mes, anio, validez;
-        String fechaRegistro, descripcion;
+        String fechaRegistro, descripcion,nombreM, apellidoM, nombre, apellido, carrera, facultad;
         try {
+            switch (tipo){
+                case COMPLETE:
+                    idEmisor = Integer.parseInt(o.getString("idemisor"));
+                    nombreM = o.getString("nombrem");
+                    apellidoM = o.getString("apellidom");
+                    idUsuario = Integer.parseInt(o.getString("idusuario"));
+                    nombre = o.getString("nombre");
+                    apellido = o.getString("apellido");
+                    carrera = o.has("carrera") && !o.isNull("carrera") ? o.getString("carrera") : "NO ASIGNADO";
+                    facultad = o.has("facultad") && !o.isNull("facultad") ? o.getString("facultad") : "NO ASIGNADO";
+                    fechaRegistro = o.getString("fecharegistro");
+                    descripcion = o.getString("descripcion");
+                    cert = new Certificado(idEmisor, idUsuario, fechaRegistro, descripcion, nombreM, apellidoM,
+                            nombre, apellido, carrera, facultad);
+                    break;
+            }
 
-            idEmisor = Integer.parseInt(o.getString("idrmisor"));
-            idUsuario = Integer.parseInt(o.getString("idusuario"));
-            dia = Integer.parseInt(o.getString("dia"));
-            mes = Integer.parseInt(o.getString("mes"));
-            anio = Integer.parseInt(o.getString("anio"));
-            validez = Integer.parseInt(o.getString("validez"));
-            fechaRegistro = o.getString("fecharegistro");
-            descripcion = o.getString("descripcion");
 
-            cert = new Certificado(idEmisor, idUsuario, dia, mes, anio, validez, fechaRegistro, descripcion);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -139,15 +235,5 @@ public class Certificado implements Parcelable {
         return cert;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idEmisor);
-        dest.writeInt(idUsuario);
-        dest.writeInt(dia);
-        dest.writeInt(mes);
-        dest.writeInt(anio);
-        dest.writeInt(validez);
-        dest.writeString(fechaRegistro);
-        dest.writeString(descripcion);
-    }
+
 }

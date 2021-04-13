@@ -44,7 +44,7 @@ public class ServiciosUPAAdapter extends RecyclerView.Adapter<ServiciosUPAAdapte
             String name = doctor.getNombre() + " " + doctor.getApellido();
             holder.mDesc.setText(name);
         } catch (IndexOutOfBoundsException e) {
-
+            holder.mDesc.setText("NO ASIGNADO");
         }
 
         holder.mName.setText(upa.getTitulo());

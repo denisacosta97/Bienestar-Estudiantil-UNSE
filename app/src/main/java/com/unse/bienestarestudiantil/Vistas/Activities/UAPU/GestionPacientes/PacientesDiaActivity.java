@@ -139,8 +139,8 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
         int id = manager.getValueInt(Utils.MY_ID);
         String URL = null;
         if (mPaciente != null)
-            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_MEDICAM_DAY, id, key,
-                    mPaciente.getDia(), mPaciente.getMes(), mPaciente.getAnio());
+            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s&id=%s", Utils.URL_PACIENTES_DIARIA, id, key,
+                    mPaciente.getDia(), mPaciente.getMes(), mPaciente.getAnio(), id);
         else
             URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s&id=%s", Utils.URL_PACIENTES_DIARIA, id, key, -1, -1, -1, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {

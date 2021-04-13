@@ -36,21 +36,44 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Datos"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/txtInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5dp"
+                    android:text="SIN INFORMACIÓN"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="DNI"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:fontFamily="@font/montserrat_black"/>
 
-                <EditText
-                    android:id="@+id/edtDni"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/edit_text_logreg"
-                    android:inputType="number"
-                    android:padding="5dp"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/btnVer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="18sp"
+                    android:background="@drawable/button_border"
+                    android:text="BUSCAR"
+                    android:fontFamily="@font/montserrat_black"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -85,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/edit_text_logreg"
-                    android:inputType="textCapWords|text"
+                    android:inputType="text"
                     android:padding="5dp"
                     android:layout_margin="5dp"
                     android:textSize="16sp"

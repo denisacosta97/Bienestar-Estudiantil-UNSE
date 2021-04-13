@@ -167,7 +167,7 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                     for (int j = 0; j<jsonArrayServ.length(); j++){
                         JSONObject m = jsonArrayServ.getJSONObject(j);
 
-                        if (m.getString("iddoctor").equals(String.valueOf(doctor.getIdUsuario()))){
+                        if (m.getString("idusuario").equals(String.valueOf(doctor.getIdUsuario()))){
                             especialidad.append(m.getString("titulo")).append(" - ")
                                     .append(Utils.getYear(Utils.getFechaDateWithHour(m.getString("fecharegistro"))));
                             especialidad.append("\n");

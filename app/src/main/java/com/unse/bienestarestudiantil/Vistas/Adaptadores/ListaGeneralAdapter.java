@@ -57,9 +57,14 @@ public class ListaGeneralAdapter extends RecyclerView.Adapter<ListaGeneralAdapte
             holder.imgIcon.setVisibility(View.GONE);
             holder.txtNombre.setText(consulta.getConsulta());
             Date date = Utils.getFechaDateWithHour(consulta.getFecha());
-            String fecha = Utils.getFechaOrderOnly(date);
-            String hora = Utils.getHora(date);
-            holder.txtDni.setText(String.format("%s - %s", fecha, hora));
+            if (date != null){
+                String fecha = Utils.getFechaOrderOnly(date);
+                String hora = Utils.getHora(date);
+                holder.txtDni.setText(String.format("%s - %s", fecha, hora));
+            }else{
+                holder.txtDni.setVisibility(View.GONE);
+            }
+
 
         }
     }

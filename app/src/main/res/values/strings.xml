@@ -238,6 +238,10 @@
    <string name="registrado">¡Registrado!</string>
     <string name="noAutorizacion">No tiene autorización para los datos</string>
     <string name="errorRegistro">¡Error al registrar!</string>
+    <string name="becaTurnoNoDia">Día no habilitado para turnos</string>
+    <string name="becaTurnoSeleccionaHorario">Primero seleccione un horario</string>
+    <string name="becaTurnoYaReservado">¡Turno ya reservado!</string>
+   <string name="becaTurnoError">¡Error al reservar el turno!</string>
 
 </resources>
 

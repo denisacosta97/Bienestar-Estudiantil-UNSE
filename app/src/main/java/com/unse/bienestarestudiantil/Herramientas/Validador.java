@@ -223,7 +223,7 @@ public class Validador {
         return numero.matches(regex);
     }
 
-    private boolean validarFechaFormato(String trim) {
+    public boolean validarFechaFormato(String trim) {
         String regex = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
         return trim.matches(regex);
     }

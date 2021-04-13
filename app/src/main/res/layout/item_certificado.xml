@@ -33,31 +33,6 @@
                     android:padding="10dp">
 
                     <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="DNI: "
-                        android:textColor="@color/blackTextColor"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                    <TextView
-                        android:id="@+id/txtDni"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text=""
-                        android:textSize="16sp"
-                        android:fontFamily="@font/montserrat_regular"/>
-
-                </LinearLayout>
-
-                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -66,15 +41,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Fecha: "
+                            android:text="DNI: "
                             android:textColor="@color/blackTextColor"
                             android:textSize="16sp"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
-                            android:id="@+id/txtFecha"
+                            android:id="@+id/txtDni"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blackTextColor"
                             android:layout_marginTop="5dp"
                             android:text=""
                             android:textSize="16sp"
@@ -85,21 +61,22 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Descripción: "
+                            android:text="Nombre y apellido: "
                             android:textColor="@color/blackTextColor"
                             android:textSize="16sp"
                             android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
-                            android:id="@+id/txtDesc"
+                            android:id="@+id/txtNomAp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blackTextColor"
                             android:layout_marginTop="5dp"
                             android:text=""
                             android:textSize="16sp"
@@ -110,22 +87,74 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Emitido el:"
-                            android:textSize="16sp"
+                            android:text="Facultad: "
                             android:textColor="@color/blackTextColor"
-                            android:fontFamily="@font/montserrat_regular"/>
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"/>
 
                         <TextView
-                            android:id="@+id/txtFechaEmit"
+                            android:id="@+id/txtFacultad"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_marginTop="5dp"
+                            android:text=""
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_regular"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Carrera: "
+                            android:textColor="@color/blackTextColor"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <TextView
+                            android:id="@+id/txtCarrera"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blackTextColor"
+                            android:layout_marginTop="5dp"
+                            android:text=""
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_regular"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Fecha de emisión: "
+                            android:textColor="@color/blackTextColor"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <TextView
+                            android:id="@+id/txtFechaMod"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blackTextColor"
                             android:layout_marginTop="5dp"
                             android:text=""
                             android:textSize="16sp"

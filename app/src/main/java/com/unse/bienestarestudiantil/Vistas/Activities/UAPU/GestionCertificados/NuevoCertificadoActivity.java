@@ -21,9 +21,11 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.OnClickUser;
 import com.unse.bienestarestudiantil.Modelos.Certificado;
 import com.unse.bienestarestudiantil.Modelos.Consulta;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoBuscarUsuario;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
 
@@ -34,13 +36,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewCertificadoActivity extends AppCompatActivity implements View.OnClickListener {
+public class NuevoCertificadoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtDni, edtDescripcion;
+    EditText  edtDescripcion;
+    TextView txtInfo;
     TextView txtFecha;
-    Button btnCancel, btnEmitir;
+    Button btnCancel, btnEmitir, btnVerificar;
     ImageView imgIcono;
     DialogoProcesamiento dialog;
+    int dni = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
     }
 
     private void loadListener() {
+        btnVerificar.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
         btnEmitir.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -69,9 +74,10 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
     }
 
     private void loadViews() {
+        btnVerificar = findViewById(R.id.btnVer);
+        txtInfo = findViewById(R.id.txtInfo);
         btnCancel = findViewById(R.id.btnCancel);
         btnEmitir = findViewById(R.id.btnEmitir);
-        edtDni = findViewById(R.id.edtDni);
         txtFecha = findViewById(R.id.txtFecha);
         edtDescripcion = findViewById(R.id.edtDesc);
         imgIcono = findViewById(R.id.imgFlecha);
@@ -112,6 +118,9 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
+            case R.id.btnVer:
+                verificar();
+                break;
             case R.id.btnEmitir:
                 save();
                 break;
@@ -124,25 +133,42 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
         }
     }
 
+    private void verificar() {
+
+        DialogoBuscarUsuario dialogoBuscarUsuario = new DialogoBuscarUsuario(getApplicationContext(),
+                getSupportFragmentManager(), null, new OnClickUser() {
+            @Override
+            public void onUserSelected(int idUsuario, Object text) {
+                txtInfo.setText(String.format("DNI: %S - Datos: %s", idUsuario,
+                        text.toString()));
+                dni = idUsuario;
+            }
+        });
+        dialogoBuscarUsuario.setNoValid(true);
+        dialogoBuscarUsuario.show(getSupportFragmentManager(), "dialog_buscar");
+
+
+    }
+
     private void save() {
         Validador validador = new Validador(getApplicationContext());
-        String dni = edtDni.getText().toString().trim();
         String fecha = txtFecha.getText().toString().trim();
         String desc = edtDescripcion.getText().toString().trim();
 
-        if (!validador.noVacio(dni) && !validador.noVacio(fecha) && !validador.noVacio(desc)) {
-            sendServer(dni, fecha, desc);
-
-        } else {
-            Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+        if (validador.validarTexto(edtDescripcion)){
+            if (validador.validarFechaFormato(fecha) && dni != 0){
+                sendServer(dni, fecha, desc);
+            }else {
+                Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
+            }
         }
     }
 
-    public void sendServer(final String dni, final String fecha, final String desc) {
+    public void sendServer(final int dni, final String fecha, final String desc) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         final String key = manager.getValueString(Utils.TOKEN);
         final int idLocal = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?", Utils.URL_INSERTAR_FECHAS);
+        String URL = Utils.URL_CERTIFICADOS_NUEVO;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -171,7 +197,8 @@ public class NewCertificadoActivity extends AppCompatActivity implements View.On
                 int year = cal.get (Calendar.YEAR);
                 params.put("key", key);
                 params.put("idU", String.valueOf(idLocal));
-                params.put("iu", String.valueOf(idLocal));
+                params.put("ie", String.valueOf(idLocal));
+                params.put("iu", String.valueOf(dni));
                 params.put("di", String.valueOf(day));
                 params.put("me", String.valueOf(mes));
                 params.put("an", String.valueOf(year));

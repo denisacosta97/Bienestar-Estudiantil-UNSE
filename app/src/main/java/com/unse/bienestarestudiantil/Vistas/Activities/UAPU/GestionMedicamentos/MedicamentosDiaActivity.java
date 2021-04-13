@@ -285,15 +285,6 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
         }
     }
 
-
-    private void openDialogo(Turno turno) {
-        DialogAtenderBecas dialogAtender = new DialogAtenderBecas();
-        dialogAtender.loadData(turno);
-        dialogAtender.setFragmentManager(getSupportFragmentManager());
-        dialogAtender.setContext(getApplicationContext());
-        dialogAtender.show(getSupportFragmentManager(), "dialog_turnos");
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

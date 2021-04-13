@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AtencionesActivity extends AppCompatActivity implements View.OnClickListener {
+public class GestionAtencionesActivity extends AppCompatActivity implements View.OnClickListener {
 
     OpcionesAdapter mAdapter;
     RecyclerView mRecyclerView;
@@ -78,8 +78,8 @@ public class AtencionesActivity extends AppCompatActivity implements View.OnClic
     private void loadData() {
 
         mList = new ArrayList<>();
-        mList.add(new Opciones(LinearLayout.VERTICAL, 1, "Registro del día", R.drawable.ic_reserva_libre_turno, R.color.colorFCEyT));
-        mList.add(new Opciones(LinearLayout.VERTICAL, 2, "Atenciones Históricas", R.drawable.ic_becas, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Registro del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Atenciones Históricas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

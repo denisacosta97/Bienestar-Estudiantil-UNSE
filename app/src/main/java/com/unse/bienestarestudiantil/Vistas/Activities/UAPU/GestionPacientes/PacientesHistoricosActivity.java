@@ -44,17 +44,12 @@ public class PacientesHistoricosActivity extends AppCompatActivity implements Vi
     ArrayList<Paciente> mPacientes;
     ArrayList<ItemBase> mItems;
     ArrayList<ItemBase> mListOficial;
-
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     FechasAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-
     ImageView imgIcono;
     ProgressBar mProgressBar;
-    String mes = "";
-    int numberMes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +81,7 @@ public class PacientesHistoricosActivity extends AppCompatActivity implements Vi
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_MEDICAM_ALL, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&id=%s", Utils.URL_PACIENTES_HISTORICO, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -188,7 +183,7 @@ public class PacientesHistoricosActivity extends AppCompatActivity implements Vi
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 if (mListOficial.get(position) instanceof ItemDato) {
-                    Intent i = new Intent(getApplicationContext(), MedicamentosDiaActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PacientesDiaActivity.class);
                     Paciente paciente = ((ItemDato) mListOficial.get(position)).getPaciente();
                     i.putExtra(Utils.PACIENTE, paciente);
                     startActivity(i);

@@ -61,7 +61,7 @@ public class Consulta extends Lista implements Parcelable {
 
             switch (tipo) {
                 case HISTORIAL:
-                    fecha = o.getString("fechaconsulta");
+                    fecha = o.getString("fecharegistro");
                     cons = o.getString("titulo");
                     consulta = new Consulta(0, 0, fecha, cons);
                     break;

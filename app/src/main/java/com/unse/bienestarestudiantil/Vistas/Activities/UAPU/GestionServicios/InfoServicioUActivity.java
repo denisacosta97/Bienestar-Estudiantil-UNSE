@@ -1,7 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,13 +27,15 @@ import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditServicioUActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class InfoServicioUActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     ServiciosU mServiciosU;
     Doctor mDoctor;
     EditText edtName, edtNameDoc, edtDia, edtHorarios, edtDesc;
     ImageView imgIcono;
-    Button btnCancelar, btnEditar, btnDeshabilitar;
+    Button btnEditar, btnDeshabilitar;
     DialogoProcesamiento dialog;
     EditText[] campos;
     boolean isEdit = false;
@@ -74,8 +74,12 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void loadData() {
         edtName.setText(mServiciosU.getTitulo());
-        String nombre = String.format(mDoctor.getNombre(), mDoctor.getApellido());
-        edtNameDoc.setText(nombre);
+        if (mDoctor != null){
+            String nombre = String.format("%s %s", mDoctor.getNombre(), mDoctor.getApellido());
+            edtNameDoc.setText(nombre);
+        }else{
+            edtNameDoc.setText("NO ASIGNADO");
+        }
         edtDia.setText(mServiciosU.getDias());
         edtHorarios.setText(mServiciosU.getHorario());
         edtDesc.setText(mServiciosU.getDescripcion());
@@ -84,7 +88,6 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
-        btnCancelar.setOnClickListener(this);
         btnEditar.setOnClickListener(this);
         btnDeshabilitar.setOnClickListener(this);
     }
@@ -96,14 +99,13 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
         edtHorarios = findViewById(R.id.edtHorarios);
         edtDesc = findViewById(R.id.edtDesc);
 
-        btnCancelar = findViewById(R.id.btnCancelar);
         btnEditar = findViewById(R.id.btnEditar);
         btnDeshabilitar = findViewById(R.id.btnDeshabilitar);
         imgIcono = findViewById(R.id.imgFlecha);
 
-        if(mServiciosU.getValidez() == 1){
+        if (mServiciosU.getValidez() == 1) {
             btnDeshabilitar.setText("Deshabilitar");
-        } else if(mServiciosU.getValidez() == 0){
+        } else if (mServiciosU.getValidez() == 0) {
             btnDeshabilitar.setText("Habilitar");
         }
 
@@ -118,21 +120,17 @@ public class EditServicioUActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnEditar:
                 btnEditar.setText("Guardar");
                 activateEditMode();
                 break;
-            case R.id.btnCancelar:
-                finish();
-                break;
             case R.id.btnDeshabilitar:
-                if(mServiciosU.getValidez() == 1){
+                if (mServiciosU.getValidez() == 1) {
                     sendServerDes(0);
-                } else if(mServiciosU.getValidez() == 0){
+                } else if (mServiciosU.getValidez() == 0) {
                     sendServerDes(1);
                 }
-
                 break;
             case R.id.imgIcon:
                 onBackPressed();

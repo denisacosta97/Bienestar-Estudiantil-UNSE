@@ -36,6 +36,10 @@ public class Medicamento implements Parcelable {
         this.anio = anio;
     }
 
+    public String getMedicamentos(String i) {
+        return i.equals("0") ? "Clínica Médica" : "Salud Sexual y Reprod.";
+    }
+
     protected Medicamento(Parcel in) {
         idUsuario = in.readInt();
         estado = in.readInt();
@@ -201,7 +205,7 @@ public class Medicamento implements Parcelable {
                     estado = Integer.parseInt(o.getString("estado"));
                     tipoMedicamento = o.getString("tipomedicamento");
                     fechaRegistro = o.getString("fecharegistro");
-                    fechaHora = o.has("fechahora") ? o.getString("fechahora") : "";
+                    fechaHora = o.has("fechamodificacion") ? o.getString("fechamodificacion") : "";
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
                     carrera = o.has("carrera") ? o.getString("carrera") : "NO ASIGNADO";

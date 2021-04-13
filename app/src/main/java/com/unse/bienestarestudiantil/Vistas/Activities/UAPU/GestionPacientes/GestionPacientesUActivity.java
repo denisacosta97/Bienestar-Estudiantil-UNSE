@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,11 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes.PacientesDiaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistUAPUActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistoricosUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class GestionPacientesUActivity extends AppCompatActivity implements View
                         startActivity(new Intent(getApplicationContext(), PacientesDiaActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), TurnosHistUAPUActivity.class));
+                        startActivity(new Intent(getApplicationContext(), PacientesHistoricosActivity.class));
                         break;
 
                 }

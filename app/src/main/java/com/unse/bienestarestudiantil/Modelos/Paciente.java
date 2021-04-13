@@ -242,7 +242,7 @@ public class Paciente implements Parcelable {
                     apellido = o.getString("apellido");
                     carrera = o.has("carrera") && !o.isNull("carrera") ? o.getString("carrera") : "NO ASIGNADO";
                     facultad = o.has("facultad") && !o.isNull("facultad") ? o.getString("facultad") : "NO ASIGNADO";
-                    motivoconsulta = o.has("motivo") && !o.isNull("motivo") ? o.getString("motivo") : "NO ASIGNADO";
+                    motivoconsulta = o.has("motivo") && !o.isNull("motivo") ? o.getString("motivo") : "";
                     horario = o.getString("horario");
                     fechaRegistro = o.getString("fecharegistro");
                     paciente = new Paciente(idUsuario, estado, nombre, apellido, facultad,

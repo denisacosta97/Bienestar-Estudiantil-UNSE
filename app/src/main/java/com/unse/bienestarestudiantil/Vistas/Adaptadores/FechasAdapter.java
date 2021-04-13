@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int TIPO_INGRESO = 4;
     public static final int TIPO_IMPRE = 5;
     public static final int TIPO_ATENCION = 6;
+    public static final int TIPO_ATENCION_2 = 7;
 
     private Context mContext;
     private ArrayList<ItemBase> lista;
@@ -71,7 +74,7 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case ItemBase.TIPO_FECHA:
                 ItemFecha itemFecha = (ItemFecha) lista.get(position);
                 FechaViewHolder fechaViewHolder = (FechaViewHolder) viewHolder;
-                fechaViewHolder.txtFecha.setText(itemFecha.getAnio());
+                fechaViewHolder.txtFecha.setText(String.format("%s", itemFecha.getAnio()));
                 break;
 
             case ItemBase.TIPO_DATO:
@@ -116,6 +119,10 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
                 }else if (tipo == TIPO_ATENCION){
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }else if (tipo == TIPO_ATENCION_2){
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());

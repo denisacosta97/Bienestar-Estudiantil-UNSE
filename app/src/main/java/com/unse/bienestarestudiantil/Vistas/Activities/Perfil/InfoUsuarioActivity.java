@@ -583,6 +583,8 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
 
     private void openPicture() {
         Intent intent = new Intent(getApplicationContext(), ProfilePictureActivity.class);
+        intent.putExtra(Utils.IS_ADMIN_MODE, isAdminMode);
+        intent.putExtra(Utils.USER_INFO, idUser);
         startActivity(intent);
 
     }

@@ -26,12 +26,17 @@ public class ProfilePictureActivity extends AppCompatActivity {
 
     ImageView imgUser;
     ProgressBar mProgressBar;
+    int dni = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_picture);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getIntExtra(Utils.USER_INFO, 0) != 0) {
+            dni = getIntent().getIntExtra(Utils.USER_INFO, 0);
+        }
 
         loadViews();
 
@@ -48,7 +53,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         if (bitmap != null) {
             Glide.with(imgUser.getContext()).load(bitmap).into(imgUser);
         }
-        Utils.loadPicture(imgUser, id).listener(new RequestListener<Drawable>() {
+        Utils.loadPicture(imgUser, dni != 0 ? dni : id).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 mProgressBar.setVisibility(View.GONE);
@@ -58,10 +63,11 @@ public class ProfilePictureActivity extends AppCompatActivity {
             @Override
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                 mProgressBar.setVisibility(View.GONE);
-                FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER,
-                        String.format(Utils.PROFILE_PIC,
-                                id),
-                        ((BitmapDrawable) resource).getBitmap(), false);
+                if (dni == 0)
+                    FileStorageManager.saveBitmap(getApplicationContext(), Utils.FOLDER,
+                            String.format(Utils.PROFILE_PIC,
+                                    id),
+                            ((BitmapDrawable) resource).getBitmap(), false);
                 return false;
             }
         }).into(imgUser);

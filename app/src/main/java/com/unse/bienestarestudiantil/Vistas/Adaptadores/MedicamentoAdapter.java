@@ -48,16 +48,19 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
         holder.txtFacultad.setText(med.getFacultad());
         holder.txtCarrera.setText(med.getCarrera());
         holder.txtFechaTurno.setText(med.getFechaRegistro());
-        holder.txtFechaMod.setText(med.getFechaHora());
+        holder.txtTipo.setText(med.getMedicamentos(med.getTipoMedicamento()));
+
 
         switch (med.getDescripcion()) {
             case "PENDIENTE":
                 holder.txtEstado.setText("PENDIENTE");
                 holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
+                holder.txtFechaMod.setText("");
                 break;
             case "RETIRADO":
                 holder.txtEstado.setText("RETIRADO");
                 holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorGreen));
+                holder.txtFechaMod.setText(med.getFechaHora());
                 break;
         }
 
@@ -76,7 +79,7 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mDni, txtFechaTurno, txtFechaMod, txtNomAp, txtCarrera, txtFacultad, txtEstado;
+        TextView mDni, txtFechaTurno, txtFechaMod, txtNomAp, txtCarrera, txtFacultad, txtEstado, txtTipo;
         Button btnAtender;
         OnClickOptionListener listener;
 
@@ -90,6 +93,7 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
             txtFacultad = itemView.findViewById(R.id.txtFacultad);
             txtCarrera = itemView.findViewById(R.id.txtCarrera);
             txtEstado = itemView.findViewById(R.id.txtEstado);
+            txtTipo = itemView.findViewById(R.id.txtTipo);
 
             this.listener = listener;
 

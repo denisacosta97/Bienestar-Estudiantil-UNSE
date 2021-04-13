@@ -212,7 +212,7 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
             }
 
             if (mListOficial.size() > 0) {
-                mAdapter = new FechasAdapter(this, mListOficial, FechasAdapter.TIPO_ATENCION);
+                mAdapter = new FechasAdapter(this, mListOficial, FechasAdapter.TIPO_ATENCION_2);
                 mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setAdapter(mAdapter);
