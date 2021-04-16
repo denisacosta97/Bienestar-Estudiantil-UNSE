@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
 import com.unse.bienestarestudiantil.R;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.EventosViewHolder> {
 
@@ -47,8 +47,15 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
         holder.txtNomAp.setText(name);
         holder.txtFacultad.setText(med.getFacultad());
         holder.txtCarrera.setText(med.getCarrera());
-        holder.txtFechaTurno.setText(med.getFechaRegistro());
+        String hora = String.format("%02d-%02d-%s %s", med.getDia(), med.getMes(), med.getAnio(),
+                med.getFechaHora());
+        holder.txtFechaTurno.setText(hora);
         holder.txtTipo.setText(med.getMedicamentos(med.getTipoMedicamento()));
+        if (med.getEstado() == 6) {
+            holder.txtFechaMod.setText(med.getFechaModificacion());
+        }else{
+            holder.txtFechaMod.setText("");
+        }
 
 
         switch (med.getDescripcion()) {

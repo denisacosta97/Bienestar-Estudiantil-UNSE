@@ -13,7 +13,7 @@ public class Medicamento implements Parcelable {
     public static final int LOW2 = 3;
 
     private int idUsuario, estado, dia, mes, anio;
-    private String tipoMedicamento, fechaRegistro, fechaHora, nombre, apellido, facultad, carrera, descripcion;
+    private String tipoMedicamento, fechaRegistro, fechaHora, nombre, apellido, facultad, carrera, descripcion, fechaModificacion;
 
     public Medicamento(int idUsuario, int estado, String tipoMedicamento, String fechaRegistro,
                        String fechaHora, String nombre, String apellido, String facultad,
@@ -54,6 +54,7 @@ public class Medicamento implements Parcelable {
         facultad = in.readString();
         carrera = in.readString();
         descripcion = in.readString();
+        fechaModificacion = in.readString();
     }
 
     @Override
@@ -71,6 +72,7 @@ public class Medicamento implements Parcelable {
         dest.writeString(facultad);
         dest.writeString(carrera);
         dest.writeString(descripcion);
+        dest.writeString(fechaModificacion);
     }
 
     public static final Creator<Medicamento> CREATOR = new Creator<Medicamento>() {
@@ -161,6 +163,14 @@ public class Medicamento implements Parcelable {
         return descripcion;
     }
 
+    public String getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -197,7 +207,7 @@ public class Medicamento implements Parcelable {
     public static Medicamento mapper(JSONObject o, int tipo) {
         Medicamento med = null;
         int idUsuario, estado, dia, mes, anio;
-        String tipoMedicamento, fechaRegistro, fechaHora, nombre, apellido, facultad, carrera, descripcion;
+        String tipoMedicamento, fechaRegistro, fechaModificacion, fechaHora, nombre, apellido, facultad, carrera, descripcion;
         try {
             switch (tipo) {
                 case COMPLETE:
@@ -205,15 +215,23 @@ public class Medicamento implements Parcelable {
                     estado = Integer.parseInt(o.getString("estado"));
                     tipoMedicamento = o.getString("tipomedicamento");
                     fechaRegistro = o.getString("fecharegistro");
-                    fechaHora = o.has("fechamodificacion") ? o.getString("fechamodificacion") : "";
+                    fechaModificacion = o.getString("fechamodificacion");
+                    fechaHora = o.has("horario") ? o.getString("horario") : "";
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
+                    dia = Integer.parseInt(o.getString("dia"));
+                    mes = Integer.parseInt(o.getString("mes"));
+                    anio = Integer.parseInt(o.getString("anio"));
                     carrera = o.has("carrera") ? o.getString("carrera") : "NO ASIGNADO";
                     facultad = o.has("facultad") ? o.getString("facultad") : "NO ASIGNADO";
                     descripcion = o.getString("descripcion");
 
                     med = new Medicamento(idUsuario, estado, tipoMedicamento, fechaRegistro, fechaHora,
                             nombre, apellido, facultad, carrera, descripcion);
+                    med.setDia(dia);
+                    med.setMes(mes);
+                    med.setAnio(anio);
+                    med.setFechaModificacion(fechaModificacion);
 
                     break;
                 case LOW2:
