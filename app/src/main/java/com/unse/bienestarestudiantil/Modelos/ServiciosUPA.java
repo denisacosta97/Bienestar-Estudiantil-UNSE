@@ -15,6 +15,7 @@ public class ServiciosUPA implements Parcelable {
     private String name, desc, dias, hora, nomApMed, categoria;
 
     public static final int BASIC = 1;
+    public static final int LOW = 2;
 
     public ServiciosUPA(int idServicio, int icon, String name, String desc, String dias,
                         String hora, String nomApMed, int categ) {
@@ -163,6 +164,12 @@ public class ServiciosUPA implements Parcelable {
                             hora, "", turnos);
                     serviciosUPA.setCategoria(categoria);
 
+                    break;
+                case LOW:
+                    idServicio = Integer.parseInt(o.getString("idservicio"));
+                    turnos = Integer.parseInt(o.getString("cantidad"));
+                    name = o.getString("titulo");
+                    serviciosUPA = new ServiciosUPA(idServicio, 0, name, "", "", "", "", turnos);
                     break;
             }
         } catch (JSONException e) {

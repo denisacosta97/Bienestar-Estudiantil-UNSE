@@ -36,16 +36,30 @@ public class ServiciosUPAAdapter extends RecyclerView.Adapter<ServiciosUPAAdapte
         return new ServiciosUPAAdapter.EventosViewHolder(view);
     }
 
+    public String getDoctor(int id) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Doctor doctor : mDoctors) {
+            if (doctor.getIdServicio() == id) {
+                stringBuilder.append(doctor.getNombre())
+                        .append(" ").append(doctor.getApellido())
+                        .append("\n");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ServiciosUPAAdapter.EventosViewHolder holder, int position) {
         ServiciosU upa = serviciosUPA.get(position);
-        try {
-            Doctor doctor = mDoctors.get(position);
-            String name = doctor.getNombre() + " " + doctor.getApellido();
-            holder.mDesc.setText(name);
-        } catch (IndexOutOfBoundsException e) {
+
+        String doctors = getDoctor(upa.getIdServicio());
+        if (!doctors.equals("")) {
+            doctors = doctors.substring(0, doctors.length()-1);
+            holder.mDesc.setText(doctors);
+        } else {
             holder.mDesc.setText("NO ASIGNADO");
         }
+
 
         holder.mName.setText(upa.getTitulo());
 

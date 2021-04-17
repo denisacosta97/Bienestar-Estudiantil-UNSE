@@ -357,6 +357,8 @@ public class Utils {
     public static final String URL_TURNO_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
     public static final String URL_TURNO_NUEVO = "https://" + IP + "/becas/turno/insertar.php";
     public static final String URL_TURNO_UAPU_NUEVO = "https://" + IP + "/uapu/turno/insertar.php";
+    public static final String URL_TURNO_ESTADISTICA  = "https://" + IP + "/uapu/turno/getEstadistica.php";
+
     public static final String URL_CERTIFICADOS = "https://" + IP + "/uapu/certificado/getCertificados.php";
     public static final String URL_CERTIFICADOS_NUEVO = "https://" + IP + "/uapu/certificado/insertar.php";
 

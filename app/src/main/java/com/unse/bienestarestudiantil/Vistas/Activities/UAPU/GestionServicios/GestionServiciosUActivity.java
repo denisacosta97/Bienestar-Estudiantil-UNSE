@@ -82,8 +82,14 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), InfoServicioUActivity.class);
                 i.putExtra(Utils.SERVUAPU, mServiciosU.get(position));
-                if (mDoctors.size() > position)
-                    i.putExtra(Utils.DOCTOR, mDoctors.get(position));
+                ArrayList<Doctor> doc = new ArrayList<>();
+                for (Doctor doctor : mDoctors) {
+                    if (doctor.getIdServicio() == mServiciosU.get(position).getIdServicio()) {
+                        doc.add(doctor);
+                    }
+                }
+                if (doc.size() > 0)
+                    i.putExtra(Utils.DOCTOR, doc);
                 startActivity(i);
             }
         });
@@ -171,7 +177,7 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
 
                     JSONObject o = doc.getJSONObject(j);
 
-                    Doctor doctor = Doctor.mapper(o, 2);
+                    Doctor doctor = Doctor.mapper(o, Doctor.MEDIUM);
 
                     mDoctors.add(doctor);
                 }

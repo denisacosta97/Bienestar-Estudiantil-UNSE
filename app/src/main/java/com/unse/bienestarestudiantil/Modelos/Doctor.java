@@ -10,7 +10,7 @@ public class Doctor extends Lista implements Parcelable {
 
     public static final int COMPLETE = 1;
     public static final int MEDIUM = 2;
-    private int idUsuario, anio, validez;
+    private int idUsuario, anio, validez, idServicio;
     private String especialidad, matricula, casaestudio, nombre, apellido;
 
     public static final int BASIC = 3;
@@ -53,6 +53,7 @@ public class Doctor extends Lista implements Parcelable {
         casaestudio = in.readString();
         nombre = in.readString();
         apellido = in.readString();
+        idServicio = in.readInt();
     }
 
     @Override
@@ -65,6 +66,15 @@ public class Doctor extends Lista implements Parcelable {
         dest.writeString(casaestudio);
         dest.writeString(nombre);
         dest.writeString(apellido);
+        dest.writeInt(idServicio);
+    }
+
+    public int getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
     }
 
     @Override
@@ -168,16 +178,15 @@ public class Doctor extends Lista implements Parcelable {
                     idServicio = Integer.parseInt(o.getString("idservicio"));
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
-                    especialidad = o.getString("especialidad");
+                    //especialidad = o.getString("especialidad");
 
-                    doctor = new Doctor(idServicio, nombre, apellido, especialidad);
+                    doctor = new Doctor(idServicio, nombre, apellido, "");
+                    doctor.setIdServicio(idServicio);
 
                     break;
             }
 
-        }
-
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return doctor;

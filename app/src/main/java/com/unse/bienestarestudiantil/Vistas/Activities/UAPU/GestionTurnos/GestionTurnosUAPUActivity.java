@@ -83,6 +83,9 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
                     case 2:
                         startActivity(new Intent(getApplicationContext(), TurnosHistoricosUAPUActivity.class));
                         break;
+                    case 3:
+                        startActivity(new Intent(getApplicationContext(), EstadisticasTurnosActivity.class));
+                        break;
 
                 }
                 //Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
@@ -97,6 +100,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
         mOpciones = new ArrayList<>();
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

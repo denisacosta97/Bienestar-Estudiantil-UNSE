@@ -189,6 +189,7 @@
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.EstadisticasMedicamentosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.SelectorFechaUPAActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.ResumenTurnoActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.EstadisticasTurnosActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
