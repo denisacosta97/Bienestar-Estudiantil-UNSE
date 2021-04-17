@@ -1,115 +1,108 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.AtencionDiaria;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.HistorialTurnosUAPUAdapter;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AtencionesHistoricasActivity extends AppCompatActivity implements View.OnClickListener {
+public class TurnosHistUAPUActivity extends AppCompatActivity implements View.OnClickListener {
+
+    DialogoProcesamiento dialog;
+    ArrayList<TurnosUAPU> mTurnos;
+    ArrayList<ItemBase> mItems;
+    ArrayList<ItemBase> mListOficial;
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    FechasAdapter mAdapter;
-    ArrayList<AtencionDiaria> mList;
-    ImageView imgIcono;
-    DialogoProcesamiento dialog;
+    HistorialTurnosUAPUAdapter adapter;
+    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
-    ArrayList<ItemBase> mItems;
-    ArrayList<ItemBase> mListOficial;
+    ImageView imgIcono;
+    ProgressBar mProgressBar;
+    String mes = "";
+    int numberMes;
+    LinearLayout mLayoutVacio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_atencion_diaria_historial);
+        setContentView(R.layout.activity_turnos_hist_uapu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        setToolbar();
 
         loadViews();
 
-        loadData();
-
         loadListener();
 
-    }
+        loadData();
 
-    private void loadData() {
-        loadInfo(1);
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-    }
-
-    private void loadViews() {
-        mRecyclerView = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
+        setToolbar();
 
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Registros Históricos");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Historial de turnos");
+        Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
-    private void loadListener() {
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                ItemBase itemBase = mListOficial.get(position);
-                if (!(itemBase instanceof ItemFecha)) {
-                    ItemDato itemDato = (ItemDato) itemBase;
-                    AtencionDiaria atencionDiaria = itemDato.getAtencionDiaria();
-                    Intent intent = new Intent(getApplicationContext(), AtencionesDiariasActivity.class);
-                    intent.putExtra(Utils.USER_INFO, atencionDiaria);
-                    startActivity(intent);
-                }
-            }
-        });
-        imgIcono.setOnClickListener(this);
+    private void loadData() {
+        loadInfo();
+
+        adapter = new HistorialTurnosUAPUAdapter(this, mListOficial);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(adapter);
     }
 
-    private void loadInfo(int i) {
+    private void loadInfo() {
+        mProgressBar.setVisibility(View.VISIBLE);
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = null;
-        if (i == 1) {
-            URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_ATENCION_HISTORICA, id, key, id);
-        } else {
-            URL = String.format("%s?idU=%s&key=%s&di=%s&me=%s&an=%s", Utils.URL_ATENCION_DIARIA, id, key,
-                    -1, -1, -1);
-        }
-
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_TURNOS_HIST_UAPU, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -119,8 +112,10 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                mProgressBar.setVisibility(View.GONE);
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
+
             }
         });
         //Abro dialogo para congelar pantalla
@@ -133,6 +128,7 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
     private void procesarRespuesta(String response) {
         try {
             dialog.dismiss();
+            mProgressBar.setVisibility(View.GONE);
             JSONObject jsonObject = new JSONObject(response);
             int estado = jsonObject.getInt("estado");
             switch (estado) {
@@ -141,20 +137,18 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
                     break;
                 case 1:
                     //Exito
+
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
+                    Utils.showToast(getApplicationContext(), "Error 2");
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
-                case 4:
-                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
-                    break;
                 case 100:
-                    //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
+                    //No autorizado
                     break;
             }
 
@@ -166,30 +160,41 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-
             if (jsonObject.has("mensaje")) {
+
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                mList = new ArrayList<>();
+
+                mTurnos = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
+
                     JSONObject o = jsonArray.getJSONObject(i);
-                    AtencionDiaria atencionDiaria = AtencionDiaria.mapper(o, AtencionDiaria.FECHA);
-                    mList.add(atencionDiaria);
+
+                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.LOW);
+
+                    mTurnos.add(turno);
+
                 }
+                //Utils.showToast(getApplicationContext(), "HAY " + mTurnos.size());
             }
 
             mItems = new ArrayList<>();
-            for (AtencionDiaria m : mList) {
+            for (TurnosUAPU m : mTurnos) {
                 ItemDato itemDato = new ItemDato();
-                itemDato.setAtencionDiaria(m);
-                itemDato.setTipo(ItemDato.TIPO_ATENCION);
+                itemDato.setTurnosUAPU(m);
+                itemDato.setTipo(ItemDato.TIPO_TURNO_UAPU);
                 mItems.add(itemDato);
             }
-
             mListOficial = new ArrayList<>();
-            TreeMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
+            HashMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
             List<String> meses = new ArrayList<>();
             meses.addAll(datos.keySet());
+            Collections.sort(meses, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return new BigDecimal(o1).compareTo(new BigDecimal(o2));
+                }
+            });
             for (String date : meses) {
                 ItemFecha dateItem = new ItemFecha(Utils.getMonth(Integer.parseInt(date)));
                 mListOficial.add(dateItem);
@@ -198,31 +203,56 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
                     mListOficial.add(generalItem);
                 }
             }
-
-            if (mListOficial.size() > 0) {
-                mAdapter = new FechasAdapter(this, mListOficial, FechasAdapter.TIPO_ATENCION_2);
-                mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setNestedScrollingEnabled(false);
-            }
-
+            adapter.change(mListOficial);
+            //Utils.showToast(getApplicationContext(), String.valueOf(mListOficial.size()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
 
-    private TreeMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
-        TreeMap<String, List<ItemBase>> groupedHashMap = new TreeMap<>();
+    private void loadListener() {
+        imgIcono.setOnClickListener(this);
+
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                if (mListOficial.get(position) instanceof ItemDato) {
+                    Intent i = new Intent(getApplicationContext(), ListadoMesTurnoActivity.class);
+                    i.putExtra(Utils.DATA_TURNO, ((ItemDato) mListOficial.get(position)).getTurnosUAPU());
+                    startActivity(i);
+                }
+            }
+        });
+    }
+
+    private void loadViews() {
+        imgIcono = findViewById(R.id.imgFlecha);
+        mProgressBar = findViewById(R.id.progress_bar);
+        mRecyclerView = findViewById(R.id.recycler);
+        mLayoutVacio = findViewById(R.id.layoutVacio);
+    }
+
+    private HashMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
+
+        HashMap<String, List<ItemBase>> groupedHashMap = new HashMap<>();
+
         for (ItemBase dato : list) {
+
             ItemDato itemDatoKey = (ItemDato) dato;
-            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_ATENCION) {
-                String mes = String.valueOf(itemDatoKey.getAtencionDiaria().getMes());
+
+            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_TURNO_UAPU) {
+
+                String mes = String.valueOf(itemDatoKey.getTurnosUAPU().getMes());
+
                 if (!groupedHashMap.containsKey(mes)) {
+
                     for (ItemBase item : list) {
+
                         ItemDato itemDato = (ItemDato) item;
-                        if (itemDato.getAtencionDiaria().getMes() == itemDatoKey.getAtencionDiaria().getMes()) {
+
+                        if (itemDato.getTurnosUAPU().getMes() == itemDatoKey.getTurnosUAPU().getMes()) {
                             if (groupedHashMap.containsKey(mes)) {
                                 groupedHashMap.get(mes).add(itemDato);
                             } else {
@@ -234,8 +264,18 @@ public class AtencionesHistoricasActivity extends AppCompatActivity implements V
                     }
                 }
             }
+
         }
         return groupedHashMap;
+    }
+
+    private void updateView(int i) {
+        switch (i) {
+            case 0:
+                mRecyclerView.setVisibility(View.GONE);
+                mLayoutVacio.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override

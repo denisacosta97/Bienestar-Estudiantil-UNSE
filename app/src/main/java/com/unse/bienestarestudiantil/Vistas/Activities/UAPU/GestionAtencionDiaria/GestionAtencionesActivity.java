@@ -35,7 +35,6 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atenciones);
 
-
         setToolbar();
 
         loadViews();
@@ -43,8 +42,6 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
         loadData();
 
         loadListener();
-
-
     }
 
     private void loadListener() {
@@ -59,8 +56,6 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
                     case 3022:
                         startActivity(new Intent(getApplicationContext(), AtencionesHistoricasActivity.class));
                         break;
-
-
                 }
             }
         });
@@ -76,7 +71,6 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
     }
 
     private void loadData() {
-
         mList = new ArrayList<>();
         mList.add(new Opciones(LinearLayout.HORIZONTAL, 3021, "Registro del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
         mList.add(new Opciones(LinearLayout.HORIZONTAL, 3022, "Atenciones Históricas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
@@ -85,9 +79,7 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new OpcionesAdapter(mList, getApplicationContext(), 1);
         mRecyclerView.setAdapter(mAdapter);
-
     }
-
 
     @Override
     public void onClick(View v) {

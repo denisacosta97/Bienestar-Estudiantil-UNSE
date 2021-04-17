@@ -20,6 +20,8 @@ import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.GestionAtencionesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.GestionCertificadosUActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.EstadisticasMedicamentosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.GestionMedicamentosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientes.GestionPacientesUActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServicios.GestionServiciosUActivity;
@@ -85,6 +87,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                         startActivity(new Intent(getApplicationContext(), GestionMedicamentosActivity.class));
                         break;
                 }
+                Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);

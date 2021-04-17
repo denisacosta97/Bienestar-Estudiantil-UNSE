@@ -65,6 +65,7 @@
                                 android:fontFamily="@font/montserrat_black"/>
 
                             <EditText
+                                android:enabled="false"
                                 android:id="@+id/edtNameDoc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

@@ -61,7 +61,6 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
         ((TextView) findViewById(R.id.txtTitulo)).setText("Doctores");
     }
 
-
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -93,10 +92,7 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -149,19 +145,13 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
         try {
 
             if (jsonObject.has("mensaje")) {
-
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
                 JSONArray jsonArrayServ = jsonObject.getJSONArray("servicios");
-
                 mDoctors = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     Doctor doctor = Doctor.mapper(o, Doctor.BASIC);
-
                     StringBuilder especialidad = new StringBuilder();
 
                     for (int j = 0; j<jsonArrayServ.length(); j++){
@@ -172,14 +162,10 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                                     .append(Utils.getYear(Utils.getFechaDateWithHour(m.getString("fecharegistro"))));
                             especialidad.append("\n");
                         }
-
                     }
                     doctor.setEspecialidad(especialidad.toString());
-
                     mDoctors.add(doctor);
-
                 }
-
             }
 
             if (mDoctors.size() > 0) {
@@ -187,14 +173,10 @@ public class GestionDoctoresActivity extends AppCompatActivity implements View.O
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setNestedScrollingEnabled(false);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);

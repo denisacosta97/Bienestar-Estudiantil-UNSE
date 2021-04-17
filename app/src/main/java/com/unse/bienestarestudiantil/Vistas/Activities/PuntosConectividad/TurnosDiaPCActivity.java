@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados;
+package com.unse.bienestarestudiantil.Vistas.Activities.PuntosConectividad;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +18,8 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
-import com.unse.bienestarestudiantil.Modelos.Certificado;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.CertificadosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -31,19 +29,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CertificadosHistoricosActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnClickListener {
+    //AGREGAR DATOS DE LOS PUNTOS DE CONECTIVIDAD
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    CertificadosAdapter mAdapter;
-    ArrayList<Certificado> mCertificados;
+    TurnosDiaUAdapter mAdapter;
+    ArrayList<TurnosUAPU> mTurnos;
     DialogoProcesamiento dialog;
+    ImageView imgRefresh;
     ImageView imgIcono;
+    OnClickOptionListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certificados_emitidos);
+        setContentView(R.layout.activity_turnos_dia_p_c);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
@@ -59,23 +59,27 @@ public class CertificadosHistoricosActivity extends AppCompatActivity implements
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de Certificados");
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Turnos del día");
+        imgRefresh.setVisibility(View.VISIBLE);
     }
 
     private void loadListener() {
+        imgRefresh.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
     }
 
 
     private void loadData() {
-        mCertificados = new ArrayList<>();
+        mTurnos = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
+        mAdapter = new TurnosDiaUAdapter(mTurnos, getApplicationContext(), mListener);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
+        imgRefresh = findViewById(R.id.imgRefresh);
         imgIcono = findViewById(R.id.imgFlecha);
     }
 
@@ -83,7 +87,7 @@ public class CertificadosHistoricosActivity extends AppCompatActivity implements
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&id=%s", Utils.URL_CERTIFICADOS, id, key, id);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -124,12 +128,6 @@ public class CertificadosHistoricosActivity extends AppCompatActivity implements
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
-                case 4:
-                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
-                    break;
-                case 5:
-                    Utils.showToast(getApplicationContext(), getString(R.string.noAutorizacion));
-                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -152,19 +150,15 @@ public class CertificadosHistoricosActivity extends AppCompatActivity implements
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Certificado cert = Certificado.mapper(o, Certificado.COMPLETE);
-                    mCertificados.add(cert);
-                }
-
-                if (mCertificados.size() > 0){
-                    mAdapter = new CertificadosAdapter(mCertificados, getApplicationContext());
-                    mRecyclerView.setAdapter(mAdapter);
+                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.COMPLETE);
+                    mTurnos.add(turno);
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -174,6 +168,11 @@ public class CertificadosHistoricosActivity extends AppCompatActivity implements
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
+            case R.id.imgRefresh:
+                mTurnos.clear();
+                loadInfo();
+                break;
         }
     }
+
 }

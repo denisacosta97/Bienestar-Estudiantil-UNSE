@@ -1,6 +1,5 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +26,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -83,11 +81,9 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-
             }
         });
         imgIcono.setOnClickListener(this);
-
     }
 
     private void loadInfo() {
@@ -105,10 +101,7 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 procesarRespuesta(response);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -116,7 +109,6 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
                 error.printStackTrace();
                 Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
-
             }
         });
         //Abro dialogo para congelar pantalla
@@ -162,23 +154,15 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-
             if (jsonObject.has("mensaje")) {
-
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
                 mList = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     AtencionDiaria atencionDiaria = AtencionDiaria.mapper(o, AtencionDiaria.BASIC);
-
                     mList.add(atencionDiaria);
-
                 }
-
             }
 
             if (mList.size() > 0) {
@@ -186,14 +170,10 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView.setNestedScrollingEnabled(false);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -203,6 +183,5 @@ public class AtencionesDiariasActivity extends AppCompatActivity implements View
                 break;
         }
     }
-
 
 }

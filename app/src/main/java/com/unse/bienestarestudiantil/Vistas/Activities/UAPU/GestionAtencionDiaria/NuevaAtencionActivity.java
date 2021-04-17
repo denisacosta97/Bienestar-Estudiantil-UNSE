@@ -41,7 +41,6 @@ public class NuevaAtencionActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_atencion);
 
-
         setToolbar();
 
         loadViews();

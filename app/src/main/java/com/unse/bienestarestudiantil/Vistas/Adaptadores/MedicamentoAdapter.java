@@ -32,9 +32,7 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
     @NonNull
     @Override
     public MedicamentoAdapter.EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medicamento_dia, parent, false);
-
         return new MedicamentoAdapter.EventosViewHolder(view, listener);
     }
 
@@ -67,6 +65,7 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
             case "RETIRADO":
                 holder.txtEstado.setText("RETIRADO");
                 holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorGreen));
+                holder.btnAtender.setVisibility(View.GONE);
                 holder.txtFechaMod.setText(med.getFechaHora());
                 break;
         }

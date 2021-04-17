@@ -25,6 +25,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.Gest
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
@@ -169,6 +170,9 @@ public class InicioFragmento extends Fragment {
                         break;
                     case 1300:
                         startActivity(new Intent(mContext, GestionNoticiasActivity.class));
+                        break;
+                    case 1400:
+                        startActivity(new Intent(mContext, GestionPuntosConectividadActivity.class));
                         break;
 
                 }

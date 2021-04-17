@@ -57,6 +57,33 @@
         android:fontFamily="@font/montserrat_black"/>
 
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/layoutVacio"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIconVacio"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_vacio" />
+
+        <TextView
+            android:id="@+id/txtVacio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO EXISTEN TURNOS PARA HOY"
+            android:textColor="@color/colorTextDefault"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="18sp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         android:layout_height="wrap_content">

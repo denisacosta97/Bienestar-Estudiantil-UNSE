@@ -67,7 +67,6 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
         imgIcono.setOnClickListener(this);
     }
 
-
     private void loadData() {
         mServiciosU = new ArrayList<>();
         mDoctors = new ArrayList<>();
@@ -165,29 +164,21 @@ public class GestionServiciosUActivity extends AppCompatActivity implements View
                 JSONArray doc = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     ServiciosU serv = ServiciosU.mapper(o, ServiciosU.COMPLETE);
-
                     mServiciosU.add(serv);
                 }
 
                 for (int j = 0; j < doc.length(); j++) {
-
                     JSONObject o = doc.getJSONObject(j);
-
-                    Doctor doctor = Doctor.mapper(o, Doctor.MEDIUM);
-
+                    Doctor doctor = Doctor.mapper(o, 2);
                     mDoctors.add(doctor);
                 }
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         mAdapter.notifyDataSetChanged();
-
     }
 
     @Override

@@ -31,7 +31,6 @@ public class TurnosDiaUAdapter extends RecyclerView.Adapter<TurnosDiaUAdapter.Ev
     @NonNull
     @Override
     public TurnosDiaUAdapter.EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_turno_dia_uapu, parent, false);
 
         return new TurnosDiaUAdapter.EventosViewHolder(view, listener);
@@ -69,7 +68,6 @@ public class TurnosDiaUAdapter extends RecyclerView.Adapter<TurnosDiaUAdapter.Ev
 
     }
 
-
     @Override
     public long getItemId(int position) {
         return mTurnos.get(position).getIdUsuario();
@@ -92,9 +90,7 @@ public class TurnosDiaUAdapter extends RecyclerView.Adapter<TurnosDiaUAdapter.Ev
             txtHorario = itemView.findViewById(R.id.txtHorario);
             txtEstado = itemView.findViewById(R.id.txtEstado);
             txtFechaRes = itemView.findViewById(R.id.txtFechaRes);
-
         }
-
     }
 
 }

@@ -22,8 +22,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity" />
+        <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosHistoricosPCActivity" />
+        <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosDiaPCActivity" />
+        <activity android:name=".Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PerfilPacienteActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.GestionMedicamentosActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.CertificadosHistoricosActivity" />

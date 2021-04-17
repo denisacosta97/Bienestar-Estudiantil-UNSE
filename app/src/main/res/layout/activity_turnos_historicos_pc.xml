@@ -24,33 +24,6 @@
                 android:layout_height="match_parent"
                 android:id="@+id/progress_bar" />
 
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/layoutVacio"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imgIconVacio"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/ic_vacio" />
-
-                <TextView
-                    android:id="@+id/txtVacio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="NO EXISTEN TURNOS"
-                    android:textColor="@color/colorTextDefault"
-                    android:fontFamily="@font/montserrat_black"
-                    android:textSize="18sp"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"

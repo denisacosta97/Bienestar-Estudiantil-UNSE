@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -40,6 +41,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
     ImageView imgIcono;
     OnClickOptionListener mListener;
     TurnosUAPU mTurnosUAPU;
+    LinearLayout mLayoutVacio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         mRecyclerView = findViewById(R.id.recycler);
         imgRefresh = findViewById(R.id.imgRefresh);
         imgIcono = findViewById(R.id.imgFlecha);
+        mLayoutVacio = findViewById(R.id.layoutVacio);
     }
 
     private void loadInfo() {
@@ -140,6 +143,7 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.noData));
+                    updateView(0);
                     break;
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
@@ -176,6 +180,15 @@ public class TurnosDiaUAPUActivity extends AppCompatActivity implements View.OnC
         }
         mAdapter.notifyDataSetChanged();
 
+    }
+
+    private void updateView(int i) {
+        switch (i) {
+            case 0:
+                mRecyclerView.setVisibility(View.GONE);
+                mLayoutVacio.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override

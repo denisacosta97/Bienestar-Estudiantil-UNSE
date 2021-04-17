@@ -53,8 +53,7 @@ import java.util.TreeMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class EstadisticasMedicamentosActivity extends AppCompatActivity
-        implements View.OnClickListener {
+public class EstadisticasMedicamentosActivity extends AppCompatActivity implements View.OnClickListener {
 
     PieChart mPieFacultad;
     BarChart mBarMedicamento;
@@ -78,7 +77,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
         loadListener();
 
         loadData();
-
     }
 
     private void loadData() {
@@ -93,7 +91,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
     private void loadLineHorario(ArrayList<Medicamento> horarios) {
 
         if (horarios != null && horarios.size() > 0) {
-
             mLineHorario.getDescription().setEnabled(false);
             mLineHorario.setExtraOffsets(5, 10, 5, 5);
             mLineHorario.getLegend().setEnabled(true);
@@ -116,7 +113,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
                     horas.put(calendar.get(Calendar.HOUR_OF_DAY),
                             horas.get(calendar.get(Calendar.HOUR_OF_DAY)) + 1);
                 }
-
             }
 
             int max = -1;
@@ -149,7 +145,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
         } else {
             mLineHorario.clear();
         }
-
     }
 
     private void loadPieFacultad(HashMap<String, Integer> map) {
@@ -185,7 +180,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
         } else {
             mPieFacultad.clear();
         }
-
     }
 
     private void loadBarMedicamento(ArrayList<Medicamento> medicamentos) {
@@ -258,7 +252,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
             xAxis2.setValueFormatter(new IAxisValueFormatter() {
                 @Override
                 public String getFormattedValue(float value, AxisBase axis) {
-                        return "";
+                    return "";
 
                 }
             });
@@ -376,29 +370,18 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
     private void loadInfo(JSONObject jsonObject) {
         try {
             if (jsonObject.has("mensaje") || jsonObject.has("datos")) {
-
                 HashMap<String, Integer> facultades = new HashMap<>();
-
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     facultades.put(o.getString("facultad"), Integer.parseInt(o.getString("cantidad")));
-
                 }
-
                 ArrayList<Medicamento> medicamentos = new ArrayList<>();
-
                 jsonArray = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject o = jsonArray.getJSONObject(i);
-
                     Medicamento medicamento = Medicamento.mapper(o, Medicamento.LOW2);
-
                     medicamentos.add(medicamento);
                 }
 
@@ -407,7 +390,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
                 loadPieFacultad(facultades);
 
                 txtCantidad.setText(String.valueOf(medicamentos.size()));
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -432,8 +414,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
         } else {
             Utils.showToast(getApplicationContext(), getString(R.string.rangoFechaInvalido));
         }
-
-
     }
 
     private void openCalendar(final int i) {
@@ -458,7 +438,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity
                     fechaFin[2] = year;
                     txtFechaFin.setText(String.format("%02d-%02d-%s", fechaFin[0], fechaFin[1], fechaFin[2]));
                 }
-
             }
 
         };

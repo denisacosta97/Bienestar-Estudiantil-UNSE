@@ -48,7 +48,6 @@ public class PerfilProfesionalActivity extends AppCompatActivity {
             finish();
         }
 
-
     }
 
     private void loadListener() {
