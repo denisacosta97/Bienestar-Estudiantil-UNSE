@@ -23,7 +23,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosHistoricosPCActivity" />
-        <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosDiaPCActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PerfilPacienteActivity" />
@@ -189,7 +188,7 @@
         <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesHistoricasActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionAtencionDiaria.NuevaAtencionActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.EstadisticasMedicamentosActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.SelectorFechaUPAActivity" />
+        <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.SelectorFechaActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.ResumenTurnoActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.EstadisticasTurnosActivity" />
 

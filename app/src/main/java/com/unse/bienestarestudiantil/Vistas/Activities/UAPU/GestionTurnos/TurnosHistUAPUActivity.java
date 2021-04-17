@@ -3,7 +3,6 @@ package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,22 +13,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
-import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
-import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.HistorialTurnosUAPUAdapter;
-import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -53,18 +46,14 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
     ArrayList<TurnosUAPU> mTurnos;
     ArrayList<ItemBase> mItems;
     ArrayList<ItemBase> mListOficial;
-
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    HistorialTurnosUAPUAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    FechasAdapter adapter;
 
     ImageView imgIcono;
     ProgressBar mProgressBar;
     String mes = "";
     int numberMes;
-    LinearLayout mLayoutVacio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +80,7 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
     private void loadData() {
         loadInfo();
 
-        adapter = new HistorialTurnosUAPUAdapter(this, mListOficial);
+        adapter = new FechasAdapter(this, mListOficial, FechasAdapter.TIPO_ATENCION);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(adapter);
@@ -113,7 +102,8 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 mProgressBar.setVisibility(View.GONE);
-                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                        getString(R.string.servidorOff), R.drawable.ic_error);
                 dialog.dismiss();
 
             }
@@ -133,7 +123,8 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
                     break;
                 case 1:
                     //Exito
@@ -141,20 +132,24 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showToast(getApplicationContext(), "Error 2");
+                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                            "Error 2", R.drawable.ic_error);
                     break;
                 case 3:
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                            getString(R.string.tokenInvalido), R.drawable.ic_error);
                     break;
                 case 100:
-                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     //No autorizado
+                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                            getString(R.string.tokenInexistente), R.drawable.ic_error);
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
+            Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
+                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
         }
     }
 
@@ -219,7 +214,7 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 if (mListOficial.get(position) instanceof ItemDato) {
-                    Intent i = new Intent(getApplicationContext(), ListadoMesTurnoActivity.class);
+                    Intent i = new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class);
                     i.putExtra(Utils.DATA_TURNO, ((ItemDato) mListOficial.get(position)).getTurnosUAPU());
                     startActivity(i);
                 }
@@ -231,7 +226,6 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
         imgIcono = findViewById(R.id.imgFlecha);
         mProgressBar = findViewById(R.id.progress_bar);
         mRecyclerView = findViewById(R.id.recycler);
-        mLayoutVacio = findViewById(R.id.layoutVacio);
     }
 
     private HashMap<String, List<ItemBase>> filtrarPorMes(List<ItemBase> list) {
@@ -267,15 +261,6 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
 
         }
         return groupedHashMap;
-    }
-
-    private void updateView(int i) {
-        switch (i) {
-            case 0:
-                mRecyclerView.setVisibility(View.GONE);
-                mLayoutVacio.setVisibility(View.VISIBLE);
-                break;
-        }
     }
 
     @Override

@@ -238,7 +238,7 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
         DialogoOpciones dialogoOpciones = new DialogoOpciones(new OnClickOptionListener() {
             @Override
             public void onClick(int pos) {
-                Intent intent = new Intent(getApplicationContext(), SelectorFechaUPAActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectorFechaActivity.class);
                 intent.putExtra(Utils.SERVICIO, mServicios.get(pos));
                 intent.putExtra(Utils.USER_INFO, dni);
                 startActivity(intent);

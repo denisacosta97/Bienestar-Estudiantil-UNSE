@@ -26,7 +26,7 @@ import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Convocatoria;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.SelectorFechaUPAActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.SelectorFechaActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -211,7 +211,7 @@ public class ResumenTurnoActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 if (isUPA) {
-                    SelectorFechaUPAActivity.instance.finish();
+                   SelectorFechaActivity.instance.finish();
                 } else {
                     //SelectorReceptoresActivity.instance.finish();
                     //SelectorFechaActivity.instance.finish();

@@ -25,9 +25,6 @@ import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.ListadoMesTurnoActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnos.TurnosHistUAPUActivity;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.HistorialTurnosUAPUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -50,7 +47,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    HistorialTurnosUAPUAdapter adapter;
+    //HistorialTurnosUAPUAdapter adapter;
     String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
             "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
@@ -84,10 +81,10 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
     private void loadData() {
         loadInfo();
 
-        adapter = new HistorialTurnosUAPUAdapter(this, mListOficial);
+        /*adapter = new HistorialTurnosUAPUAdapter(this, mListOficial);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);*/
     }
 
     private void loadInfo() {
@@ -196,7 +193,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
                     mListOficial.add(generalItem);
                 }
             }
-            adapter.change(mListOficial);
+            //adapter.change(mListOficial);
             //Utils.showToast(getApplicationContext(), String.valueOf(mListOficial.size()));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -207,7 +204,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
     private void loadListener() {
         imgIcono.setOnClickListener(this);
 
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+       /* ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
@@ -217,7 +214,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
                     startActivity(i);
                 }
             }
-        });
+        });*/
     }
 
     private void loadViews() {

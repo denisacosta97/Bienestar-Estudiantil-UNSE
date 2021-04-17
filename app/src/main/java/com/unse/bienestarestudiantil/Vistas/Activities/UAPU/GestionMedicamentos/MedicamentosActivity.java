@@ -13,13 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.CertificadosEmitidosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.NewCertificadoActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;

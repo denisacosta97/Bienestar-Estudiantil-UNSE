@@ -16,13 +16,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.AtencionesActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificadosUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionDoctores.GestionDoctoresActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionPacientesUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionServiciosUActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionTurnosUAPUActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.OpcionesAdapter;
 
 import java.util.ArrayList;
@@ -63,7 +56,7 @@ public class GestionPuntosConectividadActivity extends AppCompatActivity impleme
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
                     case 1:
-                        startActivity(new Intent(getApplicationContext(), TurnosDiaPCActivity.class));
+                       // startActivity(new Intent(getApplicationContext(), TurnosDiaPCActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), TurnosHistoricosPCActivity.class));
