@@ -14,6 +14,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
+import com.unse.bienestarestudiantil.Databases.BDGestor;
+import com.unse.bienestarestudiantil.Databases.DBManager;
 import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
 import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
 import com.unse.bienestarestudiantil.Databases.RolViewModel;
@@ -54,6 +56,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        BDGestor bdGestor = new BDGestor(getApplicationContext());
+        DBManager.initializeInstance(bdGestor);
 
         loadViews();
 

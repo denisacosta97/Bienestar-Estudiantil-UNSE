@@ -58,10 +58,10 @@ public class GestionPacientesUActivity extends AppCompatActivity implements View
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
-                    case 1:
+                    case 3051:
                         startActivity(new Intent(getApplicationContext(), PacientesDiaActivity.class));
                         break;
-                    case 2:
+                    case 3052:
                         startActivity(new Intent(getApplicationContext(), PacientesHistoricosActivity.class));
                         break;
 
@@ -75,8 +75,8 @@ public class GestionPacientesUActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Pacientes del día",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Pacientes Historícos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3051,"Pacientes del día",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3052, "Pacientes Historícos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

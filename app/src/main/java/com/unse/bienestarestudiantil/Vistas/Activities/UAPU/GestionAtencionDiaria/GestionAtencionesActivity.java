@@ -53,10 +53,10 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
-                    case 1:
+                    case 3021:
                         startActivity(new Intent(getApplicationContext(), AtencionesDiariasActivity.class));
                         break;
-                    case 2:
+                    case 3022:
                         startActivity(new Intent(getApplicationContext(), AtencionesHistoricasActivity.class));
                         break;
 
@@ -78,8 +78,8 @@ public class GestionAtencionesActivity extends AppCompatActivity implements View
     private void loadData() {
 
         mList = new ArrayList<>();
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Registro del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mList.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Atenciones Históricas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.HORIZONTAL, 3021, "Registro del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mList.add(new Opciones(LinearLayout.HORIZONTAL, 3022, "Atenciones Históricas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

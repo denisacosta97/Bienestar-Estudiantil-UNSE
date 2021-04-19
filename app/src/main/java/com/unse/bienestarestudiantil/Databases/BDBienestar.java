@@ -19,7 +19,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-@Database(entities = {Usuario.class, Alumno.class, Egresado.class, Profesor.class, Rol.class}, version = 1, exportSchema = false)
+@Database(entities = {Usuario.class, Alumno.class, Egresado.class, Profesor.class}, version = 1, exportSchema = false)
 abstract class BDBienestar extends RoomDatabase {
 
     public abstract UsuarioDAO getUserDao();
@@ -30,7 +30,7 @@ abstract class BDBienestar extends RoomDatabase {
 
     public abstract EgresadoDAO getEgresadoDAO();
 
-    public abstract RolDAO getRolDAO();
+   // public abstract RolDAO getRolDAO();
 
     private static volatile BDBienestar INSTANCE;
     private static String DATABASE_NAME = "bienestar";

@@ -11,26 +11,23 @@ import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "roles", primaryKeys = {"idRol", "idUsuario"})
 public class Rol implements Serializable {
 
-    @Ignore
-    public static final String TABLE_ROL = "roles";
-    @Ignore
+
+    public static final String TABLE = "roles";
     public static final String KEY_USER = "idUsuario";
-    @Ignore
     public static final String KEY_ROL = "idRol";
 
-    @NonNull
     private int idRol;
-    @NonNull
     private int idUsuario;
-    @NonNull
     private String descripcion;
-    @Ignore
     private int idRolPadre;
 
-    @Ignore
+    public Rol(){
+
+    }
+
+
     public Rol(int idRol, int idUsuario) {
         this.idRol = idRol;
         this.idUsuario = idUsuario;
@@ -42,21 +39,21 @@ public class Rol implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @Ignore
+
     public Rol(int idRol, int idRolPadre, @NonNull  String descripcion, int f) {
         this.idRol = idRol;
         this.idRolPadre = idRolPadre;
         this.descripcion = descripcion;
     }
 
-    @Ignore
+
     public Rol(int idRol, int idUsuario, int idRolPadre) {
         this.idRol = idRol;
         this.idUsuario = idUsuario;
         this.idRolPadre = idRolPadre;
     }
 
-    @Ignore
+
     protected Rol(Parcel in) {
         idRol = in.readInt();
         idUsuario = in.readInt();
@@ -97,7 +94,6 @@ public class Rol implements Serializable {
         this.idRolPadre = idRolPadre;
     }
 
-    @NonNull
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

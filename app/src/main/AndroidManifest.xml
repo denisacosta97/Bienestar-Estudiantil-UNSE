@@ -162,9 +162,6 @@
             android:label="Listado de Alumnos" />
         <activity android:name=".Vistas.Activities.Deportes.FuncionesProfesor.AsistenciaClasesActivity" />
         <activity
-            android:name=".Vistas.Activities.Gestion.GestionSistemaActivity"
-            android:label="Gestión de Sistema" />
-        <activity
             android:name=".Vistas.Activities.Gestion.EstadisticasActivity"
             android:label="Estadisticas" />
         <activity android:name=".Vistas.Activities.Perfil.ConfiguracionesActivities" />

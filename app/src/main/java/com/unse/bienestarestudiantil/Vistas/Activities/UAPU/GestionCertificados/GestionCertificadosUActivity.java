@@ -57,10 +57,10 @@ public class GestionCertificadosUActivity extends AppCompatActivity implements V
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id){
-                    case 1:
+                    case 3061:
                         startActivity(new Intent(getApplicationContext(), NuevoCertificadoActivity.class));
                         break;
-                    case 2:
+                    case 3062:
                         startActivity(new Intent(getApplicationContext(), CertificadosHistoricosActivity.class));
                         break;
 
@@ -74,8 +74,8 @@ public class GestionCertificadosUActivity extends AppCompatActivity implements V
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Nuevo certificado",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Certificados emitidos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3061,"Nuevo certificado",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3062, "Certificados emitidos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

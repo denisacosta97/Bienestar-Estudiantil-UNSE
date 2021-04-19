@@ -77,13 +77,13 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
-                    case 1:
+                    case 3011:
                         startActivity(new Intent(getApplicationContext(), TurnosDiaUAPUActivity.class));
                         break;
-                    case 2:
+                    case 3012:
                         startActivity(new Intent(getApplicationContext(), TurnosHistoricosUAPUActivity.class));
                         break;
-                    case 3:
+                    case 3013:
                         startActivity(new Intent(getApplicationContext(), EstadisticasTurnosActivity.class));
                         break;
 
@@ -98,9 +98,9 @@ public class GestionTurnosUAPUActivity extends AppCompatActivity implements View
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3011, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3012, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3013, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

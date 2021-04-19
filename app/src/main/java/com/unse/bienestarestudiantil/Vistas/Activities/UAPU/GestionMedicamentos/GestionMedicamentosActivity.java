@@ -55,13 +55,13 @@ public class GestionMedicamentosActivity extends AppCompatActivity implements Vi
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
-                    case 1:
+                    case 3071:
                         startActivity(new Intent(getApplicationContext(), MedicamentosDiaActivity.class));
                         break;
-                    case 2:
+                    case 3072:
                         startActivity(new Intent(getApplicationContext(), MedicamentosHistoricosActivity.class));
                         break;
-                    case 3:
+                    case 3073:
                         startActivity(new Intent(getApplicationContext(), EstadisticasMedicamentosActivity.class));
                         break;
 
@@ -74,9 +74,9 @@ public class GestionMedicamentosActivity extends AppCompatActivity implements Vi
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 1, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 2, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3071, "Turnos del día", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3072, "Turnos Históricos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 3073, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

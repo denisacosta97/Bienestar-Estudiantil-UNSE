@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionAtencionDiaria.GestionAtencionesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados.GestionCertificadosUActivity;
@@ -61,25 +63,25 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
-                    case 1:
+                    case 301:
                         startActivity(new Intent(getApplicationContext(), GestionTurnosUAPUActivity.class));
                         break;
-                    case 2:
+                    case 302:
                         startActivity(new Intent(getApplicationContext(), GestionAtencionesActivity.class));
                         break;
-                    case 3:
+                    case 303:
                         startActivity(new Intent(getApplicationContext(), GestionServiciosUActivity.class));
                         break;
-                    case 4:
+                    case 304:
                         startActivity(new Intent(getApplicationContext(), GestionDoctoresActivity.class));
                         break;
-                    case 5:
+                    case 305:
                         startActivity(new Intent(getApplicationContext(), GestionPacientesUActivity.class));
                         break;
-                    case 6:
+                    case 306:
                         startActivity(new Intent(getApplicationContext(), GestionCertificadosUActivity.class));
                         break;
-                    case 7:
+                    case 307:
                         startActivity(new Intent(getApplicationContext(), GestionMedicamentosActivity.class));
                         break;
                 }
@@ -91,19 +93,37 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,1,"Turnos",R.drawable.ic_item_arrow, R.color.colorFCEyT ));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,2, "Atenciones",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,3, "Servicios",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,4, "Gestión Doctores",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,5, "Pacientes",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,6, "Certificados",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,7, "Medicamentos",R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL,8, "Estadisticas",R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 301, "Turnos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 302, "Atenciones", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 303, "Servicios", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 304, "Gestión Doctores", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 305, "Pacientes", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 306, "Certificados", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 307, "Medicamentos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 308, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(),1);
+        mAdapter = new OpcionesAdapter(filtrarOpciones(mOpciones), getApplicationContext(), 1);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private ArrayList<Opciones> filtrarOpciones(ArrayList<Opciones> opciones) {
+        ArrayList<Opciones> finals = new ArrayList<>();
+        RolViewModel datos = new RolViewModel();
+        ArrayList<Rol> roles = datos.getAll();
+        for (Opciones e : opciones) {
+            for (Rol rol : roles) {
+                if (e.getId() == rol.getIdRol()) {
+                    finals.add(e);
+                }
+
+            }
+
+        }
+
+        return finals;
     }
 
     private void loadViews() {
@@ -113,7 +133,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
                 break;

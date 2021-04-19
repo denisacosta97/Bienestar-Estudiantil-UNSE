@@ -75,6 +75,12 @@ public class Utils {
     public static final String MY_ID = "my_id_user";
     public static final String TOKEN = "my_token";
     public static final String IS_VISIT = "visit";
+    //Constantes para las BD
+    public static final String STRING_TYPE = "text";
+    public static final String INT_TYPE = "integer";
+    public static final String FLOAT_TYPE = "float";
+    public static final String NULL_TYPE = "not null";
+    public static final String AUTO_INCREMENT = "primary key autoincrement";
     //Constantes para activities
     public static final String IS_EDIT_MODE = "edit_mode";
     public static final String USER_INFO = "user_info";
@@ -1071,7 +1077,7 @@ public class Utils {
         new EgresadoViewModel(context).deleteAll();
         new ProfesorViewModel(context).deleteAll();
         new AlumnoViewModel(context).deleteAll();
-        new RolViewModel(context).deleteAll();
+        new RolViewModel().deleteAll();
         FileStorageManager.deleteAll(0);
     }
 

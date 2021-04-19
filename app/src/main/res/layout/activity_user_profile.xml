@@ -138,6 +138,7 @@
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             android:text="Actividades"
+            android:visibility="invisible"
             android:fontFamily="@font/montserrat_black"/>
 
         <LinearLayout

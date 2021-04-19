@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
+import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Becas.GestionBecas.MainGestionBecasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Ciber.GestionCiberActivity;
@@ -80,6 +82,7 @@ public class InicioFragmento extends Fragment {
         mOpcionesFinal = new ArrayList<>();
         ids = new ArrayList<>();
 
+
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1000, "Gestión de Usuarios", R.drawable.ic_user, R.color.colorPrimary));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1200, "Gestión de Socios", R.drawable.ic_config, R.color.colorPrimary));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1, "Gestión de Estadisticas", R.drawable.ic_estadistica, R.color.colorGreyDark));
@@ -96,13 +99,12 @@ public class InicioFragmento extends Fragment {
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1300, "Gestión Noticias", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1400, "Puntos de Conectividad", R.drawable.ic_config, R.color.colorGreen));
 
-        mOpcionesFinal.addAll(mOpciones);
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new OpcionesAdapter(mOpcionesFinal, mContext, 1);
         mRecyclerView.setAdapter(mAdapter);
 
-//        filtrarOpciones();
+        filtrarOpciones();
 
         mAdapter.notifyDataSetChanged();
     }
@@ -113,10 +115,17 @@ public class InicioFragmento extends Fragment {
     }
 
     private void filtrarOpciones() {
+        RolViewModel datos = new RolViewModel();
+        ArrayList<Rol> roles = datos.getAll();
         for (Opciones e : mOpciones) {
-            if (ids.contains(String.valueOf(e.getId())))
-                mOpcionesFinal.add(e);
+            for (Rol rol : roles) {
+                if (e.getId() == rol.getIdRol()) {
+                    mOpcionesFinal.add(e);
+                }
+            }
+
         }
+
     }
 
     private void loadListener() {
@@ -163,7 +172,6 @@ public class InicioFragmento extends Fragment {
                         break;
 
                 }
-                //Utils.showToast(mContext, "Item: " + mOpciones.get(position).getTitulo());
             }
         });
 

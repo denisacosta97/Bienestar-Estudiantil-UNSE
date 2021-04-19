@@ -103,7 +103,7 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
         for (Rol rol : mRols) {
             if ((rol.getIdRol() != Utils.LIST_PERMISOS[0] ||
                     rol.getIdRol() != Utils.LIST_PERMISOS[1]) &&
-                    (mRolViewModel.getByPermission(Utils.LIST_PERMISOS[0]) != null)
+                    (mRolViewModel.get(Utils.LIST_PERMISOS[0]) != null)
             ) {
                 if (rol.getIdRolPadre() == 0) {
                     TreeAdapter.IconTreeItem nodo = new TreeAdapter.IconTreeItem(

@@ -31,6 +31,8 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.unse.bienestarestudiantil.Databases.BDGestor;
+import com.unse.bienestarestudiantil.Databases.DBManager;
 import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
@@ -41,9 +43,7 @@ import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.AboutActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSistemaActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.TermsActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        BDGestor bdGestor = new BDGestor(getApplicationContext());
+        DBManager.initializeInstance(bdGestor);
+
         loadViews();
 
         setToolbar();
@@ -137,9 +140,8 @@ public class MainActivity extends AppCompatActivity {
         mFragment = new Fragment();
         ids = new HashMap<>();
         ids.put(getString(R.string.itemPerfil), R.id.item_perfil);
-        ids.put(getString(R.string.itemSistema), R.id.item_sistema);
         ids.put(getString(R.string.itemNosotros), R.id.item_about);
-        mRolViewModel = new RolViewModel(getApplicationContext());
+        mRolViewModel = new RolViewModel();
         manager = new PreferenceManager(getApplicationContext());
         mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
 
@@ -250,29 +252,8 @@ public class MainActivity extends AppCompatActivity {
             imgBienestar.setImageResource(R.drawable.ic_logo_bienestar_01);
             txtNombre.setText(getText(R.string.app_name_shor).toString().toUpperCase());
         }
-        updateMenu();
+        // updateMenu();
 
-    }
-
-    private void updateMenu() {
-        Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.item_sistema);
-        Rol rol = mRolViewModel.getByPermission(10);
-        if (rol == null) {
-            item.setVisible(false);
-        }
-        /*int position = 0, i = 0;
-        for (ItemDrawer itemDrawer : mItemDrawers) {
-            if (itemDrawer.getId() == R.id.item_sistema) {
-                position = i;
-                break;
-            }
-            i++;
-        }
-        if (rol == null) {
-            mItemDrawers.remove(position);
-            mAdapter.notifyDataSetChanged();
-        }*/
     }
 
     private void seleccionarItem(MenuItem itemDrawer/*int itemDrawer, int position*/) {
@@ -287,9 +268,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_perfil:
                 startActivity(new Intent(MainActivity.this, PerfilActivity.class));
-                break;
-            case R.id.item_sistema:
-                startActivity(new Intent(this, GestionSistemaActivity.class));
                 break;
             case R.id.item_about:
                 startActivity(new Intent(this, AboutActivity.class));

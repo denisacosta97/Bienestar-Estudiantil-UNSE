@@ -107,9 +107,10 @@ public class EstadisticasTurnosActivity extends AppCompatActivity implements Vie
             mLineHorario.setDragDecelerationFrictionCoef(0.99f);
 
             Map<Integer, Integer> horas = new TreeMap<>();
-            for (int i = 8; i <= 19; i++) {
+            for (int i = 7; i <= 19; i++) {
                 horas.put(i, 0);
             }
+            horas.put(7, 0);
             ArrayList<Entry> entries = new ArrayList<>();
             for (String hora : horarios.keySet()) {
                 String h = hora.substring(0, 2);
@@ -238,17 +239,34 @@ public class EstadisticasTurnosActivity extends AppCompatActivity implements Vie
                 contador.put(String.valueOf(servicio.getName()), servicio.getTurnos());
             }
             int i = 1;
+            int[] colores = new int[ColorTemplate.JOYFUL_COLORS.length + ColorTemplate.LIBERTY_COLORS.length];
+            for (int j = 0; j < colores.length; j++) {
+                if (j > ColorTemplate.JOYFUL_COLORS.length - 1) {
+                    colores[j] = ColorTemplate.LIBERTY_COLORS[j % 5];
+                } else {
+                    colores[j] = ColorTemplate.JOYFUL_COLORS[j];
+                }
+            }
             LinearLayout linearLayout = findViewById(R.id.latDatos);
             for (String key : contador.keySet()) {
                 entries.add(new BarEntry(i, contador.get(key)));
 
+                LinearLayout layout = new LinearLayout(this);
+                LinearLayout.LayoutParams params3 = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params3.setMargins(0, 0, 0, 0);
+                layout.setLayoutParams(params3);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
                 LinearLayout view = new LinearLayout(this);
                 LinearLayout.LayoutParams params2 = new
-                        LinearLayout.LayoutParams(10,
-                        10);
+                        LinearLayout.LayoutParams(50,
+                        50);
                 params2.setMargins(5, 0, 0, 0);
-                view.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAccent));
-                linearLayout.addView(view);
+                view.setLayoutParams(params2);
+                view.setBackgroundColor(colores[i - 1]);
+                layout.addView(view);
 
 
                 TextView textView = new TextView(this);
@@ -263,7 +281,8 @@ public class EstadisticasTurnosActivity extends AppCompatActivity implements Vie
                 Typeface typeface = ResourcesCompat.getFont(this, R.font.montserrat_regular);
                 textView.setTypeface(typeface);
 
-                linearLayout.addView(textView);
+                layout.addView(textView);
+                linearLayout.addView(layout);
                 i++;
             }
             linearLayout.invalidate();
@@ -414,7 +433,7 @@ public class EstadisticasTurnosActivity extends AppCompatActivity implements Vie
                     JSONObject o = jsonArray.getJSONObject(i);
 
                     String nombre = o.getString("facultad");
-                    if (nombre == null || nombre.equals("null") || nombre.equals("")){
+                    if (nombre == null || nombre.equals("null") || nombre.equals("")) {
                         nombre = "SIN DATOS";
                     }
 
