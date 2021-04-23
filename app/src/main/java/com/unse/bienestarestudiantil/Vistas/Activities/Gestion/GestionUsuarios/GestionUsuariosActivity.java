@@ -3,11 +3,14 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,6 +29,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Alumno;
+import com.unse.bienestarestudiantil.Modelos.Datos;
 import com.unse.bienestarestudiantil.Modelos.Egresado;
 import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Regularidad;
@@ -40,7 +44,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,11 +57,12 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
     ArrayList<Usuario> mList;
     UsuariosAdapter mAdapter;
     ImageView imgIcono;
+    TextView txtInfo;
     DialogoProcesamiento dialog;
     CardView mCardView;
     EditText mEditText;
     LinearLayout mLayoutError, mLayoutVacio;
-    FloatingActionButton fab;
+    FloatingActionButton fab, fabEstadistica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +121,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
             @Override
             public void onResponse(String response) {
 
-                procesarRespuesta(response);
+                procesarRespuesta(response, 1);
 
 
             }
@@ -158,7 +165,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void procesarRespuesta(String response) {
+    private void procesarRespuesta(String response, int tipo) {
         try {
             dialog.dismiss();
             JSONObject jsonObject = new JSONObject(response);
@@ -169,7 +176,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
                     break;
                 case 1:
                     //Exito
-                    loadInfo(jsonObject);
+                    loadInfo(jsonObject, tipo);
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.noData));
@@ -191,35 +198,58 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void loadInfo(JSONObject jsonObject) {
+    private void loadInfo(JSONObject jsonObject, int tipo) {
         try {
-            if (jsonObject.has("mensaje") && jsonObject.get("mensaje") instanceof JSONArray) {
+            if (tipo == 1) {
+                if (jsonObject.has("mensaje")) {
 
-                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
-                for (int i = 0; i < jsonArray.length(); i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
 
-                    JSONObject o = jsonArray.getJSONObject(i);
+                        JSONObject o = jsonArray.getJSONObject(i);
 
-                    Usuario usuario = Usuario.mapper(o, Usuario.BASIC);
+                        Usuario usuario = Usuario.mapper(o, Usuario.BASIC);
 
-                    mList.add(usuario);
+                        mList.add(usuario);
+
+                    }
+                    txtInfo.setText(String.format("Total = %s", mList.size()));
+                    mAdapter.setList(mList);
+                    updateView(1);
+                    mAdapter.notifyDataSetChanged();
+                }
+            } else if (tipo == 2) {
+                if (jsonObject.has("mensaje")) {
+
+
+                    ArrayList<Datos> datos = new ArrayList<>();
+                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject o = jsonArray.getJSONObject(i);
+
+                        int c = Integer.parseInt(o.getString("cantidad"));
+                        String d = o.getString("tipo");
+
+                        Datos dato = new Datos(d, tipo);
+                        datos.add(dato);
+                    }
 
                 }
-                mAdapter.setList(mList);
-                updateView(1);
-
-
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
             updateView(2);
         }
-        mAdapter.notifyDataSetChanged();
+
 
     }
 
     private void loadListener() {
+        fabEstadistica.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
         fab.setOnClickListener(this);
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
@@ -326,7 +356,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
             if (jsonObject.has("mensaje")) {
                 Usuario usuario = Usuario.mapper(jsonObject, Usuario.COMPLETE);
                 Usuario tipo = null;
-                switch (usuario.getTipoUsuario()){
+                switch (usuario.getTipoUsuario()) {
                     case Utils.TIPO_ALUMNO:
                         tipo = Alumno.mapper(jsonObject, usuario);
                         break;
@@ -344,11 +374,11 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
                 Intent intent = new Intent(getApplicationContext(), InfoUsuarioActivity.class);
                 intent.putExtra(Utils.USER_INFO, tipo);
                 intent.putExtra(Utils.IS_ADMIN_MODE, true);
-                if (jsonObject.has("reg")){
+                if (jsonObject.has("reg")) {
 
                     ArrayList<Regularidad> regularidads = new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("reg");
-                    for (int i = 0; i<jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         int idRegularidad, anio, validez;
                         String fecha;
@@ -373,6 +403,8 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
     }
 
     private void loadViews() {
+        fabEstadistica = findViewById(R.id.fabEstadistica);
+        txtInfo = findViewById(R.id.txtInfo);
         imgIcono = findViewById(R.id.imgFlecha);
         mRecyclerView = findViewById(R.id.recycler);
         mCardView = findViewById(R.id.cardSearch);
@@ -430,7 +462,40 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
             case R.id.btnError:
                 loadInfo();
                 break;
+            case R.id.fabEstadistica:
+                getData();
+                break;
         }
+    }
+
+    private void getData() {
+        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+        String key = manager.getValueString(Utils.TOKEN);
+        int id = manager.getValueInt(Utils.MY_ID);
+        String URL = String.format("%s?iu=%s&key=%s&idU=%s", Utils.URL_USUARIO_ESTADISTICA, id, key, id);
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                procesarRespuesta(response, 2);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
+                dialog.dismiss();
+
+            }
+        });
+        //Abro dialogo para congelar pantalla
+        dialog = new DialogoProcesamiento();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "dialog_process");
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+
     }
 
     private void createUser() {

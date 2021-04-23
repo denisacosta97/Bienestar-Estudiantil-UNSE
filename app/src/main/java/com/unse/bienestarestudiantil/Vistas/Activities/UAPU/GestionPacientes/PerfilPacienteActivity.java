@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -40,6 +43,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PerfilPacienteActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     Paciente mPaciente;
+    Spinner spinner;
+    ArrayAdapter<String> medic;
+    String med = "";
     EditText edtMotivoCons;
     TextView txtDni, txtNomAp, txtCarrera, txtFacultad, txtFechaTurno;
     ImageView imgIcono;
@@ -50,8 +56,9 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
     Button btnEditar;
     DialogoProcesamiento dialog;
     EditText[] campos;
-    boolean isEdit = false, isNew = false;
+    boolean isEdit = false;
     int mode = 0, idServicio = -1;
+    String[] estados = {"PENDIENTE", "AUSENTE", "CONFIRMADO"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +72,6 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
 
         if (getIntent().getIntExtra(Utils.SERVICIO, 0) != 0) {
             idServicio = getIntent().getIntExtra(Utils.SERVICIO, 0);
-        }
-
-        if (getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false)) {
-            isNew = getIntent().getBooleanExtra(Utils.IS_ADMIN_MODE, false);
         }
 
         if (getIntent().getSerializableExtra(Utils.DATA_TURNO) != null) {
@@ -111,14 +114,49 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         mRecyclerView.setAdapter(mAdapter);
 
 
+        medic = new ArrayAdapter<String>(getApplicationContext(), R.layout.style_spinner, estados);
+        medic.setDropDownViewResource(R.layout.style_spinner);
+        spinner.setAdapter(medic);
+
+        int pos = 0;
+        switch (mPaciente.getEstado()) {
+            case 1:
+                pos = 0;
+                break;
+            case 3:
+                pos = 1;
+                break;
+            case 4:
+                pos = 2;
+                break;
+        }
+        med = estados[pos];
+        spinner.setSelection(pos);
+
+
     }
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
         btnEditar.setOnClickListener(this);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!med.equals(estados[position])) {
+                    isEdit = true;
+                }
+                med = estados[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void loadViews() {
+        spinner = findViewById(R.id.spinner);
         txtDni = findViewById(R.id.txtDni);
         txtNomAp = findViewById(R.id.txtNomAp);
         txtCarrera = findViewById(R.id.txtCarrera);
@@ -164,6 +202,11 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
                 e.setBackground(getResources().getDrawable(R.drawable.edit_text_logreg));
                 e.addTextChangedListener(this);
             }
+        }
+        if (mode == 0) {
+            spinner.setEnabled(false);
+        } else {
+            spinner.setEnabled(true);
         }
 
     }
@@ -213,8 +256,8 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
         final int id = preferenceManager.getValueInt(Utils.MY_ID);
         final String token = preferenceManager.getValueString(Utils.TOKEN);
-        if (!isNew)
-            URL = Utils.URL_ACTUALIZAR_CONSULTA;
+
+        URL = Utils.URL_ACTUALIZAR_CONSULTA;
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -241,8 +284,14 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
                 map.put("it", String.valueOf(mPaciente.getId()));
                 map.put("iu", String.valueOf(mPaciente.getIdUsuario()));
                 map.put("is", String.valueOf(idServicio));
-                if (mPaciente.getEstado() == 1){
-                    map.put("es", "4");
+                if (!med.equals("")) {
+                    if (med.equals("PENDIENTE")) {
+                        map.put("es", "1");
+                    } else if (med.equals("AUSENTE")) {
+                        map.put("es", "3");
+                    } else if (med.equals("CONFIRMADO")) {
+                        map.put("es", "4");
+                    }
                 }
                 map.put("de", data);
                 return map;

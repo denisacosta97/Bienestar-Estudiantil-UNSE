@@ -71,6 +71,16 @@
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/txtInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total = 0"
+                android:textColor="@color/colorTextDefault"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="18sp"
+                android:gravity="center" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
@@ -86,6 +96,16 @@
         android:layout_width="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_mas"
+        android:layout_gravity="bottom|end"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabEstadistica"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/ic_chart"
         android:layout_gravity="bottom|end"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_height="wrap_content" />

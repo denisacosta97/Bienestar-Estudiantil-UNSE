@@ -210,6 +210,7 @@ public class Utils {
     public static final String URL_USUARIO_BY_ID = "https://" + IP + "/usuario/getUser.php";
     public static final String URL_USUARIO_ELIMINAR = "https://" + IP + "/usuario/eliminar.php";
     public static final String URL_USUARIO_BY_ID_REDUCE = "https://" + IP + "/usuario/getUserReduce.php";
+    public static final String URL_USUARIO_ESTADISTICA = "https://" + IP + "/usuario/getEstadistica.php";
 
     //ALUMNO
     public static final String URL_REGULARIDAD = "https://" + IP + "/usuario/insertarRegularidad.php";

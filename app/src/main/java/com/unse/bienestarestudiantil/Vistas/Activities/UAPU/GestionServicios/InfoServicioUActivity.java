@@ -29,10 +29,12 @@ import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class InfoServicioUActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     ServiciosU mServiciosU;
-    Doctor mDoctor;
+    ArrayList<Doctor> mDoctor;
     EditText edtName, edtNameDoc, edtDia, edtHorarios, edtDesc;
     ImageView imgIcono;
     Button btnEditar, btnDeshabilitar;
@@ -51,8 +53,8 @@ public class InfoServicioUActivity extends AppCompatActivity implements View.OnC
             mServiciosU = getIntent().getParcelableExtra(Utils.SERVUAPU);
         }
 
-        if (getIntent().getParcelableExtra(Utils.DOCTOR) != null) {
-            mDoctor = getIntent().getParcelableExtra(Utils.DOCTOR);
+        if (getIntent().getSerializableExtra(Utils.DOCTOR) != null) {
+            mDoctor = (ArrayList<Doctor>) getIntent().getSerializableExtra(Utils.DOCTOR);
         }
 
         if (mServiciosU != null) {
@@ -74,10 +76,18 @@ public class InfoServicioUActivity extends AppCompatActivity implements View.OnC
 
     private void loadData() {
         edtName.setText(mServiciosU.getTitulo());
-        if (mDoctor != null){
-            String nombre = String.format("%s %s", mDoctor.getNombre(), mDoctor.getApellido());
+        if (mDoctor != null) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Doctor doctor : mDoctor) {
+                if (doctor.getIdServicio() == mServiciosU.getIdServicio()) {
+                    stringBuilder.append(doctor.getNombre())
+                            .append(" ").append(doctor.getApellido())
+                            .append("\n");
+                }
+            }
+            String nombre = stringBuilder.toString().substring(0, stringBuilder.toString().length() - 1);
             edtNameDoc.setText(nombre);
-        }else{
+        } else {
             edtNameDoc.setText("NO ASIGNADO");
         }
         edtDia.setText(mServiciosU.getDias());
