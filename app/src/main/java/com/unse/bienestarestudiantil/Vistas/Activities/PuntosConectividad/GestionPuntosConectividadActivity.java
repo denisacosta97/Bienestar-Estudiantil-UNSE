@@ -48,7 +48,6 @@ public class GestionPuntosConectividadActivity extends AppCompatActivity impleme
         ((TextView) findViewById(R.id.txtTitulo)).setText("Puntos de Conectividad");
     }
 
-
     private void loadListener() {
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
