@@ -108,7 +108,7 @@ public class GestionRolesActivity extends AppCompatActivity implements View.OnCl
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s", Utils.URL_ROLES_LISTA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_ROLES_LISTA, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -192,30 +192,27 @@ public class GestionRolesActivity extends AppCompatActivity implements View.OnCl
 
     private void loadInfo(JSONObject jsonObject) {
         try {
-            if (jsonObject.has("list") && jsonObject.has("usuario")) {
+            if (jsonObject.has("mensaje") && jsonObject.has("datos")) {
 
-                JSONArray roles = jsonObject.getJSONArray("list");
+                JSONArray roles = jsonObject.getJSONArray("mensaje");
 
-                JSONArray usuarios = jsonObject.getJSONArray("usuario");
+                JSONArray usuarios = jsonObject.getJSONArray("datos");
 
                 for (int i = 0; i < roles.length(); i++) {
-                    JSONObject object = roles.getJSONObject(i);
-                    int idRol = Integer.parseInt(object.getString("idRol"));
-                    int idRolPadre = Integer.parseInt(object.getString("idRolPadre"));
-                    String descripcion = object.getString("descripcion");
 
-                    Rol rol = new Rol(idRol, idRolPadre, descripcion,0);
+                    JSONObject o = roles.getJSONObject(i);
+                    Rol rol = Rol.mapper(o, Rol.COMPLETE);
 
                     mRoles.add(rol);
                 }
 
                 for (int i = 0; i < usuarios.length(); i++) {
 
-                    JSONObject object = usuarios.getJSONObject(i);
+                    JSONObject o = usuarios.getJSONObject(i);
 
-                    Usuario usuario = Usuario.mapper(object, Usuario.BASIC);
+                    Usuario usuario = Usuario.mapper(o, Usuario.BASIC);
 
-                    int cantidad = Integer.parseInt(object.getString("cantidadRoles"));
+                    int cantidad = Integer.parseInt(o.getString("cantidad"));
 
                     usuario.setValidez(cantidad);
 
@@ -277,7 +274,7 @@ public class GestionRolesActivity extends AppCompatActivity implements View.OnCl
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s&idU=%s", Utils.URL_ROLES_USER_LISTA, id, key, idUsuario);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_ROLES_USER_LISTA, id, key, idUsuario);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -348,7 +345,7 @@ public class GestionRolesActivity extends AppCompatActivity implements View.OnCl
                 for (int i = 0; i < object.length(); i++) {
                     JSONObject o = object.getJSONObject(i);
 
-                    String rol = o.getString("idRol");
+                    String rol = o.getString("idrol");
 
                     roles.add(rol);
                 }

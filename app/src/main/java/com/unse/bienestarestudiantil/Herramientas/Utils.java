@@ -228,9 +228,9 @@ public class Utils {
     public static final String URL_SOCIO_SUSCRIPCION_CAMBIAR = "https://" + IP + "/socio/actualizarSuscripcion.php";
 
     //ROLES
-    public static final String URL_ROLES_LISTA = "https://" + IP + "/general/getRoles.php";
-    public static final String URL_ROLES_INSERTAR = "https://" + IP + "/general/insertarRol.php";
-    public static final String URL_ROLES_USER_LISTA = "https://" + IP + "/general/getRolesByUsuario.php";
+    public static final String URL_ROLES_LISTA = "https://" + IP + "/general/rol/getRoles.php";
+    public static final String URL_ROLES_INSERTAR = "https://" + IP + "/general/rol/insertar.php";
+    public static final String URL_ROLES_USER_LISTA = "https://" + IP + "/general/rol/getRolesByUsuario.php";
 
     //DEPORTES
     public static final String URL_DEPORTE_LISTA = "https://" + IP + "/deportes/getDeportes.php";
@@ -296,6 +296,12 @@ public class Utils {
     public static final String URL_ARCHIVOS_LISTA = "https://" + IP + "/general/getArchivos.php";
     public static final String URL_ARCHIVOS = "https://" + IP + "/archivos/";
     public static final String URL_UPLOAD_FILE = "https://" + IP + "/general/uploadFile.php";
+    public static final String URL_PTOC_HISTORICOS = "https://" + IP + "/general/conectividad/getAll.php";
+    //PUNTOS CONECTIVIDAD
+    public static final String URL_PC_ESCANEAR = "https://" + IP + "/general/conectividad/actualizar.php";
+    public static final String URL_TURNOS_DIA_PC = "https://" + IP + "/general/conectividad/getByDay.php";
+    public static final String URL_PC_ESTADISTICA  = "https://" + IP + "/general/conectividad/getEstadisticas.php";
+
 
     //TRANSPORTE
     public static final String URL_LINEAS = "https://" + IP + "/transporte/getAllLineas.php";
@@ -474,7 +480,7 @@ public class Utils {
         return Bitmap.createBitmap(bitmapToScale, 0, 0, bitmapToScale.getWidth(), bitmapToScale.getHeight(), matrix, true);
     }
 
-    public static void showCustomToast(Activity activity, Context context, String text, int icon) {
+   /* public static void showCustomToast(Activity activity, Context context, String text, int icon) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) activity.findViewById(R.id.toast_layout));
 
@@ -488,7 +494,7 @@ public class Utils {
         toast.setDuration(Toast.LENGTH_LONG + 4);
         toast.setView(layout);
         toast.show();
-    }
+    }*/
 
 
     //Metodo para saber si un permiso esta autorizado o no

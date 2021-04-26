@@ -184,7 +184,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
                 btnEditar.setText("Guardar");
                 activateEditMode();
                 break;
-            case R.id.imgIcon:
+            case R.id.imgFlecha:
                 onBackPressed();
                 break;
         }

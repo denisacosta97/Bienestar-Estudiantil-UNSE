@@ -18,8 +18,10 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.PuntoConectividad;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.PuntoConectividadAdapter;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -30,21 +32,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnClickListener {
-    //AGREGAR DATOS DE LOS PUNTOS DE CONECTIVIDAD
+
+
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    TurnosDiaUAdapter mAdapter;
-    ArrayList<TurnosUAPU> mTurnos;
+    PuntoConectividadAdapter mAdapter;
+    ArrayList<PuntoConectividad> mPuntos;
     DialogoProcesamiento dialog;
-    ImageView imgRefresh;
     ImageView imgIcono;
-    OnClickOptionListener mListener;
+    PuntoConectividad mPuntoConectividad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turnos_dia_p_c);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if (getIntent().getParcelableExtra(Utils.DATA_TURNO) != null) {
+            mPuntoConectividad = getIntent().getParcelableExtra(Utils.DATA_TURNO);
+        }
 
         loadViews();
 
@@ -53,33 +59,29 @@ public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnCli
         loadListener();
 
         loadData();
-
-        loadInfo();
     }
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Turnos del día");
-        imgRefresh.setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.txtTitulo)).setText(mPuntoConectividad == null ? "Turnos del día"
+                : String.format("%02d/%02d/%02d", mPuntoConectividad.getDia(), mPuntoConectividad.getMes(),
+                mPuntoConectividad.getAnio()));
     }
 
     private void loadListener() {
-        imgRefresh.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
     }
 
 
     private void loadData() {
-        mTurnos = new ArrayList<>();
+        mPuntos = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new TurnosDiaUAdapter(mTurnos, getApplicationContext(), mListener);
-        mRecyclerView.setAdapter(mAdapter);
+        loadInfo();
     }
 
     private void loadViews() {
         mRecyclerView = findViewById(R.id.recycler);
-        imgRefresh = findViewById(R.id.imgRefresh);
         imgIcono = findViewById(R.id.imgFlecha);
     }
 
@@ -87,7 +89,16 @@ public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnCli
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_UAPU, id, key, id, -1, -1, -1);
+        String URL = null;
+        if (mPuntoConectividad == null) {
+            URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_PC,
+                    id, key, id, -1, -1, -1);
+        } else {
+            URL = String.format("%s?idU=%s&key=%s&iu=%s&di=%s&me=%s&an=%s", Utils.URL_TURNOS_DIA_PC, id,
+                    key, id, mPuntoConectividad.getDia(), mPuntoConectividad.getMes(), mPuntoConectividad.getAnio()
+            );
+
+        }
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -150,15 +161,20 @@ public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnCli
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.COMPLETE);
-                    mTurnos.add(turno);
+                    PuntoConectividad puntos = PuntoConectividad.mapper(o, PuntoConectividad.COMPLETE);
+
+                    mPuntos.add(puntos);
+                }
+
+                if (mPuntos.size() > 0) {
+                    mAdapter = new PuntoConectividadAdapter(mPuntos, getApplicationContext());
+                    mRecyclerView.setAdapter(mAdapter);
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mAdapter.notifyDataSetChanged();
 
     }
 
@@ -167,10 +183,6 @@ public class TurnosDiaPCActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
-                break;
-            case R.id.imgRefresh:
-                mTurnos.clear();
-                loadInfo();
                 break;
         }
     }

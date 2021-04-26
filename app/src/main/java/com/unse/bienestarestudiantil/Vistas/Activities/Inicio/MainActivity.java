@@ -364,8 +364,7 @@ public class MainActivity extends AppCompatActivity {
         IntentResult intentIntegrator = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentIntegrator != null) {
             if (intentIntegrator.getContents() == null) {
-                Utils.showCustomToast(MainActivity.this, getApplicationContext(), "Cancelaste", R.drawable.ic_error);
-
+                Utils.showToast(getApplicationContext(), getString(R.string.cancelaste));
             } else {
                 String contenido = intentIntegrator.getContents();
                 if (qrCiber)
@@ -403,8 +402,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
             }
         });
@@ -476,8 +474,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -496,37 +493,30 @@ public class MainActivity extends AppCompatActivity {
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
                     //Exito
                     Toast.makeText(this, "Listo prro", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                            "", R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
                 case 4:
-                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                            getString(R.string.camposIncompletos), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showCustomToast(MainActivity.this, getApplicationContext(),
-                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
-
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

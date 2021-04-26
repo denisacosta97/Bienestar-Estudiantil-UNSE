@@ -164,8 +164,8 @@ public class RecorridoActivity extends AppCompatActivity implements OnMapReadyCa
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(RecorridoActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -195,7 +195,7 @@ public class RecorridoActivity extends AppCompatActivity implements OnMapReadyCa
             JSONObject recorridos = jsonObject.getJSONObject("recorridos");
             JSONObject par = jsonObject.getJSONObject("paradas");
             JSONArray puntos = null, puntitos = null;
-            switch (idRecorrido){
+            switch (idRecorrido) {
                 case 1:
                     JSONObject up = recorridos.getJSONObject("1");
                     puntos = up.getJSONArray("p");
@@ -278,8 +278,7 @@ public class RecorridoActivity extends AppCompatActivity implements OnMapReadyCa
             map.addPolyline(polylineOptions);
         } else {
 
-            Utils.showCustomToast(RecorridoActivity.this, getApplicationContext(),
-                    "Error we", R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.puntosError));
         }
 
         //Inicio
@@ -312,7 +311,7 @@ public class RecorridoActivity extends AppCompatActivity implements OnMapReadyCa
 
     private void convertToLatLong(ArrayList<Punto> puntos) {
         LatLng pnto = null;
-        for (int i = 0; i < puntos.size() ; i++) {
+        for (int i = 0; i < puntos.size(); i++) {
             pnto = new LatLng(puntos.get(i).getLatitud(), puntos.get(i).getLongitud());
             points.add(pnto);
         }
@@ -365,8 +364,7 @@ public class RecorridoActivity extends AppCompatActivity implements OnMapReadyCa
             }
         } else {
 
-            Utils.showCustomToast(RecorridoActivity.this, getApplicationContext(),
-                    "Error al cargar paradas", R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.paradasError));
 
         }
 

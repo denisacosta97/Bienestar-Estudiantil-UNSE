@@ -164,8 +164,8 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(PerfilRecorridoActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -278,8 +278,7 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
             map.addPolyline(polylineOptions);
         } else {
 
-            Utils.showCustomToast(PerfilRecorridoActivity.this, getApplicationContext(),
-                    "Error we", R.drawable.ic_error);
+            Utils.showToast( getApplicationContext(),getString(R.string.puntosError));
 
         }
 
@@ -366,8 +365,7 @@ public class PerfilRecorridoActivity extends AppCompatActivity implements OnMapR
             }
         } else {
 
-            Utils.showCustomToast(PerfilRecorridoActivity.this, getApplicationContext(),
-                   "Error al cargar paradas", R.drawable.ic_error);
+            Utils.showToast( getApplicationContext(),getString(R.string.paradasError));
 
         }
 

@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos;
+package com.unse.bienestarestudiantil.Vistas.Activities.PuntosConectividad;
 
 import android.app.DatePickerDialog;
 import android.content.pm.ActivityInfo;
@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -37,7 +41,10 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
+import com.unse.bienestarestudiantil.Modelos.PuntoConectividad;
+import com.unse.bienestarestudiantil.Modelos.ServiciosUPA;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionMedicamentos.EstadisticasMedicamentosActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -51,12 +58,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class EstadisticasMedicamentosActivity extends AppCompatActivity implements View.OnClickListener {
+public class EstadisticasPCActivity extends AppCompatActivity implements View.OnClickListener {
 
     PieChart mPieFacultad;
-    BarChart mBarMedicamento;
+    BarChart mBarMedicamento, mBarEstado;
     LineChart mLineHorario;
     ImageView imgIcono;
     Button btnBuscar;
@@ -67,7 +72,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medicamentos_estadistica);
+        setContentView(R.layout.activity_pc_estadistica);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setToolbar();
@@ -84,11 +89,12 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
         fechaInicio = new int[]{1, 1, 2020};
         txtCantidad.setText("0");
         loadBarMedicamento(null);
+        loadBarEstado(null);
         loadPieFacultad(null);
         loadLineHorario(null);
     }
 
-    private void loadLineHorario(ArrayList<Medicamento> horarios) {
+    private void loadLineHorario(ArrayList<PuntoConectividad> horarios) {
 
         if (horarios != null && horarios.size() > 0) {
             mLineHorario.getDescription().setEnabled(false);
@@ -97,14 +103,16 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
             mLineHorario.setDragDecelerationFrictionCoef(0.99f);
 
             Map<Integer, Integer> horas = new TreeMap<>();
-            for (int i = 8; i <= 19; i++) {
+            for (int i = 7; i <= 19; i++) {
                 horas.put(i, 0);
             }
             ArrayList<Entry> entries = new ArrayList<>();
-            for (Medicamento hora : horarios) {
+            for (PuntoConectividad hora : horarios) {
+                String h = hora.getHorario().substring(0, 2);
                 Calendar calendar = Calendar.getInstance();
-                Date date = Utils.getFechaDateWithHour(hora.getFechaHora());
+                Date date = new Date(System.currentTimeMillis());
                 calendar.setTime(date);
+                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
                 if (calendar.get(Calendar.HOUR_OF_DAY) <= 8) {
                     horas.put(8, horas.get(8) + 1);
                 } else if (calendar.get(Calendar.HOUR_OF_DAY) >= 19) {
@@ -130,7 +138,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
 
             LineDataSet lineDataSet = new LineDataSet(entries, "Registros por Horario");
             lineDataSet.setColor(ColorTemplate.JOYFUL_COLORS[0]);
-            //lineDataSet.setDrawCircles(false);
             lineDataSet.setCircleRadius(5);
             lineDataSet.setCircleColor(Color.BLACK);
             lineDataSet.setValueTextSize(0);
@@ -171,7 +178,6 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
             dataSetDatos.setSliceSpace(3f);
             dataSetDatos.setSelectionShift(5f);
             dataSetDatos.setColors(ColorTemplate.JOYFUL_COLORS);
-            //dataSetDatos.setColors(new int[]{R.color.colorRed, R.color.colorFCEyT}, getContext());
             PieData pieDataDatos = new PieData(dataSetDatos);
             pieDataDatos.setValueTextSize(16f);
             pieDataDatos.setValueTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -182,9 +188,127 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
         }
     }
 
-    private void loadBarMedicamento(ArrayList<Medicamento> medicamentos) {
+    private void loadBarEstado(ArrayList<PuntoConectividad> puntoConectividads) {
 
-        if (medicamentos != null && medicamentos.size() > 0) {
+        if (puntoConectividads != null && puntoConectividads.size() > 0) {
+
+            mBarEstado.invalidate();
+            mBarEstado.clear();
+            mBarEstado.getDescription().setEnabled(false);
+            mBarEstado.getLegend().setEnabled(false);
+
+            XAxis xAxis2 = mBarEstado.getXAxis();
+            xAxis2.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis2.setTextSize(12f);
+            //Habilita los labels
+            xAxis2.setDrawAxisLine(true);
+            xAxis2.setDrawGridLines(false);
+
+            YAxis leftAxis, rightAxis;
+            leftAxis = mBarEstado.getAxisLeft();
+            rightAxis = mBarEstado.getAxisRight();
+
+            leftAxis.setTextSize(12f);
+            leftAxis.setAxisMinimum(0);
+            //leftAxis.setDrawAxisLine(true);
+            //leftAxis.setDrawGridLines(false);
+            //leftAxis.setDrawLabels(false);
+
+
+            rightAxis.setAxisMinimum(0);
+
+            rightAxis.setDrawAxisLine(false);
+            rightAxis.setDrawGridLines(false);
+            rightAxis.setDrawLabels(false);
+
+
+            final ArrayList<BarEntry> entries = new ArrayList<>();
+            final ArrayList<String> entryLabels = new ArrayList<>();
+
+            HashMap<String, Integer> contador = new HashMap<>();
+            for (PuntoConectividad puntoConectividad : puntoConectividads) {
+                contador.put(String.valueOf(puntoConectividad.getDescripcion()), puntoConectividad.getCantidad());
+            }
+            int i = 1;
+            int[] colores = new int[ColorTemplate.JOYFUL_COLORS.length + ColorTemplate.LIBERTY_COLORS.length];
+            for (int j = 0; j < colores.length; j++) {
+                if (j > ColorTemplate.JOYFUL_COLORS.length - 1) {
+                    colores[j] = ColorTemplate.LIBERTY_COLORS[j % 5];
+                } else {
+                    colores[j] = ColorTemplate.JOYFUL_COLORS[j];
+                }
+            }
+            LinearLayout linearLayout = findViewById(R.id.latDatos2);
+            for (String key : contador.keySet()) {
+                entries.add(new BarEntry(i, contador.get(key)));
+
+                LinearLayout layout = new LinearLayout(this);
+                LinearLayout.LayoutParams params3 = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params3.setMargins(0, 0, 0, 0);
+                layout.setLayoutParams(params3);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                LinearLayout view = new LinearLayout(this);
+                LinearLayout.LayoutParams params2 = new
+                        LinearLayout.LayoutParams(50,
+                        50);
+                params2.setMargins(5, 0, 0, 0);
+                view.setLayoutParams(params2);
+                view.setBackgroundColor(colores[i - 1]);
+                layout.addView(view);
+
+
+                TextView textView = new TextView(this);
+                LinearLayout.LayoutParams params = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(5, 0, 0, 0);
+                textView.setLayoutParams(params);
+                textView.setText(key);
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextSize(12);
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.montserrat_regular);
+                textView.setTypeface(typeface);
+
+                layout.addView(textView);
+                linearLayout.addView(layout);
+                i++;
+            }
+            linearLayout.invalidate();
+
+            BarDataSet barDataSet = new BarDataSet(entries, "");
+            barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+            barDataSet.setValueTextSize(13);
+            barDataSet.setValueTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            barDataSet.setValueTextColor(Color.rgb(155, 155, 155));
+            BarData barData = new BarData(barDataSet);
+            barData.setBarWidth(0.9f); // set custom bar width
+
+            mBarEstado.setData(barData);
+            mBarEstado.setFitBars(true);
+            mBarEstado.invalidate();
+            mBarEstado.setScaleEnabled(true);
+            mBarEstado.setDoubleTapToZoomEnabled(false);
+            mBarEstado.setBackgroundColor(Color.rgb(255, 255, 255));
+
+            xAxis2.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return "";
+
+                }
+            });
+        } else {
+            mBarEstado.clear();
+        }
+
+    }
+
+    private void loadBarMedicamento(ArrayList<PuntoConectividad> puntoConectividads) {
+
+        if (puntoConectividads != null && puntoConectividads.size() > 0) {
 
             mBarMedicamento.invalidate();
             mBarMedicamento.clear();
@@ -219,20 +343,58 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
             final ArrayList<BarEntry> entries = new ArrayList<>();
             final ArrayList<String> entryLabels = new ArrayList<>();
 
-            int medCli = 0, medSexual = 0;
-            for (Medicamento medicamento : medicamentos) {
-                if (medicamento.getTipoMedicamento().equals("0")) {
-                    medCli++;
-                } else if (medicamento.getTipoMedicamento().equals("1")) {
-                    medSexual++;
+            HashMap<String, Integer> contador = new HashMap<>();
+            for (PuntoConectividad puntoConectividad : puntoConectividads) {
+                contador.put(String.valueOf(puntoConectividad.getNombreLugar()), puntoConectividad.getCantidad());
+            }
+            int i = 1;
+            int[] colores = new int[ColorTemplate.JOYFUL_COLORS.length + ColorTemplate.LIBERTY_COLORS.length];
+            for (int j = 0; j < colores.length; j++) {
+                if (j > ColorTemplate.JOYFUL_COLORS.length - 1) {
+                    colores[j] = ColorTemplate.LIBERTY_COLORS[j % 5];
+                } else {
+                    colores[j] = ColorTemplate.JOYFUL_COLORS[j];
                 }
             }
+            LinearLayout linearLayout = findViewById(R.id.latDatos);
+            for (String key : contador.keySet()) {
+                entries.add(new BarEntry(i, contador.get(key)));
 
-            entries.add(new BarEntry(1, medCli));
-            entries.add(new BarEntry(2, medSexual));
+                LinearLayout layout = new LinearLayout(this);
+                LinearLayout.LayoutParams params3 = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params3.setMargins(0, 0, 0, 0);
+                layout.setLayoutParams(params3);
+                layout.setOrientation(LinearLayout.VERTICAL);
 
-            entryLabels.add("Clínica Médica");
-            entryLabels.add("Salud Sexual y Reprod.");
+                LinearLayout view = new LinearLayout(this);
+                LinearLayout.LayoutParams params2 = new
+                        LinearLayout.LayoutParams(50,
+                        50);
+                params2.setMargins(5, 0, 0, 0);
+                view.setLayoutParams(params2);
+                view.setBackgroundColor(colores[i - 1]);
+                layout.addView(view);
+
+
+                TextView textView = new TextView(this);
+                LinearLayout.LayoutParams params = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(5, 0, 0, 0);
+                textView.setLayoutParams(params);
+                textView.setText(key);
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextSize(12);
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.montserrat_regular);
+                textView.setTypeface(typeface);
+
+                layout.addView(textView);
+                linearLayout.addView(layout);
+                i++;
+            }
+            linearLayout.invalidate();
 
             BarDataSet barDataSet = new BarDataSet(entries, "");
             barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -270,6 +432,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
     }
 
     private void loadViews() {
+        mBarEstado = findViewById(R.id.bar_estado);
         btnBuscar = findViewById(R.id.btnBuscar);
         txtCantidad = findViewById(R.id.txtCantidad);
         txtFechaFin = findViewById(R.id.txtFechaFin);
@@ -307,7 +470,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s&fi=%s&ff=%s", Utils.URL_MEDICAM_ESTADISTICA, id, key, id, f1, f2);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s&fi=%s&ff=%s", Utils.URL_PC_ESTADISTICA, id, key, id, f1, f2);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -345,6 +508,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     loadBarMedicamento(null);
+                    loadBarEstado(null);
                     loadPieFacultad(null);
                     loadLineHorario(null);
                     txtCantidad.setText("0");
@@ -376,20 +540,41 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
                     JSONObject o = jsonArray.getJSONObject(i);
                     facultades.put(o.getString("facultad"), Integer.parseInt(o.getString("cantidad")));
                 }
-                ArrayList<Medicamento> medicamentos = new ArrayList<>();
-                jsonArray = jsonObject.getJSONArray("datos");
 
+                ArrayList<PuntoConectividad> puntoConectividads = new ArrayList<>();
+                jsonArray = jsonObject.getJSONArray("datos2");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject o = jsonArray.getJSONObject(i);
-                    Medicamento medicamento = Medicamento.mapper(o, Medicamento.LOW2);
-                    medicamentos.add(medicamento);
+                    PuntoConectividad puntoConectividad = PuntoConectividad.mapper(o, PuntoConectividad.LOW_2);
+                    puntoConectividads.add(puntoConectividad);
                 }
 
-                loadBarMedicamento(medicamentos);
-                loadLineHorario(medicamentos);
+                ArrayList<PuntoConectividad> lugares = new ArrayList<>();
+                jsonArray = jsonObject.getJSONArray("datos");
+
+                int total = 0;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject o = jsonArray.getJSONObject(i);
+                    PuntoConectividad puntos = PuntoConectividad.mapper(o, PuntoConectividad.MEDIUM);
+                    total = total + puntos.getCantidad();
+                    lugares.add(puntos);
+                }
+
+                ArrayList<PuntoConectividad> estados = new ArrayList<>();
+                jsonArray = jsonObject.getJSONArray("datos3");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject o = jsonArray.getJSONObject(i);
+                    PuntoConectividad puntoConectividad = PuntoConectividad.mapper(o, PuntoConectividad.LOW_3);
+                    estados.add(puntoConectividad);
+                }
+
+                loadBarEstado(estados);
+                loadBarMedicamento(lugares);
+                loadLineHorario(puntoConectividads);
                 loadPieFacultad(facultades);
 
-                txtCantidad.setText(String.valueOf(medicamentos.size()));
+
+                txtCantidad.setText(String.valueOf(total));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -442,8 +627,9 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
 
         };
 
-        new DatePickerDialog(EstadisticasMedicamentosActivity.this, date, calendar
+        new DatePickerDialog(this, date, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 }
+

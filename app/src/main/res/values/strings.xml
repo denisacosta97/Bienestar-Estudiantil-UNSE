@@ -176,6 +176,27 @@
     <string name="alert3">Te enviaremos un mensaje a la casilla de correo indicada con tu nueva contraseña.</string>
     <string name="contraseniaReco">Si pasaron más de 3 minutos e intentaste varias veces, por favor comunicate con la Secretaría de Bienestar Estudiantil</string>
 
+    <string name="error">¡Error!</string>
+    <string name="reservaNoExiste">¡Reserva no existente!</string>
+   <string name="confirmadoReserva">La reserva fue confirmada exitosamente</string>
+   <string name="confirmadoReservaError">Hubo un error al intentar confirmar la reserva</string>
+    <string name="yaRetiro">¡Reserva retirada!</string>
+    <string name="reservaRetirada">La reserva ya fue retirada</string>
+    <string name="reservaNoExisteDesc">La reserva no existe en el sistema</string>
+    <string name="noMenuActual">¡Menú anterior!</string>
+    <string name="reservaAnteriorCancelada">La reserva fue cancelada debido a que pertenece a un menú anterior</string>
+    <string name="reservaAnteriorNoRetirada">La reserva fue anulada debido a que pertenece a un menú anterior</string>
+    <string name="reservaAnteriorRetirada">La reserva ya fue retirada y pertenece a un menú anterior</string>
+    <string name="reservaAnteriorYaNoRetirada">La reserva ya fue anulada debido a que pertenece a un menú anterior</string>
+    <string name="cambioUsuario">¡Intercambio de usuario!</string>
+    <string name="reservaNoDNI">La reserva fue modificada y cambiada de usuario. No válido</string>
+    <string name="reservaYaComprobada">¡Ya escaneada!</string>
+    <string name="reservaHoyCancelada">La reserva es actual, pero fue cancelada por el estudiante</string>
+    <string name="reservaHoyNoRetirada">La reserva es actual, pero es inválida</string>
+    <string name="reservaNoCancelada">¡Error al cancelar!</string>
+    <string name="reservaAnterior">Reserva anterior ¡fue cancelada!</string>
+
+
     <!--  Calendario  -->
 
     <string name="torneoEliminado">Torneo eliminado</string>
@@ -242,6 +263,11 @@
     <string name="becaTurnoSeleccionaHorario">Primero seleccione un horario</string>
     <string name="becaTurnoYaReservado">¡Turno ya reservado!</string>
    <string name="becaTurnoError">¡Error al reservar el turno!</string>
+    <string name="cancelaste">¡Cancelaste!</string>
+    <string name="puntosError">Error al cargar los puntos</string>
+    <string name="paradasError">Error al cargar las paradas</string>
+    <string name="qrNoData">¡QR no válido!</string>
+   <string name="confirmado">¡Confirmado!</string>
 
 </resources>
 

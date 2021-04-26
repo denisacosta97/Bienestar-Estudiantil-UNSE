@@ -2,10 +2,13 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -42,6 +45,7 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
     CircleImageView mImageView;
     TextView txtNombre, txtDni;
     Button btnAceptar;
+    ImageView imgIcono;
 
     Usuario mUsuario;
     ArrayList<String> roles;
@@ -63,14 +67,25 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
 
         isAdmin();
 
+
+
         loadViews();
 
         loadData();
 
         loadListener();
+
+        setToolbar();
+    }
+
+    private void setToolbar() {
+        ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Roles");
+        Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
     private void loadListener() {
+        imgIcono.setOnClickListener(this);
         btnAceptar.setOnClickListener(this);
     }
 
@@ -114,7 +129,7 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
                     node.setRol(rol);
                     root.addChild(node);
                 } else {
-                    boolean isFound = foundFather(root, rol);
+                    foundFather(root, rol);
                 }
             }
 
@@ -150,6 +165,7 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void loadViews() {
+        imgIcono = findViewById(R.id.imgFlecha);
         latDatos = findViewById(R.id.latDatos);
         mImageView = findViewById(R.id.imgIcon);
         txtNombre = findViewById(R.id.txtNombre);
@@ -181,15 +197,18 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
             case R.id.btnAceptar:
                 sendPermissons();
                 break;
+            case R.id.imgFlecha:
+                onBackPressed();
+                break;
         }
     }
 
     private void sendPermissons() {
         roles.clear();
         //if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[0])))
-          //  roles.add(String.valueOf(Utils.LIST_PERMISOS[0]));
+        //  roles.add(String.valueOf(Utils.LIST_PERMISOS[0]));
         //if (mapRoles.containsKey(String.valueOf(Utils.LIST_PERMISOS[1])))
-          //  roles.add(String.valueOf(Utils.LIST_PERMISOS[1]));
+        //  roles.add(String.valueOf(Utils.LIST_PERMISOS[1]));
         visit(mAndroidTreeView.getRoot());
         String rolesURL = "";
         for (String s : roles) {
@@ -198,9 +217,8 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String fecha = Utils.getFechaName(new Date(System.currentTimeMillis()));
-        String URL = String.format("%s?id=%s&key=%s&idU=%s%s&fecha=%s", Utils.URL_ROLES_INSERTAR,
-                id, key, mUsuario.getIdUsuario(), rolesURL, fecha);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s%s", Utils.URL_ROLES_INSERTAR,
+                id, key, mUsuario.getIdUsuario(), rolesURL);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -269,7 +287,7 @@ public class EditarRolesActivity extends AppCompatActivity implements View.OnCli
                 visit(node);
             }
 
-        }else{
+        } else {
             for (TreeNode node : root.getChildren()) {
                 visit(node);
             }

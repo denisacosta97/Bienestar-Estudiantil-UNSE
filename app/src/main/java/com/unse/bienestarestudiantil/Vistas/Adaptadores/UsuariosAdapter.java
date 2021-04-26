@@ -90,7 +90,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.Alumno
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));
                 holder.txtDni.setText(String.format("%s", alumno.getIdUsuario()));
                 holder.txtRol.setVisibility(View.VISIBLE);
-                holder.txtRol.setText(String.format("Cant. Roles %s", alumno.getValidez()));
+                holder.txtRol.setText(String.format("Cant. Roles: %s", alumno.getValidez()));
 
             } else {
                 holder.txtNombre.setText(String.format("%s %s", alumno.getNombre(), alumno.getApellido()));

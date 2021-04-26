@@ -23,8 +23,12 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.ItemBase;
 import com.unse.bienestarestudiantil.Modelos.ItemDato;
 import com.unse.bienestarestudiantil.Modelos.ItemFecha;
+import com.unse.bienestarestudiantil.Modelos.Medicamento;
+import com.unse.bienestarestudiantil.Modelos.Punto;
+import com.unse.bienestarestudiantil.Modelos.PuntoConectividad;
 import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.FechasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -39,22 +43,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TurnosHistoricosPCActivity extends AppCompatActivity implements View.OnClickListener {
-    //AGREGAR LOS DATOS DE UN PC
+
     DialogoProcesamiento dialog;
-    ArrayList<TurnosUAPU> mTurnos;
+    ArrayList<PuntoConectividad> mPuntos;
     ArrayList<ItemBase> mItems;
     ArrayList<ItemBase> mListOficial;
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    //HistorialTurnosUAPUAdapter adapter;
-    String[] meses = new String[]{"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    FechasAdapter adapter;
 
     ImageView imgIcono;
     ProgressBar mProgressBar;
-    String mes = "";
-    int numberMes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +82,9 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
     private void loadData() {
         loadInfo();
 
-        /*adapter = new HistorialTurnosUAPUAdapter(this, mListOficial);
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapter);*/
+        mRecyclerView.setAdapter(adapter);
     }
 
     private void loadInfo() {
@@ -92,7 +92,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_TURNOS_HIST_UAPU, id, key, id);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_PTOC_HISTORICOS, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -103,8 +103,8 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -124,77 +124,65 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
                     //Exito
-
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                            "Error 2", R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showCustomToast(TurnosHistoricosPCActivity.this, getApplicationContext(),
-                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 
     private void loadInfo(JSONObject jsonObject) {
         try {
             if (jsonObject.has("mensaje")) {
-                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-                mTurnos = new ArrayList<>();
 
+                JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
+                mPuntos = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject o = jsonArray.getJSONObject(i);
-                    TurnosUAPU turno = TurnosUAPU.mapper(o, TurnosUAPU.LOW);
-                    mTurnos.add(turno);
+                    PuntoConectividad puntoConectividad = PuntoConectividad.mapper(o, PuntoConectividad.LOW);
+                    mPuntos.add(puntoConectividad);
                 }
-                //Utils.showToast(getApplicationContext(), "HAY " + mTurnos.size());
-            }
 
-            mItems = new ArrayList<>();
-            for (TurnosUAPU m : mTurnos) {
-                ItemDato itemDato = new ItemDato();
-                itemDato.setTurnosUAPU(m);
-                itemDato.setTipo(ItemDato.TIPO_TURNO_UAPU);
-                mItems.add(itemDato);
-            }
-            mListOficial = new ArrayList<>();
-            HashMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
-            List<String> meses = new ArrayList<>();
-            meses.addAll(datos.keySet());
-            Collections.sort(meses, new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return new BigDecimal(o1).compareTo(new BigDecimal(o2));
+                mItems = new ArrayList<>();
+                for (PuntoConectividad m : mPuntos) {
+                    ItemDato itemDato = new ItemDato();
+                    itemDato.setPuntoConectividad(m);
+                    itemDato.setTipo(ItemDato.TIPO_PUNTO_C);
+                    mItems.add(itemDato);
                 }
-            });
-            for (String date : meses) {
-                ItemFecha dateItem = new ItemFecha(Utils.getMonth(Integer.parseInt(date)));
-                mListOficial.add(dateItem);
-                for (ItemBase item : datos.get(date)) {
-                    ItemDato generalItem = (ItemDato) item;
-                    mListOficial.add(generalItem);
+
+                mListOficial = new ArrayList<>();
+                HashMap<String, List<ItemBase>> datos = filtrarPorMes(mItems);
+                List<String> meses = new ArrayList<>();
+                meses.addAll(datos.keySet());
+                for (String date : meses) {
+                    ItemFecha dateItem = new ItemFecha(Utils.getMonth(Integer.parseInt(date)));
+                    mListOficial.add(dateItem);
+                    for (ItemBase item : datos.get(date)) {
+                        ItemDato generalItem = (ItemDato) item;
+                        mListOficial.add(generalItem);
+                    }
                 }
+                adapter = new FechasAdapter(getApplicationContext(), mListOficial, FechasAdapter.TIPO_PUNTO_C);
+                mRecyclerView.setAdapter(adapter);
             }
-            //adapter.change(mListOficial);
-            //Utils.showToast(getApplicationContext(), String.valueOf(mListOficial.size()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -204,17 +192,17 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
     private void loadListener() {
         imgIcono.setOnClickListener(this);
 
-       /* ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 if (mListOficial.get(position) instanceof ItemDato) {
-                    Intent i = new Intent(getApplicationContext(), ListadoMesTurnoActivity.class);
-                    i.putExtra(Utils.DATA_TURNO, ((ItemDato) mListOficial.get(position)).getTurnosUAPU());
+                    Intent i = new Intent(getApplicationContext(), TurnosDiaPCActivity.class);
+                    i.putExtra(Utils.DATA_TURNO, ((ItemDato) mListOficial.get(position)).getPuntoConectividad());
                     startActivity(i);
                 }
             }
-        });*/
+        });
     }
 
     private void loadViews() {
@@ -231,9 +219,9 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
 
             ItemDato itemDatoKey = (ItemDato) dato;
 
-            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_TURNO_UAPU) {
+            if (itemDatoKey.getTipoDato() == ItemDato.TIPO_PUNTO_C) {
 
-                String mes = String.valueOf(itemDatoKey.getTurnosUAPU().getMes());
+                String mes = String.valueOf(itemDatoKey.getPuntoConectividad().getMes());
 
                 if (!groupedHashMap.containsKey(mes)) {
 
@@ -241,7 +229,7 @@ public class TurnosHistoricosPCActivity extends AppCompatActivity implements Vie
 
                         ItemDato itemDato = (ItemDato) item;
 
-                        if (itemDato.getTurnosUAPU().getMes() == itemDatoKey.getTurnosUAPU().getMes()) {
+                        if (itemDato.getPuntoConectividad().getMes() == itemDatoKey.getPuntoConectividad().getMes()) {
                             if (groupedHashMap.containsKey(mes)) {
                                 groupedHashMap.get(mes).add(itemDato);
                             } else {

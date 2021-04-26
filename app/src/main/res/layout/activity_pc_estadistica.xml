@@ -120,6 +120,49 @@
                 android:textStyle="bold"
                 android:layout_height="wrap_content" />
 
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/blackTextColor"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Por Estado" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_estado"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="300dp">
+
+                    </com.github.mikephil.charting.charts.BarChart>
+
+                    <LinearLayout
+                        android:id="@+id/latDatos2"
+                        android:gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_marginTop="5dp"
@@ -179,7 +222,7 @@
                         android:textSize="18sp"
                         android:textColor="@color/blackTextColor"
                         android:fontFamily="@font/montserrat_black"
-                        android:text="Por Tipo Medicamento" />
+                        android:text="Por Lugar" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/bar"
@@ -190,41 +233,12 @@
                     </com.github.mikephil.charting.charts.BarChart>
 
                     <LinearLayout
+                        android:id="@+id/latDatos"
                         android:gravity="center"
                         android:layout_margin="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorPink" />
-
-                        <TextView
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/montserrat_regular"
-                            android:text="Clínica Médica" />
-
-
-                        <View
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:background="@color/colorOrangeLigth" />
-
-                        <TextView
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/montserrat_regular"
-                            android:text="Salud Sexual y Reprod." />
+                        android:orientation="vertical">
 
                     </LinearLayout>
 

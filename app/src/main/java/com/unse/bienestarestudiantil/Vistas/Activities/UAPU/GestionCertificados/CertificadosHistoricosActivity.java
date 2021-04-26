@@ -1,15 +1,14 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporte;
+package com.unse.bienestarestudiantil.Vistas.Activities.UAPU.GestionCertificados;
 
-import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Menu;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -17,12 +16,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
-import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
-import com.unse.bienestarestudiantil.Modelos.Recorrido;
+import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
+import com.unse.bienestarestudiantil.Modelos.Certificado;
+import com.unse.bienestarestudiantil.Modelos.TurnosUAPU;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Adaptadores.RecorridoAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.CertificadosAdapter;
+import com.unse.bienestarestudiantil.Vistas.Adaptadores.TurnosDiaUAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -31,71 +32,59 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class GestionRecorridosActivity extends AppCompatActivity implements View.OnClickListener {
+public class CertificadosHistoricosActivity extends AppCompatActivity implements View.OnClickListener {
 
+    RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView mRecyclerT;
-    ArrayList<Recorrido> mRecorridos;
-    RecorridoAdapter mRecorridoAdapter;
-    ImageView imgIcono;
+    CertificadosAdapter mAdapter;
+    ArrayList<Certificado> mCertificados;
     DialogoProcesamiento dialog;
+    ImageView imgIcono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_recorridos);
-
-        setToolbar();
+        setContentView(R.layout.activity_certificados_emitidos);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         loadViews();
 
-        loadDataRecycler();
+        setToolbar();
 
         loadListener();
 
+        loadData();
+
+        loadInfo();
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Gestión de recorridos");
-
-    }
-
-    private void loadViews() {
-        mRecyclerT = findViewById(R.id.recycler);
-        imgIcono = findViewById(R.id.imgFlecha);
-
+        ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Listado de Certificados");
     }
 
     private void loadListener() {
         imgIcono.setOnClickListener(this);
+    }
 
-        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerT);
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), PerfilRecorridoActivity.class);
-                i.putExtra(Utils.RECORRIDO, mRecorridos.get(position));
-                startActivity(i);
-            }
-        });
+
+    private void loadData() {
+        mCertificados = new ArrayList<>();
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
 
-    private void loadDataRecycler() {
-        //mRecorridos = new ArrayList<>();
-
-        loadInfo();
-        mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
-        mRecyclerT.setNestedScrollingEnabled(true);
-        mRecyclerT.setLayoutManager(mLayoutManager);
-
+    private void loadViews() {
+        mRecyclerView = findViewById(R.id.recycler);
+        imgIcono = findViewById(R.id.imgFlecha);
     }
 
     private void loadInfo() {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?idU=%s&key=%s", Utils.URL_GET_RECORRIDOS, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&id=%s", Utils.URL_CERTIFICADOS, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -105,9 +94,7 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                //mProgressBar.setVisibility(View.GONE);
-                Utils.showToast(getApplicationContext(),
-                        getString(R.string.servidorOff));
+                Utils.showToast(getApplicationContext(), getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -141,6 +128,9 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
                 case 4:
                     Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.noAutorizacion));
+                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
@@ -157,21 +147,20 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
         try {
             if (jsonObject.has("mensaje")) {
 
-                mRecorridos = new ArrayList<>();
-
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject o = jsonArray.getJSONObject(i);
 
-                    Recorrido recorrido = Recorrido.mapper(o);
-
-                    mRecorridos.add(recorrido);
-
+                    Certificado cert = Certificado.mapper(o, Certificado.COMPLETE);
+                    mCertificados.add(cert);
                 }
-                mRecorridoAdapter = new RecorridoAdapter(mRecorridos, getApplicationContext());
-                mRecyclerT.setAdapter(mRecorridoAdapter);
+
+                if (mCertificados.size() > 0){
+                    mAdapter = new CertificadosAdapter(mCertificados, getApplicationContext());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
 
             }
         } catch (JSONException e) {
@@ -182,11 +171,10 @@ public class GestionRecorridosActivity extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
         }
     }
-
 }

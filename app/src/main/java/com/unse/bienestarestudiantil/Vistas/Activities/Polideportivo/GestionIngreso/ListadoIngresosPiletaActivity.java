@@ -126,8 +126,8 @@ public class ListadoIngresosPiletaActivity extends AppCompatActivity implements 
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -146,36 +146,30 @@ public class ListadoIngresosPiletaActivity extends AppCompatActivity implements 
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(),getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
                     //Exito
                     loadInfo(jsonObject);
                     break;
                 case 2:
-//                    Utils.showCustomToast(GestionRecorridosActivity.this, getApplicationContext(),
-//                            getString(R.string.noReservas), R.drawable.ic_error);
-                    break;
-                case 4:
-                    Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                            getString(R.string.camposInvalidos), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(),getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showCustomToast(ListadoIngresosPiletaActivity.this, getApplicationContext(),
-                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

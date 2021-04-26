@@ -166,8 +166,8 @@ public class InfoReservaInstActivity extends AppCompatActivity implements View.O
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 //mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -186,36 +186,30 @@ public class InfoReservaInstActivity extends AppCompatActivity implements View.O
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
                     //Exito
                     loadInfo(jsonObject);
                     break;
                 case 2:
-//                    Utils.showCustomToast(GestionRecorridosActivity.this, getApplicationContext(),
-//                            getString(R.string.noReservas), R.drawable.ic_error);
-                    break;
-                case 4:
-                    Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                            getString(R.string.camposInvalidos), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showCustomToast(InfoReservaInstActivity.this, getApplicationContext(),
-                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

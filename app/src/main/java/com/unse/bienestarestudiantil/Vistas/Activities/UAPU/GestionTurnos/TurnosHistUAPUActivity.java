@@ -102,8 +102,8 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 mProgressBar.setVisibility(View.GONE);
-                Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                        getString(R.string.servidorOff), R.drawable.ic_error);
+                Utils.showToast(getApplicationContext(),
+                        getString(R.string.servidorOff));
                 dialog.dismiss();
 
             }
@@ -123,8 +123,7 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
             int estado = jsonObject.getInt("estado");
             switch (estado) {
                 case -1:
-                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                            getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
                     break;
                 case 1:
                     //Exito
@@ -132,24 +131,23 @@ public class TurnosHistUAPUActivity extends AppCompatActivity implements View.On
                     loadInfo(jsonObject);
                     break;
                 case 2:
-                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                            "Error 2", R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.noData));
                     break;
                 case 3:
-                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInvalido), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
+                    break;
+                case 4:
+                    Utils.showToast(getApplicationContext(), getString(R.string.camposInvalidos));
                     break;
                 case 100:
                     //No autorizado
-                    Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                            getString(R.string.tokenInexistente), R.drawable.ic_error);
+                    Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));
                     break;
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Utils.showCustomToast(TurnosHistUAPUActivity.this, getApplicationContext(),
-                    getString(R.string.errorInternoAdmin), R.drawable.ic_error);
+            Utils.showToast(getApplicationContext(), getString(R.string.errorInternoAdmin));
         }
     }
 

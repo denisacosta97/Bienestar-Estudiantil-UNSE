@@ -17,6 +17,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_MEDICAM_UAPU = 8;
     public static final int TIPO_ATENCION = 9;
     public static final int TIPO_PACIENTE = 10;
+    public static final int TIPO_PUNTO_C = 11;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -27,6 +28,7 @@ public class ItemDato extends ItemBase {
     private TurnosUAPU mTurnosUAPU;
     private Medicamento mMedicamento;
     private Paciente mPaciente;
+    private PuntoConectividad mPuntoConectividad;
     private int tipo;
 
     public ItemDato() {
@@ -80,6 +82,11 @@ public class ItemDato extends ItemBase {
                 calendar = Calendar.getInstance();
                 calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mPaciente.getAnio(),
                         mPaciente.getMes(), mPaciente.getDia())));
+                return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
+            case TIPO_PUNTO_C:
+                calendar = Calendar.getInstance();
+                calendar.setTime(Utils.getFechaDate(String.format("%s-%s-%s", mPuntoConectividad.getAnio(),
+                        mPuntoConectividad.getMes(), mPuntoConectividad.getDia())));
                 return String.format("%s %s", Utils.getDayWeek(calendar.getTime()), calendar.get(Calendar.DAY_OF_MONTH));
 
         }
@@ -135,6 +142,14 @@ public class ItemDato extends ItemBase {
 
     public void setAtencionDiaria(AtencionDiaria atencionDiaria) {
         mAtencionDiaria = atencionDiaria;
+    }
+
+    public PuntoConectividad getPuntoConectividad() {
+        return mPuntoConectividad;
+    }
+
+    public void setPuntoConectividad(PuntoConectividad mPuntoConectividad) {
+        this.mPuntoConectividad = mPuntoConectividad;
     }
 
     public Deporte getDeporte() {

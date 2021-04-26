@@ -296,7 +296,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     String rol = object.getString("idrol");
 
-                    Rol ro = new Rol(Integer.parseInt(rol), id, "test");
+                    Rol ro = new Rol(Integer.parseInt(rol) ,"test", id);
 
                     rolViewModel.insert(ro);
                 }
