@@ -185,6 +185,10 @@ public class Utils {
     public static final String DATA_RESERVA = "dato_reserva";
     public static final String DATA_CONVOCATORIA = "dato_convocatoria";
     public static final String DATA_TURNO = "data_turno";
+    public static final String DATA_FACULTAD = "data_facultad";
+    public static final String DATA_SEXO = "data_sexo";
+    public static final String DATA_PROVINCIA = "data_provincia";
+    public static final String DATA_TIPO = "data_tipo";
     public static final String ALUMNO_NAME = "dato_alumno";
     public static final String USER_NAME = "dato_user";
     public static final String NUM_INST = "num_inst";
@@ -210,7 +214,7 @@ public class Utils {
     public static final String URL_USUARIO_BY_ID = "https://" + IP + "/usuario/getUser.php";
     public static final String URL_USUARIO_ELIMINAR = "https://" + IP + "/usuario/eliminar.php";
     public static final String URL_USUARIO_BY_ID_REDUCE = "https://" + IP + "/usuario/getUserReduce.php";
-    public static final String URL_USUARIO_ESTADISTICA = "https://" + IP + "/usuario/getEstadistica.php";
+    public static final String URL_USUARIO_ESTADISTICA = "https://" + IP + "/usuario/getEstadisticas.php";
 
     //ALUMNO
     public static final String URL_REGULARIDAD = "https://" + IP + "/usuario/insertarRegularidad.php";

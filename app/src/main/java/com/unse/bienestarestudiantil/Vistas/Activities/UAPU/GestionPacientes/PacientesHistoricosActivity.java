@@ -122,6 +122,9 @@ public class PacientesHistoricosActivity extends AppCompatActivity implements Vi
                 case 3:
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInvalido));
                     break;
+                case 5:
+                    Utils.showToast(getApplicationContext(), getString(R.string.noAutorizacion));
+                    break;
                 case 100:
                     //No autorizado
                     Utils.showToast(getApplicationContext(), getString(R.string.tokenInexistente));

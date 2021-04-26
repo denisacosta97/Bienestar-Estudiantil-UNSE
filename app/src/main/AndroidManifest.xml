@@ -190,6 +190,7 @@
         <activity android:name=".Vistas.Activities.UAPU.GestionTurnos.EstadisticasTurnosActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosDiaPCActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.EstadisticasPCActivity" />
+        <activity android:name=".Vistas.Activities.Gestion.GestionUsuarios.EstadisticasUsuarioActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

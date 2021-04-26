@@ -43,6 +43,8 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
         String name = pas.getNombre() + " " + pas.getApellido();
         holder.txtNomAp.setText(name);
         holder.txtFecha.setText(pas.getFecha());
+        holder.txtHora.setText(pas.getHora());
+        holder.txtFecha.setVisibility(View.GONE);
 
     }
 
@@ -59,7 +61,7 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtDni, txtFecha, txtNomAp;
+        TextView txtDni, txtFecha, txtNomAp, txtHora;
         OnClickOptionListener listener;
 
         EventosViewHolder(final View itemView, final OnClickOptionListener listener) {
@@ -67,6 +69,7 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
             txtDni = itemView.findViewById(R.id.txtDni);
             txtNomAp = itemView.findViewById(R.id.txtNomAp);
             txtFecha = itemView.findViewById(R.id.txtFecha);
+            txtHora = itemView.findViewById(R.id.txtHora);
 
             this.listener = listener;
 

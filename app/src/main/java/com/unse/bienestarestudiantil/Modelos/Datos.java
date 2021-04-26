@@ -3,12 +3,18 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Datos implements Parcelable {
 
-    String id;
-    Integer cantidad;
+    public static final int PROVINCIA = 1;
+    public static final int FACULTAD = 2;
 
-    public Datos(String id, Integer cantidad) {
+    String id;
+    Float cantidad;
+
+    public Datos(String id, Float cantidad) {
         this.id = id;
         this.cantidad = cantidad;
     }
@@ -18,7 +24,7 @@ public class Datos implements Parcelable {
         if (in.readByte() == 0) {
             cantidad = null;
         } else {
-            cantidad = in.readInt();
+            cantidad = in.readFloat();
         }
     }
 
@@ -34,6 +40,31 @@ public class Datos implements Parcelable {
         }
     };
 
+    public static Datos mapper(JSONObject o, int tipo) {
+        String id;
+        Float cantidad;
+        Datos datos = null;
+        try {
+            switch (tipo){
+                case FACULTAD:
+                    id = o.getString("facultad");
+                    cantidad = Float.parseFloat(o.getString("cantidad"));
+                    datos = new Datos(id, cantidad);
+                    break;
+                case PROVINCIA:
+                    id = o.getString("tipo");
+                    cantidad = Float.parseFloat(o.getString("cantidad"));
+                    datos = new Datos(id, cantidad);
+                    break;
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return datos;
+    }
+
     public String getId() {
         return id;
     }
@@ -42,11 +73,11 @@ public class Datos implements Parcelable {
         this.id = id;
     }
 
-    public Integer getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -62,7 +93,7 @@ public class Datos implements Parcelable {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(cantidad);
+            dest.writeFloat(cantidad);
         }
     }
 }

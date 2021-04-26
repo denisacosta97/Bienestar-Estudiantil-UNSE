@@ -223,19 +223,56 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
                 if (jsonObject.has("mensaje")) {
 
 
-                    ArrayList<Datos> datos = new ArrayList<>();
+                    ArrayList<Datos> provincia = new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject o = jsonArray.getJSONObject(i);
 
-                        int c = Integer.parseInt(o.getString("cantidad"));
-                        String d = o.getString("tipo");
-
-                        Datos dato = new Datos(d, tipo);
-                        datos.add(dato);
+                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
+                        provincia.add(dato);
                     }
+
+                    ArrayList<Datos> tipoUsuarios = new ArrayList<>();
+                    jsonArray = jsonObject.getJSONArray("datos");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject o = jsonArray.getJSONObject(i);
+
+                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
+                        tipoUsuarios.add(dato);
+                    }
+
+                    ArrayList<Datos> facultad = new ArrayList<>();
+                    jsonArray = jsonObject.getJSONArray("datos2");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject o = jsonArray.getJSONObject(i);
+
+                        Datos dato = Datos.mapper(o, Datos.FACULTAD);
+                        facultad.add(dato);
+                    }
+
+                    ArrayList<Datos> sexo = new ArrayList<>();
+                    jsonArray = jsonObject.getJSONArray("datos3");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject o = jsonArray.getJSONObject(i);
+
+                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
+                        sexo.add(dato);
+                    }
+
+                    Intent intent = new Intent(getApplicationContext(), EstadisticasUsuarioActivity.class);
+                    intent.putExtra(Utils.DATA_PROVINCIA, provincia);
+                    intent.putExtra(Utils.DATA_FACULTAD, facultad);
+                    intent.putExtra(Utils.DATA_SEXO, sexo);
+                    intent.putExtra(Utils.DATA_TIPO, tipoUsuarios);
+                    startActivity(intent);
 
                 }
             }

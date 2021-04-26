@@ -47,7 +47,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
     ArrayAdapter<String> medic;
     String med = "";
     EditText edtMotivoCons;
-    TextView txtDni, txtNomAp, txtCarrera, txtFacultad, txtFechaTurno;
+    TextView txtDni, txtNomAp, txtCarrera, txtFacultad, txtFechaTurno, txtHorario;
     ImageView imgIcono;
     RecyclerView mRecyclerView;
     ArrayList<Lista> mConsultas;
@@ -103,6 +103,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
         txtFacultad.setText(mPaciente.getFacultad());
         txtFechaTurno.setText(Utils.getFechaFormat(mPaciente.getFecha()));
         edtMotivoCons.setText(mPaciente.getMotivoconsulta());
+        txtHorario.setText(mPaciente.getHora());
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -156,6 +157,7 @@ public class PerfilPacienteActivity extends AppCompatActivity implements View.On
     }
 
     private void loadViews() {
+        txtHorario = findViewById(R.id.txtHora);
         spinner = findViewById(R.id.spinner);
         txtDni = findViewById(R.id.txtDni);
         txtNomAp = findViewById(R.id.txtNomAp);
