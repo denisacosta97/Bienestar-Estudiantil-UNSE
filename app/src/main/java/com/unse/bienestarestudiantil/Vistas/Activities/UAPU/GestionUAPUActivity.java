@@ -78,11 +78,10 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
                     case 305:
                         startActivity(new Intent(getApplicationContext(), GestionPacientesUActivity.class));
                         break;
-                    case 7:
+                    case 307:
                         startActivity(new Intent(getApplicationContext(), GestionMedicamentosActivity.class));
                         break;
                 }
-                //Utils.showToast(getApplicationContext(), "Item: "+mOpciones.get(position).getTitulo());
             }
         });
         imgIcono.setOnClickListener(this);

@@ -55,20 +55,27 @@ public class MedicamentoAdapter extends RecyclerView.Adapter<MedicamentoAdapter.
             holder.txtFechaMod.setText("");
         }
 
-
         switch (med.getDescripcion()) {
             case "PENDIENTE":
-                holder.txtEstado.setText("PENDIENTE");
-                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
-                holder.txtFechaMod.setText("");
+            case "RESERVADO":
+                holder.txtEstado.setBackgroundColor(context.getResources().getColor(R.color.colorOrange));
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
+            case "CONFIRMADO":
             case "RETIRADO":
-                holder.txtEstado.setText("RETIRADO");
-                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorGreen));
-                holder.btnAtender.setVisibility(View.GONE);
-                holder.txtFechaMod.setText(med.getFechaHora());
+                holder.txtEstado.setBackgroundColor(context.getResources().getColor(R.color.colorGreen));
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorWhite));
+                break;
+            case "AUSENTE":
+                holder.txtEstado.setBackgroundColor(context.getResources().getColor(R.color.colorYellow));
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorWhite));
+                break;
+            case "CANCELADO":
+                holder.txtEstado.setBackgroundColor(context.getResources().getColor(R.color.colorRed));
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
         }
+        holder.txtEstado.setText(med.getDescripcion());
 
     }
 

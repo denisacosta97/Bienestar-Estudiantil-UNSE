@@ -215,22 +215,24 @@
                     </LinearLayout>
 
                     <TextView
+                        android:layout_gravity="end"
                         android:id="@+id/txtEstado"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:gravity="end"
                         android:text="CONFIRMADO"
                         android:textSize="16sp"
-                        android:textColor="@color/colorGreen"
+                        android:padding="4dp"
+                        android:background="@color/colorFCEyT"
+                        android:textColor="@color/colorWhite"
                         android:fontFamily="@font/montserrat_black"/>
 
                     <Button
                         android:id="@+id/btnAtender"
-                        android:layout_width="250dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="ATENDER"
+                        android:text="ACTUALIZAR"
                         android:layout_margin="10dp"
                         android:textSize="16sp"
                         android:background="@drawable/button_border"

@@ -26,7 +26,6 @@
         <activity android:name=".Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PerfilPacienteActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.GestionMedicamentosActivity" />
-        <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionMedicamentos.MedicamentosDiaActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionCertificados.NuevoCertificadoActivity" />

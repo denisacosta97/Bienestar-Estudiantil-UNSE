@@ -21,11 +21,13 @@ import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Interfaces.OnClickOptionListener;
 import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
+import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.Turno;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.MedicamentoAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogAtenderBecas;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -90,13 +92,13 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
         DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
                 .setTitulo(getString(R.string.advertencia))
                 .setDescripcion(pos.getEstado() == 5 ?
-                        String.format(getString(R.string.turnoConfirmacion), pos.getNombre(), pos.getApellido())
+                        String.format(getString(R.string.turnoConfirmacion2), pos.getNombre(), pos.getApellido())
                         : String.format(getString(R.string.turnoModificar), pos.getNombre(), pos.getApellido()))
                 .setTipo(DialogoGeneral.TIPO_SI_NO)
                 .setListener(new YesNoDialogListener() {
                     @Override
                     public void yes() {
-                        atenderTurno(pos);
+                        showOptions(pos);
                     }
 
                     @Override
@@ -108,7 +110,22 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
         dialogoGeneral.show(getSupportFragmentManager(), "dialogo_confirmar");
     }
 
-    private void atenderTurno(final Medicamento pos) {
+    private void showOptions(final Medicamento pos) {
+        final ArrayList<Opciones> opciones = new ArrayList<>();
+        opciones.add(new Opciones("CANCELADO", 2));
+        opciones.add(new Opciones("AUSENTE", 3));
+        opciones.add(new Opciones("CONFIRMADO", 4));
+        DialogoOpciones dialogoOpciones = new DialogoOpciones(new OnClickOptionListener() {
+            @Override
+            public void onClick(int p) {
+                atenderTurno(pos, opciones.get(p));
+
+            }
+        }, opciones, getApplicationContext());
+        dialogoOpciones.show(getSupportFragmentManager(), "opciones");
+    }
+
+    private void atenderTurno(final Medicamento pos, final Opciones op) {
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         final String key = manager.getValueString(Utils.TOKEN);
         final int id = manager.getValueInt(Utils.MY_ID);
@@ -139,6 +156,7 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
                 param.put("idU", String.valueOf(id));
                 param.put("iu", String.valueOf(pos.getIdUsuario()));
                 param.put("fr", String.valueOf(pos.getFechaRegistro()));
+                param.put("es", String.valueOf(op.getId()));
 
                 return param;
             }
@@ -151,11 +169,9 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
     }
 
     private void loadData() {
-        mMedicamentos = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MedicamentoAdapter(mMedicamentos, getApplicationContext(), mListener);
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     private void loadViews() {
@@ -165,6 +181,8 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
     }
 
     private void loadInfo() {
+        if (mMedicamentos != null)
+            mMedicamentos.clear();
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
@@ -232,6 +250,7 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
 
                 JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
                 //JSONArray fecha = jsonObject.getJSONArray("datos");
+                mMedicamentos = new ArrayList<>();
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -241,11 +260,16 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
                     mMedicamentos.add(med);
                 }
 
+                if (mMedicamentos.size() > 0) {
+                    mAdapter = new MedicamentoAdapter(mMedicamentos, getApplicationContext(), mListener);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mAdapter.notifyDataSetChanged();
+
 
     }
 
@@ -260,6 +284,7 @@ public class MedicamentosDiaActivity extends AppCompatActivity implements View.O
                     break;
                 case 1:
                     //Exito
+                    loadInfo();
                     break;
                 case 2:
                     Utils.showToast(getApplicationContext(), getString(R.string.turnoErrorAtender));

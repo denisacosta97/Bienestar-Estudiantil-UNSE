@@ -76,6 +76,10 @@ public class Opciones {
         this.titulo = titulo;
     }
 
+    public Opciones(String titulo, int id) {
+        this.titulo = titulo;
+        this.id = id;
+    }
 
     public int getOrientation() {
         return orientation;

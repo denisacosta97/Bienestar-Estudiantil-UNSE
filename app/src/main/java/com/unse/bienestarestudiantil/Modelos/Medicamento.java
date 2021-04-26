@@ -11,8 +11,9 @@ public class Medicamento implements Parcelable {
     public static final int COMPLETE = 1;
     public static final int LOW = 2;
     public static final int LOW2 = 3;
+    public static final int LOW3 = 4;
 
-    private int idUsuario, estado, dia, mes, anio;
+    private int idUsuario, estado, dia, mes, anio, cantidad;
     private String tipoMedicamento, fechaRegistro, fechaHora, nombre, apellido, facultad, carrera, descripcion, fechaModificacion;
 
     public Medicamento(int idUsuario, int estado, String tipoMedicamento, String fechaRegistro,
@@ -55,6 +56,7 @@ public class Medicamento implements Parcelable {
         carrera = in.readString();
         descripcion = in.readString();
         fechaModificacion = in.readString();
+        cantidad = in.readInt();
     }
 
     @Override
@@ -73,6 +75,8 @@ public class Medicamento implements Parcelable {
         dest.writeString(carrera);
         dest.writeString(descripcion);
         dest.writeString(fechaModificacion);
+        dest.writeInt(cantidad
+        );
     }
 
     public static final Creator<Medicamento> CREATOR = new Creator<Medicamento>() {
@@ -86,6 +90,14 @@ public class Medicamento implements Parcelable {
             return new Medicamento[size];
         }
     };
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -206,7 +218,7 @@ public class Medicamento implements Parcelable {
 
     public static Medicamento mapper(JSONObject o, int tipo) {
         Medicamento med = null;
-        int idUsuario, estado, dia, mes, anio;
+        int idUsuario, estado, dia, mes, anio, cantidad;
         String tipoMedicamento, fechaRegistro, fechaModificacion, fechaHora, nombre, apellido, facultad, carrera, descripcion;
         try {
             switch (tipo) {
@@ -233,6 +245,15 @@ public class Medicamento implements Parcelable {
                     med.setAnio(anio);
                     med.setFechaModificacion(fechaModificacion);
 
+                    break;
+                case LOW3:
+                    estado = Integer.parseInt(o.getString("estado"));
+                    descripcion = o.getString("descripcion");
+                    cantidad = Integer.parseInt(o.getString("cantidad"));
+                    med = new Medicamento(0, 0, 0);
+                    med.setDescripcion(descripcion);
+                    med.setEstado(estado);
+                    med.setCantidad(cantidad);
                     break;
                 case LOW2:
                     tipoMedicamento = o.getString("tipomedicamento");

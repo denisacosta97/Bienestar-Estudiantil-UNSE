@@ -354,12 +354,8 @@ public class Utils {
     public static final String URL_BAJA_SERVICIOS = "https://" + IP + "/uapu/servicio/eliminar.php";
     public static final String URL_TURNOS_DIA_UAPU = "https://" + IP + "/uapu/turno/getAllByDay.php";
     public static final String URL_TURNOS_HIST_UAPU = "https://" + IP + "/uapu/turno/getAll.php";
-    public static final String URL_TURNOS_UAPU_BY_DAY = "https://" + IP + "/uapu/turno/getAllByDay.php";
-    public static final String URL_SERVICIOS_TURNO = "https://" + IP + "/uapu/turno/getAllServices.php";
     public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/getTurnoHorarios.php";
-    public static final String URL_MEDICAM_INSERT = "https://" + IP + "/uapu/medicamento/insertar.php";
     public static final String URL_MEDICAM_DAY  = "https://" + IP + "/uapu/medicamento/getByDay.php";
-    public static final String URL_MEDICAM_USER  = "https://" + IP + "/uapu/medicamento/getByUser.php";
     public static final String URL_MEDICAM_UPDATE  = "https://" + IP + "/uapu/medicamento/actualizar.php";
     public static final String URL_MEDICAM_ALL  = "https://" + IP + "/uapu/medicamento/getAll.php";
     public static final String URL_MEDICAM_ESTADISTICA  = "https://" + IP + "/uapu/medicamento/getEstadistica.php";

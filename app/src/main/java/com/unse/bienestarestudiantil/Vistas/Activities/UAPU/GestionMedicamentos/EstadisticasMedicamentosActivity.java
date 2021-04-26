@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -37,6 +38,7 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManag
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Medicamento;
+import com.unse.bienestarestudiantil.Modelos.PuntoConectividad;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
@@ -52,11 +54,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class EstadisticasMedicamentosActivity extends AppCompatActivity implements View.OnClickListener {
 
     PieChart mPieFacultad;
-    BarChart mBarMedicamento;
+    BarChart mBarMedicamento, mBarEstado;
     LineChart mLineHorario;
     ImageView imgIcono;
     Button btnBuscar;
@@ -83,9 +86,128 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
         fechaFin = new int[]{1, 1, 2020};
         fechaInicio = new int[]{1, 1, 2020};
         txtCantidad.setText("0");
+        loadBarEstado(null);
         loadBarMedicamento(null);
         loadPieFacultad(null);
         loadLineHorario(null);
+    }
+
+    private void loadBarEstado(ArrayList<Medicamento> puntoConectividads) {
+
+        if (puntoConectividads != null && puntoConectividads.size() > 0) {
+
+            mBarEstado.invalidate();
+            mBarEstado.clear();
+            mBarEstado.getDescription().setEnabled(false);
+            mBarEstado.getLegend().setEnabled(false);
+
+            XAxis xAxis2 = mBarEstado.getXAxis();
+            xAxis2.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis2.setTextSize(12f);
+            //Habilita los labels
+            xAxis2.setDrawAxisLine(true);
+            xAxis2.setDrawGridLines(false);
+
+            YAxis leftAxis, rightAxis;
+            leftAxis = mBarEstado.getAxisLeft();
+            rightAxis = mBarEstado.getAxisRight();
+
+            leftAxis.setTextSize(12f);
+            leftAxis.setAxisMinimum(0);
+            //leftAxis.setDrawAxisLine(true);
+            //leftAxis.setDrawGridLines(false);
+            //leftAxis.setDrawLabels(false);
+
+
+            rightAxis.setAxisMinimum(0);
+
+            rightAxis.setDrawAxisLine(false);
+            rightAxis.setDrawGridLines(false);
+            rightAxis.setDrawLabels(false);
+
+
+            final ArrayList<BarEntry> entries = new ArrayList<>();
+            final ArrayList<String> entryLabels = new ArrayList<>();
+
+            HashMap<String, Integer> contador = new HashMap<>();
+            for (Medicamento medicamento : puntoConectividads) {
+                contador.put(String.valueOf(medicamento.getDescripcion()), medicamento.getCantidad());
+            }
+            int i = 1;
+            int[] colores = new int[ColorTemplate.JOYFUL_COLORS.length + ColorTemplate.LIBERTY_COLORS.length];
+            for (int j = 0; j < colores.length; j++) {
+                if (j > ColorTemplate.JOYFUL_COLORS.length - 1) {
+                    colores[j] = ColorTemplate.LIBERTY_COLORS[j % 5];
+                } else {
+                    colores[j] = ColorTemplate.JOYFUL_COLORS[j];
+                }
+            }
+            LinearLayout linearLayout = findViewById(R.id.latDatos2);
+            for (String key : contador.keySet()) {
+                entries.add(new BarEntry(i, contador.get(key)));
+
+                LinearLayout layout = new LinearLayout(this);
+                LinearLayout.LayoutParams params3 = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params3.setMargins(0, 0, 0, 0);
+                layout.setLayoutParams(params3);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                LinearLayout view = new LinearLayout(this);
+                LinearLayout.LayoutParams params2 = new
+                        LinearLayout.LayoutParams(50,
+                        50);
+                params2.setMargins(5, 0, 0, 0);
+                view.setLayoutParams(params2);
+                view.setBackgroundColor(colores[i - 1]);
+                layout.addView(view);
+
+
+                TextView textView = new TextView(this);
+                LinearLayout.LayoutParams params = new
+                        LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(5, 0, 0, 0);
+                textView.setLayoutParams(params);
+                textView.setText(key);
+                textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+                textView.setTextSize(12);
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.montserrat_regular);
+                textView.setTypeface(typeface);
+
+                layout.addView(textView);
+                linearLayout.addView(layout);
+                i++;
+            }
+            linearLayout.invalidate();
+
+            BarDataSet barDataSet = new BarDataSet(entries, "");
+            barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+            barDataSet.setValueTextSize(13);
+            barDataSet.setValueTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            barDataSet.setValueTextColor(Color.rgb(155, 155, 155));
+            BarData barData = new BarData(barDataSet);
+            barData.setBarWidth(0.9f); // set custom bar width
+
+            mBarEstado.setData(barData);
+            mBarEstado.setFitBars(true);
+            mBarEstado.invalidate();
+            mBarEstado.setScaleEnabled(true);
+            mBarEstado.setDoubleTapToZoomEnabled(false);
+            mBarEstado.setBackgroundColor(Color.rgb(255, 255, 255));
+
+            xAxis2.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return "";
+
+                }
+            });
+        } else {
+            mBarEstado.clear();
+        }
+
     }
 
     private void loadLineHorario(ArrayList<Medicamento> horarios) {
@@ -270,6 +392,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
     }
 
     private void loadViews() {
+        mBarEstado = findViewById(R.id.bar_estado);
         btnBuscar = findViewById(R.id.btnBuscar);
         txtCantidad = findViewById(R.id.txtCantidad);
         txtFechaFin = findViewById(R.id.txtFechaFin);
@@ -347,6 +470,7 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
                     loadBarMedicamento(null);
                     loadPieFacultad(null);
                     loadLineHorario(null);
+                    loadBarEstado(null);
                     txtCantidad.setText("0");
                     break;
                 case 3:
@@ -385,6 +509,15 @@ public class EstadisticasMedicamentosActivity extends AppCompatActivity implemen
                     medicamentos.add(medicamento);
                 }
 
+                ArrayList<Medicamento> estados = new ArrayList<>();
+                jsonArray = jsonObject.getJSONArray("datos2");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject o = jsonArray.getJSONObject(i);
+                    Medicamento medicamento = Medicamento.mapper(o, Medicamento.LOW3);
+                    estados.add(medicamento);
+                }
+
+                loadBarEstado(estados);
                 loadBarMedicamento(medicamentos);
                 loadLineHorario(medicamentos);
                 loadPieFacultad(facultades);
