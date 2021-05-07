@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

@@ -37,6 +37,7 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
 
     @Override
     public void onBindViewHolder(@NonNull PacientesAdapter.EventosViewHolder holder, final int position) {
+
         Paciente pas = mPacientes.get(position);
 
         holder.txtDni.setText(String.valueOf(pas.getIdUsuario()));

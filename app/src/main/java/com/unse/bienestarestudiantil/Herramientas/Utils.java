@@ -199,7 +199,6 @@ public class Utils {
     public static final int LIST_NOMBRE = 3;
 
 
-
     private static final String IP = "sis.bienestar.unse.edu.ar/api";
     //USUARIO
     public static final String URL_USUARIO_INSERTAR = "https://" + IP + "/usuario/insertar.php";
@@ -304,7 +303,7 @@ public class Utils {
     //PUNTOS CONECTIVIDAD
     public static final String URL_PC_ESCANEAR = "https://" + IP + "/general/conectividad/actualizar.php";
     public static final String URL_TURNOS_DIA_PC = "https://" + IP + "/general/conectividad/getByDay.php";
-    public static final String URL_PC_ESTADISTICA  = "https://" + IP + "/general/conectividad/getEstadisticas.php";
+    public static final String URL_PC_ESTADISTICA = "https://" + IP + "/general/conectividad/getEstadisticas.php";
 
 
     //TRANSPORTE
@@ -359,18 +358,18 @@ public class Utils {
     public static final String URL_TURNOS_DIA_UAPU = "https://" + IP + "/uapu/turno/getAllByDay.php";
     public static final String URL_TURNOS_HIST_UAPU = "https://" + IP + "/uapu/turno/getAll.php";
     public static final String URL_UAPU_HORARIO = "https://" + IP + "/uapu/turno/getTurnoHorarios.php";
-    public static final String URL_MEDICAM_DAY  = "https://" + IP + "/uapu/medicamento/getByDay.php";
-    public static final String URL_MEDICAM_UPDATE  = "https://" + IP + "/uapu/medicamento/actualizar.php";
-    public static final String URL_MEDICAM_ALL  = "https://" + IP + "/uapu/medicamento/getAll.php";
-    public static final String URL_MEDICAM_ESTADISTICA  = "https://" + IP + "/uapu/medicamento/getEstadistica.php";
-    public static final String URL_INFO_CONSULTA  = "https://" + IP + "/uapu/atencion/getConsulta.php";
-    public static final String URL_PACIENTES_DIARIA  = "https://" + IP + "/uapu/turno/getTurnoByDay.php";
-    public static final String URL_PACIENTES_HISTORICO  = "https://" + IP + "/uapu/turno/getTurnos.php";
-    public static final String URL_ACTUALIZAR_CONSULTA  = "https://" + IP + "/uapu/turno/actualizar.php";
+    public static final String URL_MEDICAM_DAY = "https://" + IP + "/uapu/medicamento/getByDay.php";
+    public static final String URL_MEDICAM_UPDATE = "https://" + IP + "/uapu/medicamento/actualizar.php";
+    public static final String URL_MEDICAM_ALL = "https://" + IP + "/uapu/medicamento/getAll.php";
+    public static final String URL_MEDICAM_ESTADISTICA = "https://" + IP + "/uapu/medicamento/getEstadistica.php";
+    public static final String URL_INFO_CONSULTA = "https://" + IP + "/uapu/atencion/getConsulta.php";
+    public static final String URL_PACIENTES_DIARIA = "https://" + IP + "/uapu/turno/getTurnoByDay.php";
+    public static final String URL_PACIENTES_HISTORICO = "https://" + IP + "/uapu/turno/getTurnos.php";
+    public static final String URL_ACTUALIZAR_CONSULTA = "https://" + IP + "/uapu/turno/actualizar.php";
     public static final String URL_TURNO_UAPU_HORARIO = "https://" + IP + "/uapu/turno/horarios.json";
     public static final String URL_TURNO_NUEVO = "https://" + IP + "/becas/turno/insertar.php";
     public static final String URL_TURNO_UAPU_NUEVO = "https://" + IP + "/uapu/turno/insertar.php";
-    public static final String URL_TURNO_ESTADISTICA  = "https://" + IP + "/uapu/turno/getEstadistica.php";
+    public static final String URL_TURNO_ESTADISTICA = "https://" + IP + "/uapu/turno/getEstadistica.php";
 
     public static final String URL_CERTIFICADOS = "https://" + IP + "/uapu/certificado/getCertificados.php";
     public static final String URL_CERTIFICADOS_NUEVO = "https://" + IP + "/uapu/certificado/insertar.php";
@@ -406,7 +405,7 @@ public class Utils {
 
     public static String[] fhcys = {"Licenciatura en Administración", "Contador Público Nacional",
             "Licenciatura en Letras", "Licenciatura en Sociología", "Licenciatura en Enfermería",
-            "Licenciatura en Educación para la Salud", "Licenciatura en Obstetricia",
+            "Licenciatura en Educación para la Salud", "Obstetricia", "Licenciatura en Obstetricia",
             "Licenciatura en Filosofía", "Licenciatura en Trabajo Social",
             "Licenciatura en Periodismo", "Profesorado en Educación para la Salud",
             "Tecnicatura Sup. Adm. y Gestión Universitaria",

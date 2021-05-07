@@ -110,17 +110,36 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txtFecha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
                         android:gravity="end"
-                        android:layout_gravity="right"
-                        android:textColor="@color/blackTextColor"
-                        android:layout_marginTop="5dp"
-                        android:text="18/05/2021"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/montserrat_regular"/>
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fecha: "
+                            android:textSize="16sp"
+                            android:textColor="@color/blackTextColor"
+                            android:fontFamily="@font/montserrat_black"/>
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:id="@+id/txtFecha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_gravity="right"
+                            android:textColor="@color/blackTextColor"
+                            android:text="18/05/2021"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/montserrat_regular"/>
+
+
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
 

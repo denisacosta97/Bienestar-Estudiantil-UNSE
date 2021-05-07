@@ -44,6 +44,7 @@ public class PuntoConectividadAdapter extends RecyclerView.Adapter<PuntoConectiv
         holder.txtDNI.setText(String.valueOf(puntoConectividad.getIdUsuario()));
         holder.txtEstado.setText(puntoConectividad.getDescripcion());
         holder.txtHorario.setText(puntoConectividad.getHorario());
+        holder.txtLugar.setText(puntoConectividad.getNombreLugar());
         switch (puntoConectividad.getDescripcion()) {
             case "PENDIENTE":
             case "RESERVADO":
@@ -74,12 +75,13 @@ public class PuntoConectividadAdapter extends RecyclerView.Adapter<PuntoConectiv
 
     public static class PuntosHolder extends RecyclerView.ViewHolder {
 
-        TextView txtDNI, txtNombre, txtHorario, txtEstado;
+        TextView txtDNI, txtNombre, txtHorario, txtEstado, txtLugar;
 
         public PuntosHolder(@NonNull View itemView) {
             super(itemView);
 
             txtDNI = itemView.findViewById(R.id.txtDni);
+            txtLugar = itemView.findViewById(R.id.txtLugar);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtHorario = itemView.findViewById(R.id.txtHora);
             txtEstado = itemView.findViewById(R.id.txtEstado);

@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Inicio;
 
 import android.content.pm.ActivityInfo;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.unse.bienestarestudiantil.R;
 
-public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
+public class AcercaDeActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imgIcono;
 

@@ -92,9 +92,9 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.CalendarAsistenciaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.ControlAsistenciaActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.AddTorneoActivity" />
-        <activity android:name=".Vistas.Activities.TermsActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.TerminosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.InfoProfesorActivity" />
-        <activity android:name=".Vistas.Activities.AboutActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.AcercaDeActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.PerfilTorneoEditActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.EditDeportesActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Deportes.ListAsistenciaDeportesActivity" />
@@ -118,8 +118,8 @@
         <activity
             android:name=".Vistas.Activities.Perfil.ArchivosActivity"
             android:label="Gestión de archivos" />
-        <activity android:name=".Vistas.Activities.TorneosActivity" />
-        <activity android:name=".Vistas.BarcodeActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.TorneosActivity" />
+        <activity android:name=".Vistas.Activities.Inicio.BarcodeActivity" />
         <activity
             android:name=".Vistas.Activities.Perfil.InfoUsuarioActivity"
             android:label="Información" />
@@ -128,7 +128,7 @@
             android:label="Perfil" />
         <activity android:name=".Vistas.Activities.Inicio.LoginActivity" />
         <activity
-            android:name=".Vistas.Activities.AsistenciaActivity"
+            android:name=".Vistas.Activities.Deportes.AsistenciaActivity"
             android:label="Asistencia" />
         <activity android:name=".Vistas.Activities.Perfil.TiposCredencialesActivity" />
         <activity
@@ -142,7 +142,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vistas.Activities.Inicio.RegisterActivity" />
-        <activity android:name=".Vistas.Activities.PerfilTorneoActivity" />
+        <activity android:name=".Vistas.Activities.Deportes.PerfilTorneoActivity" />
         <activity
             android:name=".Vistas.Activities.Polideportivo.GestionPolideportivoActivity"
             android:label="Gestión de Polideportivo" />

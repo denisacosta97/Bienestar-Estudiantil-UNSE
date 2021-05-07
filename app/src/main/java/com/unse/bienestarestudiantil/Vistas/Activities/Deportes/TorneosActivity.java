@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities;
+package com.unse.bienestarestudiantil.Vistas.Activities.Deportes;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -22,6 +22,7 @@ import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupp
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Torneo;
 import com.unse.bienestarestudiantil.R;
+import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.PerfilTorneoActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.TorneosAdapter;
 
 import java.util.ArrayList;

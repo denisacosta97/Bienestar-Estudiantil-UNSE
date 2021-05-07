@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vistas.Activities.PostularListaActiviy">
+    tools:context=".Vistas.Activities.Deportes.PostularListaActiviy">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
