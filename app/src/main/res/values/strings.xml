@@ -178,8 +178,8 @@
 
     <string name="error">¡Error!</string>
     <string name="reservaNoExiste">¡Reserva no existente!</string>
-   <string name="confirmadoReserva">La reserva fue confirmada exitosamente</string>
-   <string name="confirmadoReservaError">Hubo un error al intentar confirmar la reserva</string>
+    <string name="confirmadoReserva">La reserva fue confirmada exitosamente</string>
+    <string name="confirmadoReservaError">Hubo un error al intentar confirmar la reserva</string>
     <string name="yaRetiro">¡Reserva retirada!</string>
     <string name="reservaRetirada">La reserva ya fue retirada</string>
     <string name="reservaNoExisteDesc">La reserva no existe en el sistema</string>
@@ -257,18 +257,18 @@
     <string name="turnoModificarAtendido">El turno ya fue atendido  ¿realmente desea continuar?</string>
     <string name="rangoFechaInvalido">Rango de fechas inválido</string>
     <string name="errorAtencion">¡Error al registrar!</string>
-   <string name="registrado">¡Registrado!</string>
+    <string name="registrado">¡Registrado!</string>
     <string name="noAutorizacion">No tiene autorización para los datos</string>
     <string name="errorRegistro">¡Error al registrar!</string>
     <string name="becaTurnoNoDia">Día no habilitado para turnos</string>
     <string name="becaTurnoSeleccionaHorario">Primero seleccione un horario</string>
     <string name="becaTurnoYaReservado">¡Turno ya reservado!</string>
-   <string name="becaTurnoError">¡Error al reservar el turno!</string>
+    <string name="becaTurnoError">¡Error al reservar el turno!</string>
     <string name="cancelaste">¡Cancelaste!</string>
     <string name="puntosError">Error al cargar los puntos</string>
     <string name="paradasError">Error al cargar las paradas</string>
     <string name="qrNoData">¡QR no válido!</string>
-   <string name="confirmado">¡Confirmado!</string>
+    <string name="confirmado">¡Confirmado!</string>
 
 </resources>
 

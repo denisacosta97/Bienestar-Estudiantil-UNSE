@@ -21,6 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Vistas.Activities.Maraton.GestionMaratonActivity"></activity>
+        <activity android:name=".Vistas.Activities.Maraton.ListadoMaratonActivity" />
         <activity android:name=".Vistas.Activities.UAPU.GestionPacientes.PacientesHistoricosActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosHistoricosPCActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity" />

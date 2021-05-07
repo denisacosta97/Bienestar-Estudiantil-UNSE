@@ -24,6 +24,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticiasAc
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Maraton.GestionMaratonActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Polideportivo.GestionPolideportivoActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.PuntosConectividad.GestionPuntosConectividadActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Transporte.GestionTransporteActivity;
@@ -99,6 +100,7 @@ public class InicioFragmento extends Fragment {
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1300, "Gestión Noticias", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1400, "Puntos de Conectividad", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1500, "Gestión de Maratón", R.drawable.ic_config, R.color.colorGreen));
 
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -173,6 +175,9 @@ public class InicioFragmento extends Fragment {
                         break;
                     case 1400:
                         startActivity(new Intent(mContext, GestionPuntosConectividadActivity.class));
+                        break;
+                    case 1500:
+                        startActivity(new Intent(mContext, GestionMaratonActivity.class));
                         break;
 
                 }
