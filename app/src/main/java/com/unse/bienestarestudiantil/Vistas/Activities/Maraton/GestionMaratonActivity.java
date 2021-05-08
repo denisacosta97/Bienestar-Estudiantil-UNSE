@@ -62,11 +62,11 @@ public class GestionMaratonActivity extends AppCompatActivity implements View.On
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
                 switch ((int) id) {
-                    case 301:
+                    case 15001:
                         startActivity(new Intent(getApplicationContext(), ListadoMaratonActivity.class));
                         break;
-                    case 302:
-                        startActivity(new Intent(getApplicationContext(), GestionAtencionesActivity.class));
+                    case 15002:
+                        //startActivity(new Intent(getApplicationContext(), GestionAtencionesActivity.class));
                         break;
                 }
             }
@@ -77,13 +77,13 @@ public class GestionMaratonActivity extends AppCompatActivity implements View.On
 
     private void loadData() {
         mOpciones = new ArrayList<>();
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 301, "Inscriptos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 302, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 15001, "Inscriptos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 15002, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new OpcionesAdapter(filtrarOpciones(mOpciones), getApplicationContext(), 1);
+        mAdapter = new OpcionesAdapter(mOpciones, getApplicationContext(), 1);
         mRecyclerView.setAdapter(mAdapter);
     }
 

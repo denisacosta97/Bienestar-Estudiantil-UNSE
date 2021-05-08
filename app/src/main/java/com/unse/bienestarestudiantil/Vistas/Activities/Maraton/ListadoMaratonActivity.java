@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
@@ -58,7 +59,7 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     ArrayList<Maraton> mList;
     MaratonAdapter mAdapter;
     ImageView imgIcono;
-    TextView txtInsc;
+    TextView txtInsc, txtCinco, txtTres;
     DialogoProcesamiento dialog;
     CardView mCardView;
     EditText edtBuscar;
@@ -81,17 +82,15 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setTextColor(getResources().getColor(R.color.colorPrimary));
-        ((TextView) findViewById(R.id.txtTitulo)).setText(getString(R.string.tituloListaUsuarios));
+        ((TextView) findViewById(R.id.txtTitulo)).setText("Inscriptos");
         Utils.changeColorDrawable(imgIcono, getApplicationContext(), R.color.colorPrimary);
     }
 
     private void loadData() {
         mList = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new MaratonAdapter(mList, getApplicationContext(), null);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mAdapter);
 
         loadInfo();
 
@@ -101,7 +100,7 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
         PreferenceManager manager = new PreferenceManager(getApplicationContext());
         String key = manager.getValueString(Utils.TOKEN);
         int id = manager.getValueInt(Utils.MY_ID);
-        String URL = String.format("%s?id=%s&key=%s", Utils.URL_USUARIOS_LISTA, id, key);
+        String URL = String.format("%s?idU=%s&key=%s&iu=%s", Utils.URL_INSCRIPTOS_MARATON, id, key, id);
         StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -164,73 +163,34 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
 
                     JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
+                    mList = new ArrayList<>();
+
+                    int diez = 0, tres = 0;
+
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject o = jsonArray.getJSONObject(i);
 
-                        //Maraton mar = Maraton.mapper(o, Maraton.COMPLETE);
+                        Maraton mar = Maraton.mapper(o, Maraton.LOW);
 
-                        //mList.add(mar);
+                        if (mar.getCarrera().equals("3")) {
+                            tres++;
+                        } else if (mar.getCarrera().equals("10")) {
+                            diez++;
+                        }
 
+                        mList.add(mar);
+
+                    }
+                    if (mList.size() > 0) {
+                        mAdapter = new MaratonAdapter(mList, getApplicationContext(), null);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setList(mList);
                     }
                     txtInsc.setText(String.format("%s", mList.size()));
-                    mAdapter.setList(mList);
-                    mAdapter.notifyDataSetChanged();
-                }
-            } else if (tipo == 2) {
-                if (jsonObject.has("mensaje")) {
+                    txtTres.setText(String.valueOf(tres));
+                    txtCinco.setText(String.valueOf(diez));
 
-
-                    ArrayList<Datos> provincia = new ArrayList<>();
-                    JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONObject o = jsonArray.getJSONObject(i);
-
-                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
-                        provincia.add(dato);
-                    }
-
-                    ArrayList<Datos> tipoUsuarios = new ArrayList<>();
-                    jsonArray = jsonObject.getJSONArray("datos");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONObject o = jsonArray.getJSONObject(i);
-
-                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
-                        tipoUsuarios.add(dato);
-                    }
-
-                    ArrayList<Datos> facultad = new ArrayList<>();
-                    jsonArray = jsonObject.getJSONArray("datos2");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONObject o = jsonArray.getJSONObject(i);
-
-                        Datos dato = Datos.mapper(o, Datos.FACULTAD);
-                        facultad.add(dato);
-                    }
-
-                    ArrayList<Datos> sexo = new ArrayList<>();
-                    jsonArray = jsonObject.getJSONArray("datos3");
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JSONObject o = jsonArray.getJSONObject(i);
-
-                        Datos dato = Datos.mapper(o, Datos.PROVINCIA);
-                        sexo.add(dato);
-                    }
-
-                    Intent intent = new Intent(getApplicationContext(), EstadisticasUsuarioActivity.class);
-                    intent.putExtra(Utils.DATA_PROVINCIA, provincia);
-                    intent.putExtra(Utils.DATA_FACULTAD, facultad);
-                    intent.putExtra(Utils.DATA_SEXO, sexo);
-                    intent.putExtra(Utils.DATA_TIPO, tipoUsuarios);
-                    startActivity(intent);
 
                 }
             }
@@ -248,7 +208,7 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
-                onClick(position, id);
+                //onClick(position, id);
             }
         });
         edtBuscar.addTextChangedListener(new TextWatcher() {
@@ -395,6 +355,8 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     }
 
     private void loadViews() {
+        txtCinco = findViewById(R.id.txt5km);
+        txtTres = findViewById(R.id.txt3km);
         txtInsc = findViewById(R.id.txtInsc);
         imgIcono = findViewById(R.id.imgFlecha);
         mRecyclerView = findViewById(R.id.recycler);

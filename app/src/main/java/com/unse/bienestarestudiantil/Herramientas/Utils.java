@@ -254,6 +254,9 @@ public class Utils {
     public static final String URL_BECADOS = "https://" + IP + "/beca/getAllBecados.php";
     public static final String URL_ASISTENCIA = "https://" + IP + "/deportes/asistencia.php";
 
+    //MARATON
+    public static final String URL_INSCRIPTOS_MARATON = "https://" + IP + "/deportes/carrera/getInscriptos.php";
+
     //POLIDEPORTIVO
     public static final String URL_INGRESO_POLI = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPoli.php";
     public static final String URL_INGRESO_PILE = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPileta.php";

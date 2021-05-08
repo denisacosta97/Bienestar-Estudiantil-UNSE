@@ -100,7 +100,7 @@ public class InicioFragmento extends Fragment {
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 800, "Gestión Comedor", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1300, "Gestión Noticias", R.drawable.ic_config, R.color.colorGreen));
         mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1400, "Puntos de Conectividad", R.drawable.ic_config, R.color.colorGreen));
-        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1500, "Gestión de Maratón", R.drawable.ic_config, R.color.colorGreen));
+        mOpciones.add(new Opciones(true, LinearLayout.VERTICAL, 1500, "Gestión de Maratón Virtual", R.drawable.ic_config, R.color.colorGreen));
 
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);

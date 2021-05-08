@@ -69,7 +69,9 @@ public class PacientesDiaActivity extends AppCompatActivity implements View.OnCl
 
     private void setToolbar() {
         ((TextView) findViewById(R.id.txtTitulo)).setText(Utils.getAppName(getApplicationContext(), getComponentName()));
-        ((TextView) findViewById(R.id.txtTitulo)).setText("Pacientes");
+        ((TextView) findViewById(R.id.txtTitulo)).setText(mPaciente == null ? "Pacientes del día" :
+                String.format("%s/%s/%s", mPaciente.getDia(), mPaciente.getMes(),
+                        mPaciente.getAnio()));
         imgRefresh.setVisibility(View.VISIBLE);
     }
 

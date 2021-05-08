@@ -45,7 +45,26 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
         holder.txtNomAp.setText(name);
         holder.txtFecha.setText(pas.getFecha());
         holder.txtHora.setText(pas.getHora());
-        holder.txtFecha.setVisibility(View.GONE);
+        holder.txtFecha.setVisibility(View.VISIBLE);
+
+        switch (pas.getDescripcionEstado()) {
+            case "RESERVADO":
+                holder.txtEstado.setText("RESERVADO");
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorOrange));
+                break;
+            case "CONFIRMADO":
+                holder.txtEstado.setText("CONFIRMADO");
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorGreen));
+                break;
+            case "AUSENTE":
+                holder.txtEstado.setText("AUSENTE");
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorPink));
+                break;
+            case "CANCELADO":
+                holder.txtEstado.setText("CANCELADO");
+                holder.txtEstado.setTextColor(context.getResources().getColor(R.color.colorRed));
+                break;
+        }
 
     }
 
@@ -62,7 +81,7 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
 
     static class EventosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtDni, txtFecha, txtNomAp, txtHora;
+        TextView txtDni, txtFecha, txtNomAp, txtHora, txtEstado;
         OnClickOptionListener listener;
 
         EventosViewHolder(final View itemView, final OnClickOptionListener listener) {
@@ -71,6 +90,7 @@ public class PacientesAdapter extends RecyclerView.Adapter<PacientesAdapter.Even
             txtNomAp = itemView.findViewById(R.id.txtNomAp);
             txtFecha = itemView.findViewById(R.id.txtFecha);
             txtHora = itemView.findViewById(R.id.txtHora);
+            txtEstado = itemView.findViewById(R.id.txtEstado);
 
             this.listener = listener;
 
