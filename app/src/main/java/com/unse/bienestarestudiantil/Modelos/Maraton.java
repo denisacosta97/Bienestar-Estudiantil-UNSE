@@ -8,8 +8,81 @@ public class Maraton {
     public static final int COMPLETE = 1;
     public static final int LOW = 2;
 
-    private int idInscripcion, idUsuario, dia, mes, anio;
-    private String fechaRegistro, carrera, edad, nombre, apellido, descripcion, fechaNac;
+    private int idInscripcion, idUsuario, dia, mes, anio, tipoUsuario, categoria;
+    private String fechaRegistro, carrera, edad, nombre, apellido, descripcion, fechaNac,
+            mail, DNI, telefono, pais, provincia, localidad, tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(int tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public int getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
 
     public int getIdInscripcion() {
         return idInscripcion;
@@ -110,27 +183,37 @@ public class Maraton {
     public static Maraton mapper(JSONObject o, int tipo) {
         Maraton maraton = null;
 
-        int idInscripcion, idUsuario, dia, mes, anio, edad;
-        String fechaRegistro, carrera, nombre, apellido, descripcion, fechaNac;
+        int idInscripcion, idUsuario, dia, mes, anio, edad, tipoUsuario;
+        String fechaRegistro, carrera, nombre, apellido, descripcion, fechaNac, mail, telefono;
         try {
             switch (tipo) {
                 case LOW:
                     idInscripcion = Integer.parseInt(o.getString("idinscripcion"));
                     idUsuario = Integer.parseInt(o.getString("idusuario"));
                     carrera = o.getString("distancia");
+                    telefono = o.getString("telefono");
+                    mail = o.getString("mail");
                     nombre = o.getString("nombre");
                     apellido = o.getString("apellido");
+                    tipoUsuario = Integer.parseInt(o.getString("tipousuario"));
                     descripcion = o.getString("descripcion");
                     edad = Integer.parseInt(o.getString("categoria"));
                     fechaNac = o.getString("fechanac");
                     maraton = new Maraton(idInscripcion, idUsuario, carrera, String.valueOf(edad),
                             nombre, apellido, descripcion, fechaNac);
+                    maraton.setTelefono(telefono);
+                    maraton.setMail(mail);
+                    maraton.setTipoUsuario(tipoUsuario);
                     break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return maraton;
+    }
+
+    public Maraton() {
+
     }
 
     public Maraton(int idInscripcion, int idUsuario, String carrera, String edad, String nombre, String apellido, String descripcion, String fechaNac) {

@@ -2,9 +2,11 @@ package com.unse.bienestarestudiantil.Vistas.Activities.Maraton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -25,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.GeneratePDFTask;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
@@ -48,7 +52,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,8 +66,10 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     ArrayList<Maraton> mList;
+    ProgressBar progressBar;
     MaratonAdapter mAdapter;
     ImageView imgIcono;
+    FloatingActionButton fabPDF;
     TextView txtInsc, txtCinco, txtTres;
     DialogoProcesamiento dialog;
     CardView mCardView;
@@ -87,6 +98,7 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     }
 
     private void loadData() {
+        progressBar.setVisibility(View.VISIBLE);
         mList = new ArrayList<>();
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -163,15 +175,25 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
 
                     JSONArray jsonArray = jsonObject.getJSONArray("mensaje");
 
+                    JSONArray tipos = jsonObject.getJSONArray("datos");
+
                     mList = new ArrayList<>();
 
                     int diez = 0, tres = 0;
+
+                    HashMap<String, String> tipoUsuario = new HashMap<>();
+
+                    for (int i = 0; i < tipos.length(); i++) {
+                        JSONObject object = tipos.getJSONObject(i);
+                        tipoUsuario.put(object.getString("idtipo"), object.getString("descripcion"));
+                    }
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject o = jsonArray.getJSONObject(i);
 
                         Maraton mar = Maraton.mapper(o, Maraton.LOW);
+                        mar.setTipo(tipoUsuario.get(String.valueOf(mar.getTipoUsuario())));
 
                         if (mar.getCarrera().equals("3")) {
                             tres++;
@@ -186,7 +208,9 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
                         mAdapter = new MaratonAdapter(mList, getApplicationContext(), null);
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.setList(mList);
+
                     }
+                    progressBar.setVisibility(View.GONE);
                     txtInsc.setText(String.format("%s", mList.size()));
                     txtTres.setText(String.valueOf(tres));
                     txtCinco.setText(String.valueOf(diez));
@@ -203,6 +227,7 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     }
 
     private void loadListener() {
+        fabPDF.setOnClickListener(this);
         imgIcono.setOnClickListener(this);
         ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mRecyclerView);
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -355,6 +380,8 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
     }
 
     private void loadViews() {
+        fabPDF = findViewById(R.id.fab);
+        progressBar = findViewById(R.id.progres);
         txtCinco = findViewById(R.id.txt5km);
         txtTres = findViewById(R.id.txt3km);
         txtInsc = findViewById(R.id.txtInsc);
@@ -406,7 +433,34 @@ public class ListadoMaratonActivity extends AppCompatActivity implements View.On
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
+            case R.id.fab:
+                checkPermiso();
+                break;
         }
+    }
+
+    private void checkPermiso() {
+        if (Utils.isPermissionGranted(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (Utils.isPermissionGranted(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                dialog.setCancelable(false);
+                dialog.show(getSupportFragmentManager(), "dialog_process");
+                GeneratePDFTask generatePDFTask = new GeneratePDFTask(1, dialog, getApplicationContext());
+                Collections.reverse(mList);
+                generatePDFTask.setmInscriptosMaraton(mList);
+                generatePDFTask.execute();
+            } else {
+                showPermission();
+            }
+
+        } else {
+            showPermission();
+        }
+    }
+
+    private void showPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
     }
 
 }

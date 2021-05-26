@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -57,6 +58,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
     ArrayList<Usuario> mList;
     UsuariosAdapter mAdapter;
     ImageView imgIcono;
+    ProgressBar progressBar;
     TextView txtInfo;
     DialogoProcesamiento dialog;
     CardView mCardView;
@@ -217,6 +219,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
                     txtInfo.setText(String.format("Total = %s", mList.size()));
                     mAdapter.setList(mList);
                     updateView(1);
+                    progressBar.setVisibility(View.GONE);
                     mAdapter.notifyDataSetChanged();
                 }
             } else if (tipo == 2) {
@@ -440,6 +443,7 @@ public class GestionUsuariosActivity extends AppCompatActivity implements View.O
     }
 
     private void loadViews() {
+        progressBar = findViewById(R.id.progres);
         fabEstadistica = findViewById(R.id.fabEstadistica);
         txtInfo = findViewById(R.id.txtInfo);
         imgIcono = findViewById(R.id.imgFlecha);

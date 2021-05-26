@@ -8,28 +8,28 @@ import java.util.List;
 
 public class ProfesorViewModel {
 
-    private Context mContext;
+   private Context mContext;
     private ProfesorRepository mRepository;
 
     public ProfesorViewModel(Context context) {
         mContext = context;
-        mRepository = new ProfesorRepository(context);
+        mRepository = new ProfesorRepository();
     }
 
     public void insert(Profesor profesor) {
-        mRepository.insert(profesor);
+
     }
 
     public void delete(Profesor profesor) {
-        mRepository.delete(profesor);
+
     }
 
     public void update(Profesor profesor) {
-        mRepository.update(profesor);
+
     }
 
     public Profesor getById(int id) {
-        return mRepository.getById(id);
+        return null;
     }
 
     public boolean isExist(int id) {
@@ -38,11 +38,10 @@ public class ProfesorViewModel {
     }
 
     public List<Profesor> getAll() {
-        return mRepository.getAll();
+        return null;
     }
 
     public void deleteAll(){
-        mRepository.deleteAll();
     }
 
 }

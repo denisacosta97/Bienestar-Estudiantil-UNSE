@@ -7,28 +7,29 @@ import com.unse.bienestarestudiantil.Modelos.Egresado;
 import java.util.List;
 
 public class EgresadoViewModel {
+
     private Context mContext;
     private EgresadoRepository mRepository;
 
     public EgresadoViewModel(Context context) {
         mContext = context;
-        mRepository = new EgresadoRepository(context);
+        mRepository = new EgresadoRepository();
     }
 
     public void insert(Egresado egresado) {
-        mRepository.insert(egresado);
+
     }
 
     public void delete(Egresado egresado) {
-        mRepository.delete(egresado);
+
     }
 
     public void update(Egresado egresado) {
-        mRepository.update(egresado);
+
     }
 
     public Egresado getById(int id) {
-        return mRepository.getById(id);
+        return null;
     }
 
     public boolean isExist(int id) {
@@ -37,10 +38,10 @@ public class EgresadoViewModel {
     }
 
     public List<Egresado> getAll() {
-        return mRepository.getAll();
+        return null;
     }
 
     public void deleteAll(){
-        mRepository.deleteAll();
+
     }
 }

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_trans" />
+
+        <TextView
+            android:id="@+id/tv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTRO"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtAddAlumno"
+            android:textColor="@color/blackTextColor"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Nombre completo"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="text|textCapWords"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilApellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Apellidos"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="text|textCapWords"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtDNI"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="D.N.I"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="number"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFecha"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Fecha de nacimiento"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    android:inputType="date"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:maxLines="1"
+                    android:background="@drawable/edit_text_logreg"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linlayAlumno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Facultad: "
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Carrera: "
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_black"/>
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLeg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtLegajo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Legajo"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:inputType="number|text"
+                        android:background="@drawable/edit_text_logreg"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAnioIngAlu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtAnioIngrAlu"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Año de ingreso"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:inputType="number"
+                        android:background="@drawable/edit_text_logreg"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_centerInParent="true"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="Registrar Alumno"
+                android:fontFamily="@font/montserrat_black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

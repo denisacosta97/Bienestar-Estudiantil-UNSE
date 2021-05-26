@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AlumnoRepository {
     
-    private AlumnoDAO mAlumnoDAO;
+ /*   private AlumnoDAO mAlumnoDAO;
     private BDBienestar mBDBienestar;
     
     public AlumnoRepository(Context context){
@@ -44,6 +44,6 @@ public class AlumnoRepository {
 
     public void deleteAll(){
         mAlumnoDAO.deleteAll();
-    }
+    }*/
 
 }

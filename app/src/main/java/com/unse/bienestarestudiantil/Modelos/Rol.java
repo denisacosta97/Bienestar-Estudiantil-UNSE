@@ -5,11 +5,6 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.Insert;
-import androidx.room.PrimaryKey;
 
 import org.json.JSONException;
 import org.json.JSONObject;

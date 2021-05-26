@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProfesorRepository {
 
-    private ProfesorDAO mProfesorDAO;
+    /*private ProfesorDAO mProfesorDAO;
     private BDBienestar bdBienestar;
 
     public ProfesorRepository(Context application) {
@@ -45,5 +45,5 @@ public class ProfesorRepository {
     public void deleteAll(){
         mProfesorDAO.deleteAll();
     }
-
+*/
 }

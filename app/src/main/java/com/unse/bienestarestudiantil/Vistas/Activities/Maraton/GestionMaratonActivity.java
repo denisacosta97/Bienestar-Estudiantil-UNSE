@@ -65,8 +65,11 @@ public class GestionMaratonActivity extends AppCompatActivity implements View.On
                     case 15001:
                         startActivity(new Intent(getApplicationContext(), ListadoMaratonActivity.class));
                         break;
+                    case 15003:
+                        startActivity(new Intent(getApplicationContext(), CargaDatosMaratonActivity.class));
+                        break;
                     case 15002:
-                        //startActivity(new Intent(getApplicationContext(), GestionAtencionesActivity.class));
+                        startActivity(new Intent(getApplicationContext(), EstadisticasMaratonActivity.class));
                         break;
                 }
             }
@@ -78,6 +81,7 @@ public class GestionMaratonActivity extends AppCompatActivity implements View.On
     private void loadData() {
         mOpciones = new ArrayList<>();
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 15001, "Inscriptos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 15003, "Cargar Datos (CSV)", R.drawable.ic_item_arrow, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 15002, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
 

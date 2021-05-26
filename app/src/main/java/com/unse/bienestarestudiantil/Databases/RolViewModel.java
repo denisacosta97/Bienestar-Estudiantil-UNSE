@@ -114,6 +114,28 @@ public class RolViewModel {
         return count;
     }
 
+    public ArrayList<Rol> getAll(int user) {
+
+        SQLiteDatabase db = DBManager.getInstance().openDatabase();
+        ArrayList<Rol> list = new ArrayList<Rol>();
+        String query = String.format("select * from %s where %s = %s", Rol.TABLE, Rol.KEY_USER, user);
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                mRol = new Rol();
+                mRol.setIdUsuario(cursor.getInt(0));
+                mRol.setIdRol(cursor.getInt(1));
+                list.add(mRol);
+            } while (cursor.moveToNext());
+        }
+        DBManager.getInstance().closeDatabase();
+        cursor.close();
+
+        return list;
+
+    }
+
     public ArrayList<Rol> getAll() {
 
         SQLiteDatabase db = DBManager.getInstance().openDatabase();

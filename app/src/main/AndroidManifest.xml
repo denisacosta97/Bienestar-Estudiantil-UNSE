@@ -112,7 +112,7 @@
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.ListaInscriptosActivity" />
         <activity android:name=".Vistas.Activities.Deportes.GestionDeportes.Inscripciones.InscripcionesActivity" />
         <activity android:name=".Vistas.Activities.Perfil.ProfilePictureActivity" />
-        <activity android:name=".Vistas.Activities.Comedor.MainGestionComedor" />
+        <activity android:name=".Vistas.Activities.Comedor.GestionComedorActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosHistoricosActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.TurnosDiaActivity" />
         <activity android:name=".Vistas.Activities.Becas.GestionBecas.GestionTurnos.GestionTurnosActivity" />
@@ -193,6 +193,21 @@
         <activity android:name=".Vistas.Activities.PuntosConectividad.TurnosDiaPCActivity" />
         <activity android:name=".Vistas.Activities.PuntosConectividad.EstadisticasPCActivity" />
         <activity android:name=".Vistas.Activities.Gestion.GestionUsuarios.EstadisticasUsuarioActivity" />
+        <activity android:name=".Vistas.Activities.Maraton.CargaDatosMaratonActivity" />
+        <activity android:name=".Vistas.Activities.Maraton.EstadisticasMaratonActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.EstadisticasComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.OpinionesComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.ReservasComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.ReservasComedorDiaActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.ReservasHistorialComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.ResumenPDFComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.DiariaComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.NuevaReservaEspecialComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.BecadosComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.InfoBecadoComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.NuevoBecadoComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.MenuComedorActivity" />
+        <activity android:name=".Vistas.Activities.Comedor.NuevoMenuComedorActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

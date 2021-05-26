@@ -6,32 +6,27 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "profesor")
 public class Profesor extends Usuario implements Parcelable {
 
-    @Ignore
+    
     public static final String TABLE_PROFESOR = "profesor";
-    @Ignore
+    
     public static final String KEY_ID_PRO = "idProfesor";
 
-    @NonNull
+    
     private int idProfesor;
-    @NonNull
+    
     private String profesion;
-    @NonNull
+    
     private String fechaIngreso;
 
-    public Profesor(int idUsuario, @NonNull String nombre, @NonNull String apellido,
-                    @NonNull String fechaNac, @NonNull String pais, @NonNull String provincia,
-                    @NonNull String localidad, @NonNull String domicilio, @NonNull String barrio,
-                    @NonNull String telefono, @NonNull String sexo, @NonNull String mail,
-                    int tipoUsuario, @NonNull String fechaRegistro, @NonNull String fechaModificacion,
-                    int validez, int idProfesor, @NonNull String profesion, @NonNull String fechaIngreso) {
+    public Profesor(int idUsuario,  String nombre,  String apellido,
+                     String fechaNac,  String pais,  String provincia,
+                     String localidad,  String domicilio,  String barrio,
+                     String telefono,  String sexo,  String mail,
+                    int tipoUsuario,  String fechaRegistro,  String fechaModificacion,
+                    int validez, int idProfesor,  String profesion,  String fechaIngreso) {
         super(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
                 barrio, telefono, sexo, mail, tipoUsuario, fechaRegistro, fechaModificacion, validez);
         this.idProfesor = idProfesor;
@@ -39,12 +34,12 @@ public class Profesor extends Usuario implements Parcelable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    @Ignore
+    
     public Profesor() {
     }
 
 
-    @Ignore
+    
     protected Profesor(Parcel in) {
         setIdUsuario(in.readInt());
         setTipoUsuario(in.readInt());

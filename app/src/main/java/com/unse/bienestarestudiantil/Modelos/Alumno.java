@@ -6,39 +6,54 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "alumno")
+
 public class Alumno extends Usuario implements Parcelable {
 
-    @Ignore
+    
     public static final String TABLE_ALUMNO = "alumno";
-    @Ignore
+    
     public static final String KEY_ID_ALU = "idAlumno";
 
-    @NonNull
+    
     private int idAlumno;
-    @NonNull
+    
     private String carrera;
-    @NonNull
+    
     private String facultad;
-    @NonNull
+    
     private String anio;
-    @NonNull
+    
     private String legajo;
-    @NonNull
+    
     private int idRegularidad;
 
-    public Alumno(int idUsuario, @NonNull String nombre, @NonNull String apellido,
-                  @NonNull String fechaNac, @NonNull String pais, @NonNull String provincia,
-                  @NonNull String localidad, @NonNull String domicilio, @NonNull String barrio,
-                  @NonNull String telefono, @NonNull String sexo, @NonNull String mail,
-                  int tipoUsuario, @NonNull String fechaRegistro, @NonNull String fechaModificacion,
-                  int validez, int idAlumno, @NonNull String carrera, @NonNull String facultad,
-                  @NonNull String anio, @NonNull String legajo, int idRegularidad) {
+    
+    public Alumno(int idUsuario,  String nombre,  String apellido,
+                   String fechaNac,  String pais,  String provincia,
+                   String localidad,  String domicilio,  String barrio,
+                   String telefono,  String mail,
+                   String fechaRegistro,  String fechaModificacion,
+                  int validez, int idAlumno,  String carrera,  String facultad,
+                   String anio,  String legajo) {
+        super(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
+                barrio, telefono, "", mail, 0, fechaRegistro,
+                fechaModificacion, validez);
+        this.idAlumno = idAlumno;
+        this.carrera = carrera;
+        this.facultad = facultad;
+        this.anio = anio;
+        this.legajo = legajo;
+    }
+
+    
+    public Alumno(int idUsuario,  String nombre,  String apellido,
+                   String fechaNac,  String pais,  String provincia,
+                   String localidad,  String domicilio,  String barrio,
+                   String telefono,  String sexo,  String mail,
+                  int tipoUsuario,  String fechaRegistro,  String fechaModificacion,
+                  int validez, int idAlumno,  String carrera,  String facultad,
+                   String anio,  String legajo, int idRegularidad) {
         super(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
                 barrio, telefono, sexo, mail, tipoUsuario, fechaRegistro,
                 fechaModificacion, validez);
@@ -50,12 +65,12 @@ public class Alumno extends Usuario implements Parcelable {
         this.idRegularidad = idRegularidad;
     }
 
-    @Ignore
+    
     public Alumno() {
 
     }
 
-    @Ignore
+    
     protected Alumno(Parcel in) {
         setIdUsuario(in.readInt());
         setTipoUsuario(in.readInt());
@@ -99,12 +114,16 @@ public class Alumno extends Usuario implements Parcelable {
         try {
             if (o.get("datos") != null) {
                 JSONObject object = o.getJSONObject("datos");
-                String carrera = object.getString("carrera");
-                String facultad = object.getString("facultad");
-                String anio = object.getString("anio");
-                String legajo = object.getString("legajo");
-                int idRegularidad = Integer.parseInt(
-                        object.getString("idregularidad"));
+                String carrera = object.has("carrera") && !object.isNull("carrera") ?
+                        object.getString("carrera") : "";
+                String facultad = object.has("facultad") && !object.isNull("facultad") ?
+                        object.getString("facultad") : "";
+                String anio = object.has("anio") && !object.isNull("anio") ?
+                        object.getString("anio") : "";
+                String legajo = object.has("legajo") && !object.isNull("legajo") ?
+                        object.getString("legajo") : "";
+                int idRegularidad = object.has("idregularidad") && !object.isNull("idregularidad") ? Integer.parseInt(
+                        object.getString("idregularidad")) : 0;
 
                 alumno = new Alumno(usuario.getIdUsuario(), usuario.getNombre(), usuario.getApellido(),
                         usuario.getFechaNac(), usuario.getPais(), usuario.getProvincia(), usuario.getLocalidad(),

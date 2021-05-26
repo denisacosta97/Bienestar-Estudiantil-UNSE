@@ -1,19 +1,9 @@
 package com.unse.bienestarestudiantil.Databases;
 
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 
-import java.util.List;
-
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.Query;
-import androidx.room.Update;
-
-@Dao
 public interface UsuarioDAO {
 
-    @Insert
+  /*  @Insert
     void insert(Usuario usuario);
 
     @Update
@@ -29,5 +19,5 @@ public interface UsuarioDAO {
     void deleteAll();
 
     @Query("SELECT * FROM " + Usuario.TABLE_USER)
-    List<Usuario> getAll();
+    List<Usuario> getAll();*/
 }

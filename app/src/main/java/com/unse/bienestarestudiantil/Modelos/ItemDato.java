@@ -18,6 +18,7 @@ public class ItemDato extends ItemBase {
     public static final int TIPO_ATENCION = 9;
     public static final int TIPO_PACIENTE = 10;
     public static final int TIPO_PUNTO_C = 11;
+    public static final int TIPO_MENU = 12;
     private Inscripcion mInscripcion;
     private Temporada mTemporada;
     private Deporte mDeporte;
@@ -28,10 +29,19 @@ public class ItemDato extends ItemBase {
     private TurnosUAPU mTurnosUAPU;
     private Medicamento mMedicamento;
     private Paciente mPaciente;
+    private Menu menu;
     private PuntoConectividad mPuntoConectividad;
     private int tipo;
 
     public ItemDato() {
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     public Inscripcion getInscripcion() {
@@ -51,6 +61,11 @@ public class ItemDato extends ItemBase {
                 return String.valueOf(getTemporada().getAnio());
             case TIPO_DEPORTE:
                 return getDeporte().getName();
+            case TIPO_MENU:
+                return String.format("%s %s", Utils.getDayWeek(Utils.getFechaDate(
+                        String.format("%s-%s-%s", menu.getAnio(),
+                                menu.getMes(), menu.getDia())
+                )), menu.getDia());
             case TIPO_TURNO:
                 return String.format("%s %s", Utils.getDayWeek(Utils.getFechaDate(mTurno.getFechaRegistro())), mTurno.getDia());
             case TIPO_INGRESO:

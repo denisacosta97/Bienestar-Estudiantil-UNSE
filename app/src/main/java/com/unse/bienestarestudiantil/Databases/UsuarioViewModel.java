@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Databases;
 
 import androidx.lifecycle.LiveData;
+
 import android.content.Context;
 
 import com.unse.bienestarestudiantil.Modelos.Usuario;
@@ -9,28 +10,30 @@ import java.util.List;
 
 public class UsuarioViewModel {
 
+
     private Context mContext;
     private UsuarioRepository mRepository;
 
     public UsuarioViewModel(Context context) {
         mContext = context;
-        mRepository = new UsuarioRepository(context);
+        mRepository = new UsuarioRepository();
     }
 
     public void insert(Usuario usuario) {
-         mRepository.insert(usuario);
+
     }
 
     public void delete(Usuario usuario) {
-         mRepository.delete(usuario);
+
     }
 
     public void update(Usuario usuario) {
-         mRepository.update(usuario);
+
     }
 
     public Usuario getById(int id) {
-        return mRepository.getById(id);
+        return null;
+
     }
 
     public boolean isExist(int id) {
@@ -39,10 +42,10 @@ public class UsuarioViewModel {
     }
 
     public List<Usuario> getAll() {
-        return mRepository.getAll();
+        return null;
     }
 
-    public void deleteAll(){
-        mRepository.deleteAll();
+    public void deleteAll() {
+
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EgresadoRepository {
     
-    private EgresadoDAO mEgresadoDAO;
+    /*private EgresadoDAO mEgresadoDAO;
     private BDBienestar bdBienestar;
 
     public EgresadoRepository(Context application) {
@@ -44,6 +44,6 @@ public class EgresadoRepository {
 
     public void deleteAll(){
         mEgresadoDAO.deleteAll();
-    }
+    }*/
 
 }

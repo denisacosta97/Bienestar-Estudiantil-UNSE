@@ -2,13 +2,13 @@ package com.unse.bienestarestudiantil.Modelos;
 
 public class Opciones {
 
-    private String titulo;
+    private String titulo, colorString;
     private int icon, orientation;
-    private int color, colorText = 0, sizeText =0;
+    private int color, colorText = 0, sizeText = 0;
     private int id;
     private boolean disponibility = true;
 
-    public Opciones(int orientation, int id,String titulo, int icon, int color) {
+    public Opciones(int orientation, int id, String titulo, int icon, int color) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -23,7 +23,7 @@ public class Opciones {
         this.orientation = orientation;
     }
 
-    public Opciones(boolean dis, int orientation, int id,String titulo, int icon, int color) {
+    public Opciones(boolean dis, int orientation, int id, String titulo, int icon, int color) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -32,7 +32,16 @@ public class Opciones {
         this.disponibility = dis;
     }
 
-    public Opciones(int orientation,int id,String titulo, int icon, int color, int colorText) {
+    public Opciones(boolean dis, int orientation, int id, String titulo, int icon, String color) {
+        this.titulo = titulo;
+        this.icon = icon;
+        this.colorString = color;
+        this.id = id;
+        this.orientation = orientation;
+        this.disponibility = dis;
+    }
+
+    public Opciones(int orientation, int id, String titulo, int icon, int color, int colorText) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -41,7 +50,7 @@ public class Opciones {
         this.orientation = orientation;
     }
 
-    public Opciones(boolean dis,int orientation,int id,String titulo, int icon, int color, int colorText) {
+    public Opciones(boolean dis, int orientation, int id, String titulo, int icon, int color, int colorText) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -51,7 +60,7 @@ public class Opciones {
         this.disponibility = dis;
     }
 
-    public Opciones(int orientation,int id,String titulo, int icon, int color, int colorText, int sizeText) {
+    public Opciones(int orientation, int id, String titulo, int icon, int color, int colorText, int sizeText) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -61,7 +70,7 @@ public class Opciones {
         this.orientation = orientation;
     }
 
-    public Opciones(int orientation, boolean disponibility, int id,String titulo, int icon, int color, int colorText, int sizeText) {
+    public Opciones(int orientation, boolean disponibility, int id, String titulo, int icon, int color, int colorText, int sizeText) {
         this.titulo = titulo;
         this.icon = icon;
         this.color = color;
@@ -79,6 +88,14 @@ public class Opciones {
     public Opciones(String titulo, int id) {
         this.titulo = titulo;
         this.id = id;
+    }
+
+    public String getColorString() {
+        return colorString;
+    }
+
+    public void setColorString(String colorString) {
+        this.colorString = colorString;
     }
 
     public int getOrientation() {

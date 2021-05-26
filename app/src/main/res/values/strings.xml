@@ -269,6 +269,31 @@
     <string name="paradasError">Error al cargar las paradas</string>
     <string name="qrNoData">¡QR no válido!</string>
     <string name="confirmado">¡Confirmado!</string>
+    <string name="errorPDF">¡Error al crear el PDF!</string>
+    <string name="noCSV">¡No es un CSV!</string>
+    <string name="noMenuDisponible">NO HAY MENÚ DISPONIBLE EL DÍA DE HOY</string>
+   <string name="noMenuAceptaReserva">YA NO SE ACEPTAN RESERVAS</string>
+   <string name="reservada">¡Reservado!</string>
+   <string name="salioMal">Algo salio mal</string>
+   <string name="reservaAdminExito">La reserva #%s fue registrada y retirada exitosamente.</string>
+   <string name="reservaError">Hubo un inconveniente con tu reserva, intentá nuevamente</string>
+    <string name="yaReservo">¡Ya se reservó en este menú!</string>
+   <string name="usuarioYaReservo">El usuario ingreso ya reservó  éste menú</string>
+   <string name="menuPermite">El menú del día ya no permite reservas</string>
+   <string name="menuCerrado">El menú del día ya fue cerrado</string>
+   <string name="elegirMenu">El menú no fue seleccionado</string>
+   <string name="menuActualizarError">¡Error al actualizar el menú!</string>
+   <string name="noReservasHistorial">¡No existen reservas!</string>
+   <string name="yaReservoEspecial">¡El usuario ya reservó en este menú!</string>
+   <string name="reservaInfo">¿Estás seguro que deseas reservar el menú el día %02d/%02d/%02d?</string>
+   <string name="finalizarMenu">¿Estás seguro que deseas terminar el día?</string>
+   <string name="restringirMenu">¿Estás seguro que deseas restringir las reservas?</string>
+   <string name="rehabilitarMenu">¿Estás seguro que deseas volver a habilitar el día?</string>
+   <string name="rehabilitarReservaMenu">¿Estás seguro que deseas volver a habilitar las reservas?</string>
+   <string name="txtNotaEspecial">NOTA: en caso de ser más de una persona, completar con 0 el campo DNI. La cantidad de reservas, corresponde a la cantidad de personas. En cuanto a la cantidad de porciones, se ligará automaticamente con el menú que corresponda del día.</string>
+    <string name="txtAddAlumno">Complete OBLIGATORIAMENTE todos los datos del alumno.</string>
+    <string name="txtNotaMenu">NOTA: en caso de no ofrecer cena y/o postre, dejar en blanco.</string>
+    <string name="yaExiste">¡Ya existe el registro!</string>
 
 </resources>
 

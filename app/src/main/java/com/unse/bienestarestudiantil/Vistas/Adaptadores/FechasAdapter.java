@@ -30,6 +30,8 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int TIPO_ATENCION = 6;
     public static final int TIPO_ATENCION_2 = 7;
     public static final int TIPO_PUNTO_C = 8;
+    public static final int TIPO_COMEDOR = 9;
+    public static final int TIPO_MENU = 10;
 
     private Context mContext;
     private ArrayList<ItemBase> lista;
@@ -128,6 +130,14 @@ public class FechasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
                 }else if (tipo == TIPO_PUNTO_C){
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }else if (tipo == TIPO_COMEDOR){
+                    dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
+                    dateViewHolder.txtEstado.setVisibility(View.GONE);
+                    dateViewHolder.txtTitulo.setText(dateItem.getTextValue());
+                }else if (tipo == TIPO_MENU){
                     dateViewHolder.txtNroArchivo.setVisibility(View.GONE);
                     dateViewHolder.txtEstado.setVisibility(View.GONE);
                     dateViewHolder.txtTitulo.setText(dateItem.getTextValue());

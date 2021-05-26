@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -30,13 +31,23 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.itextpdf.forms.PdfAcroForm;
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 import com.unse.bienestarestudiantil.Databases.AlumnoViewModel;
 import com.unse.bienestarestudiantil.Databases.EgresadoViewModel;
 import com.unse.bienestarestudiantil.Databases.ProfesorViewModel;
@@ -44,6 +55,9 @@ import com.unse.bienestarestudiantil.Databases.RolViewModel;
 import com.unse.bienestarestudiantil.Databases.UsuarioViewModel;
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageManager;
 import com.unse.bienestarestudiantil.Modelos.Archivo;
+import com.unse.bienestarestudiantil.Modelos.Maraton;
+import com.unse.bienestarestudiantil.Modelos.Reserva;
+import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 
 import java.io.ByteArrayOutputStream;
@@ -59,6 +73,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -131,6 +147,7 @@ public class Utils {
     public static final int REQUEST_LOCATION = 9096;
     public static final int REQUEST_CHECK_SETTINGS = 9097;
     public static final int GET_FROM_GALLERY = 9096;
+    public static final int REQUEST_FILE_CSV = 9098;
     //Constantes para tipos de usuario
     public static final int TIPO_USUARIO = 1;
     public static final int TIPO_ESTUDIANTE = 2;
@@ -182,7 +199,11 @@ public class Utils {
     public static final String TORNEO = "dato_torneo";
     public static final String NOTICIA = "dato_noticias";
     public static final String RESERVA = "dato_reserva";
+    public static final String ID_MENU = "id_menu";
+    public static final String RESERVA_ESPECIALES = "reservaE";
     public static final String DATA_RESERVA = "dato_reserva";
+    public static final String MESNAME = "mes_name";
+    public static final String NUMERO_MES = "numero_mes";
     public static final String DATA_CONVOCATORIA = "dato_convocatoria";
     public static final String DATA_TURNO = "data_turno";
     public static final String DATA_FACULTAD = "data_facultad";
@@ -193,10 +214,12 @@ public class Utils {
     public static final String USER_NAME = "dato_user";
     public static final String NUM_INST = "num_inst";
     public static final String NUM_CONVOC = "num_conv";
+    public static final String MENU = "menu_comedor";
     public static final int LIST_RESET = 0;
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
+
 
 
     private static final String IP = "sis.bienestar.unse.edu.ar/api";
@@ -215,6 +238,8 @@ public class Utils {
     public static final String URL_USUARIO_BY_ID_REDUCE = "https://" + IP + "/usuario/getUserReduce.php";
     public static final String URL_USUARIO_ESTADISTICA = "https://" + IP + "/usuario/getEstadisticas.php";
 
+
+    public static final String URL_INSCRIPCION_MARATON = "https://" + IP + "/deportes/carrera/insertar.php";
     //ALUMNO
     public static final String URL_REGULARIDAD = "https://" + IP + "/usuario/insertarRegularidad.php";
     public static final String URL_REGULARIDAD_CAMBIAR = "https://" + IP + "/usuario/cambiarRegularidad.php";
@@ -256,6 +281,7 @@ public class Utils {
 
     //MARATON
     public static final String URL_INSCRIPTOS_MARATON = "https://" + IP + "/deportes/carrera/getInscriptos.php";
+    public static final String URL_MARATON_ESTADISTICA = "https://" + IP + "/deportes/carrera/getEstadisticas.php";
 
     //POLIDEPORTIVO
     public static final String URL_INGRESO_POLI = "http://" + IP + "/bienestar/polideportivo/pileta/ingresoPoli.php";
@@ -373,9 +399,38 @@ public class Utils {
     public static final String URL_TURNO_NUEVO = "https://" + IP + "/becas/turno/insertar.php";
     public static final String URL_TURNO_UAPU_NUEVO = "https://" + IP + "/uapu/turno/insertar.php";
     public static final String URL_TURNO_ESTADISTICA = "https://" + IP + "/uapu/turno/getEstadistica.php";
-
     public static final String URL_CERTIFICADOS = "https://" + IP + "/uapu/certificado/getCertificados.php";
     public static final String URL_CERTIFICADOS_NUEVO = "https://" + IP + "/uapu/certificado/insertar.php";
+
+    //COMEDOR
+    private static final String IP_2 = "bienestar.unse.edu.ar";
+    public static final String URL_MENU_NUEVO = "http://" + IP_2 + "/bienestar/comedor/menu/insertarMenu.php";
+    public static final String URL_MENU_ACTUALIZAR = "http://" + IP_2 + "/bienestar/comedor/menu/actualizarMenu.php";
+    public static final String URL_MENU_LISTADO= "http://" + IP_2 + "/bienestar/comedor/menu/getMenus.php";
+    public static final String URL_USUARIO_INSERTAR_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/beneficiario/insertarUsuario.php";
+    public static final String URL_USUARIO_ACTUALIZAR_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/beneficiario/actualizarUsuario.php";
+    public static final String URL_USUARIO_ELIMINAR_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/beneficiario/eliminarUsuario.php";
+    public static final String URL_RESERVA_USUARIO = "http://" + IP_2 + "/bienestar/comedor/reserva/getReservaByUser.php";
+    public static final String URL_USUARIOS_LISTA_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/beneficiario/getUsuarios.php";
+    public static final String URL_ESTADISTICA_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/getReportes.php";
+    public static final String URL_SUGERENCIA_LISTA = "http://" + IP_2 + "/bienestar/comedor/sugerencia/getSugerencias.php";
+    public static final String URL_RESERVA_HOY = "http://" + IP_2 + "/bienestar/comedor/reserva/getReservaByDay.php";
+    public static final String URL_DATOS_RESERVA_MENSUAL = "http://" + IP_2 + "/bienestar/comedor/getReporteMensualReservas.php";
+    public static final String URL_RESERVA_HISTORIAL = "http://" + IP_2 + "/bienestar/comedor/reserva/getReservas.php";
+    public static final String URL_MENU_HOY = "http://" + IP_2 + "/bienestar/comedor/menu/getMenuToday.php";
+    public static final String URL_RESERVA_ACTUALIZAR = "http://" + IP_2 + "/bienestar/comedor/reserva/actualizarReserva.php";
+    public static final String URL_MENU_TERMINAR = "http://" + IP_2 + "/bienestar/comedor/menu/terminarMenu.php";
+    public static final String URL_MENU_RESTRINGIR = "http://" + IP_2 + "/bienestar/comedor/menu/restringirMenu.php";
+    public static final String URL_USUARIO_BY_ID_REDUCE_COMEDOR = "http://" + IP_2 + "/bienestar/usuario/getUserReduce.php";
+    public static final String URL_RESERVA_INSERTAR_ESPECIAL = "http://" + IP_2 + "/bienestar/comedor/reserva/insertarReservaEspecial.php";
+    public static final String URL_RESERVA_INSERTAR_ALUMNO = "http://" + IP_2 + "/bienestar/comedor/reserva/insertarReservaAlumno.php";
+
+    public static final String URL_USUARIO_BY_ID_COMEDOR = "http://" + IP_2 + "/bienestar/comedor/beneficiario/getUsuario.php";
+
+
+
+
+
 
     public static final String URL_FECHAS_VALIDA = "https://" + IP + "/becas/fecha/getFechaInvalidate.php";
 
@@ -414,16 +469,11 @@ public class Utils {
             "Tecnicatura Sup. Adm. y Gestión Universitaria",
             "Tecnicatura en Educación Intercultural Bilingue"};
 
-    public static String[] categorias = {"Seleccione una opción...", "Alumno", "Profesor", "Nodocente", "Egresado",
+    public static String[] categorias = {"Alumno", "Profesor", "Nodocente", "Egresado",
             "Particular", "Afiliado", "Jubilado", "Otro"};
 
-    public static String[] horaCanchasDía = {"10:00", "11:00", "12:00", "13:00", "14:00", "15:00",
-            "16:00", "17:00", "18:00"};
+    public static String[] rangoEdad = {"Menor de 18 años", "19 a 24", "25 a 29", "30 a 34", "35 a 39", "40 a 44", "45 a 49", "50 a 54", "55 a 59", "60 o mas"};
 
-    public static String[] horaCanchasNoche = {"19:00", "20:00", "21:00", "22:00", "23:00", "00:00",
-            "01:00", "02:00"};
-
-    public static String[] canchas = {"Fútbol 11", "Fútbol 8", "Fútbol 5", "Futsal"};
 
     public static String dataAlumno = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&car=%s&fac=%s&anio=%s&leg=%s" +
@@ -439,6 +489,64 @@ public class Utils {
 
     public static String dataPartiNoDoc = "?idU=%s&nom=%s&ape=%s&fechan=%s&pais=%s&prov=%s&local=%s" +
             "&dom=%s&sex=%s&tipo=%s&mail=%s&tel=%s&barr=%s&fecham=%s";
+
+    public static int[] getColors() {
+
+        return new int[]{
+                ColorTemplate.rgb("#FF1744"),
+                ColorTemplate.rgb("#1E88E5"),
+                ColorTemplate.rgb("#00BFA5"),
+                ColorTemplate.rgb("#00C853"),
+                ColorTemplate.rgb("#F57F17"),
+                ColorTemplate.rgb("#FFC107"),
+                ColorTemplate.rgb("#DD2C00"),
+                ColorTemplate.rgb("#607D8B"),
+                ColorTemplate.rgb("#827717"),
+                ColorTemplate.rgb("#DCEDC8"),
+                ColorTemplate.rgb("#B2DFDB"),
+                ColorTemplate.rgb("#B2EBF2"),
+                ColorTemplate.rgb("#4FC3F7"),
+                ColorTemplate.rgb("#3F51B5"),
+                ColorTemplate.rgb("#D1C4E9"),
+                ColorTemplate.rgb("#BA68C8"),
+                ColorTemplate.rgb("#E91E63"),
+                ColorTemplate.rgb("#EF5350"),
+                ColorTemplate.rgb("#FFCDD2"),
+                ColorTemplate.rgb("#DCE775"),
+                ColorTemplate.rgb("#0277BD"),
+                ColorTemplate.rgb("#7CB342"),
+                ColorTemplate.rgb("#FDD835")
+                /* android.graphics.Color.rgb(255, 51, 51),
+                 android.graphics.Color.rgb(102, 178, 255),
+
+                 android.graphics.Color.rgb(255, 153, 51),
+                 android.graphics.Color.rgb(102, 102, 255),
+
+                 android.graphics.Color.rgb(255, 255, 51),
+                 android.graphics.Color.rgb(178, 102, 255),
+
+                 android.graphics.Color.rgb(178, 255, 102),
+                 android.graphics.Color.rgb(255, 102, 255),
+
+                 android.graphics.Color.rgb(102, 255, 102),
+                 android.graphics.Color.rgb(255, 102, 178),
+
+                 android.graphics.Color.rgb(102, 255, 178),
+                 android.graphics.Color.rgb(192, 192, 192),
+                 android.graphics.Color.rgb(102, 255, 255),
+
+
+                 android.graphics.Color.rgb(218, 165, 32),
+                 android.graphics.Color.rgb(70, 130, 180),
+
+                 android.graphics.Color.rgb(128, 128, 0),
+                 android.graphics.Color.rgb(139, 0, 139),
+
+                 android.graphics.Color.rgb(0, 100, 0),
+                 android.graphics.Color.rgb(255, 228, 196),
+                 android.graphics.Color.rgb(47, 79, 79)*/};
+
+    }
 
 
     public static void changeColorDrawable(ImageView view, Context context, int color) {
@@ -680,55 +788,401 @@ public class Utils {
 
     }
 
-    public static void createPDF(Context context, String name) {
-        File file = null;
+    public static void createReportMensualPDF(List<Usuario> usuarios, Context context, String mes,
+                                              int dias, HashMap<String, Integer[]> reservasAlumnosDias,
+                                              Bitmap graficoBarra, Bitmap graficoTorta, int[] reserva) {
         Document document = null;
-        AssetManager assetManager = context.getAssets();
-        InputStream in = null;
-        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR/";
+        FileOutputStream fileOutputStream = null;
         try {
-            File directorio = new File(directory_path);
-            if (!directorio.exists())
-                directorio.mkdirs();
-            in = assetManager.open(name);
-            file = new File(directory_path, "prov_" + name);
-            crearArchivoProvisorio(in, file);
-
-            File src = new File(directory_path, "prov_" + name);
-            String names = name.substring(0, name.length() - 4);
-            names = names + "_" + getHoraWithSeconds(new Date(System.currentTimeMillis())) + ".pdf";
-            File des = new File(directory_path, names);
-            if (!src.exists()) {
-                try {
-                    InputStream is = context.getAssets().open(name);
-                    byte[] buffer = new byte[1024];
-                    is.read(buffer);
-                    is.close();
-                    FileOutputStream fos = new FileOutputStream(src);
-                    fos.write(buffer);
-                    fos.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR_ESTUDIANTIL/COMEDOR/";
+            File file = new File(directory_path);
+            if (!file.exists()) {
+                file.mkdirs();
             }
-            PdfDocument pdfDocument = new PdfDocument(new PdfReader(src), new PdfWriter(des));
-            PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDocument, true);
-            form.getField("DNI").setValue("4000000");
-            pdfDocument.close();
-            src.delete();
-            //document = new Document(pdfDocument);
-            //document.close();
-            /*document.add(getText("SYSTOCK", 15, true));
-            document.add(getText("Sistema de Gestión de Mercadería, Facturación y Gestión de Clientes", 12, true));
-            document.add(getText("----------------------------------------------------------------------------------------------------------------------", 11, true));
-            document.add(getText("Datos del Pedido", 12, false));
-            document.close();*/
+            File filePath = new File(getNameFile(directory_path, 2, mes.toUpperCase()));
+            if (!file.exists())
+                file.createNewFile();
+            fileOutputStream = new FileOutputStream(filePath);
+            PdfWriter pdfWriter = new PdfWriter(fileOutputStream);
+            document = new Document(new PdfDocument(pdfWriter));
+            PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+            addHeadder(document, font, context, "COMEDOR UNIVERSITARIO");
+            document.add(getText(String.format("REPORTE MENSUAL: %s", mes.toUpperCase()), 10, true).setFont(font));
+
+            document.add(getText(String.format("TOTAL DE PORCIONES ENTREGADAS : %s", reserva[0]), 10, false).setFont(font));
+            document.add(getText(String.format("TOTAL DE PORCIONES ESPECIALES : %s", reserva[1]), 10, false).setFont(font));
+            document.add(getText(String.format("TOTAL DE PORCIONES : %s", reserva[0] + reserva[1]), 10, false).setFont(font));
+
+            document.add(getText(String.format("TOTAL DE RESERVAS : %s", reserva[2]), 9, false).setFont(font));
+            document.add(getText(String.format("TOTAL DE RESERVAS ESPECIALES: %s", reserva[3]), 9, false).setFont(font));
+
+            if (graficoBarra != null) {
+                document.add(getText("GRÁFICA TOTAL DE RESERVAS", 10, true).setFont(font));
+                Image image = loadImage(context, graficoBarra, 250, 238);
+                document.add(image.setTextAlignment(TextAlignment.CENTER));
+
+
+            }
+
+            if (graficoTorta != null) {
+                document.add(getText("GRÁFICA DE RESERVAS POR FACULTAD", 10, true).setFont(font));
+                Image image = loadImage(context, graficoTorta, 250, 229);
+                document.add(image.setTextAlignment(TextAlignment.CENTER));
+            }
+
+            document.add(getText("TABLA MENSUAL", 10, true).setFont(font));
+            UnitValue[] columnas = new UnitValue[2 + dias + 1];
+            columnas[0] = new UnitValue(UnitValue.PERCENT, 18f);
+            columnas[1] = new UnitValue(UnitValue.PERCENT, 6f);
+            for (int i = 2; i < 11; i++) {
+                columnas[i] = new UnitValue(UnitValue.PERCENT, 1.6f);
+            }
+            for (int i = 11; i < (dias + 2); i++) {
+                columnas[i] = new UnitValue(UnitValue.PERCENT, 2f);
+            }
+            columnas[columnas.length - 1] = new UnitValue(UnitValue.PERCENT, 3f);
+            Table table = new Table(columnas)
+                    .setWidth(UnitValue.createPercentValue(100))
+                    .setMarginTop(10)
+                    .setMarginBottom(10);
+            table.addHeaderCell(createCell("Apellido y Nombre", true, 8).setFont(font));
+            table.addHeaderCell(createCell("D.N.I", true, 8).setFont(font));
+            for (int i = 1; i <= dias; i++) {
+                table.addHeaderCell(createCell(String.valueOf(i), true, 8).setFont(font));
+            }
+            table.addHeaderCell(createCell("T", true, 8).setFont(font));
+            for (Usuario usuario : usuarios) {
+                table.addCell(getText(String.format("%s %s", usuario.getApellido(), usuario.getNombre()),
+                        8, true));
+                table.addCell(getText(String.valueOf(usuario.getIdUsuario()), 8, true));
+                int total = 0;
+                Integer[] reservas = reservasAlumnosDias.get(String.valueOf(usuario.getIdUsuario()));
+                for (int i = 1; i <= dias; i++) {
+                    if (reservas != null) {
+                        if (reservas[i - 1] == 1) {
+                            table.addCell(createCell("X", true, 7));
+                            total++;
+                        } else {
+                            table.addCell(createCell(" ", true, 7));
+                        }
+                    } else {
+                        table.addCell(createCell(" ", true, 7));
+                    }
+                }
+                table.addCell(createCell(String.valueOf(total), true, 7));
+            }
+           /* table.addCell(createCell("TOTAL", true, 7).setFont(font));
+            table.addCell(createCell("     ", true, 7).setFont(font));
+            for (int i = 1; i <= dias; i++) {
+                table.addCell(createCell(String.valueOf(new Random().nextInt(30)), true, 7));
+            }*/
+            document.add(table);
+
+           /* document.add(getText("TOTAL DE RESERVAS POR DÍA", 10, true).setFont(font));
+            columnas = new UnitValue[7];
+
+            for (int i = 1; i < 7; i++) {
+                columnas[i] = new UnitValue(UnitValue.PERCENT, 3f);
+            }
+            table = new Table(columnas)
+                    .setWidth(UnitValue.createPercentValue(100))
+                    .setMarginTop(10)
+                    .setMarginBottom(10);
+            for (int i = 1; i <= 7; i++) {
+                table.addCell(createCell(String.valueOf(i), true, 8).setFont(font));
+                //table.addHeaderCell(createCell(String.valueOf(i), true, 8).setFont(font));
+            }
+            for (int i = 1; i <= 7; i++) {
+                table.addCell(createCell(" 10 ", true, 8).setFont(font));
+                //table.addHeaderCell(createCell(String.valueOf(i), true, 8).setFont(font));
+            }
+            for (int i = 1; i <= 7; i++) {
+                table.addCell(createCell(String.valueOf(i), true, 8).setFont(font));
+            }
+            document.add(table);
+
+           */
+
+
+            addFooter(document, font);
+            document.close();
+
 
         } catch (IOException e) {
             e.printStackTrace();
+            showToast(context, context.getString(R.string.errorPDF));
         }
 
     }
+
+    public static Bitmap getBitmapFromView(Activity context, View layout) {
+        Bitmap returnBitmap = null;
+        if (layout != null) {
+            // create bitmap screen capture
+            // View v1 = context.getWindow().getDecorView().getRootView();
+            //v1.setDrawingCacheEnabled(true);
+            //Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            //v1.setDrawingCacheEnabled(false);
+
+            int totalHeight = layout.getHeight();
+            int totalWidth = layout.getWidth();
+            float percent = 0.99f;//use this value to scale bitmap to specific size
+
+            returnBitmap = Bitmap.createBitmap(totalWidth,totalHeight, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(returnBitmap);
+            canvas.scale(percent, percent);
+            layout.draw(canvas);
+            return returnBitmap;
+
+
+/*
+
+            FileStorageManager fileStorageManager = new FileStorageManager(context.getApplicationContext());
+            fileStorageManager.setFileName("pic1.jpg");
+            fileStorageManager.setFolderName("pdf");
+            FileOutputStream outputStream = null;
+            try {
+                File file = new File(Environment
+                        .getExternalStorageDirectory().toString(), "pic1.jpg");
+                if (!file.exists())
+                    file.mkdir();
+                outputStream = new FileOutputStream(file);
+                int quality = 100;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+                outputStream.flush();
+                outputStream.close();
+                file.delete();
+                FileStorageManager.saveBitmap(context, "pdf","pic1.jpg", bitmap, false);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                returnBitmap = FileStorageManager.getBitmap(context.getApplicationContext(),
+                        "pdf","pic1", false);
+            }*/
+
+
+            /*if (layout.getMeasuredHeight() < 0) {
+                returnBitmap = Bitmap.createBitmap(layout.getLayoutParams().width,
+                        layout.getLayoutParams().height, Bitmap.Config.ARGB_8888);
+            } else {
+                //layout.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                returnBitmap = Bitmap.createBitmap(layout.getMeasuredWidth(),
+                        layout.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+            }
+            Canvas canvas = new Canvas(returnBitmap);
+            canvas.drawColor(Color.TRANSPARENT);
+            if (layout.getMeasuredHeight() > 0)
+                layout.layout(layout.getLeft(), layout.getTop(), layout.getRight(), layout.getBottom());
+            else
+                layout.layout(0, 0, layout.getMeasuredWidth(), layout.getMeasuredWidth());
+            layout.draw(canvas);*/
+        }
+        return returnBitmap;
+    }
+
+    public static void createPDF(List<Usuario> usuarios, Context context) {
+        Document document = null;
+        FileOutputStream fileOutputStream = null;
+        try {
+            String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR_ESTUDIANTIL/COMEDOR/";
+            File file = new File(directory_path);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            File filePath = new File(getNameFile(directory_path, 2, ""));
+            if (!file.exists())
+                file.createNewFile();
+            fileOutputStream = new FileOutputStream(filePath);
+            PdfWriter pdfWriter = new PdfWriter(fileOutputStream);
+            document = new Document(new PdfDocument(pdfWriter));
+            PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+            addHeadder(document, font, context, "COMEDOR UNIVERSITARIO");
+            document.add(getText("LISTADO DE USUARIOS", 10, true).setFont(font));
+            Table table = new Table(new UnitValue[]{
+                    new UnitValue(UnitValue.PERCENT, 20f),
+                    new UnitValue(UnitValue.PERCENT, 6f),
+                    new UnitValue(UnitValue.PERCENT, 10f),
+                    new UnitValue(UnitValue.PERCENT, 10f),
+                    new UnitValue(UnitValue.PERCENT, 12f),
+                    new UnitValue(UnitValue.PERCENT, 10f),
+                    new UnitValue(UnitValue.PERCENT, 10f),
+                    new UnitValue(UnitValue.PERCENT, 10f),
+                    new UnitValue(UnitValue.PERCENT, 11f)
+            })
+                    .setWidth(UnitValue.createPercentValue(100))
+                    .setMarginTop(10).setMarginBottom(10);
+            table.addHeaderCell(createCell("Apellido y Nombre", true, 8).setFont(font));
+            table.addHeaderCell(createCell("D.N.I", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Lunes", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Martes", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Miércoles", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Jueves", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Viernes", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Sábado", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Domingo", true, 8).setFont(font));
+            for (Usuario usuario : usuarios) {
+                table.addCell(getText(String.format("%s %s", usuario.getApellido(), usuario.getNombre()),
+                        8, true));
+                table.addCell(getText(String.valueOf(usuario.getIdUsuario()), 8, true));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+                table.addCell(createCell("          ", true, 9));
+            }
+            document.add(table);
+            addFooter(document, font);
+            document.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showToast(context, context.getString(R.string.errorPDF));
+        }
+
+    }
+
+    public static void createPDFMaraton(List<Maraton> usuarios, Context context) {
+        Document document = null;
+        FileOutputStream fileOutputStream = null;
+        try {
+            String directory_path = Environment.getExternalStorageDirectory().getPath() + "/BIENESTAR_ESTUDIANTIL/DEPORTES/";
+            File file = new File(directory_path);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            File filePath = new File(getNameFile(directory_path, 1, ""));
+            if (!file.exists())
+                file.createNewFile();
+            fileOutputStream = new FileOutputStream(filePath);
+            PdfWriter pdfWriter = new PdfWriter(fileOutputStream);
+            document = new Document(new PdfDocument(pdfWriter));
+            PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+            addHeadder(document, font, context, "ÁREA DEPORTES");
+            document.add(getText("LISTADO DE INSCRIPTOS - 1° MARATÓN VIRTUAL", 10, true).setFont(font));
+            Table table = new Table(new UnitValue[]{
+                    new UnitValue(UnitValue.PERCENT, 5f),
+                    new UnitValue(UnitValue.PERCENT, 12f),
+                    new UnitValue(UnitValue.PERCENT, 7f),
+                    new UnitValue(UnitValue.PERCENT, 9f),
+                    new UnitValue(UnitValue.PERCENT, 13f),
+                    new UnitValue(UnitValue.PERCENT, 7f),
+                    new UnitValue(UnitValue.PERCENT, 5f),
+                    new UnitValue(UnitValue.PERCENT, 4f)
+            })
+                    .setWidth(UnitValue.createPercentValue(100))
+                    .setMarginTop(10).setMarginBottom(10);
+            table.addHeaderCell(createCell("Nro", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Nombre y Apellido", true, 8).setFont(font));
+            table.addHeaderCell(createCell("D.N.I", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Teléfono", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Mail", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Tipo", true, 8).setFont(font));
+            table.addHeaderCell(createCell("Edad", true, 8).setFont(font));
+            table.addHeaderCell(createCell("KM", true, 8).setFont(font));
+            for (Maraton usuario : usuarios) {
+                table.addCell(getText(String.format("# %s", usuario.getIdInscripcion()), 9, true));
+                table.addCell(getText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()).toUpperCase(),
+                        8, true));
+                table.addCell(getText(String.valueOf(usuario.getIdUsuario()), 9, true));
+                table.addCell(getText(String.valueOf(usuario.getTelefono()), 9, true));
+                table.addCell(getText(String.valueOf(usuario.getMail()), 8, true));
+                table.addCell(getText(String.valueOf(usuario.getTipo()), 8, true));
+                int edad = Utils.getEdad(Utils.getFechaDate(usuario.getFechaNac()));
+                table.addCell(getText(String.valueOf(edad), 9, true));
+                table.addCell(getText(String.valueOf(usuario.getCarrera()), 9, true));
+            }
+            document.add(table);
+            addFooter(document, font);
+            document.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showToast(context, context.getString(R.string.errorPDF));
+        }
+
+    }
+
+    public static void addHeadder(Document document, PdfFont font, Context context, String area) {
+        Image image = loadImage(context, R.drawable.encabezado, 179, 79);
+        document.add(image.setTextAlignment(TextAlignment.CENTER));
+        document.add(getText("SECRETARÍA DE BIENESTAR ESTUDIANTIL", 12, true).setFont(font));
+        document.add(getText("SISTEMA DE GESTIÓN - " + area, 11, true).setFont(font));
+
+    }
+
+    public static void addFooter(Document document, PdfFont font) {
+        document.add(getText("Generado desde App Bienestar Estudiantil - UNSE", 10, false)
+                .setTextAlignment(TextAlignment.RIGHT)
+                .setFont(font));
+        document.add(getText("Fecha de Generación: " +
+                getFechaOrder(new Date(System.currentTimeMillis())), 10, false)
+                .setTextAlignment(TextAlignment.RIGHT));
+
+
+    }
+
+    private static Image loadImage(Context context, Bitmap bitmap, int width, int height) {
+        bitmap = resize(bitmap, width, height);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        Image image = null;
+        byte[] bytes = stream.toByteArray();
+        image = new Image(ImageDataFactory.create(bytes));
+        return image;
+    }
+
+    private static Image loadImage(Context context, int img, int width, int height) {
+        Drawable drawable = context.getResources().getDrawable(img);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        // bitmap = resize(bitmap, width, height);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 95, stream);
+        Image image = null;
+        byte[] bytes = stream.toByteArray();
+        image = new Image(ImageDataFactory.create(bytes));
+        return image;
+    }
+
+
+    private static Paragraph getText(String text, float size, boolean center, Color color) {
+        return center ? new Paragraph(text).setFontColor(color).setFontSize(size).setTextAlignment(TextAlignment.CENTER)
+                : new Paragraph(text).setFontSize(size);
+    }
+
+    public static String getNameFile(String directory_path, int tipo, String extra) {
+        String data = "";
+        switch (tipo) {
+            case 1:
+                data = "LISTADO_INSCRIPTOS_MARATON_";
+                break;
+            case 2:
+                data = "LISTADO_USUARIOS_COMEDOR_";
+                break;
+        }
+        return String.format("%s%s%s%s", directory_path, data, extra,
+                getFechaName(new Date(System.currentTimeMillis())) + ".pdf");
+
+    }
+
+    private static Cell createCell(String text, boolean center, int size) {
+        return center ? new Cell().setPadding(0.8f)
+                .add(new Paragraph(text).setFontSize(size)
+                        .setMultipliedLeading(1)).setTextAlignment(TextAlignment.CENTER)
+                : new Cell().setPadding(0.8f)
+                .add(new Paragraph(text).setFontSize(size)
+                        .setMultipliedLeading(1));
+    }
+
 
     private static Paragraph getText(String text, float size, boolean center) {
         return center ? new Paragraph(text).setFontSize(size).setTextAlignment(TextAlignment.CENTER)
@@ -1288,5 +1742,60 @@ public class Utils {
 
     }
 
+    public static String getDate(int dia, int mes, int anio) {
+        Date fecha = getFechaDateDMA(String.format("%02d-%02d-%02d", dia, mes, anio));
+        return getBirthday(fecha);
+    }
+
+    public static String getCode(Reserva reserva) {
+        String[] dni = new String[String.valueOf(reserva.getIdUsuario()).length()];
+        for (int i = 0; i < dni.length; i++) {
+            char valor = Utils.encode(String.valueOf(reserva.getIdUsuario()).charAt(i));
+            dni[i] = String.valueOf(valor);
+        }
+        StringBuilder dniModif = new StringBuilder();
+        for (int i = 0; i < dni.length; i++) {
+            dniModif.append(dni[i]);
+        }
+        return dniModif.toString();
+    }
+
+    public static char encode(char charAt) {
+        if (charAt % 2 == 0) {
+
+            switch (charAt) {
+                case '0':
+                    return 'M';
+                case '2':
+                    return 'U';
+                case '4':
+                    return 'T';
+                case '6':
+                    return 'W';
+                case '8':
+                    return 'X';
+                default:
+                    return charAt;
+            }
+
+        } else return charAt;
+    }
+
+    public static char decode(char charAt) {
+        switch (charAt) {
+            case 'M':
+                return '0';
+            case 'U':
+                return '2';
+            case 'T':
+                return '4';
+            case 'W':
+                return '6';
+            case 'X':
+                return '8';
+            default:
+                return charAt;
+        }
+    }
 }
 

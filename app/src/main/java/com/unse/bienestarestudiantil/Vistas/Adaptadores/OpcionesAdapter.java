@@ -1,6 +1,7 @@
 package com.unse.bienestarestudiantil.Vistas.Adaptadores;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,10 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
                         .into(holder.imgIcono);
             else
                 holder.imgIcono.setVisibility(GONE);
-            holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
+            if (s.getColor() != 0)
+                holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
+            if (s.getColorString() != null)
+                holder.mCardView.setCardBackgroundColor(Color.parseColor(s.getColorString()));
 
             if (s.getOrientation() == LinearLayoutManager.VERTICAL) {
                 holder.mLinearLayout.setOrientation(LinearLayout.VERTICAL);

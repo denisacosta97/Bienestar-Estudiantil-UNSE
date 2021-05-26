@@ -42,7 +42,6 @@ import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
 import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
-import com.unse.bienestarestudiantil.Vistas.Fragmentos.AccesoDenegadoFragment;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 
 import org.json.JSONException;
@@ -237,11 +236,13 @@ public class MainActivity extends AppCompatActivity {
         if (isLogin) {
             idUser = manager.getValueInt(Utils.MY_ID);
             Usuario usuario = mUsuarioViewModel.getById(idUser);
-            imgBienestar.setVisibility(View.GONE);
-            imgPerfil.setVisibility(View.VISIBLE);
-            txtNombre.setVisibility(View.VISIBLE);
-            loadProfilePicture();
-            txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
+            if (usuario != null) {
+                imgBienestar.setVisibility(View.GONE);
+                imgPerfil.setVisibility(View.VISIBLE);
+                txtNombre.setVisibility(View.VISIBLE);
+                loadProfilePicture();
+                txtNombre.setText(String.format("%s %s", usuario.getNombre(), usuario.getApellido()));
+            }
         } else {
             imgPerfil.setVisibility(View.GONE);
             imgBienestar.setVisibility(View.VISIBLE);
@@ -269,14 +270,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_about:
                 startActivity(new Intent(this, AcercaDeActivity.class));
                 break;
-        }
-
-
-        if (!(fragmentoGenerico instanceof InicioFragmento)) {
-            boolean isLogin = manager.getValue(Utils.IS_LOGIN);
-            if (!isLogin) {
-                fragmentoGenerico = new AccesoDenegadoFragment();
-            }
         }
 
         if (mFragment != null && fragmentoGenerico != null && !(mFragment.getClass().equals(fragmentoGenerico.getClass()))) {

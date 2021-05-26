@@ -1,20 +1,9 @@
 package com.unse.bienestarestudiantil.Databases;
 
-import com.unse.bienestarestudiantil.Modelos.Egresado;
-import com.unse.bienestarestudiantil.Modelos.Usuario;
 
-import java.util.List;
 
-import androidx.room.Dao;
-import androidx.room.Database;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.Query;
-import androidx.room.Update;
-
-@Dao
 public interface EgresadoDAO {
-    @Insert
+    /*@Insert
     void insert(Egresado egresado);
 
     @Update
@@ -30,5 +19,5 @@ public interface EgresadoDAO {
     void deleteAll();
 
     @Query("SELECT * FROM " + Egresado.TABLE_EGRESADO)
-    List<Egresado> getAll();
+    List<Egresado> getAll();*/
 }

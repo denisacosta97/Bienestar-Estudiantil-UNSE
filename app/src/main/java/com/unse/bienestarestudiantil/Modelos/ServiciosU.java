@@ -3,16 +3,15 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.room.Ignore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ServiciosU implements Parcelable {
 
-    @Ignore
+    
     public static final int LOW = 0;
-    @Ignore
+    
     public static final int COMPLETE = 1;
 
     private String titulo, descripcion, horario, dias, usuarios;

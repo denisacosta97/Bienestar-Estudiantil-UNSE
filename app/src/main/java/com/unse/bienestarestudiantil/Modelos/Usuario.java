@@ -3,72 +3,85 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.unse.bienestarestudiantil.Herramientas.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.spec.ECGenParameterSpec;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "usuario")
 public class Usuario implements Parcelable {
 
-    @Ignore
+
     public static final int COMPLETE = 1;
-    @Ignore
+
     public static final int BASIC = 2;
-    @Ignore
+
     public static final int MEDIUM = 3;
-    @Ignore
+
     public static final String TABLE_USER = "usuario";
-    @Ignore
+
     public static final String KEY_ID_USER = "idUsuario";
 
-    @PrimaryKey
-    @NonNull
     private int idUsuario;
-    @NonNull
+
     private String nombre;
-    @NonNull
+
     private String apellido;
-    @NonNull
+
     private String fechaNac;
-    @NonNull
+
     private String pais;
-    @NonNull
+
     private String provincia;
-    @NonNull
+
     private String localidad;
-    @NonNull
+
     private String domicilio;
-    @NonNull
+
     private String barrio;
-    @NonNull
+
     private String telefono;
-    @NonNull
+
     private String sexo;
-    @NonNull
+
     private String mail;
-    @NonNull
+
     private int tipoUsuario;
-    @NonNull
+
     private String fechaRegistro;
-    @NonNull
+
     private String fechaModificacion;
-    @NonNull
+
     private int validez;
 
-    public Usuario(int idUsuario, @NonNull String nombre, @NonNull String apellido,
-                   @NonNull String fechaNac, @NonNull String pais, @NonNull String provincia,
-                   @NonNull String localidad, @NonNull String domicilio, @NonNull String barrio,
-                   @NonNull String telefono, @NonNull String sexo, @NonNull String mail,
-                   int tipoUsuario, @NonNull String fechaRegistro, @NonNull String fechaModificacion,
+
+    public Usuario(int idUsuario, String nombre, String apellido,
+                   String fechaNac, String pais, String provincia,
+                   String localidad, String domicilio, String barrio,
+                   String telefono, String mail,
+                   String fechaRegistro, String fechaModificacion,
+                   int validez) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNac = fechaNac;
+        this.pais = pais;
+        this.provincia = provincia;
+        this.localidad = localidad;
+        this.domicilio = domicilio;
+        this.barrio = barrio;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaModificacion = fechaModificacion;
+        this.validez = validez;
+    }
+
+
+    public Usuario(int idUsuario, String nombre, String apellido,
+                   String fechaNac, String pais, String provincia,
+                   String localidad, String domicilio, String barrio,
+                   String telefono, String sexo, String mail,
+                   int tipoUsuario, String fechaRegistro, String fechaModificacion,
                    int validez) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -88,25 +101,24 @@ public class Usuario implements Parcelable {
         this.validez = validez;
     }
 
-    @Ignore
-    public Usuario(int idUsuario, @NonNull String nombre, @NonNull String apellido, int tipoUsuario) {
+
+    public Usuario(int idUsuario, String nombre, String apellido, int tipoUsuario) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoUsuario = tipoUsuario;
     }
 
-    @Ignore
+
     public Usuario() {
     }
 
-    @Ignore
+
     protected Usuario(Parcel in) {
         idUsuario = in.readInt();
-        tipoUsuario = in.readInt();
-        validez = in.readInt();
         nombre = in.readString();
         apellido = in.readString();
+        fechaNac = in.readString();
         pais = in.readString();
         provincia = in.readString();
         localidad = in.readString();
@@ -115,9 +127,35 @@ public class Usuario implements Parcelable {
         telefono = in.readString();
         sexo = in.readString();
         mail = in.readString();
-        fechaNac = in.readString();
+        tipoUsuario = in.readInt();
         fechaRegistro = in.readString();
         fechaModificacion = in.readString();
+        validez = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idUsuario);
+        dest.writeString(nombre);
+        dest.writeString(apellido);
+        dest.writeString(fechaNac);
+        dest.writeString(pais);
+        dest.writeString(provincia);
+        dest.writeString(localidad);
+        dest.writeString(domicilio);
+        dest.writeString(barrio);
+        dest.writeString(telefono);
+        dest.writeString(sexo);
+        dest.writeString(mail);
+        dest.writeInt(tipoUsuario);
+        dest.writeString(fechaRegistro);
+        dest.writeString(fechaModificacion);
+        dest.writeInt(validez);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
@@ -143,33 +181,42 @@ public class Usuario implements Parcelable {
             switch (tipe) {
                 case COMPLETE:
                     JSONObject datos = object.getJSONObject("mensaje");
+                    tipoUsuario = datos.has("tipousuario") ?
+                    Integer.parseInt(datos.getString("tipousuario")) : 1;
+                    sexo = datos.has("sexo") ? datos.getString("sexo") : "";
                     idUsuario = Integer.parseInt(datos.getString("idusuario"));
-                    tipoUsuario = Integer.parseInt(datos.getString("tipousuario"));
                     nombre = datos.getString("nombre");
                     apellido = datos.getString("apellido");
-                    pais = datos.getString("pais");
-                    provincia = datos.getString("provincia");
-                    localidad = datos.getString("localidad");
-                    domicilio = datos.getString("domicilio");
-                    barrio = datos.getString("barrio");
-                    telefono = datos.getString("telefono");
-                    sexo = datos.getString("sexo");
-                    mail = datos.getString("mail");
-                    fechaRegistro = datos.getString("fecharegistro");
-                    fechaNac = datos.getString("fechanac");
-                    fechaModificacion = datos.getString("fechamodificacion");
+                    pais = datos.getString("pais").equals("null") ? "" : datos.getString("pais");
+                    provincia = datos.getString("provincia").equals("null") ? "" : datos.getString("provincia");
+                    localidad = datos.getString("localidad").equals("null") ? "" : datos.getString("localidad");
+                    domicilio = datos.getString("domicilio").equals("null") ? "" : datos.getString("domicilio");
+                    barrio = datos.getString("barrio").equals("null") ? "" : datos.getString("barrio");
+                    telefono = datos.getString("telefono").equals("null") ? "" : datos.getString("telefono");
+                    ;
+                    mail = datos.getString("mail").equals("null") ? "" : datos.getString("mail");
+                    fechaRegistro = datos.getString("fecharegistro").equals("null") ? "" : datos.getString("fecharegistro");
+                    fechaNac = datos.getString("fechanac").equals("null") ? "" : datos.getString("fechanac");
+                    fechaModificacion = datos.getString("fechamodificacion").equals("null") ? "" : datos.getString("fechamodificacion");
                     validez = Integer.parseInt(datos.getString("validez"));
-
-                    usuario = new Usuario(idUsuario, nombre, apellido,fechaNac, pais, provincia,
-                            localidad, domicilio, barrio,telefono, sexo, mail, tipoUsuario, fechaRegistro,
+                    usuario = new Usuario(idUsuario, nombre, apellido, fechaNac, pais, provincia,
+                            localidad, domicilio, barrio, telefono, mail, fechaRegistro,
                             fechaModificacion, validez);
+                    usuario.setTipoUsuario(tipoUsuario);
+                    usuario.setSexo(sexo);
                     break;
                 case BASIC:
                     idUsuario = Integer.parseInt(object.getString("idusuario"));
-                    tipoUsuario = Integer.parseInt(object.getString("tipousuario"));
+                    tipoUsuario = object.has("tipousuario") ?
+                            Integer.parseInt(object.getString("tipousuario"))
+                            : 0;
                     nombre = object.getString("nombre");
                     apellido = object.getString("apellido");
-                    usuario = new Usuario(idUsuario,nombre, apellido, tipoUsuario);
+                    validez = object.has("validez") ? object.getInt("validez") : 0;
+                    String anio = object.has("anio") ? object.getString("anio") : "";
+                    usuario = new Usuario(idUsuario, nombre, apellido, tipoUsuario);
+                    usuario.setValidez(validez);
+                    usuario.setDomicilio(anio);
                     break;
                 case MEDIUM:
                     idUsuario = Integer.parseInt(object.getString("idusuario"));
@@ -184,8 +231,8 @@ public class Usuario implements Parcelable {
                     domicilio = object.getString("domicilio");
                     barrio = object.getString("barrio");
                     mail = object.getString("mail");
-                    usuario = new Usuario(idUsuario,nombre, apellido, fechaNac, pais, provincia,localidad,domicilio,
-                            barrio, telefono, null, mail,tipoUsuario,null,null,-1);
+                    usuario = new Usuario(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
+                            barrio, telefono, null, mail, tipoUsuario, null, null, -1);
                     break;
             }
 
@@ -196,30 +243,6 @@ public class Usuario implements Parcelable {
         return usuario;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idUsuario);
-        dest.writeInt(tipoUsuario);
-        dest.writeInt(validez);
-        dest.writeString(nombre);
-        dest.writeString(apellido);
-        dest.writeString(pais);
-        dest.writeString(provincia);
-        dest.writeString(localidad);
-        dest.writeString(domicilio);
-        dest.writeString(barrio);
-        dest.writeString(telefono);
-        dest.writeString(sexo);
-        dest.writeString(mail);
-        dest.writeString(fechaNac);
-        dest.writeString(fechaRegistro);
-        dest.writeString(fechaModificacion);
-    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -229,102 +252,102 @@ public class Usuario implements Parcelable {
         this.idUsuario = idUsuario;
     }
 
-    @NonNull
+
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(@NonNull String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    @NonNull
+
     public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(@NonNull String apellido) {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    @NonNull
+
     public String getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(@NonNull String fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 
-    @NonNull
+
     public String getPais() {
         return pais;
     }
 
-    public void setPais(@NonNull String pais) {
+    public void setPais(String pais) {
         this.pais = pais;
     }
 
-    @NonNull
+
     public String getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(@NonNull String provincia) {
+    public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
 
-    @NonNull
+
     public String getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(@NonNull String localidad) {
+    public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
 
-    @NonNull
+
     public String getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(@NonNull String domicilio) {
+    public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
     }
 
-    @NonNull
+
     public String getBarrio() {
         return barrio;
     }
 
-    public void setBarrio(@NonNull String barrio) {
+    public void setBarrio(String barrio) {
         this.barrio = barrio;
     }
 
-    @NonNull
+
     public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(@NonNull String telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    @NonNull
+
     public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(@NonNull String sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    @NonNull
+
     public String getMail() {
         return mail;
     }
 
-    public void setMail(@NonNull String mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
@@ -336,21 +359,21 @@ public class Usuario implements Parcelable {
         this.tipoUsuario = tipoUsuario;
     }
 
-    @NonNull
+
     public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(@NonNull String fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
-    @NonNull
+
     public String getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(@NonNull String fechaModificacion) {
+    public void setFechaModificacion(String fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
@@ -361,4 +384,5 @@ public class Usuario implements Parcelable {
     public void setValidez(int validez) {
         this.validez = validez;
     }
+
 }

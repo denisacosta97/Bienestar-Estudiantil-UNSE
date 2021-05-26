@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+     <LinearLayout
+         android:orientation="vertical"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <include layout="@layout/toolbar_trans" />
+
+         <LinearLayout
+             android:layout_marginTop="15dp"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:id="@+id/latAdmin"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"
+                 android:gravity="center"
+                 android:weightSum="1"
+                 android:orientation="horizontal">
+
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/cardScan"
+                     app:cardBackgroundColor="@color/colorPrimaryDark"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:layout_weight="0.5"
+                     android:foreground="?attr/selectableItemBackground"
+                     android:layout_width="0dp"
+                     android:layout_height="120dp"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="5dp">
+
+                     <LinearLayout
+                         android:layout_margin="10dp"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center">
+
+                         <androidx.appcompat.widget.AppCompatImageView
+                             android:layout_width="80dp"
+                             android:layout_height="80dp"
+                             android:tint="@color/whiteTextColor"
+                             android:layout_gravity="center"
+                             app:srcCompat="@drawable/ic_qr"/>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/cardCortar"
+                     app:cardBackgroundColor="@color/colorPrimaryDark"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:layout_weight="0.5"
+                     android:layout_marginLeft="10dp"
+                     android:foreground="?attr/selectableItemBackground"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="5dp">
+
+                     <LinearLayout
+                         android:gravity="center"
+                         android:orientation="vertical"
+                         android:layout_margin="5dp"
+                         android:layout_width="match_parent"
+                         android:layout_gravity="center"
+                         android:layout_height="wrap_content">
+
+                         <androidx.appcompat.widget.AppCompatImageView
+                             android:layout_width="45dp"
+                             android:layout_height="45dp"
+                             app:srcCompat="@drawable/ic_restringir_reserva" />
+
+                         <TextView
+                             android:id="@+id/txtCortar"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:text="RESTRINGIR\nRESERVAS"
+                             android:gravity="center"
+                             android:textStyle="bold"
+                             android:textSize="20sp"
+                             android:fontFamily="@font/montserrat_black"
+                             android:textColor="@color/colorWhite"/>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_margin="10dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:weightSum="1"
+                 android:orientation="horizontal">
+
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/cardReservarAlumno"
+                     app:cardBackgroundColor="@color/colorPrimaryDark"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:layout_weight="0.5"
+                     android:foreground="?attr/selectableItemBackground"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="5dp">
+
+                     <LinearLayout
+                         android:orientation="vertical"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:gravity="center"
+                         android:textStyle="bold"
+                         android:textSize="14sp"
+                         android:fontFamily="@font/montserrat_black"
+                         android:textColor="@color/colorWhite">
+
+                         <androidx.appcompat.widget.AppCompatImageView
+                             android:layout_width="45dp"
+                             android:layout_marginTop="5dp"
+                             android:padding="5dp"
+                             android:layout_height="45dp"
+                             app:srcCompat="@drawable/ic_plus_user" />
+
+                         <TextView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:text="NUEVA\nRESERVA"
+                             android:gravity="center"
+                             android:textStyle="bold"
+                             android:textSize="20sp"
+                             android:fontFamily="@font/montserrat_black"
+                             android:textColor="@color/colorWhite"/>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/cardEspecial"
+                     app:cardBackgroundColor="@color/colorPrimaryDark"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:layout_weight="0.5"
+                     android:layout_marginLeft="10dp"
+                     android:foreground="?attr/selectableItemBackground"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="5dp">
+
+                     <LinearLayout
+                         android:layout_height="wrap_content"
+                         android:layout_margin="5dp"
+                         android:orientation="vertical"
+                         android:layout_width="match_parent"
+                         android:layout_gravity="center"
+                         android:text="FINALIZAR\nDÍA"
+                         android:gravity="center"
+                         android:textStyle="bold"
+                         android:textSize="14sp"
+                         android:fontFamily="@font/montserrat_black"
+                         android:textColor="@color/colorWhite">
+
+                         <androidx.appcompat.widget.AppCompatImageView
+                             android:layout_width="45dp"
+                             android:layout_marginTop="5dp"
+                             android:layout_height="45dp"
+                             app:srcCompat="@drawable/ic_especial_caso" />
+
+                         <TextView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:text="RESERVA\nESPECIAL"
+                             android:gravity="center"
+                             android:textStyle="bold"
+                             android:textSize="20sp"
+                             android:fontFamily="@font/montserrat_black"
+                             android:textColor="@color/colorWhite"/>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_marginTop="5dp"
+                 android:gravity="center"
+                 android:weightSum="1"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/cardTerminar"
+                     app:cardBackgroundColor="@color/colorPrimaryDark"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:layout_weight="0.5"
+                     android:layout_marginLeft="10dp"
+                     android:foreground="?attr/selectableItemBackground"
+                     android:layout_width="0dp"
+                     android:layout_height="120dp"
+                     app:cardCornerRadius="10dp"
+                     app:cardElevation="5dp">
+
+                     <LinearLayout
+                         android:gravity="center"
+                         android:layout_margin="5dp"
+                         android:orientation="vertical"
+                         android:layout_width="match_parent"
+                         android:layout_gravity="center"
+                         android:layout_height="wrap_content">
+
+                         <androidx.appcompat.widget.AppCompatImageView
+                             android:layout_marginTop="5dp"
+                             android:layout_width="45dp"
+                             android:layout_height="45dp"
+                             app:srcCompat="@drawable/ic_terminar_dia" />
+
+                         <TextView
+                             android:id="@+id/txtTerminar"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center"
+                             android:text="FINALIZAR\nDÍA"
+                             android:gravity="center"
+                             android:textStyle="bold"
+                             android:textSize="20sp"
+                             android:fontFamily="@font/montserrat_black"
+                             android:textColor="@color/colorWhite"/>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:orientation="vertical"
+                 android:layout_height="wrap_content">
+
+                 <ProgressBar
+                     android:visibility="gone"
+                     android:id="@+id/progress_bar"
+                     android:layout_marginTop="10dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" />
+
+                 <include layout="@layout/item_menu_today" />
+
+                 <androidx.cardview.widget.CardView
+                     android:layout_marginBottom="10dp"
+                     android:id="@+id/cardNo"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_margin="10dp"
+                     android:clickable="true"
+                     android:focusable="true"
+                     android:foreground="?android:attr/selectableItemBackground"
+                     app:cardCornerRadius="10dp">
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:gravity="center"
+                             android:background="@color/colorPrimaryDark"
+                             android:orientation="vertical">
+
+                             <androidx.appcompat.widget.AppCompatImageView
+                                 android:layout_marginTop="10dp"
+                                 android:id="@+id/imgAlerta"
+                                 android:layout_width="100dp"
+                                 android:layout_height="100dp"
+                                 app:srcCompat="@drawable/ic_vacio_white" />
+
+                             <TextView
+                                 android:id="@+id/txtTextoMenu"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="NO HAY MENÚ DISPONIBLE"
+                                 android:layout_margin="10dp"
+                                 android:gravity="center"
+                                 android:textStyle="bold"
+                                 android:textColor="@color/whiteTextColor"
+                                 android:textSize="22dp"
+                                 android:fontFamily="@font/montserrat_black"/>
+
+                         </LinearLayout>
+
+                     </LinearLayout>
+
+                 </androidx.cardview.widget.CardView>
+
+             </LinearLayout>
+
+
+
+         </LinearLayout>
+
+     </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+

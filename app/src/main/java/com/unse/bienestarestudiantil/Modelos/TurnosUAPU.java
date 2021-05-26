@@ -3,18 +3,17 @@ package com.unse.bienestarestudiantil.Modelos;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.room.Ignore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TurnosUAPU implements Parcelable {
 
-    @Ignore
+    
     public static final int LOW = 0;
-    @Ignore
+    
     public static final int MEDIUM = 1;
-    @Ignore
+    
     public static final int COMPLETE = 2;
 
     private int idTurno, idUsuario, dia, mes, anio;

@@ -63,5 +63,6 @@
     <color name="text_shadow">#999999</color>
     <color name="semi_white">#D1D1D1</color>
     <color name="colorOrange2">#DF291B</color>
+    <color name="blackTransparente0">#80000000</color>
 
 </resources>

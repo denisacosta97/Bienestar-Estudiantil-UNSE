@@ -6,32 +6,27 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "egresado")
 public class Egresado extends Usuario implements Parcelable {
 
-    @Ignore
+    
     public static final String TABLE_EGRESADO = "egresado";
-    @Ignore
+    
     public static final String KEY_ID_EGR = "idEgresado";
 
-    @NonNull
+    
     private int idEgresado;
-    @NonNull
+    
     private String profesion;
-    @NonNull
+    
     private String fechaEgreso;
 
-    public Egresado(int idUsuario, @NonNull String nombre, @NonNull String apellido,
-                    @NonNull String fechaNac, @NonNull String pais, @NonNull String provincia,
-                    @NonNull String localidad, @NonNull String domicilio, @NonNull String barrio,
-                    @NonNull String telefono, @NonNull String sexo, @NonNull String mail,
-                    int tipoUsuario, @NonNull String fechaRegistro, @NonNull String fechaModificacion,
-                    int validez, int idEgresado, @NonNull String profesion, @NonNull String fechaEgreso) {
+    public Egresado(int idUsuario,  String nombre,  String apellido,
+                     String fechaNac,  String pais,  String provincia,
+                     String localidad,  String domicilio,  String barrio,
+                     String telefono,  String sexo,  String mail,
+                    int tipoUsuario,  String fechaRegistro,  String fechaModificacion,
+                    int validez, int idEgresado,  String profesion,  String fechaEgreso) {
         super(idUsuario, nombre, apellido, fechaNac, pais, provincia, localidad, domicilio,
                 barrio, telefono, sexo, mail, tipoUsuario, fechaRegistro,
                 fechaModificacion, validez);
@@ -40,11 +35,11 @@ public class Egresado extends Usuario implements Parcelable {
         this.fechaEgreso = fechaEgreso;
     }
 
-    @Ignore
+    
     public Egresado() {
     }
 
-    @Ignore
+    
     protected Egresado(Parcel in) {
         setIdUsuario(in.readInt());
         setTipoUsuario(in.readInt());

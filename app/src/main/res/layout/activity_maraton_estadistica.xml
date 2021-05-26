@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorGrey"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/toolbar_trans">
+        </include>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/blackTextColor"
+                android:fontFamily="@font/montserrat_black"
+                android:text="Seleccionar rango de fechas" />
+
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:weightSum="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtFechaIni"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/blackTextColor"
+                    android:text="01-01-2020" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/blackTextColor" />
+
+                <TextView
+                    android:id="@+id/txtFechaFin"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/blackTextColor"
+                    android:text="01-01-2020" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/btnBuscar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="BUSCAR"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/button_border"
+                android:fontFamily="@font/montserrat_black"/>
+
+
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/blackTextColor"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_black"
+                android:text="Total de Registros" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/txtCantidad"
+                android:layout_width="match_parent"
+                android:text="40"
+                android:fontFamily="@font/montserrat_black"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/blackTextColor"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Por Distancia" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_distancia"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="300dp">
+
+                    </com.github.mikephil.charting.charts.BarChart>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latDatos"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackTextColor"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Por Categoria" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_categoria"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/montserrat_black"
+                        android:layout_height="300dp">
+
+                    </com.github.mikephil.charting.charts.PieChart>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latDatos2"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackTextColor"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Por Facultad" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_facultad"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/montserrat_black"
+                        android:layout_height="300dp">
+
+                    </com.github.mikephil.charting.charts.PieChart>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latDatos3"
+                        android:gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/blackTextColor"
+                        android:fontFamily="@font/montserrat_black"
+                        android:text="Por Tipo de Usuario" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_tipou"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="300dp">
+
+                    </com.github.mikephil.charting.charts.PieChart>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latDatos4"
+                        android:gravity="center"
+                        android:layout_margin="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

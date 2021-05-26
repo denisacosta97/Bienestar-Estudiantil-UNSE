@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_trans" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtFecha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Fecha de menú"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtPorcion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Porción"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="number"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtAlmuerzo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Almuerzo"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtCena"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Cena"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtPostre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Postre"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/edit_text_logreg"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/blackTextColor"
+            android:text="@string/txtNotaMenu"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_regular"/>
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="200dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:text="GUARDAR\nMENÚ"
+            android:fontFamily="@font/montserrat_black"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="200dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:text="VOLVER"
+            android:fontFamily="@font/montserrat_black"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
