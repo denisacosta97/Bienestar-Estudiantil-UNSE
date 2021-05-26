@@ -97,7 +97,7 @@ public class GestionUAPUActivity extends AppCompatActivity implements View.OnCli
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 305, "Pacientes", R.drawable.ic_item_arrow, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 306, "Certificados", R.drawable.ic_item_arrow, R.color.colorFCEyT));
         mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 307, "Medicamentos", R.drawable.ic_item_arrow, R.color.colorFCEyT));
-        mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 308, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
+        //mOpciones.add(new Opciones(LinearLayout.HORIZONTAL, 308, "Estadisticas", R.drawable.ic_item_arrow, R.color.colorFCEyT));
 
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);

@@ -1,8 +1,6 @@
 package com.unse.bienestarestudiantil.Vistas.Activities.Comedor;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,10 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +34,6 @@ import com.unse.bienestarestudiantil.Modelos.Alumno;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.UsuariosAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoOpciones;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;

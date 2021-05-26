@@ -207,6 +207,7 @@ public class DiariaComedorActivity extends AppCompatActivity implements View.OnC
                 txtMenu.setText(getString(R.string.noMenuAceptaReserva));
                 Glide.with(imgAlerta.getContext()).load(R.drawable.ic_no_reserva_more).into(imgAlerta);
             }
+            updateButton(mMenu.getValidez() == 1, mMenu.getDisponible() == 1);
 
         } else {
             cardNo.setVisibility(View.VISIBLE);

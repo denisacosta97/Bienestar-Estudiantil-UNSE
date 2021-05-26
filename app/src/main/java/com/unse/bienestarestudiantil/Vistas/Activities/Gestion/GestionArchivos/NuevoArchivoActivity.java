@@ -154,7 +154,7 @@ public class NuevoArchivoActivity extends AppCompatActivity implements View.OnCl
         mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
         PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
         int id = preferenceManager.getValueInt(Utils.MY_ID);
-        mUsuario = mUsuarioViewModel.getById(id);
+        mUsuario = mUsuarioViewModel.get(id);
         txtTipo.setText("");
         txtTamano.setText("");
         txtNombre.setText("");

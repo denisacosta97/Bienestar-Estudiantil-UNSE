@@ -285,7 +285,7 @@
                                                     android:layout_marginRight="10dp"
                                                     android:textColor="@color/colorGrey2"
                                                     android:textStyle="bold"
-                                                    android:text="Sexo:"
+                                                    android:text="Género:"
                                                     android:textSize="16sp"
                                                     android:fontFamily="@font/montserrat_black"/>
 

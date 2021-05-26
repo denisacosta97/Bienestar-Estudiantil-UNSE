@@ -294,6 +294,7 @@
     <string name="txtAddAlumno">Complete OBLIGATORIAMENTE todos los datos del alumno.</string>
     <string name="txtNotaMenu">NOTA: en caso de no ofrecer cena y/o postre, dejar en blanco.</string>
     <string name="yaExiste">¡Ya existe el registro!</string>
+    <string name="itemSesion">Cerrar Sesión</string>
 
 </resources>
 

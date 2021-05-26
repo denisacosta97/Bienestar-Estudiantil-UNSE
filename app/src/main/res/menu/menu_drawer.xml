@@ -14,14 +14,10 @@
 
         <menu>
             <item
-                android:id="@+id/item_perfil"
-                android:icon="@drawable/ic_user"
-                android:title="@string/itemPerfil"/>
+                android:id="@+id/item_cerrar"
+                android:icon="@drawable/ic_cerrar_e"
+                android:title="@string/itemSesion"/>
 
-            <item
-                android:id="@+id/item_about"
-                android:icon="@drawable/ic_b_bienestar"
-                android:title="@string/itemNosotros"/>
         </menu>
     </item>
 

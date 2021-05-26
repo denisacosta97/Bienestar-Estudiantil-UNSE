@@ -219,7 +219,7 @@ public class Utils {
     public static final int LIST_LEGAJO = 1;
     public static final int LIST_DNI = 2;
     public static final int LIST_NOMBRE = 3;
-
+    public static final String COLOR = "color_op";
 
 
     private static final String IP = "sis.bienestar.unse.edu.ar/api";

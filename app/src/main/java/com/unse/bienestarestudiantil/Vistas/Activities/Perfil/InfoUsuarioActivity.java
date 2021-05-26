@@ -10,14 +10,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -373,7 +377,7 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         int idLocal = manager.getValueInt(Utils.MY_ID);
         if (!isAdminMode) {
             //En caso de ser perfil actual, obtengo los datos desde la BD local
-            mUsuario = mUsuarioViewModel.getById(idLocal);
+            mUsuario = mUsuarioViewModel.get(idLocal);
             // mUsuario = new UsuariosRepo(getApplicationContext()).get(idLocal);
             edtDNI.setEnabled(false);
         }
@@ -563,9 +567,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
             case R.id.btnAltaBaja:
                 altaBajaUser();
                 break;
-            case R.id.fabPic:
-                openGallery();
-                break;
             case R.id.imgFlecha:
                 onBackPressed();
                 break;
@@ -695,58 +696,6 @@ public class InfoUsuarioActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void openGallery() {
-        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/*");
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
-        Intent chooserIntent = Intent.createChooser(getIntent, "Seleccionar imagen");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-        startActivityForResult(chooserIntent, Utils.PICK_IMAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case Utils.PICK_IMAGE:
-                if (resultCode == RESULT_OK) {
-                    Uri uri = null;
-                    if (data.getData() != null) {
-                        uri = data.getData();
-                        Intent intent = new Intent(getApplicationContext(), CropImageActivity.class);
-                        intent.putExtra(Utils.URI_IMAGE, uri);
-                        startActivityForResult(intent, Utils.EDIT_IMAGE);
-                    } else {
-                        Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorLoad));
-                    }
-                } else if (resultCode == RESULT_CANCELED) {
-                    Utils.showToast(getApplicationContext(), getString(R.string.noSelectImagen));
-                }
-                break;
-            case Utils.EDIT_IMAGE:
-                if (resultCode == RESULT_OK) {
-                    Uri uri = null;
-                    String name = null;
-                    if (data.getParcelableExtra(Utils.URI_IMAGE) != null) {
-                        uri = data.getParcelableExtra(Utils.URI_IMAGE);
-                    }
-                    if (data.getStringExtra(Utils.NAME_GENERAL) != null) {
-                        name = data.getStringExtra(Utils.NAME_GENERAL);
-                    }
-                    if (uri != null && name != null) {
-                        loadPic(uri, name);
-                    } else {
-                        Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorCrop));
-                    }
-                } else if (resultCode == 2) {
-                    Utils.showToast(getApplicationContext(), getString(R.string.imagenErrorCrop));
-                } else if (resultCode == RESULT_CANCELED) {
-                    Utils.showToast(getApplicationContext(), getString(R.string.cambioNoGuardado));
-                }
-                break;
-        }
-
-    }
 
     private void loadPic(final Uri uri, final String name) {
         FileStorageManager.resizeBitmapAndFile(name);

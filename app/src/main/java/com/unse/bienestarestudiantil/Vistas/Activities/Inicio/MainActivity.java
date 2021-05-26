@@ -38,9 +38,10 @@ import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.FileStorageMana
 import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
+import com.unse.bienestarestudiantil.Interfaces.YesNoDialogListener;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.PerfilActivity;
+import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoGeneral;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.InicioFragmento;
 
@@ -49,7 +50,6 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,10 +74,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     View headerView;
     Fragment mFragment;
-    int itemSelecionado = -1, idUser = 0;
+    int idUser = 0;
     ImageView imgPerfil, imgBienestar;
     TextView txtNombre;
-    HashMap<String, Integer> ids;
     Double lat, lon;
     public Boolean isReady = false, qrCiber = false;
     String pat = "", idR = "";
@@ -134,9 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadData() {
         mFragment = new Fragment();
-        ids = new HashMap<>();
-        ids.put(getString(R.string.itemPerfil), R.id.item_perfil);
-        ids.put(getString(R.string.itemNosotros), R.id.item_about);
         mRolViewModel = new RolViewModel();
         manager = new PreferenceManager(getApplicationContext());
         mUsuarioViewModel = new UsuarioViewModel(getApplicationContext());
@@ -235,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         boolean isLogin = manager.getValue(Utils.IS_LOGIN);
         if (isLogin) {
             idUser = manager.getValueInt(Utils.MY_ID);
-            Usuario usuario = mUsuarioViewModel.getById(idUser);
+            Usuario usuario = mUsuarioViewModel.get(idUser);
             if (usuario != null) {
                 imgBienestar.setVisibility(View.GONE);
                 imgPerfil.setVisibility(View.VISIBLE);
@@ -264,11 +260,8 @@ public class MainActivity extends AppCompatActivity {
                 ((InicioFragmento) fragmentoGenerico).setContext(getApplicationContext());
                 ((InicioFragmento) fragmentoGenerico).setFragmentManager(getSupportFragmentManager());
                 break;
-            case R.id.item_perfil:
-                startActivity(new Intent(MainActivity.this, PerfilActivity.class));
-                break;
-            case R.id.item_about:
-                startActivity(new Intent(this, AcercaDeActivity.class));
+            case R.id.item_cerrar:
+               logout();
                 break;
         }
 
@@ -284,8 +277,30 @@ public class MainActivity extends AppCompatActivity {
         mFragment = fragmentoGenerico;
         // itemSelecionado = itemDrawer.getItemId();
 
-        if (!ids.containsKey(itemDrawer.getTitle()))
-            ((TextView) findViewById(R.id.txtTitulo)).setText(itemDrawer.getTitle());
+    }
+
+    private void logout() {
+        DialogoGeneral.Builder builder = new DialogoGeneral.Builder(getApplicationContext())
+                .setTitulo(getString(R.string.advertencia))
+                .setDescripcion("¿Seguro que desea cerrar sesión?")
+                .setListener(new YesNoDialogListener() {
+                    @Override
+                    public void yes() {
+                        Utils.resetData(getApplicationContext());
+                        PreferenceManager manager = new PreferenceManager(getApplicationContext());
+                        manager.setValue(Utils.IS_LOGIN, false);
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void no() {
+                    }
+                })
+                .setTipo(DialogoGeneral.TIPO_SI_NO);
+        final DialogoGeneral dialogoGeneral = builder.build();
+        dialogoGeneral.show(getSupportFragmentManager(), "dialog_yesno");
 
     }
 
@@ -312,42 +327,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /*public void toggleMenu() {
-        mSlidingLayout.toggleMenu();
-
-    }*/
-
-    /*private void openDrawer() {
-        toggleMenu();
-        if (!isOpen){
-            final int margin = 0;
-            Animation animation = new Animation() {
-                @Override
-                protected void applyTransformation(float interpolatedTime, Transformation t) {
-                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mLayout.getLayoutParams();
-                    params.setMarginStart(margin);
-                    mLayout.setLayoutParams(params);
-                }
-            };
-            animation.setDuration(500);
-            animation.start();
-            isOpen = true;
-        }else{
-            final int margin = -280;
-            Animation animation = new Animation() {
-                @Override
-                protected void applyTransformation(float interpolatedTime, Transformation t) {
-                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mLayout.getLayoutParams();
-                    params.setMarginStart(margin);
-                    mLayout.setLayoutParams(params);
-                }
-            };
-            animation.setDuration(500);
-            animation.start();
-            isOpen = false;
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

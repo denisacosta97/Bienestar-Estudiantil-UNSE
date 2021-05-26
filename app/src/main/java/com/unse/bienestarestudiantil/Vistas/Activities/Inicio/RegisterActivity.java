@@ -36,7 +36,6 @@ import com.unse.bienestarestudiantil.Herramientas.Validador;
 import com.unse.bienestarestudiantil.Herramientas.VolleySingleton;
 import com.unse.bienestarestudiantil.Modelos.Categoria;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.UploadPictureActivity;
 import com.unse.bienestarestudiantil.Vistas.Adaptadores.CategoriasAdapter;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 import com.unse.bienestarestudiantil.Vistas.Fragmentos.DatePickerFragment;
@@ -512,12 +511,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     break;
                 case 1:
                     //Aqui ir a foto de perfil
-                    Intent intent = new Intent(getApplicationContext(), UploadPictureActivity.class);
-                    intent.putExtra(Utils.MY_ID, idDNI);
-                    intent.putExtra(Utils.IS_ADMIN_MODE, isAdminMode);
-                    intent.putExtra(Utils.TIPO_REGISTRO, getIntent().getBooleanExtra(Utils.TIPO_REGISTRO, false));
                     finish();
-                    startActivity(intent);
                     Utils.showToast(getApplicationContext(), getString(R.string.usuarioRegistrado));
                     break;
                 case 2:

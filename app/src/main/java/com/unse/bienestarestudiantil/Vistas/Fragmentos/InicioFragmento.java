@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.unse.bienestarestudiantil.Databases.RolViewModel;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
 import com.unse.bienestarestudiantil.Herramientas.RecyclerListener.ItemClickSupport;
 import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
@@ -21,7 +22,7 @@ import com.unse.bienestarestudiantil.Vistas.Activities.Comedor.GestionComedorAct
 import com.unse.bienestarestudiantil.Vistas.Activities.Deportes.GestionDeportes.GestionGeneralDeportesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.EstadisticasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionArchivos.GestionArchivosActivity;
-import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticiasActivity;
+import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias.GestionNoticiasActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionRoles.GestionRolesActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionSocios.GestionSociosActivity;
 import com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionUsuarios.GestionUsuariosActivity;
@@ -51,6 +52,7 @@ public class InicioFragmento extends Fragment {
     Context mContext;
     FragmentManager mFragmentManager;
     View view;
+
 
     public void setContext(Context context) {
         mContext = context;
@@ -137,6 +139,8 @@ public class InicioFragmento extends Fragment {
         itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position, long id) {
+                PreferenceManager preferenceManager = new PreferenceManager(mContext);
+                preferenceManager.setValue(Utils.COLOR, mOpcionesFinal.get(position).getColorString());
                 switch ((int) id) {
                     case 900:
                         startActivity(new Intent(mContext, GestionRolesActivity.class));

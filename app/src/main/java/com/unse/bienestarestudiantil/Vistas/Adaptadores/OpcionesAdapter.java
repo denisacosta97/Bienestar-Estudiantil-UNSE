@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.unse.bienestarestudiantil.Herramientas.Almacenamiento.PreferenceManager;
+import com.unse.bienestarestudiantil.Herramientas.Utils;
 import com.unse.bienestarestudiantil.Modelos.Opciones;
 import com.unse.bienestarestudiantil.R;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +30,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     private ArrayList<Opciones> arrayList;
     private Context context;
     private int tipo;
+    private RecyclerView recyclerView;
 
     public OpcionesAdapter(ArrayList<Opciones> list, Context ctx, int tipo) {
         context = ctx;
@@ -69,8 +73,18 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
                 holder.imgIcono.setVisibility(GONE);
             if (s.getColor() != 0)
                 holder.mCardView.setCardBackgroundColor(context.getResources().getColor(s.getColor()));
-            if (s.getColorString() != null)
+            if (s.getColorString() != null) {
                 holder.mCardView.setCardBackgroundColor(Color.parseColor(s.getColorString()));
+            }
+            String name = recyclerView.getLayoutManager().getClass().getName();
+            if (!name.equals("androidx.recyclerview.widget.GridLayoutManager")) {
+                PreferenceManager preferenceManager = new PreferenceManager(context);
+                String color = preferenceManager.getValueString(Utils.COLOR);
+                if (color.equals(""))
+                    color = "#024979";
+                holder.mCardView.setCardBackgroundColor(Color.parseColor(color));
+            }
+
 
             if (s.getOrientation() == LinearLayoutManager.VERTICAL) {
                 holder.mLinearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -104,6 +118,12 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     @Override
     public int getItemCount() {
         return arrayList.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
     }
 
     static class OpcionesViewHolder extends RecyclerView.ViewHolder {

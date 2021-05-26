@@ -103,53 +103,6 @@
                     android:layout_margin="5dp"
                     android:fontFamily="@font/montserrat_black"/>
 
-                <!--HABILITAR LA VISIBILIDAD-->
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        android:padding="10dp"
-                        android:text="Registrarme"
-                        android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="5dp"
-                        android:onClick="onClick"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:fontFamily="@font/montserrat_black"/>
-
-                    <LinearLayout
-                        android:layout_width="2dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@color/whiteTransparente"/>
-
-                    <TextView
-                        android:id="@+id/txtPassMissed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        android:text="¿Olvidaste tu\ncontraseña?"
-                        android:textColor="@color/whiteTextColor"
-                        android:layout_marginTop="5dp"
-                        android:padding="10dp"
-                        android:onClick="onClick"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:fontFamily="@font/montserrat_regular"/>
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </LinearLayout>

@@ -1,4 +1,4 @@
-package com.unse.bienestarestudiantil.Vistas.Activities.Gestion;
+package com.unse.bienestarestudiantil.Vistas.Activities.Gestion.GestionNoticias;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

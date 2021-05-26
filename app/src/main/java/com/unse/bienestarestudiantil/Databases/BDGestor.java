@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class BDGestor extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "bienestar.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 
     public BDGestor(Context context) {
@@ -19,13 +19,17 @@ public class BDGestor extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL(RolViewModel.createTable());
+        sqLiteDatabase.execSQL(UsuarioViewModel.createTable());
 
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        onCreate(sqLiteDatabase);
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int old, int newVers) {
+        //onCreate(sqLiteDatabase);
+        if (old == 1 && newVers == 2) {
+            sqLiteDatabase.execSQL(UsuarioViewModel.createTable());
+        }
 
     }
 }

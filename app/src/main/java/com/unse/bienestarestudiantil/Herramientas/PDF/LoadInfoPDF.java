@@ -111,7 +111,7 @@ public class LoadInfoPDF extends AsyncTask<String, Integer, String> {
         int id = new PreferenceManager(mContext).getValueInt(Utils.MY_ID);
         //Info user
         UsuarioViewModel usuarioViewModel = new UsuarioViewModel(mContext);
-        Usuario usuario = usuarioViewModel.getById(id);
+        Usuario usuario = usuarioViewModel.get(id);
         if (usuario != null) {
             if (formFields.containsKey("dni"))
                 formFields.get("dni").setValue(String.valueOf(usuario.getIdUsuario()));

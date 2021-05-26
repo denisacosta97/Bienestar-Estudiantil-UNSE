@@ -29,7 +29,6 @@ import com.unse.bienestarestudiantil.Modelos.Profesor;
 import com.unse.bienestarestudiantil.Modelos.Rol;
 import com.unse.bienestarestudiantil.Modelos.Usuario;
 import com.unse.bienestarestudiantil.R;
-import com.unse.bienestarestudiantil.Vistas.Activities.Perfil.RecuperarContraseniaActivity;
 import com.unse.bienestarestudiantil.Vistas.Dialogos.DialogoProcesamiento;
 
 import org.json.JSONArray;
@@ -121,12 +120,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.sesionOn:
                 login();
-                break;
-            case R.id.register:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                break;
-            case R.id.txtPassMissed:
-                startActivity(new Intent(LoginActivity.this, RecuperarContraseniaActivity.class));
                 break;
         }
     }

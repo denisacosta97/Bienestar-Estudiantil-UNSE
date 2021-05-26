@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Cristian Ledesma"
+                    android:text="Sin datos"
                     android:textColor="@color/blackTextColor"
                     android:textSize="18sp"
                     android:fontFamily="@font/montserrat_black"/>

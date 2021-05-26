@@ -21,6 +21,10 @@ public class Usuario implements Parcelable {
 
     public static final String KEY_ID_USER = "idUsuario";
 
+    public static final String KEY_NOMBRE = "nombre";
+
+    public static final String KEY_APELLIDO = "apellido";
+
     private int idUsuario;
 
     private String nombre;
@@ -111,6 +115,9 @@ public class Usuario implements Parcelable {
 
 
     public Usuario() {
+        this.idUsuario = 0;
+        this.nombre = "SIN";
+        this.apellido = "DATOS";
     }
 
 
